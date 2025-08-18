@@ -1,103 +1,129 @@
-import Image from "next/image";
+// src/app/page.tsx
+import DefaultLayout from "./defaultlayout";
+import { Scale, Users, BookOpen, GraduationCap, FileText } from "lucide-react"; // Added icons
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <DefaultLayout>
+      {/* Hero Section */}
+      <section className="bg-gray-50 py-20 text-center relative overflow-hidden">
+        <h1 className="text-2xl font-bold text-red-700 underline mb-10">
+          (Every Element in this landing page is just a Sample and Protoype yet)
+        </h1>
+        <h1 className="text-4xl md:text-5xl font-extrabold text-[#024687] mb-4">
+          Empowering Aspirants for CLAT & Law Careers
+        </h1>
+        <p className="text-lg text-gray-700 max-w-3xl mx-auto mb-6">
+          Clat Tribe is your trusted partner in cracking CLAT and achieving your
+          dream law career with expert mentorship, structured resources, and
+          community support.
+        </p>
+        <button className="px-8 py-3 bg-[#024687] text-white font-semibold rounded-lg shadow hover:bg-[#02356a] transition">
+          Get Started
+        </button>
+      </section>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Features Section */}
+      <section className="py-20 container mx-auto px-6">
+        <h2 className="text-3xl font-bold text-center text-[#024687] mb-12">
+          Why Choose <span className="text-black">Clat Tribe?</span>
+        </h2>
+        <div className="grid md:grid-cols-3 gap-8 text-center">
+          <div className="p-8 bg-white shadow-md rounded-xl hover:shadow-lg transition">
+            <Scale className="mx-auto text-[#024687] mb-4 w-12 h-12" />
+            <h3 className="text-xl font-semibold mb-3">Expert Legal Mentors</h3>
+            <p className="text-gray-600">
+              Learn from top educators, advocates, and mentors with proven track
+              records in guiding aspirants to NLU success.
+            </p>
+          </div>
+          <div className="p-8 bg-white shadow-md rounded-xl hover:shadow-lg transition">
+            <BookOpen className="mx-auto text-[#024687] mb-4 w-12 h-12" />
+            <h3 className="text-xl font-semibold mb-3">Structured Resources</h3>
+            <p className="text-gray-600">
+              Access exclusive study material, case-based learning, and smart
+              strategies designed specifically for CLAT preparation.
+            </p>
+          </div>
+          <div className="p-8 bg-white shadow-md rounded-xl hover:shadow-lg transition">
+            <Users className="mx-auto text-[#024687] mb-4 w-12 h-12" />
+            <h3 className="text-xl font-semibold mb-3">Peer Community</h3>
+            <p className="text-gray-600">
+              Be a part of India’s growing CLAT community—discuss, collaborate,
+              and achieve success together.
+            </p>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+
+      {/* Law Entrance Insights Section */}
+      <section className="bg-gray-100 py-20">
+        <div className="container mx-auto px-6 text-center">
+          <h2 className="text-3xl font-bold text-[#024687] mb-12">
+            Stay Ahead in CLAT & Law Entrance Exams
+          </h2>
+          <div className="grid md:grid-cols-2 gap-10">
+            <div className="p-8 bg-white rounded-xl shadow hover:shadow-lg transition">
+              <FileText className="mx-auto text-[#024687] mb-4 w-12 h-12" />
+              <h3 className="text-xl font-semibold mb-3">Mock Tests & Analysis</h3>
+              <p className="text-gray-600">
+                Regular test series with in-depth performance analysis to track
+                your progress and strengthen weak areas.
+              </p>
+            </div>
+            <div className="p-8 bg-white rounded-xl shadow hover:shadow-lg transition">
+              <GraduationCap className="mx-auto text-[#024687] mb-4 w-12 h-12" />
+              <h3 className="text-xl font-semibold mb-3">Exam Strategy Sessions</h3>
+              <p className="text-gray-600">
+                Learn time management, question prioritization, and smart
+                approaches directly from experts to maximize your scores.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Success Stories Section */}
+      <section className="py-20 container mx-auto px-6 text-center">
+        <h2 className="text-3xl font-bold text-[#024687] mb-12">
+          Inspiring Success Stories
+        </h2>
+        <div className="grid md:grid-cols-3 gap-8">
+          <div className="p-6 bg-white shadow rounded-xl hover:shadow-lg transition">
+            <p className="italic text-gray-600 mb-4">
+              “Clat Tribe’s mentorship and resources helped me crack CLAT with
+              confidence”
+            </p>
+            <h4 className="font-semibold text-[#024687]">— Saurabh Sharma</h4>
+          </div>
+          <div className="p-6 bg-white shadow rounded-xl hover:shadow-lg transition">
+            <p className="italic text-gray-600 mb-4">
+              “Clat Tribe’s mentorship and resources helped me crack CLAT with
+              confidence”
+            </p>
+            <h4 className="font-semibold text-[#024687]">— Saurabh Sharma</h4>
+          </div>
+          <div className="p-6 bg-white shadow rounded-xl hover:shadow-lg transition">
+            <p className="italic text-gray-600 mb-4">
+              “Clat Tribe’s mentorship and resources helped me crack CLAT with
+              confidence”
+            </p>
+            <h4 className="font-semibold text-[#024687]">— Saurabh Sharma</h4>
+          </div>
+        </div>
+      </section>
+
+      {/* Call to Action */}
+      <section className="bg-[#024687] text-white py-20 text-center">
+        <h2 className="text-3xl font-bold mb-4">Begin Your Law Journey Today</h2>
+        <p className="mb-6 text-lg max-w-2xl mx-auto">
+          Join thousands of aspirants preparing with Clat Tribe. Take the first
+          step toward your dream law school and secure your career.
+        </p>
+        <button className="px-8 py-3 bg-white text-[#024687] font-semibold rounded-lg shadow hover:bg-gray-200 transition">
+          Enroll Now
+        </button>
+      </section>
+    </DefaultLayout>
   );
 }
