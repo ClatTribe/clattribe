@@ -1,10 +1,11 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
 import { createClient } from "@supabase/supabase-js"
 import { Edit, Plus, Trash2, X, Eye } from "lucide-react"
 import React from "react"
 import Link from "next/link"
+import Image from "next/image"
 
 // Supabase client
 const supabase = createClient(
@@ -264,7 +265,9 @@ const Dialog = ({
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           <div className="fixed inset-0 bg-black bg-opacity-50" onClick={() => onOpenChange(false)} />
           <div className="relative bg-white rounded-lg shadow-xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
-            {React.Children.toArray(children).find((child: any) => child.type === DialogContent)}
+            {React.Children.toArray(children)
+              .filter((child): child is React.ReactElement => React.isValidElement(child))
+              .find((child) => child.type === DialogContent)}
           </div>
         </div>
       )}
@@ -272,7 +275,7 @@ const Dialog = ({
   )
 }
 
-const DialogTrigger = ({ children, asChild }: { children: React.ReactNode; asChild?: boolean }) => {
+const DialogTrigger = ({ children }: { children: React.ReactNode }) => {
   return <>{children}</>
 }
 
@@ -412,29 +415,32 @@ function BlogEditor() {
   const [uploadingImage, setUploadingImage] = useState(false)
 
   // Fetch posts from Supabase
-  const fetchPosts = async (page = 1) => {
-    setLoading(true)
-    const from = (page - 1) * postsPerPage
-    const to = from + postsPerPage - 1
+  const fetchPosts = useCallback(
+    async (page = 1) => {
+      setLoading(true)
+      const from = (page - 1) * postsPerPage
+      const to = from + postsPerPage - 1
 
-    const { data, error, count } = await supabase
-      .from("blogs_data")
-      .select("*", { count: "exact" })
-      .order("created_at", { ascending: false })
-      .range(from, to)
+      const { data, error, count } = await supabase
+        .from("blogs_data")
+        .select("*", { count: "exact" })
+        .order("created_at", { ascending: false })
+        .range(from, to)
 
-    if (error) {
-      toast({
-        title: "Error",
-        description: "Failed to fetch posts",
-        variant: "destructive",
-      })
-    } else {
-      setPosts(data || [])
-      setTotalPages(Math.ceil((count || 0) / postsPerPage))
-    }
-    setLoading(false)
-  }
+      if (error) {
+        toast({
+          title: "Error",
+          description: "Failed to fetch posts",
+          variant: "destructive",
+        })
+      } else {
+        setPosts(data || [])
+        setTotalPages(Math.ceil((count || 0) / postsPerPage))
+      }
+      setLoading(false)
+    },
+    [postsPerPage, toast],
+  )
 
   // Save or update post
   const savePost = async () => {
@@ -565,8 +571,8 @@ function BlogEditor() {
   }
 
   useEffect(() => {
-    fetchPosts()
-  }, [currentPage])
+    fetchPosts(currentPage)
+  }, [currentPage, fetchPosts])
 
   const PostSkeleton = () => (
     <Card className="mb-4">
@@ -678,7 +684,7 @@ function BlogEditor() {
                 </Button>
               </Link>
               <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                <DialogTrigger asChild>
+                <DialogTrigger>
                   <Button onClick={openNewDialog} style={{ backgroundColor: "#024687" }} className="hover:opacity-90">
                     <Plus className="w-4 h-4 mr-2" />
                     New Post
@@ -839,9 +845,11 @@ function BlogEditor() {
                 <CardContent className="p-4">
                   <div className="flex items-center space-x-4">
                     {post.img && (
-                      <img
+                      <Image
                         src={post.img || "/placeholder.svg"}
                         alt={post.title}
+                        width={96}
+                        height={64}
                         className="w-24 h-16 object-cover rounded"
                       />
                     )}

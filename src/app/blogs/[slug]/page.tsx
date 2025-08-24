@@ -6,6 +6,7 @@ import Link from "next/link"
 import { useParams } from "next/navigation"
 import { createClient } from "@supabase/supabase-js"
 import DefaultLayout from "../../defaultlayout"
+import Image from "next/image"
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL || "https://fjswchcothephgtzqbgq.supabase.co",
@@ -44,7 +45,6 @@ export default function BlogPostPage() {
   const [mobile, setMobile] = useState("desktop")
   const [comments, setComments] = useState<Comment[]>([])
   const [commentData, setCommentData] = useState({ name: "", comment: "" })
-  const [showShareMenu, setShowShareMenu] = useState(false)
   const [estimatedReadTime, setEstimatedReadTime] = useState("5 min read")
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -73,13 +73,9 @@ export default function BlogPostPage() {
   }
 
   const fetchComments = async (postId: string) => {
-    const { data, error } = await supabase.from("comments").select("*").eq("post_id", postId).eq("isApproved", true)
+    const { data } = await supabase.from("comments").select("*").eq("post_id", postId).eq("isApproved", true)
 
-    if (error) {
-      console.error("Error fetching comments:", error)
-    } else {
-      setComments((data as Comment[]) || [])
-    }
+    setComments((data as Comment[]) || [])
   }
 
   const addComment = async () => {
@@ -155,7 +151,6 @@ export default function BlogPostPage() {
           })
         break
     }
-    setShowShareMenu(false)
   }
 
   const formatDate = (isoDate: string) => {
@@ -329,10 +324,13 @@ export default function BlogPostPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
           <div className="relative w-full rounded-xl sm:rounded-2xl overflow-hidden mb-6 sm:mb-12 mt-4 sm:mt-8 shadow-2xl">
             <div className="relative">
-              <img
-                src={post.img || "/placeholder.svg?height=600&width=1200&query=CLAT preparation blog hero image"}
-                alt={post?.meta_title || post.title}
+              <Image
+                src={post?.img || "/placeholder.svg?height=600&width=1200&query=CLAT preparation blog hero image"}
+                alt={post?.meta_title || post?.title || "Blog post image"}
+                width={1200}
+                height={600}
                 className="w-full h-auto min-h-[200px] sm:min-h-[400px] md:h-[500px] lg:h-[600px] sm:object-cover object-cover"
+                priority
               />
             </div>
           </div>
@@ -400,9 +398,9 @@ export default function BlogPostPage() {
           <nav className="flex py-4 text-sm text-gray-500 mb-6 overflow-x-auto" aria-label="Breadcrumb">
             <ol className="flex items-center space-x-1 whitespace-nowrap">
               <li>
-                <a href="/" className="hover:text-[#014688] transition-colors">
+                <Link href="/" className="hover:text-[#014688] transition-colors">
                   Home
-                </a>
+                </Link>
               </li>
               <li className="flex items-center">
                 <svg className="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
@@ -412,9 +410,9 @@ export default function BlogPostPage() {
                     clipRule="evenodd"
                   />
                 </svg>
-                <a href="/blogs" className="ml-1 hover:text-[#014688] transition-colors">
+                <Link href="/blogs" className="ml-1 hover:text-[#014688] transition-colors">
                   Blog
-                </a>
+                </Link>
               </li>
               <li className="flex items-center">
                 <svg className="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
