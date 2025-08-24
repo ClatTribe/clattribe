@@ -94,7 +94,7 @@ export default function BlogPostPage() {
       created_at: new Date().toISOString(),
     }
 
-    const { data, error } = await supabase.from("comments").insert(newComment).select()
+    const { data } = await supabase.from("comments").insert(newComment).select()
 
     if (data && data[0]) {
       setCommentData({ name: "", comment: "" })
@@ -296,7 +296,7 @@ export default function BlogPostPage() {
           <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-12 text-center">
             <h1 className="text-2xl font-bold mb-4">Post Not Found</h1>
             <p className="text-muted-foreground mb-6">
-              The blog post you're looking for doesn't exist or has been removed.
+              The blog post you&apos;re looking for doesn&apos;t exist or has been removed.
             </p>
             <Link href="/blogs">
               <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-[#014688] text-white hover:bg-[#014688]/90 h-10 px-4 py-2">
