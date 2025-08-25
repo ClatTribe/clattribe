@@ -6,6 +6,7 @@ import { Edit, Plus, Trash2, X, Eye, MessageSquare, Check, Ban } from "lucide-re
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
+import type { JSX } from "react/jsx-runtime"
 
 // Supabase client
 const supabase = createClient(
@@ -111,6 +112,7 @@ const Button = ({
   type = "button",
   style,
   className = "",
+  title, // Added title prop
   ...props
 }: {
   children: React.ReactNode
@@ -121,6 +123,7 @@ const Button = ({
   type?: "button" | "submit"
   style?: React.CSSProperties
   className?: string
+  title?: string // Added title prop to type definition
 }) => {
   const baseClasses =
     "inline-flex items-center justify-center rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2"
@@ -144,6 +147,7 @@ const Button = ({
       onClick={onClick}
       disabled={disabled}
       style={style}
+      title={title} // Pass title prop to HTML button element
       className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${disabledClasses} ${className}`}
       {...props}
     >
@@ -328,8 +332,20 @@ const RichTextEditor = ({ value, onChange }: { value: string; onChange: (value: 
       case "heading":
         newText = `## ${selectedText}`
         break
+      case "heading3":
+        newText = `### ${selectedText}`
+        break
       case "link":
         newText = `[${selectedText}](url)`
+        break
+      case "bullet":
+        newText = `- ${selectedText}`
+        break
+      case "number":
+        newText = `1. ${selectedText}`
+        break
+      case "quote":
+        newText = `> ${selectedText}`
         break
       default:
         newText = selectedText
@@ -337,21 +353,161 @@ const RichTextEditor = ({ value, onChange }: { value: string; onChange: (value: 
 
     const newValue = value.substring(0, start) + newText + value.substring(end)
     onChange(newValue)
+
+    // Focus back to textarea and set cursor position
+    setTimeout(() => {
+      textarea.focus()
+      textarea.setSelectionRange(start + newText.length, start + newText.length)
+    }, 0)
+  }
+
+  const parseMarkdown = (text: string) => {
+    const lines = text.split("\n")
+    const elements: JSX.Element[] = []
+
+    lines.forEach((line, index) => {
+      // Skip empty lines
+      if (line.trim() === "") {
+        elements.push(<br key={index} />)
+        return
+      }
+
+      // Headers
+      if (line.startsWith("### ")) {
+        elements.push(
+          <h3 key={index} className="text-lg font-bold mt-3 mb-2">
+            {parseInlineFormatting(line.replace("### ", ""))}
+          </h3>,
+        )
+      } else if (line.startsWith("## ")) {
+        elements.push(
+          <h2 key={index} className="text-xl font-bold mt-4 mb-2">
+            {parseInlineFormatting(line.replace("## ", ""))}
+          </h2>,
+        )
+      } else if (line.startsWith("# ")) {
+        elements.push(
+          <h1 key={index} className="text-2xl font-bold mt-4 mb-3">
+            {parseInlineFormatting(line.replace("# ", ""))}
+          </h1>,
+        )
+      }
+      // Bullet points
+      else if (line.startsWith("- ") || line.startsWith("* ")) {
+        elements.push(
+          <ul key={index} className="list-disc list-inside mb-2">
+            <li>{parseInlineFormatting(line.replace(/^[-*] /, ""))}</li>
+          </ul>,
+        )
+      }
+      // Numbered lists
+      else if (/^\d+\. /.test(line)) {
+        elements.push(
+          <ol key={index} className="list-decimal list-inside mb-2">
+            <li>{parseInlineFormatting(line.replace(/^\d+\. /, ""))}</li>
+          </ol>,
+        )
+      }
+      // Blockquotes
+      else if (line.startsWith("> ")) {
+        elements.push(
+          <blockquote key={index} className="border-l-4 border-gray-300 pl-4 italic mb-2 text-gray-600">
+            {parseInlineFormatting(line.replace("> ", ""))}
+          </blockquote>,
+        )
+      }
+      // Regular paragraphs
+      else {
+        elements.push(
+          <p key={index} className="mb-2 leading-relaxed">
+            {parseInlineFormatting(line)}
+          </p>,
+        )
+      }
+    })
+
+    return elements
+  }
+
+  const parseInlineFormatting = (text: string) => {
+    const parts: (string | JSX.Element)[] = []
+    let currentIndex = 0
+
+    // Handle bold text **text**
+    text.replace(/\*\*(.*?)\*\*/g, (match, content, offset) => {
+      if (offset > currentIndex) {
+        parts.push(text.substring(currentIndex, offset))
+      }
+      parts.push(<strong key={offset}>{content}</strong>)
+      currentIndex = offset + match.length
+      return match
+    })
+
+    // Add remaining text
+    if (currentIndex < text.length) {
+      parts.push(text.substring(currentIndex))
+    }
+
+    // Handle italic text *text* (avoiding already processed bold text)
+    const processedParts: (string | JSX.Element)[] = []
+    parts.forEach((part, index) => {
+      if (typeof part === "string") {
+        const italicParts: (string | JSX.Element)[] = []
+        let currentIdx = 0
+
+        part.replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, (match, content, offset) => {
+          if (offset > currentIdx) {
+            italicParts.push(part.substring(currentIdx, offset))
+          }
+          italicParts.push(<em key={`${index}-${offset}`}>{content}</em>)
+          currentIdx = offset + match.length
+          return match
+        })
+
+        if (currentIdx < part.length) {
+          italicParts.push(part.substring(currentIdx))
+        }
+
+        processedParts.push(...(italicParts.length > 0 ? italicParts : [part]))
+      } else {
+        processedParts.push(part)
+      }
+    })
+
+    return processedParts.length > 0 ? processedParts : text
   }
 
   return (
     <div className="border border-gray-300 rounded-lg">
-      <div className="flex items-center gap-2 p-2 border-b bg-gray-50">
-        <Button type="button" variant="ghost" size="sm" onClick={() => insertFormatting("bold")}>
+      <div className="flex items-center gap-1 p-2 border-b bg-gray-50 flex-wrap">
+        <Button type="button" variant="ghost" size="sm" onClick={() => insertFormatting("bold")} title="Bold">
           <strong>B</strong>
         </Button>
-        <Button type="button" variant="ghost" size="sm" onClick={() => insertFormatting("italic")}>
+        <Button type="button" variant="ghost" size="sm" onClick={() => insertFormatting("italic")} title="Italic">
           <em>I</em>
         </Button>
-        <Button type="button" variant="ghost" size="sm" onClick={() => insertFormatting("heading")}>
+        <Button type="button" variant="ghost" size="sm" onClick={() => insertFormatting("heading")} title="Heading 2">
           H2
         </Button>
-        <Button type="button" variant="ghost" size="sm" onClick={() => insertFormatting("link")}>
+        <Button type="button" variant="ghost" size="sm" onClick={() => insertFormatting("heading3")} title="Heading 3">
+          H3
+        </Button>
+        <Button type="button" variant="ghost" size="sm" onClick={() => insertFormatting("bullet")} title="Bullet List">
+          •
+        </Button>
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          onClick={() => insertFormatting("number")}
+          title="Numbered List"
+        >
+          1.
+        </Button>
+        <Button type="button" variant="ghost" size="sm" onClick={() => insertFormatting("quote")} title="Quote">
+          "
+        </Button>
+        <Button type="button" variant="ghost" size="sm" onClick={() => insertFormatting("link")} title="Link">
           Link
         </Button>
         <div className="ml-auto">
@@ -362,44 +518,32 @@ const RichTextEditor = ({ value, onChange }: { value: string; onChange: (value: 
       </div>
 
       {isPreview ? (
-        <div className="p-4 min-h-[200px] prose max-w-none">
-          {value.split("\n").map((line, index) => {
-            if (line.startsWith("## ")) {
-              return (
-                <h2 key={index} className="text-xl font-bold mt-4 mb-2">
-                  {line.replace("## ", "")}
-                </h2>
-              )
-            }
-            if (line.includes("**") && line.includes("**")) {
-              const parts = line.split("**")
-              return (
-                <p key={index} className="mb-2">
-                  {parts.map((part, i) => (i % 2 === 1 ? <strong key={i}>{part}</strong> : part))}
-                </p>
-              )
-            }
-            return (
-              <p key={index} className="mb-2">
-                {line}
-              </p>
-            )
-          })}
-        </div>
+        <div className="p-4 min-h-[200px] prose max-w-none">{parseMarkdown(value)}</div>
       ) : (
-        <Textarea
-          id="content-editor"
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          className="min-h-[200px] border-0 focus:ring-0"
-          placeholder="Write your blog content here..."
-        />
+        <div className="relative">
+          <Textarea
+            id="content-editor"
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            className="min-h-[200px] border-0 focus:ring-0 resize-none"
+            placeholder="Write your blog content here... 
+
+Use markdown formatting:
+**bold text** for bold
+*italic text* for italic  
+## Heading 2
+### Heading 3
+- Bullet point
+1. Numbered list
+> Quote text"
+          />
+        </div>
       )}
     </div>
   )
 }
 
-function BlogEditor() {
+const BlogEditor = () => {
   const [posts, setPosts] = useState<BlogPost[]>([])
   const [loading, setLoading] = useState(true)
   const [editingPost, setEditingPost] = useState<BlogPost | null>(null)
@@ -1009,15 +1153,25 @@ function BlogEditor() {
                       </div>
                     </div>
                     <div className="flex space-x-2">
-                      <Button variant="outline" size="sm" onClick={() => openCommentsDialog(post)}>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => openCommentsDialog(post)}
+                        title="Manage Comments"
+                      >
                         <MessageSquare className="w-4 h-4 mr-1" />
                         Comments
                       </Button>
-                      <Button variant="outline" size="sm" onClick={() => openEditDialog(post)}>
+                      <Button variant="outline" size="sm" onClick={() => openEditDialog(post)} title="Edit Post">
                         <Edit className="w-4 h-4 mr-1" />
                         Edit
                       </Button>
-                      <Button variant="outline" size="sm" onClick={() => post.id && deletePost(post.id)}>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => post.id && deletePost(post.id)}
+                        title="Delete Post"
+                      >
                         <Trash2 className="w-4 h-4 mr-1" />
                         Delete
                       </Button>
@@ -1049,6 +1203,7 @@ function BlogEditor() {
               variant="outline"
               onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
               disabled={currentPage === 1}
+              title="Previous Page"
             >
               Previous
             </Button>
@@ -1059,6 +1214,7 @@ function BlogEditor() {
               variant="outline"
               onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
               disabled={currentPage === totalPages}
+              title="Next Page"
             >
               Next
             </Button>
@@ -1118,6 +1274,7 @@ function BlogEditor() {
                           size="sm"
                           onClick={() => updateCommentStatus(comment.id, true)}
                           className="bg-green-600 hover:bg-green-700 text-white"
+                          title="Approve Comment"
                         >
                           <Check className="w-4 h-4 mr-1" />
                           Approve
@@ -1129,6 +1286,7 @@ function BlogEditor() {
                           variant="outline"
                           onClick={() => updateCommentStatus(comment.id, false)}
                           className="border-yellow-300 text-yellow-700 hover:bg-yellow-50"
+                          title="Unapprove Comment"
                         >
                           <Ban className="w-4 h-4 mr-1" />
                           Unapprove
@@ -1139,6 +1297,7 @@ function BlogEditor() {
                         variant="outline"
                         onClick={() => deleteComment(comment.id)}
                         className="border-red-300 text-red-700 hover:bg-red-50"
+                        title="Delete Comment"
                       >
                         <Trash2 className="w-4 h-4 mr-1" />
                         Delete
@@ -1151,7 +1310,7 @@ function BlogEditor() {
           </div>
 
           <div className="flex justify-end mt-4">
-            <Button variant="outline" onClick={() => setIsCommentsDialogOpen(false)}>
+            <Button variant="outline" onClick={() => setIsCommentsDialogOpen(false)} title="Close Comments Dialog">
               Close
             </Button>
           </div>

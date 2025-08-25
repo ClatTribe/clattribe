@@ -24,7 +24,7 @@ interface BlogPost {
 interface Comment {
   id: string
   post_id: string
-  username: string // Changed from 'user' to 'username' to avoid PostgreSQL reserved keyword
+  username: string
   text: string
   isApproved: boolean
   isReply: boolean
@@ -49,7 +49,7 @@ export default function BlogPostPage() {
         .from("blogs_data")
         .select("*")
         .eq("slug", slug)
-        .eq("published", true) // Only show published posts
+        .eq("published", true)
         .single()
 
       if (error) {
@@ -94,7 +94,7 @@ export default function BlogPostPage() {
     setIsSubmitting(true)
     const newComment = {
       post_id: post?.id,
-      username: commentData.name.trim(), // Changed from 'user' to 'username'
+      username: commentData.name.trim(),
       text: commentData.comment.trim(),
       isApproved: false,
       isReply: false,
@@ -118,13 +118,13 @@ export default function BlogPostPage() {
   }
 
   const handleShare = (platform: string) => {
-    const url = `${window.location.origin}/blog/${post?.slug}`
-    const title = `${post?.title} | CLAT Tribe`
-    const description = post?.metades || post?.title || "Expert CLAT preparation insights"
+    const url = `${window.location.origin}/blogs/${post?.slug}`
+    const title = `${post?.title} | Blog`
+    const description = post?.metades || post?.title || "Expert insights and guidance"
 
     switch (platform) {
       case "twitter":
-        const twitterText = `${title}\n\n${description}\n\n#CLAT #LawEntrance #CLATTribe`
+        const twitterText = `${title}\n\n${description}\n\n#Blog #Insights`
         window.open(
           `https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterText)}&url=${encodeURIComponent(url)}`,
           "_blank",
@@ -143,7 +143,7 @@ export default function BlogPostPage() {
         )
         break
       case "whatsapp":
-        const whatsappText = `*${title}*\n\n${description}\n\n${url}\n\n_Shared from CLAT Tribe_`
+        const whatsappText = `*${title}*\n\n${description}\n\n${url}`
         window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(whatsappText)}`, "_blank")
         break
       case "copy":
@@ -175,25 +175,24 @@ export default function BlogPostPage() {
   }
 
   const renderContent = (content: string) => {
-    // Simple markdown-like rendering for demo
     return content.split("\n").map((line, index) => {
       if (line.startsWith("# ")) {
         return (
-          <h1 key={index} className="text-3xl font-bold mt-8 mb-4 text-gray-900">
+          <h1 key={index} className="text-2xl sm:text-3xl font-bold mt-8 mb-4 text-gray-900 leading-tight">
             {line.replace("# ", "")}
           </h1>
         )
       }
       if (line.startsWith("## ")) {
         return (
-          <h2 key={index} className="text-2xl font-semibold mt-6 mb-3 text-gray-900">
+          <h2 key={index} className="text-xl sm:text-2xl font-semibold mt-6 mb-3 text-gray-900 leading-tight">
             {line.replace("## ", "")}
           </h2>
         )
       }
       if (line.startsWith("### ")) {
         return (
-          <h3 key={index} className="text-xl font-medium mt-4 mb-2 text-gray-900">
+          <h3 key={index} className="text-lg sm:text-xl font-medium mt-4 mb-2 text-gray-900">
             {line.replace("### ", "")}
           </h3>
         )
@@ -204,10 +203,10 @@ export default function BlogPostPage() {
       if (line.includes("**")) {
         const parts = line.split("**")
         return (
-          <p key={index} className="mb-4 leading-relaxed text-gray-700 text-lg">
+          <p key={index} className="mb-4 leading-relaxed text-gray-700 text-base sm:text-lg">
             {parts.map((part, i) =>
               i % 2 === 1 ? (
-                <strong key={i} className="text-gray-900">
+                <strong key={i} className="text-gray-900 font-semibold">
                   {part}
                 </strong>
               ) : (
@@ -217,8 +216,15 @@ export default function BlogPostPage() {
           </p>
         )
       }
+      if (line.startsWith("- ") || line.startsWith("* ")) {
+        return (
+          <li key={index} className="mb-2 leading-relaxed text-gray-700 text-base sm:text-lg ml-4 list-disc">
+            {line.replace(/^[*-] /, "")}
+          </li>
+        )
+      }
       return (
-        <p key={index} className="mb-4 leading-relaxed text-gray-700 text-lg">
+        <p key={index} className="mb-4 leading-relaxed text-gray-700 text-base sm:text-lg">
           {line}
         </p>
       )
@@ -280,12 +286,12 @@ export default function BlogPostPage() {
       <div className="min-h-screen bg-background">
         <div className="fixed top-0 left-0 z-[9999] w-full h-1 bg-gray-200">
           <div
-            className="h-full bg-gradient-to-r from-[#014688] to-blue-600 transition-all duration-300"
+            className="h-full bg-gradient-to-r from-[#014688] to-[#0156a3] transition-all duration-300"
             style={{ width: "0%" }}
           ></div>
         </div>
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
           <div className="animate-pulse">
             <div className="h-8 bg-muted rounded w-1/4 mb-4"></div>
             <div className="h-12 bg-muted rounded w-3/4 mb-6"></div>
@@ -304,14 +310,14 @@ export default function BlogPostPage() {
   if (!post) {
     return (
       <div className="min-h-screen bg-background">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
           <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-12 text-center">
             <h1 className="text-2xl font-bold mb-4">Post Not Found</h1>
             <p className="text-muted-foreground mb-6">
               The blog post you&apos;re looking for doesn&apos;t exist or has been removed.
             </p>
             <Link href="/blogs">
-              <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-[#014688] text-white hover:bg-[#014688]/90 h-10 px-4 py-2">
+              <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-[#014688] text-white hover:bg-[#0156a3] h-10 px-4 py-2">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Blog
               </button>
@@ -327,21 +333,21 @@ export default function BlogPostPage() {
       <div className="fixed top-0 left-0 z-[9999] w-full h-1 bg-gray-200">
         <div
           id="reading-progress"
-          className="h-full bg-gradient-to-r from-[#014688] to-blue-600 transition-all duration-300"
+          className="h-full bg-gradient-to-r from-[#014688] to-[#0156a3] transition-all duration-300"
           style={{ width: "0%" }}
         ></div>
       </div>
 
       <div className="min-h-screen bg-background">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
-          <div className="relative w-full rounded-xl sm:rounded-2xl overflow-hidden mb-6 sm:mb-12 mt-4 sm:mt-8 shadow-2xl">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+          <div className="relative w-full rounded-xl sm:rounded-2xl overflow-hidden mb-6 sm:mb-12 shadow-2xl">
             <div className="relative">
               <Image
-                src={post?.img || "/placeholder.svg?height=600&width=1200&query=CLAT preparation blog hero image"}
+                src={post?.img || "/placeholder.svg?height=600&width=1200&query=blog hero image"}
                 alt={post?.meta_title || post?.title || "Blog post image"}
                 width={1200}
                 height={600}
-                className="w-full h-auto min-h-[200px] sm:min-h-[400px] md:h-[500px] lg:h-[600px] sm:object-cover object-cover"
+                className="w-full h-auto min-h-[200px] sm:min-h-[400px] md:h-[500px] lg:h-[600px] object-cover"
                 priority
               />
             </div>
@@ -423,7 +429,7 @@ export default function BlogPostPage() {
                   />
                 </svg>
                 <Link href="/blogs" className="ml-1 hover:text-[#014688] transition-colors">
-                  Blog
+                  Blogs
                 </Link>
               </li>
               <li className="flex items-center">
@@ -469,20 +475,70 @@ export default function BlogPostPage() {
             </div>
           </div>
 
-          {post?.keywords && (
-            <div className="flex flex-wrap gap-2 sm:gap-3 mb-8 sm:mb-10">
-              {post.keywords.split(",").map((keyword, index) => (
-                <span
-                  key={index}
-                  className="bg-blue-50 text-[#014688] text-xs sm:text-sm font-medium px-3 py-2 sm:px-4 rounded-full border border-blue-200"
-                >
-                  #{keyword.trim()}
-                </span>
-              ))}
-            </div>
-          )}
-
           <div id="main-content" className="max-w-none mb-12 sm:mb-16">
+            <style jsx global>{`
+              #main-content p,
+              #main-content li {
+                font-size: 18px !important;
+                line-height: 1.7 !important;
+              }
+              #main-content h1 {
+                font-size: 28px !important;
+                margin-top: 2rem !important;
+                margin-bottom: 1rem !important;
+                font-weight: 700 !important;
+              }
+              #main-content h2 {
+                font-size: 24px !important;
+                margin-top: 2rem !important;
+                margin-bottom: 1rem !important;
+                font-weight: 600 !important;
+              }
+              #main-content h3 {
+                font-size: 20px !important;
+                margin-top: 1.5rem !important;
+                margin-bottom: 0.75rem !important;
+                font-weight: 500 !important;
+              }
+              #main-content ul {
+                margin: 1rem 0 !important;
+                padding-left: 1.5rem !important;
+              }
+              #main-content li {
+                margin-bottom: 0.5rem !important;
+              }
+              @media (min-width: 640px) {
+                #main-content p,
+                #main-content li {
+                  font-size: 18px !important;
+                  line-height: 1.6 !important;
+                }
+                #main-content h1 {
+                  font-size: 32px !important;
+                }
+                #main-content h2 {
+                  font-size: 28px !important;
+                }
+                #main-content h3 {
+                  font-size: 24px !important;
+                }
+              }
+              @media (min-width: 1024px) {
+                #main-content p,
+                #main-content li {
+                  font-size: 19px !important;
+                }
+                #main-content h1 {
+                  font-size: 36px !important;
+                }
+                #main-content h2 {
+                  font-size: 30px !important;
+                }
+                #main-content h3 {
+                  font-size: 26px !important;
+                }
+              }
+            `}</style>
             {renderContent(post.content)}
           </div>
 
@@ -498,7 +554,7 @@ export default function BlogPostPage() {
                     <div key={index} className="bg-gray-50 rounded-lg p-4 sm:p-6 border border-gray-200">
                       <div className="flex items-start">
                         <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#014688] text-white flex items-center justify-center font-semibold flex-shrink-0 text-sm sm:text-lg">
-                          {item?.username // Changed from 'user' to 'username'
+                          {item?.username
                             ? item.username
                                 .split(" ")
                                 .map((i: string) => i.substring(0, 1))
@@ -506,8 +562,7 @@ export default function BlogPostPage() {
                             : ""}
                         </div>
                         <div className="ml-3 sm:ml-4 flex-1">
-                          <p className="font-semibold text-gray-900 text-base sm:text-lg">{item.username}</p>{" "}
-                          {/* Changed from 'user' to 'username' */}
+                          <p className="font-semibold text-gray-900 text-base sm:text-lg">{item.username}</p>
                           <p className="text-gray-700 mt-2 text-sm sm:text-base leading-relaxed">{item.text}</p>
                           <p className="text-xs sm:text-sm text-gray-500 mt-3">{formatDate(item.created_at)}</p>
                         </div>
@@ -573,7 +628,7 @@ export default function BlogPostPage() {
                 <button
                   onClick={addComment}
                   disabled={isSubmitting || !commentData.name.trim() || !commentData.comment.trim()}
-                  className="w-full sm:w-auto bg-[#014688] hover:bg-[#014688]/90 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-medium py-4 px-8 rounded-lg transition-colors duration-200 text-base sm:text-lg"
+                  className="w-full sm:w-auto bg-[#014688] hover:bg-[#0156a3] disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-medium py-4 px-8 rounded-lg transition-colors duration-200 text-base sm:text-lg"
                 >
                   {isSubmitting ? "Submitting..." : "Submit Comment"}
                 </button>
