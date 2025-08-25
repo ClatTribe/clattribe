@@ -504,9 +504,15 @@ const RichTextEditor = ({ value, onChange }: { value: string; onChange: (value: 
         >
           1.
         </Button>
-        <Button type="button" variant="ghost" size="sm" onClick={() => insertFormatting("quote")} title="Quote">
-          "
-        </Button>
+        <Button
+  type="button"
+  variant="ghost"
+  size="sm"
+  onClick={() => insertFormatting("quote")}
+  title="Quote"
+>
+  &quot;
+</Button>
         <Button type="button" variant="ghost" size="sm" onClick={() => insertFormatting("link")} title="Link">
           Link
         </Button>
