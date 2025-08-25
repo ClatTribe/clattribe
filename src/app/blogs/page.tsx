@@ -177,7 +177,7 @@ export default function BlogsPage() {
                 <span className="text-[#014688] font-bold">{posts.length}</span> posts
                 {searchTerm && (
                   <span className="ml-2 px-3 py-1 bg-[#014688]/10 text-[#014688] rounded-full text-sm font-medium">
-                    "{searchTerm}"
+                     &quot;{searchTerm}&quot;
                   </span>
                 )}
               </p>
