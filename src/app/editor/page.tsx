@@ -30,7 +30,7 @@ interface BlogPost {
 interface Comment {
   id: string
   post_id: string
-  username: string
+  user: string
   text: string
   isApproved: boolean
   isReply: boolean
@@ -1070,7 +1070,7 @@ function BlogEditor() {
       <Dialog open={isCommentsDialogOpen} onOpenChange={setIsCommentsDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Comments for "{selectedPostForComments?.title}"</DialogTitle>
+            <DialogTitle>Comments for &quot;{selectedPostForComments?.title}&quot;</DialogTitle>
           </DialogHeader>
 
           <div className="max-h-96 overflow-y-auto">
@@ -1102,7 +1102,7 @@ function BlogEditor() {
                   >
                     <div className="flex justify-between items-start mb-2">
                       <div className="flex items-center space-x-2">
-                        <span className="font-semibold text-gray-900">{comment.username}</span>
+                        <span className="font-semibold text-gray-900">{comment.user}</span>
                         <Badge variant={comment.isApproved ? "default" : "secondary"}>
                           {comment.isApproved ? "Approved" : "Pending"}
                         </Badge>
