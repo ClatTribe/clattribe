@@ -4,15 +4,9 @@ import { useState, useEffect } from "react"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { useParams } from "next/navigation"
-import { createClient } from "@supabase/supabase-js"
+import { supabase } from "../../lib/supabase"
 import DefaultLayout from "../../defaultlayout"
 import Image from "next/image"
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || "https://fjswchcothephgtzqbgq.supabase.co",
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZqc3djaGNvdGhlcGhndHpxYmdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU3NTk2ODQsImV4cCI6MjA3MTMzNTY4NH0.AqKfl8rwkH4_Y0sVdcQLWu6HF1nrxhro-jMyEdUggV4",
-)
 
 interface BlogPost {
   id: string
@@ -30,7 +24,7 @@ interface BlogPost {
 interface Comment {
   id: string
   post_id: string
-  user: string
+  username: string // Changed from 'user' to 'username' to avoid PostgreSQL reserved keyword
   text: string
   isApproved: boolean
   isReply: boolean
@@ -73,9 +67,22 @@ export default function BlogPostPage() {
   }
 
   const fetchComments = async (postId: string) => {
-    const { data } = await supabase.from("comments").select("*").eq("post_id", postId).eq("isApproved", true)
+    console.log("[v0] Fetching comments for post:", postId)
 
-    setComments((data as Comment[]) || [])
+    const { data, error } = await supabase
+      .from("comments")
+      .select("*")
+      .eq("post_id", postId)
+      .eq("isApproved", true)
+      .order("created_at", { ascending: false })
+
+    if (error) {
+      console.error("[v0] Error fetching comments:", error)
+      setComments([])
+    } else {
+      console.log("[v0] Comments fetched:", data)
+      setComments((data as Comment[]) || [])
+    }
   }
 
   const addComment = async () => {
@@ -87,16 +94,21 @@ export default function BlogPostPage() {
     setIsSubmitting(true)
     const newComment = {
       post_id: post?.id,
-      user: commentData.name.trim(),
+      username: commentData.name.trim(), // Changed from 'user' to 'username'
       text: commentData.comment.trim(),
       isApproved: false,
       isReply: false,
-      created_at: new Date().toISOString(),
     }
 
-    const { data } = await supabase.from("comments").insert(newComment).select()
+    console.log("[v0] Submitting comment:", newComment)
 
-    if (data && data[0]) {
+    const { data, error } = await supabase.from("comments").insert(newComment).select()
+
+    if (error) {
+      console.error("[v0] Error submitting comment:", error)
+      alert("Error submitting comment. Please try again.")
+    } else if (data && data[0]) {
+      console.log("[v0] Comment submitted successfully:", data[0])
       setCommentData({ name: "", comment: "" })
       alert("Comment submitted successfully! It will appear after admin approval.")
     } else {
@@ -486,15 +498,16 @@ export default function BlogPostPage() {
                     <div key={index} className="bg-gray-50 rounded-lg p-4 sm:p-6 border border-gray-200">
                       <div className="flex items-start">
                         <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#014688] text-white flex items-center justify-center font-semibold flex-shrink-0 text-sm sm:text-lg">
-                          {item?.user
-                            ? item.user
+                          {item?.username // Changed from 'user' to 'username'
+                            ? item.username
                                 .split(" ")
                                 .map((i: string) => i.substring(0, 1))
                                 .join("")
                             : ""}
                         </div>
                         <div className="ml-3 sm:ml-4 flex-1">
-                          <p className="font-semibold text-gray-900 text-base sm:text-lg">{item.user}</p>
+                          <p className="font-semibold text-gray-900 text-base sm:text-lg">{item.username}</p>{" "}
+                          {/* Changed from 'user' to 'username' */}
                           <p className="text-gray-700 mt-2 text-sm sm:text-base leading-relaxed">{item.text}</p>
                           <p className="text-xs sm:text-sm text-gray-500 mt-3">{formatDate(item.created_at)}</p>
                         </div>

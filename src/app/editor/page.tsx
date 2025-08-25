@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react"
 import { createClient } from "@supabase/supabase-js"
-import { Edit, Plus, Trash2, X, Eye } from "lucide-react"
+import { Edit, Plus, Trash2, X, Eye, MessageSquare, Check, Ban } from "lucide-react"
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
@@ -25,6 +25,16 @@ interface BlogPost {
   img?: string // Changed from image_url to img
   published: boolean // Changed from is_published to published
   created_at?: string
+}
+
+interface Comment {
+  id: string
+  post_id: string
+  username: string
+  text: string
+  isApproved: boolean
+  isReply: boolean
+  created_at: string
 }
 
 interface Toast {
@@ -398,6 +408,12 @@ function BlogEditor() {
   const [totalPages, setTotalPages] = useState(1)
   const postsPerPage = 10
 
+  // Comment management state
+  const [comments, setComments] = useState<Comment[]>([])
+  const [selectedPostForComments, setSelectedPostForComments] = useState<BlogPost | null>(null)
+  const [isCommentsDialogOpen, setIsCommentsDialogOpen] = useState(false)
+  const [loadingComments, setLoadingComments] = useState(false)
+
   const { toast } = useToast()
 
   const [formData, setFormData] = useState<BlogPost>({
@@ -570,6 +586,122 @@ function BlogEditor() {
     setIsDialogOpen(true)
   }
 
+  // Fetch comments for a specific post
+  const fetchCommentsForPost = async (postId: string) => {
+    setLoadingComments(true)
+    try {
+      const { data, error } = await supabase
+        .from("comments")
+        .select("*")
+        .eq("post_id", postId)
+        .order("created_at", { ascending: false })
+
+      if (error) {
+        toast({
+          title: "Error",
+          description: "Failed to fetch comments",
+          variant: "destructive",
+        })
+      } else {
+        setComments(data || [])
+      }
+    } catch (error) {
+      console.error("Error fetching comments:", error)
+      toast({
+        title: "Error",
+        description: "Failed to fetch comments",
+        variant: "destructive",
+      })
+    } finally {
+      setLoadingComments(false)
+    }
+  }
+
+  // Approve/deny comments
+  const updateCommentStatus = async (commentId: string, isApproved: boolean) => {
+    try {
+      const { error } = await supabase.from("comments").update({ isApproved }).eq("id", commentId)
+
+      if (error) {
+        toast({
+          title: "Error",
+          description: "Failed to update comment status",
+          variant: "destructive",
+        })
+      } else {
+        toast({
+          title: "Success",
+          description: `Comment ${isApproved ? "approved" : "denied"} successfully`,
+        })
+        // Refresh comments
+        if (selectedPostForComments?.id) {
+          fetchCommentsForPost(selectedPostForComments.id)
+        }
+      }
+    } catch (error) {
+      console.error("Error updating comment:", error)
+      toast({
+        title: "Error",
+        description: "Failed to update comment status",
+        variant: "destructive",
+      })
+    }
+  }
+
+  // Delete comments
+  const deleteComment = async (commentId: string) => {
+    if (!confirm("Are you sure you want to delete this comment?")) return
+
+    try {
+      const { error } = await supabase.from("comments").delete().eq("id", commentId)
+
+      if (error) {
+        toast({
+          title: "Error",
+          description: "Failed to delete comment",
+          variant: "destructive",
+        })
+      } else {
+        toast({
+          title: "Success",
+          description: "Comment deleted successfully",
+        })
+        // Refresh comments
+        if (selectedPostForComments?.id) {
+          fetchCommentsForPost(selectedPostForComments.id)
+        }
+      }
+    } catch (error) {
+      console.error("Error deleting comment:", error)
+      toast({
+        title: "Error",
+        description: "Failed to delete comment",
+        variant: "destructive",
+      })
+    }
+  }
+
+  // Open comments management dialog
+  const openCommentsDialog = (post: BlogPost) => {
+    setSelectedPostForComments(post)
+    setIsCommentsDialogOpen(true)
+    if (post.id) {
+      fetchCommentsForPost(post.id)
+    }
+  }
+
+  // Format date for comments
+  const formatDate = (isoDate: string) => {
+    const date = new Date(isoDate)
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    })
+  }
+
   useEffect(() => {
     fetchPosts(currentPage)
   }, [currentPage, fetchPosts])
@@ -674,7 +806,7 @@ function BlogEditor() {
           <div className="flex justify-between items-center py-6">
             <div>
               <h1 className="text-3xl font-bold text-gray-900">Clat Tribe Blog Editor</h1>
-              <p className="text-gray-600">Manage your blog posts</p>
+              <p className="text-gray-600">Manage your blog posts and comments</p>
             </div>
             <div className="flex space-x-3">
               <Link href="/blogs">
@@ -877,6 +1009,10 @@ function BlogEditor() {
                       </div>
                     </div>
                     <div className="flex space-x-2">
+                      <Button variant="outline" size="sm" onClick={() => openCommentsDialog(post)}>
+                        <MessageSquare className="w-4 h-4 mr-1" />
+                        Comments
+                      </Button>
                       <Button variant="outline" size="sm" onClick={() => openEditDialog(post)}>
                         <Edit className="w-4 h-4 mr-1" />
                         Edit
@@ -929,6 +1065,98 @@ function BlogEditor() {
           </div>
         )}
       </div>
+
+      {/* Comments Management Dialog */}
+      <Dialog open={isCommentsDialogOpen} onOpenChange={setIsCommentsDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Comments for "{selectedPostForComments?.title}"</DialogTitle>
+          </DialogHeader>
+
+          <div className="max-h-96 overflow-y-auto">
+            {loadingComments ? (
+              <div className="space-y-4">
+                {Array(3)
+                  .fill(0)
+                  .map((_, index) => (
+                    <div key={index} className="animate-pulse">
+                      <div className="h-4 bg-gray-200 rounded w-1/4 mb-2"></div>
+                      <div className="h-16 bg-gray-200 rounded mb-2"></div>
+                      <div className="h-4 bg-gray-200 rounded w-1/3"></div>
+                    </div>
+                  ))}
+              </div>
+            ) : comments.length === 0 ? (
+              <div className="text-center py-8 text-gray-500">
+                <MessageSquare className="w-12 h-12 mx-auto mb-4 text-gray-300" />
+                <p>No comments yet for this post.</p>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {comments.map((comment) => (
+                  <div
+                    key={comment.id}
+                    className={`border rounded-lg p-4 ${
+                      comment.isApproved ? "bg-green-50 border-green-200" : "bg-yellow-50 border-yellow-200"
+                    }`}
+                  >
+                    <div className="flex justify-between items-start mb-2">
+                      <div className="flex items-center space-x-2">
+                        <span className="font-semibold text-gray-900">{comment.username}</span>
+                        <Badge variant={comment.isApproved ? "default" : "secondary"}>
+                          {comment.isApproved ? "Approved" : "Pending"}
+                        </Badge>
+                      </div>
+                      <span className="text-xs text-gray-500">{formatDate(comment.created_at)}</span>
+                    </div>
+
+                    <p className="text-gray-700 mb-3 leading-relaxed">{comment.text}</p>
+
+                    <div className="flex space-x-2">
+                      {!comment.isApproved && (
+                        <Button
+                          size="sm"
+                          onClick={() => updateCommentStatus(comment.id, true)}
+                          className="bg-green-600 hover:bg-green-700 text-white"
+                        >
+                          <Check className="w-4 h-4 mr-1" />
+                          Approve
+                        </Button>
+                      )}
+                      {comment.isApproved && (
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => updateCommentStatus(comment.id, false)}
+                          className="border-yellow-300 text-yellow-700 hover:bg-yellow-50"
+                        >
+                          <Ban className="w-4 h-4 mr-1" />
+                          Unapprove
+                        </Button>
+                      )}
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => deleteComment(comment.id)}
+                        className="border-red-300 text-red-700 hover:bg-red-50"
+                      >
+                        <Trash2 className="w-4 h-4 mr-1" />
+                        Delete
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="flex justify-end mt-4">
+            <Button variant="outline" onClick={() => setIsCommentsDialogOpen(false)}>
+              Close
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
