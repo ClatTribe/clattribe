@@ -11,7 +11,7 @@ export default function HomePage() {
           className="relative h-[400px] md:h-[500px] bg-cover bg-center bg-no-repeat flex items-center justify-center"
           style={{
             backgroundImage:
-              "url('https://res.cloudinary.com/daetdadtt/image/upload/v1756372565/Untitled_design_ak7yoe.png')",
+              "url('https://res.cloudinary.com/daetdadtt/image/upload/v1756378398/CLAT_TRIBE_pages-to-jpg-0001_oplyqi.jpg')",
           }}
         >
           <a
@@ -31,42 +31,71 @@ export default function HomePage() {
             background: "linear-gradient(to bottom, #024687, #ffffff)",
           }}
         >
-          <div className="max-w-7xl mx-auto">
-            {/* Row 1: Trending, To-do, GK Therapy Center */}
+          <div className="max-w-4xl mx-auto">
+            {/* Left stacked + Right GK Therapy */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
-              {/* Trending #1 */}
-              <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer">
-                <h2 className="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-gray-200 pb-2">
-                  Trending #1
-                </h2>
-                <p className="text-gray-600 leading-relaxed">
-                  (Will have the most important and trending GK Blog. Must be
-                  clickable)
-                </p>
+              {/* Left side stacked */}
+              <div className="lg:col-span-2 space-y-6">
+                {/* Trending #1 */}
+                <a
+                  href="#"
+                  className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer block"
+                >
+                  <h2 className="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-gray-200 pb-2">
+                    Trending #1
+                  </h2>
+                  <p className="text-gray-600 leading-relaxed">
+                    (Will have the most important and trending GK Blog. Must be clickable)
+                  </p>
+                </a>
+
+                {/* To-do */}
+                <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                  <h2 className="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-gray-200 pb-2">
+                    To-do
+                  </h2>
+                  <ul className="space-y-3 text-gray-600">
+                    <li className="flex items-center">
+                      <span className="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+                      3 GK Topics
+                    </li>
+                    <li className="flex items-center">
+                      <span className="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+                      Criminal Law basics
+                    </li>
+                    <li className="flex items-center">
+                      <span className="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+                      Solve Quants 12 questions
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Stats combined box */}
+                <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
+                  <div className="grid grid-cols-2 gap-16 text-center">
+                    <div>
+                      <div className="text-3xl font-bold text-gray-800 mb-2">660+</div>
+                      <p className="text-gray-600">Students enrolled in CLAT 2025</p>
+                    </div>
+                    <div>
+                      <div className="text-3xl font-bold text-gray-800 mb-2">6000+</div>
+                      <p className="text-gray-600">Students downloaded GK Tracker</p>
+                    </div>
+                    <div>
+                      <div className="text-3xl font-bold text-gray-800 mb-2">300+</div>
+                      <p className="text-gray-600">1:1 mentorship sessions per month</p>
+                    </div>
+                    <div>
+                      <div className="text-3xl font-bold text-gray-800 mb-2">140+</div>
+                      <p className="text-gray-600">
+                        Selection in <span className="text-red-500 font-semibold">NLU</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              {/* To-do */}
-              <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                <h2 className="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-gray-200 pb-2">
-                  To-do
-                </h2>
-                <ul className="space-y-3 text-gray-600">
-                  <li className="flex items-center">
-                    <span className="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
-                    3 GK Topics
-                  </li>
-                  <li className="flex items-center">
-                    <span className="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
-                    Criminal Law basics
-                  </li>
-                  <li className="flex items-center">
-                    <span className="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
-                    Solve Quants 12 questions
-                  </li>
-                </ul>
-              </div>
-
-              {/* GK Therapy Center */}
+              {/* Right GK Therapy Center */}
               <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col">
                 <h2 className="text-3xl font-bold text-gray-800 mb-2">
                   GK Therapy Center
@@ -95,9 +124,7 @@ export default function HomePage() {
 
                 {/* Pricing */}
                 <div className="bg-yellow-200 rounded-lg p-4 mb-6 text-center">
-                  <span className="text-gray-500 line-through text-lg">
-                    7999/-
-                  </span>
+                  <span className="text-gray-500 line-through text-lg">7999/-</span>
                   <div className="text-3xl font-bold text-gray-800">2999/-</div>
                 </div>
 
@@ -112,41 +139,11 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-
-            {/* Row 2: Statistics */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 text-center">
-                <div className="text-3xl font-bold text-gray-800 mb-2">
-                  660+
-                </div>
-                <p className="text-gray-600">Students enrolled in CLAT 2025</p>
-              </div>
-              <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 text-center">
-                <div className="text-3xl font-bold text-gray-800 mb-2">
-                  6000+
-                </div>
-                <p className="text-gray-600">Students downloaded GK Tracker</p>
-              </div>
-              <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 text-center">
-                <div className="text-3xl font-bold text-gray-800 mb-2">
-                  300+
-                </div>
-                <p className="text-gray-600">1:1 mentorship sessions per month</p>
-              </div>
-              <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 text-center">
-                <div className="text-3xl font-bold text-gray-800 mb-2">
-                  140+
-                </div>
-                <p className="text-gray-600">
-                  Selection in <span className="text-red-500 font-semibold">NLU</span>
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </div>
       <section>
-        <BlogsPreview/>
+        <BlogsPreview />
       </section>
     </DefaultLayout>
   )
