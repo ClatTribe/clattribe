@@ -228,7 +228,7 @@ export default function BlogsPage() {
                       {post.metades || truncateContent(post.content)}
                     </p>
 
-                    {post.keywords && (
+                    {/* {post.keywords && (
                       <div className="flex flex-wrap gap-2 mb-6">
                         {post.keywords
                           .split(",")
@@ -242,7 +242,7 @@ export default function BlogsPage() {
                             </span>
                           ))}
                       </div>
-                    )}
+                    )} */}
 
                     <Link href={`/blogs/${post.slug}`}>
                       <button className="inline-flex items-center text-[#014688] font-semibold hover:text-[#0369a1] transition-colors duration-200 group/btn">

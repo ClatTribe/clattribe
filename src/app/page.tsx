@@ -1,129 +1,153 @@
-// src/app/page.tsx
-import DefaultLayout from "./defaultlayout";
-import { Scale, Users, BookOpen, GraduationCap, FileText } from "lucide-react"; // Added icons
+"use client"
+import DefaultLayout from "./defaultlayout"
+import BlogsPreview from "./components/blogsPreview";
 
 export default function HomePage() {
   return (
     <DefaultLayout>
-      {/* Hero Section */}
-      <section className="bg-gray-50 py-20 text-center relative overflow-hidden">
-        <h1 className="text-2xl font-bold text-red-700 underline mb-10">
-          (Every Element in this landing page is just a Sample and Protoype yet)
-        </h1>
-        <h1 className="text-4xl md:text-5xl font-extrabold text-[#024687] mb-4">
-          Empowering Aspirants for CLAT & Law Careers
-        </h1>
-        <p className="text-lg text-gray-700 max-w-3xl mx-auto mb-6">
-          Clat Tribe is your trusted partner in cracking CLAT and achieving your
-          dream law career with expert mentorship, structured resources, and
-          community support.
-        </p>
-        <button className="px-8 py-3 bg-[#024687] text-white font-semibold rounded-lg shadow hover:bg-[#02356a] transition">
-          Get Started
-        </button>
-      </section>
-
-      {/* Features Section */}
-      <section className="py-20 container mx-auto px-6">
-        <h2 className="text-3xl font-bold text-center text-[#024687] mb-12">
-          Why Choose <span className="text-black">Clat Tribe?</span>
-        </h2>
-        <div className="grid md:grid-cols-3 gap-8 text-center">
-          <div className="p-8 bg-white shadow-md rounded-xl hover:shadow-lg transition">
-            <Scale className="mx-auto text-[#024687] mb-4 w-12 h-12" />
-            <h3 className="text-xl font-semibold mb-3">Expert Legal Mentors</h3>
-            <p className="text-gray-600">
-              Learn from top educators, advocates, and mentors with proven track
-              records in guiding aspirants to NLU success.
-            </p>
-          </div>
-          <div className="p-8 bg-white shadow-md rounded-xl hover:shadow-lg transition">
-            <BookOpen className="mx-auto text-[#024687] mb-4 w-12 h-12" />
-            <h3 className="text-xl font-semibold mb-3">Structured Resources</h3>
-            <p className="text-gray-600">
-              Access exclusive study material, case-based learning, and smart
-              strategies designed specifically for CLAT preparation.
-            </p>
-          </div>
-          <div className="p-8 bg-white shadow-md rounded-xl hover:shadow-lg transition">
-            <Users className="mx-auto text-[#024687] mb-4 w-12 h-12" />
-            <h3 className="text-xl font-semibold mb-3">Peer Community</h3>
-            <p className="text-gray-600">
-              Be a part of India’s growing CLAT community—discuss, collaborate,
-              and achieve success together.
-            </p>
-          </div>
+      <div className="min-h-screen">
+        {/* Hero Section with Background Image */}
+        <div
+          className="relative h-[400px] md:h-[500px] bg-cover bg-center bg-no-repeat flex items-center justify-center"
+          style={{
+            backgroundImage:
+              "url('https://res.cloudinary.com/daetdadtt/image/upload/v1756372565/Untitled_design_ak7yoe.png')",
+          }}
+        >
+          <a
+            href="#"
+            className="bg-white/95 backdrop-blur-md rounded-3xl px-6 py-3 shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-300 hover:bg-white border-2 border-blue-200 -mt-40 cursor-pointer block"
+          >
+            <h1 className="text-lg md:text-xl font-extrabold text-gray-900 text-center tracking-tight">
+              Daily Free GK Thoughts
+            </h1>
+          </a>
         </div>
-      </section>
 
-      {/* Law Entrance Insights Section */}
-      <section className="bg-gray-100 py-20">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold text-[#024687] mb-12">
-            Stay Ahead in CLAT & Law Entrance Exams
-          </h2>
-          <div className="grid md:grid-cols-2 gap-10">
-            <div className="p-8 bg-white rounded-xl shadow hover:shadow-lg transition">
-              <FileText className="mx-auto text-[#024687] mb-4 w-12 h-12" />
-              <h3 className="text-xl font-semibold mb-3">Mock Tests & Analysis</h3>
-              <p className="text-gray-600">
-                Regular test series with in-depth performance analysis to track
-                your progress and strengthen weak areas.
-              </p>
+        {/* Main Section */}
+        <div
+          className="py-12 px-4 min-h-screen"
+          style={{
+            background: "linear-gradient(to bottom, #024687, #ffffff)",
+          }}
+        >
+          <div className="max-w-7xl mx-auto">
+            {/* Row 1: Trending, To-do, GK Therapy Center */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+              {/* Trending #1 */}
+              <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer">
+                <h2 className="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-gray-200 pb-2">
+                  Trending #1
+                </h2>
+                <p className="text-gray-600 leading-relaxed">
+                  (Will have the most important and trending GK Blog. Must be
+                  clickable)
+                </p>
+              </div>
+
+              {/* To-do */}
+              <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <h2 className="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-gray-200 pb-2">
+                  To-do
+                </h2>
+                <ul className="space-y-3 text-gray-600">
+                  <li className="flex items-center">
+                    <span className="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+                    3 GK Topics
+                  </li>
+                  <li className="flex items-center">
+                    <span className="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+                    Criminal Law basics
+                  </li>
+                  <li className="flex items-center">
+                    <span className="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+                    Solve Quants 12 questions
+                  </li>
+                </ul>
+              </div>
+
+              {/* GK Therapy Center */}
+              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col">
+                <h2 className="text-3xl font-bold text-gray-800 mb-2">
+                  GK Therapy Center
+                </h2>
+                <h3 className="text-xl font-semibold text-gray-700 mb-6">
+                  Gains
+                </h3>
+                <ul className="space-y-3 text-gray-600 mb-8 flex-1">
+                  <li className="flex items-center">
+                    <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+                    Live + Recorded
+                  </li>
+                  <li className="flex items-center">
+                    <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+                    Notes + MindMaps
+                  </li>
+                  <li className="flex items-center">
+                    <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+                    FAQs + Tests
+                  </li>
+                  <li className="flex items-center">
+                    <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+                    Strategy sessions
+                  </li>
+                </ul>
+
+                {/* Pricing */}
+                <div className="bg-yellow-200 rounded-lg p-4 mb-6 text-center">
+                  <span className="text-gray-500 line-through text-lg">
+                    7999/-
+                  </span>
+                  <div className="text-3xl font-bold text-gray-800">2999/-</div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="space-y-3">
+                  <button className="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-300">
+                    CLAT 2026? Enroll now →
+                  </button>
+                  <button className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-3 px-4 rounded-lg transition-colors duration-300">
+                    CLAT 2027? Check the OG batch
+                  </button>
+                </div>
+              </div>
             </div>
-            <div className="p-8 bg-white rounded-xl shadow hover:shadow-lg transition">
-              <GraduationCap className="mx-auto text-[#024687] mb-4 w-12 h-12" />
-              <h3 className="text-xl font-semibold mb-3">Exam Strategy Sessions</h3>
-              <p className="text-gray-600">
-                Learn time management, question prioritization, and smart
-                approaches directly from experts to maximize your scores.
-              </p>
+
+            {/* Row 2: Statistics */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 text-center">
+                <div className="text-3xl font-bold text-gray-800 mb-2">
+                  660+
+                </div>
+                <p className="text-gray-600">Students enrolled in CLAT 2025</p>
+              </div>
+              <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 text-center">
+                <div className="text-3xl font-bold text-gray-800 mb-2">
+                  6000+
+                </div>
+                <p className="text-gray-600">Students downloaded GK Tracker</p>
+              </div>
+              <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 text-center">
+                <div className="text-3xl font-bold text-gray-800 mb-2">
+                  300+
+                </div>
+                <p className="text-gray-600">1:1 mentorship sessions per month</p>
+              </div>
+              <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 text-center">
+                <div className="text-3xl font-bold text-gray-800 mb-2">
+                  140+
+                </div>
+                <p className="text-gray-600">
+                  Selection in <span className="text-red-500 font-semibold">NLU</span>
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Success Stories Section */}
-      <section className="py-20 container mx-auto px-6 text-center">
-        <h2 className="text-3xl font-bold text-[#024687] mb-12">
-          Inspiring Success Stories
-        </h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          <div className="p-6 bg-white shadow rounded-xl hover:shadow-lg transition">
-            <p className="italic text-gray-600 mb-4">
-              “Clat Tribe’s mentorship and resources helped me crack CLAT with
-              confidence”
-            </p>
-            <h4 className="font-semibold text-[#024687]">— Saurabh Sharma</h4>
-          </div>
-          <div className="p-6 bg-white shadow rounded-xl hover:shadow-lg transition">
-            <p className="italic text-gray-600 mb-4">
-              “Clat Tribe’s mentorship and resources helped me crack CLAT with
-              confidence”
-            </p>
-            <h4 className="font-semibold text-[#024687]">— Saurabh Sharma</h4>
-          </div>
-          <div className="p-6 bg-white shadow rounded-xl hover:shadow-lg transition">
-            <p className="italic text-gray-600 mb-4">
-              “Clat Tribe’s mentorship and resources helped me crack CLAT with
-              confidence”
-            </p>
-            <h4 className="font-semibold text-[#024687]">— Saurabh Sharma</h4>
-          </div>
-        </div>
-      </section>
-
-      {/* Call to Action */}
-      <section className="bg-[#024687] text-white py-20 text-center">
-        <h2 className="text-3xl font-bold mb-4">Begin Your Law Journey Today</h2>
-        <p className="mb-6 text-lg max-w-2xl mx-auto">
-          Join thousands of aspirants preparing with Clat Tribe. Take the first
-          step toward your dream law school and secure your career.
-        </p>
-        <button className="px-8 py-3 bg-white text-[#024687] font-semibold rounded-lg shadow hover:bg-gray-200 transition">
-          Enroll Now
-        </button>
+      </div>
+      <section>
+        <BlogsPreview/>
       </section>
     </DefaultLayout>
-  );
+  )
 }
