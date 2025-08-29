@@ -9,12 +9,21 @@ export default function HomePage() {
       <div className="min-h-screen">
         {/* Hero Section */}
         <section className="relative min-h-[440px] md:h-[520px] bg-[#0a1a3c]">
-          {/* Image layer */}
-          <img
-            src="https://res.cloudinary.com/daetdadtt/image/upload/v1756454451/Untitled_design_1_mqwtzz.png"
-            alt="CLAT TRIBE banner"
-            className="absolute inset-0 h-full w-full object-cover object-bottom md:object-cover md:object-center"
-          />
+          {/* Image layer with responsive sources */}
+          <picture>
+            {/* Mobile image */}
+            <source
+              media="(max-width: 767px)"
+              srcSet="https://res.cloudinary.com/daetdadtt/image/upload/v1756460414/Untitled_design_2_rnzefc.png"
+            />
+            {/* Tablet + Desktop image */}
+            <img
+              src="https://res.cloudinary.com/daetdadtt/image/upload/v1756454451/Untitled_design_1_mqwtzz.png"
+              alt="CLAT TRIBE banner"
+              className="absolute inset-0 h-full w-full object-cover object-bottom md:object-center"
+            />
+          </picture>
+
           <div
             className="absolute inset-0 bg-gradient-to-b from-[#0a1a3c]/70 via-transparent to-transparent md:from-transparent"
             aria-hidden
