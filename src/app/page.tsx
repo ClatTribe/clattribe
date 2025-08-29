@@ -40,12 +40,9 @@ export default function HomePage() {
               </div>
 
               {/* CTA pill (glow preserved) */}
-              <Link href="/blogs" className="w-full max-w-[320px]">
-                <div className="relative mx-auto flex w-full items-center justify-center rounded-l-full bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 px-5 py-2 text-[#0a1a3c] shadow-lg transition-transform active:scale-[0.98]">
+              <Link href="/blogs">
+                <div className="relative mx-auto flex w-full items-center justify-center rounded-full bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 px-5 py-2 text-[#0a1a3c] shadow-lg transition-transform active:scale-[0.98]">
                   <span className="mr-2 text-xl font-bold">Daily Free GK Here</span>
-                  <div className="h-0 w-0 border-b-[10px] border-b-transparent border-l-[12px] border-l-yellow-500 border-t-[10px] border-t-transparent" />
-                  {/* Glow Effect (kept) */}
-                  <div className="absolute inset-0 -z-10 rounded-l-full bg-yellow-300/40 blur-md" aria-hidden />
                 </div>
               </Link>
 
@@ -66,9 +63,8 @@ export default function HomePage() {
               {/* CTA top-right */}
               <Link href="/blogs">
                 <div className="absolute right-6 top-6 md:right-8">
-                  <div className="relative flex items-center rounded-l-full bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 px-4 py-1 text-[#0a1a3c] shadow-lg">
+                  <div className="relative flex items-center rounded-full bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 px-4 py-1 text-[#0a1a3c] shadow-lg">
                     <span className="mr-1 text-xl font-bold">Daily free GK here</span>
-                    <div className="h-0 w-0 border-b-[12px] border-b-transparent border-l-[14px] border-l-yellow-500 border-t-[12px] border-t-transparent" />
                     <div className="absolute inset-0 -z-10 rounded-l-full bg-yellow-300/40 blur-md" aria-hidden />
                   </div>
                 </div>
