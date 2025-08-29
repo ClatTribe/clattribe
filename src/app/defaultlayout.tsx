@@ -1,4 +1,4 @@
-import Navbar from "./components/navbar";
+// import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 // import Toup from "./components/toup";
 
@@ -10,7 +10,7 @@ export default function DefaultLayout({
   return (
     <>
       {/* Navbar */}
-      <Navbar />
+      {/* <Navbar /> */}
       
       {/* Main content */}
       <main>
