@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Search, Calendar, BookOpen } from "lucide-react"
+import { Search, Calendar, Newspaper } from "lucide-react"
 import Link from "next/link"
 import { createClient } from "@supabase/supabase-js"
 import DefaultLayout from "../defaultlayout"
@@ -95,12 +95,12 @@ export default function GK() {
             <div className="py-8">
               <div className="space-y-4">
                 <div className="flex items-center gap-3 mb-4">
-                  <BookOpen className="w-8 h-8 text-blue-200" />
-                  <span className="text-blue-200 font-medium">Our Blog</span>
+                  <Newspaper className="w-8 h-8 text-blue-200" />
+                  <span className="text-blue-200 font-medium">GK Corner</span>
                 </div>
-                <h1 className="text-5xl font-bold leading-tight">Insights & Stories</h1>
+                <h1 className="text-5xl font-bold leading-tight">Daily Knowledge Hub</h1>
                 <p className="text-xl text-blue-100 max-w-2xl leading-relaxed">
-                  Discover the latest insights, tutorials, and updates from our team of experts
+                  Get fresh GK questions, answers, and current affairs every day.
                 </p>
               </div>
             </div>
@@ -140,12 +140,12 @@ export default function GK() {
             <div className="py-8">
               <div className="space-y-4">
                 <div className="flex items-center gap-3 mb-4">
-                  <BookOpen className="w-8 h-8 text-blue-200" />
-                  <span className="text-blue-200 font-medium">Our Blog</span>
+                  <Newspaper className="w-8 h-8 text-blue-200" />
+                  <span className="text-blue-200 font-medium">GK Corner</span>
                 </div>
-                <h1 className="text-5xl font-bold leading-tight">Insights & Stories</h1>
+                <h1 className="text-5xl font-bold leading-tight">Daily Knowledge Hub</h1>
                 <p className="text-xl text-blue-100 max-w-2xl leading-relaxed">
-                  Discover the latest insights, tutorials, and updates from our team of experts
+                  Get fresh GK questions, answers, and current affairs every day.
                 </p>
               </div>
             </div>
@@ -234,7 +234,7 @@ export default function GK() {
             <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-16 text-center">
               <div className="max-w-md mx-auto">
                 <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <BookOpen className="w-8 h-8 text-slate-400" />
+                  <Newspaper className="w-8 h-8 text-slate-400" />
                 </div>
                 <h3 className="text-2xl font-bold text-slate-900 mb-3">No posts found</h3>
                 <p className="text-slate-600 mb-8 leading-relaxed">

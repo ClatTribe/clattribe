@@ -41,18 +41,18 @@ export default function Navbar() {
           <Link href="/" className="font-medium text-[#014688] hover:text-[#014688]/80 transition-colors">
             Home
           </Link>
-          <Link href="/about" className="font-medium text-gray-600 hover:text-[#014688] transition-colors">
+          {/* <Link href="/about" className="font-medium text-gray-600 hover:text-[#014688] transition-colors">
             About
-          </Link>
+          </Link> */}
           <Link href="/blogs" className="font-medium text-gray-600 hover:text-[#014688] transition-colors">
             Blogs
           </Link>
-          <Link href="/contact" className="font-medium text-gray-600 hover:text-[#014688] transition-colors">
+          {/* <Link href="/contact" className="font-medium text-gray-600 hover:text-[#014688] transition-colors">
             Contact
-          </Link>
-          <Link href="/courses" className="font-medium text-gray-600 hover:text-[#014688] transition-colors">
+          </Link> */}
+          {/* <Link href="/courses" className="font-medium text-gray-600 hover:text-[#014688] transition-colors">
             Courses
-          </Link>
+          </Link> */}
         </nav>
 
         <div className="flex items-center md:hidden">
@@ -116,7 +116,7 @@ export default function Navbar() {
                 </motion.div>
 
                 {/* About */}
-                <motion.div
+                {/* <motion.div
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{
@@ -132,7 +132,7 @@ export default function Navbar() {
                   >
                     About
                   </Link>
-                </motion.div>
+                </motion.div> */}
 
                 {/* Blogs */}
                 <motion.div
@@ -154,7 +154,7 @@ export default function Navbar() {
                 </motion.div>
 
                 {/* Contact */}
-                <motion.div
+                {/* <motion.div
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{
@@ -170,10 +170,10 @@ export default function Navbar() {
                   >
                     Contact
                   </Link>
-                </motion.div>
+                </motion.div> */}
 
                 {/* Courses */}
-                <motion.div
+                {/* <motion.div
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{
@@ -189,7 +189,7 @@ export default function Navbar() {
                   >
                     Courses
                   </Link>
-                </motion.div>
+                </motion.div> */}
               </nav>
             </motion.div>
           </>
