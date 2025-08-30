@@ -1,12 +1,13 @@
 "use client"
-import DefaultLayout from "./defaultlayout"
+// import DefaultLayout from "./defaultlayout"
 import Link from "next/link"
 import BlogsPreview from "./components/blogsPreview"
+import Footer from "./components/footer"
 
 
 export default function HomePage() {
   return (
-    <DefaultLayout>
+    <>
       <div className="min-h-screen">
         {/* Hero Section */}
         <section className="relative min-h-[440px] md:h-[520px] bg-[#0a1a3c]">
@@ -201,6 +202,9 @@ export default function HomePage() {
       <section>
         <BlogsPreview />
       </section>
-    </DefaultLayout>
+       <section>
+        <Footer />
+      </section>
+    </>
   )
 }
