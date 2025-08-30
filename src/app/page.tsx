@@ -3,6 +3,7 @@ import DefaultLayout from "./defaultlayout"
 import Link from "next/link"
 import BlogsPreview from "./components/blogsPreview"
 
+
 export default function HomePage() {
   return (
     <DefaultLayout>
@@ -36,11 +37,15 @@ export default function HomePage() {
               {/* Title */}
               <div className="text-center">
                 <h1 className="text-4xl font-bold leading-tight mt-10">CLAT TRIBE</h1>
-                <span className="mx-auto mt-2 block h-[4px] w-full rounded-md bg-yellow-400" />
+                <img
+                  src="/under.svg"
+                  alt="Underline"
+                  className="w-full max-w-[200px]" // adjust size here
+                />
               </div>
 
               {/* CTA pill (glow preserved) */}
-              <Link href="/blogs">
+              <Link href="/gk">
                 <div className="relative mx-auto flex w-full items-center justify-center rounded-full bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 px-5 py-2 text-[#0a1a3c] shadow-lg transition-transform active:scale-[0.98]">
                   <span className="mr-2 text-xl font-bold">Daily Free GK Here</span>
                 </div>
@@ -48,7 +53,7 @@ export default function HomePage() {
 
               {/* Tagline */}
               <p className="text-center text-2xl font-bold tracking-wide drop-shadow-[2px_2px_3px_rgba(0,0,0,0.7)]">
-                Dream <span className="mx-1">,</span> Aim <span className="mx-1">,</span> Goal
+                dream <span className="mx-2">.</span> aim <span className="mx-2">.</span> goal
               </p>
             </div>
 
@@ -57,11 +62,15 @@ export default function HomePage() {
               {/* Title top-left */}
               <div className="absolute left-6 top-6 md:left-8">
                 <h1 className="text-4xl font-bold drop-shadow-[2px_2px_3px_rgba(0,0,0,0.7)] md:text-5xl">CLAT TRIBE</h1>
-                <span className="mt-2 block h-[5px] w-full rounded-md bg-yellow-400" />
+                <img
+                  src="/under.svg"
+                  alt="Underline"
+                  className="ml-10 w-full max-w-[200px]" // adjust size here
+                />
               </div>
 
               {/* CTA top-right */}
-              <Link href="/blogs">
+              <Link href="/gk">
                 <div className="absolute right-6 top-6 md:right-8">
                   <div className="relative flex items-center rounded-full bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 px-4 py-1 text-[#0a1a3c] shadow-lg">
                     <span className="mr-1 text-xl font-bold">Daily free GK here</span>
@@ -73,7 +82,7 @@ export default function HomePage() {
               {/* Tagline center */}
               <div className="absolute left-1/2 top-1/3 -translate-x-1/2 -translate-y-1/2 text-center">
                 <p className="text-4xl font-bold tracking-wide drop-shadow-[2px_2px_3px_rgba(0,0,0,0.7)] md:text-5xl">
-                  Dream <span className="mx-2">,</span> Aim <span className="mx-2">,</span> Goal
+                  dream <span className="mx-2">.</span> aim <span className="mx-2">.</span> goal
                 </p>
               </div>
             </div>
@@ -84,7 +93,7 @@ export default function HomePage() {
         <div
           className="px-4 py-10 sm:px-6 md:px-8 md:py-12"
           style={{
-            background: "linear-gradient(to bottom, #024687, #ffffff)",
+            background: "linear-gradient(to bottom, #01407E, #ffffff)",
           }}
         >
           <div className="mx-auto max-w-4xl">
@@ -121,28 +130,29 @@ export default function HomePage() {
                 </div>
 
                 {/* Stats combined box */}
-                <div className="rounded-2xl bg-white p-6 shadow-lg transition-all duration-300">
-                  <div className="grid grid-cols-2 gap-6 text-center md:grid-cols-4 md:gap-8 lg:gap-12">
-                    <div>
-                      <div className="mb-1 text-2xl font-bold text-gray-800 md:text-3xl">660+</div>
-                      <p className="text-sm text-gray-600 md:text-base">Students enrolled in CLAT 2025</p>
-                    </div>
-                    <div>
-                      <div className="mb-1 text-2xl font-bold text-gray-800 md:text-3xl">6000+</div>
-                      <p className="text-sm text-gray-600 md:text-base">Students downloaded GK Tracker</p>
-                    </div>
-                    <div>
-                      <div className="mb-1 text-2xl font-bold text-gray-800 md:text-3xl">300+</div>
-                      <p className="text-sm text-gray-600 md:text-base">1:1 mentorship sessions per month</p>
-                    </div>
-                    <div>
-                      <div className="mb-1 text-2xl font-bold text-gray-800 md:text-3xl">140+</div>
-                      <p className="text-sm text-gray-600 md:text-base">
-                        Selection in <span className="font-semibold text-red-500">NLU</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <div className="rounded-2xl bg-white p-8 shadow-lg transition-all duration-300">
+  <div className="grid grid-cols-2 gap-8 text-center">
+    <div className="h-[120px] flex flex-col justify-center">
+      <div className="mb-1 text-2xl font-bold text-gray-800 md:text-3xl">660+</div>
+      <p className="text-sm text-gray-600 md:text-base">Students enrolled in CLAT 2025</p>
+    </div>
+    <div className="h-[120px] flex flex-col justify-center">
+      <div className="mb-1 text-2xl font-bold text-gray-800 md:text-3xl">6000+</div>
+      <p className="text-sm text-gray-600 md:text-base">Students downloaded GK Tracker</p>
+    </div>
+    <div className="h-[120px] flex flex-col justify-center">
+      <div className="mb-1 text-2xl font-bold text-gray-800 md:text-3xl">300+</div>
+      <p className="text-sm text-gray-600 md:text-base">1:1 mentorship sessions per month</p>
+    </div>
+    <div className="h-[120px] flex flex-col justify-center">
+      <div className="mb-1 text-2xl font-bold text-gray-800 md:text-3xl">140+</div>
+      <p className="text-sm text-gray-600 md:text-base">
+        Selection in <span className="font-semibold text-red-500">NLU</span>
+      </p>
+    </div>
+  </div>
+</div>
+
               </div>
 
               {/* Right GK Therapy Center */}
