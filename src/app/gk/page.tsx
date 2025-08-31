@@ -96,12 +96,12 @@ export default function GK() {
               <div className="space-y-4">
                 <div className="flex items-center gap-3 mb-4">
                   <Newspaper className="w-8 h-8 text-blue-200" />
-                  <span className="text-blue-200 font-medium">GK Corner</span>
+                  <span className="text-blue-200 font-medium">The GK Corner</span>
                 </div>
-                <h1 className="text-5xl font-bold leading-tight">Daily Knowledge Hub</h1>
-                <p className="text-xl text-blue-100 max-w-2xl leading-relaxed">
+                <h1 className="text-5xl font-bold leading-tight"> EVERYTHING IN ONE PLACE</h1>
+                {/* <p className="text-xl text-blue-100 max-w-2xl leading-relaxed">
                   Get fresh GK questions, answers, and current affairs every day.
-                </p>
+                </p> */}
               </div>
             </div>
           </div>
@@ -141,12 +141,12 @@ export default function GK() {
               <div className="space-y-4">
                 <div className="flex items-center gap-3 mb-4">
                   <Newspaper className="w-8 h-8 text-blue-200" />
-                  <span className="text-blue-200 font-medium">GK Corner</span>
+                  <span className="text-blue-200 font-medium">The GK Corner</span>
                 </div>
-                <h1 className="text-5xl font-bold leading-tight">Daily Knowledge Hub</h1>
-                <p className="text-xl text-blue-100 max-w-2xl leading-relaxed">
+                <h1 className="text-5xl font-bold leading-tight"> EVERYTHING IN ONE PLACE</h1>
+                {/* <p className="text-xl text-blue-100 max-w-2xl leading-relaxed">
                   Get fresh GK questions, answers, and current affairs every day.
-                </p>
+                </p> */}
               </div>
             </div>
           </div>
@@ -167,7 +167,7 @@ export default function GK() {
               </div>
             </div>
 
-            <div className="mt-6 pt-6 border-t border-slate-100">
+            {/* <div className="mt-6 pt-6 border-t border-slate-100">
               <p className="text-slate-600 font-medium">
                 Showing <span className="text-[#014688] font-bold">{filteredPosts.length}</span> of{" "}
                 <span className="text-[#014688] font-bold">{posts.length}</span> posts
@@ -177,7 +177,7 @@ export default function GK() {
                   </span>
                 )}
               </p>
-            </div>
+            </div> */}
           </div>
 
           {filteredPosts.length > 0 ? (
@@ -206,7 +206,7 @@ export default function GK() {
                           post.publish ? "bg-[#014688] text-white" : "bg-amber-100 text-amber-800"
                         }`}
                       >
-                        {post.publish ? "publish" : "Draft"}
+                        {post.publish ? "Publish" : "Draft"}
                       </span>
                       <div className="flex items-center text-sm text-slate-500">
                         <Calendar className="w-4 h-4 mr-2" />
