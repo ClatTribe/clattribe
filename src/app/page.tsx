@@ -1,7 +1,7 @@
 "use client"
 // import DefaultLayout from "./defaultlayout"
 import Link from "next/link"
-import BlogsPreview from "./components/blogsPreview"
+import GkPreview from "./components/gkPreview"
 import Footer from "./components/footer"
 
 
@@ -200,7 +200,7 @@ export default function HomePage() {
         </div>
       </div>
       <section>
-        <BlogsPreview />
+        <GkPreview />
       </section>
        <section>
         <Footer />
