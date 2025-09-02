@@ -2,6 +2,7 @@
 // import DefaultLayout from "./defaultlayout"
 import Link from "next/link"
 import GkPreview from "./components/gkPreview"
+import TrendingGk from "./components/trendingGk"
 import Footer from "./components/footer"
 
 
@@ -102,30 +103,42 @@ export default function HomePage() {
               {/* Left side stacked */}
               <div className="space-y-5 md:space-y-6 lg:col-span-2">
                 {/* Trending #1 */}
-                <a
-                  href="#"
-                  className="block rounded-2xl bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-                >
-                  <h2 className="mb-4 border-b-2 border-gray-200 pb-2 text-2xl font-bold text-gray-800">Trending #1</h2>
-                  <p className="leading-relaxed text-gray-600">
-                    (Will have the most important and trending GK Blog. Must be clickable)
-                  </p>
-                </a>
+                {/* <section className="py-12 bg-gray-50"> */}
+                  <div>
+                    <TrendingGk />
+                  </div>
+                {/* </section> */}
 
                 {/* To-do */}
                 <div className="rounded-2xl bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
                   <h2 className="mb-4 border-b-2 border-gray-200 pb-2 text-2xl font-bold text-gray-800">To-do</h2>
                   <ul className="space-y-3 text-gray-600">
                     <li className="flex items-center">
-                      <span className="mr-3 h-2 w-2 rounded-full bg-blue-500"></span>3 GK Topics
+                      <span className="mr-3 h-2 w-2 rounded-full bg-blue-500"></span>⁠Study CLA topics from August 
                     </li>
                     <li className="flex items-center">
                       <span className="mr-3 h-2 w-2 rounded-full bg-blue-500"></span>
-                      Criminal Law basics
+                      ⁠⁠Revise CA 3 topics from June
                     </li>
                     <li className="flex items-center">
                       <span className="mr-3 h-2 w-2 rounded-full bg-blue-500"></span>
-                      Solve Quants 12 questions
+                      Legal revision - contract 
+                    </li>
+                    <li className="flex items-center">
+                      <span className="mr-3 h-2 w-2 rounded-full bg-blue-500"></span>
+                      ⁠⁠Solve 5 Legal Reasoning Questions (Contracts)
+                    </li>
+                    <li className="flex items-center">
+                      <span className="mr-3 h-2 w-2 rounded-full bg-blue-500"></span>
+                      ⁠ ⁠⁠Solve 10 Quants questions 
+                    </li>
+                    <li className="flex items-center">
+                      <span className="mr-3 h-2 w-2 rounded-full bg-blue-500"></span>
+                      Solve 10 CR questions  
+                    </li>
+                    <li className="flex items-center">
+                      <span className="mr-3 h-2 w-2 rounded-full bg-blue-500"></span>
+                      Read Newspaper Editorials 
                     </li>
                   </ul>
                 </div>
@@ -159,8 +172,8 @@ export default function HomePage() {
               {/* Right GK Therapy Center */}
               <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col">
                 <h2 className="text-3xl font-bold text-gray-800 mb-2">GK Therapy Center</h2>
-                <h3 className="text-xl font-semibold text-gray-700 mb-6">Gains</h3>
-                <ul className="space-y-3 text-gray-600 mb-8 flex-1">
+                <h3 className="text-2xl font-semibold text-gray-700 mb-6">Gains</h3>
+                <ul className="text-lg space-y-6 text-gray-600 mb-8 flex-1">
                   <li className="flex items-center">
                     <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
                     Live + Recorded
@@ -177,23 +190,38 @@ export default function HomePage() {
                     <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
                     Strategy sessions
                   </li>
+                  <li className="flex items-center">
+                    <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+                    All Topics Covered
+                  </li>
+                  <li className="flex items-center">
+                    <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+                    4.9/5 students rating
+                  </li>
                 </ul>
 
                 {/* Pricing */}
                 <div className="bg-yellow-200 rounded-lg p-4 mb-6 text-center">
-                  <span className="text-gray-500 line-through text-lg">7999/-</span>
+                  <span className="text-gray-500 line-through text-lg">3999/-</span>
                   <div className="text-3xl font-bold text-gray-800">2999/-</div>
                 </div>
 
                 {/* Action Buttons */}
                 <div className="space-y-3">
-                  <button className="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-300">
-                    CLAT 2026? Enroll now →
-                  </button>
-                  <button className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-3 px-4 rounded-lg transition-colors duration-300">
-                    CLAT 2027? Check the OG batch
-                  </button>
-                </div>
+                <a 
+                  href="https://courses.clattribe.com/learn/GK-Therapy-Centre"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-300 cursor-pointer text-center"
+                >
+                  CLAT 2026? Enroll now →
+                </a>
+
+               <button className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-3 px-4 rounded-lg transition-colors duration-300">
+                  CLAT 2027? Check the OG batch
+                </button>
+              </div>
+
               </div>
             </div>
           </div>
