@@ -198,12 +198,16 @@ export default function HomePage() {
                     <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
                     4.9/5 students rating
                   </li>
+                  <li className="flex items-center">
+                    <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+                    CLAT Toppers Sessions
+                  </li>
                 </ul>
 
                 {/* Pricing */}
                 <div className="bg-yellow-200 rounded-lg p-4 mb-6 text-center">
                   <span className="text-gray-500 line-through text-lg">3999/-</span>
-                  <div className="text-3xl font-bold text-gray-800">2999/-</div>
+                  <div className="text-3xl font-bold text-gray-800">1999/-</div>
                 </div>
 
                 {/* Action Buttons */}
