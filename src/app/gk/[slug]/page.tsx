@@ -31,11 +31,18 @@ export default function GKPage() {
   const [post, setPost] = useState<GK | null>(null)
   const [loading, setLoading] = useState(true)
   const [estimatedReadTime, setEstimatedReadTime] = useState("")
+  const [recentPosts, setRecentPosts] = useState<GK[]>([])
 
+  // fetch single post
   const fetchPost = async (slugValue: string) => {
     setLoading(true)
     try {
-      const { data, error } = await supabase.from("gk").select("*").eq("slug", slugValue).eq("publish", true).single()
+      const { data, error } = await supabase
+        .from("gk")
+        .select("*")
+        .eq("slug", slugValue)
+        .eq("publish", true)
+        .single()
       if (error) {
         console.error("[gkpage] Error fetching post:", error)
         setPost(null)
@@ -50,9 +57,28 @@ export default function GKPage() {
     }
   }
 
+  // fetch recent posts
+  const fetchRecentPosts = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("gk")
+        .select("title,slug")
+        .eq("publish", true)
+        .order("created_at", { ascending: false })
+        .limit(5)
+      if (!error && data) setRecentPosts(data as GK[])
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   useEffect(() => {
     if (slug) fetchPost(slug)
   }, [slug])
+
+  useEffect(() => {
+    fetchRecentPosts()
+  }, [])
 
   // reading progress + read time
   useEffect(() => {
@@ -187,6 +213,7 @@ export default function GKPage() {
 
       <div className="min-h-screen bg-background">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+          {/* HERO IMAGE */}
           <div className="relative w-full rounded-xl sm:rounded-2xl overflow-hidden mb-6 sm:mb-12 shadow-2xl">
             <div className="relative">
               <Image
@@ -200,6 +227,7 @@ export default function GKPage() {
             </div>
           </div>
 
+          {/* Breadcrumb */}
           <nav className="flex py-4 text-sm text-gray-500 mb-6 overflow-x-auto" aria-label="Breadcrumb">
             <ol className="flex items-center space-x-1 whitespace-nowrap">
               <li>
@@ -232,112 +260,140 @@ export default function GKPage() {
             </ol>
           </nav>
 
-          <div className="mb-8">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-gray-900 leading-tight">
-              {post.title}
-            </h1>
-            <div className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-4 sm:gap-6 text-sm sm:text-base text-gray-600">
-              <div className="flex items-center">
-                <svg className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                  />
-                </svg>
-                {formatDate(post.created_at)}
-              </div>
-              {estimatedReadTime && (
-                <div className="flex items-center">
-                  <svg className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  {estimatedReadTime}
+          {/* GRID with Blog + Sidebar */}
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            {/* MAIN BLOG */}
+            <div className="lg:col-span-3">
+              <div className="mb-8">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-gray-900 leading-tight">
+                  {post.title}
+                </h1>
+                <div className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-4 sm:gap-6 text-sm sm:text-base text-gray-600">
+                  <div className="flex items-center">
+                    <svg className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      />
+                    </svg>
+                    {formatDate(post.created_at)}
+                  </div>
+                  {estimatedReadTime && (
+                    <div className="flex items-center">
+                      <svg className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      {estimatedReadTime}
+                    </div>
+                  )}
                 </div>
-              )}
+              </div>
+
+              <div id="main-content" className="max-w-none mb-12 sm:mb-16">
+                {/* Global styles */}
+                <style jsx global>{`
+                  #main-content p,
+                  #main-content li {
+                    font-size: 18px !important;
+                    line-height: 1.7 !important;
+                  }
+                  #main-content h1 {
+                    font-size: 28px !important;
+                    margin-top: 2rem !important;
+                    margin-bottom: 1rem !important;
+                    font-weight: 700 !important;
+                  }
+                  #main-content h2 {
+                    font-size: 24px !important;
+                    margin-top: 2rem !important;
+                    margin-bottom: 1rem !important;
+                    font-weight: 600 !important;
+                  }
+                  #main-content h3 {
+                    font-size: 20px !important;
+                    margin-top: 1.5rem !important;
+                    margin-bottom: 0.75rem !important;
+                    font-weight: 500 !important;
+                  }
+                  #main-content ul {
+                    margin: 1rem 0 !important;
+                    padding-left: 1.5rem !important;
+                  }
+                  #main-content li {
+                    margin-bottom: 0.5rem !important;
+                  }
+                  @media (min-width: 640px) {
+                    #main-content p,
+                    #main-content li {
+                      font-size: 18px !important;
+                      line-height: 1.6 !important;
+                    }
+                    #main-content h1 {
+                      font-size: 32px !important;
+                    }
+                    #main-content h2 {
+                      font-size: 28px !important;
+                    }
+                    #main-content h3 {
+                      font-size: 24px !important;
+                    }
+                  }
+                  @media (min-width: 1024px) {
+                    #main-content p,
+                    #main-content li {
+                      font-size: 19px !important;
+                    }
+                    #main-content h1 {
+                      font-size: 36px !important;
+                    }
+                    #main-content h2 {
+                      font-size: 30px !important;
+                    }
+                    #main-content h3 {
+                      font-size: 26px !important;
+                    }
+                  }
+                `}</style>
+                {renderContent(post.content)}
+              </div>
+
+              <div className="mt-8">
+                <Link href="/gk">
+                  <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-[#014688] text-white hover:bg-[#0156a3] h-10 px-4 py-2">
+                    <ArrowLeft className="w-4 h-4 mr-2" />
+                    Back to GK
+                  </button>
+                </Link>
+              </div>
             </div>
-          </div>
 
-          <div id="main-content" className="max-w-none mb-12 sm:mb-16">
-            <style jsx global>{`
-              #main-content p,
-              #main-content li {
-                font-size: 18px !important;
-                line-height: 1.7 !important;
-              }
-              #main-content h1 {
-                font-size: 28px !important;
-                margin-top: 2rem !important;
-                margin-bottom: 1rem !important;
-                font-weight: 700 !important;
-              }
-              #main-content h2 {
-                font-size: 24px !important;
-                margin-top: 2rem !important;
-                margin-bottom: 1rem !important;
-                font-weight: 600 !important;
-              }
-              #main-content h3 {
-                font-size: 20px !important;
-                margin-top: 1.5rem !important;
-                margin-bottom: 0.75rem !important;
-                font-weight: 500 !important;
-              }
-              #main-content ul {
-                margin: 1rem 0 !important;
-                padding-left: 1.5rem !important;
-              }
-              #main-content li {
-                margin-bottom: 0.5rem !important;
-              }
-              @media (min-width: 640px) {
-                #main-content p,
-                #main-content li {
-                  font-size: 18px !important;
-                  line-height: 1.6 !important;
-                }
-                #main-content h1 {
-                  font-size: 32px !important;
-                }
-                #main-content h2 {
-                  font-size: 28px !important;
-                }
-                #main-content h3 {
-                  font-size: 24px !important;
-                }
-              }
-              @media (min-width: 1024px) {
-                #main-content p,
-                #main-content li {
-                  font-size: 19px !important;
-                }
-                #main-content h1 {
-                  font-size: 36px !important;
-                }
-                #main-content h2 {
-                  font-size: 30px !important;
-                }
-                #main-content h3 {
-                  font-size: 26px !important;
-                }
-              }
-            `}</style>
-            {renderContent(post.content)}
+            {/* SIDEBAR */}
+            <aside className="lg:col-span-1">
+          <div className="bg-white shadow-md border rounded-xl p-5 sticky top-24">
+            <h2 className="text-xl font-semibold text-[#014688] mb-4 border-b pb-2">
+              Recently Published
+            </h2>
+            <ul className="space-y-3">
+              {recentPosts.map((rp) => (
+                <li key={rp.slug}>
+                  <Link
+                    href={`/gk/${rp.slug}`}
+                    className="block px-3 py-2 rounded-lg text-gray-800 hover:bg-[#f1f5f9] hover:text-[#014688] transition-colors duration-200"
+                  >
+                    {rp.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
-
-          <div className="mt-8">
-            <Link href="/gk">
-              <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-[#014688] text-white hover:bg-[#0156a3] h-10 px-4 py-2">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to GK
-              </button>
-            </Link>
+        </aside>
           </div>
         </div>
       </div>

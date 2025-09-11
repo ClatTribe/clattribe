@@ -5,7 +5,7 @@ import { createClient } from "@supabase/supabase-js"
 import { Edit, Plus, Trash2, X } from "lucide-react"
 import React from "react"
 import Image from "next/image"
-import type { JSX } from "react/jsx-runtime" // Import JSX to fix the undeclared variable error
+import type { JSX } from "react/jsx-runtime"
 
 // Supabase client (kept same URL and anon key fallbacks as provided)
 const supabase = createClient(
@@ -166,6 +166,7 @@ const Textarea = ({
   rows = 3,
   className = "",
   id,
+  onPaste,
   ...props
 }: {
   value: string
@@ -174,11 +175,13 @@ const Textarea = ({
   rows?: number
   className?: string
   id?: string
+  onPaste?: (e: React.ClipboardEvent<HTMLTextAreaElement>) => void
 }) => (
   <textarea
     id={id}
     value={value}
     onChange={onChange}
+    onPaste={onPaste}
     placeholder={placeholder}
     rows={rows}
     className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none ${className}`}
@@ -270,9 +273,258 @@ const Skeleton = ({ className = "" }: { className?: string }) => (
   <div className={`animate-pulse bg-gray-200 rounded ${className}`} />
 )
 
-// Simple markdown-like editor (kept)
+// Simple markdown-like editor (enhanced with paste handling)
 const RichTextEditor = ({ value, onChange }: { value: string; onChange: (value: string) => void }) => {
   const [isPreview, setIsPreview] = useState(false)
+
+  const handlePaste = (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
+    e.preventDefault()
+
+    const textarea = e.currentTarget
+    const start = textarea.selectionStart
+    const end = textarea.selectionEnd
+
+    // Get both plain text and HTML from clipboard
+    const clipboardData = e.clipboardData
+    const htmlData = clipboardData.getData("text/html")
+    const plainData = clipboardData.getData("text/plain")
+
+    let processedText = plainData
+
+    // If HTML data exists and contains formatting, convert it to markdown
+    if (
+      htmlData &&
+      (htmlData.includes("<b>") ||
+        htmlData.includes("<strong>") ||
+        htmlData.includes("<table>") ||
+        htmlData.includes("<i>") ||
+        htmlData.includes("<em>") ||
+        htmlData.includes("font-weight") ||
+        htmlData.includes("<ul>") ||
+        htmlData.includes("<ol>") ||
+        htmlData.includes("mso-") || // Microsoft Office specific
+        htmlData.includes("class=") ||
+        htmlData.includes("style="))
+    ) {
+      try {
+        processedText = convertHtmlToMarkdown(htmlData)
+
+        // If conversion resulted in empty or whitespace-only text, fallback to plain text
+        if (!processedText.trim()) {
+          processedText = plainData
+        }
+      } catch (error) {
+        console.warn("HTML to markdown conversion failed, using plain text:", error)
+        processedText = plainData
+      }
+    }
+
+    // Insert the processed text at cursor position
+    const newValue = value.substring(0, start) + processedText + value.substring(end)
+    onChange(newValue)
+
+    // Set cursor position after the pasted content
+    setTimeout(() => {
+      textarea.focus()
+      textarea.setSelectionRange(start + processedText.length, start + processedText.length)
+    }, 0)
+  }
+
+  const convertHtmlToMarkdown = (html: string): string => {
+    // Create a temporary div to parse HTML
+    const tempDiv = document.createElement("div")
+    tempDiv.innerHTML = html
+
+    // Convert HTML elements to markdown with improved handling
+    let markdown = html
+
+    // Remove Microsoft Office specific tags and attributes that can interfere
+    markdown = markdown.replace(/<o:p[^>]*>.*?<\/o:p>/gi, "")
+    markdown = markdown.replace(/<\/o:p>/gi, "")
+    markdown = markdown.replace(/<!--\[if[^>]*>.*?<!\[endif\]-->/gi, "")
+    markdown = markdown.replace(/mso-[^;]*;?/gi, "")
+
+    // Enhanced bold text handling: Support multiple formats including Word's complex styling
+    // Standard bold tags
+    markdown = markdown.replace(/<(b|strong)[^>]*>(.*?)<\/(b|strong)>/gi, "**$2**")
+
+    // Word document bold via font-weight in style attribute (various formats)
+    markdown = markdown.replace(
+      /<span[^>]*style[^>]*font-weight\s*:\s*(bold|700|800|900|bolder)[^>]*>(.*?)<\/span>/gi,
+      "**$2**",
+    )
+
+    // Word document bold via class or other attributes
+    markdown = markdown.replace(/<span[^>]*class[^>]*font-weight[^>]*>(.*?)<\/span>/gi, "**$1**")
+
+    // Handle nested spans with bold formatting
+    markdown = markdown.replace(
+      /<span[^>]*style[^>]*font-weight[^>]*bold[^>]*>([^<]*(?:<[^>]*>[^<]*<\/[^>]*>[^<]*)*)<\/span>/gi,
+      "**$1**",
+    )
+
+    // Enhanced italic text: <i>, <em>, <span style="font-style:italic"> -> *text*
+    markdown = markdown.replace(/<(i|em)[^>]*>(.*?)<\/(i|em)>/gi, "*$2*")
+    markdown = markdown.replace(/<span[^>]*style[^>]*font-style\s*:\s*italic[^>]*>(.*?)<\/span>/gi, "*$1*")
+
+    // Underline text: <u> -> __text__
+    markdown = markdown.replace(/<u[^>]*>(.*?)<\/u>/gi, "__$1__")
+
+    // Headings: <h1-6> -> # text
+    markdown = markdown.replace(/<h1[^>]*>(.*?)<\/h1>/gi, "# $1\n\n")
+    markdown = markdown.replace(/<h2[^>]*>(.*?)<\/h2>/gi, "## $1\n\n")
+    markdown = markdown.replace(/<h3[^>]*>(.*?)<\/h3>/gi, "### $1\n\n")
+    markdown = markdown.replace(/<h4[^>]*>(.*?)<\/h4>/gi, "#### $1\n\n")
+    markdown = markdown.replace(/<h5[^>]*>(.*?)<\/h5>/gi, "##### $1\n\n")
+    markdown = markdown.replace(/<h6[^>]*>(.*?)<\/h6>/gi, "###### $1\n\n")
+
+    // Paragraphs: <p> -> text with line breaks
+    markdown = markdown.replace(/<p[^>]*>(.*?)<\/p>/gi, "$1\n\n")
+
+    // Line breaks: <br> -> \n
+    markdown = markdown.replace(/<br[^>]*\/?>/gi, "\n")
+
+    // Enhanced Unordered lists: <ul><li> -> - item
+    markdown = markdown.replace(/<ul[^>]*>([\s\S]*?)<\/ul>/gi, (match, content) => {
+      const items = content.match(/<li[^>]*>([\s\S]*?)<\/li>/gi) || []
+      return (
+        items
+          .map((item: string) => {
+            let text = item.replace(/<li[^>]*>([\s\S]*?)<\/li>/gi, "$1").trim()
+            // Preserve formatting within list items but clean up HTML
+            text = text.replace(/<(b|strong)[^>]*>(.*?)<\/(b|strong)>/gi, "**$2**")
+            text = text.replace(/<(i|em)[^>]*>(.*?)<\/(i|em)>/gi, "*$2*")
+            text = text.replace(/<[^>]*>/g, "")
+            return `- ${text}`
+          })
+          .join("\n") + "\n\n"
+      )
+    })
+
+    // Enhanced Ordered lists: <ol><li> -> 1. item
+    markdown = markdown.replace(/<ol[^>]*>([\s\S]*?)<\/ol>/gi, (match, content) => {
+      const items = content.match(/<li[^>]*>([\s\S]*?)<\/li>/gi) || []
+      return (
+        items
+          .map((item: string, index: number) => {
+            let text = item.replace(/<li[^>]*>([\s\S]*?)<\/li>/gi, "$1").trim()
+            // Preserve formatting within list items but clean up HTML
+            text = text.replace(/<(b|strong)[^>]*>(.*?)<\/(b|strong)>/gi, "**$2**")
+            text = text.replace(/<(i|em)[^>]*>(.*?)<\/(i|em)>/gi, "*$2*")
+            text = text.replace(/<[^>]*>/g, "")
+            return `${index + 1}. ${text}`
+          })
+          .join("\n") + "\n\n"
+      )
+    })
+
+    // Enhanced Tables: Convert HTML tables to markdown tables with better formatting
+    markdown = markdown.replace(/<table[^>]*>([\s\S]*?)<\/table>/gi, (match, content) => {
+      return convertTableToMarkdown(content)
+    })
+
+    // Blockquotes: <blockquote> -> > text
+    markdown = markdown.replace(/<blockquote[^>]*>([\s\S]*?)<\/blockquote>/gi, "> $1\n\n")
+
+    // Links: <a href="url">text</a> -> [text](url)
+    markdown = markdown.replace(/<a[^>]*href=["']([^"']*)["'][^>]*>([\s\S]*?)<\/a>/gi, "[$2]($1)")
+
+    // Code blocks: <pre><code> -> \`\`\`
+    markdown = markdown.replace(/<pre[^>]*><code[^>]*>([\s\S]*?)<\/code><\/pre>/gi, "```\n$1\n```\n")
+
+    // Inline code: <code> -> `code`
+    markdown = markdown.replace(/<code[^>]*>(.*?)<\/code>/gi, "`$1`")
+
+    // Remove remaining HTML tags but preserve content
+    markdown = markdown.replace(/<[^>]*>/g, "")
+
+    // Decode HTML entities
+    markdown = markdown.replace(/&nbsp;/g, " ")
+    markdown = markdown.replace(/&amp;/g, "&")
+    markdown = markdown.replace(/&lt;/g, "<")
+    markdown = markdown.replace(/&gt;/g, ">")
+    markdown = markdown.replace(/&quot;/g, '"')
+    markdown = markdown.replace(/&#39;/g, "'")
+    markdown = markdown.replace(/&rsquo;/g, "'")
+    markdown = markdown.replace(/&lsquo;/g, "'")
+    markdown = markdown.replace(/&rdquo;/g, '"')
+    markdown = markdown.replace(/&ldquo;/g, '"')
+
+    // Clean up extra whitespace and line breaks
+    markdown = markdown.replace(/\n{3,}/g, "\n\n")
+    markdown = markdown.replace(/^\s+|\s+$/g, "")
+
+    return markdown
+  }
+
+  const convertTableToMarkdown = (tableHtml: string): string => {
+    const tempDiv = document.createElement("div")
+    tempDiv.innerHTML = tableHtml
+
+    // Remove Word-specific table formatting
+    const cleanedHtml = tableHtml.replace(/mso-[^;]*;?/gi, "").replace(/class="[^"]*"/gi, "")
+    tempDiv.innerHTML = cleanedHtml
+
+    // Handle both thead/tbody structure and simple tr structure
+    let allRows = tempDiv.querySelectorAll("tr")
+
+    // If no rows found, try to find them in nested structures
+    if (allRows.length === 0) {
+      allRows = tempDiv.querySelectorAll("tbody tr, thead tr")
+    }
+
+    if (allRows.length === 0) {
+      console.warn("No table rows found")
+      return "\n| No table data found |\n| --- |\n\n"
+    }
+
+    let markdownTable = "\n"
+    let hasHeader = false
+
+    allRows.forEach((row, rowIndex) => {
+      const cells = row.querySelectorAll("td, th")
+      if (cells.length === 0) return
+
+      const cellTexts = Array.from(cells).map((cell) => {
+        // Preserve formatting within cells and handle Word document formatting
+        let cellContent = cell.innerHTML
+
+        // Handle bold formatting in cells
+        cellContent = cellContent.replace(/<(b|strong)[^>]*>(.*?)<\/(b|strong)>/gi, "**$2**")
+        cellContent = cellContent.replace(
+          /<span[^>]*style[^>]*font-weight\s*:\s*(bold|700|800|900)[^>]*>(.*?)<\/span>/gi,
+          "**$2**",
+        )
+
+        // Handle italic formatting in cells
+        cellContent = cellContent.replace(/<(i|em)[^>]*>(.*?)<\/(i|em)>/gi, "*$2*")
+        cellContent = cellContent.replace(/<span[^>]*style[^>]*font-style\s*:\s*italic[^>]*>(.*?)<\/span>/gi, "*$1*")
+
+        // Remove remaining HTML tags
+        cellContent = cellContent.replace(/<[^>]*>/g, "")
+
+        // Clean up whitespace and decode entities
+        cellContent = cellContent
+          .replace(/&nbsp;/g, " ")
+          .replace(/\s+/g, " ")
+          .trim()
+
+        return cellContent || ""
+      })
+
+      // Add table row
+      markdownTable += "| " + cellTexts.join(" | ") + " |\n"
+
+      // Add header separator after first row (or if we detect th elements)
+      if (rowIndex === 0 || (row.querySelector("th") && !hasHeader)) {
+        markdownTable += "| " + cellTexts.map(() => "---").join(" | ") + " |\n"
+        hasHeader = true
+      }
+    })
+
+    markdownTable += "\n"
+    return markdownTable
+  }
 
   const insertFormatting = (format: string) => {
     const textarea = document.getElementById("content-editor") as HTMLTextAreaElement
@@ -321,6 +573,135 @@ const RichTextEditor = ({ value, onChange }: { value: string; onChange: (value: 
     }, 0)
   }
 
+  const parseMarkdown = (text: string) => {
+    const lines = text.split("\n")
+    const elements: JSX.Element[] = []
+    let i = 0
+
+    while (i < lines.length) {
+      const line = lines[i]
+
+      if (line.trim() === "") {
+        elements.push(<br key={i} />)
+        i++
+        continue
+      }
+
+      // Check for table
+      if (line.trim().startsWith("|") && line.trim().endsWith("|")) {
+        const tableResult = parseTable(lines, i)
+        elements.push(tableResult.element)
+        i = tableResult.nextIndex
+        continue
+      }
+
+      if (line.startsWith("### ")) {
+        elements.push(
+          <h3 key={i} className="text-lg font-bold mt-3 mb-2">
+            {parseInlineFormatting(line.replace("### ", ""))}
+          </h3>,
+        )
+      } else if (line.startsWith("## ")) {
+        elements.push(
+          <h2 key={i} className="text-xl font-bold mt-4 mb-2">
+            {parseInlineFormatting(line.replace("## ", ""))}
+          </h2>,
+        )
+      } else if (line.startsWith("# ")) {
+        elements.push(
+          <h1 key={i} className="text-2xl font-bold mt-4 mb-3">
+            {parseInlineFormatting(line.replace("# ", ""))}
+          </h1>,
+        )
+      } else if (line.startsWith("- ") || line.startsWith("* ")) {
+        elements.push(
+          <ul key={i} className="list-disc list-inside mb-2">
+            <li>{parseInlineFormatting(line.replace(/^[-*] /, ""))}</li>
+          </ul>,
+        )
+      } else if (/^\d+\. /.test(line)) {
+        elements.push(
+          <ol key={i} className="list-decimal list-inside mb-2">
+            <li>{parseInlineFormatting(line.replace(/^\d+\. /, ""))}</li>
+          </ol>,
+        )
+      } else if (line.startsWith("> ")) {
+        elements.push(
+          <blockquote key={i} className="border-l-4 border-gray-300 pl-4 italic mb-2 text-gray-600">
+            {parseInlineFormatting(line.replace("> ", ""))}
+          </blockquote>,
+        )
+      } else {
+        elements.push(
+          <p key={i} className="mb-2 leading-relaxed">
+            {parseInlineFormatting(line)}
+          </p>,
+        )
+      }
+      i++
+    }
+    return elements
+  }
+
+  const parseTable = (lines: string[], startIndex: number) => {
+    const tableLines = []
+    let i = startIndex
+
+    // Collect all table lines
+    while (i < lines.length && lines[i].trim().startsWith("|") && lines[i].trim().endsWith("|")) {
+      tableLines.push(lines[i])
+      i++
+    }
+
+    if (tableLines.length === 0) {
+      return { element: <div key={startIndex}></div>, nextIndex: startIndex + 1 }
+    }
+
+    // Parse table structure
+    const headerRow = tableLines[0]
+    const separatorRow = tableLines[1] // Usually contains ---
+    const dataRows = tableLines.slice(separatorRow && separatorRow.includes("---") ? 2 : 1)
+
+    const parseRow = (row: string) => {
+      return row
+        .split("|")
+        .slice(1, -1)
+        .map((cell) => cell.trim())
+    }
+
+    const headerCells = parseRow(headerRow)
+    const dataRowCells = dataRows.map(parseRow)
+
+    const tableElement = (
+      <div key={startIndex} className="overflow-x-auto mb-4">
+        <table className="min-w-full border border-gray-300">
+          <thead className="bg-gray-50">
+            <tr>
+              {headerCells.map((cell, index) => (
+                <th key={index} className="border border-gray-300 px-4 py-2 text-left font-semibold">
+                  {parseInlineFormatting(cell)}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {dataRowCells.map((row, rowIndex) => (
+              <tr key={rowIndex} className={rowIndex % 2 === 0 ? "bg-white" : "bg-gray-50"}>
+                {row.map((cell, cellIndex) => (
+                  <td key={cellIndex} className="border border-gray-300 px-4 py-2">
+                    {parseInlineFormatting(cell)}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )
+
+    return { element: tableElement, nextIndex: i }
+  }
+
   const parseInlineFormatting = (text: string) => {
     const parts: (string | JSX.Element)[] = []
     let currentIndex = 0
@@ -352,61 +733,6 @@ const RichTextEditor = ({ value, onChange }: { value: string; onChange: (value: 
       }
     })
     return processedParts.length > 0 ? processedParts : text
-  }
-
-  const parseMarkdown = (text: string) => {
-    const lines = text.split("\n")
-    const elements: JSX.Element[] = []
-    lines.forEach((line, index) => {
-      if (line.trim() === "") {
-        elements.push(<br key={index} />)
-        return
-      }
-      if (line.startsWith("### ")) {
-        elements.push(
-          <h3 key={index} className="text-lg font-bold mt-3 mb-2">
-            {parseInlineFormatting(line.replace("### ", ""))}
-          </h3>,
-        )
-      } else if (line.startsWith("## ")) {
-        elements.push(
-          <h2 key={index} className="text-xl font-bold mt-4 mb-2">
-            {parseInlineFormatting(line.replace("## ", ""))}
-          </h2>,
-        )
-      } else if (line.startsWith("# ")) {
-        elements.push(
-          <h1 key={index} className="text-2xl font-bold mt-4 mb-3">
-            {parseInlineFormatting(line.replace("# ", ""))}
-          </h1>,
-        )
-      } else if (line.startsWith("- ") || line.startsWith("* ")) {
-        elements.push(
-          <ul key={index} className="list-disc list-inside mb-2">
-            <li>{parseInlineFormatting(line.replace(/^[-*] /, ""))}</li>
-          </ul>,
-        )
-      } else if (/^\d+\. /.test(line)) {
-        elements.push(
-          <ol key={index} className="list-decimal list-inside mb-2">
-            <li>{parseInlineFormatting(line.replace(/^\d+\. /, ""))}</li>
-          </ol>,
-        )
-      } else if (line.startsWith("> ")) {
-        elements.push(
-          <blockquote key={index} className="border-l-4 border-gray-300 pl-4 italic mb-2 text-gray-600">
-            {parseInlineFormatting(line.replace("> ", ""))}
-          </blockquote>,
-        )
-      } else {
-        elements.push(
-          <p key={index} className="mb-2 leading-relaxed">
-            {parseInlineFormatting(line)}
-          </p>,
-        )
-      }
-    })
-    return elements
   }
 
   return (
@@ -456,6 +782,7 @@ const RichTextEditor = ({ value, onChange }: { value: string; onChange: (value: 
             id="content-editor"
             value={value}
             onChange={(e) => onChange(e.target.value)}
+            onPaste={handlePaste}
             className="min-h-[200px] border-0 focus:ring-0 resize-none"
             placeholder={`Write your GK content here...
 
@@ -466,7 +793,9 @@ Use markdown formatting:
 ### Heading 3
 - Bullet point
 1. Numbered list
-> Quote text`}
+> Quote text
+
+You can also paste formatted content from Word or other applications!`}
           />
         </div>
       )}
@@ -800,7 +1129,6 @@ const GKEditor = () => {
                       </div>
                     </div>
 
-
                     <div>
                       <label className="block text-sm font-medium mb-2">Content *</label>
                       <RichTextEditor
@@ -936,7 +1264,7 @@ const GKEditor = () => {
   )
 }
 
-export default function App() {
+export default function Page() {
   return (
     <ToastProvider>
       <GKEditor />
