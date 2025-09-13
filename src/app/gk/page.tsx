@@ -98,7 +98,7 @@ export default function GK() {
                   <Newspaper className="w-8 h-8 text-blue-200" />
                   <span className="text-blue-200 font-medium">The GK Corner</span>
                 </div>
-                <h1 className="text-5xl font-bold leading-tight"> EVERYTHING IN ONE PLACEs</h1>
+                <h1 className="text-5xl font-bold leading-tight"> EVERYTHING IN ONE PLACE</h1>
                 {/* <p className="text-xl text-blue-100 max-w-2xl leading-relaxed">
                   Get fresh GK questions, answers, and current affairs every day.
                 </p> */}
