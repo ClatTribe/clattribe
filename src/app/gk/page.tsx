@@ -5,7 +5,9 @@ import { Search, Calendar, Newspaper } from "lucide-react"
 import Link from "next/link"
 import { createClient } from "@supabase/supabase-js"
 import DefaultLayout from "../defaultlayout"
-import Image from "next/image"
+// Remove Next.js Image import
+// import Image from "next/image"
+import React from "react"
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL || "https://fjswchcothephgtzqbgq.supabase.co",
@@ -22,6 +24,44 @@ interface GK {
   publish: boolean
   created_at: string
 }
+
+// Optimized Image Component
+const OptimizedImage = React.memo(({ src, alt, className }: { src: string; alt: string; className?: string }) => {
+  const [imageError, setImageError] = useState(false)
+  const [imageLoaded, setImageLoaded] = useState(false)
+  
+  if (imageError || !src) {
+    return (
+      <div className={`bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center text-gray-500 text-sm ${className}`}>
+        No Image
+      </div>
+    )
+  }
+
+  return (
+    <div className={`relative ${className}`}>
+      {!imageLoaded && (
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-100 to-slate-200 animate-pulse"></div>
+      )}
+      <img
+        src={src}
+        alt={alt}
+        className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ${
+          imageLoaded ? 'opacity-100' : 'opacity-0'
+        }`}
+        onError={() => setImageError(true)}
+        onLoad={() => setImageLoaded(true)}
+        loading="lazy"
+        style={{ objectFit: 'cover' }}
+      />
+      {!imageLoaded && (
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      )}
+    </div>
+  )
+})
+
+OptimizedImage.displayName = 'OptimizedImage'
 
 export default function GK() {
   const [posts, setPosts] = useState<GK[]>([])
@@ -99,9 +139,6 @@ export default function GK() {
                   <span className="text-blue-200 font-medium">The GK Corner</span>
                 </div>
                 <h1 className="text-5xl font-bold leading-tight"> EVERYTHING IN ONE PLACE</h1>
-                {/* <p className="text-xl text-blue-100 max-w-2xl leading-relaxed">
-                  Get fresh GK questions, answers, and current affairs every day.
-                </p> */}
               </div>
             </div>
           </div>
@@ -144,9 +181,6 @@ export default function GK() {
                   <span className="text-blue-200 font-medium">The GK Corner</span>
                 </div>
                 <h1 className="text-5xl font-bold leading-tight"> EVERYTHING IN ONE PLACE</h1>
-                {/* <p className="text-xl text-blue-100 max-w-2xl leading-relaxed">
-                  Get fresh GK questions, answers, and current affairs every day.
-                </p> */}
               </div>
             </div>
           </div>
@@ -166,18 +200,6 @@ export default function GK() {
                 />
               </div>
             </div>
-
-            {/* <div className="mt-6 pt-6 border-t border-slate-100">
-              <p className="text-slate-600 font-medium">
-                Showing <span className="text-[#014688] font-bold">{filteredPosts.length}</span> of{" "}
-                <span className="text-[#014688] font-bold">{posts.length}</span> posts
-                {searchTerm && (
-                  <span className="ml-2 px-3 py-1 bg-[#014688]/10 text-[#014688] rounded-full text-sm font-medium">
-                     &quot;{searchTerm}&quot;
-                  </span>
-                )}
-              </p>
-            </div> */}
           </div>
 
           {filteredPosts.length > 0 ? (
@@ -189,12 +211,10 @@ export default function GK() {
                 >
                   {post.img && (
                     <div className="aspect-[16/10] overflow-hidden relative">
-                      <Image
-                        src={post.img || "/placeholder.svg"}
+                      <OptimizedImage
+                        src={post.img}
                         alt={post.title}
-                        width={400}
-                        height={250}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="w-full h-full"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
@@ -239,7 +259,7 @@ export default function GK() {
                 <h3 className="text-2xl font-bold text-slate-900 mb-3">No posts found</h3>
                 <p className="text-slate-600 mb-8 leading-relaxed">
                   {searchTerm
-                    ? `No posts match your search for &ldquo;${searchTerm}&rdquo;`
+                    ? `No posts match your search for "${searchTerm}"`
                     : "No publish posts available yet"}
                 </p>
                 {searchTerm && (

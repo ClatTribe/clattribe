@@ -4,9 +4,11 @@ import { useEffect, useState } from "react"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { useParams } from "next/navigation"
-import Image from "next/image"
+// Remove Next.js Image import
+// import Image from "next/image"
 import DefaultLayout from "../../defaultlayout"
 import { createClient } from "@supabase/supabase-js"
+import React from "react"
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL || "https://fjswchcothephgtzqbgq.supabase.co",
@@ -23,6 +25,41 @@ type GK = {
   publish: boolean
   created_at: string
 }
+
+// Optimized Hero Image Component
+const OptimizedHeroImage = React.memo(({ src, alt, className }: { src: string; alt: string; className?: string }) => {
+  const [imageError, setImageError] = useState(false)
+  const [imageLoaded, setImageLoaded] = useState(false)
+  
+  if (imageError || !src) {
+    return (
+      <div className={`bg-gradient-to-br from-slate-300 to-slate-400 flex items-center justify-center text-gray-600 text-lg ${className}`}>
+        <div className="text-center">
+          <div className="text-4xl mb-2">📄</div>
+          <div>GK Article</div>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="relative">
+      {!imageLoaded && (
+        <div className={`absolute inset-0 bg-gradient-to-br from-slate-300 to-slate-400 animate-pulse ${className}`}></div>
+      )}
+      <img
+        src={src}
+        alt={alt}
+        className={`${className} ${imageLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}
+        onError={() => setImageError(true)}
+        onLoad={() => setImageLoaded(true)}
+        style={{ objectFit: 'cover' }}
+      />
+    </div>
+  )
+})
+
+OptimizedHeroImage.displayName = 'OptimizedHeroImage'
 
 export default function GKPage() {
   const params = useParams()
@@ -187,7 +224,7 @@ export default function GKPage() {
           <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-12 text-center">
             <h1 className="text-2xl font-bold mb-4">Post Not Found</h1>
             <p className="text-muted-foreground mb-6">
-              The GK post you&apos;re looking for doesn&apos;t exist or isn&apos;t published.
+              The GK post you're looking for doesn't exist or isn't published.
             </p>
             <Link href="/gk">
               <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-[#014688] text-white hover:bg-[#0156a3] h-10 px-4 py-2">
@@ -216,13 +253,10 @@ export default function GKPage() {
           {/* HERO IMAGE */}
           <div className="relative w-full rounded-xl sm:rounded-2xl overflow-hidden mb-6 sm:mb-12 shadow-2xl">
             <div className="relative">
-              <Image
-                src={post.img || "/placeholder.svg?height=600&width=1200&query=gk%20hero%20image"}
+              <OptimizedHeroImage
+                src={post.img || ""}
                 alt={post.title}
-                width={1200}
-                height={600}
-                className="w-full h-auto min-h-[200px] sm:min-h-[400px] md:h-[500px] lg:h-[600px] object-cover"
-                priority
+                className="w-full h-auto min-h-[200px] sm:min-h-[400px] md:h-[500px] lg:h-[600px]"
               />
             </div>
           </div>
