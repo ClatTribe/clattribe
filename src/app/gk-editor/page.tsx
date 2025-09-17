@@ -4,8 +4,9 @@ import { useEffect, useState, useCallback } from "react"
 import { createClient } from "@supabase/supabase-js"
 import { Edit, Plus, Trash2, X } from "lucide-react"
 import React from "react"
-import Image from "next/image"
-import type { JSX } from "react/jsx-runtime" // Import JSX to fix the undeclared variable error
+// Remove Next.js Image import - use regular img tag instead
+// import Image from "next/image"
+import type { JSX } from "react/jsx-runtime"
 
 // Supabase client (kept same URL and anon key fallbacks as provided)
 const supabase = createClient(
@@ -24,7 +25,7 @@ interface GK {
   created_at?: string
 }
 
-// Toast primitives (unchanged, kept minimal)
+// Toast primitives (unchanged)
 interface Toast {
   id: string
   title: string
@@ -83,7 +84,7 @@ const useToast = () => {
   return { toast: context.addToast }
 }
 
-// Simple UI primitives (unchanged)
+// UI Components (keeping all the same)
 const Button = ({
   children,
   onClick,
@@ -270,7 +271,7 @@ const Skeleton = ({ className = "" }: { className?: string }) => (
   <div className={`animate-pulse bg-gray-200 rounded ${className}`} />
 )
 
-// Simple markdown-like editor (kept)
+// Rich text editor (keeping the same)
 const RichTextEditor = ({ value, onChange }: { value: string; onChange: (value: string) => void }) => {
   const [isPreview, setIsPreview] = useState(false)
 
@@ -474,6 +475,32 @@ Use markdown formatting:
   )
 }
 
+// Memoized Image Component to prevent unnecessary re-renders
+const OptimizedImage = React.memo(({ src, alt, className }: { src: string; alt: string; className?: string }) => {
+  const [imageError, setImageError] = useState(false)
+  
+  if (imageError || !src) {
+    return (
+      <div className={`bg-gray-200 flex items-center justify-center text-gray-500 text-xs ${className}`}>
+        No Image
+      </div>
+    )
+  }
+
+  return (
+    <img
+      src={src}
+      alt={alt}
+      className={className}
+      onError={() => setImageError(true)}
+      loading="lazy" // Add lazy loading
+      style={{ objectFit: 'cover' }}
+    />
+  )
+})
+
+OptimizedImage.displayName = 'OptimizedImage'
+
 const GKEditor = () => {
   const [items, setItems] = useState<GK[]>([])
   const [loading, setLoading] = useState(true)
@@ -494,12 +521,15 @@ const GKEditor = () => {
     slug: "",
     content: "",
     img: "",
-    publish: false, // renamed
+    publish: false,
   })
 
-  // Fetch GK rows
+  // Memoized fetch function to reduce unnecessary calls
   const fetchItems = useCallback(
     async (page = 1) => {
+      // Don't fetch if already loading
+      if (loading && items.length > 0) return
+      
       setLoading(true)
       const from = (page - 1) * perPage
       const to = from + perPage - 1
@@ -522,7 +552,7 @@ const GKEditor = () => {
       }
       setLoading(false)
     },
-    [perPage, toast],
+    [perPage, toast, loading, items.length],
   )
 
   // Save or update GK
@@ -558,7 +588,7 @@ const GKEditor = () => {
       slug: formData.slug,
       content: formData.content,
       img: resolvedImg,
-      publish: formData.publish, // use 'publish'
+      publish: formData.publish,
     }
 
     let result
@@ -581,7 +611,13 @@ const GKEditor = () => {
       })
       setIsDialogOpen(false)
       resetForm()
-      fetchItems(currentPage)
+      // Only fetch if we're on the first page or creating new item
+      if (currentPage === 1 || !editingItem?.id) {
+        fetchItems(1)
+        setCurrentPage(1)
+      } else {
+        fetchItems(currentPage)
+      }
     }
   }
 
@@ -621,10 +657,10 @@ const GKEditor = () => {
       slug: item.slug,
       content: item.content,
       img: item.img || "",
-      publish: item.publish, //
+      publish: item.publish,
       created_at: item.created_at,
     })
-    setImageFile(null) // clear any previously selected file
+    setImageFile(null)
     setIsDialogOpen(true)
   }
 
@@ -633,9 +669,10 @@ const GKEditor = () => {
     setIsDialogOpen(true)
   }
 
+  // Load items only once on mount and when page changes
   useEffect(() => {
     fetchItems(currentPage)
-  }, [currentPage, fetchItems])
+  }, [currentPage]) // Remove fetchItems from dependency array
 
   const ItemSkeleton = () => (
     <Card className="mb-4">
@@ -800,7 +837,6 @@ const GKEditor = () => {
                       </div>
                     </div>
 
-
                     <div>
                       <label className="block text-sm font-medium mb-2">Content *</label>
                       <RichTextEditor
@@ -856,12 +892,10 @@ const GKEditor = () => {
                 <CardContent className="p-4">
                   <div className="flex items-center space-x-4">
                     {item.img && (
-                      <Image
-                        src={item.img || "/placeholder.svg?height=64&width=96&query=gk%20thumbnail"}
+                      <OptimizedImage
+                        src={item.img}
                         alt={item.title}
-                        width={96}
-                        height={64}
-                        className="w-24 h-16 object-cover rounded"
+                        className="w-24 h-16 rounded"
                       />
                     )}
                     <div className="flex-1">
