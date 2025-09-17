@@ -224,7 +224,7 @@ export default function GKPage() {
           <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-12 text-center">
             <h1 className="text-2xl font-bold mb-4">Post Not Found</h1>
             <p className="text-muted-foreground mb-6">
-              The GK post you're looking for doesn't exist or isn't published.
+              The GK post you are looking for does not exist or is not published.
             </p>
             <Link href="/gk">
               <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-[#014688] text-white hover:bg-[#0156a3] h-10 px-4 py-2">
