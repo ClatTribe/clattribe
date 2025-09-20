@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+// Remove Next.js Image import
+// import Image from "next/image";
 import { createClient } from "@supabase/supabase-js";
+import React from "react";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -17,6 +19,44 @@ interface GK {
   publish: boolean;
   img?: string;
 }
+
+// Optimized Image Component for small thumbnails
+const OptimizedThumbnail = React.memo(({ src, alt, className }: { src: string; alt: string; className?: string }) => {
+  const [imageError, setImageError] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  
+  if (imageError || !src) {
+    return (
+      <div className={`bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center text-gray-500 text-xs ${className}`}>
+        <div className="text-center">
+          <div className="text-lg">📄</div>
+          <div className="text-xs">GK</div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={`relative overflow-hidden ${className}`}>
+      {!imageLoaded && (
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-200 to-slate-300 animate-pulse"></div>
+      )}
+      <img
+        src={src}
+        alt={alt}
+        className={`w-full h-full object-cover transition-opacity duration-300 ${
+          imageLoaded ? 'opacity-100' : 'opacity-0'
+        }`}
+        onError={() => setImageError(true)}
+        onLoad={() => setImageLoaded(true)}
+        loading="lazy"
+        style={{ objectFit: 'cover' }}
+      />
+    </div>
+  );
+});
+
+OptimizedThumbnail.displayName = 'OptimizedThumbnail';
 
 export default function TrendingGk() {
   const [post, setPost] = useState<GK | null>(null);
@@ -74,12 +114,10 @@ export default function TrendingGk() {
       </h2>
       <Link href={`/gk/${post!.slug}`} className="flex items-center gap-4">
         {post?.img && (
-          <Image
+          <OptimizedThumbnail
             src={post.img}
             alt={post.title}
-            width={80}
-            height={80}
-            className="rounded-lg object-cover w-20 h-20"
+            className="rounded-lg w-20 h-20"
           />
         )}
         <span className="font-bold text-xl text-gray-800 hover:text-[#0360b9]">
