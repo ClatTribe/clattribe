@@ -44,9 +44,9 @@ export default function Navbar() {
           {/* <Link href="/about" className="font-medium text-gray-600 hover:text-[#014688] transition-colors">
             About
           </Link> */}
-          <Link href="/blogs" className="font-medium text-gray-600 hover:text-[#014688] transition-colors">
+          {/* <Link href="/blogs" className="font-medium text-gray-600 hover:text-[#014688] transition-colors">
             Blogs
-          </Link>
+          </Link> */}
           {/* <Link href="/contact" className="font-medium text-gray-600 hover:text-[#014688] transition-colors">
             Contact
           </Link> */}
@@ -135,7 +135,7 @@ export default function Navbar() {
                 </motion.div> */}
 
                 {/* Blogs */}
-                <motion.div
+                {/* <motion.div
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{
@@ -151,7 +151,7 @@ export default function Navbar() {
                   >
                     Blogs
                   </Link>
-                </motion.div>
+                </motion.div> */}
 
                 {/* Contact */}
                 {/* <motion.div
