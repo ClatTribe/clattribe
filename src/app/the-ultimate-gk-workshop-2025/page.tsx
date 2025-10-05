@@ -40,50 +40,56 @@ export default function WorkshopPage() {
     }))
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault()
+  setIsSubmitting(true)
 
-    try {
-      // Note: This requires Supabase to be installed in your Next.js project
-      // Install with: npm install @supabase/supabase-js
-      
-      const response = await fetch('/api/enquiry', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          phone: formData.phone,
-          email: formData.email,
-        }),
-      })
+  try {
+    // Note: This requires Supabase to be installed in your Next.js project
+    // Install with: npm install @supabase/supabase-js
+    
+    const response = await fetch('/api/enquiry', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+      }),
+    })
 
-      if (!response.ok) throw new Error('Failed to submit')
+    if (!response.ok) throw new Error('Failed to submit')
 
-      // Show success popup
-      setShowSuccessPopup(true)
-      
-      // Reset form
-      setFormData({
-        name: "",
-        phone: "",
-        email: "",
-      })
+    // Show success popup
+    setShowSuccessPopup(true)
+    
+    // Reset form
+    setFormData({
+      name: "",
+      phone: "",
+      email: "",
+    })
 
-      // Auto-close popup after 3 seconds
-      setTimeout(() => {
-        setShowSuccessPopup(false)
-      }, 3000)
-    } catch (error: any) {
+    // Auto-close popup after 3 seconds
+    setTimeout(() => {
+      setShowSuccessPopup(false)
+    }, 3000)
+  } catch (error: unknown) {
+    if (error instanceof Error) {
       console.error("Error submitting form:", error)
-      setErrorMessage(error.message || "Failed to submit form. Please try again.")
-      setShowErrorPopup(true)
-    } finally {
-      setIsSubmitting(false)
+      setErrorMessage(error.message)
+    } else {
+      console.error("Unexpected error:", error)
+      setErrorMessage("Failed to submit form. Please try again.")
     }
+    setShowErrorPopup(true)
+  } finally {
+    setIsSubmitting(false)
   }
+}
+
 
   return (
     <div className="min-h-screen relative">
