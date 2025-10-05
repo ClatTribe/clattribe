@@ -104,7 +104,7 @@ export default function WorkshopPage() {
             </div>
             <h3 className="mb-2 text-2xl font-bold text-gray-900">Success!</h3>
             <p className="text-gray-600 mb-6">
-              Your data has been saved successfully. We'll get back to you soon!
+             <p>{"Your data has been saved successfully. We'll get back to you soon!"}</p>
             </p>
             <button
               onClick={() => setShowSuccessPopup(false)}
