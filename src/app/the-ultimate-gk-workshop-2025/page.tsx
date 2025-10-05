@@ -8,7 +8,7 @@ import {
   BookOpen,
   Calendar,
   Clock,
-  MapPin,
+  MapPin, 
   UserCheck,
   ChevronDown,
   CheckCircle,
