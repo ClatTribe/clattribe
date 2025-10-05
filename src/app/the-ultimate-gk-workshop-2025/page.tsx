@@ -162,11 +162,10 @@ export default function WorkshopPage() {
             The Ultimate GK Workshop 2025
           </h1>
           <p className="mb-8 text-balance text-xl text-white md:text-2xl font-semibold">
-            Master Current Affairs & Static GK with India's Top CLAT Mentors
+            <p>{"Master Current Affairs & Static GK with India's Top CLAT Mentors"}</p>
           </p>
           <p className="mx-auto max-w-3xl text-balance text-lg text-white md:text-xl font-medium">
-            Join our exclusive offline workshop led by YOUR CHIA MA'AM and the Directors of Clat Tribe and transform your
-            General Knowledge preparation
+            <p>{"Join our exclusive offline workshop led by YOUR CHIA MA'AM and the Directors of Clat Tribe and transform your General Knowledge preparation"}</p>
           </p>
         </div>
       </section>
@@ -293,7 +292,7 @@ export default function WorkshopPage() {
             ))}
           </div>
           <p className="mt-10 text-center text-xl text-gray-700 font-semibold">
-            You're not alone. Most CLAT aspirants struggle with GK - but it doesn't have to be that way.
+            <p>{"You're not alone. Most CLAT aspirants struggle with GK - but it doesn't have to be that way."}</p>
           </p>
         </div>
       </section>
@@ -315,7 +314,7 @@ export default function WorkshopPage() {
       <section className="bg-gradient-to-b from-blue-50 to-white px-4 py-16 sm:px-6 md:px-8">
         <div className="mx-auto max-w-6xl">
           <h2 className="mb-12 text-balance text-center text-3xl font-bold text-gray-900 md:text-4xl">
-            What You'll Gain From This Workshop
+            <p>{"What You'll Gain From This Workshop"}</p>
           </h2>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             <div className="rounded-xl bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
@@ -486,7 +485,9 @@ export default function WorkshopPage() {
                     </span>
                   ))}
                 </div>
-                <p className="mb-4 text-gray-700 leading-relaxed italic">"{testimonial.text}"</p>
+                <p className="mb-4 text-gray-700 leading-relaxed italic">
+                   {`"${testimonial.text}"`}
+                </p>
                 <p className="font-semibold text-gray-900">{testimonial.name}</p>
                 <p className="text-sm text-gray-600">{testimonial.batch}</p>
               </div>
@@ -558,8 +559,7 @@ export default function WorkshopPage() {
             Limited Seats Available - Register Now!
           </h2>
           <p className="mb-8 text-balance text-lg text-white md:text-xl font-semibold leading-relaxed">
-            Don't let GK be the reason you miss your dream NLU. This is your opportunity to learn directly from the
-            experts and get ahead of the competition.
+           <p>{"Don't let GK be the reason you miss your dream NLU. This is your opportunity to learn directly from the experts and get ahead of the competition."}</p>
           </p>
           <button className="rounded-xl bg-red-500 px-10 py-4 text-lg font-semibold text-white transition-all duration-300 hover:bg-red-600 hover:scale-105 shadow-2xl">
             Register for the Workshop Now!
