@@ -1,19 +1,8 @@
 "use client"
 import Footer from "../components/footer"
-import {
-  Target,
-  Brain,
-  TrendingUp,
-  Users,
-  BookOpen,
-  Calendar,
-  Clock,
-  MapPin, 
-  UserCheck,
-  ChevronDown,
-  CheckCircle,
-  X,
-} from "lucide-react"
+import type React from "react"
+
+import { Target, Brain, TrendingUp, Users, BookOpen, CheckCircle, X } from "lucide-react"
 import { useState } from "react"
 
 export default function WorkshopPage() {
@@ -40,56 +29,49 @@ export default function WorkshopPage() {
     }))
   }
 
- const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault()
-  setIsSubmitting(true)
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
 
-  try {
-    // Note: This requires Supabase to be installed in your Next.js project
-    // Install with: npm install @supabase/supabase-js
-    
-    const response = await fetch('/api/enquiry', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: formData.name,
-        phone: formData.phone,
-        email: formData.email,
-      }),
-    })
+    try {
+      const response = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+        }),
+      })
 
-    if (!response.ok) throw new Error('Failed to submit')
+      if (!response.ok) throw new Error("Failed to submit")
 
-    // Show success popup
-    setShowSuccessPopup(true)
-    
-    // Reset form
-    setFormData({
-      name: "",
-      phone: "",
-      email: "",
-    })
+      setShowSuccessPopup(true)
 
-    // Auto-close popup after 3 seconds
-    setTimeout(() => {
-      setShowSuccessPopup(false)
-    }, 3000)
-  } catch (error: unknown) {
-    if (error instanceof Error) {
-      console.error("Error submitting form:", error)
-      setErrorMessage(error.message)
-    } else {
-      console.error("Unexpected error:", error)
-      setErrorMessage("Failed to submit form. Please try again.")
+      setFormData({
+        name: "",
+        phone: "",
+        email: "",
+      })
+
+      setTimeout(() => {
+        setShowSuccessPopup(false)
+      }, 3000)
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error("Error submitting form:", error)
+        setErrorMessage(error.message)
+      } else {
+        console.error("Unexpected error:", error)
+        setErrorMessage("Failed to submit form. Please try again.")
+      }
+      setShowErrorPopup(true)
+    } finally {
+      setIsSubmitting(false)
     }
-    setShowErrorPopup(true)
-  } finally {
-    setIsSubmitting(false)
   }
-}
-
 
   return (
     <div className="min-h-screen relative">
@@ -109,9 +91,7 @@ export default function WorkshopPage() {
               </div>
             </div>
             <h3 className="mb-2 text-2xl font-bold text-gray-900">Success!</h3>
-            <p className="text-gray-600 mb-6">
-             <p>{"Your data has been saved successfully. We'll get back to you soon!"}</p>
-            </p>
+            <p className="text-gray-600 mb-6">{"Your data has been saved successfully. We'll get back to you soon!"}</p>
             <button
               onClick={() => setShowSuccessPopup(false)}
               className="w-full bg-green-600 text-white font-semibold py-3 rounded-lg hover:bg-green-700 transition duration-300"
@@ -161,118 +141,18 @@ export default function WorkshopPage() {
           <div className="absolute bottom-10 right-10 w-96 h-96 bg-white rounded-full blur-3xl"></div>
         </div>
         <div className="mx-auto max-w-5xl text-center relative z-10">
-          <p className="mb-4 text-xl font-semibold text-white md:text-2xl">
-            CLAT Tribe presents:
-          </p>
+          <p className="mb-4 text-xl font-semibold text-white md:text-2xl">CLAT Tribe presents:</p>
           <h1 className="mb-6 text-balance text-4xl font-bold text-white md:text-5xl lg:text-6xl">
             The Ultimate GK Workshop 2025
           </h1>
           <p className="mb-8 text-balance text-xl text-white md:text-2xl font-semibold">
-            <p>{"Master Current Affairs & Static GK with India's Top CLAT Mentors"}</p>
+            {"Master Current Affairs & Static GK with India's Top CLAT Mentors"}
           </p>
           <p className="mx-auto max-w-3xl text-balance text-lg text-white md:text-xl font-medium">
-            <p>{"Join our exclusive offline workshop led by YOUR CHIA MA'AM and the Directors of Clat Tribe and transform your General Knowledge preparation"}</p>
+            {
+              "Join our exclusive offline workshop led by YOUR CHIA MA'AM and the Directors of Clat Tribe and transform your General Knowledge preparation"
+            }
           </p>
-        </div>
-      </section>
-
-      {/* Enquiry Section */}
-      <section className="bg-gradient-to-b from-gray-50 to-white px-4 py-16 sm:px-6 md:px-8">
-        <div className="mx-auto max-w-6xl grid gap-8 md:grid-cols-2 items-start">
-          {/* Left Side - Workshop Details */}
-          <div className="space-y-6">
-            <h2 className="mb-6 text-3xl font-bold text-gray-900 md:text-4xl">
-              Join the Ultimate GK Workshop
-            </h2>
-            <p className="mb-4 text-lg text-gray-700 leading-relaxed">
-              Fill in your details and reserve your seat for the exclusive offline session led by top CLAT mentors.
-            </p>
-
-            <div className="space-y-5">
-              <div className="flex items-start gap-4 p-4 bg-blue-50 rounded-lg border border-blue-100 transition-all hover:shadow-md">
-                <Calendar className="h-6 w-6 text-blue-600 flex-shrink-0 mt-1" />
-                <div>
-                  <p className="text-gray-900 font-semibold">Date</p>
-                  <p className="text-gray-700">12th October 2025</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4 p-4 bg-purple-50 rounded-lg border border-purple-100 transition-all hover:shadow-md">
-                <Clock className="h-6 w-6 text-purple-600 flex-shrink-0 mt-1" />
-                <div>
-                  <p className="text-gray-900 font-semibold">Time</p>
-                  <p className="text-gray-700">2 PM - 5 PM</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4 p-4 bg-green-50 rounded-lg border border-green-100 transition-all hover:shadow-md">
-                <MapPin className="h-6 w-6 text-green-600 flex-shrink-0 mt-1" />
-                <div>
-                  <p className="text-gray-900 font-semibold">Venue</p>
-                  <p className="text-gray-700">
-                    IPM Careers, Dube Chambers, Sapru Marg, above Mr. Brown Bakery, Lucknow
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Side - Enquiry Form */}
-          <div className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-100 hover:shadow-3xl transition-shadow duration-300">
-            <h3 className="mb-6 text-2xl font-bold text-gray-900 text-center">Enquiry Form</h3>
-            <div className="space-y-5">
-              <div>
-                <label htmlFor="name" className="block text-gray-700 font-medium mb-2">
-                  Name <span className="text-red-500">*</span>
-                </label>
-                <input
-                  id="name"
-                  type="text"
-                  placeholder="Enter your name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 outline-none transition-all"
-                  required
-                />
-              </div>
-
-              <div>
-                <label htmlFor="phone" className="block text-gray-700 font-medium mb-2">
-                  Phone Number <span className="text-red-500">*</span>
-                </label>
-                <input
-                  id="phone"
-                  type="tel"
-                  placeholder="Enter your phone number"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 outline-none transition-all"
-                  required
-                />
-              </div>
-
-              <div>
-                <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
-                  Email Address <span className="text-red-500">*</span>
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  placeholder="Enter your email address"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 outline-none transition-all"
-                  required
-                />
-              </div>
-
-              <button
-                onClick={handleSubmit}
-                disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold py-3 rounded-lg hover:from-blue-700 hover:to-blue-800 transition duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isSubmitting ? "Submitting..." : "Submit"}
-              </button>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -298,7 +178,7 @@ export default function WorkshopPage() {
             ))}
           </div>
           <p className="mt-10 text-center text-xl text-gray-700 font-semibold">
-            <p>{"You're not alone. Most CLAT aspirants struggle with GK - but it doesn't have to be that way."}</p>
+            {"You're not alone. Most CLAT aspirants struggle with GK - but it doesn't have to be that way."}
           </p>
         </div>
       </section>
@@ -320,7 +200,7 @@ export default function WorkshopPage() {
       <section className="bg-gradient-to-b from-blue-50 to-white px-4 py-16 sm:px-6 md:px-8">
         <div className="mx-auto max-w-6xl">
           <h2 className="mb-12 text-balance text-center text-3xl font-bold text-gray-900 md:text-4xl">
-            <p>{"What You'll Gain From This Workshop"}</p>
+            {"What You'll Gain From This Workshop"}
           </h2>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             <div className="rounded-xl bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
@@ -380,71 +260,6 @@ export default function WorkshopPage() {
         </div>
       </section>
 
-      {/* Workshop Details */}
-      <section className="bg-gradient-to-b from-white to-gray-50 px-4 py-16 sm:px-6 md:px-8">
-        <div className="mx-auto max-w-4xl">
-          <h2 className="mb-12 text-balance text-center text-3xl font-bold text-gray-900 md:text-4xl">
-            Workshop Details
-          </h2>
-          <div className="rounded-2xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 via-white to-blue-50 p-8 shadow-2xl">
-            <div className="grid gap-6 md:grid-cols-2">
-              <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-blue-100">
-                  <UserCheck className="h-6 w-6 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="mb-1 font-bold text-gray-900">For Whom</h3>
-                  <p className="text-gray-700">Open to all CLAT 2025/2026 Aspirants</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-blue-100">
-                  <Calendar className="h-6 w-6 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="mb-1 font-bold text-gray-900">Date</h3>
-                  <p className="text-gray-700">12th October</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-blue-100">
-                  <Clock className="h-6 w-6 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="mb-1 font-bold text-gray-900">Time</h3>
-                  <p className="text-gray-700">2 PM - 5 PM</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-blue-100">
-                  <Users className="h-6 w-6 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="mb-1 font-bold text-gray-900">Seats</h3>
-                  <p className="text-gray-700">Limited to ensure personal attention</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4 md:col-span-2">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-blue-100">
-                  <MapPin className="h-6 w-6 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="mb-1 font-bold text-gray-900">Venue</h3>
-                  <p className="text-gray-700">
-                    IPM Careers, 2nd Floor, Dube Chambers, Sapru Marg, above Mr. Brown Bakery, Prem Nagar, Hazratganj,
-                    Lucknow
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Testimonials */}
       <section className="bg-gray-50 px-4 py-16 sm:px-6 md:px-8">
         <div className="mx-auto max-w-6xl">
@@ -491,58 +306,9 @@ export default function WorkshopPage() {
                     </span>
                   ))}
                 </div>
-                <p className="mb-4 text-gray-700 leading-relaxed italic">
-                   {`"${testimonial.text}"`}
-                </p>
+                <p className="mb-4 text-gray-700 leading-relaxed italic">{`"${testimonial.text}"`}</p>
                 <p className="font-semibold text-gray-900">{testimonial.name}</p>
                 <p className="text-sm text-gray-600">{testimonial.batch}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="bg-white px-4 py-16 sm:px-6 md:px-8">
-        <div className="mx-auto max-w-3xl">
-          <h2 className="mb-12 text-balance text-center text-3xl font-bold text-gray-900 md:text-4xl">
-            Frequently Asked Questions
-          </h2>
-          <div className="space-y-4">
-            {[
-              {
-                id: "item-1",
-                question: "Is this workshop suitable for complete beginners?",
-                answer: "We start with fundamental concepts and build up to advanced strategies, making it perfect for students at all levels.",
-              },
-              {
-                id: "item-2",
-                question: "What should I bring to the workshop?",
-                answer: "Just bring a notebook and pen. We'll provide all the study material you need.",
-              },
-              {
-                id: "item-3",
-                question: "Will this cover both current affairs and static GK?",
-                answer: "Yes, we have dedicated sessions for both, with special focus on important recent developments.",
-              },
-            ].map((faq) => (
-              <div key={faq.id} className="rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-                <button
-                  onClick={() => toggleAccordion(faq.id)}
-                  className="flex w-full items-center justify-between p-5 text-left transition-colors hover:bg-gray-50"
-                >
-                  <span className="text-lg font-semibold text-gray-900">{faq.question}</span>
-                  <ChevronDown
-                    className={`h-5 w-5 shrink-0 text-gray-500 transition-transform duration-300 ${
-                      openAccordion === faq.id ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
-                {openAccordion === faq.id && (
-                  <div className="border-t border-gray-200 p-5 text-gray-700 leading-relaxed">
-                    {faq.answer}
-                  </div>
-                )}
               </div>
             ))}
           </div>
@@ -565,14 +331,16 @@ export default function WorkshopPage() {
             Limited Seats Available - Register Now!
           </h2>
           <p className="mb-8 text-balance text-lg text-white md:text-xl font-semibold leading-relaxed">
-           <p>{"Don't let GK be the reason you miss your dream NLU. This is your opportunity to learn directly from the experts and get ahead of the competition."}</p>
+            {
+              "Don't let GK be the reason you miss your dream NLU. This is your opportunity to learn directly from the experts and get ahead of the competition."
+            }
           </p>
           <button className="rounded-xl bg-red-500 px-10 py-4 text-lg font-semibold text-white transition-all duration-300 hover:bg-red-600 hover:scale-105 shadow-2xl">
             Register for the Workshop Now!
           </button>
         </div>
       </section>
-       <section>
+      <section>
         <Footer />
       </section>
     </div>
