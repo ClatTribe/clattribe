@@ -18,9 +18,15 @@ export async function POST(request: Request) {
     if (error) throw error
 
     return NextResponse.json({ success: true, data })
-  } catch (error: any) {
+  } catch (error: unknown) {
+    let errorMessage = 'Unknown error'
+
+    if (error instanceof Error) {
+      errorMessage = error.message
+    }
+
     return NextResponse.json(
-      { success: false, error: error.message },
+      { success: false, error: errorMessage },
       { status: 500 }
     )
   }
