@@ -7,7 +7,7 @@ import { useState } from "react"
 
 export default function WorkshopPage() {
   const [openAccordion, setOpenAccordion] = useState<string | null>(null)
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({ 
     name: "",
     phone: "",
     email: "",
