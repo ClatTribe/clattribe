@@ -150,6 +150,18 @@ export default function WorkshopPage() {
       )}
 
       {/* Hero Section */}
+      <section>
+         <div className="w-full relative z-10">
+              {/* Full width banner at the top */}
+              {/* <div className="w-full">
+                <img
+                  src="https://res.cloudinary.com/duyo9pzxy/image/upload/v1752296413/new_event_banner1_mupa1f.png"
+                  alt="Study Abroad Fair Banner"
+                  className="w-full h-auto shadow-lg"
+                />
+              </div> */}
+          </div>    
+      </section>
       <section
         className="px-4 py-16 sm:px-6 md:px-8 md:py-24 relative overflow-hidden"
         style={{
@@ -248,7 +260,7 @@ export default function WorkshopPage() {
                   required
                 />
               </div>
-
+              
               <div>
                 <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
                   Email Address <span className="text-red-500">*</span>
@@ -271,6 +283,29 @@ export default function WorkshopPage() {
               >
                 {isSubmitting ? "Submitting..." : "Submit"}
               </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+       <section className="bg-white px-4 py-16 sm:px-6 md:px-8">
+        <div className="mx-auto max-w-5xl">
+          <h2 className="mb-12 text-balance text-center text-3xl font-bold text-gray-900 md:text-4xl">Our Mentors</h2>
+          <div className="grid gap-8 md:grid-cols-2 max-w-3xl mx-auto">
+            {/* Chia Ma'am */}
+            <div className="flex flex-col items-center">
+              <div className="mb-4 overflow-hidden rounded-2xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                <img src="https://res.cloudinary.com/daetdadtt/image/upload/v1759745594/123_r6dnej.png" alt="Chia Ma'am" className="w-full h-auto object-cover" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900">Chia Ma'am</h3>
+            </div>
+
+            {/* Yash Sir */}
+            <div className="flex flex-col items-center">
+              <div className="mb-4 overflow-hidden rounded-2xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                <img src="https://res.cloudinary.com/daetdadtt/image/upload/v1759745598/122_uihopt.png" alt="Yash Sir" className="w-full h-auto object-cover" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900">Yash Sir</h3>
             </div>
           </div>
         </div>
