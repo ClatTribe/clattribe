@@ -297,7 +297,7 @@ export default function WorkshopPage() {
               <div className="mb-4 overflow-hidden rounded-2xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
                 <img src="https://res.cloudinary.com/daetdadtt/image/upload/v1759745594/123_r6dnej.png" alt="Chia Ma'am" className="w-full h-auto object-cover" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900">Chia Ma'am</h3>
+              <h3 className="text-xl font-bold text-gray-900"><p>{"Chia Ma'am"}</p></h3>
             </div>
 
             {/* Yash Sir */}
