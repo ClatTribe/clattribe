@@ -148,6 +148,13 @@ export default function WorkshopPage() {
       )}
 
       {/* Hero Section */}
+        <div className="w-full">
+                <img
+                  src="https://res.cloudinary.com/daetdadtt/image/upload/v1759823064/5b337570-975d-488c-8855-b9f63f72fd4f_lj4t2r.jpg"
+                  alt="Study Abroad Fair Banner"
+                  className="w-full h-auto shadow-lg"
+                />
+              </div>
       <section className="relative px-4 py-16 sm:px-6 md:px-8 md:py-24 bg-gradient-to-br from-[#054380] to-[#0a5fa3] overflow-hidden">
         {/* Subtle Background Pattern */}
         <div className="absolute inset-0 opacity-5">
@@ -432,7 +439,7 @@ export default function WorkshopPage() {
           <div className="mt-12 text-center">
             <div className="inline-block bg-gradient-to-r from-[#054380] to-[#0a5fa3] rounded-xl p-6 shadow-lg">
               <p className="text-white font-semibold text-lg">
-                <span className="text-2xl font-bold">💡</span> Combined teaching experience of over 20 years in CLAT preparation
+                <span className="text-2xl font-bold">💡</span> 75% students reported INCREASE in their CLAT MOCK SCORE after just 1 session
               </p>
             </div>
           </div>
