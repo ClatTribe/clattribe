@@ -172,15 +172,15 @@ export default function WorkshopPage() {
           </div>
           
           <h1 className="mb-6 text-4xl font-bold text-white md:text-5xl lg:text-6xl leading-tight">
-            The Ultimate GK Workshop 2025
+            The Ultimate GK Therapy Session
           </h1>
           
           <p className="mb-6 text-xl md:text-2xl text-white/95 font-semibold">
-            Master Current Affairs & Static GK with India&apos;s Top CLAT Mentors
+            Master Current Affairs &  GK with India&apos;s Top CLAT Mentors - Now in your city LUCKNOW!
           </p>
           
           <p className="mx-auto max-w-3xl text-lg text-white/90 md:text-xl leading-relaxed">
-            Join our exclusive offline workshop led by YOUR CHIA MA&apos;AM and the Directors of Clat Tribe and transform your General Knowledge preparation
+            Doubts can ruin your preparation, but we can clear your doubts 
           </p>
 
           <div className="mt-10 flex flex-wrap justify-center gap-6">
@@ -270,7 +270,7 @@ export default function WorkshopPage() {
 
           {/* Right Side - Enquiry Form */}
           <div className="bg-white rounded-xl shadow-xl p-8 border border-gray-200 sticky top-8">
-            <h3 className="mb-6 text-2xl font-bold text-gray-900">Enquiry Form</h3>
+            <h3 className="mb-6 text-2xl font-bold text-gray-900">Registration Form</h3>
             
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
@@ -352,13 +352,13 @@ export default function WorkshopPage() {
             <div className="group bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-200 hover:border-[#054380]/30 hover:-translate-y-2">
               <div className="relative overflow-hidden bg-gradient-to-br from-[#054380]/5 to-[#054380]/10">
                 <img
-                  src="https://res.cloudinary.com/daetdadtt/image/upload/v1759745594/123_r6dnej.png"
-                  alt="Chia Ma'am"
+                  src="https://res.cloudinary.com/daetdadtt/image/upload/v1759838783/123a_gllzpl.png"
+                  alt="Chia Didi"
                   className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute top-4 right-4 bg-[#054380] text-white px-3 py-1 rounded-full text-xs font-bold">
+                {/* <div className="absolute top-4 right-4 bg-[#054380] text-white px-3 py-1 rounded-full text-xs font-bold">
                   Lead Mentor
-                </div>
+                </div> */}
               </div>
               <div className="p-8">
                 <div className="flex items-center gap-3 mb-4">
@@ -366,19 +366,16 @@ export default function WorkshopPage() {
                     <Award className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-gray-900">Chia Ma&apos;am</h3>
-                    <p className="text-[#054380] font-semibold">Lead GK Mentor</p>
+                    <h3 className="text-2xl font-bold text-gray-900">Chia Didi</h3>
+                    <p className="text-[#054380] font-semibold">DNLU</p>
                   </div>
                 </div>
                 <div className="space-y-3 mb-6">
                   <div className="flex items-center gap-2 text-gray-700">
                     <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
-                    <span className="text-sm">Expert in Current Affairs & Static GK</span>
+                    <span className="text-sm">Expert in Current Affairs & GK</span>
                   </div>
-                  <div className="flex items-center gap-2 text-gray-700">
-                    <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
-                    <span className="text-sm">10+ Years of CLAT Teaching Experience</span>
-                  </div>
+                  
                   <div className="flex items-center gap-2 text-gray-700">
                     <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
                     <span className="text-sm">Trained 300+ Top Rankers</span>
@@ -399,9 +396,6 @@ export default function WorkshopPage() {
                   alt="Yash Sir"
                   className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute top-4 right-4 bg-[#054380] text-white px-3 py-1 rounded-full text-xs font-bold">
-                  Director
-                </div>
               </div>
               <div className="p-8">
                 <div className="flex items-center gap-3 mb-4">
@@ -409,8 +403,8 @@ export default function WorkshopPage() {
                     <Brain className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-gray-900">Yash Sir</h3>
-                    <p className="text-[#054380] font-semibold">Director, Clat Tribe</p>
+                    <h3 className="text-2xl font-bold text-gray-900">Yash Bhaiya</h3>
+                    <p className="text-[#054380] font-semibold">MNLU</p>
                   </div>
                 </div>
                 <div className="space-y-3 mb-6">
@@ -463,7 +457,7 @@ export default function WorkshopPage() {
           <div className="grid gap-6 md:grid-cols-2">
             {[
               { icon: BookOpen, text: "Feeling overwhelmed by the vast, unpredictable syllabus?" },
-              { icon: Brain, text: "Struggling to retain current affairs and static GK?" },
+              { icon: Brain, text: "Struggling to retain current affairs and  GK?" },
               { icon: FileQuestion, text: "Finding it hard to apply knowledge to MCQs effectively?" },
               { icon: TrendingUp, text: "Worried about missing important topics and trends?" },
             ].map((problem, idx) => (
@@ -483,7 +477,7 @@ export default function WorkshopPage() {
           
           <div className="mt-10 text-center">
             <div className="inline-block p-6 bg-gradient-to-r from-[#054380] to-[#0a5fa3] rounded-xl shadow-lg">
-              <p className="text-xl text-white font-semibold max-w-3xl">
+              <p className="text-xl text-white font-semibold max-w-4xl">
                 You&apos;re not alone. Most CLAT aspirants struggle with GK - but it doesn&apos;t have to be that way.
               </p>
             </div>
@@ -527,7 +521,7 @@ export default function WorkshopPage() {
               {
                 icon: Brain,
                 title: "Smart Retention Techniques",
-                desc: "Move beyond rote learning. Discover powerful methods to remember current affairs, dates, events, and static GK effectively.",
+                desc: "Move beyond rote learning. Discover powerful methods to remember current affairs, dates, events, and  GK effectively.",
               },
               {
                 icon: TrendingUp,
@@ -653,11 +647,7 @@ export default function WorkshopPage() {
                 question: "What should I bring to the workshop?",
                 answer: "Just bring a notebook and pen to take notes. We&apos;ll provide all the study material, practice sets, and handouts you need. Come with an open mind and eagerness to learn!"
               },
-              {
-                id: "item-3",
-                question: "Will this cover both current affairs and static GK?",
-                answer: "Yes, we have dedicated sessions for both areas. We&apos;ll cover the most important current affairs from recent months, teach you how to track ongoing developments, and provide comprehensive coverage of high-yield static GK topics that frequently appear in CLAT."
-              },
+              
               {
                 id: "item-4",
                 question: "Can I ask personal doubts during the workshop?",
