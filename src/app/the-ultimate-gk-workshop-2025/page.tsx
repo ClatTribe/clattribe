@@ -17,7 +17,7 @@ import {
   ArrowRight,
   AlertTriangle,
   FileQuestion,
-  Lightbulb,
+  // Lightbulb,
 } from "lucide-react"
 import { useState } from "react"
 
@@ -338,7 +338,7 @@ export default function WorkshopPage() {
               <p className="text-sm font-bold text-[#054380] uppercase tracking-wide">Expert Faculty</p>
             </div>
             <h2 className="text-3xl font-bold text-gray-900 md:text-4xl mb-3">Meet Your Mentors</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">Learn from India's most trusted CLAT educators who have guided hundreds of students to their dream NLUs</p>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">{"Learn from India's most trusted CLAT educators who have guided hundreds of students to their dream NLUs"}</p>
           </div>
           
           <div className="grid gap-8 md:grid-cols-2 max-w-5xl mx-auto">
@@ -379,7 +379,7 @@ export default function WorkshopPage() {
                 </div>
                 <div className="pt-4 border-t border-gray-200">
                   <p className="text-sm text-gray-600 italic">
-                    "My goal is to make GK the easiest and most scoring section for every CLAT aspirant"
+                    {"My goal is to make GK the easiest and most scoring section for every CLAT aspirant"}
                   </p>
                 </div>
               </div>
@@ -422,7 +422,7 @@ export default function WorkshopPage() {
                 </div>
                 <div className="pt-4 border-t border-gray-200">
                   <p className="text-sm text-gray-600 italic">
-                    "Success in CLAT comes from smart strategy, not just hard work"
+                    {"Success in CLAT comes from smart strategy, not just hard work"}
                   </p>
                 </div>
               </div>
