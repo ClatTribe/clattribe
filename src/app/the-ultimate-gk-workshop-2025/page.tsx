@@ -367,18 +367,7 @@ export default function WorkshopPage() {
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold text-gray-900">Chia Didi</h3>
-                    <p className="text-[#054380] font-semibold">DNLU</p>
-                  </div>
-                </div>
-                <div className="space-y-3 mb-6">
-                  <div className="flex items-center gap-2 text-gray-700">
-                    <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
-                    <span className="text-sm">Expert in Current Affairs & GK</span>
-                  </div>
-                  
-                  <div className="flex items-center gap-2 text-gray-700">
-                    <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
-                    <span className="text-sm">Trained 300+ Top Rankers</span>
+                    <p className="text-[#054380] font-semibold">Your CLAT Mentor</p>
                   </div>
                 </div>
                 <div className="pt-4 border-t border-gray-200">
@@ -400,25 +389,11 @@ export default function WorkshopPage() {
               <div className="p-8">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#054380] to-[#0a5fa3] flex items-center justify-center">
-                    <Brain className="h-6 w-6 text-white" />
+                    <Award className="h-6 w-6 text-white" />
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold text-gray-900">Yash Bhaiya</h3>
-                    <p className="text-[#054380] font-semibold">MNLU</p>
-                  </div>
-                </div>
-                <div className="space-y-3 mb-6">
-                  <div className="flex items-center gap-2 text-gray-700">
-                    <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
-                    <span className="text-sm">CLAT Strategy & Preparation Expert</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-gray-700">
-                    <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
-                    <span className="text-sm">Founder of Award-Winning Institute</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-gray-700">
-                    <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
-                    <span className="text-sm">Mentored 500+ CLAT Aspirants</span>
+                    <p className="text-[#054380] font-semibold">Your CLAT Mentor</p>
                   </div>
                 </div>
                 <div className="pt-4 border-t border-gray-200">
