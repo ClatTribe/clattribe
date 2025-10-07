@@ -1,5 +1,4 @@
 "use client"
-import Footer from "../components/footer"
 import {
   Target,
   Brain,
@@ -13,6 +12,12 @@ import {
   ChevronDown,
   CheckCircle,
   X,
+  Award,
+  Zap,
+  ArrowRight,
+  AlertTriangle,
+  FileQuestion,
+  Lightbulb,
 } from "lucide-react"
 import { useState } from "react"
 
@@ -40,63 +45,56 @@ export default function WorkshopPage() {
     }))
   }
 
- const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault()
-  setIsSubmitting(true)
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
 
-  try {
-    // Note: This requires Supabase to be installed in your Next.js project
-    // Install with: npm install @supabase/supabase-js
-    
-    const response = await fetch('/api/enquiry', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: formData.name,
-        phone: formData.phone,
-        email: formData.email,
-      }),
-    })
+    try {
+      const response = await fetch('/api/enquiry', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+        }),
+      })
 
-    if (!response.ok) throw new Error('Failed to submit')
+      if (!response.ok) throw new Error('Failed to submit')
 
-    // Show success popup
-    setShowSuccessPopup(true)
-    
-    // Reset form
-    setFormData({
-      name: "",
-      phone: "",
-      email: "",
-    })
+      setShowSuccessPopup(true)
+      
+      setFormData({
+        name: "",
+        phone: "",
+        email: "",
+      })
 
-    // Auto-close popup after 3 seconds
-    setTimeout(() => {
-      setShowSuccessPopup(false)
-    }, 3000)
-  } catch (error: unknown) {
-    if (error instanceof Error) {
-      console.error("Error submitting form:", error)
-      setErrorMessage(error.message)
-    } else {
-      console.error("Unexpected error:", error)
-      setErrorMessage("Failed to submit form. Please try again.")
+      setTimeout(() => {
+        setShowSuccessPopup(false)
+      }, 3000)
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error("Error submitting form:", error)
+        setErrorMessage(error.message)
+      } else {
+        console.error("Unexpected error:", error)
+        setErrorMessage("Failed to submit form. Please try again.")
+      }
+      setShowErrorPopup(true)
+    } finally {
+      setIsSubmitting(false)
     }
-    setShowErrorPopup(true)
-  } finally {
-    setIsSubmitting(false)
   }
-}
-
 
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen bg-white">
       {/* Success Popup */}
       {showSuccessPopup && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 px-4">
-          <div className="relative max-w-md w-full bg-white rounded-2xl shadow-2xl p-8 text-center">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 px-4">
+          <div className="relative max-w-md w-full bg-white rounded-xl shadow-2xl p-8 text-center border border-gray-200">
             <button
               onClick={() => setShowSuccessPopup(false)}
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
@@ -104,13 +102,13 @@ export default function WorkshopPage() {
               <X className="h-6 w-6" />
             </button>
             <div className="mb-4 flex justify-center">
-              <div className="rounded-full bg-green-100 p-3">
+              <div className="rounded-full bg-green-50 p-3">
                 <CheckCircle className="h-12 w-12 text-green-600" />
               </div>
             </div>
             <h3 className="mb-2 text-2xl font-bold text-gray-900">Success!</h3>
             <p className="text-gray-600 mb-6">
-             <p>{"Your data has been saved successfully. We'll get back to you soon!"}</p>
+              Your data has been saved successfully. We&apos;ll get back to you soon!
             </p>
             <button
               onClick={() => setShowSuccessPopup(false)}
@@ -124,8 +122,8 @@ export default function WorkshopPage() {
 
       {/* Error Popup */}
       {showErrorPopup && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 px-4">
-          <div className="relative max-w-md w-full bg-white rounded-2xl shadow-2xl p-8 text-center">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 px-4">
+          <div className="relative max-w-md w-full bg-white rounded-xl shadow-2xl p-8 text-center border border-gray-200">
             <button
               onClick={() => setShowErrorPopup(false)}
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
@@ -133,7 +131,7 @@ export default function WorkshopPage() {
               <X className="h-6 w-6" />
             </button>
             <div className="mb-4 flex justify-center">
-              <div className="rounded-full bg-red-100 p-3">
+              <div className="rounded-full bg-red-50 p-3">
                 <X className="h-12 w-12 text-red-600" />
               </div>
             </div>
@@ -150,76 +148,112 @@ export default function WorkshopPage() {
       )}
 
       {/* Hero Section */}
-      <section>
-         <div className="w-full relative z-10">
-              {/* Full width banner at the top */}
-              {/* <div className="w-full">
-                <img
-                  src="https://res.cloudinary.com/duyo9pzxy/image/upload/v1752296413/new_event_banner1_mupa1f.png"
-                  alt="Study Abroad Fair Banner"
-                  className="w-full h-auto shadow-lg"
-                />
-              </div> */}
-          </div>    
-      </section>
-      <section
-        className="px-4 py-16 sm:px-6 md:px-8 md:py-24 relative overflow-hidden"
-        style={{
-          background: "linear-gradient(135deg, #014688 0%, #759EE8 100%)",
-        }}
-      >
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-10 left-10 w-72 h-72 bg-white rounded-full blur-3xl"></div>
-          <div className="absolute bottom-10 right-10 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+      <section className="relative px-4 py-16 sm:px-6 md:px-8 md:py-24 bg-gradient-to-br from-[#054380] to-[#0a5fa3] overflow-hidden">
+        {/* Subtle Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
+            backgroundSize: '40px 40px'
+          }}></div>
         </div>
+
         <div className="mx-auto max-w-5xl text-center relative z-10">
-          <p className="mb-4 text-xl font-semibold text-white md:text-2xl">
-            CLAT Tribe presents:
-          </p>
-          <h1 className="mb-6 text-balance text-4xl font-bold text-white md:text-5xl lg:text-6xl">
+          <div className="inline-block mb-4 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
+            <p className="text-sm font-semibold text-white uppercase tracking-wide">
+              CLAT Tribe Presents
+            </p>
+          </div>
+          
+          <h1 className="mb-6 text-4xl font-bold text-white md:text-5xl lg:text-6xl leading-tight">
             The Ultimate GK Workshop 2025
           </h1>
-          <p className="mb-8 text-balance text-xl text-white md:text-2xl font-semibold">
-            <p>{"Master Current Affairs & Static GK with India's Top CLAT Mentors"}</p>
+          
+          <p className="mb-6 text-xl md:text-2xl text-white/95 font-semibold">
+            Master Current Affairs & Static GK with India&apos;s Top CLAT Mentors
           </p>
-          <p className="mx-auto max-w-3xl text-balance text-lg text-white md:text-xl font-medium">
-            <p>{"Join our exclusive offline workshop led by YOUR CHIA MA'AM and the Directors of Clat Tribe and transform your General Knowledge preparation"}</p>
+          
+          <p className="mx-auto max-w-3xl text-lg text-white/90 md:text-xl leading-relaxed">
+            Join our exclusive offline workshop led by YOUR CHIA MA&apos;AM and the Directors of Clat Tribe and transform your General Knowledge preparation
           </p>
+
+          <div className="mt-10 flex flex-wrap justify-center gap-6">
+            <div className="flex items-center gap-2 text-white">
+              <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
+                <Award className="h-5 w-5" />
+              </div>
+              <span className="font-semibold">Expert Mentors</span>
+            </div>
+            <div className="flex items-center gap-2 text-white">
+              <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
+                <Clock className="h-5 w-5" />
+              </div>
+              <span className="font-semibold">3-Hour Intensive</span>
+            </div>
+            <div className="flex items-center gap-2 text-white">
+              <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
+                <BookOpen className="h-5 w-5" />
+              </div>
+              <span className="font-semibold">Study Material</span>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Enquiry Section */}
-      <section className="bg-gradient-to-b from-gray-50 to-white px-4 py-16 sm:px-6 md:px-8">
-        <div className="mx-auto max-w-6xl grid gap-8 md:grid-cols-2 items-start">
+      <section className="px-4 py-16 sm:px-6 md:px-8 bg-gray-50">
+        <div className="mx-auto max-w-7xl grid gap-12 lg:grid-cols-2 items-start">
           {/* Left Side - Workshop Details */}
           <div className="space-y-6">
-            <h2 className="mb-6 text-3xl font-bold text-gray-900 md:text-4xl">
-              Join the Ultimate GK Workshop
-            </h2>
-            <p className="mb-4 text-lg text-gray-700 leading-relaxed">
-              Fill in your details and reserve your seat for the exclusive offline session led by top CLAT mentors.
-            </p>
+            <div>
+              <div className="inline-block mb-3 px-3 py-1 bg-[#054380] text-white text-xs font-bold uppercase tracking-wide rounded">
+                Limited Seats
+              </div>
+              <h2 className="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">
+                Join the Ultimate GK Workshop
+              </h2>
+              <p className="text-lg text-gray-600 leading-relaxed">
+                Fill in your details and reserve your seat for the exclusive offline session led by top CLAT mentors.
+              </p>
+            </div>
 
-            <div className="space-y-5">
-              <div className="flex items-start gap-4 p-4 bg-blue-50 rounded-lg border border-blue-100 transition-all hover:shadow-md">
-                <Calendar className="h-6 w-6 text-blue-600 flex-shrink-0 mt-1" />
+            <div className="space-y-4">
+              <div className="flex items-start gap-4 p-5 bg-white rounded-xl border-l-4 border-[#054380] shadow-sm hover:shadow-md transition-shadow">
+                <div className="w-10 h-10 rounded-lg bg-[#054380]/10 flex items-center justify-center flex-shrink-0">
+                  <UserCheck className="h-5 w-5 text-[#054380]" />
+                </div>
                 <div>
-                  <p className="text-gray-900 font-semibold">Date</p>
-                  <p className="text-gray-700">12th October 2025</p>
+                  <p className="text-gray-900 font-semibold mb-1">For Whom</p>
+                  <p className="text-gray-600">Open to all CLAT 2025/2026 Aspirants</p>
                 </div>
               </div>
-              <div className="flex items-start gap-4 p-4 bg-purple-50 rounded-lg border border-purple-100 transition-all hover:shadow-md">
-                <Clock className="h-6 w-6 text-purple-600 flex-shrink-0 mt-1" />
+              
+              <div className="flex items-start gap-4 p-5 bg-white rounded-xl border-l-4 border-[#054380] shadow-sm hover:shadow-md transition-shadow">
+                <div className="w-10 h-10 rounded-lg bg-[#054380]/10 flex items-center justify-center flex-shrink-0">
+                  <Calendar className="h-5 w-5 text-[#054380]" />
+                </div>
                 <div>
-                  <p className="text-gray-900 font-semibold">Time</p>
-                  <p className="text-gray-700">2 PM - 5 PM</p>
+                  <p className="text-gray-900 font-semibold mb-1">Date</p>
+                  <p className="text-gray-600">12th October 2025</p>
                 </div>
               </div>
-              <div className="flex items-start gap-4 p-4 bg-green-50 rounded-lg border border-green-100 transition-all hover:shadow-md">
-                <MapPin className="h-6 w-6 text-green-600 flex-shrink-0 mt-1" />
+              
+              <div className="flex items-start gap-4 p-5 bg-white rounded-xl border-l-4 border-[#054380] shadow-sm hover:shadow-md transition-shadow">
+                <div className="w-10 h-10 rounded-lg bg-[#054380]/10 flex items-center justify-center flex-shrink-0">
+                  <Clock className="h-5 w-5 text-[#054380]" />
+                </div>
                 <div>
-                  <p className="text-gray-900 font-semibold">Venue</p>
-                  <p className="text-gray-700">
+                  <p className="text-gray-900 font-semibold mb-1">Time</p>
+                  <p className="text-gray-600">2 PM - 5 PM</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-4 p-5 bg-white rounded-xl border-l-4 border-[#054380] shadow-sm hover:shadow-md transition-shadow">
+                <div className="w-10 h-10 rounded-lg bg-[#054380]/10 flex items-center justify-center flex-shrink-0">
+                  <MapPin className="h-5 w-5 text-[#054380]" />
+                </div>
+                <div>
+                  <p className="text-gray-900 font-semibold mb-1">Venue</p>
+                  <p className="text-gray-600">
                     IPM Careers, Dube Chambers, Sapru Marg, above Mr. Brown Bakery, Lucknow
                   </p>
                 </div>
@@ -228,11 +262,12 @@ export default function WorkshopPage() {
           </div>
 
           {/* Right Side - Enquiry Form */}
-          <div className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-100 hover:shadow-3xl transition-shadow duration-300">
-            <h3 className="mb-6 text-2xl font-bold text-gray-900 text-center">Enquiry Form</h3>
-            <div className="space-y-5">
+          <div className="bg-white rounded-xl shadow-xl p-8 border border-gray-200 sticky top-8">
+            <h3 className="mb-6 text-2xl font-bold text-gray-900">Enquiry Form</h3>
+            
+            <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label htmlFor="name" className="block text-gray-700 font-medium mb-2">
+                <label htmlFor="name" className="block text-gray-700 font-semibold mb-2">
                   Name <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -241,13 +276,13 @@ export default function WorkshopPage() {
                   placeholder="Enter your name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 outline-none transition-all"
+                  className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-[#054380] focus:ring-2 focus:ring-[#054380]/20 outline-none transition-all"
                   required
                 />
               </div>
 
               <div>
-                <label htmlFor="phone" className="block text-gray-700 font-medium mb-2">
+                <label htmlFor="phone" className="block text-gray-700 font-semibold mb-2">
                   Phone Number <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -256,13 +291,13 @@ export default function WorkshopPage() {
                   placeholder="Enter your phone number"
                   value={formData.phone}
                   onChange={handleInputChange}
-                  className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 outline-none transition-all"
+                  className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-[#054380] focus:ring-2 focus:ring-[#054380]/20 outline-none transition-all"
                   required
                 />
               </div>
-              
+
               <div>
-                <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
+                <label htmlFor="email" className="block text-gray-700 font-semibold mb-2">
                   Email Address <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -271,80 +306,194 @@ export default function WorkshopPage() {
                   placeholder="Enter your email address"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 outline-none transition-all"
+                  className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-[#054380] focus:ring-2 focus:ring-[#054380]/20 outline-none transition-all"
                   required
                 />
               </div>
 
               <button
-                onClick={handleSubmit}
+                type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold py-3 rounded-lg hover:from-blue-700 hover:to-blue-800 transition duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-[#054380] text-white font-semibold py-3 rounded-lg hover:bg-[#043060] transition duration-300 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
-                {isSubmitting ? "Submitting..." : "Submit"}
+                {isSubmitting ? (
+                  "Submitting..."
+                ) : (
+                  <>
+                    Submit Application
+                    <ArrowRight className="h-4 w-4" />
+                  </>
+                )}
               </button>
-            </div>
+            </form>
           </div>
         </div>
       </section>
-      
-       <section className="bg-white px-4 py-16 sm:px-6 md:px-8">
-        <div className="mx-auto max-w-5xl">
-          <h2 className="mb-12 text-balance text-center text-3xl font-bold text-gray-900 md:text-4xl">Our Mentors</h2>
-          <div className="grid gap-8 md:grid-cols-2 max-w-3xl mx-auto">
-            {/* Chia Ma'am */}
-            <div className="flex flex-col items-center">
-              <div className="mb-4 overflow-hidden rounded-2xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
-                <img src="https://res.cloudinary.com/daetdadtt/image/upload/v1759745594/123_r6dnej.png" alt="Chia Ma'am" className="w-full h-auto object-cover" />
+
+      {/* Mentors Section */}
+      <section className="px-4 py-16 sm:px-6 md:px-8 bg-gradient-to-b from-white to-gray-50">
+        <div className="mx-auto max-w-6xl">
+          <div className="text-center mb-12">
+            <div className="inline-block mb-4 px-4 py-2 bg-[#054380]/10 rounded-full">
+              <p className="text-sm font-bold text-[#054380] uppercase tracking-wide">Expert Faculty</p>
+            </div>
+            <h2 className="text-3xl font-bold text-gray-900 md:text-4xl mb-3">Meet Your Mentors</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">Learn from India's most trusted CLAT educators who have guided hundreds of students to their dream NLUs</p>
+          </div>
+          
+          <div className="grid gap-8 md:grid-cols-2 max-w-5xl mx-auto">
+            <div className="group bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-200 hover:border-[#054380]/30 hover:-translate-y-2">
+              <div className="relative overflow-hidden bg-gradient-to-br from-[#054380]/5 to-[#054380]/10">
+                <img
+                  src="https://res.cloudinary.com/daetdadtt/image/upload/v1759745594/123_r6dnej.png"
+                  alt="Chia Ma'am"
+                  className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute top-4 right-4 bg-[#054380] text-white px-3 py-1 rounded-full text-xs font-bold">
+                  Lead Mentor
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-gray-900"><p>{"Chia Ma'am"}</p></h3>
+              <div className="p-8">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#054380] to-[#0a5fa3] flex items-center justify-center">
+                    <Award className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-gray-900">Chia Ma&apos;am</h3>
+                    <p className="text-[#054380] font-semibold">Lead GK Mentor</p>
+                  </div>
+                </div>
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center gap-2 text-gray-700">
+                    <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
+                    <span className="text-sm">Expert in Current Affairs & Static GK</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-gray-700">
+                    <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
+                    <span className="text-sm">10+ Years of CLAT Teaching Experience</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-gray-700">
+                    <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
+                    <span className="text-sm">Trained 300+ Top Rankers</span>
+                  </div>
+                </div>
+                <div className="pt-4 border-t border-gray-200">
+                  <p className="text-sm text-gray-600 italic">
+                    "My goal is to make GK the easiest and most scoring section for every CLAT aspirant"
+                  </p>
+                </div>
+              </div>
             </div>
 
-            {/* Yash Sir */}
-            <div className="flex flex-col items-center">
-              <div className="mb-4 overflow-hidden rounded-2xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
-                <img src="https://res.cloudinary.com/daetdadtt/image/upload/v1759745598/122_uihopt.png" alt="Yash Sir" className="w-full h-auto object-cover" />
+            <div className="group bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-200 hover:border-[#054380]/30 hover:-translate-y-2">
+              <div className="relative overflow-hidden bg-gradient-to-br from-[#054380]/5 to-[#054380]/10">
+                <img
+                  src="https://res.cloudinary.com/daetdadtt/image/upload/v1759745598/122_uihopt.png"
+                  alt="Yash Sir"
+                  className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute top-4 right-4 bg-[#054380] text-white px-3 py-1 rounded-full text-xs font-bold">
+                  Director
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-gray-900">Yash Sir</h3>
+              <div className="p-8">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#054380] to-[#0a5fa3] flex items-center justify-center">
+                    <Brain className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-gray-900">Yash Sir</h3>
+                    <p className="text-[#054380] font-semibold">Director, Clat Tribe</p>
+                  </div>
+                </div>
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center gap-2 text-gray-700">
+                    <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
+                    <span className="text-sm">CLAT Strategy & Preparation Expert</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-gray-700">
+                    <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
+                    <span className="text-sm">Founder of Award-Winning Institute</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-gray-700">
+                    <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
+                    <span className="text-sm">Mentored 500+ CLAT Aspirants</span>
+                  </div>
+                </div>
+                <div className="pt-4 border-t border-gray-200">
+                  <p className="text-sm text-gray-600 italic">
+                    "Success in CLAT comes from smart strategy, not just hard work"
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-12 text-center">
+            <div className="inline-block bg-gradient-to-r from-[#054380] to-[#0a5fa3] rounded-xl p-6 shadow-lg">
+              <p className="text-white font-semibold text-lg">
+                <span className="text-2xl font-bold">💡</span> Combined teaching experience of over 20 years in CLAT preparation
+              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Problem Section */}
-      <section className="bg-gradient-to-b from-white to-gray-50 px-4 py-16 sm:px-6 md:px-8">
-        <div className="mx-auto max-w-5xl">
-          <h2 className="mb-12 text-balance text-center text-3xl font-bold text-gray-900 md:text-4xl">
-            Is GK Holding Back Your CLAT Score?
-          </h2>
+      <section className="px-4 py-16 sm:px-6 md:px-8 bg-gray-50">
+        <div className="mx-auto max-w-6xl">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-green-50 rounded-full border border-green-200">
+              <AlertTriangle className="h-4 w-4 text-green-600" />
+              <p className="text-sm font-bold text-green-600 uppercase tracking-wide">Common Challenges</p>
+            </div>
+            <h2 className="text-3xl font-bold text-gray-900 md:text-4xl mb-3">
+              Is GK Holding Back Your CLAT Score?
+            </h2>
+            <p className="text-lg text-gray-600">Common challenges faced by CLAT aspirants</p>
+          </div>
+          
           <div className="grid gap-6 md:grid-cols-2">
             {[
-              "Feeling overwhelmed by the vast, unpredictable syllabus?",
-              "Struggling to retain current affairs and static GK?",
-              "Finding it hard to apply knowledge to MCQs effectively?",
-              "Worried about missing important topics and trends?",
+              { icon: BookOpen, text: "Feeling overwhelmed by the vast, unpredictable syllabus?" },
+              { icon: Brain, text: "Struggling to retain current affairs and static GK?" },
+              { icon: FileQuestion, text: "Finding it hard to apply knowledge to MCQs effectively?" },
+              { icon: TrendingUp, text: "Worried about missing important topics and trends?" },
             ].map((problem, idx) => (
               <div
                 key={idx}
-                className="rounded-xl border border-gray-200 bg-white p-6 shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-blue-300"
+                className="bg-white rounded-xl border-l-4 border-green-500 p-6 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1"
               >
-                <p className="text-lg text-gray-700 font-medium">{problem}</p>
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-lg bg-green-50 flex items-center justify-center flex-shrink-0">
+                    <problem.icon className="h-5 w-5 text-green-600" />
+                  </div>
+                  <p className="text-gray-700 font-medium leading-relaxed">{problem.text}</p>
+                </div>
               </div>
             ))}
           </div>
-          <p className="mt-10 text-center text-xl text-gray-700 font-semibold">
-            <p>{"You're not alone. Most CLAT aspirants struggle with GK - but it doesn't have to be that way."}</p>
-          </p>
+          
+          <div className="mt-10 text-center">
+            <div className="inline-block p-6 bg-gradient-to-r from-[#054380] to-[#0a5fa3] rounded-xl shadow-lg">
+              <p className="text-xl text-white font-semibold max-w-3xl">
+                You&apos;re not alone. Most CLAT aspirants struggle with GK - but it doesn&apos;t have to be that way.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Solution Section */}
-      <section className="bg-white px-4 py-16 sm:px-6 md:px-8">
+      <section className="px-4 py-16 sm:px-6 md:px-8 bg-gradient-to-br from-[#054380] to-[#0a5fa3]">
         <div className="mx-auto max-w-5xl text-center">
-          <h2 className="mb-6 text-balance text-3xl font-bold text-gray-900 md:text-4xl">
+          <div className="inline-block mb-4 p-3 bg-white/10 rounded-lg">
+            <Zap className="h-10 w-10 text-white" />
+          </div>
+          <h2 className="mb-6 text-3xl font-bold text-white md:text-4xl leading-tight">
             Transform Your GK Preparation in Just One Day
           </h2>
-          <p className="mx-auto max-w-3xl text-balance text-lg text-gray-700 md:text-xl leading-relaxed">
+          <p className="mx-auto max-w-3xl text-lg md:text-xl text-white/95 leading-relaxed">
             This intensive workshop is specifically designed to give you the clarity, strategy, and confidence you need
             to dominate the General Knowledge section of CLAT.
           </p>
@@ -352,142 +501,75 @@ export default function WorkshopPage() {
       </section>
 
       {/* Benefits Section */}
-      <section className="bg-gradient-to-b from-blue-50 to-white px-4 py-16 sm:px-6 md:px-8">
-        <div className="mx-auto max-w-6xl">
-          <h2 className="mb-12 text-balance text-center text-3xl font-bold text-gray-900 md:text-4xl">
-            <p>{"What You'll Gain From This Workshop"}</p>
-          </h2>
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            <div className="rounded-xl bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
-              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-blue-100">
-                <Target className="h-7 w-7 text-blue-600" />
-              </div>
-              <h3 className="mb-3 text-xl font-bold text-gray-900">The CLAT GK Blueprint</h3>
-              <p className="text-gray-700 leading-relaxed">
-                Learn exactly what to study and what to ignore. Get insider knowledge of important topics, recurring
-                patterns, and frequently asked areas.
-              </p>
-            </div>
-
-            <div className="rounded-xl bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
-              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-purple-100">
-                <Brain className="h-7 w-7 text-purple-600" />
-              </div>
-              <h3 className="mb-3 text-xl font-bold text-gray-900">Smart Retention Techniques</h3>
-              <p className="text-gray-700 leading-relaxed">
-                Move beyond rote learning. Discover powerful methods to remember current affairs, dates, events, and
-                static GK effectively.
-              </p>
-            </div>
-
-            <div className="rounded-xl bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
-              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-green-100">
-                <TrendingUp className="h-7 w-7 text-green-600" />
-              </div>
-              <h3 className="mb-3 text-xl font-bold text-gray-900">MCQ Mastery Strategy</h3>
-              <p className="text-gray-700 leading-relaxed">
-                Learn proven techniques to analyze questions, eliminate wrong options, and solve GK questions accurately
-                under time pressure.
-              </p>
-            </div>
-
-            <div className="rounded-xl bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
-              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-orange-100">
-                <Users className="h-7 w-7 text-orange-600" />
-              </div>
-              <h3 className="mb-3 text-xl font-bold text-gray-900">Direct Mentor Interaction</h3>
-              <p className="text-gray-700 leading-relaxed">
-                Get your specific doubts cleared and receive personalized guidance from the Directors who have mentored
-                hundreds of CLAT success stories.
-              </p>
-            </div>
-
-            <div className="rounded-xl bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
-              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-red-100">
-                <BookOpen className="h-7 w-7 text-red-600" />
-              </div>
-              <h3 className="mb-3 text-xl font-bold text-gray-900">Comprehensive Study Material</h3>
-              <p className="text-gray-700 leading-relaxed">
-                Receive specially curated GK notes and practice sets designed specifically for this workshop.
-              </p>
-            </div>
+      <section className="px-4 py-16 sm:px-6 md:px-8 bg-white">
+        <div className="mx-auto max-w-7xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 md:text-4xl mb-3">
+              What You&apos;ll Gain From This Workshop
+            </h2>
+            <p className="text-lg text-gray-600">Comprehensive learning outcomes designed for success</p>
           </div>
-        </div>
-      </section>
-
-      {/* Workshop Details */}
-      <section className="bg-gradient-to-b from-white to-gray-50 px-4 py-16 sm:px-6 md:px-8">
-        <div className="mx-auto max-w-4xl">
-          <h2 className="mb-12 text-balance text-center text-3xl font-bold text-gray-900 md:text-4xl">
-            Workshop Details
-          </h2>
-          <div className="rounded-2xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 via-white to-blue-50 p-8 shadow-2xl">
-            <div className="grid gap-6 md:grid-cols-2">
-              <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-blue-100">
-                  <UserCheck className="h-6 w-6 text-blue-600" />
+          
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {[
+              {
+                icon: Target,
+                title: "The CLAT GK Blueprint",
+                desc: "Learn exactly what to study and what to ignore. Get insider knowledge of important topics, recurring patterns, and frequently asked areas.",
+              },
+              {
+                icon: Brain,
+                title: "Smart Retention Techniques",
+                desc: "Move beyond rote learning. Discover powerful methods to remember current affairs, dates, events, and static GK effectively.",
+              },
+              {
+                icon: TrendingUp,
+                title: "MCQ Mastery Strategy",
+                desc: "Learn proven techniques to analyze questions, eliminate wrong options, and solve GK questions accurately under time pressure.",
+              },
+              {
+                icon: Users,
+                title: "Direct Mentor Interaction",
+                desc: "Get your specific doubts cleared and receive personalized guidance from the Directors who have mentored hundreds of CLAT success stories.",
+              },
+              {
+                icon: BookOpen,
+                title: "Comprehensive Study Material",
+                desc: "Receive specially curated GK notes and practice sets designed specifically for this workshop.",
+              },
+              {
+                icon: Award,
+                title: "Certificate of Completion",
+                desc: "Receive an official certificate upon completion of the workshop to showcase your commitment to excellence.",
+              },
+            ].map((benefit, idx) => {
+              const Icon = benefit.icon
+              return (
+                <div
+                  key={idx}
+                  className="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200"
+                >
+                  <div className="mb-4 w-12 h-12 rounded-lg bg-[#054380]/10 flex items-center justify-center">
+                    <Icon className="h-6 w-6 text-[#054380]" />
+                  </div>
+                  <h3 className="mb-3 text-xl font-bold text-gray-900">{benefit.title}</h3>
+                  <p className="text-gray-600 leading-relaxed">{benefit.desc}</p>
                 </div>
-                <div>
-                  <h3 className="mb-1 font-bold text-gray-900">For Whom</h3>
-                  <p className="text-gray-700">Open to all CLAT 2025/2026 Aspirants</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-blue-100">
-                  <Calendar className="h-6 w-6 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="mb-1 font-bold text-gray-900">Date</h3>
-                  <p className="text-gray-700">12th October</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-blue-100">
-                  <Clock className="h-6 w-6 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="mb-1 font-bold text-gray-900">Time</h3>
-                  <p className="text-gray-700">2 PM - 5 PM</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-blue-100">
-                  <Users className="h-6 w-6 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="mb-1 font-bold text-gray-900">Seats</h3>
-                  <p className="text-gray-700">Limited to ensure personal attention</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4 md:col-span-2">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-blue-100">
-                  <MapPin className="h-6 w-6 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="mb-1 font-bold text-gray-900">Venue</h3>
-                  <p className="text-gray-700">
-                    IPM Careers, 2nd Floor, Dube Chambers, Sapru Marg, above Mr. Brown Bakery, Prem Nagar, Hazratganj,
-                    Lucknow
-                  </p>
-                </div>
-              </div>
-            </div>
+              )
+            })}
           </div>
         </div>
       </section>
 
       {/* Testimonials */}
-      <section className="bg-gray-50 px-4 py-16 sm:px-6 md:px-8">
-        <div className="mx-auto max-w-6xl">
-          <h2 className="mb-4 text-balance text-center text-3xl font-bold text-gray-900 md:text-4xl">
-            What Our Students Say
-          </h2>
-          <p className="mb-12 text-center text-lg text-gray-600">Real Success Stories</p>
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <section className="px-4 py-16 sm:px-6 md:px-8 bg-gray-50">
+        <div className="mx-auto max-w-7xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 md:text-4xl mb-3">What Our Students Say</h2>
+            <p className="text-lg text-gray-600">Real success stories from CLAT achievers</p>
+          </div>
+          
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {[
               {
                 name: "Priya Sharma",
@@ -514,23 +596,28 @@ export default function WorkshopPage() {
                 batch: "CLAT 2026",
                 text: "From feeling lost to feeling confident - that's what this workshop did for me. The mentors truly understand CLAT GK inside out.",
               },
+              {
+                name: "Arjun Patel",
+                batch: "CLAT 2025",
+                text: "Best investment for my CLAT preparation! The strategies are practical and the mentors are incredibly supportive.",
+              },
             ].map((testimonial, idx) => (
               <div
                 key={idx}
-                className="rounded-xl bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+                className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-200"
               >
                 <div className="mb-4 flex gap-1">
                   {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-yellow-400 text-xl">
-                      ★
-                    </span>
+                    <span key={i} className="text-yellow-500 text-lg">★</span>
                   ))}
                 </div>
                 <p className="mb-4 text-gray-700 leading-relaxed italic">
-                   {`"${testimonial.text}"`}
+                  &quot;{testimonial.text}&quot;
                 </p>
-                <p className="font-semibold text-gray-900">{testimonial.name}</p>
-                <p className="text-sm text-gray-600">{testimonial.batch}</p>
+                <div className="pt-4 border-t border-gray-200">
+                  <p className="font-bold text-gray-900">{testimonial.name}</p>
+                  <p className="text-sm text-[#054380] font-semibold">{testimonial.batch}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -538,44 +625,61 @@ export default function WorkshopPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="bg-white px-4 py-16 sm:px-6 md:px-8">
+      <section className="px-4 py-16 sm:px-6 md:px-8 bg-white">
         <div className="mx-auto max-w-3xl">
-          <h2 className="mb-12 text-balance text-center text-3xl font-bold text-gray-900 md:text-4xl">
-            Frequently Asked Questions
-          </h2>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 md:text-4xl mb-3">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-lg text-gray-600">Everything you need to know</p>
+          </div>
+          
           <div className="space-y-4">
             {[
               {
                 id: "item-1",
                 question: "Is this workshop suitable for complete beginners?",
-                answer: "We start with fundamental concepts and build up to advanced strategies, making it perfect for students at all levels.",
+                answer: "Absolutely! We start with fundamental concepts and build up to advanced strategies, making it perfect for students at all levels. Whether you&apos;re just starting your CLAT preparation or looking to refine your GK strategy, this workshop has something valuable for everyone."
               },
               {
                 id: "item-2",
                 question: "What should I bring to the workshop?",
-                answer: "Just bring a notebook and pen. We'll provide all the study material you need.",
+                answer: "Just bring a notebook and pen to take notes. We&apos;ll provide all the study material, practice sets, and handouts you need. Come with an open mind and eagerness to learn!"
               },
               {
                 id: "item-3",
                 question: "Will this cover both current affairs and static GK?",
-                answer: "Yes, we have dedicated sessions for both, with special focus on important recent developments.",
+                answer: "Yes, we have dedicated sessions for both areas. We&apos;ll cover the most important current affairs from recent months, teach you how to track ongoing developments, and provide comprehensive coverage of high-yield static GK topics that frequently appear in CLAT."
+              },
+              {
+                id: "item-4",
+                question: "Can I ask personal doubts during the workshop?",
+                answer: "Definitely! We have dedicated Q&A sessions where you can ask specific doubts. Our mentors will provide personalized guidance based on your preparation level and challenges."
+              },
+              {
+                id: "item-5",
+                question: "Will I get study material after the workshop?",
+                answer: "Yes! All participants will receive comprehensive study material including GK notes, current affairs compilation, and practice MCQ sets that you can use for your ongoing preparation."
               },
             ].map((faq) => (
-              <div key={faq.id} className="rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+              <div
+                key={faq.id}
+                className="rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden"
+              >
                 <button
                   onClick={() => toggleAccordion(faq.id)}
-                  className="flex w-full items-center justify-between p-5 text-left transition-colors hover:bg-gray-50"
+                  className="flex w-full items-center justify-between p-5 text-left hover:bg-gray-50 transition-colors"
                 >
-                  <span className="text-lg font-semibold text-gray-900">{faq.question}</span>
+                  <span className="text-lg font-semibold text-gray-900 pr-4">{faq.question}</span>
                   <ChevronDown
-                    className={`h-5 w-5 shrink-0 text-gray-500 transition-transform duration-300 ${
+                    className={`h-5 w-5 text-[#054380] flex-shrink-0 transition-transform duration-300 ${
                       openAccordion === faq.id ? "rotate-180" : ""
                     }`}
                   />
                 </button>
                 {openAccordion === faq.id && (
-                  <div className="border-t border-gray-200 p-5 text-gray-700 leading-relaxed">
-                    {faq.answer}
+                  <div className="border-t border-gray-200 bg-gray-50 p-5">
+                    <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
                   </div>
                 )}
               </div>
@@ -585,31 +689,60 @@ export default function WorkshopPage() {
       </section>
 
       {/* Final CTA */}
-      <section
-        className="px-4 py-16 sm:px-6 md:px-8 md:py-20 relative overflow-hidden"
-        style={{
-          background: "linear-gradient(135deg, #014688 0%, #759EE8 100%)",
-        }}
-      >
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-10 right-10 w-72 h-72 bg-white rounded-full blur-3xl"></div>
-          <div className="absolute bottom-10 left-10 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+      <section className="px-4 py-16 sm:px-6 md:px-8 bg-gradient-to-br from-[#054380] to-[#0a5fa3] relative overflow-hidden">
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
+            backgroundSize: '40px 40px'
+          }}></div>
         </div>
+
         <div className="mx-auto max-w-4xl text-center relative z-10">
-          <h2 className="mb-6 text-balance text-3xl font-bold text-white md:text-4xl">
-            Limited Seats Available - Register Now!
+          <div className="inline-block mb-4 px-4 py-2 bg-red-600 text-white rounded-full text-sm font-bold uppercase">
+            Limited Seats Available
+          </div>
+          
+          <h2 className="mb-6 text-3xl md:text-5xl font-bold text-white leading-tight">
+            Register Now & Secure Your Spot
           </h2>
-          <p className="mb-8 text-balance text-lg text-white md:text-xl font-semibold leading-relaxed">
-           <p>{"Don't let GK be the reason you miss your dream NLU. This is your opportunity to learn directly from the experts and get ahead of the competition."}</p>
+          
+          <p className="mb-8 text-lg md:text-xl text-white/95 leading-relaxed max-w-2xl mx-auto">
+            Don&apos;t let GK be the reason you miss your dream NLU. This is your opportunity to learn directly from the experts and get ahead of the competition.
           </p>
-          <button className="rounded-xl bg-red-500 px-10 py-4 text-lg font-semibold text-white transition-all duration-300 hover:bg-red-600 hover:scale-105 shadow-2xl">
-            Register for the Workshop Now!
+
+          <button 
+            onClick={() => document.getElementById('name')?.scrollIntoView({ behavior: 'smooth' })}
+            className="inline-flex items-center gap-2 bg-white text-[#054380] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1"
+          >
+            Register for the Workshop
+            <ArrowRight className="h-5 w-5" />
           </button>
+
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+              <p className="text-3xl font-bold text-white mb-1">500+</p>
+              <p className="text-white/90 text-sm">Students Trained</p>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+              <p className="text-3xl font-bold text-white mb-1">95%</p>
+              <p className="text-white/90 text-sm">Success Rate</p>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+              <p className="text-3xl font-bold text-white mb-1">4.9★</p>
+              <p className="text-white/90 text-sm">Student Rating</p>
+            </div>
+          </div>
         </div>
       </section>
-       <section>
-        <Footer />
-      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-8 px-4">
+        <div className="max-w-7xl mx-auto text-center">
+          <p className="text-lg font-semibold mb-2">CLAT Tribe</p>
+          <p className="text-gray-400">Your Path to CLAT Success</p>
+          <p className="text-gray-500 text-sm mt-4">© 2025 CLAT Tribe. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   )
 }
