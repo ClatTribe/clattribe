@@ -230,7 +230,7 @@ export default function WorkshopPage() {
                 </div>
                 <div>
                   <p className="text-gray-900 font-semibold mb-1">For Whom</p>
-                  <p className="text-gray-600">Open to all CLAT 2025/2026 Aspirants</p>
+                  <p className="text-gray-600">Open to all CLAT 2026/2026 Aspirants</p>
                 </div>
               </div>
               
@@ -240,7 +240,7 @@ export default function WorkshopPage() {
                 </div>
                 <div>
                   <p className="text-gray-900 font-semibold mb-1">Date</p>
-                  <p className="text-gray-600">12th October 2025</p>
+                  <p className="text-gray-600">12th October 2026</p>
                 </div>
               </div>
               
@@ -337,8 +337,6 @@ export default function WorkshopPage() {
         </div>
       </section>
 
-      {/* Mentors Section */}
-      
 
       {/* Problem Section */}
       <section className="px-4 py-16 sm:px-6 md:px-8 bg-gray-50">
@@ -440,8 +438,8 @@ export default function WorkshopPage() {
               },
               {
                 icon: Award,
-                title: "Certificate of Completion",
-                desc: "Receive an official certificate upon completion of the workshop to showcase your commitment to excellence.",
+                title: "Success Milestone",
+                desc: "Mark your learning journey with an official milestone celebrating your growth.",
               },
             ].map((benefit, idx) => {
               const Icon = benefit.icon
@@ -474,12 +472,12 @@ export default function WorkshopPage() {
             {[
               {
                 name: "Priya Sharma",
-                batch: "CLAT 2025",
+                batch: "CLAT 2026",
                 text: "Before joining, GK was my weakest section. The teaching method completely changed my approach. My score improved from 30 to 85 in just 2 months!",
               },
               {
                 name: "Saurabh Trivedi",
-                batch: "CLAT 2025",
+                batch: "CLAT 2026",
                 text: "The way they simplify current affairs and connect dots between different events is remarkable. This workshop is a game-changer!",
               },
               {
@@ -489,7 +487,7 @@ export default function WorkshopPage() {
               },
               {
                 name: "Rohan Kapoor",
-                batch: "CLAT 2025",
+                batch: "CLAT 2026",
                 text: "The retention techniques taught here are incredible. I can now remember facts and dates effortlessly. Worth every penny!",
               },
               {
@@ -499,7 +497,7 @@ export default function WorkshopPage() {
               },
               {
                 name: "Arjun Patel",
-                batch: "CLAT 2025",
+                batch: "CLAT 2026",
                 text: "Best investment for my CLAT preparation! The strategies are practical and the mentors are incredibly supportive.",
               },
             ].map((testimonial, idx) => (
@@ -637,7 +635,7 @@ export default function WorkshopPage() {
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-lg font-semibold mb-2">CLAT Tribe</p>
           <p className="text-gray-400">Your Path to CLAT Success</p>
-          <p className="text-gray-500 text-sm mt-4">© 2025 CLAT Tribe. All rights reserved.</p>
+          <p className="text-gray-500 text-sm mt-4">© 2026 CLAT Tribe. All rights reserved.</p>
         </div>
       </footer>
     </div>
