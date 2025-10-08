@@ -150,14 +150,14 @@ export default function WorkshopPage() {
       {/* Hero Section */}
         <div className="w-full">
                 <img
-                  src="https://res.cloudinary.com/daetdadtt/image/upload/v1759823064/5b337570-975d-488c-8855-b9f63f72fd4f_lj4t2r.jpg"
+                  src="https://res.cloudinary.com/daetdadtt/image/upload/v1759915238/Your_paragraph_text_6_lvbjma.png"
                   alt="Study Abroad Fair Banner"
                   className="w-full h-auto shadow-lg"
                 />
               </div>
-      <section className="relative px-4 py-16 sm:px-6 md:px-8 md:py-24 bg-gradient-to-br from-[#054380] to-[#0a5fa3] overflow-hidden">
+      <section>
         {/* Subtle Background Pattern */}
-        <div className="absolute inset-0 opacity-5">
+        {/* <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0" style={{
             backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
             backgroundSize: '40px 40px'
@@ -203,7 +203,7 @@ export default function WorkshopPage() {
               <span className="font-semibold">Study Material</span>
             </div>
           </div>
-        </div>
+        </div> */}
       </section>
 
       {/* Enquiry Section */}
@@ -338,82 +338,7 @@ export default function WorkshopPage() {
       </section>
 
       {/* Mentors Section */}
-      <section className="px-4 py-16 sm:px-6 md:px-8 bg-gradient-to-b from-white to-gray-50">
-        <div className="mx-auto max-w-6xl">
-          <div className="text-center mb-12">
-            <div className="inline-block mb-4 px-4 py-2 bg-[#054380]/10 rounded-full">
-              <p className="text-sm font-bold text-[#054380] uppercase tracking-wide">Expert Faculty</p>
-            </div>
-            <h2 className="text-3xl font-bold text-gray-900 md:text-4xl mb-3">Meet Your Mentors</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">{"Learn from India's most trusted CLAT educators who have guided hundreds of students to their dream NLUs"}</p>
-          </div>
-          
-          <div className="grid gap-8 md:grid-cols-2 max-w-5xl mx-auto">
-            <div className="group bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-200 hover:border-[#054380]/30 hover:-translate-y-2">
-              <div className="relative overflow-hidden bg-gradient-to-br from-[#054380]/5 to-[#054380]/10">
-                <img
-                  src="https://res.cloudinary.com/daetdadtt/image/upload/v1759838783/123a_gllzpl.png"
-                  alt="Chia Didi"
-                  className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-110"
-                />
-                {/* <div className="absolute top-4 right-4 bg-[#054380] text-white px-3 py-1 rounded-full text-xs font-bold">
-                  Lead Mentor
-                </div> */}
-              </div>
-              <div className="p-8">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#054380] to-[#0a5fa3] flex items-center justify-center">
-                    <Award className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-gray-900">Chia Didi</h3>
-                    <p className="text-[#054380] font-semibold">Your CLAT Mentor</p>
-                  </div>
-                </div>
-                <div className="pt-4 border-t border-gray-200">
-                  <p className="text-sm text-gray-600 italic">
-                    {"My goal is to make GK the easiest and most scoring section for every CLAT aspirant"}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="group bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-200 hover:border-[#054380]/30 hover:-translate-y-2">
-              <div className="relative overflow-hidden bg-gradient-to-br from-[#054380]/5 to-[#054380]/10">
-                <img
-                  src="https://res.cloudinary.com/daetdadtt/image/upload/v1759745598/122_uihopt.png"
-                  alt="Yash Sir"
-                  className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-110"
-                />
-              </div>
-              <div className="p-8">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#054380] to-[#0a5fa3] flex items-center justify-center">
-                    <Award className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-gray-900">Yash Bhaiya</h3>
-                    <p className="text-[#054380] font-semibold">Your CLAT Mentor</p>
-                  </div>
-                </div>
-                <div className="pt-4 border-t border-gray-200">
-                  <p className="text-sm text-gray-600 italic">
-                    {"Success in CLAT comes from smart strategy, not just hard work"}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-12 text-center">
-            <div className="inline-block bg-gradient-to-r from-[#054380] to-[#0a5fa3] rounded-xl p-6 shadow-lg">
-              <p className="text-white font-semibold text-lg">
-                <span className="text-2xl font-bold">💡</span> 75% students reported INCREASE in their CLAT MOCK SCORE after just 1 session
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      
 
       {/* Problem Section */}
       <section className="px-4 py-16 sm:px-6 md:px-8 bg-gray-50">
