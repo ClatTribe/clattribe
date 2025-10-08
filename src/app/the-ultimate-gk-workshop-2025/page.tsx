@@ -472,32 +472,32 @@ export default function WorkshopPage() {
             {[
               {
                 name: "Priya Sharma",
-                batch: "CLAT 2026",
+                batch: "CLAT 2025",
                 text: "Before joining, GK was my weakest section. The teaching method completely changed my approach. My score improved from 30 to 85 in just 2 months!",
               },
               {
                 name: "Saurabh Trivedi",
-                batch: "CLAT 2026",
+                batch: "CLAT 2025",
                 text: "The way they simplify current affairs and connect dots between different events is remarkable. This workshop is a game-changer!",
               },
               {
                 name: "Ananya Verma",
-                batch: "CLAT 2026",
+                batch: "CLAT 2025",
                 text: "The personalized attention and strategic approach helped me tackle GK with confidence. Highly recommend this workshop!",
               },
               {
                 name: "Rohan Kapoor",
-                batch: "CLAT 2026",
+                batch: "CLAT 2025",
                 text: "The retention techniques taught here are incredible. I can now remember facts and dates effortlessly. Worth every penny!",
               },
               {
                 name: "Ishita Malhotra",
-                batch: "CLAT 2026",
+                batch: "CLAT 2025",
                 text: "From feeling lost to feeling confident - that's what this workshop did for me. The mentors truly understand CLAT GK inside out.",
               },
               {
                 name: "Arjun Patel",
-                batch: "CLAT 2026",
+                batch: "CLAT 2025",
                 text: "Best investment for my CLAT preparation! The strategies are practical and the mentors are incredibly supportive.",
               },
             ].map((testimonial, idx) => (
