@@ -1,14 +1,11 @@
 "use client"
 
-import { useEffect, useState, useCallback } from "react"
+import { useEffect, useState, useCallback, useRef } from "react"
 import { createClient } from "@supabase/supabase-js"
 import { Edit, Plus, Trash2, X } from "lucide-react"
 import React from "react"
-// Remove Next.js Image import - use regular img tag instead
-// import Image from "next/image"
-import type { JSX } from "react/jsx-runtime"
 
-// Supabase client (kept same URL and anon key fallbacks as provided)
+// Supabase client
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL || "https://fjswchcothephgtzqbgq.supabase.co",
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
@@ -25,7 +22,6 @@ interface GK {
   created_at?: string
 }
 
-// Toast primitives (unchanged)
 interface Toast {
   id: string
   title: string
@@ -84,7 +80,6 @@ const useToast = () => {
   return { toast: context.addToast }
 }
 
-// UI Components (keeping all the same)
 const Button = ({
   children,
   onClick,
@@ -95,7 +90,6 @@ const Button = ({
   style,
   className = "",
   title,
-  ...props
 }: {
   children: React.ReactNode
   onClick?: () => void
@@ -131,7 +125,6 @@ const Button = ({
       style={style}
       title={title}
       className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${disabledClasses} ${className}`}
-      {...props}
     >
       {children}
     </button>
@@ -143,7 +136,6 @@ const Input = ({
   onChange,
   placeholder,
   className = "",
-  ...props
 }: {
   value: string
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
@@ -156,34 +148,6 @@ const Input = ({
     onChange={onChange}
     placeholder={placeholder}
     className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${className}`}
-    {...props}
-  />
-)
-
-const Textarea = ({
-  value,
-  onChange,
-  placeholder,
-  rows = 3,
-  className = "",
-  id,
-  ...props
-}: {
-  value: string
-  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
-  placeholder?: string
-  rows?: number
-  className?: string
-  id?: string
-}) => (
-  <textarea
-    id={id}
-    value={value}
-    onChange={onChange}
-    placeholder={placeholder}
-    rows={rows}
-    className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none ${className}`}
-    {...props}
   />
 )
 
@@ -245,9 +209,9 @@ const Dialog = ({
   <>
     {children}
     {open && (
-      <div className="fixed inset-0 z-50 flex items-center justify-center">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
         <div className="fixed inset-0 bg-black bg-opacity-50" onClick={() => onOpenChange(false)} />
-        <div className="relative bg-white rounded-lg shadow-xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+        <div className="relative bg-white rounded-lg shadow-xl max-w-6xl w-full max-h-[95vh] overflow-y-auto">
           {React.Children.toArray(children)
             .filter((child): child is React.ReactElement => React.isValidElement(child))
             .find((child) => child.type === DialogContent)}
@@ -271,211 +235,6 @@ const Skeleton = ({ className = "" }: { className?: string }) => (
   <div className={`animate-pulse bg-gray-200 rounded ${className}`} />
 )
 
-// Rich text editor (keeping the same)
-const RichTextEditor = ({ value, onChange }: { value: string; onChange: (value: string) => void }) => {
-  const [isPreview, setIsPreview] = useState(false)
-
-  const insertFormatting = (format: string) => {
-    const textarea = document.getElementById("content-editor") as HTMLTextAreaElement
-    if (!textarea) return
-
-    const start = textarea.selectionStart
-    const end = textarea.selectionEnd
-    const selectedText = value.substring(start, end)
-
-    let newText = ""
-    switch (format) {
-      case "bold":
-        newText = `**${selectedText}**`
-        break
-      case "italic":
-        newText = `*${selectedText}*`
-        break
-      case "heading":
-        newText = `## ${selectedText}`
-        break
-      case "heading3":
-        newText = `### ${selectedText}`
-        break
-      case "link":
-        newText = `[${selectedText}](url)`
-        break
-      case "bullet":
-        newText = `- ${selectedText}`
-        break
-      case "number":
-        newText = `1. ${selectedText}`
-        break
-      case "quote":
-        newText = `> ${selectedText}`
-        break
-      default:
-        newText = selectedText
-    }
-
-    const newValue = value.substring(0, start) + newText + value.substring(end)
-    onChange(newValue)
-
-    setTimeout(() => {
-      textarea.focus()
-      textarea.setSelectionRange(start + newText.length, start + newText.length)
-    }, 0)
-  }
-
-  const parseInlineFormatting = (text: string) => {
-    const parts: (string | JSX.Element)[] = []
-    let currentIndex = 0
-
-    text.replace(/\*\*(.*?)\*\*/g, (match, content, offset) => {
-      if (offset > currentIndex) parts.push(text.substring(currentIndex, offset))
-      parts.push(<strong key={offset}>{content}</strong>)
-      currentIndex = offset + match.length
-      return match
-    })
-
-    if (currentIndex < text.length) parts.push(text.substring(currentIndex))
-
-    const processedParts: (string | JSX.Element)[] = []
-    parts.forEach((part, index) => {
-      if (typeof part === "string") {
-        const italicParts: (string | JSX.Element)[] = []
-        let currentIdx = 0
-        part.replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, (match, content, offset) => {
-          if (offset > currentIdx) italicParts.push(part.substring(currentIdx, offset))
-          italicParts.push(<em key={`${index}-${offset}`}>{content}</em>)
-          currentIdx = offset + match.length
-          return match
-        })
-        if (currentIdx < part.length) italicParts.push(part.substring(currentIdx))
-        processedParts.push(...(italicParts.length > 0 ? italicParts : [part]))
-      } else {
-        processedParts.push(part)
-      }
-    })
-    return processedParts.length > 0 ? processedParts : text
-  }
-
-  const parseMarkdown = (text: string) => {
-    const lines = text.split("\n")
-    const elements: JSX.Element[] = []
-    lines.forEach((line, index) => {
-      if (line.trim() === "") {
-        elements.push(<br key={index} />)
-        return
-      }
-      if (line.startsWith("### ")) {
-        elements.push(
-          <h3 key={index} className="text-lg font-bold mt-3 mb-2">
-            {parseInlineFormatting(line.replace("### ", ""))}
-          </h3>,
-        )
-      } else if (line.startsWith("## ")) {
-        elements.push(
-          <h2 key={index} className="text-xl font-bold mt-4 mb-2">
-            {parseInlineFormatting(line.replace("## ", ""))}
-          </h2>,
-        )
-      } else if (line.startsWith("# ")) {
-        elements.push(
-          <h1 key={index} className="text-2xl font-bold mt-4 mb-3">
-            {parseInlineFormatting(line.replace("# ", ""))}
-          </h1>,
-        )
-      } else if (line.startsWith("- ") || line.startsWith("* ")) {
-        elements.push(
-          <ul key={index} className="list-disc list-inside mb-2">
-            <li>{parseInlineFormatting(line.replace(/^[-*] /, ""))}</li>
-          </ul>,
-        )
-      } else if (/^\d+\. /.test(line)) {
-        elements.push(
-          <ol key={index} className="list-decimal list-inside mb-2">
-            <li>{parseInlineFormatting(line.replace(/^\d+\. /, ""))}</li>
-          </ol>,
-        )
-      } else if (line.startsWith("> ")) {
-        elements.push(
-          <blockquote key={index} className="border-l-4 border-gray-300 pl-4 italic mb-2 text-gray-600">
-            {parseInlineFormatting(line.replace("> ", ""))}
-          </blockquote>,
-        )
-      } else {
-        elements.push(
-          <p key={index} className="mb-2 leading-relaxed">
-            {parseInlineFormatting(line)}
-          </p>,
-        )
-      }
-    })
-    return elements
-  }
-
-  return (
-    <div className="border border-gray-300 rounded-lg">
-      <div className="flex items-center gap-1 p-2 border-b bg-gray-50 flex-wrap">
-        <Button type="button" variant="ghost" size="sm" onClick={() => insertFormatting("bold")} title="Bold">
-          <strong>B</strong>
-        </Button>
-        <Button type="button" variant="ghost" size="sm" onClick={() => insertFormatting("italic")} title="Italic">
-          <em>I</em>
-        </Button>
-        <Button type="button" variant="ghost" size="sm" onClick={() => insertFormatting("heading")} title="Heading 2">
-          H2
-        </Button>
-        <Button type="button" variant="ghost" size="sm" onClick={() => insertFormatting("heading3")} title="Heading 3">
-          H3
-        </Button>
-        <Button type="button" variant="ghost" size="sm" onClick={() => insertFormatting("bullet")} title="Bullet List">
-          •
-        </Button>
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          onClick={() => insertFormatting("number")}
-          title="Numbered List"
-        >
-          1.
-        </Button>
-        <Button type="button" variant="ghost" size="sm" onClick={() => insertFormatting("quote")} title="Quote">
-          &quot;
-        </Button>
-        <Button type="button" variant="ghost" size="sm" onClick={() => insertFormatting("link")} title="Link">
-          Link
-        </Button>
-        <div className="ml-auto">
-          <Button type="button" variant="ghost" size="sm" onClick={() => setIsPreview(!isPreview)}>
-            {isPreview ? "Edit" : "Preview"}
-          </Button>
-        </div>
-      </div>
-      {isPreview ? (
-        <div className="p-4 min-h-[200px] prose max-w-none">{parseMarkdown(value)}</div>
-      ) : (
-        <div className="relative">
-          <Textarea
-            id="content-editor"
-            value={value}
-            onChange={(e) => onChange(e.target.value)}
-            className="min-h-[200px] border-0 focus:ring-0 resize-none"
-            placeholder={`Write your GK content here...
-
-Use markdown formatting:
-**bold text** for bold
-*italic text* for italic  
-## Heading 2
-### Heading 3
-- Bullet point
-1. Numbered list
-> Quote text`}
-          />
-        </div>
-      )}
-    </div>
-  )
-}
-
-// Memoized Image Component to prevent unnecessary re-renders
 const OptimizedImage = React.memo(({ src, alt, className }: { src: string; alt: string; className?: string }) => {
   const [imageError, setImageError] = useState(false)
   
@@ -493,13 +252,183 @@ const OptimizedImage = React.memo(({ src, alt, className }: { src: string; alt: 
       alt={alt}
       className={className}
       onError={() => setImageError(true)}
-      loading="lazy" // Add lazy loading
+      loading="lazy"
       style={{ objectFit: 'cover' }}
     />
   )
 })
 
 OptimizedImage.displayName = 'OptimizedImage'
+
+// Jodit Editor Component - FIXED VERSION
+const JoditEditor = ({ value, onChange }: { value: string; onChange: (value: string) => void }) => {
+  const editorRef = useRef<HTMLTextAreaElement>(null)
+  const joditInstance = useRef<any>(null)
+  const [isReady, setIsReady] = useState(false)
+  const { toast } = useToast()
+
+  useEffect(() => {
+    // Load Jodit CSS
+    const link = document.createElement('link')
+    link.rel = 'stylesheet'
+    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/jodit/3.24.5/jodit.min.css'
+    link.id = 'jodit-css'
+    if (!document.getElementById('jodit-css')) {
+      document.head.appendChild(link)
+    }
+
+    // Load Jodit JS
+    const script = document.createElement('script')
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jodit/3.24.5/jodit.min.js'
+    script.id = 'jodit-script'
+    script.async = true
+    
+    script.onload = () => {
+      setIsReady(true)
+    }
+
+    if (!document.getElementById('jodit-script')) {
+      document.body.appendChild(script)
+    } else if ((window as any).Jodit) {
+      setIsReady(true)
+    }
+
+    return () => {
+      if (joditInstance.current) {
+        joditInstance.current.destruct()
+        joditInstance.current = null
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!isReady || !editorRef.current || joditInstance.current) return
+
+    const uploadImageToSupabase = async (file: File): Promise<string> => {
+      try {
+        const fileExt = file.name.split('.').pop()
+        const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`
+        
+        const { error: uploadError } = await supabase.storage
+          .from('blog-images')
+          .upload(fileName, file, { cacheControl: '3600', upsert: false })
+
+        if (uploadError) throw uploadError
+
+        const { data: urlData } = supabase.storage.from('blog-images').getPublicUrl(fileName)
+        return urlData.publicUrl
+      } catch (error) {
+        console.error('Image upload error:', error)
+        throw error
+      }
+    }
+
+    const config = {
+      readonly: false,
+      toolbar: true,
+      spellcheck: true,
+      language: 'en',
+      toolbarButtonSize: 'middle',
+      toolbarAdaptive: false,
+      showCharsCounter: true,
+      showWordsCounter: true,
+      showXPathInStatusbar: false,
+      askBeforePasteHTML: false,
+      askBeforePasteFromWord: false,
+      defaultActionOnPaste: 'insert_as_html',
+      height: 500,
+      minHeight: 400,
+      processPasteHTML: true,
+      cleanHTML: {
+        timeout: 300,
+        removeEmptyElements: false,
+        fillEmptyParagraph: true,
+        replaceNBSP: true,
+        replaceOldTags: {
+          i: 'em',
+          b: 'strong',
+        },
+      },
+      buttons: [
+        'source', '|',
+        'bold', 'italic', 'underline', 'strikethrough', '|',
+        'ul', 'ol', '|',
+        'outdent', 'indent', '|',
+        'font', 'fontsize', 'brush', 'paragraph', '|',
+        'image', 'table', 'link', '|',
+        'align', 'undo', 'redo', '|',
+        'hr', 'eraser', 'copyformat', '|',
+        'fullsize', 'preview'
+      ],
+      uploader: {
+        insertImageAsBase64URI: false,
+        imagesExtensions: ['jpg', 'png', 'jpeg', 'gif', 'svg', 'webp'],
+      },
+      events: {
+        beforeImageUpload: async (files: FileList) => {
+          const file = files[0]
+          if (!file) return false
+
+          try {
+            const url = await uploadImageToSupabase(file)
+            joditInstance.current.selection.insertImage(url, null, 250)
+            toast({
+              title: 'Success',
+              description: 'Image uploaded successfully'
+            })
+          } catch (error) {
+            toast({
+              title: 'Upload Failed',
+              description: 'Failed to upload image to Supabase.',
+              variant: 'destructive'
+            })
+          }
+          return false
+        },
+      },
+    }
+
+    const editor = new (window as any).Jodit(editorRef.current, config)
+    editor.value = value
+
+    editor.events.on('change', (newValue: string) => {
+      onChange(newValue)
+    })
+
+    joditInstance.current = editor
+
+    return () => {
+      if (joditInstance.current) {
+        joditInstance.current.destruct()
+        joditInstance.current = null
+      }
+    }
+  }, [isReady, onChange, toast])
+
+  useEffect(() => {
+    if (joditInstance.current && joditInstance.current.value !== value) {
+      joditInstance.current.value = value
+    }
+  }, [value])
+
+  return (
+    <div className="w-full">
+      {!isReady && (
+        <div className="border border-gray-300 rounded-lg p-4 min-h-[500px] flex items-center justify-center bg-gray-50">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <p className="text-gray-600">Loading editor...</p>
+          </div>
+        </div>
+      )}
+      <textarea
+        ref={editorRef}
+        style={{ display: isReady ? 'block' : 'none' }}
+        defaultValue={value}
+      />
+    </div>
+  )
+}
 
 const GKEditor = () => {
   const [items, setItems] = useState<GK[]>([])
@@ -512,7 +441,6 @@ const GKEditor = () => {
 
   const { toast } = useToast()
 
-  // Image upload states
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [uploadingImage, setUploadingImage] = useState(false)
 
@@ -524,10 +452,8 @@ const GKEditor = () => {
     publish: false,
   })
 
-  // Memoized fetch function to reduce unnecessary calls
   const fetchItems = useCallback(
     async (page = 1) => {
-      // Don't fetch if already loading
       if (loading && items.length > 0) return
       
       setLoading(true)
@@ -555,7 +481,6 @@ const GKEditor = () => {
     [perPage, toast, loading, items.length],
   )
 
-  // Save or update GK
   const saveGK = async () => {
     if (!formData.title || !formData.content) {
       toast({
@@ -573,13 +498,10 @@ const GKEditor = () => {
         .replace(/(^-|-$)/g, "")
     }
 
-    // Upload file if chosen; otherwise use existing URL
     let resolvedImg = formData.img || ""
     if (imageFile) {
       const uploaded = await uploadImage(imageFile)
-      if (!uploaded) {
-        return
-      }
+      if (!uploaded) return
       resolvedImg = uploaded
     }
 
@@ -611,7 +533,6 @@ const GKEditor = () => {
       })
       setIsDialogOpen(false)
       resetForm()
-      // Only fetch if we're on the first page or creating new item
       if (currentPage === 1 || !editingItem?.id) {
         fetchItems(1)
         setCurrentPage(1)
@@ -621,8 +542,9 @@ const GKEditor = () => {
     }
   }
 
-  // Delete GK
   const deleteGK = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this entry?')) return
+    
     const { error } = await supabase.from("gk").delete().eq("id", id)
     if (error) {
       toast({
@@ -669,10 +591,9 @@ const GKEditor = () => {
     setIsDialogOpen(true)
   }
 
-  // Load items only once on mount and when page changes
   useEffect(() => {
     fetchItems(currentPage)
-  }, [currentPage]) // Remove fetchItems from dependency array
+  }, [currentPage])
 
   const ItemSkeleton = () => (
     <Card className="mb-4">
@@ -699,28 +620,21 @@ const GKEditor = () => {
     try {
       const fileExt = file.name.split(".").pop()
       const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`
-      const filePath = fileName
 
-      console.log("[v0] Uploading file:", fileName, "to bucket: blog-images")
-
-      const { data: uploadData, error: uploadError } = await supabase.storage
+      const { error: uploadError } = await supabase.storage
         .from("blog-images")
-        .upload(filePath, file, { cacheControl: "3600", upsert: false })
+        .upload(fileName, file, { cacheControl: "3600", upsert: false })
 
       if (uploadError) {
-        console.error("[v0] Upload error:", uploadError)
         toast({
           title: "Upload Failed",
-          description:
-            uploadError.message ||
-            "Failed to upload image. Ensure the 'blog-images' bucket exists, is public, and has proper policies.",
+          description: uploadError.message || "Failed to upload image.",
           variant: "destructive",
         })
         return null
       }
 
-      console.log("[v0] Upload successful:", uploadData)
-      const { data: urlData } = supabase.storage.from("blog-images").getPublicUrl(filePath)
+      const { data: urlData } = supabase.storage.from("blog-images").getPublicUrl(fileName)
       if (!urlData?.publicUrl) {
         toast({
           title: "URL Generation Failed",
@@ -730,10 +644,8 @@ const GKEditor = () => {
         return null
       }
 
-      console.log("[v0] Public URL:", urlData.publicUrl)
       return urlData.publicUrl
     } catch (error) {
-      console.error("[v0] Upload error:", error)
       toast({
         title: "Upload Error",
         description: "An unexpected error occurred during image upload.",
@@ -747,13 +659,12 @@ const GKEditor = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
             <div>
               <h1 className="text-3xl font-bold text-gray-900">GK Editor</h1>
-              <p className="text-gray-600">Manage your General Knowledge entries</p>
+              <p className="text-gray-600">Manage your General Knowledge entries with Word paste support</p>
             </div>
             <div className="flex space-x-3">
               <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -808,7 +719,7 @@ const GKEditor = () => {
                             const file = e.target.files?.[0]
                             if (file) {
                               setImageFile(file)
-                              setFormData({ ...formData, img: "" }) // clear URL when selecting a file
+                              setFormData({ ...formData, img: "" })
                             }
                           }}
                           className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
@@ -830,7 +741,7 @@ const GKEditor = () => {
                           value={formData.img || ""}
                           onChange={(e) => {
                             setFormData({ ...formData, img: e.target.value })
-                            if (e.target.value) setImageFile(null) // clear file when typing URL
+                            if (e.target.value) setImageFile(null)
                           }}
                           placeholder="https://example.com/image.jpg"
                         />
@@ -838,14 +749,16 @@ const GKEditor = () => {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium mb-2">Content *</label>
-                      <RichTextEditor
+                      <label className="block text-sm font-medium mb-3">
+                        Content * <span className="text-gray-500 font-normal">(Paste from Word supported - Ctrl+V or Cmd+V)</span>
+                      </label>
+                      <JoditEditor
                         value={formData.content}
                         onChange={(value) => setFormData({ ...formData, content: value })}
                       />
                     </div>
 
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-2 pt-4">
                       <Switch
                         checked={formData.publish}
                         onCheckedChange={(checked) => setFormData({ ...formData, publish: checked })}
@@ -853,7 +766,7 @@ const GKEditor = () => {
                       <label className="text-sm font-medium">Publish</label>
                     </div>
 
-                    <div className="flex justify-end space-x-2">
+                    <div className="flex justify-end space-x-2 pt-4 border-t">
                       <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
                         Cancel
                       </Button>
@@ -864,7 +777,7 @@ const GKEditor = () => {
                         disabled={uploadingImage}
                         title={uploadingImage ? "Uploading image..." : undefined}
                       >
-                        {editingItem?.id ? "Update GK" : "Create GK"}
+                        {uploadingImage ? "Uploading..." : editingItem?.id ? "Update GK" : "Create GK"}
                       </Button>
                     </div>
                   </div>
@@ -875,7 +788,6 @@ const GKEditor = () => {
         </div>
       </div>
 
-      {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {loading ? (
           <div className="space-y-4">
@@ -895,18 +807,21 @@ const GKEditor = () => {
                       <OptimizedImage
                         src={item.img}
                         alt={item.title}
-                        className="w-24 h-16 rounded"
+                        className="w-24 h-16 rounded object-cover"
                       />
                     )}
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2 truncate">{item.title}</h3>
                       <div className="flex items-center space-x-2">
                         <Badge variant={item.publish ? "default" : "secondary"}>
                           {item.publish ? "Published" : "Draft"}
                         </Badge>
+                        <span className="text-xs text-gray-500">
+                          {item.created_at && new Date(item.created_at).toLocaleDateString()}
+                        </span>
                       </div>
                     </div>
-                    <div className="flex space-x-2">
+                    <div className="flex space-x-2 flex-shrink-0">
                       <Button variant="outline" size="sm" onClick={() => openEditDialog(item)} title="Edit GK">
                         <Edit className="w-4 h-4 mr-1" />
                         Edit
@@ -916,6 +831,7 @@ const GKEditor = () => {
                         size="sm"
                         onClick={() => item.id && deleteGK(item.id)}
                         title="Delete GK"
+                        className="text-red-600 hover:text-red-700 hover:bg-red-50"
                       >
                         <Trash2 className="w-4 h-4 mr-1" />
                         Delete
@@ -929,21 +845,25 @@ const GKEditor = () => {
             {items.length === 0 && (
               <Card>
                 <CardContent className="p-8 text-center">
-                  <h3 className="text-lg font-medium text-gray-900 mb-2">No GK entries yet</h3>
-                  <p className="text-gray-600 mb-4">Get started by creating your first GK entry.</p>
-                  <Button onClick={openNewDialog} style={{ backgroundColor: "#024687" }} className="hover:opacity-90">
-                    <Plus className="w-4 h-4 mr-2" />
-                    Create First GK
-                  </Button>
+                  <div className="max-w-md mx-auto">
+                    <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Plus className="w-8 h-8 text-gray-400" />
+                    </div>
+                    <h3 className="text-lg font-medium text-gray-900 mb-2">No GK entries yet</h3>
+                    <p className="text-gray-600 mb-4">Get started by creating your first GK entry with rich text editing and Word paste support.</p>
+                    <Button onClick={openNewDialog} style={{ backgroundColor: "#024687" }} className="hover:opacity-90">
+                      <Plus className="w-4 h-4 mr-2" />
+                      Create First GK
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             )}
           </div>
         )}
 
-        {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex justify-center mt-8 space-x-2">
+          <div className="flex justify-center items-center mt-8 space-x-2">
             <Button
               variant="outline"
               onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
@@ -952,9 +872,31 @@ const GKEditor = () => {
             >
               Previous
             </Button>
-            <span className="flex items-center px-4 py-2 text-sm text-gray-700">
-              Page {currentPage} of {totalPages}
-            </span>
+            <div className="flex items-center space-x-1">
+              {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                let pageNum
+                if (totalPages <= 5) {
+                  pageNum = i + 1
+                } else if (currentPage <= 3) {
+                  pageNum = i + 1
+                } else if (currentPage >= totalPages - 2) {
+                  pageNum = totalPages - 4 + i
+                } else {
+                  pageNum = currentPage - 2 + i
+                }
+                return (
+                  <Button
+                    key={pageNum}
+                    variant={currentPage === pageNum ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setCurrentPage(pageNum)}
+                    style={currentPage === pageNum ? { backgroundColor: "#024687" } : undefined}
+                  >
+                    {pageNum}
+                  </Button>
+                )
+              })}
+            </div>
             <Button
               variant="outline"
               onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}

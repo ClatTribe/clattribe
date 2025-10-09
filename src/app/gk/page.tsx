@@ -5,8 +5,6 @@ import { Search, Calendar, Newspaper } from "lucide-react"
 import Link from "next/link"
 import { createClient } from "@supabase/supabase-js"
 import DefaultLayout from "../defaultlayout"
-// Remove Next.js Image import
-// import Image from "next/image"
 import React from "react"
 
 const supabase = createClient(
@@ -105,7 +103,7 @@ export default function GK() {
       filtered = filtered.filter(
         (post) =>
           post.title.toLowerCase().includes(term) ||
-          post.content.toLowerCase().includes(term),          
+          stripHtml(post.content).toLowerCase().includes(term),          
       )
     }
 
@@ -121,9 +119,18 @@ export default function GK() {
     })
   }
 
-  const truncateContent = (content: string, maxLength = 150) => {
-    if (content.length <= maxLength) return content
-    return content.substring(0, maxLength) + "..."
+  // Strip HTML tags for search and preview
+  const stripHtml = (html: string) => {
+    const tmp = document.createElement("div")
+    tmp.innerHTML = html
+    return tmp.textContent || tmp.innerText || ""
+  }
+
+  // Extract text preview from HTML content
+  const getTextPreview = (htmlContent: string, maxLength = 150) => {
+    const text = stripHtml(htmlContent)
+    if (text.length <= maxLength) return text
+    return text.substring(0, maxLength) + "..."
   }
 
   if (loading) {
@@ -193,7 +200,7 @@ export default function GK() {
                 <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 w-5 h-5" />
                 <input
                   type="text"
-                  placeholder="Search posts by title, content, or description..."
+                  placeholder="Search posts by title or content..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full h-12 pl-12 pr-4 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-[#014688] focus:ring-2 focus:ring-[#014688]/20 transition-all duration-200 text-slate-900 placeholder:text-slate-500"
@@ -226,7 +233,7 @@ export default function GK() {
                           post.publish ? "bg-[#014688] text-white" : "bg-amber-100 text-amber-800"
                         }`}
                       >
-                        {post.publish ? "Publish" : "Draft"}
+                        {post.publish ? "Published" : "Draft"}
                       </span>
                       <div className="flex items-center text-sm text-slate-500">
                         <Calendar className="w-4 h-4 mr-2" />
@@ -239,6 +246,10 @@ export default function GK() {
                         {post.title}
                       </Link>
                     </h2>
+
+                    <p className="text-slate-600 mb-4 line-clamp-3 text-sm">
+                      {getTextPreview(post.content)}
+                    </p>
 
                     <Link href={`/gk/${post.slug}`}>
                       <button className="inline-flex items-center text-[#014688] font-semibold hover:text-[#0369a1] transition-colors duration-200 group/btn">
@@ -260,7 +271,7 @@ export default function GK() {
                 <p className="text-slate-600 mb-8 leading-relaxed">
                   {searchTerm
                     ? `No posts match your search for "${searchTerm}"`
-                    : "No publish posts available yet"}
+                    : "No published posts available yet"}
                 </p>
                 {searchTerm && (
                   <button

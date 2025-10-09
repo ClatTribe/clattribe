@@ -4,8 +4,6 @@ import { useEffect, useState } from "react"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { useParams } from "next/navigation"
-// Remove Next.js Image import
-// import Image from "next/image"
 import DefaultLayout from "../../defaultlayout"
 import { createClient } from "@supabase/supabase-js"
 import React from "react"
@@ -117,11 +115,19 @@ export default function GKPage() {
     fetchRecentPosts()
   }, [])
 
+  // Strip HTML for word count
+  const stripHtml = (html: string) => {
+    const tmp = document.createElement("div")
+    tmp.innerHTML = html
+    return tmp.textContent || tmp.innerText || ""
+  }
+
   // reading progress + read time
   useEffect(() => {
     if (post?.content) {
       const wordsPerMinute = 200
-      const words = post.content.trim().split(/\s+/).length
+      const text = stripHtml(post.content)
+      const words = text.trim().split(/\s+/).length
       const minutes = Math.max(1, Math.ceil(words / wordsPerMinute))
       setEstimatedReadTime(`${minutes} min read`)
     } else {
@@ -143,53 +149,6 @@ export default function GKPage() {
   const formatDate = (isoDate: string) => {
     const date = new Date(isoDate)
     return date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })
-  }
-
-  const renderContent = (content: string) => {
-    return content.split("\n").map((line, idx) => {
-      if (line.trim() === "") return <br key={idx} />
-      if (line.startsWith("# ")) {
-        return (
-          <h1 key={idx} className="text-2xl sm:text-3xl font-bold mt-8 mb-4 text-gray-900 leading-tight">
-            {line.replace("# ", "")}
-          </h1>
-        )
-      }
-      if (line.startsWith("## ")) {
-        return (
-          <h2 key={idx} className="text-xl sm:text-2xl font-semibold mt-6 mb-3 text-gray-900 leading-tight">
-            {line.replace("## ", "")}
-          </h2>
-        )
-      }
-      if (line.startsWith("### ")) {
-        return (
-          <h3 key={idx} className="text-lg sm:text-xl font-medium mt-4 mb-2 text-gray-900">
-            {line.replace("### ", "")}
-          </h3>
-        )
-      }
-      if (line.startsWith("- ") || line.startsWith("* ")) {
-        return (
-          <li key={idx} className="mb-2 leading-relaxed text-gray-700 text-base sm:text-lg ml-4 list-disc">
-            {line.replace(/^[*-] /, "")}
-          </li>
-        )
-      }
-      if (line.includes("**")) {
-        const parts = line.split("**")
-        return (
-          <p key={idx} className="mb-4 leading-relaxed text-gray-700 text-base sm:text-lg">
-            {parts.map((p, i) => (i % 2 === 1 ? <strong key={i}>{p}</strong> : p))}
-          </p>
-        )
-      }
-      return (
-        <p key={idx} className="mb-4 leading-relaxed text-gray-700 text-base sm:text-lg">
-          {line}
-        </p>
-      )
-    })
   }
 
   if (loading) {
@@ -330,72 +289,178 @@ export default function GKPage() {
                 </div>
               </div>
 
-              <div id="main-content" className="max-w-none mb-12 sm:mb-16">
-                {/* Global styles */}
+              {/* HTML CONTENT RENDERING */}
+              <div id="main-content" className="max-w-none mb-12 sm:mb-16 prose prose-lg max-w-none">
+                {/* Global styles for HTML content */}
                 <style jsx global>{`
-                  #main-content p,
-                  #main-content li {
-                    font-size: 18px !important;
-                    line-height: 1.7 !important;
+                  #main-content {
+                    line-height: 1.8;
+                    color: #374151;
+                  }
+                  #main-content p {
+                    margin-bottom: 1.25rem;
+                    font-size: 1.125rem;
+                    line-height: 1.8;
                   }
                   #main-content h1 {
-                    font-size: 28px !important;
-                    margin-top: 2rem !important;
-                    margin-bottom: 1rem !important;
-                    font-weight: 700 !important;
+                    font-size: 2rem;
+                    font-weight: 700;
+                    margin-top: 2.5rem;
+                    margin-bottom: 1.25rem;
+                    color: #111827;
+                    line-height: 1.3;
                   }
                   #main-content h2 {
-                    font-size: 24px !important;
-                    margin-top: 2rem !important;
-                    margin-bottom: 1rem !important;
-                    font-weight: 600 !important;
+                    font-size: 1.75rem;
+                    font-weight: 600;
+                    margin-top: 2rem;
+                    margin-bottom: 1rem;
+                    color: #111827;
+                    line-height: 1.3;
                   }
                   #main-content h3 {
-                    font-size: 20px !important;
-                    margin-top: 1.5rem !important;
-                    margin-bottom: 0.75rem !important;
-                    font-weight: 500 !important;
+                    font-size: 1.5rem;
+                    font-weight: 600;
+                    margin-top: 1.75rem;
+                    margin-bottom: 0.875rem;
+                    color: #111827;
+                    line-height: 1.4;
                   }
-                  #main-content ul {
-                    margin: 1rem 0 !important;
-                    padding-left: 1.5rem !important;
+                  #main-content h4 {
+                    font-size: 1.25rem;
+                    font-weight: 600;
+                    margin-top: 1.5rem;
+                    margin-bottom: 0.75rem;
+                    color: #111827;
+                  }
+                  #main-content ul,
+                  #main-content ol {
+                    margin: 1.5rem 0;
+                    padding-left: 2rem;
                   }
                   #main-content li {
-                    margin-bottom: 0.5rem !important;
+                    margin-bottom: 0.75rem;
+                    font-size: 1.125rem;
+                    line-height: 1.8;
+                    color: #374151;
                   }
+                  #main-content ul li {
+                    list-style-type: disc;
+                  }
+                  #main-content ol li {
+                    list-style-type: decimal;
+                  }
+                  #main-content strong,
+                  #main-content b {
+                    font-weight: 600;
+                    color: #111827;
+                  }
+                  #main-content em,
+                  #main-content i {
+                    font-style: italic;
+                  }
+                  #main-content a {
+                    color: #014688;
+                    text-decoration: underline;
+                  }
+                  #main-content a:hover {
+                    color: #0369a1;
+                  }
+                  #main-content img {
+                    max-width: 100%;
+                    height: auto;
+                    margin: 2rem 0;
+                    border-radius: 0.5rem;
+                    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+                  }
+                  #main-content table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin: 2rem 0;
+                    font-size: 1rem;
+                  }
+                  #main-content table th,
+                  #main-content table td {
+                    border: 1px solid #e5e7eb;
+                    padding: 0.75rem 1rem;
+                    text-align: left;
+                  }
+                  #main-content table th {
+                    background-color: #f9fafb;
+                    font-weight: 600;
+                    color: #111827;
+                  }
+                  #main-content table tr:nth-child(even) {
+                    background-color: #f9fafb;
+                  }
+                  #main-content blockquote {
+                    border-left: 4px solid #014688;
+                    padding-left: 1.5rem;
+                    margin: 1.5rem 0;
+                    font-style: italic;
+                    color: #6b7280;
+                  }
+                  #main-content code {
+                    background-color: #f3f4f6;
+                    padding: 0.25rem 0.5rem;
+                    border-radius: 0.25rem;
+                    font-family: monospace;
+                    font-size: 0.95em;
+                  }
+                  #main-content pre {
+                    background-color: #1f2937;
+                    color: #f9fafb;
+                    padding: 1.5rem;
+                    border-radius: 0.5rem;
+                    overflow-x: auto;
+                    margin: 1.5rem 0;
+                  }
+                  #main-content pre code {
+                    background-color: transparent;
+                    padding: 0;
+                    color: inherit;
+                  }
+                  #main-content hr {
+                    border: none;
+                    border-top: 2px solid #e5e7eb;
+                    margin: 2rem 0;
+                  }
+                  
                   @media (min-width: 640px) {
                     #main-content p,
                     #main-content li {
-                      font-size: 18px !important;
-                      line-height: 1.6 !important;
+                      font-size: 1.125rem;
                     }
                     #main-content h1 {
-                      font-size: 32px !important;
+                      font-size: 2.25rem;
                     }
                     #main-content h2 {
-                      font-size: 28px !important;
+                      font-size: 1.875rem;
                     }
                     #main-content h3 {
-                      font-size: 24px !important;
+                      font-size: 1.5rem;
                     }
                   }
+                  
                   @media (min-width: 1024px) {
                     #main-content p,
                     #main-content li {
-                      font-size: 19px !important;
+                      font-size: 1.125rem;
                     }
                     #main-content h1 {
-                      font-size: 36px !important;
+                      font-size: 2.5rem;
                     }
                     #main-content h2 {
-                      font-size: 30px !important;
+                      font-size: 2rem;
                     }
                     #main-content h3 {
-                      font-size: 26px !important;
+                      font-size: 1.75rem;
                     }
                   }
                 `}</style>
-                {renderContent(post.content)}
+                
+                {/* Render HTML content directly */}
+                <div dangerouslySetInnerHTML={{ __html: post.content }} />
               </div>
 
               <div className="mt-8">
@@ -410,24 +475,28 @@ export default function GKPage() {
 
             {/* SIDEBAR */}
             <aside className="lg:col-span-1">
-          <div className="bg-white shadow-md border rounded-xl p-5 sticky top-24">
-            <h2 className="text-xl font-semibold text-[#014688] mb-4 border-b pb-2">
-              Recently Published
-            </h2>
-            <ul className="space-y-3">
-              {recentPosts.map((rp) => (
-                <li key={rp.slug}>
-                  <Link
-                    href={`/gk/${rp.slug}`}
-                    className="block px-3 py-2 rounded-lg text-gray-800 hover:bg-[#f1f5f9] hover:text-[#014688] transition-colors duration-200"
-                  >
-                    {rp.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </aside>
+              <div className="bg-white shadow-md border rounded-xl p-5 sticky top-24">
+                <h2 className="text-xl font-semibold text-[#014688] mb-4 border-b pb-2">
+                  Recently Published
+                </h2>
+                <ul className="space-y-3">
+                  {recentPosts.length > 0 ? (
+                    recentPosts.map((rp) => (
+                      <li key={rp.slug}>
+                        <Link
+                          href={`/gk/${rp.slug}`}
+                          className="block px-3 py-2 rounded-lg text-gray-800 hover:bg-[#f1f5f9] hover:text-[#014688] transition-colors duration-200"
+                        >
+                          {rp.title}
+                        </Link>
+                      </li>
+                    ))
+                  ) : (
+                    <li className="text-gray-500 text-sm px-3 py-2">No recent posts</li>
+                  )}
+                </ul>
+              </div>
+            </aside>
           </div>
         </div>
       </div>
