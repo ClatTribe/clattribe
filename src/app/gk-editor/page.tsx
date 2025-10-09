@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, useCallback, useRef, useMemo } from "react"
+import { useEffect, useState, useCallback, useRef } from "react"
 import { createClient } from "@supabase/supabase-js"
 import { Edit, Plus, Trash2, X } from "lucide-react"
 import React from "react"
@@ -22,7 +22,6 @@ interface GK {
   created_at?: string
 }
 
-// Toast system
 interface Toast {
   id: string
   title: string
@@ -81,7 +80,6 @@ const useToast = () => {
   return { toast: context.addToast }
 }
 
-// UI Components
 const Button = ({
   children,
   onClick,
@@ -92,7 +90,6 @@ const Button = ({
   style,
   className = "",
   title,
-  ...props
 }: {
   children: React.ReactNode
   onClick?: () => void
@@ -128,7 +125,6 @@ const Button = ({
       style={style}
       title={title}
       className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${disabledClasses} ${className}`}
-      {...props}
     >
       {children}
     </button>
@@ -140,7 +136,6 @@ const Input = ({
   onChange,
   placeholder,
   className = "",
-  ...props
 }: {
   value: string
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
@@ -153,7 +148,6 @@ const Input = ({
     onChange={onChange}
     placeholder={placeholder}
     className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${className}`}
-    {...props}
   />
 )
 
@@ -215,9 +209,9 @@ const Dialog = ({
   <>
     {children}
     {open && (
-      <div className="fixed inset-0 z-50 flex items-center justify-center">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
         <div className="fixed inset-0 bg-black bg-opacity-50" onClick={() => onOpenChange(false)} />
-        <div className="relative bg-white rounded-lg shadow-xl max-w-6xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+        <div className="relative bg-white rounded-lg shadow-xl max-w-6xl w-full max-h-[95vh] overflow-y-auto">
           {React.Children.toArray(children)
             .filter((child): child is React.ReactElement => React.isValidElement(child))
             .find((child) => child.type === DialogContent)}
@@ -266,49 +260,56 @@ const OptimizedImage = React.memo(({ src, alt, className }: { src: string; alt: 
 
 OptimizedImage.displayName = 'OptimizedImage'
 
-// Jodit Editor Component
+// Jodit Editor Component - FIXED VERSION
 const JoditEditor = ({ value, onChange }: { value: string; onChange: (value: string) => void }) => {
-  const editorRef = useRef<any>(null)
-  const [editorLoaded, setEditorLoaded] = useState(false)
+  const editorRef = useRef<HTMLTextAreaElement>(null)
+  const joditInstance = useRef<any>(null)
+  const [isReady, setIsReady] = useState(false)
   const { toast } = useToast()
 
-  // Load Jodit CSS and JS
   useEffect(() => {
-    // Check if already loaded
-    if (typeof window !== 'undefined' && (window as any).Jodit) {
-      setEditorLoaded(true)
-      return
-    }
-
-    // Load CSS
+    // Load Jodit CSS
     const link = document.createElement('link')
     link.rel = 'stylesheet'
     link.href = 'https://cdnjs.cloudflare.com/ajax/libs/jodit/3.24.5/jodit.min.css'
-    document.head.appendChild(link)
+    link.id = 'jodit-css'
+    if (!document.getElementById('jodit-css')) {
+      document.head.appendChild(link)
+    }
 
-    // Load JS
+    // Load Jodit JS
     const script = document.createElement('script')
     script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jodit/3.24.5/jodit.min.js'
+    script.id = 'jodit-script'
     script.async = true
-    script.onload = () => setEditorLoaded(true)
-    document.body.appendChild(script)
+    
+    script.onload = () => {
+      setIsReady(true)
+    }
+
+    if (!document.getElementById('jodit-script')) {
+      document.body.appendChild(script)
+    } else if ((window as any).Jodit) {
+      setIsReady(true)
+    }
 
     return () => {
-      document.head.removeChild(link)
-      document.body.removeChild(script)
+      if (joditInstance.current) {
+        joditInstance.current.destruct()
+        joditInstance.current = null
+      }
     }
   }, [])
 
-  // Initialize Jodit
   useEffect(() => {
-    if (!editorLoaded || !editorRef.current || (editorRef.current as any).jodit) return
+    if (!isReady || !editorRef.current || joditInstance.current) return
 
     const uploadImageToSupabase = async (file: File): Promise<string> => {
       try {
         const fileExt = file.name.split('.').pop()
         const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`
         
-        const { data: uploadData, error: uploadError } = await supabase.storage
+        const { error: uploadError } = await supabase.storage
           .from('blog-images')
           .upload(fileName, file, { cacheControl: '3600', upsert: false })
 
@@ -327,36 +328,26 @@ const JoditEditor = ({ value, onChange }: { value: string; onChange: (value: str
       toolbar: true,
       spellcheck: true,
       language: 'en',
-      toolbarButtonSize: 'medium',
+      toolbarButtonSize: 'middle',
       toolbarAdaptive: false,
       showCharsCounter: true,
       showWordsCounter: true,
       showXPathInStatusbar: false,
       askBeforePasteHTML: false,
       askBeforePasteFromWord: false,
-      defaultActionOnPaste: 'insert_clear_html',
+      defaultActionOnPaste: 'insert_as_html',
       height: 500,
       minHeight: 400,
+      processPasteHTML: true,
       cleanHTML: {
+        timeout: 300,
         removeEmptyElements: false,
-        fillEmptyParagraph: false,
-        replaceNBSP: false,
+        fillEmptyParagraph: true,
+        replaceNBSP: true,
         replaceOldTags: {
           i: 'em',
           b: 'strong',
         },
-      },
-      controls: {
-        font: {
-          list: {
-            'Arial': 'Arial',
-            'Georgia': 'Georgia',
-            'Impact': 'Impact',
-            'Tahoma': 'Tahoma',
-            'Times New Roman': 'Times New Roman',
-            'Verdana': 'Verdana',
-          }
-        }
       },
       buttons: [
         'source', '|',
@@ -371,94 +362,70 @@ const JoditEditor = ({ value, onChange }: { value: string; onChange: (value: str
       ],
       uploader: {
         insertImageAsBase64URI: false,
-        url: 'javascript:void(0)',
-        format: 'json',
-        process: async (resp: any) => {
-          return {
-            files: resp.files || [],
-            error: resp.error,
-            msg: resp.msg
-          }
-        },
-        defaultHandlerSuccess: function(this: any, data: any, resp: any) {
-          const files = data.files || []
-          if (files.length) {
-            files.forEach((file: string) => {
-              this.selection.insertImage(file)
-            })
-          }
-        },
-        isSuccess: function(resp: any) {
-          return !resp.error
-        },
+        imagesExtensions: ['jpg', 'png', 'jpeg', 'gif', 'svg', 'webp'],
       },
       events: {
-        afterInit: function(this: any, editor: any) {
-          // Custom image upload handler
-          editor.events.on('beforeImageUpload', async (files: FileList) => {
-            const file = files[0]
-            if (!file) return false
+        beforeImageUpload: async (files: FileList) => {
+          const file = files[0]
+          if (!file) return false
 
-            try {
-              const url = await uploadImageToSupabase(file)
-              editor.selection.insertImage(url)
-              toast({
-                title: 'Success',
-                description: 'Image uploaded successfully'
-              })
-            } catch (error) {
-              toast({
-                title: 'Upload Failed',
-                description: 'Failed to upload image. Please try again.',
-                variant: 'destructive'
-              })
-            }
-            return false // Prevent default upload
-          })
-        }
+          try {
+            const url = await uploadImageToSupabase(file)
+            joditInstance.current.selection.insertImage(url, null, 250)
+            toast({
+              title: 'Success',
+              description: 'Image uploaded successfully'
+            })
+          } catch (error) {
+            toast({
+              title: 'Upload Failed',
+              description: 'Failed to upload image to Supabase.',
+              variant: 'destructive'
+            })
+          }
+          return false
+        },
       },
-      // Word paste support - this is the key configuration
-      pasteHTMLActionList: [
-        { value: 'insert_clear_html', text: 'Insert as Text' },
-        { value: 'insert_as_html', text: 'Insert as HTML' },
-        { value: 'insert_only_text', text: 'Insert only Text' }
-      ]
     }
 
     const editor = new (window as any).Jodit(editorRef.current, config)
     editor.value = value
-    
+
     editor.events.on('change', (newValue: string) => {
       onChange(newValue)
     })
 
-    ;(editorRef.current as any).jodit = editor
+    joditInstance.current = editor
 
     return () => {
-      if ((editorRef.current as any)?.jodit) {
-        (editorRef.current as any).jodit.destruct()
+      if (joditInstance.current) {
+        joditInstance.current.destruct()
+        joditInstance.current = null
       }
     }
-  }, [editorLoaded, onChange, toast])
+  }, [isReady, onChange, toast])
 
-  // Update editor content when value prop changes
   useEffect(() => {
-    if ((editorRef.current as any)?.jodit && (editorRef.current as any).jodit.value !== value) {
-      (editorRef.current as any).jodit.value = value
+    if (joditInstance.current && joditInstance.current.value !== value) {
+      joditInstance.current.value = value
     }
   }, [value])
 
-  if (!editorLoaded) {
-    return (
-      <div className="border border-gray-300 rounded-lg p-4 min-h-[400px] flex items-center justify-center">
-        <p className="text-gray-500">Loading editor...</p>
-      </div>
-    )
-  }
-
   return (
-    <div className="jodit-container">
-      <textarea ref={editorRef} className="hidden" defaultValue={value} />
+    <div className="w-full">
+      {!isReady && (
+        <div className="border border-gray-300 rounded-lg p-4 min-h-[500px] flex items-center justify-center bg-gray-50">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <p className="text-gray-600">Loading editor...</p>
+          </div>
+        </div>
+      )}
+      <textarea
+        ref={editorRef}
+        style={{ display: isReady ? 'block' : 'none' }}
+        defaultValue={value}
+      />
     </div>
   )
 }
@@ -576,6 +543,8 @@ const GKEditor = () => {
   }
 
   const deleteGK = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this entry?')) return
+    
     const { error } = await supabase.from("gk").delete().eq("id", id)
     if (error) {
       toast({
@@ -652,7 +621,7 @@ const GKEditor = () => {
       const fileExt = file.name.split(".").pop()
       const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`
 
-      const { data: uploadData, error: uploadError } = await supabase.storage
+      const { error: uploadError } = await supabase.storage
         .from("blog-images")
         .upload(fileName, file, { cacheControl: "3600", upsert: false })
 
@@ -780,14 +749,16 @@ const GKEditor = () => {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium mb-2">Content * (Paste from Word supported)</label>
+                      <label className="block text-sm font-medium mb-3">
+                        Content * <span className="text-gray-500 font-normal">(Paste from Word supported - Ctrl+V or Cmd+V)</span>
+                      </label>
                       <JoditEditor
                         value={formData.content}
                         onChange={(value) => setFormData({ ...formData, content: value })}
                       />
                     </div>
 
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-2 pt-4">
                       <Switch
                         checked={formData.publish}
                         onCheckedChange={(checked) => setFormData({ ...formData, publish: checked })}
@@ -795,7 +766,7 @@ const GKEditor = () => {
                       <label className="text-sm font-medium">Publish</label>
                     </div>
 
-                    <div className="flex justify-end space-x-2">
+                    <div className="flex justify-end space-x-2 pt-4 border-t">
                       <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
                         Cancel
                       </Button>
@@ -806,7 +777,7 @@ const GKEditor = () => {
                         disabled={uploadingImage}
                         title={uploadingImage ? "Uploading image..." : undefined}
                       >
-                        {editingItem?.id ? "Update GK" : "Create GK"}
+                        {uploadingImage ? "Uploading..." : editingItem?.id ? "Update GK" : "Create GK"}
                       </Button>
                     </div>
                   </div>
@@ -836,18 +807,21 @@ const GKEditor = () => {
                       <OptimizedImage
                         src={item.img}
                         alt={item.title}
-                        className="w-24 h-16 rounded"
+                        className="w-24 h-16 rounded object-cover"
                       />
                     )}
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2 truncate">{item.title}</h3>
                       <div className="flex items-center space-x-2">
                         <Badge variant={item.publish ? "default" : "secondary"}>
                           {item.publish ? "Published" : "Draft"}
                         </Badge>
+                        <span className="text-xs text-gray-500">
+                          {item.created_at && new Date(item.created_at).toLocaleDateString()}
+                        </span>
                       </div>
                     </div>
-                    <div className="flex space-x-2">
+                    <div className="flex space-x-2 flex-shrink-0">
                       <Button variant="outline" size="sm" onClick={() => openEditDialog(item)} title="Edit GK">
                         <Edit className="w-4 h-4 mr-1" />
                         Edit
@@ -857,6 +831,7 @@ const GKEditor = () => {
                         size="sm"
                         onClick={() => item.id && deleteGK(item.id)}
                         title="Delete GK"
+                        className="text-red-600 hover:text-red-700 hover:bg-red-50"
                       >
                         <Trash2 className="w-4 h-4 mr-1" />
                         Delete
@@ -870,12 +845,17 @@ const GKEditor = () => {
             {items.length === 0 && (
               <Card>
                 <CardContent className="p-8 text-center">
-                  <h3 className="text-lg font-medium text-gray-900 mb-2">No GK entries yet</h3>
-                  <p className="text-gray-600 mb-4">Get started by creating your first GK entry.</p>
-                  <Button onClick={openNewDialog} style={{ backgroundColor: "#024687" }} className="hover:opacity-90">
-                    <Plus className="w-4 h-4 mr-2" />
-                    Create First GK
-                  </Button>
+                  <div className="max-w-md mx-auto">
+                    <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Plus className="w-8 h-8 text-gray-400" />
+                    </div>
+                    <h3 className="text-lg font-medium text-gray-900 mb-2">No GK entries yet</h3>
+                    <p className="text-gray-600 mb-4">Get started by creating your first GK entry with rich text editing and Word paste support.</p>
+                    <Button onClick={openNewDialog} style={{ backgroundColor: "#024687" }} className="hover:opacity-90">
+                      <Plus className="w-4 h-4 mr-2" />
+                      Create First GK
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             )}
@@ -883,7 +863,7 @@ const GKEditor = () => {
         )}
 
         {totalPages > 1 && (
-          <div className="flex justify-center mt-8 space-x-2">
+          <div className="flex justify-center items-center mt-8 space-x-2">
             <Button
               variant="outline"
               onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
@@ -892,9 +872,31 @@ const GKEditor = () => {
             >
               Previous
             </Button>
-            <span className="flex items-center px-4 py-2 text-sm text-gray-700">
-              Page {currentPage} of {totalPages}
-            </span>
+            <div className="flex items-center space-x-1">
+              {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                let pageNum
+                if (totalPages <= 5) {
+                  pageNum = i + 1
+                } else if (currentPage <= 3) {
+                  pageNum = i + 1
+                } else if (currentPage >= totalPages - 2) {
+                  pageNum = totalPages - 4 + i
+                } else {
+                  pageNum = currentPage - 2 + i
+                }
+                return (
+                  <Button
+                    key={pageNum}
+                    variant={currentPage === pageNum ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setCurrentPage(pageNum)}
+                    style={currentPage === pageNum ? { backgroundColor: "#024687" } : undefined}
+                  >
+                    {pageNum}
+                  </Button>
+                )
+              })}
+            </div>
             <Button
               variant="outline"
               onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
@@ -908,7 +910,7 @@ const GKEditor = () => {
       </div>
     </div>
   )
-}
+} 
 
 export default function App() {
   return (
