@@ -12,6 +12,10 @@ const supabase = createClient(
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZqc3djaGNvdGhlcGhndHpxYmdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU3NTk2ODQsImV4cCI6MjA3MTMzNTY4NH0.AqKfl8rwkH4_Y0sVdcQLWu6HF1nrxhro-jMyEdUggV4",
 )
 
+// CLOUDINARY CONFIG - Replace with your values
+const CLOUDINARY_CLOUD_NAME = "daetdadtt" // e.g., "dxxxxxxxx"
+const CLOUDINARY_UPLOAD_PRESET = "blog_images" // Create an unsigned preset in Cloudinary
+
 interface GK {
   id?: string
   title: string
@@ -260,7 +264,7 @@ const OptimizedImage = React.memo(({ src, alt, className }: { src: string; alt: 
 
 OptimizedImage.displayName = 'OptimizedImage'
 
-// Jodit Editor Component - FIXED VERSION
+// Jodit Editor Component with Cloudinary Upload
 const JoditEditor = ({ value, onChange }: { value: string; onChange: (value: string) => void }) => {
   const editorRef = useRef<HTMLTextAreaElement>(null)
   const joditInstance = useRef<any>(null)
@@ -268,7 +272,6 @@ const JoditEditor = ({ value, onChange }: { value: string; onChange: (value: str
   const { toast } = useToast()
 
   useEffect(() => {
-    // Load Jodit CSS
     const link = document.createElement('link')
     link.rel = 'stylesheet'
     link.href = 'https://cdnjs.cloudflare.com/ajax/libs/jodit/3.24.5/jodit.min.css'
@@ -277,7 +280,6 @@ const JoditEditor = ({ value, onChange }: { value: string; onChange: (value: str
       document.head.appendChild(link)
     }
 
-    // Load Jodit JS
     const script = document.createElement('script')
     script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jodit/3.24.5/jodit.min.js'
     script.id = 'jodit-script'
@@ -304,21 +306,29 @@ const JoditEditor = ({ value, onChange }: { value: string; onChange: (value: str
   useEffect(() => {
     if (!isReady || !editorRef.current || joditInstance.current) return
 
-    const uploadImageToSupabase = async (file: File): Promise<string> => {
+    // Upload to Cloudinary instead of Supabase
+    const uploadImageToCloudinary = async (file: File): Promise<string> => {
       try {
-        const fileExt = file.name.split('.').pop()
-        const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`
+        const formData = new FormData()
+        formData.append('file', file)
+        formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET)
         
-        const { error: uploadError } = await supabase.storage
-          .from('blog-images')
-          .upload(fileName, file, { cacheControl: '3600', upsert: false })
+        const response = await fetch(
+          `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
+          {
+            method: 'POST',
+            body: formData
+          }
+        )
 
-        if (uploadError) throw uploadError
+        if (!response.ok) {
+          throw new Error('Upload failed')
+        }
 
-        const { data: urlData } = supabase.storage.from('blog-images').getPublicUrl(fileName)
-        return urlData.publicUrl
+        const data = await response.json()
+        return data.secure_url
       } catch (error) {
-        console.error('Image upload error:', error)
+        console.error('Cloudinary upload error:', error)
         throw error
       }
     }
@@ -370,16 +380,22 @@ const JoditEditor = ({ value, onChange }: { value: string; onChange: (value: str
           if (!file) return false
 
           try {
-            const url = await uploadImageToSupabase(file)
+            toast({
+              title: 'Uploading',
+              description: 'Uploading image to Cloudinary...'
+            })
+            
+            const url = await uploadImageToCloudinary(file)
             joditInstance.current.selection.insertImage(url, null, 250)
+            
             toast({
               title: 'Success',
-              description: 'Image uploaded successfully'
+              description: 'Image uploaded to Cloudinary successfully'
             })
           } catch (error) {
             toast({
               title: 'Upload Failed',
-              description: 'Failed to upload image to Supabase.',
+              description: 'Failed to upload image to Cloudinary. Check your config.',
               variant: 'destructive'
             })
           }
@@ -481,6 +497,46 @@ const GKEditor = () => {
     [perPage, toast, loading, items.length],
   )
 
+  // Upload image to Cloudinary
+  const uploadImageToCloudinary = async (file: File): Promise<string | null> => {
+    setUploadingImage(true)
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
+      formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+      
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
+        {
+          method: 'POST',
+          body: formData
+        }
+      )
+
+      if (!response.ok) {
+        throw new Error('Upload failed')
+      }
+
+      const data = await response.json()
+      
+      toast({
+        title: "Success",
+        description: "Image uploaded to Cloudinary successfully",
+      })
+      
+      return data.secure_url
+    } catch (error) {
+      toast({
+        title: "Upload Failed",
+        description: "Failed to upload image to Cloudinary. Check your config.",
+        variant: "destructive",
+      })
+      return null
+    } finally {
+      setUploadingImage(false)
+    }
+  }
+
   const saveGK = async () => {
     if (!formData.title || !formData.content) {
       toast({
@@ -500,7 +556,7 @@ const GKEditor = () => {
 
     let resolvedImg = formData.img || ""
     if (imageFile) {
-      const uploaded = await uploadImage(imageFile)
+      const uploaded = await uploadImageToCloudinary(imageFile)
       if (!uploaded) return
       resolvedImg = uploaded
     }
@@ -615,48 +671,6 @@ const GKEditor = () => {
     </Card>
   )
 
-  const uploadImage = async (file: File): Promise<string | null> => {
-    setUploadingImage(true)
-    try {
-      const fileExt = file.name.split(".").pop()
-      const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`
-
-      const { error: uploadError } = await supabase.storage
-        .from("blog-images")
-        .upload(fileName, file, { cacheControl: "3600", upsert: false })
-
-      if (uploadError) {
-        toast({
-          title: "Upload Failed",
-          description: uploadError.message || "Failed to upload image.",
-          variant: "destructive",
-        })
-        return null
-      }
-
-      const { data: urlData } = supabase.storage.from("blog-images").getPublicUrl(fileName)
-      if (!urlData?.publicUrl) {
-        toast({
-          title: "URL Generation Failed",
-          description: "Image uploaded but failed to generate public URL.",
-          variant: "destructive",
-        })
-        return null
-      }
-
-      return urlData.publicUrl
-    } catch (error) {
-      toast({
-        title: "Upload Error",
-        description: "An unexpected error occurred during image upload.",
-        variant: "destructive",
-      })
-      return null
-    } finally {
-      setUploadingImage(false)
-    }
-  }
-
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="bg-white border-b">
@@ -664,7 +678,7 @@ const GKEditor = () => {
           <div className="flex justify-between items-center py-6">
             <div>
               <h1 className="text-3xl font-bold text-gray-900">GK Editor</h1>
-              <p className="text-gray-600">Manage your General Knowledge entries with Word paste support</p>
+              <p className="text-gray-600">Cloudinary-powered (Free Supabase friendly)</p>
             </div>
             <div className="flex space-x-3">
               <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -710,7 +724,7 @@ const GKEditor = () => {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium mb-2">Featured Image</label>
+                      <label className="block text-sm font-medium mb-2">Featured Image (Upload to Cloudinary)</label>
                       <div className="space-y-3">
                         <input
                           type="file"
@@ -736,21 +750,21 @@ const GKEditor = () => {
                             </button>
                           </div>
                         )}
-                        <div className="text-center text-gray-500">or</div>
+                        <div className="text-center text-gray-500">or paste Cloudinary URL</div>
                         <Input
                           value={formData.img || ""}
                           onChange={(e) => {
                             setFormData({ ...formData, img: e.target.value })
                             if (e.target.value) setImageFile(null)
                           }}
-                          placeholder="https://example.com/image.jpg"
+                          placeholder="https://res.cloudinary.com/..."
                         />
                       </div>
                     </div>
 
                     <div>
                       <label className="block text-sm font-medium mb-3">
-                        Content * <span className="text-gray-500 font-normal">(Paste from Word supported - Ctrl+V or Cmd+V)</span>
+                        Content * <span className="text-gray-500 font-normal">(Images upload to Cloudinary)</span>
                       </label>
                       <JoditEditor
                         value={formData.content}
@@ -850,7 +864,7 @@ const GKEditor = () => {
                       <Plus className="w-8 h-8 text-gray-400" />
                     </div>
                     <h3 className="text-lg font-medium text-gray-900 mb-2">No GK entries yet</h3>
-                    <p className="text-gray-600 mb-4">Get started by creating your first GK entry with rich text editing and Word paste support.</p>
+                    <p className="text-gray-600 mb-4">Get started by creating your first GK entry with Cloudinary-powered images.</p>
                     <Button onClick={openNewDialog} style={{ backgroundColor: "#024687" }} className="hover:opacity-90">
                       <Plus className="w-4 h-4 mr-2" />
                       Create First GK
