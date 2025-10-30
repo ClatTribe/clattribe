@@ -240,7 +240,7 @@ export default function WorkshopPage() {
                 </div>
                 <div>
                   <p className="text-gray-900 font-semibold mb-1">Date</p>
-                  <p className="text-gray-600">7th November 2026</p>
+                  <p className="text-gray-600">7th November 2025</p>
                 </div>
               </div>
               
