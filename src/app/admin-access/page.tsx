@@ -192,7 +192,7 @@ export default function AdminEnquiryPage() {
           <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-600 text-sm font-medium">Today's Enquiries</p>
+                <p className="text-gray-600 text-sm font-medium">Todays Enquiries</p>
                 <p className="text-3xl font-bold text-gray-900 mt-2">
                   {enquiries.filter(e => {
                     const diff = new Date().getTime() - new Date(e.created_at).getTime()
