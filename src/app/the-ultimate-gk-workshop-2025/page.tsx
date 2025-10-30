@@ -230,7 +230,7 @@ export default function WorkshopPage() {
                 </div>
                 <div>
                   <p className="text-gray-900 font-semibold mb-1">For Whom</p>
-                  <p className="text-gray-600">Open to all CLAT 2026/2026 Aspirants</p>
+                  <p className="text-gray-600">Open to all CLAT 2026/2027 Aspirants</p>
                 </div>
               </div>
               
