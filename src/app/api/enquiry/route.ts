@@ -9,11 +9,11 @@ const supabase = createClient(
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const { name, phone, email } = body
+    const { name, phone, email, city } = body
 
     const { data, error } = await supabase
       .from('Enquiry')
-      .insert([{ name, phone, email }])
+      .insert([{ name, phone, email, city }])
 
     if (error) throw error
 

@@ -11,7 +11,8 @@ import {
   Filter,
   X,
   Loader2,
-  AlertCircle
+  AlertCircle,
+  MapPin
 } from "lucide-react"
 
 interface Enquiry {
@@ -19,6 +20,7 @@ interface Enquiry {
   name: string
   email: string
   phone: string
+  city: string
   created_at: string
 }
 
@@ -67,7 +69,8 @@ export default function AdminEnquiryPage() {
       filtered = filtered.filter(enquiry => 
         enquiry.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         enquiry.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        enquiry.phone?.includes(searchTerm)
+        enquiry.phone?.includes(searchTerm) ||
+        enquiry.city?.toLowerCase().includes(searchTerm.toLowerCase())
       )
     }
 
@@ -97,11 +100,12 @@ export default function AdminEnquiryPage() {
 
   // Export to CSV
   const exportToCSV = () => {
-    const headers = ["Name", "Email", "Phone", "Date"]
+    const headers = ["Name", "Email", "Phone", "City", "Date"]
     const rows = filteredEnquiries.map(e => [
       e.name,
       e.email,
       e.phone,
+      e.city,
       new Date(e.created_at).toLocaleString()
     ])
 
@@ -216,7 +220,7 @@ export default function AdminEnquiryPage() {
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                 <input
                   type="text"
-                  placeholder="Search by name, email, or phone..."
+                  placeholder="Search by name, email, phone, or city..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#054380] focus:border-[#054380] outline-none"
@@ -298,6 +302,9 @@ export default function AdminEnquiryPage() {
                         Contact
                       </th>
                       <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        City
+                      </th>
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         Date & Time
                       </th>
                     </tr>
@@ -329,6 +336,12 @@ export default function AdminEnquiryPage() {
                                 {enquiry.phone}
                               </a>
                             </div>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4">
+                          <div className="flex items-center gap-2 text-sm text-gray-600">
+                            <MapPin className="h-4 w-4 text-gray-400" />
+                            {enquiry.city || "N/A"}
                           </div>
                         </td>
                         <td className="px-6 py-4">

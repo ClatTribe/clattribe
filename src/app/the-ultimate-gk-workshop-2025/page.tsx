@@ -17,7 +17,6 @@ import {
   ArrowRight,
   AlertTriangle,
   FileQuestion,
-  // Lightbulb,
 } from "lucide-react"
 import { useState } from "react"
 
@@ -27,6 +26,7 @@ export default function WorkshopPage() {
     name: "",
     phone: "",
     email: "",
+    city: "",
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showSuccessPopup, setShowSuccessPopup] = useState(false)
@@ -59,6 +59,7 @@ export default function WorkshopPage() {
           name: formData.name,
           phone: formData.phone,
           email: formData.email,
+          city: formData.city,
         }),
       })
 
@@ -70,6 +71,7 @@ export default function WorkshopPage() {
         name: "",
         phone: "",
         email: "",
+        city: "",
       })
 
       setTimeout(() => {
@@ -148,62 +150,14 @@ export default function WorkshopPage() {
       )}
 
       {/* Hero Section */}
-        <div className="w-full">
-                <img
-                  src="https://res.cloudinary.com/daetdadtt/image/upload/v1762155865/The_Ultimate_GK_Therapy_Session_at_Lucknow_y17weh.png"
-                  alt="Study Abroad Fair Banner"
-                  className="w-full h-auto shadow-lg"
-                />
-              </div>
+      <div className="w-full">
+        <img
+          src="https://res.cloudinary.com/daetdadtt/image/upload/v1762762803/The_Ultimate_GK_Therapy_Session_at_Lucknow_1_1_by33ay.png"
+          alt="Study Abroad Fair Banner"
+          className="w-full h-auto shadow-lg"
+        />
+      </div>
       <section>
-        {/* Subtle Background Pattern */}
-        {/* <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
-            backgroundSize: '40px 40px'
-          }}></div>
-        </div>
-
-        <div className="mx-auto max-w-5xl text-center relative z-10">
-          <div className="inline-block mb-4 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
-            <p className="text-sm font-semibold text-white uppercase tracking-wide">
-              CLAT Tribe Presents
-            </p>
-          </div>
-          
-          <h1 className="mb-6 text-4xl font-bold text-white md:text-5xl lg:text-6xl leading-tight">
-            The Ultimate GK Therapy Session
-          </h1>
-          
-          <p className="mb-6 text-xl md:text-2xl text-white/95 font-semibold">
-            Master Current Affairs &  GK with India&apos;s Top CLAT Mentors - Now in your city LUCKNOW!
-          </p>
-          
-          <p className="mx-auto max-w-3xl text-lg text-white/90 md:text-xl leading-relaxed">
-            Doubts can ruin your preparation, but we can clear your doubts 
-          </p>
-
-          <div className="mt-10 flex flex-wrap justify-center gap-6">
-            <div className="flex items-center gap-2 text-white">
-              <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
-                <Award className="h-5 w-5" />
-              </div>
-              <span className="font-semibold">Expert Mentors</span>
-            </div>
-            <div className="flex items-center gap-2 text-white">
-              <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
-                <Clock className="h-5 w-5" />
-              </div>
-              <span className="font-semibold">3-Hour Intensive</span>
-            </div>
-            <div className="flex items-center gap-2 text-white">
-              <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
-                <BookOpen className="h-5 w-5" />
-              </div>
-              <span className="font-semibold">Study Material</span>
-            </div>
-          </div>
-        </div> */}
       </section>
 
       {/* Enquiry Section */}
@@ -240,7 +194,8 @@ export default function WorkshopPage() {
                 </div>
                 <div>
                   <p className="text-gray-900 font-semibold mb-1">Date</p>
-                  <p className="text-gray-600">7th November 2025</p>
+                  <p className="text-gray-600">For Delhi - 15th Nov</p>
+                  <p className="text-gray-600">For Lucknow - 16th Nov</p>
                 </div>
               </div>
               
@@ -282,6 +237,21 @@ export default function WorkshopPage() {
                   type="text"
                   placeholder="Enter your name"
                   value={formData.name}
+                  onChange={handleInputChange}
+                  className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-[#054380] focus:ring-2 focus:ring-[#054380]/20 outline-none transition-all"
+                  required
+                />
+              </div>
+              
+              <div>
+                <label htmlFor="city" className="block text-gray-700 font-semibold mb-2">
+                  City <span className="text-red-500">*</span>
+                </label>
+                <input
+                  id="city"
+                  type="text"
+                  placeholder="Enter your city"
+                  value={formData.city}
                   onChange={handleInputChange}
                   className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-[#054380] focus:ring-2 focus:ring-[#054380]/20 outline-none transition-all"
                   required
@@ -538,12 +508,12 @@ export default function WorkshopPage() {
               {
                 id: "item-1",
                 question: "Is this workshop suitable for complete beginners?",
-                answer: "Absolutely! We start with fundamental concepts and build up to advanced strategies, making it perfect for students at all levels. Whether you&apos;re just starting your CLAT preparation or looking to refine your GK strategy, this workshop has something valuable for everyone."
+                answer: "Absolutely! We start with fundamental concepts and build up to advanced strategies, making it perfect for students at all levels. Whether you're just starting your CLAT preparation or looking to refine your GK strategy, this workshop has something valuable for everyone."
               },
               {
                 id: "item-2",
                 question: "What should I bring to the workshop?",
-                answer: "Just bring a notebook and pen to take notes. We&apos;ll provide all the study material, practice sets, and handouts you need. Come with an open mind and eagerness to learn!"
+                answer: "Just bring a notebook and pen to take notes. We'll provide all the study material, practice sets, and handouts you need. Come with an open mind and eagerness to learn!"
               },
               
               {
