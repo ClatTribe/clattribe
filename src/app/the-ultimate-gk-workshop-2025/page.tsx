@@ -152,7 +152,7 @@ export default function WorkshopPage() {
       {/* Hero Section */}
       <div className="w-full">
         <img
-          src="https://res.cloudinary.com/daetdadtt/image/upload/v1762762803/The_Ultimate_GK_Therapy_Session_at_Lucknow_1_1_by33ay.png"
+          src="https://res.cloudinary.com/daetdadtt/image/upload/v1759823064/5b337570-975d-488c-8855-b9f63f72fd4f_lj4t2r.jpg"
           alt="Study Abroad Fair Banner"
           className="w-full h-auto shadow-lg"
         />
