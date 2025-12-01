@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-// import NextTopLoader from "nextjs-toploader";
+import Script from "next/script";
 
 import { Montserrat, Lato } from "next/font/google";
-import Script from "next/script";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -22,11 +21,24 @@ export const metadata: Metadata = {
   description: "Your trusted platform for CLAT preparation and law careers.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" className={`${montserrat.variable} ${lato.variable}`}>
+    <html
+      lang="en"
+      className={`${montserrat.variable} ${lato.variable}`}
+    >
       <head>
-        {/* Google Tag Manager (script) */}
+        {/* Google Fonts for Template */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600;800&display=swap"
+          rel="stylesheet"
+        />
+
+        {/* Google Tag Manager */}
         <Script id="google-tag-manager" strategy="afterInteractive">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -37,8 +49,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           `}
         </Script>
       </head>
+
       <body className="flex flex-col min-h-screen font-body">
-        {/* Google Tag Manager (noscript) */}
+        {/* GTM noscript */}
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-54D2C6NS"
@@ -48,7 +61,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           ></iframe>
         </noscript>
 
-        {/* <NextTopLoader color="#024687" /> */}
         <main className="flex-1">{children}</main>
       </body>
     </html>

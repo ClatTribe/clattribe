@@ -10,20 +10,29 @@ const config: Config = {
     extend: {
       colors: {
         primary: "#024687",
-        // secondary: '#f6c52a',
+
+        // New color palette
+        brand: {
+          900: "#0f172a",
+          800: "#1e293b",
+          gold: "#f59e0b",
+        },
       },
+
       fontFamily: {
         montserrat: "var(--font-montserrat)",
         raleway: "var(--font-raleway)",
         merriweather: "var(--font-merriweather)",
         lato: "var(--font-lato)",
 
-        // Optional aliases for clarity
+        // Template fonts (optional use)
+        serif: ['"Playfair Display"', "serif"],
+        sans: ['"Inter"', "sans-serif"],
+
         heading: "var(--font-montserrat)",
         body: "var(--font-lato)",
       },
 
-      // glow animation added here
       keyframes: {
         glow: {
           "0%, 100%": { opacity: "0.3", transform: "scale(1)" },
