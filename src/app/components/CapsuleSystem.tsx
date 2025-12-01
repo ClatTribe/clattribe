@@ -51,7 +51,7 @@ const CapsuleSystem: React.FC = () => {
           </h2>
           <p className="text-slate-400 max-w-2xl mx-auto">
             Whether you have months or days, we have a structured learning path
-            for you. Don't study hard, study smart.
+            for you. Dont study hard, study smart.
           </p>
         </div>
 
