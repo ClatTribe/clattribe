@@ -250,7 +250,7 @@ const App: React.FC = () => {
               <p className="text-lg font-medium text-slate-800 dark:text-slate-200">It looks challenging.</p>
               <p className="text-slate-500 dark:text-slate-400 mt-2">
                 Based on previous trends, this score might be below the typical cutoff for the tracked NLUs. <br/>
-                Don't lose hope—vacancies often arise in later lists.
+                Don not lose hope—vacancies often arise in later lists.
               </p>
             </div>
           ) : (
