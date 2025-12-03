@@ -29,6 +29,108 @@ const SAMPLE_CARDS: FlashcardType[] = [
     question: "Where is the ICJ headquarters?",
     answer: "The Hague, Netherlands.",
   },
+  {
+    id: 4,
+    category: "International",
+    question: "53rd Chief Justice of India (Appointed Nov 2025)",
+    answer: "Justice Surya Kant",
+  },
+  {
+    id: 5,
+    category: "International",
+    question: "Ruling: Mihir Rajesh Shah v. State of Maharashtra (2025)",
+    answer: "Grounds of arrest must be communicated to the accused in writing in a language they understand.",
+  },
+  {
+    id: 6,
+    category: "International",
+    question: "Ruling: All India Judges Association v. Union of India (2025)",
+    answer: "Seniority in Higher Judicial Services is protected; if recruitment is delayed, later appointees don't lose seniority relative to the vacancy year.",
+  },
+  {
+    id: 7,
+    category: "International",
+    question: "Supreme Court verdict on Governor's assent to Bills (Art 200)",
+    answer: "The discharge of functions by the Governor regarding assent is not justiciable; courts cannot prescribe strict timelines.",
+  },
+  {
+    id: 8,
+    category: "International",
+    question: "Objective of Constitution (131st Amendment) Bill, 2025",
+    answer: "To bring Chandigarh under Article 240, allowing the President to appoint an independent Administrator.",
+  },
+  {
+    id: 9,
+    category: "International",
+    question: "Significance of Article 240 of the Constitution",
+    answer: "It grants the President the power to make regulations for the peace, progress, and good government of certain Union Territories.",
+  },
+  {
+    id: 10,
+    category: "International",
+    question: "Winner of Bihar Assembly Elections 2025",
+    answer: "National Democratic Alliance (NDA); Nitish Kumar sworn in as CM.",
+  },
+  {
+    id: 11,
+    category: "International",
+    question: "Location of Mudh-Nyoma Air Force Station",
+    answer: "Ladakh (Altitude: 13,700 feet)",
+  },
+  {
+    id: 12,
+    category: "International",
+    question: "Theme of Constitution Day 2025 (76th Anniversary)",
+    answer: "Access to Justice as a Constitutional North Star",
+  },
+  {
+    id: 13,
+    category: "International",
+    question: "US designation for Saudi Arabia (Nov 2025)",
+    answer: "Major Non-NATO Ally (MNNA)",
+  },
+  {
+    id: 14,
+    category: "International",
+    question: "First Arab nation authorized to buy F-35 jets",
+    answer: "Saudi Arabia",
+  },
+  {
+    id: 15,
+    category: "International",
+    question: "Winner of Booker Prize 2025",
+    answer: "David Szalay (Novel:- Flesh)",
+  },
+  {
+    id: 16,
+    category: "International",
+    question: "Cambridge Dictionary Word of the Year 2025",
+    answer: "Parasocial",
+  },
+  {
+    id: 17,
+    category: "International",
+    question: "Winner of Miss Universe 2025",
+    answer: "Fatima Bosch (Mexico)",
+  },
+  {
+    id: 18,
+    category: "International",
+    question: "First woman to lead UN Tourism (Nov 2025)",
+    answer: "Shaikha Nasser Al Nowais",
+  },
+  {
+    id: 19,
+    category: "International",
+    question: "Winner of ICC Women's Cricket World Cup 2025",
+    answer: "India (First-ever title)",
+  },
+  {
+    id: 20,
+    category: "International",
+    question: "Player of the Series: ICC Women's World Cup 2025",
+    answer: "Deepti Sharma",
+  },
 ];
 
 const Flashcards: React.FC = () => {
