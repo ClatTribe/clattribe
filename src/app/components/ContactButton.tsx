@@ -7,6 +7,7 @@ const ContactButton = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const phoneNumber = '8303865139';
+  const whatsappNumber = '918303865139'; // Indian country code (+91)
 
   // Close options when clicking outside
   useEffect(() => {
@@ -35,7 +36,7 @@ const ContactButton = () => {
   };
 
   const handleWhatsApp = () => {
-    window.open(`https://wa.me/${phoneNumber}`, '_blank');
+    window.open(`https://wa.me/${whatsappNumber}`, '_blank');
     setIsOpen(false);
   };
 
