@@ -1,5 +1,5 @@
 import React from "react";
-import { Instagram, Twitter, Linkedin } from "lucide-react";
+import { Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
 
 const NewFooter: React.FC = () => {
   return (
@@ -21,19 +21,19 @@ const NewFooter: React.FC = () => {
 
           {/* Social icons */}
           <div className="flex gap-6">
-            <a href="#" className="transition-colors"
+            <a href="https://www.instagram.com/clattribe/" className="transition-colors"
                style={{ color: "#cbd5e1" }}>
               <Instagram className="w-5 h-5 hover:scale-110 transition-transform hover:text-[#f59e0b]" />
             </a>
 
-            <a href="#" className="transition-colors"
+            {/* <a href="#" className="transition-colors"
                style={{ color: "#cbd5e1" }}>
               <Twitter className="w-5 h-5 hover:scale-110 transition-transform hover:text-[#f59e0b]" />
-            </a>
+            </a> */}
 
-            <a href="#" className="transition-colors"
+            <a href="https://www.youtube.com/@CLATribe" className="transition-colors"
                style={{ color: "#cbd5e1" }}>
-              <Linkedin className="w-5 h-5 hover:scale-110 transition-transform hover:text-[#f59e0b]" />
+              <Youtube className="w-5 h-5 hover:scale-110 transition-transform hover:text-[#f59e0b]" />
             </a>
           </div>
 

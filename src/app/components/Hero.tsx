@@ -98,18 +98,18 @@ const Hero: React.FC = () => {
             ></div>
 
             <div
-              className="absolute inset-0 bg-gradient-to-b z-10"
-              style={{ backgroundImage: "linear-gradient(to bottom, transparent, #0f172a)" }}
+              // className="absolute inset-0 bg-gradient-to-b z-10"
+              // style={{ backgroundImage: "linear-gradient(to bottom, transparent, #0f172a)" }}
             ></div>
 
             <img
-              src="https://picsum.photos/seed/yashji/500/600"
+              src="https://res.cloudinary.com/daetdadtt/image/upload/v1765009390/IMG_5613_1_knzs0v.jpg"
               alt="Yash Ji - Star Teacher"
-              className="w-full h-full object-cover rounded-2xl shadow-2xl grayscale hover:grayscale-0 transition-all duration-700"
+              className="w-full h-full object-cover rounded-2xl shadow-2xl transition-all duration-700"
             />
 
             {/* Floating Badge */}
-            <motion.div
+            {/* <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
               className="absolute bottom-10 -left-6 md:-left-10 border p-4 rounded-xl shadow-xl z-20"
@@ -137,7 +137,7 @@ const Hero: React.FC = () => {
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </motion.div> */}
           </div>
         </motion.div>
       </div>

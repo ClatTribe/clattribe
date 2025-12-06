@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import CapsuleSystem from './components/CapsuleSystem';
 import Flashcards from './components/Flashcards';
 import NewFooter from './components/newFooter';
+import ContactButton from './components/ContactButton';
 import Link from 'next/link';
 import Image from "next/image"
 // import TrendingBlogs from "../components/TrendingBlogs"
@@ -238,7 +239,7 @@ const App: React.FC = () => {
       <nav className="fixed w-full z-50 bg-brand-900/80 backdrop-blur-md border-b border-white/5">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-3">
-                    <Image src="/logo.jpg" alt="Clat Tribe Logo" width={180} height={180} className="rounded" />
+                    <Image src="/heading.png" alt="Clat Tribe Logo" width={180} height={180} className="rounded" />
                   </div>
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
             <a href="#" className="hover:text-white transition-colors">Capsules</a>
@@ -262,7 +263,7 @@ const App: React.FC = () => {
 
         <LeadForm />
       </main>
-
+      <ContactButton />
       <NewFooter />
     </div>
   );
