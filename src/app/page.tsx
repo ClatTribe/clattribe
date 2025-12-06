@@ -6,10 +6,9 @@ import Flashcards from './components/Flashcards';
 import NewFooter from './components/newFooter';
 import ContactButton from './components/ContactButton';
 import Link from 'next/link';
-import Image from "next/image"
-// import TrendingBlogs from "../components/TrendingBlogs"
+import Image from "next/image";
 import TrendingBlogs from './components/trendingBlogs';
-import { GraduationCap, ArrowRight, CheckCircle, X } from 'lucide-react';
+import { GraduationCap, ArrowRight, CheckCircle, X, Menu } from 'lucide-react';
 
 const LeadForm: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -136,131 +135,179 @@ const LeadForm: React.FC = () => {
       )}
 
       {/* Lead Form Section */}
-      {/* Lead Form Section */}
-<section className="py-20 bg-[#0F172B]">
-  <div className="container mx-auto px-6">
-    <div className="max-w-4xl mx-auto">
-      <div className="text-center mb-12">
-        <h2 className="text-4xl font-serif font-bold mb-4">Start Your CLAT Journey Today</h2>
-        <p className="text-slate-300 text-lg">Join thousands of aspirants who trust ClatTribe for their preparation</p>
-      </div>
-      
-      <div className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-200">
-        <h3 className="mb-6 text-2xl font-bold text-gray-900">Get Started Now</h3>
-        
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div>
-            <label htmlFor="name" className="block text-gray-700 font-semibold mb-2">
-              Name <span className="text-red-500">*</span>
-            </label>
-            <input
-              id="name"
-              type="text"
-              placeholder="Enter your name"
-              value={formData.name}
-              onChange={handleInputChange}
-              className="w-full rounded-lg border-1 border-[#0F172B] bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all"
-              required
-            />
-          </div>
-          
-          <div>
-            <label htmlFor="city" className="block text-gray-700 font-semibold mb-2">
-              City <span className="text-red-500">*</span>
-            </label>
-            <input
-              id="city"
-              type="text"
-              placeholder="Enter your city"
-              value={formData.city}
-              onChange={handleInputChange}
-              className="w-full rounded-lg border-1 border-[#0F172B] bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all"
-              required
-            />
-          </div>
+      <section className="py-20 bg-[#0F172B]">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-serif font-bold mb-4">Start Your CLAT Journey Today</h2>
+              <p className="text-slate-300 text-lg">Join thousands of aspirants who trust ClatTribe for their preparation</p>
+            </div>
+            
+            <div className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-200">
+              <h3 className="mb-6 text-2xl font-bold text-gray-900">Get Started Now</h3>
+              
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div>
+                  <label htmlFor="name" className="block text-gray-700 font-semibold mb-2">
+                    Name <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="name"
+                    type="text"
+                    placeholder="Enter your name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    className="w-full rounded-lg border-1 border-[#0F172B] bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all"
+                    required
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="city" className="block text-gray-700 font-semibold mb-2">
+                    City <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="city"
+                    type="text"
+                    placeholder="Enter your city"
+                    value={formData.city}
+                    onChange={handleInputChange}
+                    className="w-full rounded-lg border-1 border-[#0F172B] bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all"
+                    required
+                  />
+                </div>
 
-          <div>
-            <label htmlFor="phone" className="block text-gray-700 font-semibold mb-2">
-              Phone Number <span className="text-red-500">*</span>
-            </label>
-            <input
-              id="phone"
-              type="tel"
-              placeholder="Enter your phone number"
-              value={formData.phone}
-              onChange={handleInputChange}
-              className="w-full rounded-lg border-1 border-[#0F172B] bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all"
-              required
-            />
-          </div>
+                <div>
+                  <label htmlFor="phone" className="block text-gray-700 font-semibold mb-2">
+                    Phone Number <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="phone"
+                    type="tel"
+                    placeholder="Enter your phone number"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    className="w-full rounded-lg border-1 border-[#0F172B] bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all"
+                    required
+                  />
+                </div>
 
-          <div>
-            <label htmlFor="email" className="block text-gray-700 font-semibold mb-2">
-              Email Address <span className="text-red-500">*</span>
-            </label>
-            <input
-              id="email"
-              type="email"
-              placeholder="Enter your email address"
-              value={formData.email}
-              onChange={handleInputChange}
-              className="w-full rounded-lg border-1 border-[#0F172B] bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all"
-              required
-            />
-          </div>
+                <div>
+                  <label htmlFor="email" className="block text-gray-700 font-semibold mb-2">
+                    Email Address <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    placeholder="Enter your email address"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="w-full rounded-lg border-1 border-[#0F172B] bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all"
+                    required
+                  />
+                </div>
 
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full bg-brand-gold text-brand-900 font-semibold py-3 rounded-lg bg-[#0F172B] hover:bg-yellow-400 transition duration-300 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-          >
-            {isSubmitting ? (
-              "Submitting..."
-            ) : (
-              <>
-                Get Started
-                <ArrowRight className="h-4 w-4" />
-              </>
-            )}
-          </button>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-brand-gold text-brand-900 font-semibold py-3 rounded-lg bg-[#0F172B] hover:bg-yellow-400 transition duration-300 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  {isSubmitting ? (
+                    "Submitting..."
+                  ) : (
+                    <>
+                      Get Started
+                      <ArrowRight className="h-4 w-4" />
+                    </>
+                  )}
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   )
 }
 
 const App: React.FC = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-brand-900 text-white font-sans selection:bg-brand-gold selection:text-brand-900">
       {/* Navigation */}
       <nav className="fixed w-full z-50 bg-brand-900/80 backdrop-blur-md border-b border-white/5">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-3">
-                    <Image src="/heading.png" alt="Clat Tribe Logo" width={180} height={180} className="rounded" />
-                  </div>
+            <Image src="/heading.png" alt="Clat Tribe Logo" width={180} height={180} className="rounded" />
+          </div>
+          
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-            <a href="#" className="hover:text-white transition-colors">Capsules</a>
-            <a href="#" className="hover:text-white transition-colors">Flashcards</a>
-            <a href="#" className="hover:text-white transition-colors">Blogs</a>
+            <a href="#capsules" className="hover:text-white transition-colors">Capsules</a>
+            <a href="#flashcards" className="hover:text-white transition-colors">Flashcards</a>
+            <a href="#blogs" className="hover:text-white transition-colors">Blogs</a>
             <Link href="/nlu-predictor" className="hover:text-white transition-colors">NLU Predictor</Link>
-            <button className="px-5 py-2 bg-white text-brand-900 rounded-full font-bold hover:bg-brand-gold transition-colors">
+            <button className="px-5 py-2 bg-white text-slate-900 rounded-full font-bold hover:bg-brand-gold transition-colors">
               Login
             </button>
           </div>
+
+          {/* Mobile Menu Button */}
+          <button 
+            className="md:hidden text-white p-2"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
         </div>
+
+        {/* Mobile Navigation Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-brand-900 border-t border-white/5">
+            <div className="container mx-auto px-6 py-4 flex flex-col gap-4">
+              <a 
+                href="#capsules" 
+                className="text-slate-300 hover:text-white transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Capsules
+              </a>
+              <a 
+                href="#flashcards" 
+                className="text-slate-300 hover:text-white transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Flashcards
+              </a>
+              <a 
+                href="#blogs" 
+                className="text-slate-300 hover:text-white transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Blogs
+              </a>
+              <Link 
+                href="/nlu-predictor" 
+                className="text-slate-300 hover:text-white transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                NLU Predictor
+              </Link>
+              <button className="px-5 py-2 bg-white text-brand-900 rounded-full font-bold hover:bg-brand-gold transition-colors w-full">
+                Login
+              </button>
+            </div>
+          </div>
+        )}
       </nav>
 
       <main>
         <Hero />
         <CapsuleSystem />
         <Flashcards />
-        
-        {/* Blog Teaser Section */}
         <TrendingBlogs />
-
         <LeadForm />
       </main>
       <ContactButton />

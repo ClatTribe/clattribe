@@ -3,6 +3,8 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { COLLEGES, AdmissionChance, PredictionResult, getCollegeImage } from './data';
 import Image from 'next/image';
 import Link from 'next/link';
+import NewFooter from '../components/newFooter';
+import { Menu, X } from 'lucide-react';
 
 // =========================
 // Result Card Component
@@ -111,6 +113,7 @@ interface FormErrors {
 }
 
 const App: React.FC = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const [isFormSubmitted, setIsFormSubmitted] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormData>({
@@ -295,16 +298,74 @@ const App: React.FC = () => {
           <div className="flex items-center space-x-3">
             <Image src="/heading.png" alt="Clat Tribe Logo" width={180} height={180} className="rounded" />
           </div>
+          
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-            <a href="#" className="hover:text-white transition-colors">Capsules</a>
-            <a href="#" className="hover:text-white transition-colors">Flashcards</a>
-            <a href="#" className="hover:text-white transition-colors">Blogs</a>
+            <Link href="/" className="hover:text-white transition-colors">Home</Link>
+            <a href="#capsules" className="hover:text-white transition-colors">Capsules</a>
+            <a href="#flashcards" className="hover:text-white transition-colors">Flashcards</a>
+            <a href="#blogs" className="hover:text-white transition-colors">Blogs</a>
             <Link href="/nlu-predictor" className="hover:text-white transition-colors">NLU Predictor</Link>
             <button className="px-5 py-2 bg-white text-slate-900 rounded-full font-bold hover:bg-[#F59E0B] hover:text-white transition-colors">
               Login
             </button>
           </div>
+
+          {/* Mobile Menu Button */}
+          <button 
+            className="md:hidden text-white p-2"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
         </div>
+
+        {/* Mobile Navigation Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-slate-900 border-t border-white/5">
+            <div className="container mx-auto px-6 py-4 flex flex-col gap-4">
+              <Link 
+                href="/" 
+                className="text-slate-300 hover:text-white transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Home
+              </Link>
+              <a 
+                href="#capsules" 
+                className="text-slate-300 hover:text-white transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Capsules
+              </a>
+              <a 
+                href="#flashcards" 
+                className="text-slate-300 hover:text-white transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Flashcards
+              </a>
+              <a 
+                href="#blogs" 
+                className="text-slate-300 hover:text-white transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Blogs
+              </a>
+              <Link 
+                href="/nlu-predictor" 
+                className="text-slate-300 hover:text-white transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                NLU Predictor
+              </Link>
+              <button className="px-5 py-2 bg-white text-slate-900 rounded-full font-bold hover:bg-[#F59E0B] hover:text-white transition-colors w-full">
+                Login
+              </button>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Background decoration */}
@@ -557,11 +618,7 @@ const App: React.FC = () => {
           </div>
         )}
 
-        <footer className="text-center pt-12 pb-6 border-t border-slate-800">
-          <p className="text-slate-500 text-sm">
-            Data is based on estimated cut-offs. Actual admission depends on rank, category, and domicile.
-          </p>
-        </footer>
+       <NewFooter /> 
       </div>
     </div>
   );
