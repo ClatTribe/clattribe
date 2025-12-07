@@ -52,7 +52,6 @@ const ResultCard: React.FC<ResultCardProps> = ({ result, index }) => {
         animation: 'fadeIn 0.5s ease-out forwards'
       }}
     >
-      {/* Subtle glow effect on hover */}
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
       </div>
@@ -293,22 +292,31 @@ const App: React.FC = () => {
       `}</style>
 
       {/* Navigation Bar */}
-      <nav className="fixed w-full z-50 bg-slate-900/80 backdrop-blur-md border-b border-white/5">
+      <nav className="fixed w-full z-50 bg-slate-900/95 backdrop-blur-md border-b border-white/5">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-3">
-            <Image src="/heading.png" alt="Clat Tribe Logo" width={180} height={180} className="rounded" />
+            <Link href="/">
+              <Image src="/heading.png" alt="Clat Tribe Logo" width={180} height={180} className="rounded cursor-pointer" />
+            </Link>
           </div>
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-            <Link href="/" className="hover:text-white transition-colors">Home</Link>
-            <a href="#capsules" className="hover:text-white transition-colors">Capsules</a>
-            <a href="#flashcards" className="hover:text-white transition-colors">Flashcards</a>
-            <a href="#blogs" className="hover:text-white transition-colors">Blogs</a>
-            <Link href="/nlu-predictor" className="hover:text-white transition-colors">NLU Predictor</Link>
-            <button className="px-5 py-2 bg-white text-slate-900 rounded-full font-bold hover:bg-[#F59E0B] hover:text-white transition-colors">
-              Login
-            </button>
+            <Link href="/" className="hover:text-white transition-colors">
+              Home
+            </Link>
+            <Link href="/#capsules" className="hover:text-white transition-colors">
+              Capsules
+            </Link>
+            <Link href="/#flashcards" className="hover:text-white transition-colors">
+              Flashcards
+            </Link>
+            <Link href="/#blogs" className="hover:text-white transition-colors">
+              Blogs
+            </Link>
+            <Link href="/nlu-predictor" className="hover:text-white transition-colors">
+              NLU Predictor
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -323,46 +331,43 @@ const App: React.FC = () => {
 
         {/* Mobile Navigation Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-slate-900 border-t border-white/5">
-            <div className="container mx-auto px-6 py-4 flex flex-col gap-4">
+          <div className="md:hidden bg-[#0F172B] border-t border-white/10 shadow-lg">
+            <div className="container mx-auto px-6 py-4 flex flex-col gap-2">
               <Link 
                 href="/" 
-                className="text-slate-300 hover:text-white transition-colors py-2"
+                className="text-white hover:text-[#F59E0B] transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Home
               </Link>
-              <a 
-                href="#capsules" 
-                className="text-slate-300 hover:text-white transition-colors py-2"
+              <Link 
+                href="/#capsules" 
+                className="text-white hover:text-[#F59E0B] transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Capsules
-              </a>
-              <a 
-                href="#flashcards" 
-                className="text-slate-300 hover:text-white transition-colors py-2"
+              </Link>
+              <Link 
+                href="/#flashcards" 
+                className="text-white hover:text-[#F59E0B] transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Flashcards
-              </a>
-              <a 
-                href="#blogs" 
-                className="text-slate-300 hover:text-white transition-colors py-2"
+              </Link>
+              <Link 
+                href="/#blogs" 
+                className="text-white hover:text-[#F59E0B] transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Blogs
-              </a>
+              </Link>
               <Link 
                 href="/nlu-predictor" 
-                className="text-slate-300 hover:text-white transition-colors py-2"
+                className="text-white hover:text-[#F59E0B] transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 NLU Predictor
               </Link>
-              <button className="px-5 py-2 bg-white text-slate-900 rounded-full font-bold hover:bg-[#F59E0B] hover:text-white transition-colors w-full">
-                Login
-              </button>
             </div>
           </div>
         )}
@@ -577,7 +582,7 @@ const App: React.FC = () => {
                   <p className="text-lg font-medium text-white">It looks challenging.</p>
                   <p className="text-slate-400 mt-2">
                     Based on previous trends, this score might be below the typical cutoff for the tracked NLUs in <span className="font-semibold text-[#F59E0B]">{formData.category}</span> category. <br/>
-                    Don't lose hope—vacancies often arise in later lists.
+                    Don&apos;t lose hope—vacancies often arise in later lists.
                   </p>
                 </div>
               ) : (
@@ -618,8 +623,8 @@ const App: React.FC = () => {
           </div>
         )}
 
-       <NewFooter /> 
       </div>
+       <NewFooter /> 
     </div>
   );
 };

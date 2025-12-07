@@ -58,9 +58,7 @@ const NewFooter: React.FC = () => {
             <a href="#" className="transition-colors" style={{ color: "#94a3b8" }}>
               Terms of Service
             </a>
-            {/* <a href="#" className="transition-colors" style={{ color: "#94a3b8" }}>
-              Contact Yash Ji
-            </a> */}
+          
           </div>
         </div>
 

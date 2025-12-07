@@ -233,10 +233,30 @@ const LeadForm: React.FC = () => {
 const App: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offset = 80; // Account for fixed navbar height
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+    setMobileMenuOpen(false);
+  };
+
+  // Function to be passed to Hero component
+  const handleHeroButtonClick = (section: 'leadform' | 'capsules') => {
+    scrollToSection(section);
+  };
+
   return (
     <div className="min-h-screen bg-brand-900 text-white font-sans selection:bg-brand-gold selection:text-brand-900">
       {/* Navigation */}
-      <nav className="fixed w-full z-50 bg-brand-900/80 backdrop-blur-md border-b border-white/5">
+      <nav className="fixed w-full z-50 bg-brand-900/95 backdrop-blur-md border-b border-white/5">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-3">
             <Image src="/heading.png" alt="Clat Tribe Logo" width={180} height={180} className="rounded" />
@@ -244,13 +264,30 @@ const App: React.FC = () => {
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-            <a href="#capsules" className="hover:text-white transition-colors">Capsules</a>
-            <a href="#flashcards" className="hover:text-white transition-colors">Flashcards</a>
-            <a href="#blogs" className="hover:text-white transition-colors">Blogs</a>
-            <Link href="/nlu-predictor" className="hover:text-white transition-colors">NLU Predictor</Link>
-            <button className="px-5 py-2 bg-white text-slate-900 rounded-full font-bold hover:bg-brand-gold transition-colors">
-              Login
+            <Link href="/" className="hover:text-white transition-colors">
+              Home
+            </Link>
+            <button 
+              onClick={() => scrollToSection('capsules')} 
+              className="hover:text-white transition-colors cursor-pointer"
+            >
+              Capsules
             </button>
+            <button 
+              onClick={() => scrollToSection('flashcards')} 
+              className="hover:text-white transition-colors cursor-pointer"
+            >
+              Flashcards
+            </button>
+            <button 
+              onClick={() => scrollToSection('blogs')} 
+              className="hover:text-white transition-colors cursor-pointer"
+            >
+              Blogs
+            </button>
+            <Link href="/nlu-predictor" className="hover:text-white transition-colors">
+              NLU Predictor
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -265,50 +302,59 @@ const App: React.FC = () => {
 
         {/* Mobile Navigation Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-brand-900 border-t border-white/5">
-            <div className="container mx-auto px-6 py-4 flex flex-col gap-4">
-              <a 
-                href="#capsules" 
-                className="text-slate-300 hover:text-white transition-colors py-2"
+          <div className="md:hidden bg-[#0F172B] border-t border-white/10 shadow-lg">
+            <div className="container mx-auto px-6 py-4 flex flex-col gap-2">
+              <Link 
+                href="/" 
+                className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
                 onClick={() => setMobileMenuOpen(false)}
+              >
+                Home
+              </Link>
+              <button 
+                onClick={() => scrollToSection('capsules')}
+                className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 text-left font-medium"
               >
                 Capsules
-              </a>
-              <a 
-                href="#flashcards" 
-                className="text-slate-300 hover:text-white transition-colors py-2"
-                onClick={() => setMobileMenuOpen(false)}
+              </button>
+              <button 
+                onClick={() => scrollToSection('flashcards')}
+                className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 text-left font-medium"
               >
                 Flashcards
-              </a>
-              <a 
-                href="#blogs" 
-                className="text-slate-300 hover:text-white transition-colors py-2"
-                onClick={() => setMobileMenuOpen(false)}
+              </button>
+              <button 
+                onClick={() => scrollToSection('blogs')}
+                className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 text-left font-medium"
               >
                 Blogs
-              </a>
+              </button>
               <Link 
                 href="/nlu-predictor" 
-                className="text-slate-300 hover:text-white transition-colors py-2"
+                className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 NLU Predictor
               </Link>
-              <button className="px-5 py-2 bg-white text-brand-900 rounded-full font-bold hover:bg-brand-gold transition-colors w-full">
-                Login
-              </button>
             </div>
           </div>
         )}
       </nav>
 
       <main>
-        <Hero />
-        <CapsuleSystem />
-        <Flashcards />
-        <TrendingBlogs />
-        <LeadForm />
+        <Hero onNavigate={handleHeroButtonClick} />
+        <div id="capsules">
+          <CapsuleSystem />
+        </div>
+        <div id="flashcards">
+          <Flashcards />
+        </div>
+        <div id="blogs">
+          <TrendingBlogs />
+        </div>
+        <div id="leadform">
+          <LeadForm />
+        </div>
       </main>
       <ContactButton />
       <NewFooter />
