@@ -385,7 +385,7 @@ const App: React.FC = () => {
         <div className="text-center space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 shadow-sm text-xs font-semibold uppercase tracking-widest text-[#F59E0B]">
             <span className="w-2 h-2 rounded-full bg-[#F59E0B] animate-pulse"></span>
-            CLAT 2025 Predictor
+            CLAT 2026 Predictor
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white">
             Where will your <span className="text-[#F59E0B]">score</span> take you?
