@@ -9,38 +9,47 @@ const capsules = [
     title: "The Marathon",
     duration: "6 Months",
     icon: <Layers className="w-6 h-6" />,
-    color: "from-[#024687] to-[#0ea5e9]", // BLUE → CYAN gradient
+    color: "from-[#024687] to-[#0ea5e9]",
     description:
       "Comprehensive coverage of past events. Deep dive into legal precedents and historical context.",
     stats: ["1200+ Topics", "Deep Analysis", "Video Explainers"],
+    oldPrice: "15,999",
+    currentPrice: "9,999",
+    link: "https://rzp.io/rzp/gqOnTLIN",
   },
   {
     id: "medium",
     title: "The Sprinter",
     duration: "1 Month",
     icon: <Calendar className="w-6 h-6" />,
-    color: "from-[#7c3aed] to-[#ec4899]", // PURPLE → PINK gradient
+    color: "from-[#7c3aed] to-[#ec4899]",
     description:
       "High-yield topics only. Focused entirely on likely exam candidates and current affairs.",
     stats: ["300+ Key Topics", "Summary Notes", "Weekly Quizzes"],
+    oldPrice: "5,999",
+    currentPrice: "3,999",
+    link: "https://rzp.io/rzp/gqOnTLIN",
   },
   {
     id: "short",
     title: "The Finisher",
-    duration: "10 Days",
+    duration: "7 Days",
     icon: <Zap className="w-6 h-6" />,
-    color: "from-[#f59e0b] to-[#f97316]", // GOLD → ORANGE gradient
+    color: "from-[#f59e0b] to-[#f97316]",
     description:
       "Rapid revision. One-liners, acronyms, and memory hooks for last-minute retention.",
     stats: ["100 Hot Topics", "Flash Memorization", "Cheat Sheets"],
+    oldPrice: "1,999",
+    currentPrice: "999",
+    link: "https://rzp.io/rzp/gqOnTLIN",
   },
 ];
 
-const CapsuleSystem: React.FC = () => {
+const CapsuleSystem = () => {
   const [activeCapsule, setActiveCapsule] = useState(capsules[0]);
 
   return (
-    <section className="py-24 relative overflow-hidden bg-[#1e293b]">
+    <section className="py-24 relative overflow-hidden bg-[#1e293b] min-h-screen">
       {/* Background Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
 
@@ -51,7 +60,7 @@ const CapsuleSystem: React.FC = () => {
           </h2>
           <p className="text-slate-400 max-w-2xl mx-auto">
             Whether you have months or days, we have a structured learning path
-            for you. Dont study hard, study smart.
+            for you. Don't study hard, study smart.
           </p>
         </div>
 
@@ -62,38 +71,49 @@ const CapsuleSystem: React.FC = () => {
               <button
                 key={cap.id}
                 onClick={() => setActiveCapsule(cap)}
-                className={`flex items-center gap-4 p-4 rounded-xl transition-all duration-300 border ${
+                className={`flex items-center justify-between gap-4 p-4 rounded-xl transition-all duration-300 border ${
                   activeCapsule.id === cap.id
                     ? "bg-[#334155] border-[#f59e0b]/50 shadow-lg scale-105"
                     : "bg-transparent border-[#334155] hover:bg-[#334155]/50 hover:border-[#475569]"
                 }`}
               >
-                <div
-                  className={`p-3 rounded-lg bg-gradient-to-br ${cap.color} text-white shadow-inner`}
-                >
-                  {cap.icon}
+                <div className="flex items-center gap-4">
+                  <div
+                    className={`p-3 rounded-lg bg-gradient-to-br ${cap.color} text-white shadow-inner`}
+                  >
+                    {cap.icon}
+                  </div>
+
+                  <div className="text-left">
+                    <h3
+                      className={`font-bold text-lg ${
+                        activeCapsule.id === cap.id
+                          ? "text-white"
+                          : "text-slate-300"
+                      }`}
+                    >
+                      {cap.duration} Capsule
+                    </h3>
+                    <p className="text-xs text-slate-500 uppercase tracking-wide">
+                      {cap.title}
+                    </p>
+                  </div>
                 </div>
 
-                <div className="text-left">
-                  <h3
-                    className={`font-bold text-lg ${
-                      activeCapsule.id === cap.id
-                        ? "text-white"
-                        : "text-slate-300"
-                    }`}
-                  >
-                    {cap.duration} Capsule
-                  </h3>
-                  <p className="text-xs text-slate-500 uppercase tracking-wide">
-                    {cap.title}
-                  </p>
+                <div className="text-right">
+                  <div className="text-sm text-slate-400 line-through">
+                    ₹{cap.oldPrice}
+                  </div>
+                  <div className="text-xl font-bold text-white">
+                    ₹{cap.currentPrice}
+                  </div>
                 </div>
               </button>
             ))}
           </div>
 
           {/* Visualization */}
-          <div className="w-full lg:w-1/2 h-[400px] relative">
+          <div className="w-full lg:w-1/2 h-[500px] relative">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeCapsule.id}
@@ -167,6 +187,19 @@ const CapsuleSystem: React.FC = () => {
                         />
                       </div>
                     </div>
+
+                    {/* Join Now Button */}
+                    <motion.a
+                      href={activeCapsule.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.5 }}
+                      className={`mt-6 w-full py-4 rounded-xl bg-gradient-to-r ${activeCapsule.color} text-white font-bold text-lg text-center hover:shadow-2xl hover:scale-105 transition-all duration-300 block`}
+                    >
+                      Join Now
+                    </motion.a>
                   </div>
                 </div>
               </motion.div>

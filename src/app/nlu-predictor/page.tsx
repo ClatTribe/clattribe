@@ -4,6 +4,7 @@ import { COLLEGES, AdmissionChance, PredictionResult, getCollegeImage } from './
 import Image from 'next/image';
 import Link from 'next/link';
 import NewFooter from '../components/newFooter';
+import Layout from '../components/Layout';
 import { Menu, X } from 'lucide-react';
 
 // =========================
@@ -53,7 +54,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ result, index }) => {
       }}
     >
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
+        <div className="absolute inset-0 bg-linear-to-br from-white/5 to-transparent"></div>
       </div>
 
       <div className="flex items-start gap-4 mb-3 relative z-10">
@@ -103,12 +104,14 @@ interface FormData {
   name: string;
   phone: string;
   category: string;
+  score: string;
 }
 
 interface FormErrors {
   name?: string;
   phone?: string;
   category?: string;
+  score?: string;
 }
 
 const App: React.FC = () => {
@@ -118,10 +121,12 @@ const App: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     phone: '',
-    category: ''
+    category: '',
+    score: ''
   });
   const [errors, setErrors] = useState<FormErrors>({});
-  const [score, setScore] = useState<string>('');
+  const [currentCategory, setCurrentCategory] = useState<string>('');
+  const [currentScore, setCurrentScore] = useState<string>('');
 
   const categories = [
     { value: 'General', label: 'General' },
@@ -136,10 +141,13 @@ const App: React.FC = () => {
     const name = localStorage.getItem('nlu_enquiry_name');
     const phone = localStorage.getItem('nlu_enquiry_phone');
     const category = localStorage.getItem('nlu_enquiry_category');
+    const score = localStorage.getItem('nlu_enquiry_score');
     
-    if (submitted === 'true' && name && phone && category) {
+    if (submitted === 'true' && name && phone && category && score) {
       setIsFormSubmitted(true);
-      setFormData({ name, phone, category });
+      setFormData({ name, phone, category, score });
+      setCurrentCategory(category);
+      setCurrentScore(score);
     }
   }, []);
 
@@ -160,6 +168,15 @@ const App: React.FC = () => {
 
     if (!formData.category) {
       newErrors.category = 'Please select your category';
+    }
+
+    if (!formData.score.trim()) {
+      newErrors.score = 'Score is required';
+    } else {
+      const scoreNum = parseFloat(formData.score);
+      if (isNaN(scoreNum) || scoreNum < 0 || scoreNum > 200) {
+        newErrors.score = 'Score must be between 0 and 200';
+      }
     }
 
     setErrors(newErrors);
@@ -186,6 +203,7 @@ const App: React.FC = () => {
           name: formData.name.trim(),
           phone: formData.phone.trim(),
           category: formData.category,
+          score: parseFloat(formData.score),
           submitted_at: new Date().toISOString()
         })
       });
@@ -195,7 +213,9 @@ const App: React.FC = () => {
         localStorage.setItem('nlu_enquiry_name', formData.name.trim());
         localStorage.setItem('nlu_enquiry_phone', formData.phone.trim());
         localStorage.setItem('nlu_enquiry_category', formData.category);
+        localStorage.setItem('nlu_enquiry_score', formData.score);
         setIsFormSubmitted(true);
+        setCurrentCategory(formData.category);
       } else {
         const errorData = await response.json();
         alert(`Submission failed: ${errorData.message || 'Please try again'}`);
@@ -212,30 +232,28 @@ const App: React.FC = () => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
     
-    if (isFormSubmitted) {
-      if (name === 'category') {
-        localStorage.setItem('nlu_enquiry_category', value);
-      } else if (name === 'name') {
-        localStorage.setItem('nlu_enquiry_name', value);
-      } else if (name === 'phone') {
-        localStorage.setItem('nlu_enquiry_phone', value);
-      }
-    }
-    
     if (errors[name as keyof FormErrors]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
   };
 
+  const handleCategoryChange = (newCategory: string): void => {
+    setCurrentCategory(newCategory);
+  };
+
+  const handleScoreChange = (newScore: string): void => {
+    setCurrentScore(newScore);
+  };
+
   const parsedScore = useMemo(() => {
-    const s = parseFloat(score);
+    const s = parseFloat(currentScore);
     return isNaN(s) ? 0 : s;
-  }, [score]);
+  }, [currentScore]);
 
   const predictions: PredictionResult[] = useMemo(() => {
-    if (!score || !formData.category || !isFormSubmitted) return [];
+    if (!currentScore || !currentCategory || !isFormSubmitted) return [];
     
-    const categoryColleges = COLLEGES.filter(college => college.category === formData.category);
+    const categoryColleges = COLLEGES.filter(college => college.category === currentCategory);
     
     const results: PredictionResult[] = categoryColleges.map(college => {
       let chance = AdmissionChance.NONE;
@@ -273,9 +291,10 @@ const App: React.FC = () => {
       return b.maxScore - a.maxScore;
     });
 
-  }, [parsedScore, score, formData.category, isFormSubmitted]);
+  }, [parsedScore, currentScore, currentCategory, isFormSubmitted]);
 
   return (
+    <Layout>
     <div className="min-h-screen bg-slate-950 text-slate-100 font-sans">
       
       <style jsx global>{`
@@ -292,86 +311,7 @@ const App: React.FC = () => {
       `}</style>
 
       {/* Navigation Bar */}
-      <nav className="fixed w-full z-50 bg-slate-900/95 backdrop-blur-md border-b border-white/5">
-        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="flex items-center space-x-3">
-            <Link href="/">
-              <Image src="/heading.png" alt="Clat Tribe Logo" width={180} height={180} className="rounded cursor-pointer" />
-            </Link>
-          </div>
-          
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-            <Link href="/" className="hover:text-white transition-colors">
-              Home
-            </Link>
-            <Link href="/#capsules" className="hover:text-white transition-colors">
-              Capsules
-            </Link>
-            <Link href="/#flashcards" className="hover:text-white transition-colors">
-              Flashcards
-            </Link>
-            <Link href="/#blogs" className="hover:text-white transition-colors">
-              Blogs
-            </Link>
-            <Link href="/nlu-predictor" className="hover:text-white transition-colors">
-              NLU Predictor
-            </Link>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button 
-            className="md:hidden text-white p-2"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
-        </div>
-
-        {/* Mobile Navigation Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden bg-[#0F172B] border-t border-white/10 shadow-lg">
-            <div className="container mx-auto px-6 py-4 flex flex-col gap-2">
-              <Link 
-                href="/" 
-                className="text-white hover:text-[#F59E0B] transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Home
-              </Link>
-              <Link 
-                href="/#capsules" 
-                className="text-white hover:text-[#F59E0B] transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Capsules
-              </Link>
-              <Link 
-                href="/#flashcards" 
-                className="text-white hover:text-[#F59E0B] transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Flashcards
-              </Link>
-              <Link 
-                href="/#blogs" 
-                className="text-white hover:text-[#F59E0B] transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Blogs
-              </Link>
-              <Link 
-                href="/nlu-predictor" 
-                className="text-white hover:text-[#F59E0B] transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                NLU Predictor
-              </Link>
-            </div>
-          </div>
-        )}
-      </nav>
+      
 
       {/* Background decoration */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
@@ -379,7 +319,7 @@ const App: React.FC = () => {
         <div className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-indigo-500/5 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 pt-32 pb-12 flex flex-col gap-8">
+      <div className="relative max-w-7xl mx-auto px-4 pt-8 pb-12 flex flex-col gap-8">
         
         {/* Header */}
         <div className="text-center space-y-4">
@@ -391,11 +331,11 @@ const App: React.FC = () => {
             Where will your <span className="text-[#F59E0B]">score</span> take you?
           </h1>
           <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-            Enter your estimated score to instantly see which National Law Universities are within your reach.
+            Enter your details and estimated score to instantly see which National Law Universities are within your reach.
           </p>
         </div>
 
-        {/* Horizontal Enquiry Form */}
+        {/* Enquiry Form */}
         <div className="w-full relative group z-10">
           <div className="absolute -inset-0.5 bg-[#F59E0B]/20 rounded-2xl blur opacity-50 group-hover:opacity-75 transition duration-500"></div>
           <div className="relative bg-slate-900 rounded-xl p-6 shadow-xl border border-slate-800">
@@ -413,7 +353,7 @@ const App: React.FC = () => {
               )}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div>
                 <label htmlFor="name" className="block text-xs font-semibold text-slate-400 mb-1.5">
                   Full Name *
@@ -425,7 +365,7 @@ const App: React.FC = () => {
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="Enter your name"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || isFormSubmitted}
                   className={`w-full px-3 py-2.5 rounded-lg border ${
                     errors.name 
                       ? 'border-red-500/50 bg-red-500/10' 
@@ -449,7 +389,7 @@ const App: React.FC = () => {
                   onChange={handleChange}
                   placeholder="10-digit number"
                   maxLength={10}
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || isFormSubmitted}
                   className={`w-full px-3 py-2.5 rounded-lg border ${
                     errors.phone 
                       ? 'border-red-500/50 bg-red-500/10' 
@@ -470,7 +410,7 @@ const App: React.FC = () => {
                   name="category"
                   value={formData.category}
                   onChange={handleChange}
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || isFormSubmitted}
                   className={`w-full px-3 py-2.5 rounded-lg border ${
                     errors.category 
                       ? 'border-red-500/50 bg-red-500/10' 
@@ -486,6 +426,32 @@ const App: React.FC = () => {
                 </select>
                 {errors.category && (
                   <p className="mt-1 text-xs text-red-400">{errors.category}</p>
+                )}
+              </div>
+
+              <div>
+                <label htmlFor="score" className="block text-xs font-semibold text-slate-400 mb-1.5">
+                  Estimated Score *
+                </label>
+                <input
+                  type="number"
+                  id="score"
+                  name="score"
+                  value={formData.score}
+                  onChange={handleChange}
+                  placeholder="Enter score (0-100)"
+                  min="0"
+                  max="200"
+                  step="0.5"
+                  disabled={isSubmitting || isFormSubmitted}
+                  className={`w-full px-3 py-2.5 rounded-lg border ${
+                    errors.score 
+                      ? 'border-red-500/50 bg-red-500/10' 
+                      : 'border-slate-700 bg-slate-800'
+                  } text-sm text-white placeholder-slate-500 focus:ring-2 focus:ring-[#F59E0B] focus:border-transparent transition-all disabled:opacity-60`}
+                />
+                {errors.score && (
+                  <p className="mt-1 text-xs text-red-400">{errors.score}</p>
                 )}
               </div>
             </div>
@@ -518,114 +484,167 @@ const App: React.FC = () => {
             )}
 
             {isFormSubmitted && (
-              <p className="text-xs text-center text-slate-400">
-                You can change your category anytime to see different results
-              </p>
+              <div className="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
+                <p className="text-sm text-slate-300 mb-3">
+                  <span className="font-semibold text-white">Your submitted data:</span> Score <span className="text-[#F59E0B] font-bold">{formData.score}</span> for <span className="text-[#F59E0B] font-bold">{formData.category}</span> category
+                </p>
+                <p className="text-xs text-slate-400">
+                  You can explore predictions for different categories and scores below without changing your saved data.
+                </p>
+              </div>
             )}
           </div>
         </div>
 
-        {/* Score Input Section */}
-        {isFormSubmitted ? (
-          <>
-            <div className="w-full max-w-md mx-auto relative group z-10">
-              <div className="absolute -inset-0.5 bg-[#F59E0B]/20 rounded-2xl blur opacity-50 group-hover:opacity-75 transition duration-500"></div>
-              <div className="relative bg-slate-900 rounded-xl p-2 flex items-center shadow-xl border border-slate-800">
-                <div className="pl-4 text-slate-400">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 4 0 01-2 2h-2a2 2 0 01-2-2z" />
+        {/* Category and Score Selector (Only shown after form submission) */}
+        {isFormSubmitted && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Category Selector */}
+            <div className="w-full relative group z-10">
+              <div className="absolute -inset-0.5 bg-indigo-500/10 rounded-2xl blur opacity-50 group-hover:opacity-75 transition duration-500"></div>
+              <div className="relative bg-slate-900 rounded-xl p-5 shadow-xl border border-slate-800">
+                <div className="flex items-center gap-2 mb-3">
+                  <svg className="w-5 h-5 text-[#F59E0B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
                   </svg>
+                  <h3 className="text-base font-bold text-white">
+                    Explore Different Categories
+                  </h3>
                 </div>
-                <input 
-                  type="number" 
-                  value={score}
-                  onChange={(e) => {
-                    const val = e.target.value;
-                    if (parseFloat(val) < 0) return;
-                    if (parseFloat(val) > 200) return;
-                    setScore(val);
-                  }}
-                  placeholder="Enter your estimated score (e.g. 95.5)" 
-                  className="w-full bg-transparent border-none focus:ring-0 text-2xl font-bold text-white placeholder-slate-600 h-14 px-4"
-                />
-                {score && (
-                  <button 
-                    onClick={() => setScore('')}
-                    className="p-2 text-slate-400 hover:text-slate-200 transition-colors"
-                  >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                )}
+                <div className="flex flex-wrap gap-2">
+                  {categories.map(cat => (
+                    <button
+                      key={cat.value}
+                      onClick={() => handleCategoryChange(cat.value)}
+                      className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all ${
+                        currentCategory === cat.value
+                          ? 'bg-[#F59E0B] text-white shadow-lg'
+                          : 'bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700'
+                      }`}
+                    >
+                      {cat.label}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
 
-            {/* Results Area */}
-            <div className="space-y-6 min-h-[400px]">
-              {score === '' ? (
-                <div className="text-center py-20 opacity-40">
-                  <div className="inline-block p-4 rounded-full bg-slate-800 mb-4">
-                    <svg className="w-12 h-12 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                    </svg>
-                  </div>
-                  <p className="text-lg font-medium text-slate-300">Enter your score above to start predicting.</p>
+            {/* Score Selector */}
+            <div className="w-full relative group z-10">
+              <div className="absolute -inset-0.5 bg-[#F59E0B]/10 rounded-2xl blur opacity-50 group-hover:opacity-75 transition duration-500"></div>
+              <div className="relative bg-slate-900 rounded-xl p-5 shadow-xl border border-slate-800">
+                <div className="flex items-center gap-2 mb-3">
+                  <svg className="w-5 h-5 text-[#F59E0B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 4 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                  <h3 className="text-base font-bold text-white">
+                    Try Different Scores
+                  </h3>
                 </div>
-              ) : predictions.length === 0 ? (
-                <div className="text-center py-20">
-                  <div className="inline-block p-4 rounded-full bg-red-500/10 mb-4">
-                    <svg className="w-12 h-12 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                    </svg>
-                  </div>
-                  <p className="text-lg font-medium text-white">It looks challenging.</p>
-                  <p className="text-slate-400 mt-2">
-                    Based on previous trends, this score might be below the typical cutoff for the tracked NLUs in <span className="font-semibold text-[#F59E0B]">{formData.category}</span> category. <br/>
-                    Don&apos;t lose hope—vacancies often arise in later lists.
-                  </p>
+                <div className="flex items-center gap-3">
+                  <input
+                    type="number"
+                    value={currentScore}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      if (val && parseFloat(val) < 0) return;
+                      if (val && parseFloat(val) > 200) return;
+                      handleScoreChange(val);
+                    }}
+                    placeholder="Enter score (0-100)"
+                    min="0"
+                    max="200"
+                    step="0.5"
+                    className="flex-1 px-4 py-2.5 rounded-lg border border-slate-700 bg-slate-800 text-white placeholder-slate-500 focus:ring-2 focus:ring-[#F59E0B] focus:border-transparent transition-all"
+                  />
+                  {currentScore !== formData.score && (
+                    <button
+                      onClick={() => handleScoreChange(formData.score)}
+                      className="px-4 py-2.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700 font-semibold text-sm transition-all whitespace-nowrap"
+                    >
+                      Reset
+                    </button>
+                  )}
                 </div>
-              ) : (
-                <div className="animate-[fadeIn_0.5s_ease-out]">
-                  <div className="flex justify-between items-end mb-6 border-b border-slate-800 pb-2">
-                    <h2 className="text-xl font-semibold text-white">
-                      <span className="text-[#F59E0B]">{predictions.length}</span> Universities Found for <span className="text-[#F59E0B]">{formData.category}</span>
-                    </h2>
-                    <span className="text-xs text-slate-500">Sorted by probability</span>
-                  </div>
-                  
-                  <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                    {predictions.map((college, idx) => (
-                      <ResultCard 
-                        key={college.id} 
-                        result={college} 
-                        index={idx}
-                      />
-                    ))}
-                  </div>
-                </div>
-              )}
+                <p className="text-xs text-slate-500 mt-2">
+                  Exploring with: <span className="text-[#F59E0B] font-semibold">{currentScore || 'No score'}</span>
+                </p>
+              </div>
             </div>
-          </>
-        ) : (
-          <div className="text-center py-20 opacity-60">
-            <div className="inline-block p-6 rounded-full bg-[#F59E0B]/10 mb-4">
-              <svg className="w-16 h-16 text-[#F59E0B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-              </svg>
-            </div>
-            <p className="text-xl font-semibold text-white mb-2">
-              Fill the form above to unlock the predictor
-            </p>
-            <p className="text-slate-400">
-              Enter your details to get personalized college predictions
-            </p>
           </div>
         )}
 
-      </div>
-       <NewFooter /> 
+        {/* Results Area */}
+        <div className="space-y-6 min-h-[400px]">
+          {!isFormSubmitted ? (
+            <div className="text-center py-20 opacity-60">
+              <div className="inline-block p-6 rounded-full bg-[#F59E0B]/10 mb-4">
+                <svg className="w-16 h-16 text-[#F59E0B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              <p className="text-xl font-semibold text-white mb-2">
+                Fill the form above to unlock the predictor
+              </p>
+              <p className="text-slate-400">
+                Enter your details and score to get personalized college predictions
+              </p>
+            </div>
+          ) : predictions.length === 0 ? (
+            <div className="text-center py-20">
+              <div className="inline-block p-4 rounded-full bg-red-500/10 mb-4">
+                <svg className="w-12 h-12 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+              </div>
+              <p className="text-lg font-medium text-white">It looks challenging.</p>
+              <p className="text-slate-400 mt-2">
+                Based on previous trends, this score might be below the typical cutoff for the tracked NLUs in <span className="font-semibold text-[#F59E0B]">{currentCategory}</span> category. <br/>
+                Don&apos;t lose hope—vacancies often arise in later lists.
+              </p>
+            </div>
+          ) : (
+            <div className="animate-[fadeIn_0.5s_ease-out]">
+              <div className="flex justify-between items-end mb-6 border-b border-slate-800 pb-2">
+                <h2 className="text-xl font-semibold text-white">
+                  <span className="text-[#F59E0B]">{predictions.length}</span> Universities Found for <span className="text-[#F59E0B]">{currentCategory}</span>
+                </h2>
+                <span className="text-xs text-slate-500">Sorted by probability</span>
+              </div>
+              
+              <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {predictions.map((college, idx) => (
+                  <ResultCard 
+                    key={college.id} 
+                    result={college} 
+                    index={idx}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+         <div className="w-full bg-slate-900/50 rounded-xl border border-slate-800 p-6 flex flex-wrap items-center justify-center gap-4">
+      <span className="text-white font-semibold text-xl">Try our</span>
+      
+      <a 
+        href="/#capsules"
+        className="px-6 py-3 rounded-lg bg-[#F59E0B] hover:bg-[#D97706] text-white font-semibold transition-all duration-300 shadow-md hover:shadow-lg text-base"
+      >
+        GK Capsules
+      </a>
+      
+      <a 
+        href="/#flashcards"
+        className="px-6 py-3 rounded-lg bg-[#F59E0B] hover:bg-[#D97706] text-white font-semibold transition-all duration-300 shadow-md hover:shadow-lg text-base"
+      >
+        Flashcards
+      </a>
     </div>
+      </div>
+      <NewFooter /> 
+    </div>
+    </Layout>
   );
 };
 
