@@ -15,7 +15,7 @@ const capsules = [
     stats: ["1200+ Topics", "Deep Analysis", "Video Explainers"],
     oldPrice: "15,999",
     currentPrice: "9,999",
-    link: "https://rzp.io/rzp/gqOnTLIN",
+    link: "#",
   },
   {
     id: "medium",
@@ -28,7 +28,7 @@ const capsules = [
     stats: ["300+ Key Topics", "Summary Notes", "Weekly Quizzes"],
     oldPrice: "5,999",
     currentPrice: "3,999",
-    link: "https://rzp.io/rzp/gqOnTLIN",
+    link: "#",
   },
   {
     id: "short",
@@ -37,11 +37,11 @@ const capsules = [
     icon: <Zap className="w-6 h-6" />,
     color: "from-[#f59e0b] to-[#f97316]",
     description:
-      "Rapid revision. One-liners, acronyms, and memory hooks for last-minute retention.",
+      "Rapid revision. One-liners, memory hooks and designed for Specailly AILET.",
     stats: ["100 Hot Topics", "Flash Memorization", "Cheat Sheets"],
     oldPrice: "1,999",
     currentPrice: "999",
-    link: "https://rzp.io/rzp/gqOnTLIN",
+    link: "#",
   },
 ];
 
@@ -189,7 +189,7 @@ const CapsuleSystem = () => {
                     </div>
 
                     {/* Join Now Button */}
-                    <motion.a
+                    {/* <motion.a
                       href={activeCapsule.link}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -199,7 +199,7 @@ const CapsuleSystem = () => {
                       className={`mt-6 w-full py-4 rounded-xl bg-gradient-to-r ${activeCapsule.color} text-white font-bold text-lg text-center hover:shadow-2xl hover:scale-105 transition-all duration-300 block`}
                     >
                       Join Now
-                    </motion.a>
+                    </motion.a> */}
                   </div>
                 </div>
               </motion.div>
