@@ -20,8 +20,12 @@ export const metadata: Metadata = {
   title: "Clat Tribe",
   description: "Your trusted platform for CLAT preparation and law careers.",
   icons: {
-    icon: '/shortlogo.png',
+    icon: [
+      { url: '/shortlogo.png', sizes: '32x32', type: 'image/png' },
+      { url: '/shortlogo.png', sizes: '16x16', type: 'image/png' },
+    ],
     apple: '/shortlogo.png',
+    shortcut: '/shortlogo.png',
   },
 };
 
@@ -36,6 +40,10 @@ export default function RootLayout({
       className={`${montserrat.variable} ${lato.variable}`}
     >
       <head>
+        {/* Favicon Links */}
+        <link rel="icon" type="image/png" href="/shortlogo.png" />
+        <link rel="shortcut icon" href="/shortlogo.png" />
+        
         {/* Google Fonts for Template */}
         <link
           href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600;800&display=swap"
