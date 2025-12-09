@@ -18,21 +18,21 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       label: 'NLU Predictor', 
       icon: <BarChart3 className="w-5 h-5" />
     },
-    // { 
-    //   href: '/written-analysis', 
-    //   label: 'Written Analysis', 
-    //   icon: <FileText className="w-5 h-5" />
-    // },
-    // { 
-    //   href: '/video-analysis', 
-    //   label: 'Video Analysis', 
-    //   icon: <Video className="w-5 h-5" />
-    // },
-    // { 
-    //   href: '#', 
-    //   label: 'My CLAT Performance', 
-    //   icon: <TrendingUp className="w-5 h-5" />
-    // }
+    { 
+      href: '/written-analysis', 
+      label: 'Written Analysis', 
+      icon: <FileText className="w-5 h-5" />
+    },
+    { 
+      href: '/video-analysis', 
+      label: 'Video Analysis', 
+      icon: <Video className="w-5 h-5" />
+    },
+    { 
+      href: 'my-clat-performance', 
+      label: 'My CLAT Performance', 
+      icon: <TrendingUp className="w-5 h-5" />
+    }
   ];
 
   const isActive = (path: string) => pathname === path;

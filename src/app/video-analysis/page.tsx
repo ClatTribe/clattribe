@@ -16,72 +16,76 @@ const VideoAnalysisPage: React.FC = () => {
   const videos: Video[] = [
     {
       id: 1,
-      title: "Analysis Session 1",
-      url: "https://www.youtube.com/live/ZZdZjYzeBOA?si=hsH3JgWF7SJb2Sha",
-      description: "Comprehensive analysis of key concepts"
+      title: "CLAT 2026 Analysis",
+      url: "https://youtu.be/2JVTB5S5FBQ?si=3O1j64gcJvpcOaG1",
+      description: "CLAT 2026 Analysis"
     },
     {
       id: 2,
-      title: "Analysis Session 2",
-      url: "https://www.youtube.com/live/ZZdZjYzeBOA?si=hsH3JgWF7SJb2Sha",
-      description: "Deep dive into important topics"
+      title: "Student Reaction 1",
+      url: "https://youtube.com/shorts/LKleAEZntXQ?si=LOIr14YIOfp_VAG7",
+      description: "Student Reaction 1"
     },
     {
       id: 3,
-      title: "Analysis Session 3",
-      url: "https://www.youtube.com/live/ZZdZjYzeBOA?si=hsH3JgWF7SJb2Sha",
-      description: "Expert analysis and insights"
+      title: "Student Reaction 2",
+      url: "https://youtube.com/shorts/eRviuK1qfRs?si=FJ1VRzJqMbS9iyRK",
+      description: "Student Reaction 2"
     },
-    {
-      id: 4,
-      title: "Analysis Session 4",
-      url: "https://www.youtube.com/live/ZZdZjYzeBOA?si=hsH3JgWF7SJb2Sha",
-      description: "Advanced concepts explained"
-    },
-    {
-      id: 5,
-      title: "Analysis Session 5",
-      url: "https://www.youtube.com/live/ZZdZjYzeBOA?si=hsH3JgWF7SJb2Sha",
-      description: "Key strategies and tips"
-    },
-    {
-      id: 6,
-      title: "Analysis Session 6",
-      url: "https://www.youtube.com/live/ZZdZjYzeBOA?si=hsH3JgWF7SJb2Sha",
-      description: "Problem-solving techniques"
-    },
-    {
-      id: 7,
-      title: "Analysis Session 7",
-      url: "https://www.youtube.com/live/ZZdZjYzeBOA?si=hsH3JgWF7SJb2Sha",
-      description: "Practice session analysis"
-    },
-    {
-      id: 8,
-      title: "Analysis Session 8",
-      url: "https://www.youtube.com/live/ZZdZjYzeBOA?si=hsH3JgWF7SJb2Sha",
-      description: "Mock test breakdown"
-    },
-    {
-      id: 9,
-      title: "Analysis Session 9",
-      url: "https://www.youtube.com/live/ZZdZjYzeBOA?si=hsH3JgWF7SJb2Sha",
-      description: "Common mistakes analysis"
-    },
-    {
-      id: 10,
-      title: "Analysis Session 10",
-      url: "https://www.youtube.com/live/ZZdZjYzeBOA?si=hsH3JgWF7SJb2Sha",
-      description: "Final preparation strategies"
-    }
+    // {
+    //   id: 4,
+    //   title: "Analysis Session 4",
+    //   url: "https://www.youtube.com/live/ZZdZjYzeBOA?si=hsH3JgWF7SJb2Sha",
+    //   description: "Advanced concepts explained"
+    // },
+    // {
+    //   id: 5,
+    //   title: "Analysis Session 5",
+    //   url: "https://www.youtube.com/live/ZZdZjYzeBOA?si=hsH3JgWF7SJb2Sha",
+    //   description: "Key strategies and tips"
+    // },
+    // {
+    //   id: 6,
+    //   title: "Analysis Session 6",
+    //   url: "https://www.youtube.com/live/ZZdZjYzeBOA?si=hsH3JgWF7SJb2Sha",
+    //   description: "Problem-solving techniques"
+    // },
+    // {
+    //   id: 7,
+    //   title: "Analysis Session 7",
+    //   url: "https://www.youtube.com/live/ZZdZjYzeBOA?si=hsH3JgWF7SJb2Sha",
+    //   description: "Practice session analysis"
+    // },
+    // {
+    //   id: 8,
+    //   title: "Analysis Session 8",
+    //   url: "https://www.youtube.com/live/ZZdZjYzeBOA?si=hsH3JgWF7SJb2Sha",
+    //   description: "Mock test breakdown"
+    // },
+    // {
+    //   id: 9,
+    //   title: "Analysis Session 9",
+    //   url: "https://www.youtube.com/live/ZZdZjYzeBOA?si=hsH3JgWF7SJb2Sha",
+    //   description: "Common mistakes analysis"
+    // },
+    // {
+    //   id: 10,
+    //   title: "Analysis Session 10",
+    //   url: "https://www.youtube.com/live/ZZdZjYzeBOA?si=hsH3JgWF7SJb2Sha",
+    //   description: "Final preparation strategies"
+    // }
   ];
 
   const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
 
-  const extractVideoId = (url: string): string | null => {
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=|live\/)([^#&?]*).*/;
+   const extractVideoId = (url: string): string | null => {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=|live\/|shorts\/)([^#&?]*).*/;
     const match = url.match(regExp);
     return (match && match[2].length === 11) ? match[2] : null;
+  };
+
+  const isShort = (url: string): boolean => {
+    return url.includes('/shorts/');
   };
 
   return (
