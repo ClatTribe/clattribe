@@ -15,7 +15,7 @@ const capsules = [
     stats: ["1200+ Topics", "Deep Analysis", "Video Explainers"],
     oldPrice: "15,999",
     currentPrice: "9,999",
-    link: "#",
+    link: "https://pages.razorpay.com/clattribemarathon",
   },
   {
     id: "medium",
@@ -28,7 +28,7 @@ const capsules = [
     stats: ["300+ Key Topics", "Summary Notes", "Weekly Quizzes"],
     oldPrice: "5,999",
     currentPrice: "3,999",
-    link: "#",
+    link: "https://rzp.io/rzp/clattribesprinter",
   },
   {
     id: "short",
@@ -41,7 +41,7 @@ const capsules = [
     stats: ["100 Hot Topics", "Flash Memorization", "Cheat Sheets"],
     oldPrice: "1,999",
     currentPrice: "999",
-    link: "#",
+    link: "https://pages.razorpay.com/clattribefinisher", 
   },
 ];
 
@@ -189,7 +189,7 @@ const CapsuleSystem = () => {
                     </div>
 
                     {/* Join Now Button */}
-                    {/* <motion.a
+                    <motion.a
                       href={activeCapsule.link}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -199,7 +199,7 @@ const CapsuleSystem = () => {
                       className={`mt-6 w-full py-4 rounded-xl bg-gradient-to-r ${activeCapsule.color} text-white font-bold text-lg text-center hover:shadow-2xl hover:scale-105 transition-all duration-300 block`}
                     >
                       Join Now
-                    </motion.a> */}
+                    </motion.a>
                   </div>
                 </div>
               </motion.div>

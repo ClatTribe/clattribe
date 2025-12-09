@@ -84,8 +84,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         {mobileMenuOpen && (
           <div className="md:hidden bg-[#0F172B] border-t border-white/10 shadow-lg">
             <div className="container mx-auto px-6 py-4 flex flex-col gap-2">
-              {/* Main Nav Links */}
-              <Link 
+
+              {/* <Link 
                 href="/" 
                 className="text-white hover:text-[#F59E0B] transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
                 onClick={() => setMobileMenuOpen(false)}
@@ -112,12 +112,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Blogs
-              </Link>
+              </Link> */}
 
-              {/* Divider */}
+
               <div className="border-t border-slate-700 my-2"></div>
 
-              {/* Sidebar Items in Mobile */}
               <div className="text-xs font-bold uppercase tracking-wider text-slate-500 px-4 py-2">
                 Analysis Tools
               </div>

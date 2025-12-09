@@ -177,7 +177,7 @@ const App: React.FC = () => {
     } else {
       const scoreNum = parseFloat(data.score);
       if (isNaN(scoreNum) || scoreNum < 0 || scoreNum > 200) {
-        newErrors.score = 'Score must be between 0 and 200';
+        newErrors.score = 'Score must be between 0 and 120';
       }
     }
 
@@ -472,7 +472,7 @@ const App: React.FC = () => {
                   name="score"
                   value={formData.score}
                   onChange={handleChange}
-                  placeholder="Enter score (0-200)"
+                  placeholder="Enter score (0-120)"
                   min="0"
                   max="200"
                   step="0.5"
@@ -593,23 +593,27 @@ const App: React.FC = () => {
             </div>
           )}
         </div>
-         <div className="w-full bg-slate-900/50 rounded-xl border border-slate-800 p-6 flex flex-wrap items-center justify-center gap-4">
-      <span className="text-white font-semibold text-xl">Try our</span>
-      
-      <a 
-        href="/#capsules"
-        className="px-6 py-3 rounded-lg bg-[#F59E0B] hover:bg-[#D97706] text-white font-semibold transition-all duration-300 shadow-md hover:shadow-lg text-base"
-      >
-        GK Capsules
-      </a>
-      
-      <a 
-        href="/#flashcards"
-        className="px-6 py-3 rounded-lg bg-[#F59E0B] hover:bg-[#D97706] text-white font-semibold transition-all duration-300 shadow-md hover:shadow-lg text-base"
-      >
-        Flashcards
-      </a>
+        <div className="w-full bg-slate-900/50 rounded-xl border border-slate-800 p-4 sm:p-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+    <span className="text-white font-semibold text-lg sm:text-xl mb-2 sm:mb-0">
+        Try our
+    </span>
+
+    <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+        <a 
+            href="/#capsules"
+            className="w-full text-center sm:w-auto px-6 py-3 rounded-lg bg-[#F59E0B] hover:bg-[#D97706] text-white font-semibold transition-all duration-300 shadow-md hover:shadow-lg text-base"
+        >
+            GK Capsules
+        </a>
+
+        <a 
+            href="/#flashcards"
+            className="w-full text-center sm:w-auto px-6 py-3 rounded-lg bg-[#F59E0B] hover:bg-[#D97706] text-white font-semibold transition-all duration-300 shadow-md hover:shadow-lg text-base"
+        >
+            Flashcards
+        </a>
     </div>
+</div> 
       </div>
       <NewFooter /> 
     </div>
