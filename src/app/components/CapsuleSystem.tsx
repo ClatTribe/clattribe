@@ -37,7 +37,7 @@ const capsules = [
     icon: <Zap className="w-6 h-6" />,
     color: "from-[#f59e0b] to-[#f97316]",
     description:
-      "Rapid revision. One-liners, memory hooks and designed for Specailly AILET.",
+      "Rapid revision, acronym, one liners etc specially designed for AILET.",
     stats: ["100 Hot Topics", "Flash Memorization", "Cheat Sheets"],
     oldPrice: "1,999",
     currentPrice: "999",
@@ -51,7 +51,7 @@ const CapsuleSystem = () => {
   return (
     <section className="py-24 relative overflow-hidden bg-[#1e293b] min-h-screen">
       {/* Background Grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px]"></div>
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
@@ -79,7 +79,7 @@ const CapsuleSystem = () => {
               >
                 <div className="flex items-center gap-4">
                   <div
-                    className={`p-3 rounded-lg bg-gradient-to-br ${cap.color} text-white shadow-inner`}
+                    className={`p-3 rounded-lg bg-linear-to-br ${cap.color} text-white shadow-inner`}
                   >
                     {cap.icon}
                   </div>
@@ -124,7 +124,7 @@ const CapsuleSystem = () => {
                 className="absolute inset-0"
               >
                 <div
-                  className={`w-full h-full rounded-2xl bg-gradient-to-br ${activeCapsule.color} p-1`}
+                  className={`w-full h-full rounded-2xl bg-linear-to-br ${activeCapsule.color} p-1`}
                 >
                   <div className="w-full h-full bg-[#0f172a]/90 backdrop-blur-xl rounded-xl p-8 flex flex-col justify-between border border-white/10">
                     <div>
@@ -183,7 +183,7 @@ const CapsuleSystem = () => {
                                 : "20%",
                           }}
                           transition={{ duration: 1, delay: 0.3 }}
-                          className={`h-full bg-gradient-to-r ${activeCapsule.color}`}
+                          className={`h-full bg-linear-to-r ${activeCapsule.color}`}
                         />
                       </div>
                     </div>

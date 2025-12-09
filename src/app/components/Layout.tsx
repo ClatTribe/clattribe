@@ -14,12 +14,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   const sidebarItems = [
     { 
-      href: '#', 
+      href: '/nlu-predictor', 
       label: 'NLU Predictor', 
       icon: <BarChart3 className="w-5 h-5" />
     },
     // { 
-    //   href: '', 
+    //   href: '/written-analysis', 
     //   label: 'Written Analysis', 
     //   icon: <FileText className="w-5 h-5" />
     // },
@@ -29,7 +29,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     //   icon: <Video className="w-5 h-5" />
     // },
     // { 
-    //   href: '/my-performance', 
+    //   href: '#', 
     //   label: 'My CLAT Performance', 
     //   icon: <TrendingUp className="w-5 h-5" />
     // }

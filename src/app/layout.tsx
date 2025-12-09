@@ -20,8 +20,8 @@ export const metadata: Metadata = {
   title: "Clat Tribe",
   description: "Your trusted platform for CLAT preparation and law careers.",
   icons: {
-    icon: '/favion.ico',
-    apple: '/favion.ico',
+    icon: '/shortlogo.png',
+    apple: '/shortlogo.png',
   },
 };
 
