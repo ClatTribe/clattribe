@@ -61,7 +61,8 @@ const LeadForm: React.FC = () => {
 
       setTimeout(() => {
         setShowSuccessPopup(false)
-      }, 3000)
+        window.location.href = '/gk-flashcards'
+      }, 1000)
     } catch (error) {
       if (error instanceof Error) {
         console.error("Error submitting form:", error)
@@ -95,7 +96,7 @@ const LeadForm: React.FC = () => {
             </div>
             <h3 className="mb-2 text-2xl font-bold text-gray-900">Success!</h3>
             <p className="text-gray-600 mb-6">
-              Your data has been saved successfully. We&apos;ll get back to you soon!
+              Thank you for submitting! Redirecting you to GK Flashcards...
             </p>
             <button
               onClick={() => setShowSuccessPopup(false)}
@@ -248,8 +249,8 @@ const App: React.FC = () => {
     setMobileMenuOpen(false);
   };
 
-  // Function to be passed to Hero component
-  const handleHeroButtonClick = (section: 'leadform' | 'capsules') => {
+  // Function to be passed to Hero and Flashcards components
+  const handleNavigate = (section: 'leadform' | 'capsules') => {
     scrollToSection(section);
   };
 
@@ -342,12 +343,12 @@ const App: React.FC = () => {
       </nav>
 
       <main>
-        <Hero onNavigate={handleHeroButtonClick} />
+        <Hero onNavigate={handleNavigate} />
         <div id="capsules">
           <CapsuleSystem />
         </div>
         <div id="flashcards">
-          <Flashcards />
+          <Flashcards onNavigate={handleNavigate} />
         </div>
         <div id="blogs">
           <TrendingBlogs />

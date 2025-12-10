@@ -133,7 +133,11 @@ const SAMPLE_CARDS: FlashcardType[] = [
   },
 ];
 
-const Flashcards: React.FC = () => {
+interface FlashcardsProps {
+  onNavigate?: (section: 'leadform') => void;
+}
+
+const Flashcards: React.FC<FlashcardsProps> = ({ onNavigate }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -259,6 +263,40 @@ const Flashcards: React.FC = () => {
             </motion.div>
           </div>
         </div>
+
+        {/* Call-to-Action Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="mt-16 text-center"
+        >
+          <div
+            className="inline-block px-8 py-10 rounded-2xl shadow-2xl border max-w-2xl mx-auto"
+            style={{
+              backgroundColor: "#1e293b",
+              borderColor: "#f59e0b33",
+            }}
+          >
+            <h3 className="text-2xl md:text-3xl font-serif font-bold mb-4">
+              Get Daily GK Flashcards
+            </h3>
+            {/* <p className="text-slate-400 mb-6 leading-relaxed">
+              Stay updated with fresh, high-impact GK flashcards delivered daily. Never miss a crucial fact for CLAT.
+            </p> */}
+            <button
+              onClick={() => onNavigate?.('leadform')}
+              className="px-8 py-4 font-bold rounded-lg transition-all shadow-[0_0_20px_rgba(245,158,11,0.3)] hover:shadow-[0_0_30px_rgba(245,158,11,0.5)] hover:scale-105"
+              style={{
+                backgroundColor: "#f59e0b",
+                color: "#0f172a",
+              }}
+            >
+              Join Today
+            </button>
+          </div>
+        </motion.div>
       </div>
 
       {/* CSS */}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, BarChart3, FileText, Video, TrendingUp } from 'lucide-react';
+import { Menu, X, BarChart3, FileText, Video, TrendingUp, Users, CreditCard } from 'lucide-react';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -32,6 +32,16 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       href: 'my-clat-performance', 
       label: 'My CLAT Performance', 
       icon: <TrendingUp className="w-5 h-5" />
+    },
+    { 
+      href: 'connect-with-mentors', 
+      label: 'Connect With Mentors', 
+      icon: <Users className="w-5 h-5" />
+    },
+    { 
+      href: 'gk-flashcards', 
+      label: 'GK Flashcards', 
+      icon: <CreditCard className="w-5 h-5" />
     }
   ];
 
