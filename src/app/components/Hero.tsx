@@ -44,7 +44,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
             #1 GK PLATFORM FOR CLAT
           </div>
 
-          <h1 className="text-4xl md:text-7xl font-serif font-bold leading-tight mb-6">
+          <h1 className="text-3xl md:text-7xl font-serif font-bold leading-tight mb-6">
             Master the Facts.
             <br />
             <span
