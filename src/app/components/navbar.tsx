@@ -33,9 +33,9 @@ export default function Navbar() {
       }`}
     >
       <div className="container flex h-20 items-center justify-between mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center space-x-3">
+        <Link href="/" className="flex items-center space-x-3">
           <Image src="/logo.jpg" alt="Clat Tribe Logo" width={180} height={180} className="rounded" />
-        </div>
+        </Link>
 
         <nav className="hidden md:flex items-center gap-8 text-lg ml-auto">
           <Link href="/" className="font-medium text-[#014688] hover:text-[#014688]/80 transition-colors">
