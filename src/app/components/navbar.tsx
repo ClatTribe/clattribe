@@ -29,35 +29,35 @@ export default function Navbar() {
   return (
     <header
       className={`sticky top-0 z-50 w-full shadow-sm transition-all duration-300 ${
-        isScrolled ? "bg-white shadow-xl" : "bg-white/90 backdrop-blur-sm"
+        isScrolled ? "bg-[#0E162A] shadow-xl" : "bg-[#0E162A]/90 backdrop-blur-sm"
       }`}
     >
       <div className="container flex h-20 items-center justify-between mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center space-x-3">
-          <Image src="/logo.jpg" alt="Clat Tribe Logo" width={180} height={180} className="rounded" />
+          <Image src="/heading.png" alt="Clat Tribe Logo" width={180} height={180} className="rounded" />
         </Link>
 
         <nav className="hidden md:flex items-center gap-8 text-lg ml-auto">
-          <Link href="/" className="font-medium text-[#014688] hover:text-[#014688]/80 transition-colors">
+          <Link href="/" className="font-medium text-[#F59E0B] hover:text-[#FB923C] transition-colors">
             Home
           </Link>
-          {/* <Link href="/about" className="font-medium text-gray-600 hover:text-[#014688] transition-colors">
+          {/* <Link href="/about" className="font-medium text-slate-300 hover:text-[#F59E0B] transition-colors">
             About
           </Link> */}
-          {/* <Link href="/blogs" className="font-medium text-gray-600 hover:text-[#014688] transition-colors">
+          {/* <Link href="/blogs" className="font-medium text-slate-300 hover:text-[#F59E0B] transition-colors">
             Blogs
           </Link> */}
-          {/* <Link href="/contact" className="font-medium text-gray-600 hover:text-[#014688] transition-colors">
+          {/* <Link href="/contact" className="font-medium text-slate-300 hover:text-[#F59E0B] transition-colors">
             Contact
           </Link> */}
-          {/* <Link href="/courses" className="font-medium text-gray-600 hover:text-[#014688] transition-colors">
+          {/* <Link href="/courses" className="font-medium text-slate-300 hover:text-[#F59E0B] transition-colors">
             Courses
           </Link> */}
         </nav>
 
         <div className="flex items-center md:hidden">
           <motion.button
-            className="z-50 text-[#014688]"
+            className="z-50 text-[#F59E0B]"
             onClick={() => setIsOpen(!isOpen)}
             animate={{ rotate: isOpen ? 180 : 0, scale: isOpen ? 1.2 : 1 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
@@ -84,13 +84,13 @@ export default function Navbar() {
               animate={{ x: "0%", borderRadius: "0" }}
               exit={{ x: "-100%", borderRadius: "50% 0 0 50%" }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="fixed top-0 left-0 w-4/5 h-screen bg-[#014688] backdrop-blur-md shadow-lg flex flex-col items-center justify-center text-lg z-50"
+              className="fixed top-0 left-0 w-4/5 h-screen bg-[#0E162A] backdrop-blur-md shadow-lg flex flex-col items-center justify-center text-lg z-50 border-r border-slate-800"
             >
               <motion.div>
                 <Link href="/" className="text-3xl font-bold text-white mb-6" onClick={() => setIsOpen(false)}>
                   <div className="flex items-center gap-2">
-                    <Image src="/logo.jpg" alt="Clat Tribe Logo" width={40} height={40} className="rounded" />
-                    <span>Clat Tribe</span>
+                    <Image src="/heading.png" alt="Clat Tribe Logo" width={40} height={40} className="rounded" />
+                    <span className="text-[#F59E0B]">Clat Tribe</span>
                   </div>
                 </Link>
               </motion.div>
@@ -108,7 +108,7 @@ export default function Navbar() {
                 >
                   <Link
                     href="/"
-                    className="text-white hover:text-yellow-400 text-xl font-semibold"
+                    className="text-white hover:text-[#F59E0B] text-xl font-semibold transition-colors"
                     onClick={() => setIsOpen(false)}
                   >
                     Home
@@ -127,7 +127,7 @@ export default function Navbar() {
                 >
                   <Link
                     href="/about"
-                    className="text-white hover:text-yellow-400 text-xl font-semibold"
+                    className="text-white hover:text-[#F59E0B] text-xl font-semibold transition-colors"
                     onClick={() => setIsOpen(false)}
                   >
                     About
@@ -146,7 +146,7 @@ export default function Navbar() {
                 >
                   <Link
                     href="/blogs"
-                    className="text-white hover:text-yellow-400 text-xl font-semibold"
+                    className="text-white hover:text-[#F59E0B] text-xl font-semibold transition-colors"
                     onClick={() => setIsOpen(false)}
                   >
                     Blogs
@@ -165,7 +165,7 @@ export default function Navbar() {
                 >
                   <Link
                     href="/contact"
-                    className="text-white hover:text-yellow-400 text-xl font-semibold"
+                    className="text-white hover:text-[#F59E0B] text-xl font-semibold transition-colors"
                     onClick={() => setIsOpen(false)}
                   >
                     Contact
@@ -184,7 +184,7 @@ export default function Navbar() {
                 >
                   <Link
                     href="/courses"
-                    className="text-white hover:text-yellow-400 text-xl font-semibold"
+                    className="text-white hover:text-[#F59E0B] text-xl font-semibold transition-colors"
                     onClick={() => setIsOpen(false)}
                   >
                     Courses
@@ -198,36 +198,3 @@ export default function Navbar() {
     </header>
   )
 }
-// "use client"
-
-// import Link from "next/link"
-// import Image from "next/image"
-
-// export default function Navbar() {
-//   return (
-//     <nav className="w-full bg-white shadow-md">
-//       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
-//         {/* Logo */}
-//         <div className="flex items-center">
-//           <Image
-//             src="/logo.jpg"
-//             alt="Logo"
-//             width={140}
-//             height={50}
-//             className="rounded"
-//           />
-//         </div>
-
-//         {/* Menu Links (same for all screens) */}
-//         <div className="flex space-x-8 text-lg font-medium">
-//           <Link href="/about" className="text-gray-700 hover:text-blue-600">
-//             About Us
-//           </Link>
-//           <Link href="/contact" className="text-gray-700 hover:text-blue-600">
-//             Contact
-//           </Link>
-//         </div>
-//       </div>
-//     </nav>
-//   )
-// }

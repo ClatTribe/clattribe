@@ -31,7 +31,7 @@ const OptimizedHeroImage = React.memo(({ src, alt, className }: { src: string; a
   
   if (imageError || !src) {
     return (
-      <div className={`bg-gradient-to-br from-slate-300 to-slate-400 flex items-center justify-center text-gray-600 text-lg ${className}`}>
+      <div className={`bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center text-slate-400 text-lg ${className}`}>
         <div className="text-center">
           <div className="text-4xl mb-2">📄</div>
           <div>GK Article</div>
@@ -43,7 +43,7 @@ const OptimizedHeroImage = React.memo(({ src, alt, className }: { src: string; a
   return (
     <div className="relative">
       {!imageLoaded && (
-        <div className={`absolute inset-0 bg-gradient-to-br from-slate-300 to-slate-400 animate-pulse ${className}`}></div>
+        <div className={`absolute inset-0 bg-gradient-to-br from-slate-700 to-slate-800 animate-pulse ${className}`}></div>
       )}
       <img
         src={src}
@@ -51,7 +51,7 @@ const OptimizedHeroImage = React.memo(({ src, alt, className }: { src: string; a
         className={`${className} ${imageLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}
         onError={() => setImageError(true)}
         onLoad={() => setImageLoaded(true)}
-        style={{ objectFit: 'cover' }}
+        style={{ objectFit: 'contain', width: '100%', height: 'auto' }}
       />
     </div>
   )
@@ -153,22 +153,22 @@ export default function GKPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background">
-        <div className="fixed top-0 left-0 z-[9999] w-full h-1 bg-gray-200">
+      <div className="min-h-screen bg-slate-950">
+        <div className="fixed top-0 left-0 z-[9999] w-full h-1 bg-slate-800">
           <div
-            className="h-full bg-gradient-to-r from-[#014688] to-[#0156a3] transition-all duration-300"
+            className="h-full bg-gradient-to-r from-[#F59E0B] to-[#FB923C] transition-all duration-300"
             style={{ width: "0%" }}
           />
         </div>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
           <div className="animate-pulse">
-            <div className="h-8 bg-muted rounded w-1/4 mb-4"></div>
-            <div className="h-12 bg-muted rounded w-3/4 mb-6"></div>
-            <div className="h-64 sm:h-96 bg-muted rounded mb-6"></div>
+            <div className="h-8 bg-slate-800 rounded w-1/4 mb-4"></div>
+            <div className="h-12 bg-slate-800 rounded w-3/4 mb-6"></div>
+            <div className="h-64 sm:h-96 bg-slate-800 rounded mb-6"></div>
             <div className="space-y-4">
-              <div className="h-4 bg-muted rounded"></div>
-              <div className="h-4 bg-muted rounded w-5/6"></div>
-              <div className="h-4 bg-muted rounded w-4/6"></div>
+              <div className="h-4 bg-slate-800 rounded"></div>
+              <div className="h-4 bg-slate-800 rounded w-5/6"></div>
+              <div className="h-4 bg-slate-800 rounded w-4/6"></div>
             </div>
           </div>
         </div>
@@ -178,19 +178,13 @@ export default function GKPage() {
 
   if (!post) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-slate-950">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-          <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-12 text-center">
+          <div className="rounded-lg border border-slate-800 bg-slate-900 text-white shadow-sm p-12 text-center">
             <h1 className="text-2xl font-bold mb-4">Post Not Found</h1>
-            <p className="text-muted-foreground mb-6">
+            <p className="text-slate-400 mb-6">
               The GK post you are looking for does not exist or is not published.
             </p>
-            {/* <Link href="/gk">
-              <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-[#014688] text-white hover:bg-[#0156a3] h-10 px-4 py-2">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to GK
-              </button>
-            </Link> */}
           </div>
         </div>
       </div>
@@ -199,56 +193,62 @@ export default function GKPage() {
 
   return (
     <DefaultLayout>
-      <div className="fixed top-0 left-0 z-[9999] w-full h-1 bg-gray-200">
+      <div className="fixed top-0 left-0 z-[9999] w-full h-1 bg-slate-800">
         <div
           id="reading-progress"
-          className="h-full bg-gradient-to-r from-[#014688] to-[#0156a3] transition-all duration-300"
+          className="h-full bg-gradient-to-r from-[#F59E0B] to-[#FB923C] transition-all duration-300"
           style={{ width: "0%" }}
         />
       </div>
 
-      <div className="min-h-screen bg-background">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <div className="min-h-screen bg-slate-950">
+        {/* Background decoration */}
+        <div className="fixed inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#F59E0B]/5 rounded-full blur-3xl sm:w-[600px] sm:h-[600px]"></div>
+          <div className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-indigo-500/5 rounded-full blur-3xl sm:w-[800px] sm:h-[800px]"></div>
+        </div>
+
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
           {/* HERO IMAGE */}
-          <div className="relative w-full rounded-xl sm:rounded-2xl overflow-hidden mb-6 sm:mb-12 shadow-2xl">
-            <div className="relative">
+          <div className="relative w-full rounded-xl sm:rounded-2xl overflow-hidden mb-6 sm:mb-12 border border-slate-800 bg-slate-900/50">
+            <div className="relative w-full">
               <OptimizedHeroImage
                 src={post.img || ""}
                 alt={post.title}
-                className="w-full h-auto min-h-[200px] sm:min-h-[400px] md:h-[500px] lg:h-[600px]"
+                className="w-full h-auto"
               />
             </div>
           </div>
 
           {/* Breadcrumb */}
-          <nav className="flex py-4 text-sm text-gray-500 mb-6 overflow-x-auto" aria-label="Breadcrumb">
+          <nav className="flex py-4 text-sm text-slate-400 mb-6 overflow-x-auto" aria-label="Breadcrumb">
             <ol className="flex items-center space-x-1 whitespace-nowrap">
               <li>
-                <Link href="/" className="hover:text-[#014688] transition-colors">
+                <Link href="/" className="hover:text-[#F59E0B] transition-colors">
                   Home
                 </Link>
               </li>
               <li className="flex items-center">
-                <svg className="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                <svg className="h-5 w-5 flex-shrink-0 text-slate-600" viewBox="0 0 20 20" fill="currentColor">
                   <path
                     fillRule="evenodd"
                     d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
                     clipRule="evenodd"
                   />
                 </svg>
-                <Link href="/gk" className="ml-1 hover:text-[#014688] transition-colors">
+                <Link href="/gk" className="ml-1 hover:text-[#F59E0B] transition-colors">
                   GK
                 </Link>
               </li>
               <li className="flex items-center">
-                <svg className="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                <svg className="h-5 w-5 flex-shrink-0 text-slate-600" viewBox="0 0 20 20" fill="currentColor">
                   <path
                     fillRule="evenodd"
                     d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
                     clipRule="evenodd"
                   />
                 </svg>
-                <span className="ml-1 text-gray-700 truncate max-w-[150px] sm:max-w-xs">{post.title}</span>
+                <span className="ml-1 text-slate-300 truncate max-w-[150px] sm:max-w-xs">{post.title}</span>
               </li>
             </ol>
           </nav>
@@ -258,12 +258,12 @@ export default function GKPage() {
             {/* MAIN BLOG */}
             <div className="lg:col-span-3">
               <div className="mb-8">
-                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-gray-900 leading-tight">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-white leading-tight">
                   {post.title}
                 </h1>
-                <div className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-4 sm:gap-6 text-sm sm:text-base text-gray-600">
+                <div className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-4 sm:gap-6 text-sm sm:text-base text-slate-400">
                   <div className="flex items-center">
-                    <svg className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="h-5 w-5 mr-2 text-[#F59E0B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -275,7 +275,7 @@ export default function GKPage() {
                   </div>
                   {estimatedReadTime && (
                     <div className="flex items-center">
-                      <svg className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg className="h-5 w-5 mr-2 text-[#F59E0B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -290,24 +290,34 @@ export default function GKPage() {
               </div>
 
               {/* HTML CONTENT RENDERING */}
-              <div id="main-content" className="max-w-none mb-12 sm:mb-16 prose prose-lg max-w-none">
+              <div id="main-content" className="max-w-none mb-12 sm:mb-16">
                 {/* Global styles for HTML content */}
                 <style jsx global>{`
                   #main-content {
                     line-height: 1.8;
-                    color: #374151;
+                    color: #cbd5e1 !important;
+                  }
+                  #main-content * {
+                    color: #cbd5e1 !important;
                   }
                   #main-content p {
                     margin-bottom: 1.25rem;
                     font-size: 1.125rem;
                     line-height: 1.8;
+                    color: #cbd5e1 !important;
+                  }
+                  #main-content span {
+                    color: #cbd5e1 !important;
+                  }
+                  #main-content div {
+                    color: #cbd5e1 !important;
                   }
                   #main-content h1 {
                     font-size: 2rem;
                     font-weight: 700;
                     margin-top: 2.5rem;
                     margin-bottom: 1.25rem;
-                    color: #111827;
+                    color: #f1f5f9 !important;
                     line-height: 1.3;
                   }
                   #main-content h2 {
@@ -315,7 +325,7 @@ export default function GKPage() {
                     font-weight: 600;
                     margin-top: 2rem;
                     margin-bottom: 1rem;
-                    color: #111827;
+                    color: #f1f5f9 !important;
                     line-height: 1.3;
                   }
                   #main-content h3 {
@@ -323,7 +333,7 @@ export default function GKPage() {
                     font-weight: 600;
                     margin-top: 1.75rem;
                     margin-bottom: 0.875rem;
-                    color: #111827;
+                    color: #f1f5f9 !important;
                     line-height: 1.4;
                   }
                   #main-content h4 {
@@ -331,7 +341,7 @@ export default function GKPage() {
                     font-weight: 600;
                     margin-top: 1.5rem;
                     margin-bottom: 0.75rem;
-                    color: #111827;
+                    color: #f1f5f9 !important;
                   }
                   #main-content ul,
                   #main-content ol {
@@ -342,7 +352,7 @@ export default function GKPage() {
                     margin-bottom: 0.75rem;
                     font-size: 1.125rem;
                     line-height: 1.8;
-                    color: #374151;
+                    color: #cbd5e1 !important;
                   }
                   #main-content ul li {
                     list-style-type: disc;
@@ -353,25 +363,26 @@ export default function GKPage() {
                   #main-content strong,
                   #main-content b {
                     font-weight: 600;
-                    color: #111827;
+                    color: #f1f5f9 !important;
                   }
                   #main-content em,
                   #main-content i {
                     font-style: italic;
+                    color: #cbd5e1 !important;
                   }
                   #main-content a {
-                    color: #014688;
+                    color: #F59E0B !important;
                     text-decoration: underline;
                   }
                   #main-content a:hover {
-                    color: #0369a1;
+                    color: #FB923C !important;
                   }
                   #main-content img {
                     max-width: 100%;
                     height: auto;
                     margin: 2rem 0;
                     border-radius: 0.5rem;
-                    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+                    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
                   }
                   #main-content table {
                     width: 100%;
@@ -381,39 +392,41 @@ export default function GKPage() {
                   }
                   #main-content table th,
                   #main-content table td {
-                    border: 1px solid #e5e7eb;
+                    border: 1px solid #334155;
                     padding: 0.75rem 1rem;
                     text-align: left;
                   }
                   #main-content table th {
-                    background-color: #f9fafb;
+                    background-color: #1e293b;
                     font-weight: 600;
-                    color: #111827;
+                    color: #f1f5f9;
                   }
                   #main-content table tr:nth-child(even) {
-                    background-color: #f9fafb;
+                    background-color: #1e293b;
                   }
                   #main-content blockquote {
-                    border-left: 4px solid #014688;
+                    border-left: 4px solid #F59E0B;
                     padding-left: 1.5rem;
                     margin: 1.5rem 0;
                     font-style: italic;
-                    color: #6b7280;
+                    color: #94a3b8;
                   }
                   #main-content code {
-                    background-color: #f3f4f6;
+                    background-color: #1e293b;
                     padding: 0.25rem 0.5rem;
                     border-radius: 0.25rem;
                     font-family: monospace;
                     font-size: 0.95em;
+                    color: #F59E0B;
                   }
                   #main-content pre {
-                    background-color: #1f2937;
-                    color: #f9fafb;
+                    background-color: #0f172a;
+                    color: #e2e8f0;
                     padding: 1.5rem;
                     border-radius: 0.5rem;
                     overflow-x: auto;
                     margin: 1.5rem 0;
+                    border: 1px solid #334155;
                   }
                   #main-content pre code {
                     background-color: transparent;
@@ -422,7 +435,7 @@ export default function GKPage() {
                   }
                   #main-content hr {
                     border: none;
-                    border-top: 2px solid #e5e7eb;
+                    border-top: 2px solid #334155;
                     margin: 2rem 0;
                   }
                   
@@ -462,21 +475,12 @@ export default function GKPage() {
                 {/* Render HTML content directly */}
                 <div dangerouslySetInnerHTML={{ __html: post.content }} />
               </div>
-
-              <div className="mt-8">
-                {/* <Link href="/gk">
-                  <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-[#014688] text-white hover:bg-[#0156a3] h-10 px-4 py-2">
-                    <ArrowLeft className="w-4 h-4 mr-2" />
-                    Back to GK
-                  </button>
-                </Link> */}
-              </div>
             </div>
 
             {/* SIDEBAR */}
             <aside className="lg:col-span-1">
-              <div className="bg-white shadow-md border rounded-xl p-5 sticky top-24">
-                <h2 className="text-xl font-semibold text-[#014688] mb-4 border-b pb-2">
+              <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-xl p-5 sticky top-24">
+                <h2 className="text-xl font-semibold text-[#F59E0B] mb-4 border-b border-slate-800 pb-2">
                   Recently Published
                 </h2>
                 <ul className="space-y-3">
@@ -485,14 +489,14 @@ export default function GKPage() {
                       <li key={rp.slug}>
                         <Link
                           href={`/gk/${rp.slug}`}
-                          className="block px-3 py-2 rounded-lg text-gray-800 hover:bg-[#f1f5f9] hover:text-[#014688] transition-colors duration-200"
+                          className="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-800/50 hover:text-[#F59E0B] transition-colors duration-200"
                         >
                           {rp.title}
                         </Link>
                       </li>
                     ))
                   ) : (
-                    <li className="text-gray-500 text-sm px-3 py-2">No recent posts</li>
+                    <li className="text-slate-500 text-sm px-3 py-2">No recent posts</li>
                   )}
                 </ul>
               </div>
