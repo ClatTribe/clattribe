@@ -265,38 +265,54 @@ const Flashcards: React.FC<FlashcardsProps> = ({ onNavigate }) => {
         </div>
 
         {/* Call-to-Action Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="mt-16 text-center"
-        >
+         <div className="flex justify-center mt-6">
           <div
-            className="inline-block px-8 py-10 rounded-2xl shadow-2xl border max-w-2xl mx-auto"
+            className="flex flex-col md:flex-row items-center gap-4 px-6 py-4 rounded-xl shadow-lg border w-full max-w-2xl"
             style={{
               backgroundColor: "#1e293b",
               borderColor: "#f59e0b33",
             }}
           >
-            <h3 className="text-2xl md:text-3xl font-serif font-bold mb-4">
-              Get Daily GK Flashcards
-            </h3>
-            {/* <p className="text-slate-400 mb-6 leading-relaxed">
-              Stay updated with fresh, high-impact GK flashcards delivered daily. Never miss a crucial fact for CLAT.
-            </p> */}
+            <div className="flex-1">
+              <h3 className="text-lg md:text-xl font-serif font-bold">
+                Subscribe to daily GK Flashcards 
+              </h3>
+              <div className="flex items-center gap-3 mt-2">
+                <span
+                  className="text-2xl font-bold line-through opacity-50"
+                  style={{ color: "#94a3b8" }}
+                >
+                  ₹999
+                </span>
+                <span
+                  className="text-3xl font-bold"
+                  style={{ color: "#f59e0b" }}
+                >
+                  ₹0
+                </span>
+                <span
+                  className="px-3 py-1 rounded-full text-xs font-bold"
+                  style={{
+                    backgroundColor: "#22c55e33",
+                    color: "#22c55e",
+                  }}
+                >
+                  LIMITED TIME
+                </span>
+              </div>
+            </div>
             <button
               onClick={() => onNavigate?.('leadform')}
-              className="px-8 py-4 font-bold rounded-lg transition-all shadow-[0_0_20px_rgba(245,158,11,0.3)] hover:shadow-[0_0_30px_rgba(245,158,11,0.5)] hover:scale-105"
+              className="px-6 py-3 text-sm font-bold rounded-lg transition-all shadow-[0_0_20px_rgba(245,158,11,0.3)] hover:shadow-[0_0_30px_rgba(245,158,11,0.5)] hover:scale-105 whitespace-nowrap"
               style={{
                 backgroundColor: "#f59e0b",
                 color: "#0f172a",
               }}
             >
-              Join Today
+              Join the tribe
             </button>
           </div>
-        </motion.div>
+        </div>
       </div>
 
       {/* CSS */}

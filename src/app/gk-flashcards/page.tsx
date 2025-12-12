@@ -26,10 +26,51 @@ const FlashcardsPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [knewCount, setKnewCount] = useState(0);
   const [forgotCount, setForgotCount] = useState(0);
+  const [currentDay, setCurrentDay] = useState(1);
+  const [dailyCards, setDailyCards] = useState<FlashcardType[]>([]);
+
+  const CARDS_PER_DAY = 20;
 
   useEffect(() => {
-    fetchFlashcards();
+    loadCurrentDay();
   }, []);
+
+  useEffect(() => {
+    if (currentDay > 0) {
+      fetchFlashcards();
+    }
+  }, [currentDay]);
+
+  useEffect(() => {
+    if (flashcards.length > 0) {
+      const startIndex = (currentDay - 1) * CARDS_PER_DAY;
+      const endIndex = startIndex + CARDS_PER_DAY;
+      const todaysCards = flashcards.slice(startIndex, endIndex);
+      setDailyCards(todaysCards);
+    }
+  }, [currentDay, flashcards]);
+
+  const loadCurrentDay = () => {
+    const stored = localStorage.getItem('clat_flashcard_day');
+    const storedDate = localStorage.getItem('clat_flashcard_date');
+    const today = new Date().toDateString();
+
+    if (storedDate === today && stored) {
+      setCurrentDay(parseInt(stored));
+    } else if (storedDate && storedDate !== today && stored) {
+      const nextDay = parseInt(stored) + 1;
+      const maxDay = 10;
+      const newDay = nextDay > maxDay ? 1 : nextDay;
+      
+      setCurrentDay(newDay);
+      localStorage.setItem('clat_flashcard_day', newDay.toString());
+      localStorage.setItem('clat_flashcard_date', today);
+    } else {
+      setCurrentDay(1);
+      localStorage.setItem('clat_flashcard_day', '1');
+      localStorage.setItem('clat_flashcard_date', today);
+    }
+  };
 
   const fetchFlashcards = async () => {
     try {
@@ -58,15 +99,15 @@ const FlashcardsPage: React.FC = () => {
 
     setIsFlipped(false);
     setTimeout(() => {
-      setCurrentIndex((prev) => (prev + 1) % flashcards.length);
+      setCurrentIndex((prev) => (prev + 1) % dailyCards.length);
     }, 200);
   };
 
-  const currentCard = flashcards[currentIndex];
+  const currentCard = dailyCards[currentIndex];
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center px-4">
         <div className="text-center">
           <Loader2 className="w-12 h-12 text-[#F59E0B] animate-spin mx-auto mb-4" />
           <p className="text-slate-400">Loading flashcards...</p>
@@ -77,7 +118,7 @@ const FlashcardsPage: React.FC = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center px-4">
         <div className="text-center">
           <p className="text-red-400 mb-4">Error: {error}</p>
           <button
@@ -93,8 +134,19 @@ const FlashcardsPage: React.FC = () => {
 
   if (flashcards.length === 0) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center px-4">
         <p className="text-slate-400">No flashcards available</p>
+      </div>
+    );
+  }
+
+  if (dailyCards.length === 0) {
+    return (
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center px-4">
+        <div className="text-center">
+          <p className="text-slate-400 mb-4">No flashcards available for today</p>
+          <p className="text-slate-500 text-sm">Please check back tomorrow!</p>
+        </div>
       </div>
     );
   }
@@ -108,39 +160,39 @@ const FlashcardsPage: React.FC = () => {
         <div className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-indigo-500/5 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-3">
+        <div className="text-center mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white mb-2 sm:mb-3">
             CLAT <span className="text-[#F59E0B]">Flashcards</span>
           </h1>
-          <p className="text-sm sm:text-base text-slate-400">
+          <p className="text-xs sm:text-sm md:text-base text-slate-400">
             Master key facts and concepts for CLAT preparation
           </p>
         </div>
 
         {/* Stats Bar */}
-        <div className="flex flex-wrap justify-center gap-4 mb-8">
-          <div className="px-4 py-2 rounded-lg bg-slate-900/50 border border-slate-800">
-            <span className="text-slate-400 text-sm">Progress: </span>
-            <span className="text-white font-semibold">
-              {currentIndex + 1} / {flashcards.length}
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-6 sm:mb-8">
+          <div className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg bg-slate-900/50 border border-slate-800">
+            <span className="text-slate-400 text-xs sm:text-sm">Progress: </span>
+            <span className="text-white font-semibold text-xs sm:text-sm">
+              {currentIndex + 1} / {dailyCards.length}
             </span>
           </div>
-          <div className="px-4 py-2 rounded-lg bg-green-500/10 border border-green-500/30">
-            <CheckCircle className="w-4 h-4 inline mr-1 text-green-400" />
-            <span className="text-green-400 font-semibold">{knewCount}</span>
+          <div className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg bg-green-500/10 border border-green-500/30">
+            <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 inline mr-1 text-green-400" />
+            <span className="text-green-400 font-semibold text-xs sm:text-sm">{knewCount}</span>
           </div>
-          <div className="px-4 py-2 rounded-lg bg-red-500/10 border border-red-500/30">
-            <XCircle className="w-4 h-4 inline mr-1 text-red-400" />
-            <span className="text-red-400 font-semibold">{forgotCount}</span>
+          <div className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg bg-red-500/10 border border-red-500/30">
+            <XCircle className="w-3 h-3 sm:w-4 sm:h-4 inline mr-1 text-red-400" />
+            <span className="text-red-400 font-semibold text-xs sm:text-sm">{forgotCount}</span>
           </div>
         </div>
 
         {/* Flashcard */}
-        <div className="flex justify-center mb-8">
+        <div className="flex justify-center mb-6 sm:mb-8">
           <div
-            className="relative w-full max-w-2xl h-[400px] cursor-pointer perspective-1000"
+            className="relative w-full max-w-2xl h-[350px] sm:h-[400px] md:h-[450px] cursor-pointer"
             onClick={() => setIsFlipped(!isFlipped)}
             style={{ perspective: '1000px' }}
           >
@@ -153,7 +205,7 @@ const FlashcardsPage: React.FC = () => {
             >
               {/* FRONT */}
               <div
-                className="absolute inset-0 flex flex-col justify-center items-center text-center shadow-2xl rounded-2xl p-8 border-2"
+                className="absolute inset-0 flex flex-col justify-between shadow-2xl rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 border-2"
                 style={{
                   backfaceVisibility: 'hidden',
                   backgroundColor: '#ffffff',
@@ -161,27 +213,27 @@ const FlashcardsPage: React.FC = () => {
                   borderColor: '#F59E0B',
                 }}
               >
-                <div className="absolute top-6 left-6">
-                  <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#F59E0B]/20 text-[#F59E0B] uppercase">
+                <div className="flex justify-start">
+                  <span className="px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-bold bg-[#F59E0B]/20 text-[#F59E0B] uppercase">
                     {currentCard.category}
                   </span>
                 </div>
 
-                <div className="flex-1 flex items-center justify-center px-4">
-                  <h3 className="text-2xl sm:text-3xl font-bold leading-relaxed">
+                <div className="flex-1 flex items-center justify-center px-2 sm:px-4 py-4">
+                  <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold leading-relaxed text-center">
                     {currentCard.question}
                   </h3>
                 </div>
 
-                <div className="flex items-center gap-2 text-slate-500 text-sm">
-                  <RefreshCw className="w-4 h-4" />
+                <div className="flex items-center justify-center gap-2 text-slate-500 text-xs sm:text-sm">
+                  <RefreshCw className="w-3 h-3 sm:w-4 sm:h-4" />
                   <span>Tap to reveal answer</span>
                 </div>
               </div>
 
               {/* BACK */}
               <div
-                className="absolute inset-0 flex flex-col justify-center items-center text-center shadow-2xl rounded-2xl p-8 border-2"
+                className="absolute inset-0 flex flex-col justify-between shadow-2xl rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 border-2"
                 style={{
                   backfaceVisibility: 'hidden',
                   transform: 'rotateY(180deg)',
@@ -190,33 +242,33 @@ const FlashcardsPage: React.FC = () => {
                   borderColor: '#3b82f6',
                 }}
               >
-                <div className="absolute top-6 left-6">
-                  <span className="px-3 py-1 rounded-full text-xs font-bold bg-blue-500/20 text-blue-300 uppercase">
+                <div className="flex justify-start">
+                  <span className="px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-bold bg-blue-500/20 text-blue-300 uppercase">
                     Answer
                   </span>
                 </div>
 
-                <div className="flex-1 flex items-center justify-center px-4 mb-6">
-                  <h3 className="text-xl sm:text-2xl leading-relaxed">
+                <div className="flex-1 flex items-center justify-center px-2 sm:px-4 py-4">
+                  <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-center">
                     {currentCard.answer}
                   </h3>
                 </div>
 
                 {/* Buttons */}
-                <div className="flex gap-4">
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       handleNext(true);
                     }}
-                    className="px-6 py-3 rounded-xl flex items-center gap-2 font-semibold text-sm transition-all hover:scale-105"
+                    className="px-4 py-2.5 sm:px-6 sm:py-3 rounded-lg sm:rounded-xl flex items-center justify-center gap-2 font-semibold text-xs sm:text-sm transition-all hover:scale-105"
                     style={{
                       backgroundColor: 'rgba(34, 197, 94, 0.2)',
                       color: '#22c55e',
                       border: '1px solid rgba(34, 197, 94, 0.3)',
                     }}
                   >
-                    <CheckCircle className="w-5 h-5" />
+                    <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5" />
                     <span>Knew it</span>
                   </button>
 
@@ -225,14 +277,14 @@ const FlashcardsPage: React.FC = () => {
                       e.stopPropagation();
                       handleNext(false);
                     }}
-                    className="px-6 py-3 rounded-xl flex items-center gap-2 font-semibold text-sm transition-all hover:scale-105"
+                    className="px-4 py-2.5 sm:px-6 sm:py-3 rounded-lg sm:rounded-xl flex items-center justify-center gap-2 font-semibold text-xs sm:text-sm transition-all hover:scale-105"
                     style={{
                       backgroundColor: 'rgba(239, 68, 68, 0.2)',
                       color: '#ef4444',
                       border: '1px solid rgba(239, 68, 68, 0.3)',
                     }}
                   >
-                    <XCircle className="w-5 h-5" />
+                    <XCircle className="w-4 h-4 sm:w-5 sm:h-5" />
                     <span>Review Later</span>
                   </button>
                 </div>
@@ -242,27 +294,29 @@ const FlashcardsPage: React.FC = () => {
         </div>
 
         {/* Completion Message */}
-        {currentIndex === flashcards.length - 1 && (knewCount + forgotCount) > 0 && (
+        {currentIndex === dailyCards.length - 1 && (knewCount + forgotCount) > 0 && (
           <div className="max-w-2xl mx-auto">
-            <div className="rounded-xl border-2 border-[#F59E0B]/30 bg-slate-900/70 backdrop-blur-sm p-6 text-center">
-              <Award className="w-12 h-12 text-[#F59E0B] mx-auto mb-3" />
-              <h2 className="text-xl font-bold text-white mb-2">
-                Great Progress!
+            <div className="rounded-xl border-2 border-[#F59E0B]/30 bg-slate-900/70 backdrop-blur-sm p-4 sm:p-6 text-center">
+              <Award className="w-10 h-10 sm:w-12 sm:h-12 text-[#F59E0B] mx-auto mb-2 sm:mb-3" />
+              <h2 className="text-lg sm:text-xl font-bold text-white mb-2">
+                Day {currentDay} Complete! 🎉
               </h2>
-              <p className="text-slate-400 text-sm mb-4">
-                You've reviewed {knewCount + forgotCount} flashcards. Keep practicing daily!
+              <p className="text-slate-400 text-xs sm:text-sm mb-3 sm:mb-4">
+                You've reviewed all {dailyCards.length} flashcards for today. Come back tomorrow for the next set!
               </p>
-              <button
-                onClick={() => {
-                  setCurrentIndex(0);
-                  setIsFlipped(false);
-                  setKnewCount(0);
-                  setForgotCount(0);
-                }}
-                className="px-6 py-2 bg-[#F59E0B] text-slate-950 rounded-lg font-semibold hover:bg-[#F59E0B]/90 transition"
-              >
-                Restart Practice
-              </button>
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center">
+                <button
+                  onClick={() => {
+                    setCurrentIndex(0);
+                    setIsFlipped(false);
+                    setKnewCount(0);
+                    setForgotCount(0);
+                  }}
+                  className="px-4 py-2 sm:px-6 sm:py-2 bg-slate-800 text-white rounded-lg font-semibold hover:bg-slate-700 transition border border-slate-700 text-sm"
+                >
+                  Review Today's Cards
+                </button>
+              </div>
             </div>
           </div>
         )}
