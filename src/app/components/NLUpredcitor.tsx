@@ -539,7 +539,7 @@ const App: React.FC = () => {
                 </svg>
               </div>
               <p className="text-xl font-semibold text-white mb-2">
-                Fill the form above and click "Access Predictor"
+                Fill the form above and click {"Access Predictor"}
               </p>
               <p className="text-slate-400">
                 Enter your details and score to get personalized college predictions.
@@ -599,19 +599,19 @@ const App: React.FC = () => {
     </span>
 
     <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-        <a 
+        <Link 
             href="/#capsules"
             className="w-full text-center sm:w-auto px-6 py-3 rounded-lg bg-[#F59E0B] hover:bg-[#D97706] text-white font-semibold transition-all duration-300 shadow-md hover:shadow-lg text-base"
         >
             GK Capsules
-        </a>
+        </Link>
 
-        <a 
+        <Link 
             href="/#flashcards"
             className="w-full text-center sm:w-auto px-6 py-3 rounded-lg bg-[#F59E0B] hover:bg-[#D97706] text-white font-semibold transition-all duration-300 shadow-md hover:shadow-lg text-base"
         >
             Flashcards
-        </a>
+        </Link>
     </div>
 </div> 
       </div>
