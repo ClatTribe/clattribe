@@ -21,6 +21,7 @@ export const metadata: Metadata = {
   description: "Your trusted platform for CLAT preparation and law careers.",
   icons: {
     icon: [
+      { url: '/shortlogo.png', sizes: '48x48', type: 'image/png' },
       { url: '/shortlogo.png', sizes: '32x32', type: 'image/png' },
       { url: '/shortlogo.png', sizes: '16x16', type: 'image/png' },
     ],
