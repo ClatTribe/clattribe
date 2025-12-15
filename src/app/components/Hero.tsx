@@ -45,7 +45,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           </div>
 
           <h1 className="text-3xl md:text-6xl font-serif font-bold leading-tight mb-6">
-            Master the Fact.
+            Master the Facts.
             <br />
             <span
               className="text-transparent bg-clip-text bg-gradient-to-r"
