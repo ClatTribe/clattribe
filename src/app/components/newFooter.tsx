@@ -3,7 +3,7 @@ import { Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
 
 const NewFooter: React.FC = () => {
   return (
-    <footer className="py-14" style={{ backgroundColor: "#020617" }}>
+    <footer className="py-10" style={{ backgroundColor: "#020617" }}>
       <div className="container mx-auto px-6">
         
         {/* TOP SECTION */}

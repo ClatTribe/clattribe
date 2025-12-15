@@ -348,10 +348,10 @@ const App: React.FC = () => {
         <div className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-indigo-500/5 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 pt-8 pb-12 flex flex-col gap-8">
+      <div className="relative max-w-7xl mx-auto px-4 pt-6 pb-12 flex flex-col gap-8">
         
         {/* Header */}
-        <div className="text-center space-y-4">
+        <div className="text-center space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 shadow-sm text-xs font-semibold uppercase tracking-widest text-[#F59E0B]">
             <span className="w-2 h-2 rounded-full bg-[#F59E0B] animate-pulse"></span>
             CLAT 2026 Predictor
@@ -359,7 +359,7 @@ const App: React.FC = () => {
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white">
             Where will your <span className="text-[#F59E0B]">score</span> take you?
           </h1>
-          <p className="text-lg text-slate-400 max-w-2xl mx-auto">
+          <p className=" text-slate-400 max-w-2xl text-md mx-auto">
             Enter your details and estimated score to instantly see which National Law Universities are within your reach.
           </p>
         </div>
@@ -371,15 +371,15 @@ const App: React.FC = () => {
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-[#F59E0B] animate-pulse"></div>
-                <h2 className="text-lg font-bold text-white">
-                  Enter Your Details and Criteria
-                </h2>
+                <h3 className="font-semibold text-white">
+                  Enter Your Details and Criteria :
+                </h3>
               </div>
-              {isFormSubmitted && (
+              {/* {isFormSubmitted && (
                 <span className="text-xs px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 font-semibold border border-emerald-500/40">
                   ✓ Data Saved
                 </span>
-              )}
+              )} */}
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
@@ -530,10 +530,10 @@ const App: React.FC = () => {
         </div>
 
         {/* Results Area */}
-        <div className="space-y-6 min-h-[400px]">
+        <div className="space-y-6  mb-12">
           {!isFormSubmitted ? (
             <div className="text-center py-20 opacity-60">
-              <div className="inline-block p-6 rounded-full bg-[#F59E0B]/10 mb-4">
+              <div className="inline-block p-6 rounded-full bg-[#F59E0B] mb-4">
                 <svg className="w-16 h-16 text-[#F59E0B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
@@ -578,8 +578,8 @@ const App: React.FC = () => {
               </div>
             </div>
           ) : (
-            <div className="text-center py-20 opacity-60">
-                <div className="inline-block p-6 rounded-full bg-slate-800/50 mb-4">
+            <div className="text-center mt-8 opacity-60 ">
+                <div className="inline-block p-6 rounded-full bg-slate-800/50">
                     <svg className="w-16 h-16 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
                     </svg>
@@ -593,7 +593,7 @@ const App: React.FC = () => {
             </div>
           )}
         </div>
-        <div className="w-full bg-slate-900/50 rounded-xl border border-slate-800 p-4 sm:p-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="w-full bg-slate-900/50 rounded-xl border border-slate-800 p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-center gap-4">
     <span className="text-white font-semibold text-lg sm:text-xl mb-2 sm:mb-0">
         Try our
     </span>
@@ -613,7 +613,7 @@ const App: React.FC = () => {
             Flashcards
         </Link>
     </div>
-</div> 
+        </div> 
       </div>
       <NewFooter /> 
     </div>
