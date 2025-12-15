@@ -3,12 +3,12 @@ import AILETpredictor from '../components/AILETpredictor';
 
 // import AILETpre
 export const metadata: Metadata = {
-  title: 'CLAT 2026 NLU Predictor | Check Your Admission Chances',
-  description: 'Enter your estimated CLAT score to instantly see which National Law Universities are within your reach. Get personalized predictions for CLAT 2026.',
-  keywords: 'CLAT predictor, NLU admission, law university, CLAT 2026, National Law University',
+  title: 'CLAT 2026 AILET Predictor | Check Your Admission Chances',
+  description: 'Enter your estimated AILET score to instantly check your chances of admission to the National Law University, Delhi. Get a personalized prediction for AILET 2026.',
+  keywords: 'CLAT predictor, AILET admission, law university, CLAT 2026, National Law University',
   openGraph: {
-    title: 'CLAT 2026 NLU Predictor',
-    description: 'Discover which National Law Universities you can get into based on your CLAT score',
+    title: 'CLAT 2026 AILET Predictor',
+    description: 'Check whether your AILET score is enough for admission to National Law University, Delhi',
   }
 };
 
