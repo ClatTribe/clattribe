@@ -121,7 +121,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ category, score, isEligib
         {!isEligible && (
           <div className="mt-6 p-4 bg-slate-900/30 rounded-lg border border-slate-700/50 relative z-10">
             <p className="text-sm text-slate-300">
-              <span className="font-semibold text-white">Don't lose hope!</span> Vacancies often arise in later admission lists, and there are many pathways to success. Consider strengthening your application or exploring other excellent law schools.
+              <span className="font-semibold text-white">{"Don't"} lose hope!</span> Vacancies often arise in later admission lists, and there are many pathways to success. Consider strengthening your application or exploring other excellent law schools.
             </p>
           </div>
         )}
@@ -356,7 +356,7 @@ const App: React.FC = () => {
             AILET <span className="text-[#F59E0B]">Predictor</span>
           </h1>
           <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-            Enter your details and estimated AILET score to check if you're in the expected cutoff range for NLU Delhi.
+            Enter your details and estimated AILET score to check if {"you're"} in the expected cutoff range for NLU Delhi.
           </p>
         </div>
 
@@ -536,7 +536,7 @@ const App: React.FC = () => {
                 </svg>
               </div>
               <p className="text-xl font-semibold text-white mb-2">
-                Fill the form above and click "Access Predictor"
+                Fill the form above and click {"Access Predictor"}
               </p>
               <p className="text-slate-400">
                 Enter your details and score to check your eligibility for NLU Delhi.
@@ -571,19 +571,19 @@ const App: React.FC = () => {
           </span>
 
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-              <a 
+              <Link 
                   href="/#capsules"
                   className="w-full text-center sm:w-auto px-6 py-3 rounded-lg bg-[#F59E0B] hover:bg-[#D97706] text-white font-semibold transition-all duration-300 shadow-md hover:shadow-lg text-base"
               >
                   GK Capsules
-              </a>
+              </Link>
 
-              <a 
+              <Link 
                   href="/#flashcards"
                   className="w-full text-center sm:w-auto px-6 py-3 rounded-lg bg-[#F59E0B] hover:bg-[#D97706] text-white font-semibold transition-all duration-300 shadow-md hover:shadow-lg text-base"
               >
                   Flashcards
-              </a>
+              </Link>
           </div>
         </div> 
       </div>
