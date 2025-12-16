@@ -34,7 +34,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           className="md:w-1/2 text-left mb-10 md:mb-0"
         >
           <div
-            className="inline-block px-3 py-1 mb-4 border rounded-full text-sm font-semibold tracking-wide"
+            className="inline-block px-3 mt-2 py-1 mb-4 border rounded-full text-sm font-semibold tracking-wide"
             style={{
               borderColor: "#f59e0b4D",
               backgroundColor: "#f59e0b1A",
@@ -44,7 +44,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
             #1 GK PLATFORM FOR CLAT
           </div>
 
-          <h1 className="text-3xl md:text-6xl font-serif font-bold leading-tight mb-6">
+          <h1 className="text-3xl md:text-6xl font-serif font-bold leading-tight mb-2">
             Master the Facts.
             <br />
             <span
@@ -57,7 +57,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
             </span>
           </h1>
 
-          <p className="text-slate-400 text-lg md:text-xl mb-8 max-w-lg leading-relaxed">
+          <p className="text-slate-400 text-[14px] md:text-xl mb-6 max-w-lg leading-relaxed">
             Stop drowning in newspapers. ClatTribe delivers high-impact GK
             capsules, smart flashcards, and strategies curated by us.
           </p>
@@ -96,7 +96,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="md:w-1/2 flex justify-center relative"
         >
-          <div className="relative w-80 h-80 md:w-[500px] md:h-[600px]">
+          <div className="relative w-80 h-80 mb-7 md:w-[500px] md:h-[600px]">
             {/* Decorative Frame */}
             <div
               className="absolute inset-0 border-2 rounded-2xl transform rotate-3 scale-105"

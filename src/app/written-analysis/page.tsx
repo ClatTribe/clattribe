@@ -28,9 +28,9 @@ const WrittenAnalysisPage: React.FC = () => {
           <div className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-indigo-500/5 rounded-full blur-3xl"></div>
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 py-12">
+        <div className="relative max-w-7xl mx-auto px-4 py-6">
           {/* Header */}
-          <div className="text-center space-y-4 mb-12">
+          <div className="text-center space-y-4 mb-8">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 shadow-sm text-xs font-semibold uppercase tracking-widest text-[#F59E0B]">
               <span className="w-2 h-2 rounded-full bg-[#F59E0B] animate-pulse"></span>
               Written Analysis
@@ -55,13 +55,13 @@ const WrittenAnalysisPage: React.FC = () => {
                     CLAT 2026 Exam Analysis
                   </h2>
                   <p className="text-base text-slate-300 leading-relaxed mb-4">
-                    The CLAT 2026 exam, held on December 7, 2025, has been widely assessed by experts and students as having an <span className="text-[#F59E0B] font-semibold">"easy to moderate"</span> overall difficulty level. The paper followed a predictable structure but featured one major surprise that significantly impacted the test-taking strategy.
+                    The CLAT 2026 exam, held on December 7, 2025, has been widely assessed by experts and students as having an <span className="text-[#F59E0B] font-semibold">{"easy to moderate"}</span> overall difficulty level. The paper followed a predictable structure but featured one major surprise that significantly impacted the test-taking strategy.
                   </p>
                 </div>
 
                 {/* Section-Wise Performance */}
                 <div className="space-y-4">
-                  <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                  <h3 className="text-lg font-bold text-white flex items-center gap-2">
                     <AlertCircle className="w-5 h-5 text-[#F59E0B]" />
                     Section-Wise Performance & Key Surprise
                   </h3>
@@ -78,7 +78,7 @@ const WrittenAnalysisPage: React.FC = () => {
 
                 {/* Implications */}
                 <div className="space-y-4 pt-4 border-t border-slate-800">
-                  <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                  <h3 className="text-lg font-bold text-white flex items-center gap-2">
                     <CheckCircle className="w-5 h-5 text-[#F59E0B]" />
                     Implications and Next Steps
                   </h3>
@@ -99,7 +99,7 @@ const WrittenAnalysisPage: React.FC = () => {
                 {/* Watch Button */}
                 <button
                   onClick={() => setIsPlaying(!isPlaying)}
-                  className="inline-flex items-center gap-2 self-start px-6 py-3 rounded-xl bg-[#F59E0B] hover:bg-[#F59E0B]/90 text-white font-semibold transition-all duration-300 shadow-lg shadow-[#F59E0B]/30 hover:shadow-[#F59E0B]/50"
+                  className="inline-flex w-full items-center gap-2 self-start px-6 py-3 rounded-xl bg-[#F59E0B] hover:bg-[#F59E0B]/90 text-white font-semibold transition-all duration-300 shadow-lg shadow-[#F59E0B]/30 hover:shadow-[#F59E0B]/50"
                 >
                   <Play className="w-5 h-5" fill="white" />
                   {isPlaying ? 'Hide Video' : 'Watch Detailed Analysis'}
