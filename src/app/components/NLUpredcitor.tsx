@@ -1104,7 +1104,7 @@ const App: React.FC = () => {
               {/* Rank (Editable always) */}
               <div className="md:col-span-1">
                 <label htmlFor="score" className="block text-xs font-semibold text-slate-400 mb-1.5">
-                  Expected Rank *
+                  Rank *
                 </label>
                 <input
                   type="number"
