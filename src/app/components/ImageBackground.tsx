@@ -6,7 +6,7 @@ interface HeroProps {
 const ImageBackground: React.FC<HeroProps>=({onNavigate})=> {
   return (
     <div className='md:hidden relative'>
-        <img className='h-screen w-full object-cover' src="https://res.cloudinary.com/daetdadtt/image/upload/v1765958092/hiii_cpo4hu.png" alt="" />
+        <img className='h-screen w-full object-cover' src="https://res.cloudinary.com/daetdadtt/image/upload/v1765958422/hiii_optimized_500_uu8dmd.png" alt="" />
         <div className="container mx-auto px-6 z-10 flex flex-col md:flex-row items-left absolute top-[68%]">
         {/* Text Content */}
         <motion.div
