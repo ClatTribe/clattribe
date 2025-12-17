@@ -9,6 +9,7 @@ import Link from 'next/link';
 import Image from "next/image";
 import TrendingBlogs from './components/trendingBlogs';
 import { GraduationCap, ArrowRight, CheckCircle, X, Menu } from 'lucide-react';
+import ImageBackground from './components/ImageBackground';
 
 const LeadForm: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -257,7 +258,7 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-brand-900 text-white font-sans selection:bg-brand-gold selection:text-brand-900">
       {/* Navigation */}
-      <nav className="fixed w-full z-50 bg-brand-900/95 backdrop-blur-md border-b border-white/5">
+      <nav className="fixed w-full z-50 bg-brand-900/95  backdrop-blur-md border-b border-white/5">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-3">
             <Image src="/heading.png" alt="Clat Tribe Logo" width={180} height={180} className="rounded" />
@@ -343,6 +344,7 @@ const App: React.FC = () => {
       </nav>
 
       <main>
+        <ImageBackground onNavigate={handleNavigate}/>
         <Hero onNavigate={handleNavigate} />
         <div id="capsules">
           <CapsuleSystem />

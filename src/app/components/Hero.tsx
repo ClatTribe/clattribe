@@ -10,7 +10,7 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
   return (
     <section
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 text-white"
+      className="relative min-h-screen lg:flex hidden sm:block items-center justify-center overflow-hidden pt-20 text-white"
       style={{ backgroundColor: "#0f172a" }}
     >
       {/* Background Elements */}
@@ -34,7 +34,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           className="md:w-1/2 text-left mb-10 md:mb-0"
         >
           <div
-            className="inline-block px-3 mt-2 py-1 mb-4 border rounded-full text-sm font-semibold tracking-wide"
+            className="w-[215px] hidden sm:block px-3 mt-2 py-1 mb-4 border rounded-full text-sm font-semibold tracking-wide "
             style={{
               borderColor: "#f59e0b4D",
               backgroundColor: "#f59e0b1A",
@@ -44,7 +44,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
             #1 GK PLATFORM FOR CLAT
           </div>
 
-          <h1 className="text-3xl md:text-6xl font-serif font-bold leading-tight mb-2">
+          <h1 className="text-3xl hidden sm:block md:text-6xl font-serif font-bold leading-tight mb-2">
             Master the Facts.
             <br />
             <span
@@ -57,12 +57,12 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
             </span>
           </h1>
 
-          <p className="text-slate-400 text-[14px] md:text-xl mb-6 max-w-lg leading-relaxed">
+          <p className="text-slate-400 hidden sm:block text-[14px] md:text-xl mb-6 max-w-lg leading-relaxed">
             Stop drowning in newspapers. ClatTribe delivers high-impact GK
             capsules, smart flashcards, and strategies curated by us.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="hidden sm:block lg:flex flex-col sm:flex-row gap-4">
             <button
               onClick={() => onNavigate('leadform')}
               className="px-8 py-4 font-bold rounded-lg transition-all flex items-center justify-center gap-2 group shadow-[0_0_20px_rgba(245,158,11,0.3)] hover:shadow-[0_0_30px_rgba(245,158,11,0.5)] hover:scale-105"
@@ -96,7 +96,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="md:w-1/2 flex justify-center relative"
         >
-          <div className="relative w-80 h-80 mb-7 md:w-[500px] md:h-[600px]">
+          <div className="relative hidden sm:block w-80 h-80 mb-7 md:w-[500px] md:h-[600px]">
             {/* Decorative Frame */}
             <div
               className="absolute inset-0 border-2 rounded-2xl transform rotate-3 scale-105"
