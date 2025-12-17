@@ -34,7 +34,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           className="md:w-1/2 text-left mb-10 md:mb-0"
         >
           <div
-            className="w-[215px] hidden sm:block px-3 mt-2 py-1 mb-4 border rounded-full text-sm font-semibold tracking-wide "
+            className="w-[30%] hidden sm:block px-3 mt-2 py-1 mb-4 border rounded-full text-sm font-semibold tracking-wide "
             style={{
               borderColor: "#f59e0b4D",
               backgroundColor: "#f59e0b1A",
@@ -44,7 +44,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
             #1 GK PLATFORM FOR CLAT
           </div>
 
-          <h1 className="text-3xl hidden sm:block md:text-6xl font-serif font-bold leading-tight mb-2">
+          <h1 className="text-3xl w-full hidden sm:block md:text-6xl font-serif font-bold leading-tight mb-2">
             Master the Facts.
             <br />
             <span

@@ -13,10 +13,10 @@ const ImageBackground: React.FC<HeroProps>=({onNavigate})=> {
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="md:w-1/2 text-left mb-3 md:mb-0"
+          className="md:w-1/2 text-left  w-full mb-3 md:mb-0"
         >
           <div
-            className="inline-block w-[215px] px-3 mt-0 py-1 mb-2 border rounded-full text-sm font-semibold tracking-wide"
+            className="inline-block  w-[70%] px-3 mt-0 py-1 mb-2 border rounded-full text-sm font-semibold tracking-wide"
             style={{
               borderColor: "#f59e0b4D",
               backgroundColor: "#f59e0b1A",
@@ -26,7 +26,7 @@ const ImageBackground: React.FC<HeroProps>=({onNavigate})=> {
             #1 GK PLATFORM FOR CLAT
           </div>
 
-          <h1 className="text-3xl md:text-6xl w-full font-serif font-bold leading-tight mb-2">
+          <h1 className="text-3xl w-full md:text-6xl w-full font-serif font-bold leading-tight mb-2">
             Master the Facts.
             <br />
             <span
