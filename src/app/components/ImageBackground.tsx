@@ -1,5 +1,3 @@
-import Image from 'next/image'
-import vivek from '../../../public/vivek.png'
 import { motion } from "framer-motion";
 import { ArrowRight, BookOpen } from "lucide-react";
 interface HeroProps {
@@ -8,7 +6,7 @@ interface HeroProps {
 const ImageBackground: React.FC<HeroProps>=({onNavigate})=> {
   return (
     <div className='md:hidden relative'>
-        <Image className='h-screen w-full object-cover' src={vivek} alt="" />
+        <img className='h-screen w-full object-cover' src="https://res.cloudinary.com/daetdadtt/image/upload/v1765958092/hiii_cpo4hu.png" alt="" />
         <div className="container mx-auto px-6 z-10 flex flex-col md:flex-row items-left absolute top-[68%]">
         {/* Text Content */}
         <motion.div
