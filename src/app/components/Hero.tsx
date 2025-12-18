@@ -34,7 +34,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           className="md:w-1/2 text-left mb-10 md:mb-0"
         >
           <div
-            className="lg:w-[40%] xl:w-[30%] md:w-[60%] whitespace-nowrap  hidden sm:block px-3 mt-2 py-1 mb-4 border rounded-full text-sm font-semibold tracking-wide "
+            className="lg:w-[40%] xl:w-[30%] md:w-[67%] whitespace-nowrap  hidden sm:block px-3 mt-2 py-1 mb-4 border rounded-full text-sm font-semibold tracking-wide "
             style={{
               borderColor: "#f59e0b4D",
               backgroundColor: "#f59e0b1A",
@@ -44,7 +44,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
             #1 GK PLATFORM FOR CLAT
           </div>
 
-          <h1 className="lg:text-6xl md:text-4xl whitespace-nowrap text-3xl w-full hidden sm:block  font-serif font-bold leading-tight mb-2">
+          <h1 className="lg:text-4xl xl:text-6xl  md:text-4xl text-3xl w-full hidden sm:block  font-serif font-bold leading-tight mb-2">
             Master the Facts.
             <br />
             <span
@@ -94,9 +94,9 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="md:w-1/2 flex justify-center relative"
+          className="md:w-1/2 flex top-5 justify-center relative"
         >
-          <div className="relative hidden sm:block w-80 h-80 mb-7 md:w-[500px] md:h-[600px]">
+          <div className="relative  hidden sm:block w-80 h-80  mb-7 md:w-[70%] md:h-[60vh]">
             {/* Decorative Frame */}
             <div
               className="absolute inset-0 border-2 rounded-2xl transform rotate-3 scale-105"
