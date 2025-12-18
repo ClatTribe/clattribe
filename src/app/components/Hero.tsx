@@ -34,7 +34,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           className="md:w-1/2 text-left mb-10 md:mb-0"
         >
           <div
-            className="lg:w-[30%] md:w-[60%] whitespace-nowrap  hidden sm:block px-3 mt-2 py-1 mb-4 border rounded-full text-sm font-semibold tracking-wide "
+            className="lg:w-[40%] xl:w-[30%] md:w-[60%] whitespace-nowrap  hidden sm:block px-3 mt-2 py-1 mb-4 border rounded-full text-sm font-semibold tracking-wide "
             style={{
               borderColor: "#f59e0b4D",
               backgroundColor: "#f59e0b1A",
