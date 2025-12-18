@@ -778,7 +778,7 @@ const App: React.FC = () => {
     }
   }, []);
 
-  const validateForm = (data: FormData): boolean => {
+ const validateForm = (data: FormData): boolean => {
     const newErrors: FormErrors = {};
 
     if (!data.name.trim()) {
@@ -801,8 +801,10 @@ const App: React.FC = () => {
       newErrors.score = 'Rank is required';
     } else {
       const scoreNum = parseFloat(data.score);
-      if (isNaN(scoreNum) || scoreNum < 1 || scoreNum > 10000) {
-        newErrors.score = 'Rank must be between 1 and 10000';
+      if (isNaN(scoreNum) || scoreNum < 1) {
+        newErrors.score = 'Please enter a valid rank (minimum 1)';
+      } else if (scoreNum > 1000000) {
+        newErrors.score = 'Rank seems unusually high. Please verify.';
       }
     }
 
@@ -1114,7 +1116,7 @@ const App: React.FC = () => {
                   onChange={handleChange}
                   placeholder="Enter your rank"
                   min="1"
-                  max="10000"
+                  // max="10000"
                   step="1"
                   disabled={isSubmitting}
                   className={`w-full px-3 py-2.5 rounded-lg border ${
