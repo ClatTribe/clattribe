@@ -16,7 +16,7 @@ const ImageBackground: React.FC<HeroProps>=({onNavigate})=> {
           className="md:w-1/2 text-left  w-full mb-3 md:mb-0"
         >
           <div
-            className="inline-block  w-[70%] px-3 mt-0 py-1 mb-2 border rounded-full text-sm font-semibold tracking-wide"
+            className="inline-block sm:w-[70%] px-3 mt-0 py-1 mb-2 border rounded-full text-sm font-semibold tracking-wide"
             style={{
               borderColor: "#f59e0b4D",
               backgroundColor: "#f59e0b1A",
