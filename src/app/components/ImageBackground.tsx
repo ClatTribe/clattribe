@@ -26,7 +26,7 @@ const ImageBackground: React.FC<HeroProps>=({onNavigate})=> {
             #1 GK PLATFORM FOR CLAT
           </div>
 
-          <h1 className="text-3xl w-full md:text-6xl w-full font-serif font-bold leading-tight mb-2">
+          <h1 className="text-3xl  md:text-6xl w-full font-serif font-bold leading-tight mb-2">
             Master the Facts.
             <br />
             <span
