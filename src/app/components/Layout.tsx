@@ -19,6 +19,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       icon: <BarChart3 className="w-5 h-5" />
     },
     { 
+      href: '/nlu-preference-list', 
+      label: 'NLU Preference List', 
+      icon: <BarChart3 className="w-5 h-5" />
+    },
+    { 
       href: '/ailet-predictor', 
       label: 'AILET Predictor', 
       icon: <BarChart3 className="w-5 h-5" />
