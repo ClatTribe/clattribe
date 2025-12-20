@@ -38,11 +38,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       label: 'Video Analysis', 
       icon: <Video className="w-5 h-5" />
     },
-    { 
-      href: 'my-clat-performance', 
-      label: 'My CLAT Performance', 
-      icon: <TrendingUp className="w-5 h-5" />
-    },
+    // { 
+    //   href: 'my-clat-performance', 
+    //   label: 'My CLAT Performance', 
+    //   icon: <TrendingUp className="w-5 h-5" />
+    // },
     { 
       href: 'connect-with-mentors', 
       label: 'Connect With Mentors', 
