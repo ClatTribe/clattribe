@@ -215,7 +215,7 @@ const PredictorForm: React.FC<PredictorFormProps> = ({ onPredict, isLoading }) =
         </div>
         
         {/* Category - Always editable */}
-        <div>
+        {/* <div>
           <label className="block text-xs font-medium text-gray-400 mb-2">Category *</label>
           <select
             name="category"
@@ -231,7 +231,7 @@ const PredictorForm: React.FC<PredictorFormProps> = ({ onPredict, isLoading }) =
           {errors.category && (
             <p className="mt-1 text-xs text-red-400">{errors.category}</p>
           )}
-        </div>
+        </div> */}
 
         {/* Rank - Always editable */}
         <div>
