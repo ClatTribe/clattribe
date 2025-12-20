@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import NLUPreference from '../components/NLUPreference/NLUPreference';
 
 export const metadata: Metadata = {
-  title: 'CLAT 2026 NLU Preference List | Arrange NLUs as Per Your Choice',
+  title: 'CLAT 2026 NLU Preference List | Your ideal NLUs as Per Your Rank',
   description: 'Create and customize your CLAT 2026 NLU Preference List by arranging National Law Universities based on what matters most to you—ranking, location, placements, and more.',
   keywords: 'CLAT 2026 NLU preference list, NLU choice filling, CLAT counselling, National Law University ranking, law college preference',
   openGraph: {
