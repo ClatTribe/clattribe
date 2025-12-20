@@ -6,6 +6,7 @@ import NLUCard from './NLUCard';
 import { UserPreferences } from './types';
 import { NLU_DATA } from './constants';
 import { Info, LayoutGrid, List } from 'lucide-react';
+import Link from 'next/link';
 
 const NLUPreference: React.FC = () => {
   const [userPrefs, setUserPrefs] = useState<UserPreferences | null>(null);
@@ -154,6 +155,27 @@ const NLUPreference: React.FC = () => {
           </div>
         </main>
       </div>
+      <div className="w-full bg-slate-900/50 rounded-xl border border-slate-800 p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+    <span className="text-white font-semibold text-lg sm:text-xl mb-2 sm:mb-0">
+        Try our
+    </span>
+
+    <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+        <Link 
+            href="/#capsules"
+            className="w-full text-center sm:w-auto px-6 py-3 rounded-lg bg-[#F59E0B] hover:bg-[#D97706] text-white font-semibold transition-all duration-300 shadow-md hover:shadow-lg text-base"
+        >
+            GK Capsules
+        </Link>
+
+        <Link 
+            href="/#flashcards"
+            className="w-full text-center sm:w-auto px-6 py-3 rounded-lg bg-[#F59E0B] hover:bg-[#D97706] text-white font-semibold transition-all duration-300 shadow-md hover:shadow-lg text-base"
+        >
+            Flashcards
+        </Link>
+    </div>
+        </div> 
     </Layout>
   );
 };

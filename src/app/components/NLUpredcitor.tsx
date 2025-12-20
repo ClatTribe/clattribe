@@ -1175,7 +1175,7 @@ const App: React.FC = () => {
         <div className="space-y-6  mb-12">
           {!isFormSubmitted ? (
             <div className="text-center py-20 opacity-60">
-              <div className="inline-block p-6 rounded-full bg-[#F59E0B] mb-4">
+               <div className="inline-block p-6 rounded-full bg-[#F59E0B]/10 mb-4">
                 <svg className="w-16 h-16 text-[#F59E0B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
