@@ -21,12 +21,12 @@ export const metadata: Metadata = {
   description: "Your trusted platform for CLAT preparation and law careers.",
   icons: {
     icon: [
-      { url: '/shortlogo.png', sizes: '48x48', type: 'image/png' },
-      { url: '/shortlogo.png', sizes: '32x32', type: 'image/png' },
-      { url: '/shortlogo.png', sizes: '16x16', type: 'image/png' },
+      { url: '/clattribe.png', sizes: '48x48', type: 'image/png' },
+      { url: '/clattribe.png', sizes: '32x32', type: 'image/png' },
+      { url: '/clattribe.png', sizes: '16x16', type: 'image/png' },
     ],
-    apple: '/shortlogo.png',
-    shortcut: '/shortlogo.png',
+    apple: '/clattribe.png',
+    shortcut: '/clattribe.png',
   },
 };
 
@@ -42,8 +42,8 @@ export default function RootLayout({
     >
       <head>
         {/* Favicon Links */}
-        <link rel="icon" type="image/png" href="/shortlogo.png" />
-        <link rel="shortcut icon" href="/shortlogo.png" />
+        <link rel="icon" type="image/png" href="/clattribe.png" />
+        <link rel="shortcut icon" href="/clattribe.png" />
         
         {/* Google Fonts for Template */}
         <link

@@ -10,3 +10,7 @@ export const metadata: Metadata = {
     description: 'Build your ideal CLAT 2026 NLU Preference List by ordering National Law Universities according to your personal priorities.',
   }
 };
+
+export default function Page() {
+  return <NLUPreference />;
+}
