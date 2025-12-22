@@ -290,6 +290,9 @@ const App: React.FC = () => {
             <Link href="/nlu-predictor" className="hover:text-white transition-colors">
               NLU Predictor
             </Link>
+            <Link href="/nlu-preference-list" className="hover:text-white transition-colors">
+              NLU Preference List
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -337,6 +340,13 @@ const App: React.FC = () => {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 NLU Predictor
+              </Link>
+              <Link 
+                href="/nlu-preference-list" 
+                className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                NLU Preference List
               </Link>
             </div>
           </div>
