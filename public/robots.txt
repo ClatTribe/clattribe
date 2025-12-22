@@ -1,2 +1,18 @@
+# Default rules for all crawlers
 User-agent: *
+
+# Allow crawling of all public content
 Allow: /
+
+# Disallow sensitive/private areas:
+Disallow: /admin
+Disallow: /dashboard
+Disallow: /profile
+Disallow: /account
+Disallow: /login
+Disallow: /register
+Disallow: /api/ # Block API endpoints if they don't return indexable content
+Disallow: /_next/ # Block internal Next.js build assets (not content)
+
+# Specify the location of your sitemap file(s)
+Sitemap: www.clattribe.com
