@@ -8,7 +8,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'CLAT 2026 NLU Predictor',
     description: 'Discover which National Law Universities you can get into based on your CLAT score',
-  }
+  },
+  alternates: { // <-- Added this block for SEO clarity
+    canonical: 'www.clattribe.com',
+  },
 };
 
 export default function Page() {
