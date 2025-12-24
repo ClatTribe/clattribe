@@ -320,6 +320,54 @@ const FlashcardsPage: React.FC = () => {
             </div>
           </div>
         )}
+        <div className="flex justify-center mt-6">
+          <div
+            className="flex flex-col md:flex-row items-center gap-4 px-6 py-4 rounded-xl shadow-lg border w-full max-w-2xl"
+            style={{
+              backgroundColor: "#1e293b",
+              borderColor: "#f59e0b33",
+            }}
+          >
+            <div className="flex-1">
+              <h3 className="text-lg md:text-xl font-serif font-bold">
+                Subscribe to daily GK Flashcards 
+              </h3>
+              <div className="flex items-center gap-3 mt-2">
+                <span
+                  className="text-2xl font-bold line-through opacity-50"
+                  style={{ color: "#94a3b8" }}
+                >
+                  ₹999
+                </span>
+                <span
+                  className="text-3xl font-bold"
+                  style={{ color: "#f59e0b" }}
+                >
+                  ₹0
+                </span>
+                <span
+                  className="px-3 py-1 rounded-full text-xs font-bold"
+                  style={{
+                    backgroundColor: "#22c55e33",
+                    color: "#22c55e",
+                  }}
+                >
+                  LIMITED TIME
+                </span>
+              </div>
+            </div>
+            <button
+              onClick={() => window.location.href = '/#leadform'}
+              className="px-6 py-3 text-sm font-bold rounded-lg transition-all shadow-[0_0_20px_rgba(245,158,11,0.3)] hover:shadow-[0_0_30px_rgba(245,158,11,0.5)] hover:scale-105 whitespace-nowrap"
+              style={{
+                backgroundColor: "#f59e0b",
+                color: "#0f172a",
+              }}
+            >
+              Join the tribe
+            </button>
+          </div>
+        </div>
       </div>
     </div>
     </Layout>
