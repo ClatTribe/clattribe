@@ -359,8 +359,8 @@ const App: React.FC = () => {
         <div id="capsules">
           <CapsuleSystem />
         </div>
-        <div id="flashcards">
-          <Flashcards onNavigate={handleNavigate} />
+        <div>
+          <Flashcards/>
         </div>
         <div id="blogs">
           <TrendingBlogs />
