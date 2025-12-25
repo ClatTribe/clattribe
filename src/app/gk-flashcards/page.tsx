@@ -357,8 +357,8 @@ const FlashcardsPage: React.FC = () => {
               </div>
             </div>
             <button
-              onClick={() => window.location.href = '/#leadform'}
-              className="px-6 py-3 text-sm font-bold rounded-lg transition-all shadow-[0_0_20px_rgba(245,158,11,0.3)] hover:shadow-[0_0_30px_rgba(245,158,11,0.5)] hover:scale-105 whitespace-nowrap"
+              onClick={() => window.open('https://chat.whatsapp.com/EIMkBl02bhr8lC36jvVCiv', '_blank')}
+              className="px-6 py-3 text-sm font-bold rounded-lg transition-all shadow-[0_0_20px_rgba(245,158,11,0.3)] hover:shadow-[0_0_30px_rgba(245,158,11,0.5)] hover:scale-105 whitespace-nowrap cursor-pointer"
               style={{
                 backgroundColor: "#f59e0b",
                 color: "#0f172a",
