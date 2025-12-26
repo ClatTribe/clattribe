@@ -192,7 +192,7 @@ const CoursePage = () => {
             <div className="p-8 sm:p-12 bg-slate-900/50 rounded-2xl border-2 border-dashed border-slate-700 max-w-4xl mx-auto">
               <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">Tribe Philosophy</h3>
               <p className="text-slate-400 text-lg sm:text-xl lg:text-2xl italic mb-6 sm:mb-8 leading-relaxed">
-                "Generic coaching got you to a plateau. The <span className="text-white font-bold">Director's Batch</span> will get you to an NLU. We don't just teach the syllabus; we teach you how to out-think the exam."
+                We don't just teach the Syllabus; We teach you how to out-think the Exam.
               </p>
               <div className="flex flex-col items-center">
                 <div className="flex items-center justify-center gap-1 mb-2">
