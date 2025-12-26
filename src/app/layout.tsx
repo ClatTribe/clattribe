@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Script from "next/script";
+import { Analytics } from '@vercel/analytics/react';
 
 import { Montserrat, Lato } from "next/font/google";
 
@@ -75,6 +76,7 @@ export default function RootLayout({
         </noscript>
 
         <main className="flex-1">{children}</main>
+        <Analytics />
       </body>
     </html>
   );

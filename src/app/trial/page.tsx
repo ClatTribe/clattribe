@@ -6,21 +6,21 @@ const COURSES = [
   {
     id: 'rankers-batch',
     name: "The Director's Batch (NLU Rankers)",
-    currentPrice: '₹14,999',
-    originalPrice: '₹34,999',
+    currentPrice: '₹4,999',
+    originalPrice: '₹9,999',
     tag: 'Elite Exclusive',
     description: "Generic coaching got you to a plateau. The Director's Batch will get you to an NLU. Designed for top-tier aspirants.",
-    features: ['Direct Access to NLU Mentors', 'Mock Analysis by Rank 1 Holders', 'Daily Answer Writing (Legal)', 'Advanced GK Deep-Dives', 'Personalized Mentorship by Yash Ji'],
+    features: ['Direct Access to NLU Mentors', 'Mock Analysis by Rank Holders', 'Daily Answer Writing (Legal)', 'Advanced GK Deep-Dives', 'One-on-One Mentorship by NLUs/IIM Alumni'],
     highlight: true
   },
   {
     id: 'gk-intensive',
-    name: 'GK Masterclass (The Capsule)',
+    name: 'GK Capsules',
     currentPrice: '₹6,999',
     originalPrice: '₹15,999',
     tag: 'Best Seller',
     description: 'Master the most volatile section. Current affairs, static GK, and legal updates curated by NLU alumni.',
-    features: ['Monthly GK Capsules', 'High-Yield Video Explainers', 'Weekly Current Affairs Quizzes', "Yash Ji's Special Notes"]
+    features: ['Monthly GK Capsules', 'High-Yield Video Explainers', 'Weekly Current Affairs Quizzes', "Yash Ji's Special Notes","Elite GK Flashcards"]
   },
   {
     id: 'gk-flashcards',
@@ -80,7 +80,7 @@ const CoursePage = () => {
                   </div>
                 </div>
                 <p className="text-slate-400 text-sm sm:text-base lg:text-lg leading-relaxed">
-                  Excellence deserves support. If you scored <span className="text-white font-bold">90+ in CLAT 2024</span> or achieve it in our scholarship mock, you are eligible for <span className="text-[#F59E0B] font-bold">100% scholarship</span>.
+                  Excellence deserves support. If you scored <span className="text-white font-bold">90+ in CLAT 2026</span> or achieve it in our scholarship mock, you are eligible for <span className="text-[#F59E0B] font-bold">100% scholarship</span>.
                 </p>
               </div>
               <div className="flex flex-col gap-3 w-full md:w-auto">
