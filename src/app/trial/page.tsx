@@ -40,6 +40,10 @@ const RANKERS = [
   { name: "Rahul Verma", rank: "AIR 92", college: "NLU Jodhpur", image: "https://i.pravatar.cc/150?u=rahul" }
 ];
 
+const handleWaiverCall = () => {
+  window.location.href = 'tel:8303865139';
+};
+
 const CoursePage = () => {
   return (
     <div className="min-h-screen bg-slate-950 text-white">
@@ -84,11 +88,14 @@ const CoursePage = () => {
                 </p>
               </div>
               <div className="flex flex-col gap-3 w-full md:w-auto">
-                <button className="px-8 sm:px-10 py-4 sm:py-5 bg-[#F59E0B] text-slate-950 font-extrabold rounded-xl hover:bg-white hover:scale-105 transition-all shadow-xl text-base sm:text-lg">
-                  Apply for Waiver
-                </button>
-                <p className="text-center text-xs text-slate-500 font-medium italic">*Applicable for Director's & Foundation batches</p>
-              </div>
+  <button 
+    onClick={handleWaiverCall}
+    className="px-8 sm:px-10 py-4 sm:py-5 bg-[#F59E0B] text-slate-950 font-extrabold rounded-xl hover:bg-white hover:scale-105 transition-all shadow-xl text-base sm:text-lg cursor-pointer"
+  >
+    Apply for Waiver
+  </button>
+  <p className="text-center text-xs text-slate-500 font-medium italic">*Applicable for Director's & Foundation batches</p>
+</div>
             </div>
           </div>
         </div>

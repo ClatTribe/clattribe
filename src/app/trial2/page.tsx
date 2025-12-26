@@ -4,29 +4,30 @@ import { Award, GraduationCap, Building2 } from 'lucide-react';
 
 const TEACHERS = [
   {
-    name: "Yash Ji",
-    role: "Lead GK & Current Affairs Mentor",
-    background: "NLSIU Bangalore Alumnus",
-    bio: "With over a decade of experience in legal education, Yash Ji has pioneered the 'Capsule' methodology that has helped over 5,000 students enter top NLUs.",
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400&h=500",
+    name: "Ashutosh Mishra",
+    // role: "Lead GK & Current Affairs Mentor",
+    background: "IIM Ahmedabad Alumnus",
+    bio: "With over a decade of experience in legal education, Ashutosh Mishra has pioneered the 'Capsule' methodology that has helped over 5,000 students enter top NLUs.",
+    image: "https://res.cloudinary.com/daetdadtt/image/upload/v1766744730/WhatsApp_Image_2025-12-26_at_14.49.25_1_ucqpct.jpg",
     stats: "AIR 12 Mentor",
-    specialty: "GK & Legal Current Affairs"
+    specialty: "GK & Legal Current Affairs",
+    layout: "left"
   },
   {
-    name: "Megha Sharma",
-    role: "Legal Reasoning Expert",
-    background: "NALSAR Hyderabad Alumna",
-    bio: "Megha specializes in decoding complex legal propositions. Her background as a practicing High Court advocate brings unparalleled practical insight to her sessions.",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400&h=500",
+    name: "Ashish Mishra",
+    // role: "Legal Reasoning Expert",
+    background: "IIT Bombay Alumnus",
+    bio: "Ashish specializes in decoding complex legal propositions. His background as a practicing High Court advocate brings unparalleled practical insight to his sessions.",
+    image: "https://res.cloudinary.com/daetdadtt/image/upload/v1766745275/WhatsApp_Image_2025-12-26_at_16.02.51_t5qrhu.jpg",
     stats: "NLU Topper",
     specialty: "Constitutional Law & Torts"
   },
   {
-    name: "Rohan Varma",
-    role: "Aptitude & Logical Lead",
-    background: "IIM Ahmedabad Alumnus",
-    bio: "Rohan brings the rigor of an IIM education to CLAT prep. He focuses on speed-solving techniques and data-driven critical reasoning strategies.",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400&h=500",
+    name: "Aradhya Vats",
+    // role: "Aptitude & Logical Lead",
+    background: "IPM IIM Indore Alumnus",
+    bio: "Aradhya Mam brings the rigor of an IIM education to CLAT prep. He focuses on speed-solving techniques and data-driven critical reasoning strategies.",
+    image: "https://res.cloudinary.com/daetdadtt/image/upload/v1766741253/WhatsApp_Image_2025-12-26_at_14.56.09_xihrb1.jpg",
     stats: "CAT 99.98%tile",
     specialty: "Critical Reasoning & QT"
   }
@@ -53,7 +54,10 @@ const TeachersPage = () => {
             Learn from <span className="text-[#F59E0B]">NLU & IIM Alumni</span>
           </h1>
           <p className="text-base sm:text-lg text-slate-400 max-w-3xl mx-auto px-2">
-            We don't just teach law; we've lived it. Our mentors are graduates of the very institutions you aspire to join.
+            We don't just teach law, We've lived it.
+          </p>
+          <p className="text-base sm:text-lg text-slate-400 max-w-3xl mx-auto px-2">
+            Our mentors are graduates of the very institutions you aspire to join.
           </p>
         </div>
 
@@ -76,7 +80,7 @@ const TeachersPage = () => {
                     <Building2 className="w-4 h-4" /> {teacher.background}
                   </div>
                   <h3 className="text-2xl sm:text-3xl font-bold text-white mb-1">{teacher.name}</h3>
-                  <p className="text-slate-300 text-sm font-medium">{teacher.role}</p>
+                  {/* <p className="text-slate-300 text-sm font-medium">{teacher.role}</p> */}
                 </div>
               </div>
               <div className="p-6 sm:p-8">
