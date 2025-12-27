@@ -7,7 +7,7 @@ const TEACHERS = [
     name: "Ashutosh Mishra",
     // role: "Lead GK & Current Affairs Mentor",
     background: "IIM Ahmedabad Alumnus",
-    bio: "Mr. Ashutosh Mishra is the Co-Founder of IPM Careers and an alumnus of the prestigious Indian Institute of Management, Ahmedabad. A Chemical Engineer by background, he brings a rare blend of technical expertise and managerial acumen to the field of education. With over a decade of teaching experience and having mentored more than 10,000 students, Mr. Mishra is renowned for his insightful guidance and dynamic teaching style. His passion lies in interacting with young minds and nurturing their academic and personal growth. This passion is reflected in his role at CLAT Tribe, where he has been instrumental in building a high-caliber faculty team and ensuring that the company consistently stands out through its quality-focused approach.",
+    bio: "Mr. Ashutosh Mishra is the Co-Founder of IPM Careers and an alumnus of the prestigious Indian Institute of Management, Ahmedabad. A Chemical Engineer by background, he brings a rare blend of technical expertise and managerial acumen to the field of education.",
     image: "https://res.cloudinary.com/daetdadtt/image/upload/v1766744730/WhatsApp_Image_2025-12-26_at_14.49.25_1_ucqpct.jpg",
     stats: "AIR 12 Mentor",
     specialty: "GK & Legal Current Affairs",
