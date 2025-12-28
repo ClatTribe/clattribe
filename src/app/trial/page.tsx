@@ -20,7 +20,7 @@ const COURSES = [
     originalPrice: '₹15,999',
     tag: 'Best Seller',
     description: 'Master the most volatile section. Current affairs, static GK, and legal updates curated by NLU alumni.',
-    features: ['Monthly GK Capsules', 'High-Yield Video Explainers', 'Weekly Current Affairs Quizzes', "Yash Ji's Special Notes","Elite GK Flashcards"]
+    features: ['Monthly GK Capsules', 'High-Yield Video Explainers', 'Weekly Current Affairs Quizzes', "GK Special Notes","Elite GK Flashcards"]
   },
   {
     id: 'gk-flashcards',
@@ -143,14 +143,20 @@ const CoursePage = () => {
                 ))}
               </div>
 
-              <button className={`w-full py-4 sm:py-5 rounded-xl font-black text-base sm:text-lg transition-all flex items-center justify-center gap-2 ${
-                course.highlight
-                ? 'bg-[#F59E0B] text-slate-950 hover:bg-white shadow-lg'
-                : 'bg-slate-700 text-white hover:bg-[#F59E0B] hover:text-slate-950'
-              }`}>
-                {course.id === 'gk-flashcards' ? 'Grab Access Now' : 'Join the Tribe'}
-                <ArrowRight className="w-5 h-5" />
-              </button>
+              <button 
+  onClick={course.id === 'gk-flashcards' 
+    ? () => window.open('https://chat.whatsapp.com/EIMkBl02bhr8lC36jvVCiv', '_blank')
+    : undefined
+  }
+  className={`w-full py-4 sm:py-5 rounded-xl font-black text-base sm:text-lg transition-all flex items-center justify-center gap-2 cursor-pointer ${
+    course.highlight
+    ? 'bg-[#F59E0B] text-slate-950 hover:bg-white shadow-lg'
+    : 'bg-slate-700 text-white hover:bg-[#F59E0B] hover:text-slate-950'
+  }`}
+>
+  {course.id === 'gk-flashcards' ? 'Join WhatsApp Community' : 'Join the Tribe'}
+  <ArrowRight className="w-5 h-5" />
+</button>
             </div>
           ))}
         </div>
@@ -201,12 +207,12 @@ const CoursePage = () => {
               <p className="text-slate-400 text-lg sm:text-xl lg:text-2xl italic mb-6 sm:mb-8 leading-relaxed">
                 We don't just teach the Syllabus; We teach you how to out-think the Exam.
               </p>
-              <div className="flex flex-col items-center">
+              {/* <div className="flex flex-col items-center">
                 <div className="flex items-center justify-center gap-1 mb-2">
                   {[1,2,3,4,5].map(s => <Star key={s} className="w-4 h-4 sm:w-5 sm:h-5 text-[#F59E0B] fill-[#F59E0B]" />)}
                 </div>
                 <span className="text-xs text-slate-500 font-bold uppercase tracking-widest">Verified Alumnus Testimonial</span>
-              </div>
+              </div> */}
             </div>
           </div>
         </section>

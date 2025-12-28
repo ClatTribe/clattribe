@@ -90,7 +90,7 @@ const FlashcardsPage: React.FC = () => {
     }
   };
 
-  const handleNext = (knew: boolean) => {
+   const handleNext = (knew: boolean) => {
     if (knew) {
       setKnewCount(prev => prev + 1);
     } else {
@@ -99,11 +99,44 @@ const FlashcardsPage: React.FC = () => {
 
     setIsFlipped(false);
     setTimeout(() => {
-      setCurrentIndex((prev) => (prev + 1) % dailyCards.length);
+      // Don't loop - just move to next if available
+      if (currentIndex < dailyCards.length - 1) {
+        setCurrentIndex(prev => prev + 1);
+      }
     }, 200);
   };
 
+  const handleReset = () => {
+    setCurrentIndex(0);
+    setIsFlipped(false);
+    setKnewCount(0);
+    setForgotCount(0);
+  };
+
   const currentCard = dailyCards[currentIndex];
+  const totalCards = knewCount + forgotCount;
+  const scorePercentage = totalCards > 0 ? Math.round((knewCount / totalCards) * 100) : 0;
+  const isCompleted = currentIndex >= dailyCards.length - 1 && (knewCount + forgotCount) > 0;
+
+  const getScoreMessage = () => {
+    if (scorePercentage >= 60) {
+      return {
+        title: "Outstanding Performance!",
+        message: `Congratulations! You scored ${scorePercentage}%. You're absolutely crushing it! Your dedication and understanding of these concepts is exceptional. Keep this momentum going!`,
+      };
+    } else if (scorePercentage >= 30) {
+      return {
+        title: "Great Progress!",
+        message: `Well done! You scored ${scorePercentage}%. You're on the right track and showing real improvement. Focus on reviewing the challenging cards and you'll master them in no time!`,
+      };
+    } else {
+      return {
+        title: "Every Expert Started Here!",
+        message: `You scored ${scorePercentage}%. Don't be discouraged - mastery takes practice and repetition. Each review session makes you stronger. Hit that reset button and watch yourself improve!`,
+      };
+    }
+  };
+
 
   if (loading) {
     return (
@@ -187,6 +220,14 @@ const FlashcardsPage: React.FC = () => {
             <XCircle className="w-3 h-3 sm:w-4 sm:h-4 inline mr-1 text-red-400" />
             <span className="text-red-400 font-semibold text-xs sm:text-sm">{forgotCount}</span>
           </div>
+          {currentIndex >= dailyCards.length - 1 && (knewCount + forgotCount) > 0 && (
+            <button
+              onClick={handleReset}
+              className="px-4 py-2 rounded-lg bg-[#F59E0B] text-slate-950 font-semibold hover:bg-[#F59E0B]/90 transition text-xs sm:text-sm"
+            >
+              Reset
+            </button>
+          )}
         </div>
 
         {/* Flashcard */}
@@ -213,22 +254,51 @@ const FlashcardsPage: React.FC = () => {
                   borderColor: '#F59E0B',
                 }}
               >
-                <div className="flex justify-start">
-                  <span className="px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-bold bg-[#F59E0B]/20 text-[#F59E0B] uppercase">
-                    {currentCard.category}
-                  </span>
-                </div>
+                {isCompleted ? (
+                  <>
+                    {/* <div className="flex justify-center">
+                      <span className="text-6xl sm:text-7xl md:text-8xl">{getScoreMessage().emoji}</span>
+                    </div> */}
 
-                <div className="flex-1 flex items-center justify-center px-2 sm:px-4 py-4">
-                  <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold leading-relaxed text-center">
-                    {currentCard.question}
-                  </h3>
-                </div>
+                     <div className="flex-1 flex flex-col items-center justify-center px-2 sm:px-4 py-4 gap-4">
+                      <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center" style={{ color: '#F59E0B' }}>
+                        {getScoreMessage().title}
+                      </h3>
+                      <p className="text-sm sm:text-base md:text-lg text-center leading-relaxed max-w-lg text-slate-700">
+                        {getScoreMessage().message}
+                      </p>
+                      <div className="flex gap-6 mt-6">
+                        <div className="text-center px-6 py-3 rounded-xl bg-green-50 border-2 border-green-200">
+                          <div className="text-4xl sm:text-5xl font-bold text-green-600">{knewCount}</div>
+                          <div className="text-xs sm:text-sm text-green-700 font-semibold mt-1">Cards Mastered</div>
+                        </div>
+                      </div>
+                    </div>
 
-                <div className="flex items-center justify-center gap-2 text-slate-500 text-xs sm:text-sm">
-                  <RefreshCw className="w-3 h-3 sm:w-4 sm:h-4" />
-                  <span>Tap to reveal answer</span>
-                </div>
+                    <div className="flex items-center justify-center gap-2 text-slate-600 text-xs sm:text-sm font-medium">
+                      <span>Click the Reset button above to practice again</span>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="flex justify-start">
+                      <span className="px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-bold bg-[#F59E0B]/20 text-[#F59E0B] uppercase">
+                        {currentCard.category}
+                      </span>
+                    </div>
+
+                    <div className="flex-1 flex items-center justify-center px-2 sm:px-4 py-4">
+                      <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold leading-relaxed text-center">
+                        {currentCard.question}
+                      </h3>
+                    </div>
+
+                    <div className="flex items-center justify-center gap-2 text-slate-500 text-xs sm:text-sm">
+                      <RefreshCw className="w-3 h-3 sm:w-4 sm:h-4" />
+                      <span>Tap to reveal answer</span>
+                    </div>
+                  </>
+                )}
               </div>
 
               {/* BACK */}
@@ -294,7 +364,7 @@ const FlashcardsPage: React.FC = () => {
         </div>
 
         {/* Completion Message */}
-        {currentIndex === dailyCards.length - 1 && (knewCount + forgotCount) > 0 && (
+        {/* {currentIndex === dailyCards.length - 1 && (knewCount + forgotCount) > 0 && (
           <div className="max-w-2xl mx-auto">
             <div className="rounded-xl border-2 border-[#F59E0B]/30 bg-slate-900/70 backdrop-blur-sm p-4 sm:p-6 text-center">
               <Award className="w-10 h-10 sm:w-12 sm:h-12 text-[#F59E0B] mx-auto mb-2 sm:mb-3" />
@@ -306,20 +376,15 @@ const FlashcardsPage: React.FC = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center">
                 <button
-                  onClick={() => {
-                    setCurrentIndex(0);
-                    setIsFlipped(false);
-                    setKnewCount(0);
-                    setForgotCount(0);
-                  }}
-                  className="px-4 py-2 sm:px-6 sm:py-2 bg-slate-800 text-white rounded-lg font-semibold hover:bg-slate-700 transition border border-slate-700 text-sm"
+                  onClick={handleReset}
+                  className="px-4 py-2 sm:px-6 sm:py-2 bg-[#F59E0B] text-slate-950 rounded-lg font-semibold hover:bg-[#F59E0B]/90 transition text-sm"
                 >
-                  Review Today's Cards
+                  Reset & Review Again
                 </button>
               </div>
             </div>
           </div>
-        )}
+        )} */}
         <div className="flex justify-center mt-6">
           <div
             className="flex flex-col md:flex-row items-center gap-4 px-6 py-4 rounded-xl shadow-lg border w-full max-w-2xl"

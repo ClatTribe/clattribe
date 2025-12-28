@@ -7,7 +7,7 @@ const TEACHERS = [
     name: "Ashutosh Mishra",
     // role: "Lead GK & Current Affairs Mentor",
     background: "IIM Ahmedabad Alumnus",
-    bio: "Mr. Ashutosh Mishra is the Co-Founder of IPM Careers and an alumnus of the prestigious Indian Institute of Management, Ahmedabad. A Chemical Engineer by background, he brings a rare blend of technical expertise and managerial acumen to the field of education.",
+    bio: "The Architect of Our Academic Excellence Ashutosh, a co-founder of CLAT Tribe, is an alumnus of the prestigious IIM Ahmedabad. As our Head of Academics, he brings the world-class strategic thinking and rigorous standards of India’s top B-school to the legal entrance domain. Ashutosh oversees the entire pedagogical framework, ensuring that our curriculum is not just comprehensive, but strategically designed to help students think like toppers and manage their preparation with peak efficiency.",
     image: "https://res.cloudinary.com/daetdadtt/image/upload/v1766744730/WhatsApp_Image_2025-12-26_at_14.49.25_1_ucqpct.jpg",
     stats: "AIR 12 Mentor",
     specialty: "GK & Legal Current Affairs",
@@ -17,7 +17,7 @@ const TEACHERS = [
     name: "Ashish Mishra",
     // role: "Legal Reasoning Expert",
     background: "IIT Bombay Alumnus",
-    bio: "Ashish specializes in decoding complex legal propositions. His background as a practicing High Court advocate brings unparalleled practical insight to his sessions.",
+    bio: "Learn from the Best Our Co-founder, Ashish, knows exactly what it takes to crack India’s toughest competitive exams. An IIT Bombay graduate, he specializes in transforming the way students approach Quants and Critical Reasoning. By blending high-level analytical strategies with simplified learning techniques, Ashish ensures that every member of the CLAT Tribe gains a competitive edge in their journey toward a top National Law University..",
     image: "https://res.cloudinary.com/daetdadtt/image/upload/v1766745275/WhatsApp_Image_2025-12-26_at_16.02.51_t5qrhu.jpg",
     stats: "NLU Topper",
     specialty: "Constitutional Law & Torts"

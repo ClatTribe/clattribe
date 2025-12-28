@@ -359,7 +359,7 @@ const App: React.FC = () => {
         <div id="capsules">
           <CapsuleSystem />
         </div>
-        <div>
+        <div id="flashcards">
           <Flashcards/>
         </div>
         <div id="blogs">
