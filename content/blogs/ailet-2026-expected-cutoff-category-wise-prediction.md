@@ -1,6 +1,7 @@
 ---
 title: "AILET 2026 Expected Cutoff: Category-Wise Score & Rank Prediction for NLU Delhi"
 date: "2024-12-21"
+lastModified: "2025-12-29" # ADD THIS LINE (Use the current date whenever you update)
 author: "CLAT Tribe"
 excerpt: "Complete analysis of AILET 2026 expected cutoff with category-wise predictions, last year's data, rank vs score analysis, and expert tips to secure admission at NLU Delhi."
 coverImage: "https://res.cloudinary.com/duyo9pzxy/image/upload/v1765694804/WhatsApp_Image_2025-12-14_at_12.08.09_PM_piqfev.jpg"

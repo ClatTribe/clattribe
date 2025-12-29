@@ -11,8 +11,8 @@ Disallow: /profile
 Disallow: /account
 Disallow: /login
 Disallow: /register
-Disallow: /api/ # Block API endpoints if they don't return indexable content
-Disallow: /_next/ # Block internal Next.js build assets (not content)
+Disallow: /api/ 
+Disallow: /_next/ 
 
-# Specify the location of your sitemap file(s)
-Sitemap: www.clattribe.com
+# CORRECTED Sitemap location
+Sitemap: https://www.clattribe.com/sitemap.xml
