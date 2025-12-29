@@ -269,12 +269,9 @@ const App: React.FC = () => {
             <Link href="/" className="hover:text-white transition-colors">
               Home
             </Link>
-            <button 
-              onClick={() => scrollToSection('capsules')} 
-              className="hover:text-white transition-colors cursor-pointer"
-            >
-              Capsules
-            </button>
+            <Link href="/our-team" className="hover:text-white transition-colors">
+              Our Team
+            </Link>
             <button 
               onClick={() => scrollToSection('flashcards')} 
               className="hover:text-white transition-colors cursor-pointer"
@@ -313,19 +310,16 @@ const App: React.FC = () => {
               >
                 Home
               </Link>
-              <button 
-                onClick={() => scrollToSection('capsules')}
-                className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 text-left font-medium"
-              >
-                Capsules
-              </button>
+              <Link href="/our-team" className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium">
+              Our Team
+            </Link>
               <button 
                 onClick={() => scrollToSection('flashcards')}
                 className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 text-left font-medium"
               >
                 Flashcards
               </button>
-              <Link href="/blogs" className="hover:text-white transition-colors">
+              <Link href="/blogs" className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium">
               Blogs
             </Link>
               <Link 
