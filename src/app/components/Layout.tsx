@@ -85,7 +85,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <Link href="/#flashcards" className="hover:text-white transition-colors">
               Flashcards
             </Link>
-            <Link href="/#blogs" className="hover:text-white transition-colors">
+            <Link href="/blogs" className="hover:text-white transition-colors">
               Blogs
             </Link>
           </div>

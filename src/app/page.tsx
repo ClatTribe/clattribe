@@ -7,7 +7,7 @@ import NewFooter from './components/newFooter';
 import ContactButton from './components/ContactButton';
 import Link from 'next/link';
 import Image from "next/image";
-import TrendingBlogs from './components/trendingBlogs';
+// import TrendingBlogs from './components/trendingBlogs';
 import { GraduationCap, ArrowRight, CheckCircle, X, Menu } from 'lucide-react';
 import ImageBackground from './components/ImageBackground';
 
@@ -281,12 +281,9 @@ const App: React.FC = () => {
             >
               Flashcards
             </button>
-            <button 
-              onClick={() => scrollToSection('blogs')} 
-              className="hover:text-white transition-colors cursor-pointer"
-            >
+           <Link href="/blogs" className="hover:text-white transition-colors">
               Blogs
-            </button>
+            </Link>
             <Link href="/nlu-predictor" className="hover:text-white transition-colors">
               NLU Predictor
             </Link>
@@ -328,12 +325,9 @@ const App: React.FC = () => {
               >
                 Flashcards
               </button>
-              <button 
-                onClick={() => scrollToSection('blogs')}
-                className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 text-left font-medium"
-              >
-                Blogs
-              </button>
+              <Link href="/blogs" className="hover:text-white transition-colors">
+              Blogs
+            </Link>
               <Link 
                 href="/nlu-predictor" 
                 className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
@@ -362,9 +356,9 @@ const App: React.FC = () => {
         <div id="flashcards">
           <Flashcards/>
         </div>
-        <div id="blogs">
+        {/* <div id="blogs">
           <TrendingBlogs />
-        </div>
+        </div> */}
         <div id="leadform">
           <LeadForm />
         </div>

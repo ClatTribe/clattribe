@@ -6,8 +6,8 @@ import BlogCard from './BlogCard';
 export const revalidate = 3600; 
 
 export const metadata = {
-  title: 'Blog Posts | Your Site Name',
-  description: 'Read our latest insights and articles.',
+   title: 'Blog Posts | Clat Tribe',
+  description: 'Expert guides on CLAT, AILET, NLU admissions, MBA colleges, and law entrance exam preparation. Read our latest insights and strategies.',
 };
 
 export default async function BlogsPage() {
