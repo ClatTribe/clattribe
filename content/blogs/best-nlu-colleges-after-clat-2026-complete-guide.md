@@ -1,6 +1,6 @@
 ---
 title: "Best Law Colleges After CLAT 2026: Complete NLU Preference List Guide"
-date: "2024-12-21"
+date: "2025-12-20"
 author: "CLAT Tribe"
 excerpt: "A comprehensive guide to choosing the best law colleges after CLAT 2026. Learn how to create your perfect NLU preference list with rank-wise analysis, placement data, and expert counselling tips."
 coverImage: "https://res.cloudinary.com/daetdadtt/image/upload/v1766239037/WhatsApp_Image_2025-12-20_at_17.39.39_irfgoz.jpg"

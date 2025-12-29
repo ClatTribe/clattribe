@@ -1,6 +1,7 @@
 ---
 title: "How to Start CLAT 2027 Preparation: Complete Beginner's Guide for Class 10, 11, 12 Students"
-date: "2024-12-21"
+date: "2025-12-27"
+lastModified: "2025-12-29" 
 author: "CLAT Tribe"
 excerpt: "A complete step-by-step guide for beginners on how to start CLAT 2027 preparation. Learn exam pattern, study strategy, daily routine, and expert tips for Class 10, 11, 12 students and droppers."
 coverImage: "https://res.cloudinary.com/duyo9pzxy/image/upload/v1766842604/Gold_Black_Elegant_Lawyer_Presentation_ba9b9p.png"

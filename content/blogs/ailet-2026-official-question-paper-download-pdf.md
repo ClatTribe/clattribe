@@ -1,6 +1,6 @@
 ---
 title: "AILET 2026 Official Question Paper Download (PDF) – Authentic Resource for NLU Delhi Aspirants"
-date: "2024-12-21"
+date: "2025-12-14"
 author: "CLAT Tribe"
 excerpt: "Download the official AILET 2026 question paper PDF and learn how to use it effectively for your NLU Delhi preparation. Complete guide with section-wise analysis and preparation tips."
 coverImage: "https://res.cloudinary.com/duyo9pzxy/image/upload/v1765721230/WhatsApp_Image_2025-12-14_at_7.36.11_PM_ssaqwz.jpg"

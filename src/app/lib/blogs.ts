@@ -64,5 +64,9 @@ export async function getAllBlogs(): Promise<BlogPost[]> {
     slugs.map(({ slug }) => getBlogBySlug(slug))
   );
   
-  return blogs.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  return blogs.sort((a, b) => {
+  const timeA = new Date(a.date || 0).getTime();
+  const timeB = new Date(b.date || 0).getTime();
+  return timeB - timeA;
+});
 }
