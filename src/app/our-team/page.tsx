@@ -56,10 +56,10 @@ const TeachersPage = () => {
     <div className="min-h-screen bg-slate-950 text-white">
       <nav className="fixed w-full z-50 bg-brand-900/95 backdrop-blur-md border-b border-white/5">
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-        <div className="flex items-center space-x-3">
+        <Link href="/" className="flex items-center space-x-3">
           <Image src="/heading.png" alt="Clat Tribe Logo" width={180} height={180} className="rounded" />
-        </div>
-        
+        </Link>
+
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
           <Link href="/" className="hover:text-white transition-colors">
