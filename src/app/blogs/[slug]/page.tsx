@@ -25,12 +25,12 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
       title: `${blog.title} | CLAT Tribe`,
       description: blog.excerpt || `Read ${blog.title}`,
       alternates: {
-        canonical: `https://www.clattribe.com/blog/${slug}`,
+        canonical: `https://www.clattribe.com/blogs/${slug}`,
       },
       openGraph: {
         title: blog.title,
         description: blog.excerpt,
-        url: `https://www.clattribe.com/blog/${slug}`,
+        url: `https://www.clattribe.com/blogs/${slug}`,
         siteName: 'CLAT Tribe',
         type: 'article',
         publishedTime: blog.date,

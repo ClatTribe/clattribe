@@ -12,7 +12,6 @@ Disallow: /account
 Disallow: /login
 Disallow: /register
 Disallow: /api/ 
-Disallow: /_next/ 
 
 # CORRECTED Sitemap location
 Sitemap: https://www.clattribe.com/sitemap.xml
