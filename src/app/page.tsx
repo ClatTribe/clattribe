@@ -272,6 +272,9 @@ const App: React.FC = () => {
             <Link href="/our-team" className="hover:text-white transition-colors">
               Our Team
             </Link>
+            <Link href="/our-courses" className="hover:text-white transition-colors">
+              Our Courses
+            </Link>
             <button 
               onClick={() => scrollToSection('flashcards')} 
               className="hover:text-white transition-colors cursor-pointer"
@@ -284,9 +287,9 @@ const App: React.FC = () => {
             <Link href="/nlu-predictor" className="hover:text-white transition-colors">
               NLU Predictor
             </Link>
-            <Link href="/nlu-preference-list" className="hover:text-white transition-colors">
+            {/* <Link href="/nlu-preference-list" className="hover:text-white transition-colors">
               NLU Preference List
-            </Link>
+            </Link> */}
           </div>
 
           {/* Mobile Menu Button */}
@@ -313,6 +316,9 @@ const App: React.FC = () => {
               <Link href="/our-team" className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium">
               Our Team
             </Link>
+              <Link href="/our-courses" className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium">
+              Our Courses
+            </Link>
               <button 
                 onClick={() => scrollToSection('flashcards')}
                 className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 text-left font-medium"
@@ -329,13 +335,13 @@ const App: React.FC = () => {
               >
                 NLU Predictor
               </Link>
-              <Link 
+              {/* <Link 
                 href="/nlu-preference-list" 
                 className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 NLU Preference List
-              </Link>
+              </Link> */}
             </div>
           </div>
         )}
