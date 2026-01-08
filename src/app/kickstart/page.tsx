@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { Zap, Calendar, Clock, CheckCircle, MapPin, Filter, Rocket, Lock, ChevronRight, Gift } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation'; // Added for redirection
+import ContactButton from '../components/ContactButton';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -47,6 +49,7 @@ interface KickstartFormData {
 }
 
 const WebinarPage: React.FC = () => {
+  const router = useRouter(); // Initialize the router
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [formData, setFormData] = useState<KickstartFormData>({
     fullName: '',
@@ -110,14 +113,8 @@ const WebinarPage: React.FC = () => {
       });
 
       if (response.ok) {
-        alert('Success! Your spot is reserved. Check your email for the Zoom link and Starter Kit instructions.');
-        setFormData({
-          fullName: '',
-          phoneNumber: '',
-          email: '',
-          currentStatus: 'Class 12 Student',
-          question: ''
-        });
+        // Redirection logic instead of simple alert
+        router.push('/kickstart-thankyou');
       } else {
         const errorData = await response.json();
         alert(`Submission failed: ${errorData.message || 'Please try again'}`);
@@ -266,7 +263,7 @@ const WebinarPage: React.FC = () => {
         {/* Registration Section */}
         <section id="register" className="relative py-12 sm:py-16 lg:py-20 px-4">
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
               <div className="order-2 lg:order-1">
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 sm:mb-5">
                   Ready to join the <span className="text-[#F59E0B]">Tribe?</span>
@@ -274,23 +271,11 @@ const WebinarPage: React.FC = () => {
                 <p className="text-slate-400 text-base sm:text-lg mb-6 sm:mb-8">
                   This is a free session, but seats are capped to ensure we can answer student questions live. Claim your invitation and starter kit today.
                 </p>
-                
-                <div className="bg-slate-900/50 backdrop-blur-sm border-l-4 border-[#F59E0B] rounded-xl p-5 sm:p-6">
-                  <h4 className="text-[#F59E0B] font-bold flex items-center gap-2 mb-2 sm:mb-3 text-sm sm:text-base">
-                    <Gift className="w-4 h-4 sm:w-5 sm:h-5" />
-                    Attendee Bonus:
-                  </h4>
-                  <p className="text-slate-300 text-sm sm:text-base">
-                    Register today to receive the <strong className="text-white">CLAT 2027 Starter Kit</strong> (Roadmap PDF + Resource Masterlist) immediately after the session.
-                  </p>
-                </div>
               </div>
 
-              {/* Kickstart Form */}
               <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 shadow-2xl order-1 lg:order-2">
                 <h3 className="text-xl sm:text-2xl font-bold text-slate-950 mb-5 sm:mb-6">Reserve Your Spot</h3>
                 <div className="space-y-4 sm:space-y-5">
-                  {/* Full Name */}
                   <div>
                     <label className="block text-slate-950 font-semibold mb-2 text-xs sm:text-sm">
                       Full Name *
@@ -311,7 +296,6 @@ const WebinarPage: React.FC = () => {
                     )}
                   </div>
                   
-                  {/* Phone Number */}
                   <div>
                     <label className="block text-slate-950 font-semibold mb-2 text-xs sm:text-sm">
                       WhatsApp Number *
@@ -333,7 +317,6 @@ const WebinarPage: React.FC = () => {
                     )}
                   </div>
                   
-                  {/* Email */}
                   <div>
                     <label className="block text-slate-950 font-semibold mb-2 text-xs sm:text-sm">
                       Email Address *
@@ -343,7 +326,6 @@ const WebinarPage: React.FC = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      placeholder="For webinar materials"
                       disabled={isSubmitting}
                       className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 border ${
                         errors.email ? 'border-red-500' : 'border-slate-300'
@@ -354,7 +336,6 @@ const WebinarPage: React.FC = () => {
                     )}
                   </div>
                   
-                  {/* Current Status */}
                   <div>
                     <label className="block text-slate-950 font-semibold mb-2 text-xs sm:text-sm">
                       Current Status
@@ -373,7 +354,6 @@ const WebinarPage: React.FC = () => {
                     </select>
                   </div>
 
-                  {/* Question Field */}
                   <div>
                     <label className="block text-slate-950 font-semibold mb-2 text-xs sm:text-sm">
                       Question you want us to answer
@@ -389,7 +369,6 @@ const WebinarPage: React.FC = () => {
                     />
                   </div>
                   
-                  {/* Submit Button */}
                   <button
                     onClick={handleSubmit}
                     disabled={isSubmitting}
@@ -406,25 +385,23 @@ const WebinarPage: React.FC = () => {
 
         {/* Footer */}
         <footer className="relative py-12 sm:py-16 border-t border-slate-800 px-4">
-  <div className="max-w-7xl mx-auto text-center">
-    
-    <div className="flex justify-center mb-4">
-      <Image 
-        src="/heading.png" 
-        alt="Clat Tribe Logo" 
-        width={180} 
-        height={180} 
-        className="rounded cursor-pointer"
-      />
-    </div>
-
-    <p className="text-slate-400 text-sm sm:text-base">
-      &copy; 2026 CLAT Tribe. Master the Facts. Rule the Law.
-    </p>
-    
-  </div>
-</footer>
+          <div className="max-w-7xl mx-auto text-center">
+            <div className="flex justify-center mb-4">
+              <Image 
+                src="/heading.png" 
+                alt="Clat Tribe Logo" 
+                width={180} 
+                height={180} 
+                className="rounded cursor-pointer"
+              />
+            </div>
+            <p className="text-slate-400 text-sm sm:text-base">
+              &copy; 2026 CLAT Tribe. Master the Facts. Rule the Law.
+            </p>
+          </div>
+        </footer>
       </div>
+      <ContactButton />
     </Layout>
   );
 };
