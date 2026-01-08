@@ -1,11 +1,16 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Zap, Calendar, Clock, CheckCircle, MapPin, Filter, Rocket, Lock, ChevronRight, Gift } from 'lucide-react';
+import { 
+  Zap, Calendar, Clock, CheckCircle, MapPin, Filter, 
+  Rocket, Lock, ChevronRight, Plus, Minus 
+} from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation'; // Added for redirection
+import { useRouter } from 'next/navigation';
 import ContactButton from '../components/ContactButton';
+
+// --- Sub-Components ---
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -34,6 +39,96 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+const FAQSection: React.FC = () => {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  const faqs: FAQItem[] = [
+    {
+      question: "Is this webinar really free?",
+      answer: "Absolutely! This is CLAT Tribe's inaugural event to build our community and help aspirants start their CLAT 2027 journey right. There are no hidden charges."
+    },
+    {
+      question: "What if I miss the live session?",
+      answer: "A recording will be sent to all registered participants within 24 hours after the live webinar. You'll also receive all the bonus materials."
+    },
+    {
+      question: "Who is this webinar for?",
+      answer: "Primarily for Class 12 students and droppers targeting CLAT 2027. Parents who want to support their child's law entrance journey are also welcome."
+    },
+    {
+      question: "What will I receive after registration?",
+      answer: "Immediate confirmation email with webinar details. 24 hours before: reminder with Zoom link. After webinar: recording + CLAT 2027 Starter Kit."
+    },
+    {
+      question: "Will there be a Q&A session?",
+      answer: "Yes! We've dedicated 30 minutes for live Q&A where you can ask any question about CLAT 2027 preparation directly to our mentors."
+    }
+  ];
+
+  const toggleFAQ = (index: number) => {
+    setActiveIndex(activeIndex === index ? null : index);
+  };
+
+  return (
+    <section className="relative py-12 sm:py-16 lg:py-20 px-4 bg-slate-900/20">
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center mb-10 sm:mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3 sm:mb-4">
+            Frequently Asked <span className="text-[#F59E0B]">Questions</span>
+          </h2>
+          <p className="text-slate-400 text-base sm:text-lg">
+            Got questions? We've got answers
+          </p>
+        </div>
+
+        <div className="space-y-4">
+          {faqs.map((faq, index) => (
+            <div
+              key={index}
+              className="bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-xl overflow-hidden transition-all duration-300 hover:border-[#F59E0B]/30"
+            >
+              <button
+                onClick={() => toggleFAQ(index)}
+                className="w-full flex items-center justify-between p-5 sm:p-6 text-left transition-colors duration-200 hover:bg-slate-800/30"
+              >
+                <span className="text-white font-semibold text-base sm:text-lg pr-4">
+                  {faq.question}
+                </span>
+                <div className="flex-shrink-0">
+                  {activeIndex === index ? (
+                    <Minus className="w-5 h-5 sm:w-6 sm:h-6 text-[#F59E0B]" />
+                  ) : (
+                    <Plus className="w-5 h-5 sm:w-6 sm:h-6 text-[#F59E0B]" />
+                  )}
+                </div>
+              </button>
+              
+              <div
+                className={`overflow-hidden transition-all duration-300 ${
+                  activeIndex === index ? 'max-h-96' : 'max-h-0'
+                }`}
+              >
+                <div className="px-5 sm:px-6 pb-5 sm:pb-6">
+                  <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+                    {faq.answer}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// --- Main Page Component ---
+
 interface FormErrors {
   fullName?: string;
   phoneNumber?: string;
@@ -49,7 +144,7 @@ interface KickstartFormData {
 }
 
 const WebinarPage: React.FC = () => {
-  const router = useRouter(); // Initialize the router
+  const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [formData, setFormData] = useState<KickstartFormData>({
     fullName: '',
@@ -113,7 +208,6 @@ const WebinarPage: React.FC = () => {
       });
 
       if (response.ok) {
-        // Redirection logic instead of simple alert
         router.push('/kickstart-thankyou');
       } else {
         const errorData = await response.json();
@@ -382,6 +476,9 @@ const WebinarPage: React.FC = () => {
             </div>
           </div>
         </section>
+
+        {/* FAQ Section */}
+        <FAQSection />
 
         {/* Footer */}
         <footer className="relative py-12 sm:py-16 border-t border-slate-800 px-4">
