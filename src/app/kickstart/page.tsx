@@ -296,13 +296,13 @@ const WebinarPage: React.FC = () => {
                   Meet Your Webinar Mentor
                 </span>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3">
-                  Purva <span className="text-[#F59E0B]">(RMLNLU)</span>
+                  Purva <span className="text-[#F59E0B]">(NLU)</span>
                 </h2>
                 <p className="text-slate-400 font-semibold mb-4 sm:mb-5 text-sm sm:text-base">
                   National Law University Graduate | Core Mentor at CLAT Tribe
                 </p>
                 <p className="text-slate-300 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
-                  Purva has helped hundreds of aspirants bring structure and confidence to their preparation. A graduate of RMLNLU, she specializes in transforming overwhelming syllabi into actionable roadmaps.
+                  Purva has helped hundreds of aspirants bring structure and confidence to their preparation. A graduate of NLU, she specializes in transforming overwhelming syllabi into actionable roadmaps.
                 </p>
                 <ul className="space-y-2 sm:space-y-3">
                   <li className="flex items-center gap-2 sm:gap-3 text-slate-300 text-sm sm:text-base">

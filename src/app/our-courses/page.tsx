@@ -162,7 +162,7 @@ const CoursePage = () => {
         </div>
 
         {/* Rankers Section */}
-        <section className="py-16 sm:py-24 border-t border-slate-800">
+        {/* <section className="py-16 sm:py-24 border-t border-slate-800">
           <div className="text-center mb-16 sm:mb-20 relative">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-black uppercase tracking-widest mb-6">
               <Trophy className="w-4 h-4" /> The Hall of Fame
@@ -207,15 +207,15 @@ const CoursePage = () => {
               <p className="text-slate-400 text-lg sm:text-xl lg:text-2xl italic mb-6 sm:mb-8 leading-relaxed">
                 We don't just teach the Syllabus; We teach you how to out-think the Exam.
               </p>
-              {/* <div className="flex flex-col items-center">
+              <div className="flex flex-col items-center">
                 <div className="flex items-center justify-center gap-1 mb-2">
                   {[1,2,3,4,5].map(s => <Star key={s} className="w-4 h-4 sm:w-5 sm:h-5 text-[#F59E0B] fill-[#F59E0B]" />)}
                 </div>
                 <span className="text-xs text-slate-500 font-bold uppercase tracking-widest">Verified Alumnus Testimonial</span>
-              </div> */}
+              </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Info Box */}
         <div className="mt-10 sm:mt-16 bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 sm:p-8">
