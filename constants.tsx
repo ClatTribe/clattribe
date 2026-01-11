@@ -61,8 +61,54 @@ export const COLLEGES_DATA: CollegeInfo[] = [
 ];
 
 export const FORMS_DATA: ExamForm[] = [
-  { name: "CLAT 2026", startDate: "July 2025", endDate: "Oct 2025", link: "#", status: "Coming Soon" },
-  { name: "AILET 2026", startDate: "Aug 2025", endDate: "Nov 2025", link: "#", status: "Coming Soon" },
-  { name: "PUCET Law", startDate: "April 2025", endDate: "May 2025", link: "#", status: "Open" },
-  { name: "MHCET Law", startDate: "March 2025", endDate: "April 2025", link: "#", status: "Open" },
+  {
+    name: "CLAT 2026",
+    startDate: "July 2025",
+    endDate: "Oct 2025",
+    link: "https://consortiumofnlus.ac.in",
+    status: "Coming Soon"
+  },
+  {
+    name: "AILET 2026",
+    startDate: "Aug 2025",
+    endDate: "Nov 2025",
+    link: "https://nationallawuniversitydelhi.in",
+    status: "Coming Soon"
+  },
+  {
+    name: "SLAT 2026",
+    startDate: "May 2026",
+    endDate: "May 2026",
+    link: "https://set-test.org",
+    status: "Coming Soon"
+  },
+  {
+    name: "NMIMS-LAT",
+    startDate: "Jan 2026",
+    endDate: "May 2026",
+    link: "https://nmims.edu",
+    status: "Coming Soon"
+  },
+  {
+    name: "MHCET Law",
+    startDate: "March 2025",
+    endDate: "May 2026",
+    link: "https://cetcell.mahacet.org",
+    status: "Open"
+  },
+  {
+    name: "IPU CET / CLAT Score",
+    startDate: "March 2026",
+    endDate: "May 2026",
+    link: "https://ipu.ac.in",
+    status: "Coming Soon"
+  },
+  {
+    name: "LSAT-India",
+    startDate: "Jan 2026",
+    endDate: "May 2026",
+    link: "https://lsatindia.in",
+    status: "Coming Soon"
+  }
 ];
+
