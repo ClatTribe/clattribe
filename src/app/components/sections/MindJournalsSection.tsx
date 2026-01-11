@@ -39,37 +39,37 @@ const audioLogs: AudioLog[] = [
       "That conversation where I explained why mock scores matter more than perfect attendance.",
     icon: Users,
     tags: ["Family Pressure", "Communication", "Boundaries"],
-    audio: "/parental.mp4",
+    audio: "/audio/CLAT - Parental expectations.m4a",
   },
+//   {
+//     id: 2,
+//     title: "The February Motivation Dip",
+//     duration: "5:48",
+//     description:
+//       "Woke up today and just stared at my books. The exact self-talk I used.",
+//     icon: TrendingUp,
+//     tags: ["Burnout", "Self-Motivation", "Recovery"],
+//     audio: "/audio/CLAT - Exam day.m4a",
+//   },
   {
     id: 2,
-    title: "The February Motivation Dip",
-    duration: "5:48",
-    description:
-      "Woke up today and just stared at my books. The exact self-talk I used.",
-    icon: TrendingUp,
-    tags: ["Burnout", "Self-Motivation", "Recovery"],
-    audio: "/parental.mp4",
-  },
-  {
-    id: 3,
     title: "One Week Before D-Day",
     duration: "7:12",
     description:
       "Should I study more or rest? My exact checklist for the final 7 days.",
     icon: HeartPulse,
     tags: ["Anxiety", "Last Week", "Mental Prep"],
-    audio: "/parental.mp4",
+    audio: "/audio/CLAT - One week before exam.m4a",
   },
   {
-    id: 4,
+    id: 3,
     title: "From Home to Exam Hall",
     duration: "6:05",
     description:
       "Minute-by-minute: What I ate, when I left, and exam-day nerves.",
     icon: Flag,
     tags: ["Exam Day", "Routine", "Peak Performance"],
-    audio: "/parental.mp4",
+    audio: "/audio/CLAT - Exam day.m4a",
   },
 ];
 

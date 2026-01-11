@@ -269,6 +269,9 @@ const App: React.FC = () => {
             <Link href="/" className="hover:text-white transition-colors">
               Home
             </Link>
+            <Link href="clat-starter-pack" className="hover:text-white transition-colors">
+              CLAT Starter Pack
+            </Link>
             <Link href="/our-team" className="hover:text-white transition-colors">
               Our Team
             </Link>
@@ -312,6 +315,13 @@ const App: React.FC = () => {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Home
+              </Link>
+              <Link 
+                href="clat-starter-pack" 
+                className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                CLAT Starter Pack
               </Link>
               <Link href="/our-team" className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium">
               Our Team

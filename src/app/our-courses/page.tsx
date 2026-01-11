@@ -6,8 +6,8 @@ const COURSES = [
   {
     id: 'rankers-batch',
     name: "The Director's Batch (NLU Rankers)",
-    currentPrice: '₹4,999',
-    originalPrice: '₹9,999',
+    currentPrice: '₹14,999',
+    originalPrice: '₹19,000',
     tag: 'Elite Exclusive',
     description: "Generic coaching got you to a plateau. The Director's Batch will get you to an NLU. Designed for top-tier aspirants.",
     features: ['Direct Access to NLU Mentors', 'Mock Analysis by Rank Holders', 'Daily Answer Writing (Legal)', 'Advanced GK Deep-Dives', 'One-on-One Mentorship by NLUs/IIM Alumni'],
@@ -16,8 +16,8 @@ const COURSES = [
   {
     id: 'gk-intensive',
     name: 'GK Capsules',
-    currentPrice: '₹6,999',
-    originalPrice: '₹15,999',
+    currentPrice: '₹2,999',
+    originalPrice: '₹4,999',
     tag: 'Best Seller',
     description: 'Master the most volatile section. Current affairs, static GK, and legal updates curated by NLU alumni.',
     features: ['Monthly GK Capsules', 'High-Yield Video Explainers', 'Weekly Current Affairs Quizzes', "GK Special Notes","Elite GK Flashcards"]

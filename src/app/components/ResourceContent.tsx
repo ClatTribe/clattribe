@@ -5,7 +5,7 @@ import { ResourceTab } from '../../../types';
 import { PYQSection } from './sections/PYQSection';
 import { CheatSheetsSection } from './sections/CheatSheetsSection';
 // import { ToppersTalkSection } from './sections/ToppersTalkSection';
-// import { GKNotesSection } from './sections/GKNotesSection';
+import { GKNotesSection } from './sections/GKNotesSection';
 import { FormsSection } from './sections/FormsSection';
 import { DeskSection } from './sections/DeskSection';
 import { CollegeSection } from './sections/CollegeSection';
@@ -27,7 +27,7 @@ export const ResourceContent: React.FC<Props> = ({ activeTab }) => {
       case ResourceTab.TOPPERS:
         // return <ToppersTalkSection />;
       case ResourceTab.GK_NOTES:
-        // return <GKNotesSection />;
+        return <GKNotesSection />;
       case ResourceTab.FORMS:
         return <FormsSection />;
       case ResourceTab.DESK:
