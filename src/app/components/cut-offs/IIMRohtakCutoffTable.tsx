@@ -1,0 +1,302 @@
+import React from 'react';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
+const primaryColor = '#FB923C';
+// const secondaryColor = '#823588';
+const accentPurple = '#fce4ec';
+const accentGold = '#FFC107';
+
+// Define types for different year data structures
+type Data2025 = {
+  category: string;
+  cutoff: number;
+  SA?: number;
+  MCQ?: number;
+  VA?: number;
+  female: number;
+  male: number;
+  total: number;
+};
+
+type DataOtherYears = {
+  category: string;
+  cutoff: number;
+};
+
+// Data for all years
+const yearlyData = {
+  2025: [
+    { category: 'General', cutoff: 381, SA: 24, MCQ: 28, VA: 112, female: 144, male: 310, total: 454 },
+    { category: 'EWS', cutoff: 331, SA: 16, MCQ: 18, VA: 87, female: 17, male: 71, total: 88 },
+    { category: 'NC-OBC', cutoff: 297, SA: 12, MCQ: 15, VA: 78, female: 80, male: 164, total: 244 },
+    { category: 'SC', cutoff: 230, SA: 12, MCQ: 10, VA: 65, female: 61, male: 75, total: 136 },
+    { category: 'ST', cutoff: 138, SA: 8, MCQ: 6, VA: 49, female: 26, male: 43, total: 69 },
+    { category: 'DAP-General', cutoff: 274, SA: 8, MCQ: 5, VA: 47, female: 5, male: 10, total: 15 },
+    { category: 'DAP-EWS', cutoff: 236, female: 1, male: 1, total: 2 },
+    { category: 'DAP-NCOBC', cutoff: 196, female: 1, male: 2, total: 3 },
+    { category: 'DAP-SC', cutoff: 202, female: 1, male: 0, total: 1 },
+    { category: 'DAP-ST', cutoff: 171, female: 0, male: 1, total: 1 },
+  ] as Data2025[],
+  2024: [
+    { category: 'General', cutoff: 301 },
+    { category: 'EWS', cutoff: 264 },
+    { category: 'NC-OBC', cutoff: 225 },
+    { category: 'SC', cutoff: 167 },
+    { category: 'ST', cutoff: 118 },
+  ] as DataOtherYears[],
+  2023: [
+    { category: 'General', cutoff: 409 },
+    { category: 'EWS', cutoff: 376 },
+    { category: 'NC-OBC', cutoff: 349 },
+    { category: 'SC', cutoff: 274 },
+    { category: 'ST', cutoff: 201 },
+  ] as DataOtherYears[],
+  2022: [
+    { category: 'General', cutoff: 306 },
+    { category: 'EWS', cutoff: 261 },
+    { category: 'NC-OBC', cutoff: 219 },
+    { category: 'SC', cutoff: 154 },
+    { category: 'ST', cutoff: 66 },
+  ] as DataOtherYears[],
+  2021: [
+    { category: 'General', cutoff: 265 },
+    { category: 'EWS', cutoff: 197 },
+    { category: 'NC-OBC', cutoff: 80 },
+    { category: 'SC', cutoff: 119 },
+    { category: 'ST', cutoff: 52 },
+  ] as DataOtherYears[],
+};
+
+interface TooltipProps {
+  active?: boolean;
+  payload?: Array<{
+    name: string;
+    value: number;
+    color: string;
+    payload: { category: string };
+  }>;
+}
+
+interface IIMRohtakCutoffProps {
+  selectedYear?: number;
+}
+
+const IIMRohtakCutoff = ({ selectedYear: propYear }: IIMRohtakCutoffProps = {}) => {
+  const selectedYear = propYear ?? 2025;
+  const currentData = yearlyData[selectedYear as keyof typeof yearlyData];
+
+  const CustomTooltip = ({ active, payload }: TooltipProps) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="bg-slate-900 p-3 rounded-lg shadow-lg border-2 border-orange-500">
+          <p className="font-semibold mb-1 text-orange-400">{payload[0].payload.category}</p>
+          {payload.map((entry, index) => (
+            <p key={index} className="text-sm" style={{ color: entry.color }}>
+              {entry.name}: {entry.value}
+            </p>
+          ))}
+        </div>
+      );
+    }
+    return null;
+  };
+
+  // Calculate totals for 2025
+  const totalCandidates = selectedYear === 2025 
+    ? (currentData as Data2025[]).reduce((sum, item) => sum + item.total, 0)
+    : null;
+
+  return (
+    <div className="min-h-screen bg-slate-950">
+      <div className="max-w-7xl mx-auto p-4 md:p-8">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-4xl md:text-5xl font-bold mb-2 text-orange-400">
+            IIM Rohtak IPM Cutoff Data
+          </h1>
+          <p className="text-slate-400 text-lg">Comprehensive Analysis of Admission Statistics</p>
+        </div>
+
+        {/* Stats Card - Only for 2025 */}
+        {/* {selectedYear === 2025 && totalCandidates && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            <div className="rounded-2xl p-6 shadow-lg transform hover:scale-105 transition-transform"
+                 style={{ background: `linear-gradient(135deg, ${primaryColor}, ${accentPurple})` }}>
+              <p className="text-white text-sm font-medium mb-1">Applicants (Positive Score)</p>
+              <p className="text-white text-4xl font-bold">{totalCandidates.toLocaleString()}</p>
+            </div>
+            <div className="rounded-2xl p-6 shadow-lg transform hover:scale-105 transition-transform"
+                 style={{ background: `linear-gradient(135deg, ${secondaryColor}, ${accentGold})` }}>
+              <p className="text-white text-sm font-medium mb-1">Total Qualified</p>
+              <p className="text-white text-4xl font-bold">{totalCandidates.toLocaleString()}</p>
+            </div>
+          </div>
+        )} */}
+
+        {/* Bar Chart Section - Only for 2025 */}
+        {selectedYear === 2025 ? (
+          <div className="bg-slate-900/40 rounded-2xl shadow-xl p-6 mb-8 border-t-4 border-orange-500">
+            <h2 className="text-2xl font-bold mb-6 text-orange-400">
+              Sectional Cutoff Distribution - {selectedYear}
+            </h2>
+            <ResponsiveContainer width="100%" height={400}>
+              <BarChart 
+                data={(currentData as Data2025[]).filter(item => item.SA && item.MCQ && item.VA)} 
+                margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+                <XAxis 
+                  dataKey="category" 
+                  tick={{ fill: '#94a3b8', fontSize: 12, fontWeight: 600 }}
+                />
+                <YAxis 
+                  tick={{ fill: '#94a3b8', fontSize: 12 }}
+                  label={{ value: 'Marks', angle: -90, position: 'insideLeft', style: { fill: primaryColor } }}
+                />
+                <Tooltip content={<CustomTooltip />} />
+                <Legend 
+                  wrapperStyle={{ paddingTop: '20px' }}
+                  iconType="circle"
+                />
+                <Bar dataKey="SA" name="Short Answer" fill={accentPurple} radius={[8, 8, 0, 0]} />
+                <Bar dataKey="MCQ" name="Multiple Choice" fill="#48C9B0" radius={[8, 8, 0, 0]} />
+                <Bar dataKey="VA" name="Verbal Ability" fill={primaryColor} radius={[8, 8, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+            <div className="mt-4 flex flex-wrap gap-4 justify-center text-sm text-slate-400">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: accentPurple }}></div>
+                <span>SA: Short Answer</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#48C9B0' }}></div>
+                <span>MCQ: Multiple Choice</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: primaryColor }}></div>
+                <span>VA: Verbal Ability</span>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="bg-slate-900/40 rounded-2xl shadow-xl p-6 mb-8 border-t-4 border-orange-500">
+            <h2 className="text-2xl font-bold mb-6 text-orange-400">
+              Cutoff Trends - {selectedYear}
+            </h2>
+            <ResponsiveContainer width="100%" height={400}>
+              <BarChart 
+                data={currentData} 
+                margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+                <XAxis 
+                  dataKey="category" 
+                  tick={{ fill: '#94a3b8', fontSize: 12, fontWeight: 600 }}
+                />
+                <YAxis 
+                  tick={{ fill: '#94a3b8', fontSize: 12 }}
+                  label={{ value: 'Cutoff Marks', angle: -90, position: 'insideLeft', style: { fill: primaryColor } }}
+                />
+                <Tooltip 
+                  contentStyle={{ backgroundColor: '#0f172a', border: `2px solid ${primaryColor}`, borderRadius: '8px' }}
+                  labelStyle={{ color: primaryColor, fontWeight: 'bold' }}
+                />
+                <Legend 
+                  wrapperStyle={{ paddingTop: '20px' }}
+                  iconType="circle"
+                />
+                <Bar dataKey="cutoff" name="Minimum Cutoff" fill={primaryColor} radius={[8, 8, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+            <div className="mt-4 flex justify-center text-sm text-slate-400">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: primaryColor }}></div>
+                <span>Overall Cutoff Marks by Category</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Cutoff Table */}
+        <div className="bg-slate-900/40 rounded-2xl shadow-xl overflow-hidden border-t-4 border-purple-500">
+          <div className="p-6 border-b border-slate-800 bg-slate-900/60">
+            <h2 className="text-2xl font-bold text-orange-400">
+              IIM Rohtak IPM {selectedYear} Cutoff Details
+            </h2>
+          </div>
+          
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="bg-slate-800">
+                  <th className="px-6 py-4 text-left text-white font-semibold text-sm">Category</th>
+                  <th className="px-6 py-4 text-center text-white font-semibold text-sm">Min. Cutoff</th>
+                  {selectedYear === 2025 && (
+                    <>
+                      <th className="px-6 py-4 text-center text-white font-semibold text-sm">Female</th>
+                      <th className="px-6 py-4 text-center text-white font-semibold text-sm">Male</th>
+                      <th className="px-6 py-4 text-center text-white font-semibold text-sm">Total Seats</th>
+                    </>
+                  )}
+                </tr>
+              </thead>
+              <tbody>
+                {currentData.map((row, index) => (
+                  <tr
+                    key={row.category}
+                    className={`border-b border-slate-800 transition-colors ${
+                      index % 2 === 0 ? 'bg-slate-900/20' : 'bg-slate-900/40'
+                    } hover:bg-slate-800/50`}
+                  >
+                    <td className="px-6 py-4 font-semibold text-slate-200">{row.category}</td>
+                    <td className="px-6 py-4 text-center">
+                      <span className="inline-block px-3 py-1 rounded-full font-bold text-black text-sm bg-orange-400">
+                        {row.cutoff}
+                      </span>
+                    </td>
+                    {selectedYear === 2025 && (
+                      <>
+                        <td className="px-6 py-4 text-center text-slate-300">{(row as Data2025).female}</td>
+                        <td className="px-6 py-4 text-center text-slate-300">{(row as Data2025).male}</td>
+                        <td className="px-6 py-4 text-center">
+                          <span className="font-bold text-lg text-purple-400">
+                            {(row as Data2025).total}
+                          </span>
+                        </td>
+                      </>
+                    )}
+                  </tr>
+                ))}
+              </tbody>
+              {selectedYear === 2025 && (
+                <tfoot>
+                  <tr className="bg-purple-500/10">
+                    <td className="px-6 py-4 font-bold text-slate-200">Grand Total</td>
+                    <td className="px-6 py-4 text-center font-semibold text-slate-400">—</td>
+                    <td className="px-6 py-4 text-center font-bold text-slate-200">336</td>
+                    <td className="px-6 py-4 text-center font-bold text-slate-200">677</td>
+                    <td className="px-6 py-4 text-center">
+                      <span className="font-bold text-2xl text-purple-400">
+                        1,013
+                      </span>
+                    </td>
+                  </tr>
+                </tfoot>
+              )}
+            </table>
+          </div>
+        </div>
+
+        {/* Footer Note */}
+        <div className="mt-8 p-4 bg-slate-900/40 rounded-xl border-l-4 border-orange-500">
+          <p className="text-sm text-slate-300">
+            <span className="font-semibold text-orange-400">Note:</span> The cutoff marks are subject to final verification.
+            {selectedYear === 2025 && ' DAP stands for Differently Abled Persons category.'} All figures are based on official IIM Rohtak data.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default IIMRohtakCutoff;
