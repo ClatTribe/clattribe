@@ -19,7 +19,7 @@ type CheatSheet = {
 export const CheatSheetsSection: React.FC = () => {
   const sheets: CheatSheet[] = [
     {
-      title: "Legal Reasoning Maxims",
+      title: "Legal Maxims",
       icon: Scale,
       color: "text-blue-400",
       bg: "bg-blue-400/10",
@@ -33,7 +33,7 @@ export const CheatSheetsSection: React.FC = () => {
       count: "80+ Key Articles",
     },
     {
-      title: "Logical Reasoning Patterns",
+      title: "Logical Patterns",
       icon: Zap,
       color: "text-[#f9a01b]",
       bg: "bg-orange-400/10",
