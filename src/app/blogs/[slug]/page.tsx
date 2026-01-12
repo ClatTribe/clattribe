@@ -2,6 +2,7 @@ import { getBlogBySlug, getAllBlogSlugs } from '../../lib/blogs';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { Metadata } from 'next'; 
+import Navbar from '@/app/components/navbar';
 
 interface BlogPageProps {
   params: Promise<{
@@ -70,7 +71,8 @@ export default async function BlogPage({ params }: BlogPageProps) {
 
   return (
     <div className="min-h-screen w-full" style={{ backgroundColor: '#050818' }}>
-      <article className="container mx-auto px-4 sm:px-6 py-8 sm:py-12 max-w-4xl">
+      <Navbar/>
+      <article className="container mx-auto px-4 sm:px-6 py-8 sm:py-12 max-w-4xl pt-18 sm:pt-20 md:pt-24">
         
         {/* Cover Image */}
         {blog.coverImage && (
