@@ -6,7 +6,7 @@ export const GKNotesSection: React.FC = () => {
   const years = [2025];
 
   const cheatsheetPdf =
-    '/cheatsheet/December_2024_GK_CurrentAffairs_Clattribe.html.pdf.pdf';
+    '/cheatsheets/December_2024_GK_CurrentAffairs_Clattribe.html.pdf';
 
   return (
     <div className="space-y-6">
