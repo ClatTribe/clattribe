@@ -1,12 +1,11 @@
 import { getAllBlogs, BlogPost } from '../lib/blogs';
 import BlogCard from './BlogCard';
+import Navbar from '../components/navbar';
 
-// This ensures that if you add a new .md file, 
-// the page updates every hour without a full rebuild.
 export const revalidate = 3600; 
 
 export const metadata = {
-   title: 'Blog Posts | Clat Tribe',
+  title: 'Blog Posts | Clat Tribe',
   description: 'Expert guides on CLAT, AILET, NLU admissions, MBA colleges, and law entrance exam preparation. Read our latest insights and strategies.',
 };
 
@@ -18,7 +17,10 @@ export default async function BlogsPage() {
       className="min-h-screen w-full"
       style={{ backgroundColor: '#050818' }}
     >
-      <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12 max-w-7xl">
+      <Navbar />
+      
+      {/* Added padding-top to account for fixed navbar */}
+      <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12 max-w-7xl pt-24 sm:pt-28 md:pt-32">
         <header className="mb-8 sm:mb-12">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
             Blog Posts

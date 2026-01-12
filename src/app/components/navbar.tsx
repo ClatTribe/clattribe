@@ -1,200 +1,126 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import { Menu, X } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
+import { useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Menu, X } from 'lucide-react';
 
-export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
+interface NavbarProps {
+  scrollToSection?: (sectionId: string) => void;
+}
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 100)
+export default function Navbar({ scrollToSection }: NavbarProps) {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const handleScrollToSection = (sectionId: string) => {
+    if (scrollToSection) {
+      scrollToSection(sectionId);
     }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
-  useEffect(() => {
-    if (isOpen) {
-      document.body.classList.add("overflow-hidden")
-    } else {
-      document.body.classList.remove("overflow-hidden")
-    }
-  }, [isOpen])
+  };
 
   return (
-    <header
-      className={`sticky top-0 z-50 w-full shadow-sm transition-all duration-300 ${
-        isScrolled ? "bg-[#0E162A] shadow-xl" : "bg-[#0E162A]/90 backdrop-blur-sm"
-      }`}
-    >
-      <div className="container flex h-20 items-center justify-between mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center space-x-3">
+    <nav className="fixed w-full z-50 bg-brand-900/95 backdrop-blur-md border-b border-white/5">
+      <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+        <div className="flex items-center space-x-3">
           <Image src="/heading.png" alt="Clat Tribe Logo" width={180} height={180} className="rounded" />
-        </Link>
-
-        <nav className="hidden md:flex items-center gap-8 text-lg ml-auto">
-          <Link href="/" className="font-medium text-[#F59E0B] hover:text-[#FB923C] transition-colors">
+        </div>
+        
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+          <Link href="/" className="hover:text-white transition-colors">
             Home
           </Link>
-          {/* <Link href="/about" className="font-medium text-slate-300 hover:text-[#F59E0B] transition-colors">
-            About
-          </Link> */}
-          {/* <Link href="/blogs" className="font-medium text-slate-300 hover:text-[#F59E0B] transition-colors">
-            Blogs
-          </Link> */}
-          {/* <Link href="/contact" className="font-medium text-slate-300 hover:text-[#F59E0B] transition-colors">
-            Contact
-          </Link> */}
-          {/* <Link href="/courses" className="font-medium text-slate-300 hover:text-[#F59E0B] transition-colors">
-            Courses
-          </Link> */}
-        </nav>
-
-        <div className="flex items-center md:hidden">
-          <motion.button
-            className="z-50 text-[#F59E0B]"
-            onClick={() => setIsOpen(!isOpen)}
-            animate={{ rotate: isOpen ? 180 : 0, scale: isOpen ? 1.2 : 1 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            aria-label="Toggle menu"
+          <Link href="/clat-starter-pack" className="hover:text-white transition-colors">
+            CLAT Starter Pack
+          </Link>
+          <Link href="/our-team" className="hover:text-white transition-colors">
+            Our Team
+          </Link>
+          <Link href="/our-courses" className="hover:text-white transition-colors">
+            Our Courses
+          </Link>
+          {/* <button 
+            onClick={() => handleScrollToSection('flashcards')} 
+            className="hover:text-white transition-colors cursor-pointer"
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </motion.button>
+            Flashcards
+          </button> */}
+          <Link href="/blogs" className="hover:text-white transition-colors">
+            Blogs
+          </Link>
+          <Link href="/nlu-predictor" className="hover:text-white transition-colors">
+            NLU Predictor
+          </Link>
         </div>
+
+        {/* Mobile Menu Button */}
+        <button 
+          className="md:hidden text-white p-2"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
       </div>
 
-      <AnimatePresence>
-        {isOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}
-              className="fixed top-0 left-0 w-full h-full bg-black/50 backdrop-blur-lg z-40"
-              onClick={() => setIsOpen(false)}
-            />
-            <motion.div
-              initial={{ x: "-100%", borderRadius: "50% 0 0 50%" }}
-              animate={{ x: "0%", borderRadius: "0" }}
-              exit={{ x: "-100%", borderRadius: "50% 0 0 50%" }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="fixed top-0 left-0 w-4/5 h-screen bg-[#0E162A] backdrop-blur-md shadow-lg flex flex-col items-center justify-center text-lg z-50 border-r border-slate-800"
+      {/* Mobile Navigation Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden bg-[#0F172B] border-t border-white/10 shadow-lg">
+          <div className="container mx-auto px-6 py-4 flex flex-col gap-2">
+            <Link 
+              href="/" 
+              className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
+              onClick={() => setMobileMenuOpen(false)}
             >
-              <motion.div>
-                <Link href="/" className="text-3xl font-bold text-white mb-6" onClick={() => setIsOpen(false)}>
-                  <div className="flex items-center gap-2">
-                    <Image src="/heading.png" alt="Clat Tribe Logo" width={40} height={40} className="rounded" />
-                    <span className="text-[#F59E0B]">Clat Tribe</span>
-                  </div>
-                </Link>
-              </motion.div>
-
-              <nav className="flex flex-col items-center space-y-6">
-                {/* Home */}
-                <motion.div
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{
-                    delay: 0.2,
-                    duration: 0.5,
-                    ease: "easeOut",
-                  }}
-                >
-                  <Link
-                    href="/"
-                    className="text-white hover:text-[#F59E0B] text-xl font-semibold transition-colors"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Home
-                  </Link>
-                </motion.div>
-
-                {/* About */}
-                {/* <motion.div
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{
-                    delay: 0.35,
-                    duration: 0.5,
-                    ease: "easeOut",
-                  }}
-                >
-                  <Link
-                    href="/about"
-                    className="text-white hover:text-[#F59E0B] text-xl font-semibold transition-colors"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    About
-                  </Link>
-                </motion.div> */}
-
-                {/* Blogs */}
-                {/* <motion.div
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{
-                    delay: 0.5,
-                    duration: 0.5,
-                    ease: "easeOut",
-                  }}
-                >
-                  <Link
-                    href="/blogs"
-                    className="text-white hover:text-[#F59E0B] text-xl font-semibold transition-colors"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Blogs
-                  </Link>
-                </motion.div> */}
-
-                {/* Contact */}
-                {/* <motion.div
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{
-                    delay: 0.65,
-                    duration: 0.5,
-                    ease: "easeOut",
-                  }}
-                >
-                  <Link
-                    href="/contact"
-                    className="text-white hover:text-[#F59E0B] text-xl font-semibold transition-colors"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Contact
-                  </Link>
-                </motion.div> */}
-
-                {/* Courses */}
-                {/* <motion.div
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{
-                    delay: 0.8,
-                    duration: 0.5,
-                    ease: "easeOut",
-                  }}
-                >
-                  <Link
-                    href="/courses"
-                    className="text-white hover:text-[#F59E0B] text-xl font-semibold transition-colors"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Courses
-                  </Link>
-                </motion.div> */}
-              </nav>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-    </header>
-  )
+              Home
+            </Link>
+            <Link 
+              href="/clat-starter-pack" 
+              className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              CLAT Starter Pack
+            </Link>
+            <Link 
+              href="/our-team" 
+              className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Our Team
+            </Link>
+            <Link 
+              href="/our-courses" 
+              className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Our Courses
+            </Link>
+            {/* <button 
+              onClick={() => {
+                handleScrollToSection('flashcards');
+                setMobileMenuOpen(false);
+              }}
+              className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 text-left font-medium"
+            >
+              Flashcards
+            </button> */}
+            <Link 
+              href="/blogs" 
+              className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Blogs
+            </Link>
+            <Link 
+              href="/nlu-predictor" 
+              className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              NLU Predictor
+            </Link>
+          </div>
+        </div>
+      )}
+    </nav>
+  );
 }
