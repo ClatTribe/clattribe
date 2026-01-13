@@ -116,21 +116,21 @@ export default function Navbar({ scrollToSection }: NavbarProps) {
               Home
             </Link>
             <Link 
-              href="/" 
+              href="/clat-2027-starter-kit" 
               className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
               onClick={() => setMobileMenuOpen(false)}
             >
               CLAT 2027 Starter Kit
             </Link>
             <Link 
-              href="/clat-2027-starter-kit" 
+              href="/our-team" 
               className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
               onClick={() => setMobileMenuOpen(false)}
             >
               Our Team
             </Link>
             <Link 
-              href="/our-team" 
+              href="/our-courses" 
               className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
               onClick={() => setMobileMenuOpen(false)}
             >
