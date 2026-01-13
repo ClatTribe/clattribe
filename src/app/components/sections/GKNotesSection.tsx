@@ -26,7 +26,7 @@ export const GKNotesSection: React.FC = () => {
             </div>
 
             <h3 className="text-xl font-bold mb-2">
-              December 2024 GK & Current Affairs
+              December 2025 GK & Current Affairs
             </h3>
 
             <p className="text-slate-400 text-sm mb-6">

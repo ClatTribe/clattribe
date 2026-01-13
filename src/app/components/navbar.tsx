@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter, usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 
 interface NavbarProps {
@@ -11,10 +12,47 @@ interface NavbarProps {
 
 export default function Navbar({ scrollToSection }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
 
-  const handleScrollToSection = (sectionId: string) => {
-    if (scrollToSection) {
-      scrollToSection(sectionId);
+  const handleFlashcardsClick = () => {
+    setMobileMenuOpen(false);
+    
+    // Check if we're on the homepage
+    if (pathname === '/') {
+      // If on homepage, scroll to flashcards section
+      if (scrollToSection) {
+        scrollToSection('flashcards');
+      } else {
+        // Fallback if scrollToSection is not provided
+        const element = document.getElementById('flashcards');
+        if (element) {
+          const offset = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - offset;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+    } else {
+      // If on another page, navigate to homepage with hash
+      router.push('/#flashcards');
+      
+      // After navigation, scroll to section
+      setTimeout(() => {
+        const element = document.getElementById('flashcards');
+        if (element) {
+          const offset = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - offset;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 100);
     }
   };
 
@@ -22,7 +60,9 @@ export default function Navbar({ scrollToSection }: NavbarProps) {
     <nav className="fixed w-full z-50 bg-brand-900/95 backdrop-blur-md border-b border-white/5">
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         <div className="flex items-center space-x-3">
-          <Image src="/heading.png" alt="Clat Tribe Logo" width={180} height={180} className="rounded" />
+          <Link href="/">
+            <Image src="/heading.png" alt="Clat Tribe Logo" width={180} height={180} className="rounded" />
+          </Link>
         </div>
         
         {/* Desktop Navigation */}
@@ -30,8 +70,8 @@ export default function Navbar({ scrollToSection }: NavbarProps) {
           <Link href="/" className="hover:text-white transition-colors">
             Home
           </Link>
-          <Link href="/clat-starter-pack" className="hover:text-white transition-colors">
-            CLAT Starter Pack
+          <Link href="/clat-2027-starter-kit" className="hover:text-white transition-colors">
+            CLAT 2027 Starter Kit
           </Link>
           <Link href="/our-team" className="hover:text-white transition-colors">
             Our Team
@@ -39,12 +79,12 @@ export default function Navbar({ scrollToSection }: NavbarProps) {
           <Link href="/our-courses" className="hover:text-white transition-colors">
             Our Courses
           </Link>
-          {/* <button 
-            onClick={() => handleScrollToSection('flashcards')} 
+          <button 
+            onClick={handleFlashcardsClick} 
             className="hover:text-white transition-colors cursor-pointer"
           >
             Flashcards
-          </button> */}
+          </button>
           <Link href="/blogs" className="hover:text-white transition-colors">
             Blogs
           </Link>
@@ -67,6 +107,7 @@ export default function Navbar({ scrollToSection }: NavbarProps) {
       {mobileMenuOpen && (
         <div className="md:hidden bg-[#0F172B] border-t border-white/10 shadow-lg">
           <div className="container mx-auto px-6 py-4 flex flex-col gap-2">
+            
             <Link 
               href="/" 
               className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
@@ -75,35 +116,32 @@ export default function Navbar({ scrollToSection }: NavbarProps) {
               Home
             </Link>
             <Link 
-              href="/clat-starter-pack" 
+              href="/" 
               className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
               onClick={() => setMobileMenuOpen(false)}
             >
-              CLAT Starter Pack
+              CLAT 2027 Starter Kit
             </Link>
             <Link 
-              href="/our-team" 
+              href="/clat-2027-starter-kit" 
               className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
               onClick={() => setMobileMenuOpen(false)}
             >
               Our Team
             </Link>
             <Link 
-              href="/our-courses" 
+              href="/our-team" 
               className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
               onClick={() => setMobileMenuOpen(false)}
             >
               Our Courses
             </Link>
-            {/* <button 
-              onClick={() => {
-                handleScrollToSection('flashcards');
-                setMobileMenuOpen(false);
-              }}
+            <button 
+              onClick={handleFlashcardsClick}
               className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 text-left font-medium"
             >
               Flashcards
-            </button> */}
+            </button>
             <Link 
               href="/blogs" 
               className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"

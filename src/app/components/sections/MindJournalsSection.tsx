@@ -34,7 +34,7 @@ const audioLogs: AudioLog[] = [
   {
     id: 1,
     title: "Managing Parental Expectations",
-    duration: "6:24",
+    duration: "1:42",
     description:
       "That conversation where I explained why mock scores matter more than perfect attendance.",
     icon: Users,
@@ -54,7 +54,7 @@ const audioLogs: AudioLog[] = [
   {
     id: 2,
     title: "One Week Before D-Day",
-    duration: "7:12",
+    duration: "1:10",
     description:
       "Should I study more or rest? My exact checklist for the final 7 days.",
     icon: HeartPulse,
@@ -64,7 +64,7 @@ const audioLogs: AudioLog[] = [
   {
     id: 3,
     title: "From Home to Exam Hall",
-    duration: "6:05",
+    duration: "1:18",
     description:
       "Minute-by-minute: What I ate, when I left, and exam-day nerves.",
     icon: Flag,

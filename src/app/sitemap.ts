@@ -25,7 +25,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1.0,
     },
     {
-      url: `${baseUrl}/clat-starter-pack`,
+      url: `${baseUrl}/clat-2027-starter-kit`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.9,

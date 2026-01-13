@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { 
   FileText, 
@@ -65,6 +64,7 @@ export const FORMS_DATA: ExamForm[] = [
     name: "CLAT 2026",
     startDate: "July 2025",
     endDate: "Oct 2025",
+    examDate: "Dec 1, 2025",
     link: "https://consortiumofnlus.ac.in",
     status: "Coming Soon"
   },
@@ -72,6 +72,7 @@ export const FORMS_DATA: ExamForm[] = [
     name: "AILET 2026",
     startDate: "Aug 2025",
     endDate: "Nov 2025",
+    examDate: "Dec 8, 2025",
     link: "https://nationallawuniversitydelhi.in",
     status: "Coming Soon"
   },
@@ -79,13 +80,23 @@ export const FORMS_DATA: ExamForm[] = [
     name: "SLAT 2026",
     startDate: "May 2026",
     endDate: "May 2026",
+    examDate: "Jun 15, 2026",
     link: "https://set-test.org",
     status: "Coming Soon"
+  },
+  {
+    name: "CUET 2026",
+    startDate: "Jan 3, 2026",
+    endDate: "Jan 30, 2026",
+    examDate: "May 15, 2026",
+    link: "https://examinationservices.nic.in/ExamSysCUETUG26/root/Home.aspx?enc=Ei4cajBkK1gZSfgr53ImFYsjZOdyj8DuPcxGBqAK2DwPXgGzSvy8OkvXqQJ0Bni9",
+    status: "Open"
   },
   {
     name: "NMIMS-LAT",
     startDate: "Jan 2026",
     endDate: "May 2026",
+    examDate: "Jun 10, 2026",
     link: "https://nmims.edu",
     status: "Coming Soon"
   },
@@ -93,6 +104,7 @@ export const FORMS_DATA: ExamForm[] = [
     name: "MHCET Law",
     startDate: "March 2025",
     endDate: "May 2026",
+    examDate: "Jun 20, 2026",
     link: "https://cetcell.mahacet.org",
     status: "Open"
   },
@@ -100,6 +112,7 @@ export const FORMS_DATA: ExamForm[] = [
     name: "IPU CET / CLAT Score",
     startDate: "March 2026",
     endDate: "May 2026",
+    examDate: "Jun 25, 2026",
     link: "https://ipu.ac.in",
     status: "Coming Soon"
   },
@@ -107,8 +120,8 @@ export const FORMS_DATA: ExamForm[] = [
     name: "LSAT-India",
     startDate: "Jan 2026",
     endDate: "May 2026",
+    examDate: "Jun 30, 2026",
     link: "https://lsatindia.in",
     status: "Coming Soon"
   }
 ];
-

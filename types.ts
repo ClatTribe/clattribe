@@ -1,4 +1,3 @@
-
 export enum ResourceTab {
   PYQ = 'PYQ',
   CHEATSHEETS = 'CheatSheets',
@@ -26,6 +25,7 @@ export interface ExamForm {
   name: string;
   startDate: string;
   endDate: string;
+  examDate: string;
   link: string;
   status: 'Open' | 'Closed' | 'Coming Soon';
 }

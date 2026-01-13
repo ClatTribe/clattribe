@@ -24,6 +24,16 @@ type ExamLink = {
 export const FormsPage: React.FC = () => {
   const examLinks: ExamLink[] = [
     {
+      college: "MAH Law Colleges (GLC, ILS)",
+      examName: "MHCET Law",
+      examDate: "May 2026 (TBA)",
+      applicationDeadline: "Feb/March 2026",
+      url: "https://cetcell.mahacet.org",
+      courses: "5-Year Integrated LLB",
+      color: "text-pink-400",
+      bg: "bg-pink-400/10",
+    },
+    {
       college: "National Law Universities (24 NLUs)",
       examName: "CLAT 2026",
       examDate: "7th Dec 2025*",
@@ -62,16 +72,6 @@ export const FormsPage: React.FC = () => {
       courses: "BA LLB / BBA LLB",
       color: "text-[#f9a01b]",
       bg: "bg-orange-400/10",
-    },
-    {
-      college: "MAH Law Colleges (GLC, ILS)",
-      examName: "MHCET Law",
-      examDate: "May 2026 (TBA)",
-      applicationDeadline: "Feb/March 2026",
-      url: "https://cetcell.mahacet.org",
-      courses: "5-Year Integrated LLB",
-      color: "text-pink-400",
-      bg: "bg-pink-400/10",
     },
     {
       college: "IP University (Delhi)",
