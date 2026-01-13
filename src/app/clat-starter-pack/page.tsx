@@ -36,7 +36,7 @@ const App: React.FC = () => {
                 Clat Free Learning Resources
               </div>
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-3 sm:mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-slate-400">
-                Unlock Your <span className="text-[#f9a01b]">Potential.</span>
+                CLAT Starter <span className="text-[#f9a01b]">Pack.</span>
               </h1>
               <p className="text-slate-400 text-base sm:text-lg max-w-2xl leading-relaxed">
                 Empowering your CLAT journey with curated study materials, expert insights, and real-time exam updates. Join the tribe and lead the rank list.
