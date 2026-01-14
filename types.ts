@@ -7,6 +7,7 @@ export enum ResourceTab {
   DESK = 'From the desk of ClatTribe',
   COLLEGES = 'Know your college',
   MIND_JOURNALS = 'Voices',
+  CONTACT = 'Contact Us',
 }
 
 export interface CollegeInfo {

@@ -1,6 +1,9 @@
 "use client";
 import React from 'react';
 import { Check, Star, GraduationCap, Trophy, ArrowRight, ArrowDown, Info } from 'lucide-react';
+import Navbar from '../components/navbar';
+import NewFooter from '../components/newFooter';
+import Footer from '../components/footer';
 
 const COURSES = [
   {
@@ -47,6 +50,7 @@ const handleWaiverCall = () => {
 const CoursePage = () => {
   return (
     <div className="min-h-screen bg-slate-950 text-white">
+      <Navbar />
       {/* Background decoration */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#F59E0B]/5 rounded-full blur-3xl sm:w-[600px] sm:h-[600px]"></div>
@@ -228,6 +232,7 @@ const CoursePage = () => {
           </p>
         </div>
       </div>
+      <NewFooter/>
     </div>
   );
 };

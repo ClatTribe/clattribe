@@ -33,6 +33,7 @@ export const RESOURCE_TABS = [
   { id: ResourceTab.FORMS, icon: <Calendar className="w-5 h-5" />, label: 'Forms' },
   { id: ResourceTab.DESK, icon: <Info className="w-5 h-5" />, label: 'Desk of CT' },
   { id: ResourceTab.COLLEGES, icon: <School className="w-5 h-5" />, label: 'Cut-offs' },
+  { id: ResourceTab.CONTACT, icon: <School className="w-5 h-5" />, label: 'Contact' },
 ];
 
 export const COLLEGES_DATA: CollegeInfo[] = [

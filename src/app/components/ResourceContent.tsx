@@ -6,9 +6,11 @@ import { PYQSection } from './sections/PYQSection';
 import { CheatSheetsSection } from './sections/CheatSheetsSection';
 // import { ToppersTalkSection } from './sections/ToppersTalkSection';
 import { GKNotesSection } from './sections/GKNotesSection';
+import ContactPage from './ContactUs';
 import { FormsSection } from './sections/FormsSection';
 import { DeskSection } from './sections/DeskSection';
 import { CollegeSection } from './sections/CollegeSection';
+import ContactUs from './ContactUs';
 import  MindJournalsSection  from './sections/MindJournalsSection';
 import UnifiedCutoffsPage from './cut-offs/UnifiedCutoffsPage';
 
@@ -36,6 +38,8 @@ export const ResourceContent: React.FC<Props> = ({ activeTab }) => {
         return <UnifiedCutoffsPage />;
       case ResourceTab.MIND_JOURNALS:
         return <MindJournalsSection />;
+      case ResourceTab.CONTACT:
+        return <ContactUs />;
       default:
         return <div className="text-white">Content for {activeTab} is coming soon!</div>;
     }

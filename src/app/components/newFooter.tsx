@@ -1,5 +1,5 @@
 import React from "react";
-import { Instagram, Youtube, MessageCircle } from "lucide-react";
+import { Instagram, Youtube } from "lucide-react";
 
 const NewFooter = () => {
   const whatsappNumber = '918303865139';
@@ -9,7 +9,8 @@ const NewFooter = () => {
   };
 
   return (
-    <footer className="py-10" style={{ backgroundColor: "#020617" }}>
+    // Changed to #000000 for maximum darkness
+    <footer className="py-12" style={{ backgroundColor: "#000000" }}>
       <div className="container mx-auto px-6">
         
         {/* TOP SECTION */}
@@ -23,23 +24,24 @@ const NewFooter = () => {
                 alt="Clat Tribe Logo" 
                 width={180} 
                 height={180} 
-                className="rounded" 
+                className="rounded brightness-90 hover:brightness-100 transition-all" 
               />
             </div>
-            <p className="text-sm mt-2" style={{ color: "#94a3b8" }}>
+            {/* Slightly darker text to blend with background */}
+            <p className="text-sm mt-3 font-medium tracking-wide" style={{ color: "#64748b" }}>
               Master General Knowledge. Conquer CLAT.
             </p>
           </div>
 
           {/* Social icons */}
-          <div className="flex gap-6">
+          <div className="flex gap-6 items-center">
             <button 
               onClick={handleWhatsApp}
-              className="transition-colors group"
-              style={{ color: "#cbd5e1" }}
+              className="transition-all group"
+              style={{ color: "#94a3b8" }}
               aria-label="WhatsApp"
             >
-              <div className="w-5 h-5 hover:scale-110 transition-transform">
+              <div className="w-6 h-6 hover:scale-110 transition-transform">
                 <svg 
                   viewBox="0 0 24 24" 
                   fill="currentColor"
@@ -52,46 +54,49 @@ const NewFooter = () => {
 
             <a 
               href="https://www.instagram.com/clattribe/" 
-              className="transition-colors"
-              style={{ color: "#cbd5e1" }}
+              className="transition-all"
+              style={{ color: "#94a3b8" }}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
             >
-              <Instagram className="w-5 h-5 hover:scale-110 transition-transform hover:text-[#f59e0b]" />
+              <Instagram className="w-6 h-6 hover:scale-110 transition-transform hover:text-[#f59e0b]" />
             </a>
 
             <a 
               href="https://www.youtube.com/@CLATribe" 
-              className="transition-colors"
-              style={{ color: "#cbd5e1" }}
+              className="transition-all"
+              style={{ color: "#94a3b8" }}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="YouTube"
             >
-              <Youtube className="w-5 h-5 hover:scale-110 transition-transform hover:text-[#f59e0b]" />
+              <Youtube className="w-6 h-6 hover:scale-110 transition-transform hover:text-[#f59e0b]" />
             </a>
           </div>
 
         </div>
 
-        {/* DIVIDER */}
+        {/* DIVIDER - Darker border to match new background */}
         <div
           className="my-10"
-          style={{ borderBottom: "1px solid #1e293b" }}
+          style={{ borderBottom: "1px solid #111827" }}
         ></div>
 
         {/* BOTTOM SECTION */}
-        <div className="flex flex-col md:flex-row justify-between text-sm">
-          <p style={{ color: "#64748b" }}>
-            © 2025 ClatTribe Education. All rights reserved.
+        <div className="flex flex-col md:flex-row justify-between text-xs tracking-wider">
+          <p style={{ color: "#475569" }}>
+            © {new Date().getFullYear()} ClatTribe Education. All rights reserved.
           </p>
-
-          <div className="flex gap-6 mt-4 md:mt-0">
-            <a href="#" className="transition-colors hover:text-[#f59e0b]" style={{ color: "#94a3b8" }}>
+          
+          <div className="flex flex-wrap gap-6 mt-6 md:mt-0 items-center">
+            <a href="/contact" className="transition-colors hover:text-[#f59e0b]" style={{ color: "#64748b" }}>
+              Contact Us
+            </a>
+            <a href="#" className="transition-colors hover:text-[#f59e0b]" style={{ color: "#64748b" }}>
               Privacy Policy
             </a>
-            <a href="#" className="transition-colors hover:text-[#f59e0b]" style={{ color: "#94a3b8" }}>
+            <a href="#" className="transition-colors hover:text-[#f59e0b]" style={{ color: "#64748b" }}>
               Terms of Service
             </a>
           </div>
