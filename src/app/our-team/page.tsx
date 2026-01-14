@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from 'react';
-import { Award, GraduationCap, Star, Target, ShieldCheck, TrendingUp, Crown } from 'lucide-react';
+import { Award, GraduationCap, Star, Target, ShieldCheck, Trophy, Crown } from 'lucide-react';
 import Navbar from '../components/navbar';
 import NewFooter from '../components/newFooter';
 import ContactButton from '../components/ContactButton';
@@ -8,12 +8,12 @@ import ContactButton from '../components/ContactButton';
 const TEAM = [
   {
     name: "Raghvendra Bhaiya",
-    role: "Legal Reasoning Specialist",
-    credentials: "NLU Bangalore Alumnus",
-    achievement: "NLSIU Topper",
-    bio: "Hailing from India's #1 Law School, Raghvendra brings the NLSIU standard of reasoning to every ClatTribe student, ensuring peak mental agility.",
+    role: "GK Expert",
+    credentials: "NLU Lucknow Alumnus",
+    achievement: "Mentor",
+    bio: "Raghvendra Bhaiya, our GK Specialist, leverages his NLU Lucknow foundation to build a strong knowledge base for ClatTribe aspirants, powering their overall preparation.",
     image: "https://res.cloudinary.com/daetdadtt/image/upload/v1768377212/Gemini_Generated_Image_p9dr49p9dr49p9dr_cbaowb.png",
-    tags: ["NLU Lucknow", "NLSIU Alumni"]
+    tags: ["NLU Lucknow", "Mentor"]
   },
   {
     name: "Poorva Didi",
@@ -63,18 +63,48 @@ const TeachersPage = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 md:pt-32 pb-24">
         
         {/* Hero Section */}
-        <div className="text-center mb-16 md:mb-24">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 border border-slate-800 text-[#F59E0B] text-[10px] md:text-xs font-black uppercase tracking-widest mb-6">
-            <Crown className="w-4 h-4 fill-[#F59E0B]" /> From the Makers of IPMCareer
+        <section className="relative overflow-hidden rounded-[3rem] bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 p-8 md:p-16">
+          <div className="absolute top-0 right-0 p-12 opacity-10">
+            <Crown className="w-64 h-64 text-[#F59E0B]" />
           </div>
-          <h1 className="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-[1.1]">
-            We don't just teach. <br className="hidden sm:block" />
-            We build <span className="text-[#F59E0B] italic">Rankers.</span>
-          </h1>
-          <p className="text-slate-400 max-w-2xl mx-auto text-base md:text-xl leading-relaxed">
-            The same leadership that delivered <span className="text-white font-bold italic">All India Rank 1s</span> at IPMCareer is now revolutionizing CLAT.
-          </p>
-        </div>
+
+          <div className="relative z-10 flex flex-col lg:flex-row items-center gap-12">
+            <div className="relative">
+              <div className="w-48 h-48 md:w-64 md:h-64 rounded-3xl overflow-hidden border-4 border-[#F59E0B] shadow-2xl shadow-[#F59E0B]/20">
+                <img
+                  src="https://res.cloudinary.com/daetdadtt/image/upload/v1768386323/air1_zhepy9.png"
+                  alt="AIR 1 Success Story"
+                  className="w-full h-full object-cover"
+                  style={{ objectPosition: "50% 20%" }}
+                />
+              </div>
+              <div className="absolute -bottom-4 -right-4 bg-gradient-to-r from-[#F59E0B] to-amber-600 text-white font-black px-5 py-2.5 rounded-xl text-xl shadow-lg">
+                AIR 1
+              </div>
+            </div>
+
+            <div className="flex-1 text-center">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 border border-[#F59E0B] text-[#F59E0B] text-[10px] md:text-xs font-black uppercase tracking-widest mb-6">
+                <Crown className="w-4 h-4 fill-[#F59E0B]" /> FROM THE MAKERS OF IPMCAREER
+              </div>
+              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-4 text-white leading-[1.1]">
+                We don't just teach. <br className="hidden sm:block" />
+                We build <span className="text-[#F59E0B] italic">Rankers.</span>
+              </h2>
+              <p className="text-slate-400 text-base md:text-xl leading-relaxed max-w-2xl mb-8 mx-auto">
+                The same leadership that delivered <span className="text-white font-bold italic">All India Rank 1s</span> at IPMCareer is now revolutionizing CLAT preparation with proven strategies and relentless excellence.
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-4">
+                <div className="flex items-center gap-2 text-slate-300 bg-slate-800/50 px-4 py-2 rounded-xl border border-slate-700 hover:border-[#F59E0B] transition-colors">
+                  <Trophy className="w-4 h-4 text-[#F59E0B]" /> Multiple AIR 1s
+                </div>
+                <div className="flex items-center gap-2 text-slate-300 bg-slate-800/50 px-4 py-2 rounded-xl border border-slate-700 hover:border-[#F59E0B] transition-colors">
+                  <Target className="w-4 h-4 text-[#F59E0B]" /> Proven Excellence
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Success Habit Section */}
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-24 p-6 md:p-12 bg-slate-900/40 backdrop-blur-sm rounded-[32px] border border-slate-800/50 shadow-2xl">
@@ -105,7 +135,7 @@ const TeachersPage = () => {
               <span className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Proven Record</span>
             </div>
             <div className="p-6 bg-slate-800/50 border border-slate-700 rounded-2xl text-center">
-              <span className="block text-2xl md:text-4xl font-black text-[#F59E0B] mb-1">IIM-A/L</span>
+              <span className="block text-2xl md:text-4xl font-black text-[#F59E0B] mb-1">NLU / IIM A</span>
               <span className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Mentorship</span>
             </div>
             <div className="col-span-2 p-6 bg-slate-800/80 border border-[#F59E0B]/20 rounded-2xl text-center">

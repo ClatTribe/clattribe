@@ -81,22 +81,22 @@ export const FORMS_DATA: ExamForm[] = [
     name: "SLAT 2026",
     startDate: "May 2026",
     endDate: "May 2026",
-    examDate: "Jun 15, 2026",
+    examDate: "",
     link: "https://set-test.org",
-    status: "Coming Soon"
+    status: "Closed"
   },
   {
-    name: "CUET 2026",
+    name: "CUET UG 2026",
     startDate: "Jan 3, 2026",
     endDate: "Jan 30, 2026",
-    examDate: "May 15, 2026",
+    examDate: "May 11 to May 31, 2026 (Tentative)",
     link: "https://examinationservices.nic.in/ExamSysCUETUG26/root/Home.aspx?enc=Ei4cajBkK1gZSfgr53ImFYsjZOdyj8DuPcxGBqAK2DwPXgGzSvy8OkvXqQJ0Bni9",
     status: "Open"
   },
   {
     name: "NMIMS-LAT",
-    startDate: "Jan 2026",
-    endDate: "May 2026",
+    startDate: "Feb 2026",
+    endDate: "March 2026",
     examDate: "Jun 10, 2026",
     link: "https://nmims.edu",
     status: "Coming Soon"
@@ -105,7 +105,7 @@ export const FORMS_DATA: ExamForm[] = [
     name: "MHCET Law",
     startDate: "March 2025",
     endDate: "May 2026",
-    examDate: "Jun 20, 2026",
+    examDate: "April 1 to April 2, 2026 (Tentative)",
     link: "https://cetcell.mahacet.org",
     status: "Open"
   },
@@ -113,16 +113,8 @@ export const FORMS_DATA: ExamForm[] = [
     name: "IPU CET / CLAT Score",
     startDate: "March 2026",
     endDate: "May 2026",
-    examDate: "Jun 25, 2026",
+    examDate: "May 2026",
     link: "https://ipu.ac.in",
-    status: "Coming Soon"
-  },
-  {
-    name: "LSAT-India",
-    startDate: "Jan 2026",
-    endDate: "May 2026",
-    examDate: "Jun 30, 2026",
-    link: "https://lsatindia.in",
     status: "Coming Soon"
   }
 ];
