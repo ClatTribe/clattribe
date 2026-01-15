@@ -147,6 +147,17 @@ export default async function BlogPage({ params }: BlogPageProps) {
             </div>
           )}
         </header>
+        {blog.audioUrl && (
+          <div className="mb-8 p-4 rounded-lg border border-[rgba(245,158,11,0.15)] bg-[#0F172B]">
+            <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
+              🎧 Listen to this article
+            </h3>
+            <audio controls className="w-full">
+              <source src={blog.audioUrl} type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+        )}
 
         {/* Content Area */}
         <div

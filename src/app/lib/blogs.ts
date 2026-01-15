@@ -16,6 +16,7 @@ export interface BlogPost {
   author?: string;
   excerpt?: string;
   coverImage?: string;
+  audioUrl?: string; 
   tags?: string[];
   content: string;
 }
@@ -46,6 +47,7 @@ export const getBlogBySlug = cache(async (slug: string): Promise<BlogPost> => {
     author: data.author,
     excerpt: data.excerpt,
     coverImage: data.coverImage,
+    audioUrl: data.audioUrl,
     tags: data.tags || [],
   };
 });
