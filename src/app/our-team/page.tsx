@@ -16,7 +16,7 @@ const TEAM = [
     tags: ["NLU Lucknow", "Mentor"]
   },
   {
-    name: "Poorva Didi",
+    name: "Purva Didi",
     role: "Mentor & Legal Architect",
     credentials: "NLU Lucknow Alumna",
     achievement: "NLU Success Specialist",
@@ -28,10 +28,10 @@ const TEAM = [
     name: "Ashutosh Mishra",
     role: "Visionary Educator & Founder",
     credentials: "IIM Ahmedabad Alumnus",
-    achievement: "Founder, IPMCareer | AIR 1 Producer",
-    bio: "An educator with the vision to redefine success. As the founder of IPMCareer, he has built the exact blueprint that consistently delivers All India Rank 1s.",
+    achievement: "Founder, IPM Careers | AIR 1 Producer",
+    bio: "An educator with the vision to redefine success. As the founder of IPM Careers, he has built the exact blueprint that consistently delivers All India Rank 1s.",
     image: "https://res.cloudinary.com/daetdadtt/image/upload/v1766744730/WhatsApp_Image_2025-12-26_at_14.49.25_1_ucqpct.jpg",
-    tags: ["Ex-IIMA", "IPMCareer Founder"]
+    tags: ["IIMA Alumni", "IPM Careers Founder"]
   },
 ];
 
@@ -84,15 +84,15 @@ const TeachersPage = () => {
             </div>
 
             <div className="flex-1 text-center">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 border border-[#F59E0B] text-[#F59E0B] text-[10px] md:text-xs font-black uppercase tracking-widest mb-6">
-                <Crown className="w-4 h-4 fill-[#F59E0B]" /> FROM THE MAKERS OF IPMCAREER
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 border border-[#F59E0B] text-[#F59E0B] text-[10px] md:text-xs font-black tracking-widest mb-6">
+                <Crown className="w-4 h-4 fill-[#F59E0B]" /> FROM THE MAKERS OF IPM Careers
               </div>
               <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-4 text-white leading-[1.1]">
                 We don't just teach. <br className="hidden sm:block" />
                 We build <span className="text-[#F59E0B] italic">Rankers.</span>
               </h2>
               <p className="text-slate-400 text-base md:text-xl leading-relaxed max-w-2xl mb-8 mx-auto">
-                The same leadership that delivered <span className="text-white font-bold italic">All India Rank 1s</span> at IPMCareer is now revolutionizing CLAT preparation with proven strategies and relentless excellence.
+                The same leadership that delivered <span className="text-white font-bold italic">All India Rank 1s</span> at IPM Careers is now revolutionizing CLAT preparation with proven strategies and relentless excellence.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-4">
                 <div className="flex items-center gap-2 text-slate-300 bg-slate-800/50 px-4 py-2 rounded-xl border border-slate-700 hover:border-[#F59E0B] transition-colors">
@@ -111,7 +111,7 @@ const TeachersPage = () => {
           <div className="order-2 lg:order-1">
             <h2 className="text-2xl md:text-4xl font-bold mb-6">The Pedigree of AIR 1</h2>
             <p className="text-slate-400 text-sm md:text-lg mb-8 leading-relaxed">
-              Success is not an accident—it's a system. Built by IIM and NLU alumni, ClatTribe inherits the winning DNA of IPMCareer.
+              Success is not an accident—it's a system. Built by IIM and NLU alumni, ClatTribe inherits the winning DNA of IPM Careers.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="flex items-center gap-3 p-3 bg-slate-800/30 rounded-xl border border-slate-700/50">
@@ -139,7 +139,7 @@ const TeachersPage = () => {
               <span className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Mentorship</span>
             </div>
             <div className="col-span-2 p-6 bg-slate-800/80 border border-[#F59E0B]/20 rounded-2xl text-center">
-              <span className="block text-lg md:text-xl font-black text-white mb-1 uppercase tracking-tight">Makers of IPMCareer</span>
+              <span className="block text-lg md:text-xl font-black text-white mb-1 tracking-tight">Makers of IPM Careers</span>
               <span className="text-[9px] text-slate-500 uppercase tracking-[0.2em] font-bold">The Gold Standard</span>
             </div>
           </div>
