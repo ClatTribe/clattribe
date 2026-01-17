@@ -62,7 +62,7 @@ export const COLLEGES_DATA: CollegeInfo[] = [
 
 export const FORMS_DATA: ExamForm[] = [
   {
-    name: "CLAT 2026",
+    name: "CLAT 2027",
     startDate: "Coming Soon",
     endDate: "Coming Soon",
     examDate: "Dec 6, 2026",
@@ -70,7 +70,7 @@ export const FORMS_DATA: ExamForm[] = [
     status: "Coming Soon"
   },
   {
-    name: "AILET 2026",
+    name: "AILET 2027",
     startDate: "Coming Soon",
     endDate: "Coming Soon",
     examDate: "Coming Soon",
