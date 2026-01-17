@@ -63,17 +63,17 @@ export const COLLEGES_DATA: CollegeInfo[] = [
 export const FORMS_DATA: ExamForm[] = [
   {
     name: "CLAT 2026",
-    startDate: "July 2025",
-    endDate: "Oct 2025",
-    examDate: "Dec 1, 2025",
+    startDate: "Coming Soon",
+    endDate: "Coming Soon",
+    examDate: "Dec 6, 2026",
     link: "https://consortiumofnlus.ac.in",
     status: "Coming Soon"
   },
   {
     name: "AILET 2026",
-    startDate: "Aug 2025",
-    endDate: "Nov 2025",
-    examDate: "Dec 8, 2025",
+    startDate: "Coming Soon",
+    endDate: "Coming Soon",
+    examDate: "Coming Soon",
     link: "https://nationallawuniversitydelhi.in",
     status: "Coming Soon"
   },
@@ -116,5 +116,13 @@ export const FORMS_DATA: ExamForm[] = [
     examDate: "May 2026",
     link: "https://ipu.ac.in",
     status: "Coming Soon"
+  },
+  {
+    name: "UPES Law College",
+    startDate: "Dec 15 2025",
+    endDate: "Jan 20 2026",
+    examDate: "April 2026",
+    link: "https://admission.upes.ac.in/Login?BCode=ysApp0gAXIDFHAhVkG75bw%3D%3D",
+    status: "Open"
   }
 ];
