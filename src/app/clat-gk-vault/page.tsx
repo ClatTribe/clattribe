@@ -404,7 +404,7 @@ const DailyCurrentAffairsPage: React.FC = () => {
               <Calendar className="w-3 h-3 sm:w-4 sm:h-4" /> {formattedSelectedDate}
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2 tracking-tight">
-              Daily <span className="text-[#F59E0B]">GK Vault</span>
+              CLAT <span className="text-[#F59E0B]">GK Vault</span> 
             </h1>
             <p className="text-slate-400 text-sm sm:text-base md:text-lg">Stop reading. Start listening. Master GK in 10 minutes.</p>
           </div>
@@ -561,7 +561,7 @@ const DailyCurrentAffairsPage: React.FC = () => {
                     <div className="flex items-center gap-3 p-4 bg-slate-950/50 rounded-xl border border-slate-800">
                       <div className="w-10 h-10 rounded-full bg-[#F59E0B] flex items-center justify-center font-bold text-slate-950">P</div>
                       <div>
-                        <p className="text-white text-xs sm:text-sm font-bold">Narration by Purva Didi</p>
+                        <p className="text-white text-xs sm:text-sm font-bold">Narration by Purva Didi & Team.</p>
                         <p className="text-slate-500 text-[10px] uppercase font-bold tracking-wider">NLU Success Specialist</p>
                       </div>
                     </div>
