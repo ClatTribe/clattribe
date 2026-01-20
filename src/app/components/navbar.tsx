@@ -88,8 +88,8 @@ export default function Navbar({ scrollToSection }: NavbarProps) {
           <Link href="/blogs" className="hover:text-white transition-colors">
             Blogs
           </Link>
-          <Link href="/nlu-predictor" className="hover:text-white transition-colors">
-            NLU Predictor
+          <Link href="/clat-gk-vault" className="hover:text-white transition-colors">
+            CLAT GK Vault
           </Link>
         </div>
 
@@ -150,11 +150,11 @@ export default function Navbar({ scrollToSection }: NavbarProps) {
               Blogs
             </Link>
             <Link 
-              href="/nlu-predictor" 
+              href="/clat-gk-vault" 
               className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
               onClick={() => setMobileMenuOpen(false)}
             >
-              NLU Predictor
+              CLAT GK Vault
             </Link>
           </div>
         </div>
