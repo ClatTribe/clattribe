@@ -6,7 +6,7 @@ author: "CLAT Tribe"
 excerpt: "Best CLAT Coaching in Delhi and a Complete Guide for CLAT Aspirants"
 coverImage: "https://res.cloudinary.com/db14ukba7/image/upload/v1768469308/Brown_and_Navy_Blue_Modern_Lawyer_Presentation_3_xuexic.png"
 tags: ["Best CLAT Coaching in Delhi", "Best CLAT Coaching", "CLAT Coaching", "CLAT Coaching Delhi", "CLAT Exam"]
-audioUrl: "https://res.cloudinary.com/daetdadtt/video/upload/v1768324505/CMAT_%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A5%8B%E0%A4%B0_%E0%A4%B8%E0%A5%87_%E0%A4%9C%E0%A5%8D%E0%A4%AF%E0%A4%BE%E0%A4%A6%E0%A4%BE_%E0%A4%9C%E0%A4%BC%E0%A4%B0%E0%A5%82%E0%A4%B0%E0%A5%80_%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A5%8B%E0%A4%AB%E0%A4%BE%E0%A4%87%E0%A4%B2_ztfp8r.mp4"
+audioUrl: "https://res.cloudinary.com/dduzrmc4b/video/upload/v1768910504/CLAT_%E0%A4%B8%E0%A4%AB%E0%A4%B2%E0%A4%A4%E0%A4%BE_%E0%A4%95%E0%A4%BE_%E0%A4%B0%E0%A4%B9%E0%A4%B8%E0%A5%8D%E0%A4%AF_NLU_%E0%A4%AE%E0%A5%87%E0%A4%82%E0%A4%9F%E0%A4%B0%E0%A5%8D%E0%A4%B8_%E0%A4%B8%E0%A5%87_1_f7q04b.mp4"
 ---
 # Best CLAT Coaching in Delhi | A Complete Guide for CLAT Aspirants  
   

@@ -6,6 +6,8 @@ import {
   BookOpen, Calendar, Newspaper, ChevronRight, Sparkles, 
   History, Loader2, AlertCircle, Lock, RefreshCw, CheckCircle, XCircle, PartyPopper
 } from 'lucide-react';
+import Navbar from '../components/navbar';
+import NewFooter from '../components/newFooter';
 
 // Types updated to match Database Schema
 type SnippetType = {
@@ -390,6 +392,7 @@ const DailyCurrentAffairsPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100">
+      <Navbar/>
       <PaymentPopup isOpen={showPaymentPopup} onClose={() => setShowPaymentPopup(false)} />
       
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
@@ -397,7 +400,7 @@ const DailyCurrentAffairsPage: React.FC = () => {
         <div className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-indigo-500/5 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-8 sm:mb-12">
           <div className="text-left">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#F59E0B]/10 border border-[#F59E0B]/30 text-[#F59E0B] text-xs font-bold uppercase tracking-wider mb-3 sm:mb-4">
@@ -501,72 +504,86 @@ const DailyCurrentAffairsPage: React.FC = () => {
             <>
               <div className="grid lg:grid-cols-12 gap-6 sm:gap-8 mb-8 animate-in fade-in duration-500">
                 <div className="lg:col-span-5 bg-gradient-to-b from-slate-800/80 to-slate-900/80 rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-slate-700/50 relative overflow-hidden">
-                  <audio 
-                    ref={audioRef} 
-                    src={audioLanguage === 'hindi' ? entry.audio_url_hindi : entry.audio_url_english}
-                    onTimeUpdate={handleTimeUpdate}
-                    onEnded={() => setIsPlaying(false)}
-                  />
-                  <div className="relative z-10 flex flex-col h-full justify-between min-h-[400px]">
-                    <div>
-                      <span className="text-[#F59E0B] font-bold uppercase tracking-wider text-[10px] block mb-3 sm:mb-4">Tribe Audiobook</span>
-                      <div className="flex gap-2 mb-4">
-                        <button
-                          onClick={() => setAudioLanguage('english')}
-                          className={`flex-1 px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-300 flex items-center justify-center gap-2 ${
-                            audioLanguage === 'english' ? 'bg-[#F59E0B] text-slate-950' : 'bg-slate-800/50 text-slate-400'
-                          }`}
-                        >
-                          English
-                        </button>
-                        <button
-                          onClick={() => setAudioLanguage('hindi')}
-                          className={`flex-1 px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-300 flex items-center justify-center gap-2 ${
-                            audioLanguage === 'hindi' ? 'bg-[#F59E0B] text-slate-950' : 'bg-slate-800/50 text-slate-400'
-                          }`}
-                        >
-                          हिंदी
-                        </button>
-                      </div>
-                      <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">Today's Briefing</h3>
-                      <p className="text-slate-400 text-xs sm:text-sm italic">Curated by Purva Didi & Team.</p>
-                    </div>
+  <audio 
+    ref={audioRef} 
+    src={audioLanguage === 'hindi' ? entry.audio_url_hindi : entry.audio_url_english}
+    onTimeUpdate={handleTimeUpdate}
+    onEnded={() => setIsPlaying(false)}
+  />
+  
+  <div className="relative z-10 flex flex-col h-full justify-between min-h-[400px]">
+    <div>
+      <span className="text-[#F59E0B] font-bold uppercase tracking-wider text-[10px] block mb-3 sm:mb-4">Tribe Audiobook</span>
+      <div className="flex gap-2 mb-4">
+        <button
+          onClick={() => setAudioLanguage('english')}
+          className={`flex-1 px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-300 flex items-center justify-center gap-2 ${
+            audioLanguage === 'english' ? 'bg-[#F59E0B] text-slate-950' : 'bg-slate-800/50 text-slate-400'
+          }`}
+        >
+          English
+        </button>
+        <button
+          onClick={() => setAudioLanguage('hindi')}
+          className={`flex-1 px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-300 flex items-center justify-center gap-2 ${
+            audioLanguage === 'hindi' ? 'bg-[#F59E0B] text-slate-950' : 'bg-slate-800/50 text-slate-400'
+          }`}
+        >
+          हिंदी
+        </button>
+      </div>
+      <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">Today's Briefing</h3>
+      <p className="text-slate-400 text-xs sm:text-sm italic">Curated by Purva Didi & Team.</p>
+    </div>
 
-                    <div className="my-8 sm:my-12 text-center">
-                      <button 
-                        onClick={() => setIsPlaying(!isPlaying)}
-                        className="w-20 h-20 bg-[#F59E0B] text-slate-950 rounded-full flex items-center justify-center hover:scale-105 transition-transform shadow-xl mx-auto"
-                      >
-                        {isPlaying ? <Pause className="w-10 h-10" /> : <Play className="w-10 h-10 ml-1" />}
-                      </button>
-                      <div className="flex items-center justify-center gap-4 mt-6">
-                        <button onClick={() => skipTime(-10)} className="p-2 rounded-full bg-slate-800/50 text-slate-400 hover:text-white"><SkipBack className="w-5 h-5" /></button>
-                        <button onClick={() => skipTime(10)} className="p-2 rounded-full bg-slate-800/50 text-slate-400 hover:text-white"><SkipForward className="w-5 h-5" /></button>
-                      </div>
-                      <div className="mt-8 space-y-2">
-                        <div className="flex justify-between text-xs font-bold text-slate-500">
-                          <span>{formatTime(currentTime)}</span>
-                          <span className="text-[#F59E0B]">{formatTime(duration)}</span>
-                        </div>
-                        <div 
-                          ref={progressBarRef}
-                          onClick={handleProgressBarClick}
-                          className="h-2 bg-slate-700 rounded-full overflow-hidden cursor-pointer"
-                        >
-                          <div className="h-full bg-[#F59E0B]" style={{ width: `${progress}%` }}></div>
-                        </div>
-                      </div>
-                    </div>
+    {/* Center Section: Headphone above the Play Button */}
+    <div className="flex flex-col items-center justify-center my-4">
+      {/* Headphone Icon positioned specifically above the button */}
+      <Headphones className="w-24 h-24 sm:w-32 sm:h-32 text-white/10 mb-8 sm:mb-[50px]" />
+      
+      <div className="text-center relative z-20">
+        <button 
+          onClick={() => setIsPlaying(!isPlaying)}
+          className="w-20 h-20 bg-[#F59E0B] text-slate-950 rounded-full flex items-center justify-center hover:scale-105 transition-transform shadow-xl mx-auto"
+        >
+          {isPlaying ? <Pause className="w-10 h-10" /> : <Play className="w-10 h-10 ml-1" />}
+        </button>
+        
+        <div className="flex items-center justify-center gap-4 mt-6">
+          <button onClick={() => skipTime(-10)} className="p-2 rounded-full bg-slate-800/50 text-slate-400 hover:text-white">
+            <SkipBack className="w-5 h-5" />
+          </button>
+          <button onClick={() => skipTime(10)} className="p-2 rounded-full bg-slate-800/50 text-slate-400 hover:text-white">
+            <SkipForward className="w-5 h-5" />
+          </button>
+        </div>
+      </div>
+    </div>
 
-                    <div className="flex items-center gap-3 p-4 bg-slate-950/50 rounded-xl border border-slate-800">
-                      <div className="w-10 h-10 rounded-full bg-[#F59E0B] flex items-center justify-center font-bold text-slate-950">P</div>
-                      <div>
-                        <p className="text-white text-xs sm:text-sm font-bold">Narration by Purva Didi & Team.</p>
-                        <p className="text-slate-500 text-[10px] uppercase font-bold tracking-wider">NLU Success Specialist</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+    {/* Progress Bar Section */}
+    <div className="mt-4 space-y-2">
+      <div className="flex justify-between text-xs font-bold text-slate-500">
+        <span>{formatTime(currentTime)}</span>
+        <span className="text-[#F59E0B]">{formatTime(duration)}</span>
+      </div>
+      <div 
+        ref={progressBarRef}
+        onClick={handleProgressBarClick}
+        className="h-2 bg-slate-700 rounded-full overflow-hidden cursor-pointer"
+      >
+        <div className="h-full bg-[#F59E0B]" style={{ width: `${progress}%` }}></div>
+      </div>
+    </div>
+
+    <div className="flex items-center gap-3 p-4 mt-6 bg-slate-950/50 rounded-xl border border-slate-800">
+      <div className="w-10 h-10 rounded-full bg-[#F59E0B] flex items-center justify-center font-bold text-slate-950">P</div>
+      <div>
+        <p className="text-white text-xs sm:text-sm font-bold">Narration by Purva Didi & Team.</p>
+        <p className="text-slate-500 text-[10px] uppercase font-bold tracking-wider">NLU Success Specialist</p>
+      </div>
+    </div>
+  </div>
+</div>
 
                 <div className="lg:col-span-7 bg-slate-900/50 rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-slate-800">
                   <div className="flex items-center justify-between mb-8">
@@ -674,6 +691,7 @@ const DailyCurrentAffairsPage: React.FC = () => {
           background: #F59E0B;
         }
       `}</style>
+      <NewFooter/>
     </div>
   );
 };
