@@ -6,6 +6,7 @@ author: "CLAT Tribe"
 excerpt: "Best CLAT coaching in Delhi with NLU mentors, rank-focused batches, GK capsules & personalized guidance. Start your CLAT preparation with CLAT Tribe."
 coverImage: "https://res.cloudinary.com/db14ukba7/image/upload/v1769076975/Brown_and_Navy_Blue_Modern_Lawyer_Presentation_3_1_gm0us1.png"
 tags: ["Best CLAT Coaching in Delhi", "Best CLAT Coaching", "CLAT Coaching", "CLAT Coaching Delhi", "CLAT Exam"]
+audioUrl: "https://res.cloudinary.com/daetdadtt/video/upload/v1768491483/CLAT_%E0%A4%95%E0%A5%8B%E0%A4%9A%E0%A4%BF%E0%A4%82%E0%A4%97_%E0%A4%95%E0%A5%87_%E0%A4%AE%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%95%E0%A5%87%E0%A4%9F%E0%A4%BF%E0%A4%82%E0%A4%97_%E0%A4%A6%E0%A4%BE%E0%A4%B5%E0%A5%8B%E0%A4%82_%E0%A4%95%E0%A5%8B_%E0%A4%95%E0%A5%88%E0%A4%B8%E0%A5%87_%E0%A4%AA%E0%A4%B0%E0%A4%96%E0%A5%87%E0%A4%82_nnqi3p.mp4"
 ---
 # Best CLAT Coaching in Delhi | A Complete Guide for CLAT Aspirants
   
