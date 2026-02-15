@@ -34,6 +34,24 @@ const COURSES = [
     tag: 'Limited Time',
     description: '1000+ smart cards covering every important fact for CLAT. Perfect for rapid last-minute revision.',
     features: ['Memory Hook Techniques', 'Daily Progress Tracking', 'Offline Access via App', 'Category-wise Sorting']
+  },
+  {
+    id: 'gk-intensive',
+    name: 'GK Capsules',
+    currentPrice: '₹2,999',
+    originalPrice: '₹4,999',
+    tag: 'Best Seller',
+    description: 'Master the most volatile section. Current affairs, static GK, and legal updates curated by NLU alumni.',
+    features: ['Monthly GK Capsules', 'High-Yield Video Explainers', 'Weekly Current Affairs Quizzes', "GK Special Notes","Elite GK Flashcards"]
+  },
+  {
+    id: 'gk-flashcards',
+    name: 'Elite GK Flashcards',
+    currentPrice: '₹99',
+    originalPrice: '₹1,999',
+    tag: 'Limited Time',
+    description: '1000+ smart cards covering every important fact for CLAT. Perfect for rapid last-minute revision.',
+    features: ['Memory Hook Techniques', 'Daily Progress Tracking', 'Offline Access via App', 'Category-wise Sorting']
   }
 ];
 

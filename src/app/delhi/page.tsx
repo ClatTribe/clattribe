@@ -437,7 +437,7 @@ const AdsLandingPage: React.FC = () => {
 
         {/* Call Now Button */}
         <motion.a 
-          href="tel:8299470392"
+          href="tel:8303865139"
           whileHover={{ scale: 1.02 }}
           className="relative group bg-slate-950 text-white p-4 rounded-[2rem] flex items-center gap-4 md:gap-6 shadow-2xl border border-white/10 w-full max-w-sm overflow-hidden"
         >
@@ -455,7 +455,7 @@ const AdsLandingPage: React.FC = () => {
               Call Now
             </span>
             <span className="text-2xl md:text-3xl lg:text-4xl font-black tracking-tight leading-none group-hover:translate-x-1 transition-transform">
-              8299470392
+              8303865139
             </span>
           </div>
 

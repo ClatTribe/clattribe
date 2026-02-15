@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import Hero from './components/Hero';
 import CapsuleSystem from './components/CapsuleSystem';
+import HeroWithPedigree from './components/HeroWithPedigree';
 import Flashcards from './components/Flashcards';
 import NewFooter from './components/newFooter';
 import ContactButton from './components/ContactButton';
@@ -261,6 +262,7 @@ const App: React.FC = () => {
       <main>
         <ImageBackground onNavigate={handleNavigate}/>
         <Hero onNavigate={handleNavigate} />
+        <HeroWithPedigree />
         <div id="capsules">
           <CapsuleSystem />
         </div>
