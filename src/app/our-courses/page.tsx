@@ -35,23 +35,35 @@ const COURSES = [
     description: '1000+ smart cards covering every important fact for CLAT. Perfect for rapid last-minute revision.',
     features: ['Memory Hook Techniques', 'Daily Progress Tracking', 'Offline Access via App', 'Category-wise Sorting']
   },
-  {
-    id: 'gk-intensive',
-    name: 'GK Capsules',
-    currentPrice: '₹2,999',
-    originalPrice: '₹4,999',
-    tag: 'Best Seller',
-    description: 'Master the most volatile section. Current affairs, static GK, and legal updates curated by NLU alumni.',
-    features: ['Monthly GK Capsules', 'High-Yield Video Explainers', 'Weekly Current Affairs Quizzes', "GK Special Notes","Elite GK Flashcards"]
+  {id: 'foundation-tribe',
+    name: 'The Foundation Tribe',
+    currentPrice: '₹79,999',
+    originalPrice: '₹99,999',
+    tag: 'Class 11th Target',
+    description: 'A meticulously designed CLAT 2028 program applying the analytical rigour of IIT Bombay, the strategic management of IIM Ahmedabad, and NLU insider wisdom.',
+    features: [
+        'Founders’ Masterclasses (NLU, IIT B & IIM A Strategy)',
+        'The GK Vault (Unlimited Access & Smart Flashcards)',
+        '15+ Printed Books & 500+ Sectional Tests',
+        '60+ Full-length Mocks with Personalised Analysis',
+        'AI-Enabled Performance Tracker',
+        'Monthly 1-on-1 Personalised Mentorship'
+    ]
   },
   {
-    id: 'gk-flashcards',
-    name: 'Elite GK Flashcards',
-    currentPrice: '₹99',
-    originalPrice: '₹1,999',
-    tag: 'Limited Time',
-    description: '1000+ smart cards covering every important fact for CLAT. Perfect for rapid last-minute revision.',
-    features: ['Memory Hook Techniques', 'Daily Progress Tracking', 'Offline Access via App', 'Category-wise Sorting']
+ id: 'elite-tribe',
+    name: 'The Elite Tribe',
+    currentPrice: '₹39,999',
+    originalPrice: '₹49,999',
+    tag: 'Class 12 & Droppers',
+    description: 'A focused 1-year sprint for CLAT 2027 eliminating noise with high-yield strategies. Led by IIT Bombay and IIM Ahmedabad founders for maximum mock score improvement.',
+    features: [
+        'Founders’ Office Hours (1-on-1 Mentorship)',
+        'Unlimited GK Vault Access & Smart Flashcards',
+        '60+ Full-Length Mocks (CLAT & AILET Pattern)',
+        'Triple Advantage Curriculum (IIT Logic, IIM Strategy, NLU Wisdom)',
+        'Small Batch Accountability & Individual Tracking',
+        'Personalised Mock Analysis Clinics']
   }
 ];
 

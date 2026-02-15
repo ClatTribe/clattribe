@@ -94,12 +94,12 @@ export const FORMS_DATA: ExamForm[] = [
     status: "Open"
   },
   {
-    name: "NMIMS-LAT",
+    name: "NMIMS NLAT",
     startDate: "Feb 2026",
     endDate: "March 2026",
     examDate: "Jun 10, 2026",
-    link: "https://nmims.edu",
-    status: "Coming Soon"
+    link: "https://nlat.nmims.edu/?utm_source=IPM%20Careers&utm_medium=NLATWidget&utm_campaign=NMIMSNLAT",
+    status: "Open"
   },
   {
     name: "MHCET Law",
@@ -120,7 +120,7 @@ export const FORMS_DATA: ExamForm[] = [
   {
     name: "UPES Law College",
     startDate: "Dec 15 2025",
-    endDate: "Jan 20 2026",
+    endDate: "Feb 25 2026",
     examDate: "April 2026",
     link: "https://admission.upes.ac.in/Login?BCode=ysApp0gAXIDFHAhVkG75bw%3D%3D",
     status: "Open"

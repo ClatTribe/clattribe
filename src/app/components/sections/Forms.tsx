@@ -65,7 +65,7 @@ export const FormsPage: React.FC = () => {
     },
     {
       college: "NMIMS (Kirit P. Mehta)",
-      examName: "NMIMS-LAT",
+      examName: "NMIMS NLAT",
       examDate: "Jan – May 2026",
       applicationDeadline: "May 2026",
       url: "https://nmims.edu",

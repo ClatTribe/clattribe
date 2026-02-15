@@ -3,17 +3,27 @@ import { Download, ChevronRight, FileText } from 'lucide-react';
 import Link from 'next/link';
 
 export const GKNotesSection: React.FC = () => {
-  const years = [2025];
-
-  const cheatsheetPdf =
-    '/cheatsheets/December_2024_GK_CurrentAffairs_Clattribe.html.pdf';
+  const cheatsheets = [
+    {
+      year: 2024,
+      title: 'December 2024 GK & Current Affairs',
+      description: 'CLAT-focused GK & Current Affairs cheatsheet with exam-relevant coverage.',
+      pdfPath: '/cheatsheets/December_2024_GK_CurrentAffairs_Clattribe.html.pdf'
+    },
+    {
+      year: 2026,
+      title: 'January 2026 Current Affairs',
+      description: 'CLAT-focused GK & Current Affairs cheatsheet with exam-relevant coverage.',
+      pdfPath: '/cheatsheets/CLAT_Tribe_January_2026_Current_Affairs (1).pdf'
+    }
+  ];
 
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {years.map((year) => (
+        {cheatsheets.map((item) => (
           <div
-            key={year}
+            key={item.year}
             className="group p-6 rounded-3xl bg-slate-900/50 border border-slate-800/50 hover:border-[#f9a01b]/50 transition-all duration-300"
           >
             <div className="flex items-start justify-between mb-6">
@@ -26,17 +36,17 @@ export const GKNotesSection: React.FC = () => {
             </div>
 
             <h3 className="text-xl font-bold mb-2">
-              December 2025 GK & Current Affairs
+              {item.title}
             </h3>
 
             <p className="text-slate-400 text-sm mb-6">
-              CLAT-focused GK & Current Affairs cheatsheet with exam-relevant coverage.
+              {item.description}
             </p>
 
             <div className="flex items-center gap-3">
-              {/* Download */}
+              {/* FIXED: Re-added the missing 'a' tag opening here */}
               <a
-                href={cheatsheetPdf}
+                href={item.pdfPath}
                 download
                 className="flex-1 flex items-center justify-center gap-2 bg-[#f9a01b] hover:bg-[#e08e15] text-slate-900 text-sm font-bold py-3 rounded-xl transition-colors"
               >
@@ -44,9 +54,8 @@ export const GKNotesSection: React.FC = () => {
                 Download PDF
               </a>
 
-              {/* View */}
               <Link
-                href={cheatsheetPdf}
+                href={item.pdfPath}
                 target="_blank"
                 className="w-12 h-12 flex items-center justify-center border border-slate-800 hover:border-slate-700 rounded-xl transition-all"
               >
