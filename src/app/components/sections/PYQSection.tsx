@@ -3,6 +3,7 @@ import { Download, ChevronRight, FileText } from 'lucide-react';
 
 export const PYQSection: React.FC = () => {
   const papers = [
+    { year: 2026, file: 'CLAT 2026.pdf' },
     { year: 2025, file: 'CLAT 2025.pdf' },
     { year: 2024, file: 'CLAT 2024.pdf' },
     { year: 2023, file: 'CLAT 2023.pdf' },
