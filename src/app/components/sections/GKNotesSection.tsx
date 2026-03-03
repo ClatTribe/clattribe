@@ -15,6 +15,12 @@ export const GKNotesSection: React.FC = () => {
       title: 'January 2026 Current Affairs',
       description: 'CLAT-focused GK & Current Affairs cheatsheet with exam-relevant coverage.',
       pdfPath: '/cheatsheets/CLAT_Tribe_January_2026_Current_Affairs (1).pdf'
+    },
+    {
+      year: 2025,
+      title: 'February 2026 GK & Current Affairs',
+      description: 'CLAT-focused GK & Current Affairs cheatsheet with exam-relevant coverage.',
+      pdfPath: '/cheatsheets/CLAT_Tribe_February_2026_GK_Notes.pdf'
     }
   ];
 
