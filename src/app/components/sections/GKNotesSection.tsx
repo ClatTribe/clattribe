@@ -5,10 +5,10 @@ import Link from 'next/link';
 export const GKNotesSection: React.FC = () => {
   const cheatsheets = [
     {
-      year: 2024,
-      title: 'December 2024 GK & Current Affairs',
+      year: 2026,
+      title: 'February 2026 GK & Current Affairs',
       description: 'CLAT-focused GK & Current Affairs cheatsheet with exam-relevant coverage.',
-      pdfPath: '/cheatsheets/December_2024_GK_CurrentAffairs_Clattribe.html.pdf'
+      pdfPath: '/cheatsheets/CLAT_Tribe_February_2026_GK_Notes.pdf'
     },
     {
       year: 2026,
@@ -17,10 +17,10 @@ export const GKNotesSection: React.FC = () => {
       pdfPath: '/cheatsheets/CLAT_Tribe_January_2026_Current_Affairs (1).pdf'
     },
     {
-      year: 2025,
-      title: 'February 2026 GK & Current Affairs',
+      year: 2024,
+      title: 'December 2024 GK & Current Affairs',
       description: 'CLAT-focused GK & Current Affairs cheatsheet with exam-relevant coverage.',
-      pdfPath: '/cheatsheets/CLAT_Tribe_February_2026_GK_Notes.pdf'
+      pdfPath: '/cheatsheets/December_2024_GK_CurrentAffairs_Clattribe.html.pdf'
     }
   ];
 

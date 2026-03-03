@@ -535,10 +535,10 @@ export default function WhyUsPage() {
             </FadeUp>
             <FadeUp delay={0.2}>
               <div className="flex flex-col md:flex-row justify-center gap-4">
-                <button className="bg-slate-950 text-white px-8 py-4 md:px-10 md:py-5 rounded-full font-bold text-lg md:text-xl flex items-center justify-center gap-3 hover:scale-105 transition-transform">
+                <button onClick={() => window.location.href = '/#leadform'} className="bg-slate-950 text-white px-8 py-4 md:px-10 md:py-5 rounded-full font-bold text-lg md:text-xl flex items-center justify-center gap-3 hover:scale-105 transition-transform cursor-pointer">
                   Get Started Now <ArrowRight />
                 </button>
-                <button className="border-2 border-slate-950 px-8 py-4 md:px-10 md:py-5 rounded-full font-bold text-lg md:text-xl hover:bg-slate-950 hover:text-white transition-all">
+                <button onClick={() => window.location.href = 'tel:8303865139'} className="border-2 border-slate-950 px-8 py-4 md:px-10 md:px-5 rounded-full font-bold text-lg md:text-xl hover:bg-slate-950 hover:text-white transition-all cursor-pointer">
                   Talk to a Mentor
                 </button>
               </div>
