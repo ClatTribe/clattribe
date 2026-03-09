@@ -6,7 +6,7 @@ import HeroWithPedigree from './components/HeroWithPedigree';
 import Flashcards from './components/Flashcards';
 import NewFooter from './components/newFooter';
 import ContactButton from './components/ContactButton';
-import { GraduationCap, ArrowRight, CheckCircle, X, Menu } from 'lucide-react';
+import { GraduationCap, ArrowRight, CheckCircle, X, Menu, AlertCircle } from 'lucide-react';
 import ImageBackground from './components/ImageBackground';
 import Navbar from './components/navbar';
 
@@ -95,7 +95,7 @@ const LeadForm: React.FC = () => {
               </div>
             </div>
             <h3 className="mb-2 text-2xl font-bold text-gray-900">Success!</h3>
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-600 mb-6 text-black">
               Thank you for submitting! Redirecting you to GK Flashcards...
             </p>
             <button
@@ -158,7 +158,7 @@ const LeadForm: React.FC = () => {
                     placeholder="Enter your name"
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="w-full rounded-lg border-1 border-[#0F172B] bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all"
+                    className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 outline-none transition-all"
                     required
                   />
                 </div>
@@ -173,7 +173,7 @@ const LeadForm: React.FC = () => {
                     placeholder="Enter your city"
                     value={formData.city}
                     onChange={handleInputChange}
-                    className="w-full rounded-lg border-1 border-[#0F172B] bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all"
+                    className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 outline-none transition-all"
                     required
                   />
                 </div>
@@ -188,7 +188,7 @@ const LeadForm: React.FC = () => {
                     placeholder="Enter your phone number"
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className="w-full rounded-lg border-1 border-[#0F172B] bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all"
+                    className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 outline-none transition-all"
                     required
                   />
                 </div>
@@ -203,7 +203,7 @@ const LeadForm: React.FC = () => {
                     placeholder="Enter your email address"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full rounded-lg border-1 border-[#0F172B] bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all"
+                    className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 outline-none transition-all"
                     required
                   />
                 </div>
@@ -211,7 +211,7 @@ const LeadForm: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-brand-gold text-brand-900 font-semibold py-3 rounded-lg bg-[#0F172B] hover:bg-yellow-400 transition duration-300 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  className="w-full text-white font-semibold py-3 rounded-lg bg-[#0F172B] hover:bg-yellow-500 hover:text-[#0F172B] transition duration-300 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   {isSubmitting ? (
                     "Submitting..."
@@ -249,29 +249,68 @@ const App: React.FC = () => {
     setMobileMenuOpen(false);
   };
 
-  // Function to be passed to Hero and Flashcards components
   const handleNavigate = (section: 'leadform' | 'capsules') => {
     scrollToSection(section);
   };
 
   return (
     <div className="min-h-screen bg-brand-900 text-white font-sans selection:bg-brand-gold selection:text-brand-900">
-      {/* Navigation */}
       <Navbar scrollToSection={scrollToSection} />
 
       <main>
         <ImageBackground onNavigate={handleNavigate}/>
         <Hero onNavigate={handleNavigate} />
         <HeroWithPedigree />
+
+        {/* Video Highlight Section */}
+        <section className="py-20 bg-[#0B1221] border-y border-white/5">
+          <div className="container mx-auto px-6">
+            <div className="flex flex-col lg:flex-row items-center gap-12 max-w-7xl mx-auto">
+              {/* LEFT: Video */}
+              <div className="w-full lg:w-3/5">
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 aspect-video bg-black">
+                  <iframe
+                    className="w-full h-full"
+                    src="https://www.youtube.com/embed/Y05D3Y7D268?autoplay=1&mute=0&rel=0"
+                    title="CLAT Reality Check"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </div>
+
+              {/* RIGHT: Details */}
+              <div className="w-full lg:w-2/5 space-y-6">
+                <div className="flex items-center gap-2 text-yellow-500 font-bold uppercase tracking-widest text-sm">
+                  <AlertCircle className="h-4 w-4" />
+                  <span>Important Update</span>
+                </div>
+                <h2 className="text-3xl md:text-5xl font-serif font-bold text-white leading-tight">
+                  Analytical Reasoning <br /> 
+                  <span className="text-yellow-500 italic text-2xl md:text-4xl">is Officially Back.</span>
+                </h2>
+                <p className="text-slate-400 text-lg leading-relaxed">
+                  The pattern has shifted. Watch this reality check to understand why reading skills alone won't get you into a top NLU anymore.
+                </p>
+                <div className="space-y-4 pt-2">
+                  {["Low Hanging Fruits Strategy", "Avoiding Logical Time Traps", "Foundational Logic for Legal"].map((text, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <CheckCircle className="h-5 w-5 text-yellow-500 shrink-0" />
+                      <span className="text-slate-200 font-medium">{text}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <div id="capsules">
           <CapsuleSystem />
         </div>
         <div id="flashcards">
           <Flashcards/>
         </div>
-        {/* <div id="blogs">
-          <TrendingBlogs />
-        </div> */}
         <div id="leadform">
           <LeadForm />
         </div>
