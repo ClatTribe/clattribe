@@ -263,47 +263,52 @@ const App: React.FC = () => {
         <HeroWithPedigree />
 
         {/* Video Highlight Section */}
-        <section className="py-20 bg-[#0B1221] border-y border-white/5">
-          <div className="container mx-auto px-6">
-            <div className="flex flex-col lg:flex-row items-center gap-12 max-w-7xl mx-auto">
-              {/* LEFT: Video */}
-              <div className="w-full lg:w-3/5">
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 aspect-video bg-black">
-                  <iframe
-                    className="w-full h-full"
-                    src="https://www.youtube.com/embed/Y05D3Y7D268?autoplay=1&mute=0&rel=0"
-                    title="CLAT Reality Check"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
-                </div>
-              </div>
+        {/* Video Highlight Section */}
+<section className="py-20 bg-[#0B1221] border-y border-white/5">
+  <div className="container mx-auto px-6">
+    <div className="flex flex-col lg:flex-row items-center gap-12 max-w-7xl mx-auto">
+      {/* LEFT: Video */}
+      <div className="w-full lg:w-3/5">
+        <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 aspect-video bg-black">
+          {/* Note: If this doesn't play instantly, it is because your browser 
+              is blocking 'Autoplay with Sound'. Clicking ANYWHERE on your 
+              page (like a scroll or a menu) usually bypasses this.
+          */}
+          <iframe
+            className="w-full h-full"
+            src="https://www.youtube.com/embed/Y05D3Y7D268?autoplay=1&mute=0&rel=0&controls=1&showinfo=0&autohide=1&enablejsapi=1"
+            title="CLAT Reality Check"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </div>
+      </div>
 
-              {/* RIGHT: Details */}
-              <div className="w-full lg:w-2/5 space-y-6">
-                <div className="flex items-center gap-2 text-yellow-500 font-bold uppercase tracking-widest text-sm">
-                  <AlertCircle className="h-4 w-4" />
-                  <span>Important Update</span>
-                </div>
-                <h2 className="text-3xl md:text-5xl font-serif font-bold text-white leading-tight">
-                  Analytical Reasoning <br /> 
-                  <span className="text-yellow-500 italic text-2xl md:text-4xl">is Officially Back.</span>
-                </h2>
-                <p className="text-slate-400 text-lg leading-relaxed">
-                  The pattern has shifted. Watch this reality check to understand why reading skills alone won't get you into a top NLU anymore.
-                </p>
-                <div className="space-y-4 pt-2">
-                  {["Low Hanging Fruits Strategy", "Avoiding Logical Time Traps", "Foundational Logic for Legal"].map((text, i) => (
-                    <div key={i} className="flex items-center gap-3">
-                      <CheckCircle className="h-5 w-5 text-yellow-500 shrink-0" />
-                      <span className="text-slate-200 font-medium">{text}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+      {/* RIGHT: Details */}
+      <div className="w-full lg:w-2/5 space-y-6">
+        <div className="flex items-center gap-2 text-yellow-500 font-bold uppercase tracking-widest text-sm">
+          <AlertCircle className="h-4 w-4" />
+          <span>Important Update</span>
+        </div>
+        <h2 className="text-3xl md:text-5xl font-serif font-bold text-white leading-tight">
+          Analytical Reasoning <br /> 
+          <span className="text-yellow-500 italic text-2xl md:text-4xl">is Officially Back.</span>
+        </h2>
+        <p className="text-slate-400 text-lg leading-relaxed">
+          The pattern has shifted. Watch this reality check to understand why reading skills alone won't get you into a top NLU anymore.
+        </p>
+        <div className="space-y-4 pt-2">
+          {["Low Hanging Fruits Strategy", "Avoiding Logical Time Traps", "Foundational Logic for Legal"].map((text, i) => (
+            <div key={i} className="flex items-center gap-3">
+              <CheckCircle className="h-5 w-5 text-yellow-500 shrink-0" />
+              <span className="text-slate-200 font-medium">{text}</span>
             </div>
-          </div>
-        </section>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
         <div id="capsules">
           <CapsuleSystem />
