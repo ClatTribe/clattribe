@@ -206,4 +206,4 @@ The expected AILET 2026 cutoff will likely stay close to last year's, so your go
 - **OBC/EWS:** Aim 63–67
 - **SC/ST:** Aim 45–58
 
-Start early, prepare smartly, and trust the process. Your NLU Delhi dream is absolutely achievable.
+Start early, prepare smartly, and trust the process. Your NLU Delhi dream is absolutely achievable. 
