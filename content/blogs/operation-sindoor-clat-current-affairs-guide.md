@@ -1,11 +1,11 @@
 ---
 title: "Operation Sindoor — CLAT Current Affairs Guide"
-date: "2026-03-12
-lastModified: "2026-03-12
+date: "2026-03-13"
+lastModified: "2026-03-13"
 author: "CLAT Tribe"
-excerpt: " aster Operation Sindoor for CLAT 2026, Phalgam attack, legal angles, IWT suspension, key persons, weapons used & 10 practice MCQs. Your complete GK guide."
-coverImage: "https://res.cloudinary.com/dcr8ec2rt/image/upload/v1773310432/1_tzxdvn.png" 
-tags: ["Operation Sindoor", "Pahalgam Attack", "India Pakistan 2025", "CLAT 2026", "CLAT 2027", "CLAT Current Affairs", "Current Affairs for CLAT", "GK for CLAT", "Legal Awareness CLAT", "CLAT MCQ", "CLAT Preparation", "CLAT 2026 Coaching", "CLAT 2027 Coaching", "CLAT Coaching", "Law Entrance Exam", "UAPA", "Indus Waters Treaty", "Shimla Agreement", "BrahMos Missile", "Atmanirbhar Bharat" , "GK Series by CLAT Tribe"]
+excerpt: "Master Operation Sindoor for CLAT 2026, Phalgam attack, legal angles, IWT suspension, key persons, weapons used & 10 practice MCQs. Your complete GK guide."
+coverImage: "https://res.cloudinary.com/dcr8ec2rt/image/upload/v1773310432/1_tzxdvn.png"
+tags: ["Operation Sindoor", "Pahalgam Attack", "India Pakistan 2025", "CLAT 2026", "CLAT 2027", "CLAT Current Affairs", "Current Affairs for CLAT", "GK for CLAT", "Legal Awareness CLAT", "CLAT MCQ", "CLAT Preparation", "CLAT 2026 Coaching", "CLAT 2027 Coaching", "CLAT Coaching", "Law Entrance Exam", "UAPA", "Indus Waters Treaty", "Shimla Agreement", "BrahMos Missile", "Atmanirbhar Bharat", "GK Series by CLAT Tribe"]
 ---
 
 # Operation Sindoor — CLAT Current Affairs Guide
