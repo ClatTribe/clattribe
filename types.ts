@@ -28,5 +28,5 @@ export interface ExamForm {
   endDate: string;
   examDate: string;
   link: string;
-  status: 'Open' | 'Closed' | 'Coming Soon';
+  status: 'Open' | 'Closed' | 'Coming Soon' | 'Discontinued';
 }
