@@ -71,18 +71,18 @@ export const FORMS_DATA: ExamForm[] = [
   },
   {
     name: "AILET 2027",
-    startDate: "Coming Soon",
-    endDate: "Coming Soon",
-    examDate: "Coming Soon",
+    startDate: "Aug 2026 (Expected)",
+    endDate: "Nov 2026 (Expected)",
+    examDate: "Dec 2026 (Expected)",
     link: "https://nationallawuniversitydelhi.in",
     status: "Coming Soon"
   },
   {
     name: "SLAT 2026",
-    startDate: "May 2026",
-    endDate: "May 2026",
-    examDate: "",
-    link: "https://set-test.org",
+    startDate: "Oct 2025",
+    endDate: "Nov 2025",
+    examDate: "Dec 20 & 28, 2025",
+    link: "https://www.slat-test.org",
     status: "Closed"
   },
   {
@@ -111,11 +111,11 @@ export const FORMS_DATA: ExamForm[] = [
   },
   {
     name: "IPU CET / CLAT Score",
-    startDate: "March 2026",
-    endDate: "May 2026",
-    examDate: "May 2026",
-    link: "https://ipu.ac.in",
-    status: "Coming Soon"
+    startDate: "Feb 2, 2026",
+    endDate: "March 31, 2026",
+    examDate: "April 25 to May 17, 2026",
+    link: "https://ipu.ac.in/adm2026/adm2026main.php",
+    status: "Open"
   },
   {
     name: "UPES Law College",
@@ -124,5 +124,29 @@ export const FORMS_DATA: ExamForm[] = [
     examDate: "April 2026",
     link: "https://admission.upes.ac.in/Login?BCode=ysApp0gAXIDFHAhVkG75bw%3D%3D",
     status: "Open"
+  },
+  {
+    name: "SET Law (Symbiosis) 2026",
+    startDate: "Dec 12, 2025",
+    endDate: "April 15, 2026",
+    examDate: "May 2 & May 10, 2026",
+    link: "https://www.set-test.org",
+    status: "Open"
+  },
+  {
+    name: "CUET PG Law 2026",
+    startDate: "Jan 2026",
+    endDate: "Feb 2026",
+    examDate: "March 6 to March 27, 2026",
+    link: "https://exams.nta.nic.in/cuet-pg/",
+    status: "Closed"
+  },
+  {
+    name: "LSAT India",
+    startDate: "—",
+    endDate: "—",
+    examDate: "Discontinued",
+    link: "https://www.lsac.org",
+    status: "Discontinued"
   }
 ];
