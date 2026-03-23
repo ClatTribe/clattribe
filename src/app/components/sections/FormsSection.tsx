@@ -5,7 +5,7 @@ import { Calendar, ExternalLink, AlertCircle, Clock } from "lucide-react";
 
 /* ---------------- TYPES ---------------- */
 
-type FormStatus = "Open" | "Closed" | "Coming Soon";
+type FormStatus = "Open" | "Closed" | "Coming Soon" | "Discontinued";
 
 type Form = {
   name: string;
@@ -142,6 +142,8 @@ export const FormsSection: React.FC = () => {
                 className={`text-xs font-black uppercase tracking-tighter px-3 py-1 rounded-full ${
                   form.status === "Open"
                     ? "bg-green-500/10 text-green-400"
+                    : form.status === "Discontinued"
+                    ? "bg-red-500/10 text-red-400"
                     : "bg-slate-800 text-slate-500"
                 }`}
               >
