@@ -7,6 +7,9 @@ import {
   LucideIcon,
   Download,
   Eye,
+  Gavel,
+  Calculator,
+  FileText,
 } from "lucide-react";
 
 type CheatSheet = {
@@ -20,6 +23,30 @@ type CheatSheet = {
 
 export const CheatSheetsSection: React.FC = () => {
   const sheets: CheatSheet[] = [
+    {
+      title: "Legal Reasoning Types",
+      icon: Gavel,
+      color: "text-red-400",
+      bg: "bg-red-400/10",
+      count: "20+ Concepts",
+      file: "Legal Reasoning Types.pdf",
+    },
+    {
+      title: "Quant Techniques",
+      icon: Calculator,
+      color: "text-blue-500",
+      bg: "bg-blue-500/10",
+      count: "50+ Formulas",
+      file: "Quant Techniques.pdf",
+    },
+    {
+      title: "RC Strategies",
+      icon: FileText,
+      color: "text-yellow-400",
+      bg: "bg-yellow-400/10",
+      count: "15+ Reading Tips",
+      file: "RC Strategies.pdf",
+    },
     {
       title: "Legal Maxims",
       icon: Scale,
