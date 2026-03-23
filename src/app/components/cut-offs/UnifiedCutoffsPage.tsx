@@ -12,6 +12,7 @@ type YearData = {
 };
 
 type NLUYearData = {
+  2026: YearData;
   2025: YearData;
   2024: YearData;
   2023: YearData;
@@ -26,6 +27,7 @@ type NLUDataType = {
 // NLU Data
 const nluData: NLUDataType = {
   'NLSIU Bengaluru': {
+    2026: { opening: 1, closing: 101 },
     2025: { opening: 1, closing: 112 },
     2024: { opening: 1, closing: 97 },
     2023: { opening: 1, closing: 114 },
@@ -33,6 +35,7 @@ const nluData: NLUDataType = {
     2021: { opening: 1, closing: 83 }
   },
   'NALSAR Hyderabad': {
+    2026: { opening: 17, closing: 148 },
     2025: { opening: 17, closing: 159 },
     2024: { opening: 4, closing: 161 },
     2023: { opening: 25, closing: 177 },
@@ -40,6 +43,7 @@ const nluData: NLUDataType = {
     2021: { opening: 65, closing: 172 }
   },
   'WBNUJS Kolkata': {
+    2026: { opening: 102, closing: 284 },
     2025: { opening: 57, closing: 327 },
     2024: { opening: 140, closing: 262 },
     2023: { opening: 136, closing: 260 },
@@ -47,6 +51,7 @@ const nluData: NLUDataType = {
     2021: { opening: 24, closing: 241 }
   },
   'NLIU Bhopal': {
+    2026: { opening: 149, closing: 431 },
     2025: { opening: 257, closing: 480 },
     2024: { opening: 311, closing: 409 },
     2023: { opening: 186, closing: 463 },
@@ -54,6 +59,7 @@ const nluData: NLUDataType = {
     2021: { opening: 247, closing: 378 }
   },
   'HNLU Raipur': {
+    2026: { opening: 434, closing: 729 },
     2025: { opening: 480, closing: 807 },
     2024: { opening: 413, closing: 707 },
     2023: { opening: 425, closing: 805 },
@@ -61,6 +67,7 @@ const nluData: NLUDataType = {
     2021: { opening: 387, closing: 765 }
   },
   'NLU Jodhpur': {
+    2026: { opening: 118, closing: 310 },
     2025: { opening: 159, closing: 367 },
     2024: { opening: 170, closing: 341 },
     2023: { opening: 70, closing: 383 },
@@ -68,6 +75,7 @@ const nluData: NLUDataType = {
     2021: { opening: 185, closing: 356 }
   },
   'RMLNLU Lucknow': {
+    2026: { opening: 411, closing: 747 },
     2025: { opening: 461, closing: 780 },
     2024: { opening: 357, closing: 695 },
     2023: { opening: 432, closing: 749 },
@@ -75,6 +83,7 @@ const nluData: NLUDataType = {
     2021: { opening: 255, closing: 676 }
   },
   'GNLU Gandhinagar': {
+    2026: { opening: 163, closing: 373 },
     2025: { opening: 236, closing: 444 },
     2024: { opening: 8, closing: 429 },
     2023: { opening: 147, closing: 462 },
@@ -82,6 +91,7 @@ const nluData: NLUDataType = {
     2021: { opening: 251, closing: 366 }
   },
   'CNLU Patna': {
+    2026: { opening: 367, closing: 1141 },
     2025: { opening: 882, closing: 1398 },
     2024: { opening: 790, closing: 1236 },
     2023: { opening: 628, closing: 1541 },
@@ -89,6 +99,7 @@ const nluData: NLUDataType = {
     2021: { opening: 677, closing: 1312 }
   },
   'RGNUL Patiala': {
+    2026: { opening: 464, closing: 1059 },
     2025: { opening: 565, closing: 1279 },
     2024: { opening: 502, closing: 1129 },
     2023: { opening: 537, closing: 1307 },
@@ -96,6 +107,7 @@ const nluData: NLUDataType = {
     2021: { opening: 413, closing: 1075 }
   },
   'NLU Odisha (Cuttack)': {
+    2026: { opening: 459, closing: 800 },
     2025: { opening: 469, closing: 1013 },
     2024: { opening: 591, closing: 1080 },
     2023: { opening: 504, closing: 1207 },
@@ -103,6 +115,7 @@ const nluData: NLUDataType = {
     2021: { opening: 436, closing: 1072 }
   },
   'MNLU Mumbai': {
+    2026: { opening: 383, closing: 481 },
     2025: { opening: 443, closing: 1473 },
     2024: { opening: 99, closing: 547 },
     2023: { opening: 325, closing: 590 },
@@ -110,57 +123,65 @@ const nluData: NLUDataType = {
     2021: { opening: 371, closing: 453 }
   },
   'NUALS Kochi': {
+    2026: { opening: 439, closing: 1076 },
     2025: { opening: 350, closing: 1346 },
-    2024: { opening: 350, closing: 1346 }, // Data not provided, using 2025 as placeholder
+    2024: { opening: 350, closing: 1346 },
     2023: { opening: 552, closing: 1461 },
     2022: { opening: 413, closing: 1315 },
     2021: { opening: 414, closing: 1144 }
   },
   'NUSRL Ranchi': {
+    2026: { opening: 853, closing: 1297 },
     2025: { opening: 864, closing: 1667 },
-    2024: { opening: 864, closing: 1667 }, // Data not provided, using 2025 as placeholder
+    2024: { opening: 864, closing: 1667 },
     2023: { opening: 939, closing: 1895 },
     2022: { opening: 933, closing: 1729 },
     2021: { opening: 1104, closing: 1507 }
   },
   'DSNLU Vishakhapatnam': {
+    2026: { opening: 788, closing: 1122 },
     2025: { opening: 957, closing: 1682 },
-    2024: { opening: 957, closing: 1682 }, // Data not provided, using 2025 as placeholder
+    2024: { opening: 957, closing: 1682 },
     2023: { opening: 538, closing: 2080 },
     2022: { opening: 1002, closing: 1617 },
     2021: { opening: 1036, closing: 1473 }
   },
   'TNNLU Tiruchirappalli': {
+    2026: { opening: 989, closing: 1370 },
     2025: { opening: 1231, closing: 1763 },
-    2024: { opening: 1231, closing: 1763 }, // Data not provided, using 2025 as placeholder
+    2024: { opening: 1231, closing: 1763 },
     2023: { opening: 577, closing: 2045 },
     2022: { opening: 807, closing: 2024 },
     2021: { opening: 1199, closing: 1834 }
   },
   'MNLU Nagpur': {
+    2026: { opening: 564, closing: 1225 },
     2025: { opening: 722, closing: 1529 },
-    2024: { opening: 722, closing: 1529 }, // Data not provided, using 2025 as placeholder
+    2024: { opening: 722, closing: 1529 },
     2023: { opening: 606, closing: 2102 },
     2022: { opening: 796, closing: 1657 },
     2021: { opening: 1052, closing: 1448 }
   },
   'MNLU Aurangabad': {
+    2026: { opening: 822, closing: 1424 },
     2025: { opening: 1023, closing: 1949 },
-    2024: { opening: 1023, closing: 1949 }, // Data not provided, using 2025 as placeholder
+    2024: { opening: 1023, closing: 1949 },
     2023: { opening: 1578, closing: 2655 },
     2022: { opening: 1390, closing: 2323 },
     2021: { opening: 1474, closing: 2022 }
   },
   'HPNLU Shimla': {
+    2026: { opening: 930, closing: 1824 },
     2025: { opening: 949, closing: 2555 },
-    2024: { opening: 949, closing: 2555 }, // Data not provided, using 2025 as placeholder
+    2024: { opening: 949, closing: 2555 },
     2023: { opening: 822, closing: 2816 },
     2022: { opening: 1056, closing: 2302 },
     2021: { opening: 755, closing: 2009 }
   },
   'DBRANLU Sonepat': {
+    2026: { opening: 1115, closing: 1665 },
     2025: { opening: 626, closing: 1930 },
-    2024: { opening: 626, closing: 1930 }, // Data not provided, using 2025 as placeholder
+    2024: { opening: 626, closing: 1930 },
     2023: { opening: 767, closing: 2713 },
     2022: { opening: 1346, closing: 2000 },
     2021: { opening: 1033, closing: 2040 }
@@ -169,10 +190,10 @@ const nluData: NLUDataType = {
 
 const NLUCLATCutoff = () => {
   const [selectedNLU, setSelectedNLU] = useState<string>('NLSIU Bengaluru');
-  const [selectedYear, setSelectedYear] = useState<number>(2025);
+  const [selectedYear, setSelectedYear] = useState<number>(2026);
 
   const nluList = Object.keys(nluData);
-  const years = [2025, 2024, 2023, 2022, 2021]; // All available years
+  const years = [2026, 2025, 2024, 2023, 2022, 2021]; // All available years
 
   // Prepare data for bar chart (current year)
   const currentYearData = nluList.map(nlu => ({
