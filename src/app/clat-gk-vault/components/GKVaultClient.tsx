@@ -174,7 +174,9 @@ const PaymentPopup: React.FC<PaymentPopupProps> = ({ isOpen, onClose }) => {
 interface GKVaultClientProps {
   initialDate?: string; // YYYY-MM-DD format
 }
-
+const toDateStr = (d: Date): string =>
+    `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    
 const GKVaultClient: React.FC<GKVaultClientProps> = ({ initialDate }) => {
   const router = useRouter();
 
@@ -223,7 +225,7 @@ const GKVaultClient: React.FC<GKVaultClientProps> = ({ initialDate }) => {
   // Update URL when date changes (without full page navigation)
   const handleDateSelect = (date: Date) => {
     setSelectedDate(date);
-    const formatted = date.toISOString().split('T')[0];
+    const formatted = toDateStr(date);
     window.history.replaceState(null, '', `/clat-gk-vault/${formatted}`);
   };
 
@@ -291,7 +293,7 @@ const GKVaultClient: React.FC<GKVaultClientProps> = ({ initialDate }) => {
           }));
           setAvailableDates(dates);
 
-          const currentDateExists = dates.some((d: {date: string}) => d.date === selectedDate.toISOString().split('T')[0]);
+          const currentDateExists = dates.some((d: {date: string}) => d.date === toDateStr(selectedDate));
           if (!currentDateExists && dates.length > 0) {
             const latestDate = new Date(dates[0].date + 'T00:00:00');
             setSelectedDate(latestDate);
@@ -321,7 +323,7 @@ const GKVaultClient: React.FC<GKVaultClientProps> = ({ initialDate }) => {
       setForgotCount(0);
       setSelectedCategory('All');
 
-      const formattedDate = selectedDate.toISOString().split('T')[0];
+      const formattedDate = toDateStr(selectedDate);
 
       try {
         const response = await fetch(
@@ -369,7 +371,7 @@ const GKVaultClient: React.FC<GKVaultClientProps> = ({ initialDate }) => {
 
     if (!entry || entry.holiday) return;
 
-    const dateStr = selectedDate.toISOString().split('T')[0];
+    const dateStr = toDateStr(selectedDate);
     const formatted = selectedDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 
     const articleSchema = {
@@ -583,7 +585,7 @@ const GKVaultClient: React.FC<GKVaultClientProps> = ({ initialDate }) => {
             <div className="flex items-center gap-2 mt-3">
               <button
                 onClick={() => {
-                  const dateStr = selectedDate.toISOString().split('T')[0];
+                  const dateStr = toDateStr(selectedDate);
                   const formatted = selectedDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
                   const text = `Check out CLAT GK Vault for ${formatted} - Daily current affairs with audio & flashcards for CLAT prep!\nhttps://clattribe.com/clat-gk-vault/${dateStr}`;
                   window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
@@ -594,7 +596,7 @@ const GKVaultClient: React.FC<GKVaultClientProps> = ({ initialDate }) => {
               </button>
               <button
                 onClick={() => {
-                  const dateStr = selectedDate.toISOString().split('T')[0];
+                  const dateStr = toDateStr(selectedDate);
                   navigator.clipboard.writeText(`https://clattribe.com/clat-gk-vault/${dateStr}`);
                   setLinkCopied(true);
                   setTimeout(() => setLinkCopied(false), 2000);
@@ -758,7 +760,7 @@ const GKVaultClient: React.FC<GKVaultClientProps> = ({ initialDate }) => {
           {/* Monthly Summary & Quiz Links */}
           <div className="mt-3 flex flex-wrap justify-end gap-4">
             <Link
-              href={`/clat-gk-vault/monthly/${selectedDate.toISOString().slice(0, 7)}`}
+              href={`/clat-gk-vault/monthly/${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, '0')}`}
               className="inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-[#F59E0B] font-semibold transition-colors"
             >
               <BookOpen className="w-3 h-3" /> {selectedDate.toLocaleDateString('en-GB', { month: 'long' })} Summary <ChevronRight className="w-3 h-3" />
