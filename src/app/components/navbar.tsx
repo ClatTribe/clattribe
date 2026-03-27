@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 
 interface NavbarProps {
   scrollToSection?: (sectionId: string) => void;
@@ -18,13 +18,10 @@ export default function Navbar({ scrollToSection }: NavbarProps) {
   const handleFlashcardsClick = () => {
     setMobileMenuOpen(false);
     
-    // Check if we're on the homepage
     if (pathname === '/') {
-      // If on homepage, scroll to flashcards section
       if (scrollToSection) {
         scrollToSection('flashcards');
       } else {
-        // Fallback if scrollToSection is not provided
         const element = document.getElementById('flashcards');
         if (element) {
           const offset = 80;
@@ -37,10 +34,7 @@ export default function Navbar({ scrollToSection }: NavbarProps) {
         }
       }
     } else {
-      // If on another page, navigate to homepage with hash
       router.push('/#flashcards');
-      
-      // After navigation, scroll to section
       setTimeout(() => {
         const element = document.getElementById('flashcards');
         if (element) {
@@ -70,24 +64,54 @@ export default function Navbar({ scrollToSection }: NavbarProps) {
           <Link href="/" className="hover:text-white transition-colors">
             Home
           </Link>
+          
+          <Link 
+            href="https://dsbchallenge.clattribe.com/" 
+            target="_blank"
+            className="text-brand-gold hover:text-white transition-colors font-semibold"
+          >
+            DSB Challenge
+          </Link>
+
+          {/* About Us Dropdown */}
+          <div className="relative group py-2">
+            <button className="flex items-center gap-1 hover:text-white transition-colors cursor-default">
+              About Us
+              <ChevronDown className="h-4 w-4 group-hover:rotate-180 transition-transform duration-300" />
+            </button>
+            
+            {/* Dropdown Menu */}
+            <div className="absolute left-0 mt-2 w-48 bg-[#0F172B] border border-white/10 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left scale-95 group-hover:scale-100 overflow-hidden">
+              <Link 
+                href="/our-team" 
+                className="block px-5 py-3 hover:bg-white/5 hover:text-white transition-colors"
+              >
+                Our Team
+              </Link>
+              <Link 
+                href="/our-courses" 
+                className="block px-5 py-3 hover:bg-white/5 hover:text-white transition-colors"
+              >
+                Our Courses
+              </Link>
+            </div>
+          </div>
+
           <Link href="/clat-2027-starter-kit" className="hover:text-white transition-colors">
             CLAT 2027 Starter Kit
           </Link>
-          <Link href="/our-team" className="hover:text-white transition-colors">
-            Our Team
-          </Link>
-          <Link href="/our-courses" className="hover:text-white transition-colors">
-            Our Courses
-          </Link>
+
           <button 
             onClick={handleFlashcardsClick} 
             className="hover:text-white transition-colors cursor-pointer"
           >
             Flashcards
           </button>
+          
           <Link href="/blogs" className="hover:text-white transition-colors">
             Blogs
           </Link>
+          
           <Link href="/clat-gk-vault" className="hover:text-white transition-colors">
             CLAT GK Vault
           </Link>
@@ -105,53 +129,72 @@ export default function Navbar({ scrollToSection }: NavbarProps) {
 
       {/* Mobile Navigation Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#0F172B] border-t border-white/10 shadow-lg">
-          <div className="container mx-auto px-6 py-4 flex flex-col gap-2">
-            
+        <div className="md:hidden bg-[#0F172B] border-t border-white/10 shadow-lg max-h-[85vh] overflow-y-auto">
+          <div className="container mx-auto px-6 py-4 flex flex-col gap-1">
             <Link 
               href="/" 
-              className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
+              className="text-white py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
               onClick={() => setMobileMenuOpen(false)}
             >
               Home
             </Link>
+            
+            <Link 
+              href="https://dsbchallenge.clattribe.com/" 
+              target="_blank"
+              className="text-brand-gold py-3 px-4 rounded-lg hover:bg-white/5 font-bold"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              DSB Challenge
+            </Link>
+
+            {/* Mobile About Us Sub-menu */}
+            <div className="py-2 px-4">
+              <p className="text-slate-400 text-xs uppercase tracking-wider mb-2 font-bold">About Us</p>
+              <div className="flex flex-col gap-1 border-l-2 border-white/10 ml-1">
+                <Link 
+                  href="/our-team" 
+                  className="text-white py-2 px-4 hover:text-brand-gold transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Our Team
+                </Link>
+                <Link 
+                  href="/our-courses" 
+                  className="text-white py-2 px-4 hover:text-brand-gold transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Our Courses
+                </Link>
+              </div>
+            </div>
+
             <Link 
               href="/clat-2027-starter-kit" 
-              className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
+              className="text-white py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
               onClick={() => setMobileMenuOpen(false)}
             >
               CLAT 2027 Starter Kit
             </Link>
-            <Link 
-              href="/our-team" 
-              className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Our Team
-            </Link>
-            <Link 
-              href="/our-courses" 
-              className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Our Courses
-            </Link>
+            
             <button 
               onClick={handleFlashcardsClick}
-              className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 text-left font-medium"
+              className="text-white py-3 px-4 rounded-lg hover:bg-white/5 text-left font-medium"
             >
               Flashcards
             </button>
+            
             <Link 
               href="/blogs" 
-              className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
+              className="text-white py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
               onClick={() => setMobileMenuOpen(false)}
             >
               Blogs
             </Link>
+            
             <Link 
               href="/clat-gk-vault" 
-              className="text-white hover:text-brand-gold transition-colors py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
+              className="text-white py-3 px-4 rounded-lg hover:bg-white/5 font-medium"
               onClick={() => setMobileMenuOpen(false)}
             >
               CLAT GK Vault
