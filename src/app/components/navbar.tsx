@@ -65,14 +65,6 @@ export default function Navbar({ scrollToSection }: NavbarProps) {
             Home
           </Link>
           
-          <Link 
-            href="https://dsbchallenge.clattribe.com/" 
-            target="_blank"
-            className="text-brand-gold hover:text-white transition-colors font-semibold"
-          >
-            DSB Challenge
-          </Link>
-
           {/* About Us Dropdown */}
           <div className="relative group py-2">
             <button className="flex items-center gap-1 hover:text-white transition-colors cursor-default">
@@ -96,6 +88,15 @@ export default function Navbar({ scrollToSection }: NavbarProps) {
               </Link>
             </div>
           </div>
+          
+          <Link 
+            href="https://dsbchallenge.clattribe.com/" 
+            target="_blank"
+            className="text-brand-gold hover:text-white transition-colors font-semibold"
+          >
+            DSB Challenge
+          </Link>
+
 
           <Link href="/clat-2027-starter-kit" className="hover:text-white transition-colors">
             CLAT 2027 Starter Kit
@@ -138,16 +139,6 @@ export default function Navbar({ scrollToSection }: NavbarProps) {
             >
               Home
             </Link>
-            
-            <Link 
-              href="https://dsbchallenge.clattribe.com/" 
-              target="_blank"
-              className="text-brand-gold py-3 px-4 rounded-lg hover:bg-white/5 font-bold"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              DSB Challenge
-            </Link>
-
             {/* Mobile About Us Sub-menu */}
             <div className="py-2 px-4">
               <p className="text-slate-400 text-xs uppercase tracking-wider mb-2 font-bold">About Us</p>
@@ -168,6 +159,16 @@ export default function Navbar({ scrollToSection }: NavbarProps) {
                 </Link>
               </div>
             </div>
+            
+            <Link 
+              href="https://dsbchallenge.clattribe.com/" 
+              target="_blank"
+              className="text-brand-gold py-3 px-4 rounded-lg hover:bg-white/5 font-bold"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              DSB Challenge
+            </Link>
+
 
             <Link 
               href="/clat-2027-starter-kit" 
