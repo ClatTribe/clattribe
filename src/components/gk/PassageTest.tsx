@@ -119,7 +119,7 @@ export default function PassageTest({ onComplete }: PassageTestProps) {
               <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:justify-between">
                       <h2 className="text-lg sm:text-2xl font-black tracking-tight text-[#060818] dark:text-white leading-tight">
                         {passage.title}
-                      </h2>h2>
+                      </h2>
                       <div className="flex items-center gap-2 bg-[#060818] text-white px-4 py-2 rounded-xl font-mono text-sm font-bold self-start sm:self-auto shrink-0">
                                 <Clock size={15} className="text-[#F59E0B]" />
                         {formatTime(timeSpent)}
@@ -141,7 +141,7 @@ export default function PassageTest({ onComplete }: PassageTestProps) {
                                 <div className="bg-white dark:bg-white/5 p-5 sm:p-8 rounded-[1.5rem] sm:rounded-[2.5rem] border border-gray-100 dark:border-white/5">
                                             <h3 className="text-base sm:text-xl font-black mb-5 sm:mb-8 text-[#060818] dark:text-white leading-tight">
                                               {passage.questions[currentQuestion].text}
-                                            </h3>h3>
+                                            </h3>
                                             <div className="space-y-3">
                                               {passage.questions[currentQuestion].options.map((opt, i) => (
                           <button
