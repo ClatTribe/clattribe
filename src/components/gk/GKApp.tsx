@@ -11,6 +11,7 @@ import GKMonthlySummary from './MonthlySummary';
 import GKLogin from './Login';
 import GKSubscriptionModal from './SubscriptionModal';
 import { User } from 'lucide-react';
+import { gkSupabase } from '@/lib/gk-supabase';
 
 export default function GKApp() {
   const [activeTab, setActiveTab] = React.useState('dashboard');
@@ -19,8 +20,30 @@ export default function GKApp() {
   const [isSubscribed, setIsSubscribed] = React.useState(false);
 
   React.useEffect(() => {
-    setIsLoggedIn(localStorage.getItem('gk_isLoggedIn') === 'true');
-    setIsSubscribed(localStorage.getItem('gk_isSubscribed') === 'true');
+    // Check existing Supabase session on mount
+    gkSupabase.auth.getSession().then(({ data: { session } }) => {
+      if (session?.user) {
+        setIsLoggedIn(true);
+        localStorage.setItem('gk_userEmail', session.user.email || '');
+        localStorage.setItem('gk_userName', session.user.user_metadata?.full_name || session.user.user_metadata?.name || '');
+      } else {
+        setIsLoggedIn(false);
+      }
+      setIsSubscribed(localStorage.getItem('gk_isSubscribed') === 'true');
+    });
+
+    // Listen for auth state changes (e.g. after OAuth redirect)
+    const { data: { subscription } } = gkSupabase.auth.onAuthStateChange((_event, session) => {
+      if (session?.user) {
+        setIsLoggedIn(true);
+        localStorage.setItem('gk_userEmail', session.user.email || '');
+        localStorage.setItem('gk_userName', session.user.user_metadata?.full_name || session.user.user_metadata?.name || '');
+      } else {
+        setIsLoggedIn(false);
+      }
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   React.useEffect(() => {
