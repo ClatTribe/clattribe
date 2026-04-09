@@ -36,7 +36,7 @@ export default function Vault() {
         <div className="space-y-4">
           {highlights.map((item, idx) => (
             <motion.div key={item.id} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: idx * 0.1 }}
-              className="bg-white dark:bs-white/5 p-8 rounded-[2rem] border border-gray-100 dark:border-white/5 hover:border-[#F59E0B] transition-all cursor-pointer">
+              className="bg-white dark:bg-white/5 p-8 rounded-[2rem] border border-gray-100 dark:border-white/5 hover:border-[#F59E0B] transition-all cursor-pointer">
               <div className="flex justify-between items-start mb-4">
                 <span className="text-[10px] font-black px-3 py-1 rounded-full bg-gray-50 dark:bg-white/10 text-gray-400 uppercase tracking-widest">{item.category}</span>
                 <button onClick={(e) => { e.stopPropagation(); showToast(bookmarks.includes(item.id) ? 'Bookmark removed!' : 'Bookmarked!'); }}
