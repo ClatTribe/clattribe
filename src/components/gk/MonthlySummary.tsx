@@ -185,7 +185,7 @@ export default function MonthlySummary() {
                                   </div>
                                   <h1 className="text-2xl sm:text-4xl font-black text-[#060818] dark:text-white leading-tight">
                                     {selectedNews.title}
-                                  </h1>h1>
+                                  </h1>
                           {selectedNews.image && (
                                       <div className="aspect-video rounded-[1.5rem] sm:rounded-[2.5rem] overflow-hidden border border-gray-100 dark:border-white/10 shadow-2xl">
                                                     <img src={selectedNews.image} alt={selectedNews.title} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
@@ -223,7 +223,7 @@ export default function MonthlySummary() {
                         <div className="space-y-2">
                                   <h1 className="text-2xl sm:text-4xl font-black text-[#060818] dark:text-white tracking-tight">
                                               April 2026 Summary
-                                  </h1>h1>
+                                  </h1>
                                   <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400 font-medium">
                                               Curated GK & Legal updates specifically for CLAT aspirants.
                                   </p>
@@ -280,7 +280,7 @@ export default function MonthlySummary() {
                                                                                       </div>
                                                                                     <h3 className="text-base sm:text-xl font-black text-[#060818] dark:text-white group-hover:text-[#F59E0B] transition-colors leading-tight line-clamp-2">
                                                                                       {news.title}
-                                                                                      </h3>h3>
+                                                                                      </h3>
                                                                                     <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 line-clamp-2 font-medium">
                                                                                       {news.summary}
                                                                                       </p>
@@ -323,7 +323,7 @@ export default function MonthlySummary() {
                                                     {/* Question */}
                                                                   <h2 className="text-lg sm:text-2xl font-black text-[#060818] dark:text-white leading-tight">
                                                                     {MONTHLY_QUIZ[currentQuestion].question}
-                                                                  </h2>h2>
+                                                                  </h2>
                                                   
                                                     {/* Options */}
                                                                   <div className="space-y-3">
@@ -396,7 +396,7 @@ export default function MonthlySummary() {
                                                                                     <Trophy size={40} className="text-[#F59E0B]" />
                                                                   </div>
                                                                   <div className="space-y-2">
-                                                                                    <h2 className="text-2xl sm:text-4xl font-black text-[#060818] dark:text-white">Quiz Completed!</h2>h2>
+                                                                                    <h2 className="text-2xl sm:text-4xl font-black text-[#060818] dark:text-white">Quiz Completed!</h2>
                                                                                     <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400 font-medium">Great effort on staying updated with April's news.</p>
                                                                   </div>
                                                                   <div className="text-5xl sm:text-6xl font-black text-[#F59E0B]">
