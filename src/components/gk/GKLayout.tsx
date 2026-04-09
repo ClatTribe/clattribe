@@ -13,7 +13,7 @@ interface GKLayoutProps {
 export default function GKLayout({ children, activeTab, setActiveTab }: GKLayoutProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const [isProfileOpen, setIsProfileOpen] = React.useState(false);
-  const [theme, setTheme] = React.useState<'light' | 'dark'>('light');
+  const [theme, setTheme] = React.useState<'light' | 'dark'>('dark');
   const [toast, setToast] = React.useState<string | null>(null);
   const [mounted, setMounted] = React.useState(false);
 
