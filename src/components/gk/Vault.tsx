@@ -39,7 +39,7 @@ export default function Vault() {
               className="bg-white dark:bs-white/5 p-8 rounded-[2rem] border border-gray-100 dark:border-white/5 hover:border-[#F59E0B] transition-all cursor-pointer">
               <div className="flex justify-between items-start mb-4">
                 <span className="text-[10px] font-black px-3 py-1 rounded-full bg-gray-50 dark:bg-white/10 text-gray-400 uppercase tracking-widest">{item.category}</span>
-                <button onClick={(e) => { e.stopPropagation(); showToast(bW=== item.id ? 'Bookmark removed!' : 'Bookmarked!'); }}
+                <button onClick={(e) => { e.stopPropagation(); showToast(bookmarks.includes(item.id) ? 'Bookmark removed!' : 'Bookmarked!'); }}
                   className="p-2 text-gray-300 hover:text-[#F59E0B] transition-colors"><Bookmark size={18} /></button>
               </div>
               <h4 className="text-xl font-bold mb-2 text-[#060818] dark:text-white">{item.title}</h4>
