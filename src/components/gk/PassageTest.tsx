@@ -76,7 +76,7 @@ export default function PassageTest({ onComplete }: PassageTestProps) {
           ))}
         </div>
         <div className="space-y-6">
-          <div className="bg-white dark:bs-white/5 p-10 rounded-[2.5rem] border border-gray-100 dark:border-white/5">
+          <div className="bg-white dark:bg-white/5 p-10 rounded-[2.5rem] border border-gray-100 dark:border-white/5">
             <h3 className="text-2xl font-black mb-8 text-[#060818] dark:text-white">
               {passage.questions[currentQuestion].text}
             </h3>
