@@ -13,7 +13,13 @@ interface GKLayoutProps {
   userEmail?: string;
 }
 
-export default function GKLayout({ children, activeTab, setActiveTab, userName = 'Student', userEmail = '' }: GKLayoutProps) {
+export default function GKLayout({
+  children,
+  activeTab,
+  setActiveTab,
+  userName = 'Student',
+  userEmail = ''
+}: GKLayoutProps) {
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const [isProfileOpen, setIsProfileOpen] = React.useState(false);
@@ -84,7 +90,7 @@ export default function GKLayout({ children, activeTab, setActiveTab, userName =
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          className="fixed bottom-10 left-1/2 -translate-x-1/2 z-[100] bg-[#060818] dark:bg-[#F59E0B] text-white dark:text-[#060818] px-6 py-3 rounded-2xl font-bold shadow-2xl border border-white/10"
+          className="fixed bottom-6 left-4 right-4 sm:left-1/2 sm:right-auto sm:-translate-x-1/2 sm:w-auto z-[100] bg-[#060818] dark:bg-[#F59E0B] text-white dark:text-[#060818] px-6 py-3 rounded-2xl font-bold shadow-2xl border border-white/10 text-center"
         >
           {toast}
         </motion.div>
@@ -92,12 +98,15 @@ export default function GKLayout({ children, activeTab, setActiveTab, userName =
 
       <nav className="bg-white dark:bg-[#060818] border-b border-gray-100 dark:border-white/5 sticky top-0 z-50 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-20">
-            <div className="flex items-center gap-3 cursor-pointer" onClick={() => setActiveTab('dashboard')}>
-              <div className="w-10 h-10 bg-[#060818] dark:bg-[#F59E0B] rounded-xl flex items-center justify-center font-bold text-xl text-[#F59E0B] dark:text-[#060818]">
+          <div className="flex justify-between h-16 sm:h-20">
+            <div
+              className="flex items-center gap-2 sm:gap-3 cursor-pointer"
+              onClick={() => setActiveTab('dashboard')}
+            >
+              <div className="w-9 h-9 sm:w-10 sm:h-10 bg-[#060818] dark:bg-[#F59E0B] rounded-xl flex items-center justify-center font-bold text-lg sm:text-xl text-[#F59E0B] dark:text-[#060818]">
                 CT
               </div>
-              <span className="text-xl font-black tracking-tighter text-[#060818] dark:text-white">CLAT TRIBE</span>
+              <span className="text-lg sm:text-xl font-black tracking-tighter text-[#060818] dark:text-white">CLAT TRIBE</span>
             </div>
 
             <div className="hidden lg:flex items-center space-x-8">
@@ -105,14 +114,23 @@ export default function GKLayout({ children, activeTab, setActiveTab, userName =
                 <button
                   key={link.id}
                   onClick={() => setActiveTab(link.id)}
-                  className={`text-sm font-semibold transition-colors ${activeTab === link.id ? 'text-[#F59E0B]' : 'text-gray-500 dark:text-gray-400 hover:text-[#060818] dark:hover:text-white'}`}
+                  className={`text-sm font-semibold transition-colors ${
+                    activeTab === link.id
+                      ? 'text-[#F59E0B]'
+                      : 'text-gray-500 dark:text-gray-400 hover:text-[#060818] dark:hover:text-white'
+                  }`}
                 >
                   {link.label}
                 </button>
               ))}
-              <button onClick={toggleTheme} className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/5 transition-colors text-gray-500 dark:text-gray-400">
+
+              <button
+                onClick={toggleTheme}
+                className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/5 transition-colors text-gray-500 dark:text-gray-400"
+              >
                 {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
               </button>
+
               <div className="relative ml-4">
                 <button
                   onClick={() => setIsProfileOpen(!isProfileOpen)}
@@ -124,18 +142,24 @@ export default function GKLayout({ children, activeTab, setActiveTab, userName =
                   <span className="text-sm font-bold">{firstName}</span>
                   <ChevronDown size={14} className={`transition-transform ${isProfileOpen ? 'rotate-180' : ''}`} />
                 </button>
+
                 {isProfileOpen && (
                   <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-[#060818] rounded-2xl shadow-xl border border-gray-100 dark:border-white/10 py-2 overflow-hidden">
                     <div className="px-4 py-3 border-b border-gray-100 dark:border-white/10">
                       <p className="text-sm font-black text-[#060818] dark:text-white truncate">{userName}</p>
                       <p className="text-xs text-gray-400 truncate">{userEmail}</p>
                     </div>
+
                     <button
-                      onClick={() => { setActiveTab('profile'); setIsProfileOpen(false); }}
+                      onClick={() => {
+                        setActiveTab('profile');
+                        setIsProfileOpen(false);
+                      }}
                       className="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors"
                     >
                       <User size={16} /> Profile
                     </button>
+
                     <button
                       onClick={handleSignOut}
                       className="w-full flex items-center gap-3 px-4 py-3 text-sm text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors"
@@ -147,12 +171,19 @@ export default function GKLayout({ children, activeTab, setActiveTab, userName =
               </div>
             </div>
 
-            <div className="lg:hidden flex items-center gap-4">
-              <button onClick={toggleTheme} className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/5 transition-colors text-gray-500 dark:text-gray-400">
-                {theme === 'light' ? <Moon size={24} /> : <Sun size={24} />}
+            <div className="lg:hidden flex items-center gap-2 sm:gap-4">
+              <button
+                onClick={toggleTheme}
+                className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/5 transition-colors text-gray-500 dark:text-gray-400"
+              >
+                {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
               </button>
-              <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 text-gray-600 dark:text-gray-400">
-                {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="p-2 text-gray-600 dark:text-gray-400"
+              >
+                {isMobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
               </button>
             </div>
           </div>
@@ -162,33 +193,58 @@ export default function GKLayout({ children, activeTab, setActiveTab, userName =
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="lg:hidden bg-white dark:bg-[#060818] border-t border-gray-100 dark:border-white/5 px-4 py-6 space-y-4 shadow-xl"
+            className="lg:hidden bg-white dark:bg-[#060818] border-t border-gray-100 dark:border-white/5 px-4 py-4 space-y-1 shadow-xl"
           >
             {navLinks.map((link) => (
               <button
                 key={link.id}
-                onClick={() => { setActiveTab(link.id); setIsMobileMenuOpen(false); }}
-                className="block w-full text-left text-lg font-bold text-gray-800 dark:text-white py-2"
+                onClick={() => {
+                  setActiveTab(link.id);
+                  setIsMobileMenuOpen(false);
+                }}
+                className={`block w-full text-left text-base font-bold py-3 px-3 rounded-xl transition-colors ${
+                  activeTab === link.id
+                    ? 'text-[#F59E0B] bg-amber-50 dark:bg-[#F59E0B]/10'
+                    : 'text-gray-800 dark:text-white hover:bg-gray-50 dark:hover:bg-white/5'
+                }`}
               >
                 {link.label}
               </button>
             ))}
-            <div className="pt-4 border-t border-gray-100 dark:border-white/5 space-y-2">
+
+            <div className="pt-3 border-t border-gray-100 dark:border-white/5 space-y-1">
+              <div className="px-3 py-2 flex items-center gap-3">
+                <div className="w-8 h-8 bg-[#F59E0B] rounded-full flex items-center justify-center text-xs font-bold text-[#060818]">
+                  {initials}
+                </div>
+                <div>
+                  <p className="text-sm font-black text-[#060818] dark:text-white">{userName}</p>
+                  <p className="text-xs text-gray-400 truncate max-w-[200px]">{userEmail}</p>
+                </div>
+              </div>
+
               <button
-                onClick={() => { setActiveTab('profile'); setIsMobileMenuOpen(false); }}
-                className="flex items-center gap-3 text-lg font-bold text-gray-800 dark:text-white py-2"
+                onClick={() => {
+                  setActiveTab('profile');
+                  setIsMobileMenuOpen(false);
+                }}
+                className="flex items-center gap-3 text-base font-bold text-gray-800 dark:text-white py-3 px-3 w-full rounded-xl hover:bg-gray-50 dark:hover:bg-white/5"
               >
-                <User size={20} /> My Profile
+                <User size={18} /> My Profile
               </button>
-              <button onClick={handleSignOut} className="flex items-center gap-3 text-lg font-bold text-red-500 py-2">
-                <LogOut size={20} /> Sign Out
+
+              <button
+                onClick={handleSignOut}
+                className="flex items-center gap-3 text-base font-bold text-red-500 py-3 px-3 w-full rounded-xl hover:bg-red-50 dark:hover:bg-red-500/10"
+              >
+                <LogOut size={18} /> Sign Out
               </button>
             </div>
           </motion.div>
         )}
       </nav>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">{children}</main>
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8 lg:py-12">{children}</main>
     </div>
   );
 }
