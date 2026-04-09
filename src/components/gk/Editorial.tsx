@@ -133,7 +133,7 @@ const EDITORIALS: EditorialCard[] = [
 
     The current global climate finance architecture is widely seen as inadequate. The promised $100 billion per year from developed nations has been slow to materialize and often comes in the form of loans rather than grants, further exacerbating the debt crisis. There is an urgent need for a fundamental shift towards more equitable and accessible financing.
 
-    The upcoming summit must address the issue of 'loss and damage'âthe unavoidable impacts of climate change that cannot be adapted to. For the Global South, climate justice is not just a moral imperative but a prerequisite for sustainable development.`,
+    The upcoming summit must address the issue of 'loss and damage'—the unavoidable impacts of climate change that cannot be adapted to. For the Global South, climate justice is not just a moral imperative but a prerequisite for sustainable development.`,
     tags: ['Environment', 'International Relations'],
     mcqs: [
       {
