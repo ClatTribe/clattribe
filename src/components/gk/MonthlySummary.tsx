@@ -170,49 +170,49 @@ export default function MonthlySummary() {
                                     className="flex items-center gap-2 text-gray-500 hover:text-[#F59E0B] transition-colors font-bold uppercase text-[10px] tracking-widest"
                                   >
                                   <ArrowLeft size={16} /> Back to Summary
-                        </button>button>
+                        </button>
                         <div className="space-y-5 sm:space-y-6">
                                   <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                                               <span className="px-3 py-1 rounded-full bg-[#F59E0B]/10 text-[#F59E0B] text-[10px] font-black uppercase tracking-widest">
                                                 {selectedNews.category}
-                                              </span>span>
+                                              </span>
                                               <span className="text-[10px] font-bold text-gray-400 flex items-center gap-1 uppercase tracking-widest">
                                                             <Calendar size={12} /> {selectedNews.date}
-                                              </span>span>
+                                              </span>
                                               <span className="text-[10px] font-bold text-gray-400 flex items-center gap-1 uppercase tracking-widest">
                                                             <Clock size={12} /> {selectedNews.readTime}
-                                              </span>span>
-                                  </div>div>
+                                              </span>
+                                  </div>
                                   <h1 className="text-2xl sm:text-4xl font-black text-[#060818] dark:text-white leading-tight">
                                     {selectedNews.title}
                                   </h1>h1>
                           {selectedNews.image && (
                                       <div className="aspect-video rounded-[1.5rem] sm:rounded-[2.5rem] overflow-hidden border border-gray-100 dark:border-white/10 shadow-2xl">
                                                     <img src={selectedNews.image} alt={selectedNews.title} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-                                      </div>div>
+                                      </div>
                                   )}
                                   <div className="prose prose-sm sm:prose-lg dark:prose-invert max-w-none">
                                     {selectedNews.content.split('\n').map((paragraph, i) => (
                                         <p key={i} className="text-gray-600 dark:text-gray-400 leading-relaxed mb-3 sm:mb-4 text-sm sm:text-base">
                                           {paragraph.trim()}
-                                        </p>p>
+                                        </p>
                                       ))}
-                                  </div>div>
+                                  </div>
                                   <div className="pt-8 sm:pt-12 border-t border-gray-100 dark:border-white/5 flex items-center justify-between">
                                               <div className="flex gap-4">
                                                             <button className="flex items-center gap-2 text-gray-400 hover:text-[#F59E0B] transition-colors">
                                                                             <Share2 size={20} />
-                                                            </button>button>
+                                                            </button>
                                                             <button className="flex items-center gap-2 text-gray-400 hover:text-[#F59E0B] transition-colors">
                                                                             <Bookmark size={20} />
-                                                            </button>button>
-                                              </div>div>
+                                                            </button>
+                                              </div>
                                               <button className="flex items-center gap-2 text-[#F59E0B] font-bold text-sm">
                                                             Next Topic <ChevronRight size={16} />
-                                              </button>button>
-                                  </div>div>
-                        </div>div>
-                </motion.div>motion.div>
+                                              </button>
+                                  </div>
+                        </div>
+                </motion.div>
               );
   }
   
@@ -226,8 +226,8 @@ export default function MonthlySummary() {
                                   </h1>h1>
                                   <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400 font-medium">
                                               Curated GK & Legal updates specifically for CLAT aspirants.
-                                  </p>p>
-                        </div>div>
+                                  </p>
+                        </div>
                         <div className="flex bg-gray-100 dark:bg-white/5 p-1.5 rounded-2xl border border-gray-200 dark:border-white/10 self-start">
                                   <button
                                                 onClick={() => setView('news')}
@@ -235,18 +235,18 @@ export default function MonthlySummary() {
                                                                 view === 'news' ? 'bg-white dark:bg-[#F59E0B] text-[#060818] shadow-sm' : 'text-gray-500 hover:text-[#060818] dark:hover:text-white'
                                                 }`}
                                               >
-                                              <BookOpen size={16} /> <span className="hidden sm:inline">News Updates</span>span><span className="sm:hidden">News</span>span>
-                                  </button>button>
+                                              <BookOpen size={16} /> <span className="hidden sm:inline">News Updates</span><span className="sm:hidden">News</span>
+                                  </button>
                                   <button
                                                 onClick={() => setView('quiz')}
                                                 className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl text-sm font-bold transition-all flex items-center gap-2 ${
                                                                 view === 'quiz' ? 'bg-white dark:bg-[#F59E0B] text-[#060818] shadow-sm' : 'text-gray-500 hover:text-[#060818] dark:hover:text-white'
                                                 }`}
                                               >
-                                              <Zap size={16} /> <span className="hidden sm:inline">Monthly Quiz</span>span><span className="sm:hidden">Quiz</span>span>
-                                  </button>button>
-                        </div>div>
-                </div>div>
+                                              <Zap size={16} /> <span className="hidden sm:inline">Monthly Quiz</span><span className="sm:hidden">Quiz</span>
+                                  </button>
+                        </div>
+                </div>
           
                 <AnimatePresence mode="wait">
                   {view === 'news' ? (
@@ -269,28 +269,28 @@ export default function MonthlySummary() {
                                                                                     <div className="absolute top-3 sm:top-4 left-3 sm:left-4">
                                                                                                         <span className="px-3 py-1 rounded-full bg-white/90 dark:bg-[#060818]/90 backdrop-blur-md text-[10px] font-black text-[#060818] dark:text-[#F59E0B] uppercase tracking-widest shadow-xl">
                                                                                                           {news.category}
-                                                                                                          </span>span>
-                                                                                      </div>div>
-                                                                  </div>div>
+                                                                                                          </span>
+                                                                                      </div>
+                                                                  </div>
                                                                   <div className="p-5 sm:p-8 space-y-3 sm:space-y-4">
                                                                                     <div className="flex items-center gap-2 sm:gap-3 text-[10px] font-bold text-gray-400 uppercase tracking-widest flex-wrap">
                                                                                                         <Calendar size={11} /> {news.date}
                                                                                                         <span className="w-1 h-1 bg-gray-300 rounded-full" />
                                                                                                         <Clock size={11} /> {news.readTime}
-                                                                                      </div>div>
+                                                                                      </div>
                                                                                     <h3 className="text-base sm:text-xl font-black text-[#060818] dark:text-white group-hover:text-[#F59E0B] transition-colors leading-tight line-clamp-2">
                                                                                       {news.title}
                                                                                       </h3>h3>
                                                                                     <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 line-clamp-2 font-medium">
                                                                                       {news.summary}
-                                                                                      </p>p>
+                                                                                      </p>
                                                                                     <div className="pt-2 sm:pt-4 flex items-center gap-2 text-[#F59E0B] font-bold text-xs uppercase tracking-widest">
                                                                                                         Read Full Story <ChevronRight size={13} />
-                                                                                      </div>div>
-                                                                  </div>div>
-                                                  </motion.div>motion.div>
+                                                                                      </div>
+                                                                  </div>
+                                                  </motion.div>
                                                 ))}
-                      </motion.div>motion.div>
+                      </motion.div>
                     ) : null}
                   {view === 'quiz' ? (
                       <motion.div
@@ -305,20 +305,20 @@ export default function MonthlySummary() {
                                                     {/* Quiz Header */}
                                                                   <div className="flex items-start sm:items-center justify-between gap-3">
                                                                                     <div className="space-y-1 flex-1">
-                                                                                                        <p className="text-[10px] font-black text-[#F59E0B] uppercase tracking-[0.2em]">Question {currentQuestion + 1} of {MONTHLY_QUIZ.length}</p>p>
+                                                                                                        <p className="text-[10px] font-black text-[#F59E0B] uppercase tracking-[0.2em]">Question {currentQuestion + 1} of {MONTHLY_QUIZ.length}</p>
                                                                                                         <div className="h-1.5 w-full bg-gray-100 dark:bg-white/5 rounded-full overflow-hidden">
                                                                                                                               <motion.div
                                                                                                                                                         className="h-full bg-[#F59E0B]"
                                                                                                                                                         initial={{ width: 0 }}
                                                                                                                                                         animate={{ width: `${((currentQuestion + 1) / MONTHLY_QUIZ.length) * 100}%` }}
                                                                                                                                                       />
-                                                                                                          </div>div>
-                                                                                      </div>div>
+                                                                                                          </div>
+                                                                                      </div>
                                                                                     <div className="flex items-center gap-2 bg-[#F59E0B]/10 px-3 sm:px-4 py-2 rounded-2xl shrink-0">
                                                                                                         <Trophy size={16} className="text-[#F59E0B]" />
-                                                                                                        <span className="text-sm font-black text-[#F59E0B]">{score} pts</span>span>
-                                                                                      </div>div>
-                                                                  </div>div>
+                                                                                                        <span className="text-sm font-black text-[#F59E0B]">{score} pts</span>
+                                                                                      </div>
+                                                                  </div>
                                                   
                                                     {/* Question */}
                                                                   <h2 className="text-lg sm:text-2xl font-black text-[#060818] dark:text-white leading-tight">
@@ -355,13 +355,13 @@ export default function MonthlySummary() {
                                                                                                                           onClick={() => handleOptionSelect(idx)}
                                                                                                                           className={`w-full p-3 sm:p-5 rounded-[1.2rem] sm:rounded-[1.5rem] border-2 text-left transition-all flex items-center justify-between group ${bgColor} ${borderColor} ${textColor}`}
                                                                                                                         >
-                                                                                                                        <span className="font-bold text-sm sm:text-base">{option}</span>span>
+                                                                                                                        <span className="font-bold text-sm sm:text-base">{option}</span>
                                                                                                   {isAnswered && isCorrect && <CheckCircle2 size={20} className="text-green-500 shrink-0" />}
                                                                                                   {isAnswered && isSelected && !isCorrect && <AlertCircle size={20} className="text-red-500 shrink-0" />}
-                                                                                                  </button>button>
+                                                                                                  </button>
                                                                                               );
                                                   })}
-                                                                  </div>div>
+                                                                  </div>
                                                   
                                                     {/* Explanation */}
                                                     {isAnswered && (
@@ -370,11 +370,11 @@ export default function MonthlySummary() {
                                                                                             animate={{ opacity: 1, y: 0 }}
                                                                                             className="p-4 sm:p-6 rounded-2xl bg-[#060818]/5 dark:bg-white/5 border-l-4 border-[#F59E0B] space-y-2"
                                                                                           >
-                                                                                          <p className="text-[10px] font-black text-[#F59E0B] uppercase tracking-widest">Explanation</p>p>
+                                                                                          <p className="text-[10px] font-black text-[#F59E0B] uppercase tracking-widest">Explanation</p>
                                                                                           <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 font-medium leading-relaxed">
                                                                                             {MONTHLY_QUIZ[currentQuestion].explanation}
-                                                                                            </p>p>
-                                                                      </motion.div>motion.div>
+                                                                                            </p>
+                                                                      </motion.div>
                                                                     )}
                                                   
                                                     {/* Next Button */}
@@ -387,40 +387,40 @@ export default function MonthlySummary() {
                                                                                           >
                                                                         {currentQuestion + 1 === MONTHLY_QUIZ.length ? 'Finish Quiz' : 'Next Question'}
                                                                                           <ArrowRight size={20} />
-                                                                      </motion.button>motion.button>
+                                                                      </motion.button>
                                                                     )}
-                                                  </div>div>
+                                                  </div>
                                                 ) : (
                                                   <div className="bg-white dark:bg-white/5 rounded-[2rem] sm:rounded-[3rem] border border-gray-100 dark:border-white/10 p-8 sm:p-16 text-center space-y-6 sm:space-y-8 shadow-2xl">
                                                                   <div className="w-20 h-20 sm:w-24 sm:h-24 bg-[#F59E0B]/20 rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-4">
                                                                                     <Trophy size={40} className="text-[#F59E0B]" />
-                                                                  </div>div>
+                                                                  </div>
                                                                   <div className="space-y-2">
                                                                                     <h2 className="text-2xl sm:text-4xl font-black text-[#060818] dark:text-white">Quiz Completed!</h2>h2>
-                                                                                    <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400 font-medium">Great effort on staying updated with April's news.</p>p>
-                                                                  </div>div>
+                                                                                    <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400 font-medium">Great effort on staying updated with April's news.</p>
+                                                                  </div>
                                                                   <div className="text-5xl sm:text-6xl font-black text-[#F59E0B]">
                                                                     {score} / {MONTHLY_QUIZ.length}
-                                                                  </div>div>
+                                                                  </div>
                                                                   <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4 sm:pt-8">
                                                                                     <button
                                                                                                           onClick={resetQuiz}
                                                                                                           className="px-8 sm:px-10 py-4 bg-[#060818] dark:bg-white/10 text-white rounded-2xl font-bold hover:bg-gray-800 dark:hover:bg-white/20 transition-all text-sm sm:text-base"
                                                                                                         >
                                                                                                         Try Again
-                                                                                      </button>button>
+                                                                                      </button>
                                                                                     <button
                                                                                                           onClick={() => setView('news')}
                                                                                                           className="px-8 sm:px-10 py-4 bg-[#F59E0B] text-[#060818] rounded-2xl font-bold hover:shadow-xl hover:shadow-[#F59E0B]/20 transition-all text-sm sm:text-base"
                                                                                                         >
                                                                                                         Back to News
-                                                                                      </button>button>
-                                                                  </div>div>
-                                                  </div>div>
+                                                                                      </button>
+                                                                  </div>
+                                                  </div>
                                   )}
-                      </motion.div>motion.div>
+                      </motion.div>
                     ) : null}
-                </AnimatePresence>AnimatePresence>
-          </div>div>
+                </AnimatePresence>
+          </div>
         );
 }</motion.div>
