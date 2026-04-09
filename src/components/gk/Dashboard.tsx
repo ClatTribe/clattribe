@@ -19,13 +19,83 @@ import { GK_DAILY_TARGETS, GK_LEADERBOARD_DATA } from '@/constants/gk-constants'
 const NAVY = '#060818';
 const AMBER = '#F59E0B';
 
+/** Returns YYYY-MM-DD in local timezone */
+function getTodayStr(): string {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+
+/** Calculates current streak and week study days from localStorage */
+function calcStreakData(): { streak: number; weekDays: boolean[] } {
+  const today = getTodayStr();
+  const storedDates: string[] = JSON.parse(localStorage.getItem('gk_studyDates') || '[]');
+  const lastDate = localStorage.getItem('gk_lastStudyDate') || '';
+  let streak = parseInt(localStorage.getItem('gk_streak') || '0', 10);
+
+  if (!storedDates.includes(today)) {
+    storedDates.push(today);
+    localStorage.setItem('gk_studyDates', JSON.stringify(storedDates));
+  }
+
+  if (lastDate === '') {
+    streak = 1;
+  } else if (lastDate === today) {
+    // Same day - streak unchanged
+  } else {
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    const yStr = `${yesterday.getFullYear()}-${String(yesterday.getMonth() + 1).padStart(2, '0')}-${String(yesterday.getDate()).padStart(2, '0')}`;
+    streak = lastDate === yStr ? streak + 1 : 1;
+  }
+
+  localStorage.setItem('gk_streak', String(streak));
+  localStorage.setItem('gk_lastStudyDate', today);
+
+  // Build Mon-Sun array for current week
+  const now = new Date();
+  const dow = now.getDay(); // 0=Sun
+  const monOffset = dow === 0 ? -6 : 1 - dow;
+  const weekDays: boolean[] = [];
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(now);
+    d.setDate(now.getDate() + monOffset + i);
+    const dStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    weekDays.push(storedDates.includes(dStr));
+  }
+
+  return { streak, weekDays };
+}
+
 export default function GKDashboard() {
   const [toast, setToast] = React.useState<string | null>(null);
   const [userName, setUserName] = React.useState('Student');
+  const [quizzesTaken, setQuizzesTaken] = React.useState(0);
+  const [accuracy, setAccuracy] = React.useState('--');
+  const [readingSpeed, setReadingSpeed] = React.useState('--');
+  const [streak, setStreak] = React.useState(1);
+  const [weekDays, setWeekDays] = React.useState<boolean[]>(Array(7).fill(false));
+  const [completedTargets, setCompletedTargets] = React.useState<string[]>([]);
 
   React.useEffect(() => {
-    const stored = localStorage.getItem('gk_userName');
-    if (stored) setUserName(stored);
+    const name = localStorage.getItem('gk_userName');
+    if (name) setUserName(name);
+
+    const q = parseInt(localStorage.getItem('gk_quizzesTaken') || '0', 10);
+    setQuizzesTaken(q);
+
+    const acc = localStorage.getItem('gk_accuracy');
+    if (acc && acc !== '0') setAccuracy(acc + '%');
+
+    const spd = localStorage.getItem('gk_readingSpeed');
+    if (spd && spd !== '0') setReadingSpeed(spd + ' wpm');
+
+    const { streak: s, weekDays: wd } = calcStreakData();
+    setStreak(s);
+    setWeekDays(wd);
+
+    const todayKey = `gk_targets_${getTodayStr()}`;
+    const saved: string[] = JSON.parse(localStorage.getItem(todayKey) || '[]');
+    setCompletedTargets(saved);
   }, []);
 
   const showToast = (msg: string) => {
@@ -33,15 +103,41 @@ export default function GKDashboard() {
     setTimeout(() => setToast(null), 3000);
   };
 
+  const handleTargetClick = (targetId: string, isCompleted: boolean) => {
+    if (isCompleted) return;
+    const todayKey = `gk_targets_${getTodayStr()}`;
+    const updated = [...completedTargets, targetId];
+    setCompletedTargets(updated);
+    localStorage.setItem(todayKey, JSON.stringify(updated));
+    showToast('Target marked complete! Keep going 🔥');
+  };
+
+  const firstName = userName.split(' ')[0] || 'Student';
+  const userInitials = userName.split(' ').filter(Boolean).map((w: string) => w[0].toUpperCase()).join('').substring(0, 2) || 'ST';
+
   const stats = [
-    { label: 'Accuracy Rate', value: '84%', icon: TrendingUp, color: 'text-emerald-600', bg: 'bg-emerald-50' },
-    { label: 'Reading Speed', value: '320 wpm', icon: Zap, color: 'text-amber-500', bg: 'bg-amber-50' },
-    { label: 'Quizzes Taken', value: '42', icon: CheckCircle2, color: 'text-blue-600', bg: 'bg-blue-50' },
-    { label: 'Current Streak', value: '5 Days', icon: Flame, color: 'text-orange-600', bg: 'bg-orange-50' },
+    { label: 'Accuracy Rate', value: accuracy, icon: TrendingUp, color: 'text-emerald-600', bg: 'bg-emerald-50' },
+    { label: 'Reading Speed', value: readingSpeed, icon: Zap, color: 'text-amber-500', bg: 'bg-amber-50' },
+    { label: 'Quizzes Taken', value: String(quizzesTaken), icon: CheckCircle2, color: 'text-blue-600', bg: 'bg-blue-50' },
+    { label: 'Current Streak', value: `${streak} Day${streak !== 1 ? 's' : ''}`, icon: Flame, color: 'text-orange-600', bg: 'bg-orange-50' },
   ];
 
-  // First name only for the greeting
-  const firstName = userName.split(' ')[0] || 'Student';
+  const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  const todayDayIdx = (() => { const d = new Date().getDay(); return d === 0 ? 6 : d - 1; })();
+
+  const targetsWithState = GK_DAILY_TARGETS.map(t => ({
+    ...t,
+    is_completed: completedTargets.includes(t.id),
+  }));
+  const completedCount = targetsWithState.filter(t => t.is_completed).length;
+
+  const leaderboard = GK_LEADERBOARD_DATA.map(s =>
+    s.is_user ? { ...s, name: `${firstName} (You)`, avatar: userInitials } : s
+  );
+
+  const nextMilestone = streak < 7 ? 7 : streak < 30 ? 30 : 100;
+  const prevMilestone = nextMilestone === 7 ? 0 : nextMilestone === 30 ? 7 : 30;
+  const streakProgress = Math.min(((streak - prevMilestone) / (nextMilestone - prevMilestone)) * 100, 100);
 
   return (
     <div className="space-y-12 relative">
@@ -66,7 +162,9 @@ export default function GKDashboard() {
             Welcome back, {firstName}!
           </h2>
           <p className="text-gray-500 dark:text-gray-400 mt-2 font-medium">
-            You&#39;re on a 5-day streak. Your consistency is your superpower.
+            {streak <= 1
+              ? "Day 1 of your journey. Consistency is your superpower."
+              : `You're on a ${streak}-day streak. Your consistency is your superpower.`}
           </p>
         </div>
         <div className="flex items-center gap-4 bg-gray-50 dark:bg-white/5 p-2 rounded-2xl border border-gray-100 dark:border-white/5">
@@ -109,19 +207,23 @@ export default function GKDashboard() {
           <div className="flex flex-col items-center text-center space-y-4">
             <div className="w-24 h-24 bg-orange-500/10 rounded-full flex items-center justify-center border-4 border-orange-500/20 relative">
               <Flame size={48} className="text-orange-500" fill="currentColor" />
-              <div className="absolute -top-2 -right-2 bg-[#F59E0B] text-[#060818] text-[10px] font-black px-2 py-1 rounded-full shadow-lg">
-                HOT!
-              </div>
+              {streak >= 3 && (
+                <div className="absolute -top-2 -right-2 bg-[#F59E0B] text-[#060818] text-[10px] font-black px-2 py-1 rounded-full shadow-lg">
+                  HOT!
+                </div>
+              )}
             </div>
             <div>
-              <h4 className="text-3xl font-black text-[#060818] dark:text-white">5 Day Streak</h4>
-              <p className="text-sm text-gray-500 dark:text-gray-400 font-bold uppercase tracking-widest">Keep it up!</p>
+              <h4 className="text-3xl font-black text-[#060818] dark:text-white">{streak} Day{streak !== 1 ? 's' : ''} Streak</h4>
+              <p className="text-sm text-gray-500 dark:text-gray-400 font-bold uppercase tracking-widest">
+                {streak === 1 ? 'Just started!' : 'Keep it up!'}
+              </p>
             </div>
           </div>
           <div className="flex-1 grid grid-cols-7 gap-4 w-full">
-            {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day, idx) => {
-              const isCompleted = idx < 5;
-              const isToday = idx === 4;
+            {DAYS.map((day, idx) => {
+              const isCompleted = weekDays[idx] || false;
+              const isToday = idx === todayDayIdx;
               return (
                 <div key={day} className="flex flex-col items-center gap-3">
                   <span className={`text-[10px] font-black uppercase tracking-widest ${isToday ? 'text-[#F59E0B]' : 'text-gray-400'}`}>
@@ -141,13 +243,15 @@ export default function GKDashboard() {
           <div className="md:w-64 space-y-4">
             <div className="flex items-center gap-2 text-xs font-bold text-gray-500">
               <CalendarIcon size={14} />
-              Next Milestone: 7 Days
+              Next Milestone: {nextMilestone} Days
             </div>
             <div className="h-2 bg-gray-100 dark:bg-white/5 rounded-full overflow-hidden">
-              <motion.div initial={{ width: 0 }} animate={{ width: '71%' }} className="h-full bg-orange-500" />
+              <motion.div initial={{ width: 0 }} animate={{ width: `${streakProgress}%` }} className="h-full bg-orange-500" />
             </div>
             <p className="text-[10px] text-gray-400 font-medium leading-relaxed">
-              Complete your targets tomorrow to unlock the &#34;Consistency King&#34; badge!
+              {streak >= nextMilestone
+                ? `${streak}-day legend! You've unlocked the next level!`
+                : `${nextMilestone - streak} more day${nextMilestone - streak !== 1 ? 's' : ''} to unlock the "${nextMilestone === 7 ? 'Consistency King' : nextMilestone === 30 ? 'Monthly Champion' : 'Century Scholar'}" badge!`}
             </p>
           </div>
         </div>
@@ -160,17 +264,17 @@ export default function GKDashboard() {
             <h3 className="text-2xl font-black tracking-tight dark:text-white">Daily Targets</h3>
             <div className="flex items-center gap-2 text-sm font-bold text-[#F59E0B] bg-amber-50 dark:bg-[#F59E0B]/10 px-4 py-1.5 rounded-full">
               <CheckCircle2 size={16} />
-              2/3 Completed
+              {completedCount}/{targetsWithState.length} Completed
             </div>
           </div>
           <div className="grid gap-4">
-            {GK_DAILY_TARGETS.map((target, idx) => (
+            {targetsWithState.map((target, idx) => (
               <motion.div
                 key={target.id}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 + idx * 0.1 }}
-                onClick={() => !target.is_completed && showToast(`Starting: ${target.title}`)}
+                onClick={() => handleTargetClick(target.id, target.is_completed)}
                 className={`group p-6 rounded-[2rem] border transition-all duration-300 flex items-center gap-6 cursor-pointer ${
                   target.is_completed
                     ? 'bg-gray-50 dark:bg-white/5 border-transparent opacity-60'
@@ -203,7 +307,7 @@ export default function GKDashboard() {
             <Trophy size={20} className="text-[#F59E0B]" />
           </div>
           <div className="bg-white dark:bg-white/5 border border-gray-100 dark:border-white/5 rounded-[2rem] p-6 space-y-4">
-            {GK_LEADERBOARD_DATA.map((student, idx) => (
+            {leaderboard.map((student, idx) => (
               <motion.div
                 key={student.id}
                 initial={{ opacity: 0, x: 20 }}
@@ -272,7 +376,7 @@ export default function GKDashboard() {
             Strategy Tip
           </div>
           <blockquote className="text-2xl font-bold text-[#060818] dark:text-white leading-tight italic">
-            &#34;Don&#39;t read to memorize. Read to understand the logic behind the author&#39;s argument. In CLAT GK, the answer is often hidden in the passage&#39;s structure.&#34;
+            “Don’t read to memorize. Read to understand the logic behind the author’s argument. In CLAT GK, the answer is often hidden in the passage’s structure.”
           </blockquote>
           <div className="flex items-center gap-4 pt-6 border-t border-gray-50 dark:border-white/5 mt-6">
             <div className="w-10 h-10 rounded-full bg-gray-100 dark:bg-white/10" />
@@ -285,4 +389,4 @@ export default function GKDashboard() {
       </div>
     </div>
   );
-                             }
+}
