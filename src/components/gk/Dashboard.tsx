@@ -83,7 +83,7 @@ export default function GKDashboard() {
       </div>
 
       {/* Streak */}
-      <section className="bg-white dark:bw-white/5 border border-gray-100 dark:border-white/5 rounded-[2rem] p-10 relative overflow-hidden">
+      <section className="bg-white dark:bg-white/5 border border-gray-100 dark:border-white/5 rounded-[2rem] p-10 relative overflow-hidden">
         <div className="absolute top-0 right-0 p-10 opacity-5 pointer-events-none">
           <Flame size={200} />
         </div>
@@ -113,7 +113,7 @@ export default function GKDashboard() {
                   <div className={`w-full aspect-square rounded-2xl flex items-center justify-center transition-all border-2 ${
                     isCompleted
                       ? 'bg-orange-500 border-orange-500 text-white shadow-lg shadow-orange-500/20'
-                      : 'bg-gray-50 dark:bs-white/5 border-transparent text-gray-300 dark:text-gray-700'
+                      : 'bg-gray-50 dark:bg-white/5 border-transparent text-gray-300 dark:text-gray-700'
                   } ${isToday ? 'ring-4 ring-[#F59E0B]/20' : ''}`}>
                     {isCompleted ? <CheckCircle2 size={20} /> : <Circle size={20} />}
                   </div>
@@ -141,7 +141,7 @@ export default function GKDashboard() {
         <div className="lg:col-span-2 space-y-8">
           <div className="flex items-center justify-between">
             <h3 className="text-2xl font-black tracking-tight dark:text-white">Daily Targets</h3>
-            <div className="flex items-center gap-2 text-sm font-bold text-[#F59E0B] bg-amber-50 dark:bw-[#F59E0B]/10 px-4 py-1.5 rounded-full">
+            <div className="flex items-center gap-2 text-sm font-bold text-[#F59E0B] bg-amber-50 dark:bg-[#F59E0B]/10 px-4 py-1.5 rounded-full">
               <CheckCircle2 size={16} /> 2/3 Completed
             </div>
           </div>
@@ -155,7 +155,7 @@ export default function GKDashboard() {
                 onClick={() => !target.is_completed && showToast(`Starting: ${target.title}`)}
                 className={`group p-6 rounded-[2rem] border transition-all duration-300 flex items-center gap-6 cursor-pointer ${
                   target.is_completed
-                    ? 'bg-gray-50 dark:bs-white/5 border-transparent opacity-60'
+                    ? 'bg-gray-50 dark:bg-white/5 border-transparent opacity-60'
                     : 'bg-white dark:bg-white/5 border-gray-100 dark:border-white/5 hover:border-[#F59E0B] hover:shadow-xl hover:shadow-[#F59E0B]/5'
                 }`}
               >
@@ -169,7 +169,7 @@ export default function GKDashboard() {
                   <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 font-medium">{target.description}</p>
                 </div>
                 {!target.is_completed && (
-                  <div className="w-10 h-10 rounded-full bg-gray-50 dark:bs-white/5 flex items-center justify-center text-gray-300 dark:text-gray-600 group-hover:bg-[#F59E0B] group-hover:text-[#060818] transition-all">
+                  <div className="w-10 h-10 rounded-full bg-gray-50 dark:bg-white/5 flex items-center justify-center text-gray-300 dark:text-gray-600 group-hover:bg-[#F59E0B] group-hover:text-[#060818] transition-all">
                     <ArrowRight size={20} />
                   </div>
                 )}
@@ -184,7 +184,7 @@ export default function GKDashboard() {
             <h3 className="text-2xl font-black tracking-tight dark:text-white">Leaderboard</h3>
             <Trophy size={20} className="text-[#F59E0B]" />
           </div>
-          <div className="bg-white dark:bs-white/5 border border-gray-100 dark:border-white/5 rounded-[2rem] p-6 space-y-4">
+          <div className="bg-white dark:bg-white/5 border border-gray-100 dark:border-white/5 rounded-[2rem] p-6 space-y-4">
             {GK_LEADERBOARD_DATA.map((student, idx) => (
               <motion.div
                 key={student.id}
@@ -205,7 +205,7 @@ export default function GKDashboard() {
                 }`}>
                   {student.rank}
                 </div>
-                <div className="w-10 h-10 rounded-xl bg-[#060818] dark:bs-white/10 flex items-center justify-center text-white dark:text-gray-300 font-bold text-xs">
+                <div className="w-10 h-10 rounded-xl bg-[#060818] dark:bg-white/10 flex items-center justify-center text-white dark:text-gray-300 font-bold text-xs">
                   {student.avatar}
                 </div>
                 <div className="flex-1">
