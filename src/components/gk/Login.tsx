@@ -3,18 +3,25 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { LogIn, Sparkles, ShieldCheck, Zap, Globe } from 'lucide-react';
+import { gkSupabase } from '@/lib/gk-supabase';
 
 interface GKLoginProps {
   onLogin: () => void;
 }
 
 export default function GKLogin({ onLogin }: GKLoginProps) {
-  const handleGoogleLogin = () => {
-    localStorage.setItem('gk_isLoggedIn', 'true');
-    localStorage.setItem('gk_userEmail', 'clattribe@gmail.com');
-    localStorage.setItem('gk_userName', 'Abhinav');
-    localStorage.setItem('gk_registrationDate', new Date().toISOString());
-    onLogin();
+  const handleGoogleLogin = async () => {
+    try {
+      const { error } = await gkSupabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/gk/auth/callback`,
+        },
+      });
+      if (error) throw error;
+    } catch (err: any) {
+      console.error('Google login error:', err);
+    }
   };
 
   return (
