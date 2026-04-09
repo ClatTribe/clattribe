@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import GKLayout from './GKLayout';
 import GKDashboard from './Dashboard';
 import GKTestingEngine from './TestingEngine';
@@ -8,62 +9,59 @@ import GKVault from './Vault';
 import GKFlashcards from './Flashcards';
 import GKEditorial from './Editorial';
 import GKMonthlySummary from './MonthlySummary';
-import GKLogin from './Login';
 import GKSubscriptionModal from './SubscriptionModal';
 import { User } from 'lucide-react';
 import { gkSupabase } from '@/lib/gk-supabase';
 
 export default function GKApp() {
+  const router = useRouter();
   const [activeTab, setActiveTab] = React.useState('dashboard');
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
   const [showSubModal, setShowSubModal] = React.useState(false);
   const [isSubscribed, setIsSubscribed] = React.useState(false);
+  const [userName, setUserName] = React.useState('');
+  const [userEmail, setUserEmail] = React.useState('');
 
   React.useEffect(() => {
-    // Check existing Supabase session on mount
     gkSupabase.auth.getSession().then(({ data: { session } }) => {
       if (session?.user) {
-        setIsLoggedIn(true);
-        localStorage.setItem('gk_userEmail', session.user.email || '');
-        localStorage.setItem('gk_userName', session.user.user_metadata?.full_name || session.user.user_metadata?.name || '');
+        const name = session.user.user_metadata?.full_name || session.user.user_metadata?.name || 'Student';
+        const email = session.user.email || '';
+        setUserName(name);
+        setUserEmail(email);
+        localStorage.setItem('gk_userEmail', email);
+        localStorage.setItem('gk_userName', name);
+        setIsSubscribed(localStorage.getItem('gk_isSubscribed') === 'true');
+        const regDateStr = localStorage.getItem('gk_registrationDate');
+        if (!regDateStr) {
+          localStorage.setItem('gk_registrationDate', new Date().toISOString());
+        }
       } else {
-        setIsLoggedIn(false);
+        router.replace('/gk/login');
       }
-      setIsSubscribed(localStorage.getItem('gk_isSubscribed') === 'true');
+      setIsLoading(false);
     });
 
-    // Listen for auth state changes (e.g. after OAuth redirect)
     const { data: { subscription } } = gkSupabase.auth.onAuthStateChange((_event, session) => {
-      if (session?.user) {
-        setIsLoggedIn(true);
-        localStorage.setItem('gk_userEmail', session.user.email || '');
-        localStorage.setItem('gk_userName', session.user.user_metadata?.full_name || session.user.user_metadata?.name || '');
-      } else {
-        setIsLoggedIn(false);
+      if (!session?.user) {
+        router.replace('/gk/login');
       }
     });
 
     return () => subscription.unsubscribe();
-  }, []);
+  }, [router]);
 
   React.useEffect(() => {
-    if (isLoggedIn && !isSubscribed) {
+    if (!isLoading && !isSubscribed) {
       const regDateStr = localStorage.getItem('gk_registrationDate');
       if (regDateStr) {
         const regDate = new Date(regDateStr);
         const now = new Date();
-        const diffTime = Math.abs(now.getTime() - regDate.getTime());
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        if (diffDays > 2) {
-          setShowSubModal(true);
-        }
+        const diffDays = Math.ceil(Math.abs(now.getTime() - regDate.getTime()) / (1000 * 60 * 60 * 24));
+        if (diffDays > 2) setShowSubModal(true);
       }
     }
-  }, [isLoggedIn, isSubscribed]);
-
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
+  }, [isLoading, isSubscribed]);
 
   const handleSubscribe = () => {
     localStorage.setItem('gk_isSubscribed', 'true');
@@ -71,31 +69,30 @@ export default function GKApp() {
     setShowSubModal(false);
   };
 
-  if (!isLoggedIn) {
-    return <GKLogin onLogin={handleLogin} />;
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-[#060818] flex items-center justify-center">
+        <div className="w-12 h-12 border-4 border-[#F59E0B] border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
   }
 
   const renderContent = () => {
     switch (activeTab) {
-      case 'dashboard':
-        return <GKDashboard />;
-      case 'testing':
-        return <GKTestingEngine />;
-      case 'vault':
-        return <GKVault />;
-      case 'flashcards':
-        return <GKFlashcards />;
-      case 'editorial':
-        return <GKEditorial />;
-      case 'monthly-summary':
-        return <GKMonthlySummary />;
+      case 'dashboard': return <GKDashboard />;
+      case 'testing': return <GKTestingEngine />;
+      case 'vault': return <GKVault />;
+      case 'flashcards': return <GKFlashcards />;
+      case 'editorial': return <GKEditorial />;
+      case 'monthly-summary': return <GKMonthlySummary />;
       case 'profile':
         return (
           <div className="flex flex-col items-center justify-center py-20 text-center">
             <div className="w-24 h-24 bg-[#060818] dark:bg-white/10 rounded-full mb-6 flex items-center justify-center text-white dark:text-gray-400 border-4 border-[#F59E0B]/20">
               <User className="text-[#F59E0B]" size={40} />
             </div>
-            <h2 className="text-3xl font-black mb-2 text-[#060818] dark:text-white">Abhinav Singh</h2>
+            <h2 className="text-3xl font-black mb-2 text-[#060818] dark:text-white">{userName || 'Student'}</h2>
+            <p className="text-gray-500 dark:text-gray-400 mb-2 text-sm">{userEmail}</p>
             <p className="text-gray-500 dark:text-gray-400 mb-8 font-bold uppercase tracking-widest text-xs">
               CLAT 2025 Aspirant • {isSubscribed ? 'Premium Member' : 'Free Trial'}
             </p>
@@ -119,8 +116,7 @@ export default function GKApp() {
             )}
           </div>
         );
-      default:
-        return <GKDashboard />;
+      default: return <GKDashboard />;
     }
   };
 
@@ -130,10 +126,7 @@ export default function GKApp() {
         {renderContent()}
       </GKLayout>
       {showSubModal && (
-        <GKSubscriptionModal
-          onSubscribe={handleSubscribe}
-          onClose={() => setShowSubModal(false)}
-        />
+        <GKSubscriptionModal onSubscribe={handleSubscribe} onClose={() => setShowSubModal(false)} />
       )}
     </>
   );
