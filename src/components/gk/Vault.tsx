@@ -25,7 +25,7 @@ export default function Vault() {
                               className="fixed bottom-6 left-4 right-4 sm:left-1/2 sm:right-auto sm:-translate-x-1/2 z-[100] bg-[#060818] text-white px-6 py-3 rounded-2xl font-bold shadow-2xl text-center"
                             >
                     {toast}
-                  </motion.div>motion.div>
+                  </motion.div>
                 )}
         
           {/* Hero */}
