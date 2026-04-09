@@ -1,30 +1,4 @@
-        <button
-                            onClick={handleSubmit}
-                            className="flex items-center gap-2 bg-[#F59E0B] text-[#060818] px-5 sm:px-8 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl font-black text-sm"
-                          >
-                          Submit
-                          <CheckCircle2 size={18} />
-        </button>
-                        ) : (
-                                          <button
-                                            onClick={() => {
-                                              setCurrentQuestion(p => p + 1);
-                                                                  setSelectedOption(null);
-                                            }}
-                                            className="flex items-center gap-2 bg-[#F59E0B] text-[#060818] px-5 sm:px-8 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl font-black text-sm"
-                          >
-                            Next
-                            <ChevronRight size={18} />
-          </button>
-                        )}
-          </>div>
-          </div>
-          </>div>
-          </div>
-          </>div>
-            );
-}</button>'use client';
-
+'use client';
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Clock, ChevronRight, ChevronLeft, CheckCircle2 } from 'lucide-react';
