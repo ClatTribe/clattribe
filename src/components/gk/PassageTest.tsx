@@ -4,7 +4,7 @@
                           >
                           Submit
                           <CheckCircle2 size={18} />
-        </button>button>
+        </button>
                         ) : (
                                           <button
                                             onClick={() => {
@@ -112,7 +112,7 @@ export default function PassageTest({ onComplete }: PassageTestProps) {
                               className="fixed bottom-6 left-4 right-4 sm:left-1/2 sm:right-auto sm:-translate-x-1/2 z-[100] bg-[#060818] text-white px-6 py-3 rounded-2xl font-bold shadow-2xl text-center"
                             >
                     {toast}
-                  </motion.div>motion.div>
+                  </motion.div>
                 )}
         
           {/* Header */}
@@ -123,8 +123,8 @@ export default function PassageTest({ onComplete }: PassageTestProps) {
                       <div className="flex items-center gap-2 bg-[#060818] text-white px-4 py-2 rounded-xl font-mono text-sm font-bold self-start sm:self-auto shrink-0">
                                 <Clock size={15} className="text-[#F59E0B]" />
                         {formatTime(timeSpent)}
-                      </div>div>
-              </div>div>
+                      </div>
+              </div>
         
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-8 items-start">
                 {/* Passage */}
@@ -132,9 +132,9 @@ export default function PassageTest({ onComplete }: PassageTestProps) {
                         {passage.content.split('\n\n').map((para, i) => (
                       <p key={i} className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4 text-sm sm:text-base font-medium">
                         {para}
-                      </p>p>
+                      </p>
                     ))}
-                      </div>div>
+                      </div>
               
                 {/* Questions */}
                       <div className="space-y-4 sm:space-y-6">
@@ -161,13 +161,13 @@ export default function PassageTest({ onComplete }: PassageTestProps) {
                                                                   }`}
                                                                 >
                                               {String.fromCharCode(65 + i)}
-                                                </div>div>
+                                                </div>
                                             <span className="text-sm sm:text-base font-medium text-gray-700 dark:text-gray-300">
                                               {opt}
-                                            </span>span>
-                          </button>button>
+                                            </span>
+                          </button>
                         ))}
-                                            </div>div>
+                                            </div>
                                 
                                             <div className="mt-6 flex justify-between pt-5 border-t border-gray-100 dark:border-white/5">
                                                           <button
@@ -180,7 +180,7 @@ export default function PassageTest({ onComplete }: PassageTestProps) {
                                                                           >
                                                                           <ChevronLeft size={18} />
                                                                           Previous
-                                                          </button>button>
+                                                          </button>
                                             
                                               {currentQuestion === passage.questions.length - 1 ? (
                   </div>
