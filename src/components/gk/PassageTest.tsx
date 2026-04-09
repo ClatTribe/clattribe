@@ -51,7 +51,7 @@ export default function PassageTest({ onComplete }: PassageTestProps) {
 
   const handleSubmit = () => {
     if (onComplete) {
-      const score = answers.reduce((acc, ans, i) => ans === passage.questions[i].correct ? acc + 1 : acc, 0);
+      const score = answers.reduce<number>((acc, ans, i) => ans === passage.questions[i].correct ? acc + 1 : acc, 0);
       onComplete({ score, total: passage.questions.length, timeSpent });
     } else { showToast('Test submitted!'); }
   };
