@@ -583,7 +583,7 @@ function DetailedEditorial({ item, onBack }: { item: EditorialCard; onBack: () =
                 </div>
 
                 {showExplanation && (
-      0           <motion.div
+                  <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="p-6 bg-[#F59E0B]/10 rounded-2xl border border-[#F59E0B]/20"
