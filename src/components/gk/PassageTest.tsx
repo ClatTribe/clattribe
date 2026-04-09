@@ -157,4 +157,26 @@ export default function PassageTest({ onComplete }: PassageTestProps) {
                                                           </button>
                                             
                                               {currentQuestion === passage.questions.length - 1 ? (
+                        <button
+                            onClick={handleSubmit}
+                            className="flex items-center gap-2 bg-[#F59E0B] text-[#060818] px-5 sm:px-8 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl font-black text-sm"
+                          >
+                          Submit
+                          <ChevronRight size={18} />
+                        </button>
+                      ) : (
+                        <button
+                            onClick={() => setCurrentQuestion(q => q + 1)}
+                            className="flex items-center gap-2 bg-[#F59E0B] text-[#060818] px-5 sm:px-8 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl font-black text-sm"
+                          >
+                          Next
+                          <ChevronRight size={18} />
+                        </button>
+                      )}
                   </div>
+          </div>
+          </div>
+          </div>
+          </div>
+        );
+}
