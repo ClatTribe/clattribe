@@ -423,4 +423,4 @@ export default function MonthlySummary() {
                 </AnimatePresence>
           </div>
         );
-}</motion.div>
+}
