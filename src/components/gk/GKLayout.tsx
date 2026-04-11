@@ -96,7 +96,7 @@ export default function GKLayout({
         </motion.div>
       )}
       {/* clattribe.com header */}
-      <header className="sticky top-0 z-[60] bg-[#060818] border-b border-white/10">
+      <header className="sticky top-0 z-[60] bg-[#060818]/80 backdrop-blur-md border-b border-white/[0.08] shadow-[0_1px_24px_rgba(0,0,0,0.45)]">
         <div className="mx-auto px-4 py-3 flex items-center justify-between">
           <a href="https://www.clattribe.com" target="_blank" rel="noopener noreferrer">
             <img src="https://www.clattribe.com/heading.png" alt="CLAT Tribe" className="h-9 w-auto" />
