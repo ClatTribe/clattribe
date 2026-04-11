@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Menu, X, ChevronDown, User, LogOut, Moon, Sun } from 'lucide-react';
+import { User, LayoutDashboard, FileText, Zap, Brain, BookMarked, CalendarDays } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { gkSupabase } from '@/lib/gk-supabase';
 
@@ -76,12 +76,12 @@ export default function GKLayout({
   };
 
   const navLinks = [
-    { label: 'Dashboard', id: 'dashboard' },
-    { label: 'Editorials', id: 'editorial' },
-    { label: 'Flashcard', id: 'flashcards' },
-    { label: 'Testing Engine', id: 'testing' },
-    { label: 'GK Vault', id: 'vault' },
-    { label: 'Monthly Summary', id: 'monthly-summary' },
+    { id: 'dashboard',       name: 'Dashboard',       icon: LayoutDashboard },
+    { id: 'editorial',       name: 'Editorials',       icon: FileText        },
+    { id: 'flashcards',      name: 'Flashcards',       icon: Zap             },
+    { id: 'testing',         name: 'Testing Engine',   icon: Brain           },
+    { id: 'vault',           name: 'GK Vault',         icon: BookMarked      },
+    { id: 'monthly-summary', name: 'Monthly Summary',  icon: CalendarDays    },
   ];
 
   return (
@@ -96,153 +96,67 @@ export default function GKLayout({
         </motion.div>
       )}
 
-      <nav className="bg-white dark:bg-[#060818] border-r border-gray-100 dark:border-white/5 sticky top-0 h-screen flex flex-col w-52 shrink-0 z-50 overflow-y-auto transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col h-full py-6">
+      <nav className="bg-white dark:bg-[#060818] border-r border-gray-100 dark:border-white/5 sticky top-0 h-screen flex flex-col w-56 shrink-0 z-50 overflow-y-auto transition-colors">
+
+          {/* Brand */}
+          <div className="px-4 pt-6 pb-4">
             <div
-              className="flex flex-col gap-1 cursor-pointer w-full"
+              className="flex items-center gap-2.5 cursor-pointer select-none"
               onClick={() => setActiveTab('dashboard')}
             >
-              <div className="w-9 h-9 sm:w-10 sm:h-10 bg-[#060818] dark:bg-[#F59E0B] rounded-xl flex items-center justify-center font-bold text-lg sm:text-xl text-[#F59E0B] dark:text-[#060818]">
-                CT
+              <div className="w-9 h-9 bg-[#F59E0B] rounded-xl flex items-center justify-center shadow-sm shrink-0">
+                <span className="text-[#060818] font-black text-xs tracking-tight">CT</span>
               </div>
-              <span className="text-lg sm:text-xl font-black tracking-tighter text-[#060818] dark:text-white">CLAT TRIBE</span>
-            </div>
-
-            <div className="flex flex-col gap-1 w-full">
-              {navLinks.map((link) => (
-                <button
-                  key={link.id}
-                  onClick={() => setActiveTab(link.id)}
-                  className={`text-sm font-semibold transition-colors ${
-                    activeTab === link.id
-                      ? 'text-[#F59E0B]'
-                      : 'text-gray-500 dark:text-gray-400 hover:text-[#060818] dark:hover:text-white'
-                  }`}
-                >
-                  {link.label}
-                </button>
-              ))}
-
-              <button
-                onClick={toggleTheme}
-                className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/5 transition-colors text-gray-500 dark:text-gray-400"
-              >
-                {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
-              </button>
-
-              <div className="relative ml-4">
-                <button
-                  onClick={() => setIsProfileOpen(!isProfileOpen)}
-                  className="flex items-center gap-2 bg-gray-50 dark:bg-white/5 px-4 py-2 rounded-full border border-gray-100 dark:border-white/10 hover:bg-gray-100 dark:hover:bg-white/10 transition-all"
-                >
-                  <div className="w-6 h-6 bg-[#F59E0B] rounded-full flex items-center justify-center text-[10px] font-bold text-[#060818]">
-                    {initials}
-                  </div>
-                  <span className="text-sm font-bold">{firstName}</span>
-                  <ChevronDown size={14} className={`transition-transform ${isProfileOpen ? 'rotate-180' : ''}`} />
-                </button>
-
-                {isProfileOpen && (
-                  <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-[#060818] rounded-2xl shadow-xl border border-gray-100 dark:border-white/10 py-2 overflow-hidden">
-                    <div className="px-4 py-3 border-b border-gray-100 dark:border-white/10">
-                      <p className="text-sm font-black text-[#060818] dark:text-white truncate">{userName}</p>
-                      <p className="text-xs text-gray-400 truncate">{userEmail}</p>
-                    </div>
-
-                    <button
-                      onClick={() => {
-                        setActiveTab('profile');
-                        setIsProfileOpen(false);
-                      }}
-                      className="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors"
-                    >
-                      <User size={16} /> Profile
-                    </button>
-
-                    <button
-                      onClick={handleSignOut}
-                      className="w-full flex items-center gap-3 px-4 py-3 text-sm text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors"
-                    >
-                      <LogOut size={16} /> Sign Out
-                    </button>
-                  </div>
-                )}
+              <div className="flex flex-col leading-tight">
+                <span className="font-bold text-[#060818] dark:text-white text-sm">CLAT Tribe</span>
+                <span className="text-[10px] text-gray-400">GK Portal</span>
               </div>
-            </div>
-
-            <div className="lg:hidden flex items-center gap-2 sm:gap-4">
-              <button
-                onClick={toggleTheme}
-                className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/5 transition-colors text-gray-500 dark:text-gray-400"
-              >
-                {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
-              </button>
-
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="p-2 text-gray-600 dark:text-gray-400"
-              >
-                {isMobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
-              </button>
             </div>
           </div>
-        </div>
 
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="lg:hidden bg-white dark:bg-[#060818] border-t border-gray-100 dark:border-white/5 px-4 py-4 space-y-1 shadow-xl"
-          >
-            {navLinks.map((link) => (
-              <button
-                key={link.id}
-                onClick={() => {
-                  setActiveTab(link.id);
-                  setIsMobileMenuOpen(false);
-                }}
-                className={`block w-full text-left text-base font-bold py-3 px-3 rounded-xl transition-colors ${
-                  activeTab === link.id
-                    ? 'text-[#F59E0B] bg-amber-50 dark:bg-[#F59E0B]/10'
-                    : 'text-gray-800 dark:text-white hover:bg-gray-50 dark:hover:bg-white/5'
-                }`}
-              >
-                {link.label}
-              </button>
-            ))}
+          {/* Nav links */}
+          <div className="flex flex-col gap-0.5 px-3 flex-1 pb-2">
+            {navLinks.map((link) => {
+              const Icon = link.icon;
+              const isActive = activeTab === link.id;
+              return (
+                <div
+                  key={link.id}
+                  onClick={() => setActiveTab(link.id)}
+                  className={`flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer transition-all duration-150 ${
+                    isActive
+                      ? 'bg-amber-50 dark:bg-amber-500/10 text-amber-500'
+                      : 'text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-800 dark:hover:text-white'
+                  }`}
+                >
+                  <Icon size={18} className="shrink-0" />
+                  <span className="text-sm font-medium leading-none">{link.name}</span>
+                  {isActive && <div className="ml-auto w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0" />}
+                </div>
+              );
+            })}
+          </div>
 
-            <div className="pt-3 border-t border-gray-100 dark:border-white/5 space-y-1">
-              <div className="px-3 py-2 flex items-center gap-3">
-                <div className="w-8 h-8 bg-[#F59E0B] rounded-full flex items-center justify-center text-xs font-bold text-[#060818]">
-                  {initials}
-                </div>
-                <div>
-                  <p className="text-sm font-black text-[#060818] dark:text-white">{userName}</p>
-                  <p className="text-xs text-gray-400 truncate max-w-[200px]">{userEmail}</p>
-                </div>
+          {/* Profile footer */}
+          <div className="px-3 pb-4 pt-2 border-t border-gray-100 dark:border-white/10">
+            <div
+              onClick={() => setActiveTab('profile')}
+              className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl cursor-pointer transition-all duration-150 ${
+                activeTab === 'profile'
+                  ? 'bg-amber-50 text-amber-500'
+                  : 'text-gray-500 hover:bg-gray-50 hover:text-gray-800'
+              }`}
+            >
+              <div className="w-7 h-7 rounded-full bg-gray-100 dark:bg-white/10 flex items-center justify-center shrink-0">
+                <User size={13} />
               </div>
-
-              <button
-                onClick={() => {
-                  setActiveTab('profile');
-                  setIsMobileMenuOpen(false);
-                }}
-                className="flex items-center gap-3 text-base font-bold text-gray-800 dark:text-white py-3 px-3 w-full rounded-xl hover:bg-gray-50 dark:hover:bg-white/5"
-              >
-                <User size={18} /> My Profile
-              </button>
-
-              <button
-                onClick={handleSignOut}
-                className="flex items-center gap-3 text-base font-bold text-red-500 py-3 px-3 w-full rounded-xl hover:bg-red-50 dark:hover:bg-red-500/10"
-              >
-                <LogOut size={18} /> Sign Out
-              </button>
+              <div className="flex flex-col min-w-0 flex-1 leading-tight">
+                <span className="text-xs font-semibold text-gray-800 dark:text-white truncate">{userName}</span>
+                <span className="text-[10px] text-gray-400 truncate">{userEmail}</span>
+              </div>
             </div>
-          </motion.div>
-        )}
-      </nav>
+          </div>
+        </nav>
 
       <main className="flex-1 overflow-auto max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8 lg:py-12">{children}</main>
     </div>
