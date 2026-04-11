@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { motion } from 'framer-motion';
-import { User, LayoutDashboard, FileText, Zap, Brain, BookMarked, CalendarDays } from 'lucide-react';
+import { User, ChevronDown, LayoutDashboard, FileText, Zap, Brain, BookMarked, CalendarDays } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { gkSupabase } from '@/lib/gk-supabase';
 
@@ -85,7 +85,7 @@ export default function GKLayout({
   ];
 
   return (
-    <div className={`flex gk-portal${theme === 'dark' ? ' dark' : ''} min-h-screen bg-white dark:bg-[#060818] font-sans text-[#060818] dark:text-white transition-colors duration-300 relative`}>
+    <div className={`flex flex-col gk-portal${theme === 'dark' ? ' dark' : ''} min-h-screen bg-white dark:bg-[#060818] font-sans text-[#060818] dark:text-white transition-colors duration-300 relative`}>
       {toast && (
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -95,8 +95,34 @@ export default function GKLayout({
           {toast}
         </motion.div>
       )}
+      {/* clattribe.com header */}
+      <header className="sticky top-0 z-50 bg-[#060818] border-b border-white/10">
+        <div className="mx-auto px-4 py-3 flex items-center justify-between">
+          <a href="https://www.clattribe.com" target="_blank" rel="noopener noreferrer">
+            <img src="https://www.clattribe.com/heading.png" alt="CLAT Tribe" className="h-9 w-auto" />
+          </a>
+          <div className="hidden md:flex items-center gap-5 text-[13px] text-white/75">
+            <a href="https://www.clattribe.com" className="hover:text-white transition-colors">Home</a>
+            <div className="relative group">
+              <button className="flex items-center gap-1 hover:text-white transition-colors bg-transparent border-0 cursor-pointer text-[13px] text-white/75">
+                About Us <ChevronDown className="w-3 h-3" />
+              </button>
+              <div className="absolute top-full left-0 mt-2 w-44 bg-[#0d1235] border border-white/10 rounded-lg shadow-xl py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50">
+                <a href="https://www.clattribe.com/our-team" className="block px-4 py-2 text-white/70 hover:text-white hover:bg-white/5 transition-colors">Our Team</a>
+                <a href="https://www.clattribe.com/our-courses" className="block px-4 py-2 text-white/70 hover:text-white hover:bg-white/5 transition-colors">Our Courses</a>
+              </div>
+            </div>
+            <a href="https://www.clattribe.com" className="hover:text-white transition-colors">DSB Challenge</a>
+            <a href="https://www.clattribe.com/clat-2027-starter-kit" className="hover:text-white transition-colors">CLAT 2027 Starter Kit</a>
+            <button onClick={() => setActiveTab('flashcards')} className="hover:text-white transition-colors bg-transparent border-0 cursor-pointer text-[13px] text-white/75">Flashcards</button>
+            <a href="https://www.clattribe.com/blogs" className="hover:text-white transition-colors">Blogs</a>
+            <a href="https://www.clattribe.com/clat-gk-vault" className="hover:text-white transition-colors">CLAT GK Vault</a>
+          </div>
+        </div>
+      </header>
+      <div className="flex flex-1 overflow-hidden">
 
-      <nav className="bg-white dark:bg-[#060818] border-r border-gray-100 dark:border-white/5 sticky top-0 h-screen flex flex-col w-56 shrink-0 z-50 overflow-y-auto transition-colors">
+      <nav className="bg-white dark:bg-[#060818] border-r border-gray-100 dark:border-white/5 h-full flex flex-col overflow-y-auto w-56 shrink-0 z-50 overflow-y-auto transition-colors">
 
           {/* Brand */}
           <div className="px-4 pt-6 pb-4">
@@ -159,6 +185,7 @@ export default function GKLayout({
         </nav>
 
       <main className="flex-1 overflow-auto max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8 lg:py-12">{children}</main>
+      </div>
     </div>
   );
 }
