@@ -79,6 +79,7 @@ function transformRow(row: any): EditorialCard {
 export default function Editorial() {
   const [selectedDate, setSelectedDate] = React.useState(String(new Date().getDate()));
   const [selectedEditorial, setSelectedEditorial] = React.useState<EditorialCard | null>(null);
+  const [quizItemId, setQuizItemId] = React.useState<string | null>(null);
   const [allEditorials, setAllEditorials] = React.useState<EditorialCard[]>([]);
   const [availableDays, setAvailableDays] = React.useState<Set<string>>(new Set());
 
@@ -124,7 +125,7 @@ export default function Editorial() {
     });
   }, [selectedDate]);
   if (selectedEditorial) {
-    return <DetailedEditorial item={selectedEditorial} onBack={() => setSelectedEditorial(null)} />;
+    return <DetailedEditorial item={selectedEditorial} onBack={() => { setSelectedEditorial(null); setQuizItemId(null); }} initialShowQuiz={quizItemId === selectedEditorial.id} />;
   }
 
   return (
@@ -211,7 +212,7 @@ export default function Editorial() {
 
           <div className="space-y-6">
             {filteredEditorials.filter(e => e.source === 'The Hindu').map((item) => (
-              <EditorialItem key={item.id} item={item} onOpen={() => setSelectedEditorial(item)} />
+              <EditorialItem key={item.id} item={item} onOpen={() => setSelectedEditorial(item)} onQuiz={() => { setQuizItemId(item.id); setSelectedEditorial(item); }} />
             ))}
             {filteredEditorials.filter(e => e.source === 'The Hindu').length === 0 && (
               <p className="text-gray-500 font-medium py-8 text-center">No editorials found for this date.</p>
@@ -233,7 +234,7 @@ export default function Editorial() {
 
           <div className="space-y-6">
             {filteredEditorials.filter(e => e.source === 'The Indian Express').map((item) => (
-              <EditorialItem key={item.id} item={item} onOpen={() => setSelectedEditorial(item)} />
+              <EditorialItem key={item.id} item={item} onOpen={() => setSelectedEditorial(item)} onQuiz={() => { setQuizItemId(item.id); setSelectedEditorial(item); }} />
             ))}
             {filteredEditorials.filter(e => e.source === 'The Indian Express').length === 0 && (
               <p className="text-gray-500 font-medium py-8 text-center">No editorials found for this date.</p>
@@ -245,7 +246,7 @@ export default function Editorial() {
   );
 }
 
-const EditorialItem: React.FC<{ item: EditorialCard; onOpen: () => void }> = ({ item, onOpen }) => {
+const EditorialItem: React.FC<{ item: EditorialCard; onOpen: () => void; onQuiz: () => void }> = ({ item, onOpen, onQuiz }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -282,8 +283,9 @@ const EditorialItem: React.FC<{ item: EditorialCard; onOpen: () => void }> = ({ 
           <BookOpen size={16} /> Read
         </button>
         <button
-          onClick={(e) => e.stopPropagation()}
+          onClick={(e) => { e.stopPropagation(); onQuiz(); }}
           className="p-3 rounded-2xl bg-gray-50 dark:bg-white/5 text-[#060818] dark:text-white hover:bg-[#F59E0B] hover:text-[#060818] transition-all"
+          title="Take Quiz"
         >
           <FileText size={20} />
         </button>
@@ -292,8 +294,8 @@ const EditorialItem: React.FC<{ item: EditorialCard; onOpen: () => void }> = ({ 
   );
 }
 
-function DetailedEditorial({ item, onBack }: { item: EditorialCard; onBack: () => void }) {
-  const [showQuiz, setShowQuiz] = React.useState(false);
+function DetailedEditorial({ item, onBack, initialShowQuiz = false }: { item: EditorialCard; onBack: () => void; initialShowQuiz?: boolean }) {
+  const [showQuiz, setShowQuiz] = React.useState(initialShowQuiz);
   const [currentQuestion, setCurrentQuestion] = React.useState(0);
   const [selectedOption, setSelectedOption] = React.useState<number | null>(null);
   const [showExplanation, setShowExplanation] = React.useState(false);
