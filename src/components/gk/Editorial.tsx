@@ -67,9 +67,9 @@ function transformRow(row: any): EditorialCard {
   const content = row.content ?? '';
   return {
     id: row.id,
-    source: row.source as 'The Hindu' | 'The Indian Express',
+    source: (row.source === 'Indian Express' ? 'The Indian Express' : row.source) as 'The Hindu' | 'The Indian Express',
     title: row.title,
-    date: isoToDisplayDate(row.date),
+    date: row.date && row.date !== '1970-01-01' ? isoToDisplayDate(row.date) : isoToDisplayDate(new Date().toISOString().split('T')[0]),
     readTime: estimateReadTime(content),
     summary: content.replace(/\n/g, ' ').substring(0, 200).trim(),
     content,
