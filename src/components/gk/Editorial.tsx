@@ -85,17 +85,13 @@ export default function Editorial() {
 
   React.useEffect(() => {
     const now = new Date();
-    const y = now.getFullYear();
-    const m = String(now.getMonth() + 1).padStart(2, '0');
-    const prev = new Date(now.getFullYear(), now.getMonth() - 1, 1);
-    const py = prev.getFullYear();
-    const pm = String(prev.getMonth() + 1).padStart(2, '0');
-    fetch(
-      `${SUPABASE_URL}/rest/v1/gk_editorials?date=gte.${py}-${pm}-01&date=lte.${y}-${m}-31&order=date.desc,source.asc&select=*`,
+    // Fetch recent editorials (last 60 entries covers 1 month of daily data)
+    fetch(`${SUPABASE_URL}/rest/v1/gk_editorials?order=date.desc&limit=60&select=*`,
       { headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` } }
     )
       .then(r => r.json())
       .then((rows: any[]) => {
+        if (!Array.isArray(rows)) { console.error('Supabase error', rows); return; }
         setAllEditorials(rows.map(transformRow));
         const days = new Set<string>(rows.map((r: any) => String(parseInt(r.date.split('-')[2]))));
         setAvailableDays(days);
@@ -105,9 +101,8 @@ export default function Editorial() {
           setSelectedDate(String(sorted[0]));
         }
       })
-      .catch(console.error);
+      .catch(e => console.error('Editorial fetch failed:', e));
   }, []);
-
   const filteredEditorials = React.useMemo(() => {
     return allEditorials.filter(e => e.date.includes(`${selectedDate}, ${new Date().getFullYear()}`));
   }, [allEditorials, selectedDate]);
