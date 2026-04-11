@@ -6,7 +6,6 @@ import {
   Lock,
   ChevronRight,
   BookOpen,
-  Headphones,
   FileText,
   Clock,
   ArrowRight,
@@ -286,12 +285,6 @@ const EditorialItem: React.FC<{ item: EditorialCard; onOpen: () => void }> = ({ 
           onClick={(e) => e.stopPropagation()}
           className="p-3 rounded-2xl bg-gray-50 dark:bg-white/5 text-[#060818] dark:text-white hover:bg-[#F59E0B] hover:text-[#060818] transition-all"
         >
-          <Headphones size={20} />
-        </button>
-        <button
-          onClick={(e) => e.stopPropagation()}
-          className="p-3 rounded-2xl bg-gray-50 dark:bg-white/5 text-[#060818] dark:text-white hover:bg-[#F59E0B] hover:text-[#060818] transition-all"
-        >
           <FileText size={20} />
         </button>
       </div>
@@ -369,10 +362,7 @@ function DetailedEditorial({ item, onBack }: { item: EditorialCard; onBack: () =
 
         <div className="pt-8 border-t border-gray-100 dark:border-white/5 flex justify-between items-center">
           <div className="flex items-center gap-4">
-    0       <button className="flex items-center gap-2 text-[#060818] dark:text-white font-bold hover:text-[#F59E0B] transition-colors">
-              <Headphones size={20} /> Listen to Audio
-            </button>
-            <button className="flex items-center gap-2 text-[#060818] dark:text-white font-bold hover:text-[#F59E0B] transition-colors">
+    0                   <button className="flex items-center gap-2 text-[#060818] dark:text-white font-bold hover:text-[#F59E0B] transition-colors">
               <FileText size={20} /> Download PDF
             </button>
           </div>
