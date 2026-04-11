@@ -96,7 +96,7 @@ export default function GKLayout({
         </motion.div>
       )}
       {/* clattribe.com header */}
-      <header className="sticky top-0 z-50 bg-[#060818] border-b border-white/10">
+      <header className="sticky top-0 z-[60] bg-[#060818] border-b border-white/10">
         <div className="mx-auto px-4 py-3 flex items-center justify-between">
           <a href="https://www.clattribe.com" target="_blank" rel="noopener noreferrer">
             <img src="https://www.clattribe.com/heading.png" alt="CLAT Tribe" className="h-9 w-auto" />
@@ -122,11 +122,11 @@ export default function GKLayout({
       </header>
       <div className="flex flex-1 overflow-hidden">
 
-      <nav className="bg-white dark:bg-[#060818] border-r border-gray-100 dark:border-white/5 h-full flex flex-col overflow-y-auto w-56 shrink-0 z-50 overflow-y-auto transition-colors">
+      <nav className="bg-white dark:bg-[#060818] border-r border-gray-100 dark:border-white/5 h-full flex flex-col overflow-y-auto w-56 shrink-0 transition-colors">
 
           {/* Brand */}
           {/* Nav links */}
-          <div className="flex flex-col gap-0.5 px-3 flex-1 pb-2">
+          <div className="flex flex-col gap-0.5 px-3 flex-1 pt-5 pb-4">
             {navLinks.map((link) => {
               const Icon = link.icon;
               const isActive = activeTab === link.id;
