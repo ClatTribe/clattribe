@@ -125,21 +125,6 @@ export default function GKLayout({
       <nav className="bg-white dark:bg-[#060818] border-r border-gray-100 dark:border-white/5 h-full flex flex-col overflow-y-auto w-56 shrink-0 z-50 overflow-y-auto transition-colors">
 
           {/* Brand */}
-          <div className="px-4 pt-6 pb-4">
-            <div
-              className="flex items-center gap-2.5 cursor-pointer select-none"
-              onClick={() => setActiveTab('dashboard')}
-            >
-              <div className="w-9 h-9 bg-[#F59E0B] rounded-xl flex items-center justify-center shadow-sm shrink-0">
-                <span className="text-[#060818] font-black text-xs tracking-tight">CT</span>
-              </div>
-              <div className="flex flex-col leading-tight">
-                <span className="font-bold text-[#060818] dark:text-white text-sm">CLAT Tribe</span>
-                <span className="text-[10px] text-gray-400">GK Portal</span>
-              </div>
-            </div>
-          </div>
-
           {/* Nav links */}
           <div className="flex flex-col gap-0.5 px-3 flex-1 pb-2">
             {navLinks.map((link) => {
