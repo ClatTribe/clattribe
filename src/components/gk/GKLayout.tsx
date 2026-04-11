@@ -109,7 +109,7 @@ export default function GKLayout({
               <span className="text-lg sm:text-xl font-black tracking-tighter text-[#060818] dark:text-white">CLAT TRIBE</span>
             </div>
 
-            <div className="hidden lg:flex items-center space-x-8">
+            <div className="flex flex-col gap-1 w-full">
               {navLinks.map((link) => (
                 <button
                   key={link.id}
