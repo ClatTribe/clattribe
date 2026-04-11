@@ -85,7 +85,7 @@ export default function GKLayout({
   ];
 
   return (
-    <div className={`gk-portal${theme === 'dark' ? ' dark' : ''} min-h-screen bg-white dark:bg-[#060818] font-sans text-[#060818] dark:text-white transition-colors duration-300 relative`}>
+    <div className={`flex gk-portal${theme === 'dark' ? ' dark' : ''} min-h-screen bg-white dark:bg-[#060818] font-sans text-[#060818] dark:text-white transition-colors duration-300 relative`}>
       {toast && (
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -96,11 +96,11 @@ export default function GKLayout({
         </motion.div>
       )}
 
-      <nav className="bg-white dark:bg-[#060818] border-b border-gray-100 dark:border-white/5 sticky top-0 z-50 transition-colors">
+      <nav className="bg-white dark:bg-[#060818] border-r border-gray-100 dark:border-white/5 sticky top-0 h-screen flex flex-col w-52 shrink-0 z-50 overflow-y-auto transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16 sm:h-20">
+          <div className="flex flex-col h-full py-6">
             <div
-              className="flex items-center gap-2 sm:gap-3 cursor-pointer"
+              className="flex flex-col gap-1 cursor-pointer w-full"
               onClick={() => setActiveTab('dashboard')}
             >
               <div className="w-9 h-9 sm:w-10 sm:h-10 bg-[#060818] dark:bg-[#F59E0B] rounded-xl flex items-center justify-center font-bold text-lg sm:text-xl text-[#F59E0B] dark:text-[#060818]">
@@ -244,7 +244,7 @@ export default function GKLayout({
         )}
       </nav>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8 lg:py-12">{children}</main>
+      <main className="flex-1 overflow-auto max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8 lg:py-12">{children}</main>
     </div>
   );
 }
