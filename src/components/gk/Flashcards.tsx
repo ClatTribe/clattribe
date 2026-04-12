@@ -178,7 +178,7 @@ export default function Flashcards() {
   }) => (
     <motion.div className={`relative ${height} cursor-pointer select-none drop-shadow-2xl`} onClick={onFlip} style={{ perspective: 1200 }}>
       <motion.div
-        className="absolute inset-0 rounded-2xl bg-gradient-to-br from-zinc-700/60 via-zinc-800 to-zinc-900 border border-zinc-600/50 flex flex-col items-center justify-center p-6 gap-3 shadow-2xl"
+        className="absolute inset-0 rounded-2xl bg-zinc-800 border border-zinc-600 shadow-[0_12px_48px_rgba(0,0,0,0.6)] ring-1 ring-white/[0.06] flex flex-col items-center justify-center p-6 gap-3"
         animate={{ rotateY: flippedState ? 180 : 0 }}
         transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
         style={{ backfaceVisibility: 'hidden' }}
