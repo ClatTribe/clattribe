@@ -355,10 +355,10 @@ export default function Flashcards() {
             <div key={i} className={`h-1 flex-1 rounded-full transition-all ${i < dIdx ? 'bg-green-500' : i === dIdx ? 'bg-red-500' : 'bg-zinc-800'}`} />
           ))}
         </div>
-        <FlipCard question={dc.question} answer={dc.answer} category={dc.category} flippedState={dFlipped} onFlip={() => setDFlipped(f => !f)} height="h-56" />
+        <FlipCard question={dc.question} answer={dc.answer} category={dc.category} flippedState={dFlipped} onFlip={() => setDFlipped(f => !f)} height="h-60 max-w-[300px] sm:max-w-xs mx-auto" />
         <AnimatePresence>
           {dFlipped && (
-            <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="grid grid-cols-4 gap-1.5">
+            <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="grid grid-cols-4 gap-1.5 max-w-[300px] sm:max-w-xs mx-auto w-full">
               {[
                 { label: 'Again',   q: 1, color: 'text-red-400',   hover: 'hover:bg-red-950/40 hover:border-red-900' },
                 { label: 'Hard',    q: 3, color: 'text-amber-400', hover: 'hover:bg-amber-950/40 hover:border-amber-900' },
@@ -455,10 +455,10 @@ export default function Flashcards() {
           <span className="text-green-400">✓ {sCorrect}</span>
           <span className="text-red-400">✗ {sTotal - sCorrect}</span>
         </div>
-        <FlipCard question={sc.question} answer={sc.answer} category={sc.category} flippedState={sFlipped} onFlip={() => setSFlipped(f => !f)} height="h-56" />
+        <FlipCard question={sc.question} answer={sc.answer} category={sc.category} flippedState={sFlipped} onFlip={() => setSFlipped(f => !f)} height="h-60 max-w-[300px] sm:max-w-xs mx-auto" />
         <AnimatePresence>
           {sFlipped && (
-            <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="grid grid-cols-2 gap-2">
+            <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="grid grid-cols-2 gap-2 max-w-[300px] sm:max-w-xs mx-auto w-full">
               <button onClick={() => {
                 setSTotal(t => t + 1); setSFlipped(false);
                 const ni = sIdx + 1 < sCards.length ? sIdx + 1 : 0;
@@ -610,13 +610,13 @@ export default function Flashcards() {
           ))}
         </div>
       )}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 mx-auto w-full max-w-[300px] sm:max-w-[320px]">
         <div className="flex-1 h-1.5 bg-zinc-800 rounded-full overflow-hidden">
           <div className="h-full bg-gradient-to-r from-red-600 to-amber-500 rounded-full transition-all duration-300" style={{ width: `${progress * 100}%` }} />
         </div>
         <span className="text-zinc-600 text-xs shrink-0">{swipeIdx}/{swipeCards.length}</span>
       </div>
-      <div className="relative h-72 w-full">
+      <div className="relative mx-auto w-full max-w-[300px] sm:max-w-[320px] h-[400px] sm:h-[440px]">
         {swipeIdx + 2 < swipeCards.length && (
           <div className="absolute inset-0 rounded-3xl bg-zinc-800/70 border border-zinc-700/40"
             style={{ transform: 'scale(0.86) translateY(22px)', zIndex: 1, transformOrigin: 'bottom center' }} />
@@ -634,7 +634,7 @@ export default function Flashcards() {
           isDraggable={true}
         />
       </div>
-      <div className="flex items-center justify-between px-1 pt-1">
+      <div className="flex items-center justify-between px-1 pt-1 mx-auto w-full max-w-[300px] sm:max-w-[320px]">
         <button onClick={() => handleSwipe('left')}
           className="flex flex-col items-center gap-1 px-5 py-3 rounded-2xl bg-zinc-900 border border-zinc-700/80 text-red-400 hover:bg-red-950/30 hover:border-red-800/60 transition-all active:scale-95 text-xs font-semibold">
           <ArrowLeft size={18} />
