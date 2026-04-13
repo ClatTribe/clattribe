@@ -57,7 +57,7 @@ interface SwipeCardProps {
 }
 function SwipeCard({ card, onSwipe, onFlip, isFlipped, isDraggable }: SwipeCardProps) {
   const x            = useMotionValue(0);
-  const rotate       = useTransform(x, [-260, 260], [-16, 16]);
+  const rotate       = useTransform(x, [-260, 260], [-14, 14]);
   const gotItOpacity = useTransform(x, [20, 110], [0, 1]);
   const revOpacity   = useTransform(x, [-20, -110], [0, 1]);
   const isDragging   = React.useRef(false);
@@ -76,54 +76,54 @@ function SwipeCard({ card, onSwipe, onFlip, isFlipped, isDraggable }: SwipeCardP
       }}
       onClick={() => { if (!isDragging.current) onFlip(); }}
     >
-      <div className="w-full h-full rounded-3xl bg-white shadow-[0_12px_40px_rgba(0,0,0,0.18)] relative overflow-hidden">
+      <div style={{ width: '100%', height: '100%', borderRadius: '24px', backgroundColor: '#ffffff', boxShadow: '0 12px 40px rgba(0,0,0,0.18)', position: 'relative', overflow: 'hidden' }}>
+
         {isDraggable && (
-          <motion.div style={{ opacity: gotItOpacity, rotate: -22 }}
-            className="absolute top-7 left-5 z-20 border-[3px] border-green-500 bg-green-500/10 text-green-600 rounded-xl px-3 py-1 font-black text-lg uppercase tracking-widest pointer-events-none">
-            GOT IT ✓
+          <motion.div style={{ opacity: gotItOpacity, rotate: -22, position: 'absolute', top: 28, left: 20, zIndex: 20, border: '3px solid #16a34a', backgroundColor: 'rgba(22,163,74,0.12)', borderRadius: 12, padding: '4px 12px', pointerEvents: 'none' }}>
+            <span style={{ color: '#15803d', fontWeight: 900, fontSize: 16, textTransform: 'uppercase', letterSpacing: '0.1em' }}>GOT IT ✓</span>
           </motion.div>
         )}
         {isDraggable && (
-          <motion.div style={{ opacity: revOpacity, rotate: 22 }}
-            className="absolute top-7 right-5 z-20 border-[3px] border-red-500 bg-red-500/10 text-red-600 rounded-xl px-3 py-1 font-black text-lg uppercase tracking-widest pointer-events-none">
-            REVIEW ✗
+          <motion.div style={{ opacity: revOpacity, rotate: 22, position: 'absolute', top: 28, right: 20, zIndex: 20, border: '3px solid #dc2626', backgroundColor: 'rgba(220,38,38,0.12)', borderRadius: 12, padding: '4px 12px', pointerEvents: 'none' }}>
+            <span style={{ color: '#b91c1c', fontWeight: 900, fontSize: 16, textTransform: 'uppercase', letterSpacing: '0.1em' }}>REVIEW ✗</span>
           </motion.div>
         )}
+
         <AnimatePresence mode="wait" initial={false}>
           {!isFlipped ? (
-            <motion.div key="front" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }}
-              className="absolute inset-0 rounded-3xl overflow-hidden bg-white">
-              <div className="absolute top-5 left-6">
-                <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">{card.category}</span>
+            <motion.div key="front" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.12 }}
+              style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', backgroundColor: '#ffffff' }}>
+              <div style={{ padding: '20px 24px 8px' }}>
+                <span style={{ color: '#94a3b8', fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.15em' }}>{card.category}</span>
               </div>
-              <div className="absolute inset-0 flex items-center justify-center px-8" style={{ paddingTop: '3.5rem', paddingBottom: '3.5rem' }}>
-                <p className="text-slate-900 text-xl font-bold text-center leading-snug">{card.question}</p>
+              <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px 28px' }}>
+                <p style={{ color: '#0f172a', fontSize: '1.2rem', fontWeight: 700, textAlign: 'center', lineHeight: 1.5, margin: 0 }}>{card.question}</p>
               </div>
-              <div className="absolute bottom-5 left-0 right-0 flex justify-center items-center gap-1.5">
-                <span className="text-slate-400 text-xs">&#8635; Tap to flip</span>
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 6, paddingBottom: 20 }}>
+                <span style={{ color: '#94a3b8', fontSize: 11 }}>&#8635; Tap to flip</span>
               </div>
-              <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-gradient-to-r from-amber-400 to-yellow-400" />
+              <div style={{ height: 4, background: 'linear-gradient(to right, #fbbf24, #facc15)', flexShrink: 0 }} />
             </motion.div>
           ) : (
-            <motion.div key="back" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }}
-              className="absolute inset-0 rounded-3xl overflow-hidden bg-[#0f172a]">
-              <div className="absolute top-5 left-6">
-                <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-blue-400">Answer</span>
+            <motion.div key="back" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.12 }}
+              style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', backgroundColor: '#0f172a' }}>
+              <div style={{ padding: '20px 24px 8px' }}>
+                <span style={{ color: '#60a5fa', fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.15em' }}>Answer</span>
               </div>
-              <div className="absolute inset-0 flex flex-col items-center justify-center px-8 gap-5" style={{ paddingTop: '3.5rem', paddingBottom: '4.5rem' }}>
-                <p className="text-white text-xl font-bold text-center leading-snug">{card.answer}</p>
-                <div className="flex gap-3">
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '8px 28px', gap: 24 }}>
+                <p style={{ color: '#ffffff', fontSize: '1.2rem', fontWeight: 700, textAlign: 'center', lineHeight: 1.5, margin: 0 }}>{card.answer}</p>
+                <div style={{ display: 'flex', gap: 12 }}>
                   <button onClick={(e) => { e.stopPropagation(); onSwipe('right'); }}
-                    className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-green-700 hover:bg-green-600 text-white font-semibold text-sm active:scale-95 transition-all shadow-md">
+                    style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '10px 20px', borderRadius: 9999, backgroundColor: '#15803d', color: '#fff', fontWeight: 600, fontSize: 14, border: 'none', cursor: 'pointer' }}>
                     <CheckCircle size={15} /> Knew it
                   </button>
                   <button onClick={(e) => { e.stopPropagation(); onSwipe('left'); }}
-                    className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-red-700 hover:bg-red-600 text-white font-semibold text-sm active:scale-95 transition-all shadow-md">
+                    style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '10px 20px', borderRadius: 9999, backgroundColor: '#b91c1c', color: '#fff', fontWeight: 600, fontSize: 14, border: 'none', cursor: 'pointer' }}>
                     <XCircle size={15} /> Forgot
                   </button>
                 </div>
               </div>
-              <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-gradient-to-r from-blue-500 to-indigo-500" />
+              <div style={{ height: 4, background: 'linear-gradient(to right, #3b82f6, #6366f1)', flexShrink: 0 }} />
             </motion.div>
           )}
         </AnimatePresence>
@@ -131,6 +131,7 @@ function SwipeCard({ card, onSwipe, onFlip, isFlipped, isDraggable }: SwipeCardP
     </motion.div>
   );
 }
+
 
 // ── Main Component ─────────────────────────────────────────────────────────
 export default function Flashcards() {
@@ -257,7 +258,7 @@ export default function Flashcards() {
   }
 
   // ── FlipCard ──────────────────────────────────────────────────────────────
-  function FlipCard({ question, answer, category, flippedState, onFlip, height = 'h-56' }: {
+  function FlipCard({ question, answer, category, flippedState, onFlip, height = 'h-60 max-w-[300px] sm:max-w-xs mx-auto' }: {
     question: string; answer: string; category: string;
     flippedState: boolean; onFlip: () => void; height?: string;
   }) {
@@ -268,33 +269,32 @@ export default function Flashcards() {
           animate={{ rotateY: flippedState ? 180 : 0 }}
           transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
           style={{ transformStyle: 'preserve-3d' }}>
-          <div className="absolute inset-0 rounded-2xl bg-white shadow-[0_8px_30px_rgba(0,0,0,0.12)] overflow-hidden"
-            style={{ backfaceVisibility: 'hidden' }}>
-            <div className="absolute top-4 left-5">
-              <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">{category}</span>
+          <div style={{ position: 'absolute', inset: 0, borderRadius: 16, overflow: 'hidden', backfaceVisibility: 'hidden', backgroundColor: '#ffffff', boxShadow: '0 8px 30px rgba(0,0,0,0.12)', display: 'flex', flexDirection: 'column' }}>
+            <div style={{ padding: '16px 20px 6px' }}>
+              <span style={{ color: '#94a3b8', fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.15em' }}>{category}</span>
             </div>
-            <div className="absolute inset-0 flex items-center justify-center px-6" style={{ paddingTop: '3rem', paddingBottom: '3rem' }}>
-              <p className="text-slate-900 text-lg font-bold text-center leading-snug">{question}</p>
+            <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '6px 24px' }}>
+              <p style={{ color: '#0f172a', fontSize: '1.1rem', fontWeight: 700, textAlign: 'center', lineHeight: 1.5, margin: 0 }}>{question}</p>
             </div>
-            <div className="absolute bottom-4 left-0 right-0 flex justify-center">
-              <span className="text-slate-400 text-xs">&#8635; Tap to flip</span>
+            <div style={{ display: 'flex', justifyContent: 'center', paddingBottom: 16 }}>
+              <span style={{ color: '#94a3b8', fontSize: 11 }}>&#8635; Tap to flip</span>
             </div>
-            <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-gradient-to-r from-amber-400 to-yellow-400" />
+            <div style={{ height: 4, background: 'linear-gradient(to right, #fbbf24, #facc15)', flexShrink: 0 }} />
           </div>
-          <div className="absolute inset-0 rounded-2xl bg-[#0f172a] shadow-[0_8px_30px_rgba(0,0,0,0.35)] overflow-hidden"
-            style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}>
-            <div className="absolute top-4 left-5">
-              <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-blue-400">Answer</span>
+          <div style={{ position: 'absolute', inset: 0, borderRadius: 16, overflow: 'hidden', backfaceVisibility: 'hidden', transform: 'rotateY(180deg)', backgroundColor: '#0f172a', boxShadow: '0 8px 30px rgba(0,0,0,0.35)', display: 'flex', flexDirection: 'column' }}>
+            <div style={{ padding: '16px 20px 6px' }}>
+              <span style={{ color: '#60a5fa', fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.15em' }}>Answer</span>
             </div>
-            <div className="absolute inset-0 flex items-center justify-center px-6" style={{ paddingTop: '3rem', paddingBottom: '3rem' }}>
-              <p className="text-white text-xl font-bold text-center leading-snug">{answer}</p>
+            <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '6px 24px' }}>
+              <p style={{ color: '#ffffff', fontSize: '1.1rem', fontWeight: 700, textAlign: 'center', lineHeight: 1.5, margin: 0 }}>{answer}</p>
             </div>
-            <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-gradient-to-r from-blue-500 to-indigo-500" />
+            <div style={{ height: 4, background: 'linear-gradient(to right, #3b82f6, #6366f1)', flexShrink: 0 }} />
           </div>
         </motion.div>
       </div>
     );
   }
+
 
   if (loading) return (
     <div className="flex flex-col gap-4">
@@ -642,11 +642,11 @@ export default function Flashcards() {
       </div>
       <div className="relative mx-auto w-full max-w-[300px] sm:max-w-[320px] h-[400px] sm:h-[440px]">
         {swipeIdx + 2 < swipeCards.length && (
-          <div className="absolute inset-0 rounded-3xl bg-white/70 shadow"
+          <div className="absolute inset-0 rounded-3xl" style={{ backgroundColor: '#f1f5f9', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}
             style={{ transform: 'scale(0.86) translateY(22px)', zIndex: 1, transformOrigin: 'bottom center' }} />
         )}
         {swipeIdx + 1 < swipeCards.length && (
-          <div className="absolute inset-0 rounded-3xl bg-white/85 shadow-md"
+          <div className="absolute inset-0 rounded-3xl" style={{ backgroundColor: '#f8fafc', boxShadow: '0 4px 16px rgba(0,0,0,0.12)' }}
             style={{ transform: 'scale(0.93) translateY(11px)', zIndex: 2, transformOrigin: 'bottom center' }} />
         )}
         <SwipeCard
