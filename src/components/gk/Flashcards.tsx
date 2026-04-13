@@ -1,71 +1,85 @@
 'use client';
-import React from 'react';
-import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
-import { Brain, Zap, Trophy, Flame, Clock, CheckCircle, XCircle, ArrowLeft, ArrowRight } from 'lucide-react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { motion, useMotionValue, useTransform, AnimatePresence } from 'framer-motion';
+import { Brain, Zap, Trophy, Flame, Clock, CheckCircle, XCircle, ArrowLeft, ArrowRight, BookOpen, Star, Target, RefreshCw, ChevronRight, Award, TrendingUp, BarChart2 } from 'lucide-react';
 
+// ── Supabase ──────────────────────────────────────────────────────────────────
 const SUPABASE_URL = 'https://fjswchcothephgtzqbgq.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZqc3djaGNvdGhlcGhndHpxYmdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU3NTk2ODQsImV4cCI6MjA3MTMzNTY4NH0.AqKfl8rwkH4_Y0sVdcQLWu6HF1nrxhro-jMyEdUggV4';
 
-interface Flashcard { id: string; question: string; answer: string; category: string; }
-interface SM2State { repetitions: number; interval: number; easeFactor: number; nextReviewDate: string; }
-interface CardState extends SM2State { id: string; }
-
-function calculateSM2(state: SM2State, quality: number): SM2State {
-  let { repetitions, interval, easeFactor } = state;
-  if (quality >= 3) {
-    if (repetitions === 0) interval = 1;
-    else if (repetitions === 1) interval = 6;
-    else interval = Math.round(interval * easeFactor);
-    repetitions += 1;
-  } else { repetitions = 0; interval = 1; }
-  easeFactor = Math.max(1.3, easeFactor + 0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02));
-  const d = new Date(); d.setDate(d.getDate() + interval);
-  return { repetitions, interval, easeFactor, nextReviewDate: d.toISOString().split('T')[0] };
+// ── Types ─────────────────────────────────────────────────────────────────────
+interface FlashCard {
+  id: number;
+  question: string;
+  answer: string;
+  category: string;
+  difficulty?: number;
 }
 
-const LS_MASTERED = 'ct_mastered_v2';
-const LS_STREAK   = 'ct_streak';
-const LS_LAST_DAY = 'ct_last_daily';
-const LS_SPEED_PB = 'ct_speed_best';
+type Mode = 'home' | 'daily' | 'speed' | 'browse' | 'mastery';
 
-const getMastered  = (): Set<string> => { try { return new Set(JSON.parse(localStorage.getItem(LS_MASTERED) || '[]')); } catch { return new Set(); } };
-const saveMastered = (s: Set<string>) => localStorage.setItem(LS_MASTERED, JSON.stringify([...s]));
-const getStreak    = (): number => parseInt(localStorage.getItem(LS_STREAK) || '0');
-const getSpeedPB   = (): number => parseInt(localStorage.getItem(LS_SPEED_PB) || '0');
-const todayStr     = (): string => new Date().toISOString().split('T')[0];
-const isDailyDone  = (): boolean => localStorage.getItem(LS_LAST_DAY) === todayStr();
+// ── SM2 Spaced Repetition ─────────────────────────────────────────────────────
+interface SM2Card { id: number; ef: number; interval: number; due: string; }
+function getSM2Cards(): SM2Card[] {
+  try { return JSON.parse(localStorage.getItem('ct_sm2') || '[]'); } catch { return []; }
+}
+function saveSM2Cards(cards: SM2Card[]) {
+  localStorage.setItem('ct_sm2', JSON.stringify(cards));
+}
+function calculateSM2(card: SM2Card, quality: number): SM2Card {
+  const ef = Math.max(1.3, card.ef + 0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02));
+  const interval = quality < 3 ? 1 : card.interval <= 1 ? 1 : card.interval <= 6 ? 6 : Math.round(card.interval * ef);
+  const due = new Date(Date.now() + interval * 86400000).toISOString().split('T')[0];
+  return { ...card, ef, interval, due };
+}
 
+// ── Helpers ───────────────────────────────────────────────────────────────────
 function seededRng(seed: number) {
   let s = seed;
-  return () => { s = (s * 1664525 + 1013904223) & 0xffffffff; return (s >>> 0) / 0xffffffff; };
-}
-function getDailyCards(cards: Flashcard[]): Flashcard[] {
-  if (!cards.length) return [];
-  const rng = seededRng(parseInt(todayStr().replace(/-/g, '')));
-  return [...cards].sort(() => rng() - 0.5).slice(0, Math.min(10, cards.length));
+  return () => { s = (s * 16807 + 0) % 2147483647; return (s - 1) / 2147483646; };
 }
 
-type Mode = 'browse' | 'daily' | 'speed' | 'mastery';
+function getDailyCards(all: FlashCard[]): FlashCard[] {
+  if (!all.length) return [];
+  const today = new Date().toISOString().split('T')[0];
+  const seed = parseInt(today.replace(/-/g, ''));
+  const rng = seededRng(seed);
+  const sm2 = getSM2Cards();
+  const todayDue = sm2.filter(c => c.due <= today).map(c => c.id);
+  const dueCards = all.filter(c => todayDue.includes(c.id));
+  const rest = all.filter(c => !todayDue.includes(c.id)).sort(() => rng() - 0.5);
+  return [...dueCards, ...rest].slice(0, 15);
+}
 
-// ── SwipeCard (standalone) ─────────────────────────────────────────────────
+// ── Motivational quotes for CLAT aspirants ────────────────────────────────────
+const QUOTES = [
+  '"Every expert was once a beginner. Every CLAT topper started with one card."',
+  '"Your daily dose of GK is your edge over the competition."',
+  '"The CLAT exam tests 100 questions. You are preparing one card at a time."',
+  '"Consistency beats intelligence. Show up daily."',
+  '"NLU dreams are built one fact at a time. Keep going."',
+];
+
+// ── SwipeCard (Browse/Tinder mode) ────────────────────────────────────────────
 interface SwipeCardProps {
-  card: Flashcard;
+  card: FlashCard;
   onSwipe: (dir: 'left' | 'right') => void;
   onFlip: () => void;
   isFlipped: boolean;
   isDraggable: boolean;
 }
+
 function SwipeCard({ card, onSwipe, onFlip, isFlipped, isDraggable }: SwipeCardProps) {
-  const x            = useMotionValue(0);
-  const rotate       = useTransform(x, [-260, 260], [-14, 14]);
-  const gotItOpacity = useTransform(x, [20, 110], [0, 1]);
-  const revOpacity   = useTransform(x, [-20, -110], [0, 1]);
-  const isDragging   = React.useRef(false);
+  const x = useMotionValue(0);
+  const rotate = useTransform(x, [-260, 260], [-14, 14]);
+  const gotItOp = useTransform(x, [20, 110], [0, 1]);
+  const revOp = useTransform(x, [-20, -110], [0, 1]);
+  const isDragging = useRef(false);
 
   return (
     <motion.div
       className="absolute inset-0 cursor-grab active:cursor-grabbing select-none"
-      style={{ x: isDraggable ? x : undefined, rotate: isDraggable ? rotate : undefined }}
+      style={{ x: isDraggable ? x : undefined, rotate: isDraggable ? rotate : undefined, zIndex: 10 }}
       drag={isDraggable ? 'x' : false}
       dragConstraints={{ left: 0, right: 0 }}
       dragElastic={0.6}
@@ -76,54 +90,61 @@ function SwipeCard({ card, onSwipe, onFlip, isFlipped, isDraggable }: SwipeCardP
       }}
       onClick={() => { if (!isDragging.current) onFlip(); }}
     >
-      <div style={{ width: '100%', height: '100%', borderRadius: '24px', backgroundColor: '#ffffff', boxShadow: '0 12px 40px rgba(0,0,0,0.18)', position: 'relative', overflow: 'hidden' }}>
+      <div className="absolute inset-0 rounded-3xl overflow-hidden"
+        style={{ backgroundColor: '#ffffff', boxShadow: '0 16px 48px rgba(0,0,0,0.22)' }}>
 
-        {isDraggable && (
-          <motion.div style={{ opacity: gotItOpacity, rotate: -22, position: 'absolute', top: 28, left: 20, zIndex: 20, border: '3px solid #16a34a', backgroundColor: 'rgba(22,163,74,0.12)', borderRadius: 12, padding: '4px 12px', pointerEvents: 'none' }}>
-            <span style={{ color: '#15803d', fontWeight: 900, fontSize: 16, textTransform: 'uppercase', letterSpacing: '0.1em' }}>GOT IT ✓</span>
-          </motion.div>
-        )}
-        {isDraggable && (
-          <motion.div style={{ opacity: revOpacity, rotate: 22, position: 'absolute', top: 28, right: 20, zIndex: 20, border: '3px solid #dc2626', backgroundColor: 'rgba(220,38,38,0.12)', borderRadius: 12, padding: '4px 12px', pointerEvents: 'none' }}>
-            <span style={{ color: '#b91c1c', fontWeight: 900, fontSize: 16, textTransform: 'uppercase', letterSpacing: '0.1em' }}>REVIEW ✗</span>
-          </motion.div>
-        )}
+        {/* GOT IT stamp */}
+        <motion.div className="absolute top-8 left-6 px-3 py-1 rounded-lg border-4 z-20"
+          style={{ opacity: gotItOp, rotate: -22, borderColor: '#16a34a', color: '#16a34a', fontSize: 22, fontWeight: 900, letterSpacing: '0.08em' }}>
+          GOT IT
+        </motion.div>
+        {/* REVIEW stamp */}
+        <motion.div className="absolute top-8 right-6 px-3 py-1 rounded-lg border-4 z-20"
+          style={{ opacity: revOp, rotate: 22, borderColor: '#dc2626', color: '#dc2626', fontSize: 22, fontWeight: 900, letterSpacing: '0.08em' }}>
+          REVIEW
+        </motion.div>
 
         <AnimatePresence mode="wait" initial={false}>
           {!isFlipped ? (
-            <motion.div key="front" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.12 }}
-              style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', backgroundColor: '#ffffff' }}>
-              <div style={{ padding: '20px 24px 8px' }}>
-                <span style={{ color: '#94a3b8', fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.15em' }}>{card.category}</span>
+            <motion.div key="front" className="absolute inset-0 flex flex-col"
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              transition={{ duration: 0.18 }}
+              style={{ backgroundColor: '#ffffff' }}>
+              <div className="flex-1 flex flex-col items-center justify-center p-7 gap-4">
+                <span style={{ backgroundColor: '#f1f5f9', borderRadius: 999, padding: '3px 12px', color: '#64748b', fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em' }}>
+                  {card.category}
+                </span>
+                <p style={{ color: '#0f172a', fontSize: '1.15rem', fontWeight: 700, textAlign: 'center', lineHeight: 1.55 }}>
+                  {card.question}
+                </p>
+                <span style={{ color: '#94a3b8', fontSize: 12, marginTop: 8 }}>Tap to reveal · Swipe to judge</span>
               </div>
-              <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px 28px' }}>
-                <p style={{ color: '#0f172a', fontSize: '1.2rem', fontWeight: 700, textAlign: 'center', lineHeight: 1.5, margin: 0 }}>{card.question}</p>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 6, paddingBottom: 20 }}>
-                <span style={{ color: '#94a3b8', fontSize: 11 }}>&#8635; Tap to flip</span>
-              </div>
-              <div style={{ height: 4, background: 'linear-gradient(to right, #fbbf24, #facc15)', flexShrink: 0 }} />
+              <div style={{ height: 5, flexShrink: 0, background: 'linear-gradient(to right, #fbbf24, #f59e0b)' }} />
             </motion.div>
           ) : (
-            <motion.div key="back" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.12 }}
-              style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', backgroundColor: '#0f172a' }}>
-              <div style={{ padding: '20px 24px 8px' }}>
-                <span style={{ color: '#60a5fa', fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.15em' }}>Answer</span>
+            <motion.div key="back" className="absolute inset-0 flex flex-col"
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              transition={{ duration: 0.18 }}
+              style={{ backgroundColor: '#0f172a' }}>
+              <div className="flex-1 flex flex-col items-center justify-center p-7 gap-4">
+                <span style={{ color: '#60a5fa', fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em' }}>Answer</span>
+                <p style={{ color: '#ffffff', fontSize: '1.15rem', fontWeight: 700, textAlign: 'center', lineHeight: 1.55 }}>
+                  {card.answer}
+                </p>
               </div>
-              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '8px 28px', gap: 24 }}>
-                <p style={{ color: '#ffffff', fontSize: '1.2rem', fontWeight: 700, textAlign: 'center', lineHeight: 1.5, margin: 0 }}>{card.answer}</p>
-                <div style={{ display: 'flex', gap: 12 }}>
-                  <button onClick={(e) => { e.stopPropagation(); onSwipe('right'); }}
-                    style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '10px 20px', borderRadius: 9999, backgroundColor: '#15803d', color: '#fff', fontWeight: 600, fontSize: 14, border: 'none', cursor: 'pointer' }}>
-                    <CheckCircle size={15} /> Knew it
-                  </button>
-                  <button onClick={(e) => { e.stopPropagation(); onSwipe('left'); }}
-                    style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '10px 20px', borderRadius: 9999, backgroundColor: '#b91c1c', color: '#fff', fontWeight: 600, fontSize: 14, border: 'none', cursor: 'pointer' }}>
-                    <XCircle size={15} /> Forgot
-                  </button>
-                </div>
+              <div className="flex gap-3 px-6 pb-5">
+                <button
+                  onClick={e => { e.stopPropagation(); onSwipe('left'); }}
+                  style={{ flex: 1, backgroundColor: '#b91c1c', borderRadius: 999, color: '#fff', fontWeight: 700, fontSize: 14, padding: '10px 0', border: 'none', cursor: 'pointer' }}>
+                  Forgot
+                </button>
+                <button
+                  onClick={e => { e.stopPropagation(); onSwipe('right'); }}
+                  style={{ flex: 1, backgroundColor: '#15803d', borderRadius: 999, color: '#fff', fontWeight: 700, fontSize: 14, padding: '10px 0', border: 'none', cursor: 'pointer' }}>
+                  Knew it ✓
+                </button>
               </div>
-              <div style={{ height: 4, background: 'linear-gradient(to right, #3b82f6, #6366f1)', flexShrink: 0 }} />
+              <div style={{ height: 5, flexShrink: 0, background: 'linear-gradient(to right, #3b82f6, #6366f1)' }} />
             </motion.div>
           )}
         </AnimatePresence>
@@ -132,547 +153,790 @@ function SwipeCard({ card, onSwipe, onFlip, isFlipped, isDraggable }: SwipeCardP
   );
 }
 
+// ── FlipCard (Daily / Speed modes) ────────────────────────────────────────────
+function FlipCard({ question, answer, category, flippedState, onFlip }: {
+  question: string; answer: string; category: string; flippedState: boolean; onFlip: () => void;
+}) {
+  return (
+    <div className="relative w-full max-w-[320px] mx-auto h-[340px] cursor-pointer select-none"
+      onClick={onFlip} style={{ perspective: 1200 }}>
+      <motion.div className="relative w-full h-full"
+        animate={{ rotateY: flippedState ? 180 : 0 }}
+        transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
+        style={{ transformStyle: 'preserve-3d' }}>
+        {/* Front */}
+        <div className="absolute inset-0 rounded-2xl overflow-hidden flex flex-col"
+          style={{ backfaceVisibility: 'hidden', backgroundColor: '#ffffff', boxShadow: '0 8px 32px rgba(0,0,0,0.15)' }}>
+          <div className="flex-1 flex flex-col items-center justify-center p-6 gap-3">
+            <span style={{ backgroundColor: '#f1f5f9', borderRadius: 999, padding: '3px 12px', color: '#64748b', fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em' }}>
+              {category}
+            </span>
+            <p style={{ color: '#0f172a', fontSize: '1.05rem', fontWeight: 700, textAlign: 'center', lineHeight: 1.55 }}>
+              {question}
+            </p>
+            <span style={{ color: '#94a3b8', fontSize: 12, marginTop: 4 }}>Tap to reveal</span>
+          </div>
+          <div style={{ height: 5, flexShrink: 0, background: 'linear-gradient(to right, #fbbf24, #f59e0b)' }} />
+        </div>
+        {/* Back */}
+        <div className="absolute inset-0 rounded-2xl overflow-hidden flex flex-col"
+          style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)', backgroundColor: '#0f172a', boxShadow: '0 8px 32px rgba(0,0,0,0.25)' }}>
+          <div className="flex-1 flex flex-col items-center justify-center p-6 gap-3">
+            <span style={{ color: '#60a5fa', fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em' }}>Answer</span>
+            <p style={{ color: '#ffffff', fontSize: '1.05rem', fontWeight: 700, textAlign: 'center', lineHeight: 1.55 }}+
+              {answer}
+            </p>
+          </div>
+          <div style={{ height: 5, flexShrink: 0, background: 'linear-gradient(to right, #3b82f6, #6366f1)' }} />
+        </div>
+      </motion.div>
+    </div>
+  );
+}
 
-// ── Main Component ─────────────────────────────────────────────────────────
+// ── Main Component ─────────────────────────────────────────────────────────────
 export default function Flashcards() {
-  const [allCards,   setAllCards]   = React.useState<Flashcard[]>([]);
-  const [loading,    setLoading]    = React.useState(true);
-  const [mode,       setMode]       = React.useState<Mode>('browse');
-  const [selCat,     setSelCat]     = React.useState('All');
-  const [cardStates, setCardStates] = React.useState<Record<string, CardState>>({});
-  const [mastered,   setMastered]   = React.useState<Set<string>>(new Set());
-  // Daily
-  const [dailyCards, setDailyCards] = React.useState<Flashcard[]>([]);
-  const [dIdx,       setDIdx]       = React.useState(0);
-  const [dFlipped,   setDFlipped]   = React.useState(false);
-  const [dScore,     setDScore]     = React.useState(0);
-  const [dDone,      setDDone]      = React.useState(false);
-  const [streak,     setStreak]     = React.useState(0);
-  // Speed
-  const [sCards,     setSCards]     = React.useState<Flashcard[]>([]);
-  const [sIdx,       setSIdx]       = React.useState(0);
-  const [sFlipped,   setSFlipped]   = React.useState(false);
-  const [sCorrect,   setSCorrect]   = React.useState(0);
-  const [sTotal,     setSTotal]     = React.useState(0);
-  const [sTime,      setSTime]      = React.useState(60);
-  const [sRunning,   setSRunning]   = React.useState(false);
-  const [sDone,      setSDone]      = React.useState(false);
-  const [pb,         setPb]         = React.useState(0);
-  const timerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
-  // Swipe / Browse
-  const [swipeCards,       setSwipeCards]       = React.useState<Flashcard[]>([]);
-  const [swipeIdx,         setSwipeIdx]         = React.useState(0);
-  const [swipeFlipped,     setSwipeFlipped]     = React.useState(false);
-  const [gotItIds,         setGotItIds]         = React.useState<string[]>([]);
-  const [reviseIds,        setReviseIds]        = React.useState<string[]>([]);
-  const [swipeDone,        setSwipeDone]        = React.useState(false);
-  const [isRevisingMissed, setIsRevisingMissed] = React.useState(false);
-  const handleSwipeRef = React.useRef<(dir: 'left' | 'right') => void>(() => {});
+  const [allCards, setAllCards] = useState<FlashCard[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [mode, setMode] = useState<Mode>('home');
+  const [streak, setStreak] = useState(0);
+  const [mastered, setMastered] = useState<Set<number>>(new Set());
 
-  React.useEffect(() => {
+  // Daily Dose
+  const [dailyCards, setDailyCards] = useState<FlashCard[]>([]);
+  const [dailyIdx, setDailyIdx] = useState(0);
+  const [dailyFlipped, setDailyFlipped] = useState(false);
+  const [dailyResults, setDailyResults] = useState<('knew' | 'forgot')[]>([]);
+  const [dailyDone, setDailyDone] = useState(false);
+
+  // Exam Blitz (Speed)
+  const [speedCards, setSpeedCards] = useState<FlashCard[]>([]);
+  const [speedIdx, setSpeedIdx] = useState(0);
+  const [speedFlipped, setSpeedFlipped] = useState(false);
+  const [speedCorrect, setSpeedCorrect] = useState(0);
+  const [speedTimer, setSpeedTimer] = useState(90);
+  const [speedRunning, setSpeedRunning] = useState(false);
+  const [speedDone, setSpeedDone] = useState(false);
+  const [speedBest, setSpeedBest] = useState(0);
+
+  // Browse (Swipe)
+  const [swipeCards, setSwipeCards] = useState<FlashCard[]>([]);
+  const [swipeIdx, setSwipeIdx] = useState(0);
+  const [swipeFlipped, setSwipeFlipped] = useState(false);
+  const [missedIds, setMissedIds] = useState<number[]>([]);
+  const [swipeDone, setSwipeDone] = useState(false);
+  const [revisingMissed, setRevisingMissed] = useState(false);
+
+  const handleSwipeRef = useRef<(dir: 'left' | 'right') => void>(() => {});
+  const speedIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // ── Boot ──────────────────────────────────────────────────────────────────
+  useEffect(() => {
+    const s = parseInt(localStorage.getItem('ct_streak') || '0');
+    const last = localStorage.getItem('ct_last_daily') || '';
+    const today = new Date().toISOString().split('T')[0];
+    const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+    if (last === today || last === yesterday) setStreak(s);
+    else if (last && last < yesterday) setStreak(0);
+    else setStreak(s);
+
+    try {
+      const m = JSON.parse(localStorage.getItem('ct_mastered_v2') || '[]') as number[];
+      setMastered(new Set(m));
+    } catch { /* */ }
+
+    setSpeedBest(parseInt(localStorage.getItem('ct_speed_best') || '0'));
+
     fetch(`${SUPABASE_URL}/rest/v1/flashcard?select=*&order=id.asc&limit=500`, {
-      headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` },
+      headers: {
+        apikey: SUPABASE_KEY,
+        Authorization: `Bearer ${SUPABASE_KEY}`,
+      },
     })
       .then(r => r.json())
-      .then((rows: any[]) => {
-        if (Array.isArray(rows)) setAllCards(rows.map((r: any) => ({ id: String(r.id), question: r.question ?? '', answer: r.answer ?? '', category: r.category ?? '' })));
-        setLoading(false);
-      })
+      .then(data => { if (Array.isArray(data)) setAllCards(data); setLoading(false); })
       .catch(() => setLoading(false));
-    setMastered(getMastered()); setStreak(getStreak()); setPb(getSpeedPB());
   }, []);
 
-  React.useEffect(() => {
-    if (sRunning && sTime > 0) { timerRef.current = setTimeout(() => setSTime(t => t - 1), 1000); }
-    else if (sRunning && sTime === 0) { endSpeed(); }
-    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
-  }, [sRunning, sTime]);
+  // ── Speed timer ───────────────────────────────────────────────────────────
+  useEffect(() => {
+    if (speedRunning) {
+      speedIntervalRef.current = setInterval(() => {
+        setSpeedTimer(t => {
+          if (t <= 1) { endSpeed(); return 0; }
+          return t - 1;
+        });
+      }, 1000);
+    }
+    return () => { if (speedIntervalRef.current) clearInterval(speedIntervalRef.current); };
+  }, [speedRunning]); // eslint-disable-line
 
-  React.useEffect(() => {
-    if (mode !== 'browse' || !allCards.length || isRevisingMissed) return;
-    const cards = selCat === 'All' ? [...allCards] : allCards.filter(c => c.category === selCat);
-    setSwipeCards(cards); setSwipeIdx(0); setSwipeFlipped(false);
-    setGotItIds([]); setReviseIds([]); setSwipeDone(false);
-  }, [allCards, selCat, mode]);
+  // ── Swipe ref ─────────────────────────────────────────────────────────────
+  useEffect(() => {
+    handleSwipeRef.current = (dir: 'left' | 'right') => {
+      const card = swipeCards[swipeIdx];
+      if (!card) return;
+      if (dir === 'left') {
+        setMissedIds(prev => [...prev, card.id]);
+      } else {
+        setMastered(prev => {
+          const next = new Set(prev);
+          next.add(card.id);
+          localStorage.setItem('ct_mastered_v2', JSON.stringify(Array.from(next)));
+          return next;
+        });
+      }
+      setSwipeFlipped(false);
+      if (swipeIdx + 1 >= swipeCards.length) setSwipeDone(true);
+      else setSwipeIdx(i => i + 1);
+    };
+  }, [swipeCards, swipeIdx]);
 
-  React.useEffect(() => {
+  // ── Keyboard (Browse mode) ────────────────────────────────────────────────
+  useEffect(() => {
     if (mode !== 'browse') return;
     const handler = (e: KeyboardEvent) => {
-      if (e.code === 'Space') { setSwipeFlipped(f => !f); e.preventDefault(); }
-      else if (e.code === 'ArrowRight') handleSwipeRef.current('right');
-      else if (e.code === 'ArrowLeft')  handleSwipeRef.current('left');
+      if (e.key === 'ArrowRight') handleSwipeRef.current('right');
+      else if (e.key === 'ArrowLeft') handleSwipeRef.current('left');
+      else if (e.key === ' ') { e.preventDefault(); setSwipeFlipped(f => !f); }
     };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
   }, [mode]);
 
-  function sm2(card: Flashcard, quality: number) {
-    const prev = cardStates[card.id] || { repetitions: 0, interval: 1, easeFactor: 2.5, nextReviewDate: todayStr() };
-    const next = calculateSM2(prev, quality);
-    setCardStates(cs => ({ ...cs, [card.id]: { id: card.id, ...next } }));
-    if (quality >= 4) { setMastered(m => { const n = new Set(m); n.add(card.id); saveMastered(n); return n; }); }
-  }
+  // ── Daily Dose ────────────────────────────────────────────────────────────
+  const startDaily = () => {
+    if (!allCards.length) return;
+    const cards = getDailyCards(allCards);
+    setDailyCards(cards);
+    setDailyIdx(0);
+    setDailyFlipped(false);
+    setDailyResults([]);
+    setDailyDone(false);
+    setMode('daily');
+  };
 
-  function startSpeed() {
+  const handleDailyAnswer = (knew: boolean) => {
+    if (!dailyFlipped) return;
+    const card = dailyCards[dailyIdx];
+    const newResults: ('knew' | 'forgot')[] = [...dailyResults, knew ? 'knew' : 'forgot'];
+    setDailyResults(newResults);
+
+    const sm2 = getSM2Cards();
+    const existing = sm2.find(c => c.id === card.id) || { id: card.id, ef: 2.5, interval: 0, due: '' };
+    const updated = calculateSM2(existing, knew ? 4 : 1);
+    saveSM2Cards([...sm2.filter(c => c.id !== card.id), updated]);
+
+    if (knew) {
+      setMastered(prev => {
+        const next = new Set(prev);
+        next.add(card.id);
+        localStorage.setItem('ct_mastered_v2', JSON.stringify(Array.from(next)));
+        return next;
+      });
+    }
+
+    if (dailyIdx + 1 >= dailyCards.length) {
+      const today = new Date().toISOString().split('T')[0];
+      const last = localStorage.getItem('ct_last_daily') || '';
+      const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+      const newStreak = (last === yesterday || last === today) ? streak + 1 : 1;
+      setStreak(newStreak);
+      localStorage.setItem('ct_streak', String(newStreak));
+      localStorage.setItem('ct_last_daily', today);
+      setDailyDone(true);
+    } else {
+      setDailyIdx(i => i + 1);
+      setDailyFlipped(false);
+    }
+  };
+
+  // ── Speed ─────────────────────────────────────────────────────────────────
+  const startSpeed = () => {
+    if (!allCards.length) return;
     const shuffled = [...allCards].sort(() => Math.random() - 0.5);
-    setSCards(shuffled); setSIdx(0); setSFlipped(false);
-    setSCorrect(0); setSTotal(0); setSTime(60); setSRunning(true); setSDone(false);
-  }
-  function endSpeed() {
-    if (timerRef.current) clearTimeout(timerRef.current);
-    setSRunning(false); setSDone(true);
-    if (sCorrect > pb) { localStorage.setItem(LS_SPEED_PB, String(sCorrect)); setPb(sCorrect); }
-  }
+    setSpeedCards(shuffled);
+    setSpeedIdx(0);
+    setSpeedFlipped(false);
+    setSpeedCorrect(0);
+    setSpeedTimer(90);
+    setSpeedDone(false);
+    setSpeedRunning(true);
+    setMode('speed');
+  };
 
-  function handleSwipe(dir: 'left' | 'right') {
-    if (swipeDone || swipeIdx >= swipeCards.length) return;
-    const card = swipeCards[swipeIdx];
-    if (dir === 'right') setGotItIds(g => [...g, card.id]);
-    else setReviseIds(r => [...r, card.id]);
+  const endSpeed = () => {
+    if (speedIntervalRef.current) clearInterval(speedIntervalRef.current);
+    setSpeedRunning(false);
+    setSpeedDone(true);
+  };
+
+  const handleSpeedAnswer = (knew: boolean) => {
+    if (!speedRunning || speedDone || !speedFlipped) return;
+    if (knew) {
+      const next = speedCorrect + 1;
+      setSpeedCorrect(next);
+      const best = parseInt(localStorage.getItem('ct_speed_best') || '0');
+      if (next > best) {
+        localStorage.setItem('ct_speed_best', String(next));
+        setSpeedBest(next);
+      }
+    }
+    if (speedIdx + 1 >= speedCards.length) { endSpeed(); return; }
+    setSpeedIdx(i => i + 1);
+    setSpeedFlipped(false);
+  };
+
+  // ── Browse ────────────────────────────────────────────────────────────────
+  const startBrowse = (cards?: FlashCard[]) => {
+    const pool = cards || allCards;
+    if (!pool.length) return;
+    setSwipeCards([...pool].sort(() => Math.random() - 0.5));
+    setSwipeIdx(0);
     setSwipeFlipped(false);
-    const next = swipeIdx + 1;
-    if (next >= swipeCards.length) setSwipeDone(true);
-    setSwipeIdx(next);
-  }
-  handleSwipeRef.current = handleSwipe;
+    setMissedIds([]);
+    setSwipeDone(false);
+    setRevisingMissed(!!cards);
+    setMode('browse');
+  };
 
-  // ── TabBar ───────────────────────────────────────────────────────────────
-  function TabBar() {
-    const tabs = [
-      { key: 'browse'  as Mode, label: 'Browse',  icon: <Brain size={12} /> },
-      { key: 'daily'   as Mode, label: 'Daily',   icon: <Flame size={12} /> },
-      { key: 'speed'   as Mode, label: 'Speed',   icon: <Zap size={12} /> },
-      { key: 'mastery' as Mode, label: 'Mastery', icon: <Trophy size={12} /> },
-    ];
+  const handleSwipe = (dir: 'left' | 'right') => handleSwipeRef.current(dir);
+  const currentSwipeCard = swipeCards[swipeIdx];
+
+  // ── Category stats ────────────────────────────────────────────────────────
+  const categoryStats = useMemo(() => {
+    const stats: Record<string, { total: number; done: number }> = {};
+    allCards.forEach(c => {
+      if (!stats[c.category]) stats[c.category] = { total: 0, done: 0 };
+      stats[c.category].total++;
+      if (mastered.has(c.id)) stats[c.category].done++;
+    });
+    return Object.entries(stats)
+      .map(([cat, s]) => ({ cat, ...s, pct: s.total ? Math.round((s.done / s.total) * 100) : 0 }))
+      .sort((a, b) => a.pct - b.pct);
+  }, [allCards, mastered]);
+
+  const totalMastered = mastered.size;
+  const todayQuote = QUOTES[new Date().getDay() % QUOTES.length];
+  const overallPct = allCards.length ? Math.round((totalMastered / allCards.length) * 100) : 0;
+
+  // ── Loading ───────────────────────────────────────────────────────────────
+  if (loading) {
     return (
-      <div className="flex items-center bg-zinc-900 rounded-2xl p-1 gap-1">
-        {tabs.map(t => (
-          <button key={t.key} onClick={() => setMode(t.key)}
-            className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-semibold transition-all duration-200
-              ${mode === t.key ? 'bg-red-600 text-white shadow-sm' : 'text-zinc-500 hover:text-zinc-300'}`}>
-            {t.icon}{t.label}
+      <div className="flex flex-col items-center justify-center py-20 gap-4">
+        <div style={{ width: 48, height: 48, borderRadius: '50%', border: '4px solid #334155', borderTopColor: '#f59e0b', animation: 'spin 0.8s linear infinite' }} />
+        <p style={{ color: '#64748b', fontSize: 14 }}>Loading flashcards…</p>
+        <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+      </div>
+    );
+  }
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // DAILY DOSE
+  // ══════════════════════════════════════════════════════════════════════════
+  if (mode === 'daily') {
+    const card = dailyCards[dailyIdx];
+    const knewCount = dailyResults.filter(r => r === 'knew').length;
+    const forgotCount = dailyResults.filter(r => r === 'forgot').length;
+
+    if (dailyDone) {
+      const score = Math.round((knewCount / dailyCards.length) * 100);
+      return (
+        <div className="flex flex-col items-center gap-6 py-6 px-4 max-w-lg mx-auto">
+          <button onClick={() => setMode('home')} style={{ alignSelf: 'flex-start', background: 'none', border: 'none', color: '#64748b', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4, fontSize: 14 }}>
+            <ArrowLeft size={16} /> Home
           </button>
+
+          <div className="w-full rounded-2xl p-6 text-center" style={{ background: 'linear-gradient(135deg, #1e293b, #0f172a)', boxShadow: '0 8px 32px rgba(0,0,0,0.3)' }}>
+            <div style={{ fontSize: 48 }}>{score >= 80 ? '🏆' : score >= 60 ? '💪' : '📚'}</div>
+            <p style={{ color: '#f8fafc', fontSize: 22, fontWeight: 800, marginTop: 8 }}>
+              {score >= 80 ? 'Outstanding!' : score >= 60 ? 'Good effort!' : 'Keep practising!'}
+            </p>
+            <p style={{ color: '#94a3b8', fontSize: 14, marginTop: 4 }}>You knew {knewCount} out of {dailyCards.length} cards</p>
+            <div className="flex justify-center gap-6 mt-5">
+              <div className="text-center">
+                <p style={{ color: '#4ade80', fontSize: 28, fontWeight: 800 }}>{knewCount}</p>
+                <p style={{ color: '#94a3b8', fontSize: 12 }}>Knew it</p>
+              </div>
+              <div className="text-center">
+                <p style={{ color: '#f87171', fontSize: 28, fontWeight: 800 }}>{forgotCount}</p>
+                <p style={{ color: '#94a3b8', fontSize: 12 }}>Forgot</p>
+              </div>
+              <div className="text-center">
+                <p style={{ color: '#fbbf24', fontSize: 28, fontWeight: 800 }}>{streak}</p>
+                <p style={{ color: '#94a3b8', fontSize: 12 }}>Day streak 🔥</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="w-full rounded-xl p-4" style={{ backgroundColor: '#1e293b' }}>
+            <p style={{ color: '#94a3b8', fontSize: 12, marginBottom: 8 }}>Score: {score}%</p>
+            <div style={{ height: 10, borderRadius: 999, backgroundColor: '#334155', overflow: 'hidden' }}>
+              <div style={{ height: '100%', width: `${score}%`, background: score >= 80 ? 'linear-gradient(to right,#4ade80,#22c55e)' : score >= 60 ? 'linear-gradient(to right,#fbbf24,#f59e0b)' : 'linear-gradient(to right,#f87171,#ef4444)', borderRadius: 999, transition: 'width 0.6s ease' }} />
+            </div>
+          </div>
+
+          <p style={{ color: '#64748b', fontSize: 13, textAlign: 'center', fontStyle: 'italic' }}>{todayQuote}</p>
+
+          <div className="flex gap-3 w-full">
+            {forgotCount > 0 && (
+              <button
+                onClick={() => startBrowse(dailyCards.filter((_, i) => dailyResults[i] === 'forgot'))}
+                style={{ flex: 1, padding: '12px 0', borderRadius: 12, backgroundColor: '#1e293b', color: '#60a5fa', fontWeight: 700, fontSize: 14, border: '1px solid #334155', cursor: 'pointer' }}>
+                Revise {forgotCount} missed
+              </button>
+            )}
+            <button onClick={() => setMode('home')}
+              style={{ flex: 1, padding: '12px 0', borderRadius: 12, background: 'linear-gradient(135deg,#f59e0b,#d97706)', color: '#fff', fontWeight: 700, fontSize: 14, border: 'none', cursor: 'pointer' }}>
+              Back to Home
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    if (!card) return null;
+
+    return (
+      <div className="flex flex-col items-center gap-5 py-4 px-4 max-w-lg mx-auto">
+        <div className="flex items-center justify-between w-full">
+          <button onClick={() => setMode('home')} style={{ background: 'none', border: 'none', color: '#64748b', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4, fontSize: 14 }}>
+            <ArrowLeft size={16} /> Home
+          </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <Flame size={16} style={{ color: '#f59e0b' }} />
+            <span style={{ color: '#f59e0b', fontWeight: 700, fontSize: 14 }}>{streak} day streak</span>
+          </div>
+        </div>
+
+        <div className="w-full">
+          <div className="flex justify-between mb-1">
+            <span style={{ color: '#64748b', fontSize: 12 }}>Daily Dose</span>
+            <span style={{ color: '#64748b', fontSize: 12 }}>{dailyIdx + 1} / {dailyCards.length}</span>
+          </div>
+          <div style={{ height: 6, borderRadius: 999, backgroundColor: '#1e293b', overflow: 'hidden' }}>
+            <div style={{ height: '100%', width: `${(dailyIdx / dailyCards.length) * 100}%`, background: 'linear-gradient(to right,#fbbf24,#f59e0b)', borderRadius: 999, transition: 'width 0.3s ease' }} />
+          </div>
+        </div>
+
+        <FlipCard
+          question={card.question}
+          answer={card.answer}
+          category={card.category}
+          flippedState={dailyFlipped}
+          onFlip={() => setDailyFlipped(f => !f)}
+        />
+
+        <AnimatePresence>
+          {dailyFlipped && (
+            <motion.div className="flex gap-3 w-full max-w-[320px]"
+              initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+              <button onClick={() => handleDailyAnswer(false)}
+                style={{ flex: 1, padding: '14px 0', borderRadius: 12, backgroundColor: '#450a0a', color: '#fca5a5', fontWeight: 700, fontSize: 14, border: '1px solid #7f1d1d', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+                <XCircle size={18} /> Forgot
+              </button>
+              <button onClick={() => handleDailyAnswer(true)}
+                style={{ flex: 1, padding: '14px 0', borderRadius: 12, backgroundColor: '#052e16', color: '#86efac', fontWeight: 700, fontSize: 14, border: '1px solid #14532d', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+                <CheckCircle size={18} /> Knew it
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {!dailyFlipped && (
+          <p style={{ color: '#475569', fontSize: 13, textAlign: 'center' }}>Tap the card to reveal the answer</p>
+        )}
+      </div>
+    );
+  }
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // EXAM BLITZ (SPEED)
+  // ══════════════════════════════════════════════════════════════════════════
+  if (mode === 'speed') {
+    const card = speedCards[speedIdx];
+    const timerPct = (speedTimer / 90) * 100;
+    const timerColor = speedTimer > 30 ? '#4ade80' : speedTimer > 10 ? '#fbbf24' : '#ef4444';
+
+    if (speedDone) {
+      const attempted = speedIdx + 1;
+      const accuracy = attempted > 0 ? Math.round((speedCorrect / attempted) * 100) : 0;
+      const isNewBest = speedCorrect > 0 && speedCorrect >= speedBest;
+      return (
+        <div className="flex flex-col items-center gap-6 py-6 px-4 max-w-lg mx-auto">
+          <button onClick={() => setMode('home')} style={{ alignSelf: 'flex-start', background: 'none', border: 'none', color: '#64748b', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4, fontSize: 14 }}>
+            <ArrowLeft size={16} /> Home
+          </button>
+
+          <div className="w-full rounded-2xl p-6 text-center" style={{ background: 'linear-gradient(135deg, #1e293b, #0f172a)', boxShadow: '0 8px 32px rgba(0,0,0,0.3)' }}>
+            {isNewBest && <div style={{ color: '#fbbf24', fontSize: 13, fontWeight: 700, marginBottom: 8, letterSpacing: '0.1em' }}>🎉 NEW PERSONAL BEST!</div>}
+            <p style={{ color: '#f8fafc', fontSize: 22, fontWeight: 800 }}>Time&apos;s Up!</p>
+            <p style={{ color: '#4ade80', fontSize: 48, fontWeight: 900, lineHeight: 1.2, marginTop: 8 }}>{speedCorrect}</p>
+            <p style={{ color: '#94a3b8', fontSize: 14 }}>correct answers in 90 seconds</p>
+            <div className="flex justify-center gap-8 mt-5">
+              <div className="text-center">
+                <p style={{ color: '#60a5fa', fontSize: 22, fontWeight: 800 }}>{accuracy}%</p>
+                <p style={{ color: '#94a3b8', fontSize: 12 }}>Accuracy</p>
+              </div>
+              <div className="text-center">
+                <p style={{ color: '#a78bfa', fontSize: 22, fontWeight: 800 }}>{attempted}</p>
+                <p style={{ color: '#94a3b8', fontSize: 12 }}>Attempted</p>
+              </div>
+              <div className="text-center">
+                <p style={{ color: '#fbbf24', fontSize: 22, fontWeight: 800 }}>{speedBest}</p>
+                <p style={{ color: '#94a3b8', fontSize: 12 }}>Personal Best</p>
+              </div>
+            </div>
+          </div>
+
+          <p style={{ color: '#64748b', fontSize: 13, textAlign: 'center' }}>
+            {accuracy >= 80 ? '🔥 Excellent! You\'re CLAT-ready!' : accuracy >= 60 ? '💪 Good job! Keep pushing!' : '📚 Accuracy over speed. Practise more.'}
+          </p>
+
+          <div className="flex gap-3 w-full">
+            <button onClick={startSpeed}
+              style={{ flex: 1, padding: '12px 0', borderRadius: 12, backgroundColor: '#1e293b', color: '#60a5fa', fontWeight: 700, fontSize: 14, border: '1px solid #334155', cursor: 'pointer' }}>
+              Try Again
+            </button>
+            <button onClick={() => setMode('home')}
+              style={{ flex: 1, padding: '12px 0', borderRadius: 12, background: 'linear-gradient(135deg,#6366f1,#4f46e5)', color: '#fff', fontWeight: 700, fontSize: 14, border: 'none', cursor: 'pointer' }}>
+              Back to Home
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className="flex flex-col items-center gap-5 py-4 px-4 max-w-lg mx-auto">
+        <div className="flex items-center justify-between w-full">
+          <button onClick={() => { endSpeed(); setMode('home'); }} style={{ background: 'none', border: 'none', color: '#64748b', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4, fontSize: 14 }}>
+            <ArrowLeft size={16} /> Quit
+          </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <CheckCircle size={14} style={{ color: '#4ade80' }} />
+            <span style={{ color: '#4ade80', fontWeight: 700, fontSize: 16 }}>{speedCorrect}</span>
+            <span style={{ color: '#475569', fontSize: 14 }}>correct</span>
+          </div>
+        </div>
+
+        {/* Timer ring */}
+        <div className="relative flex items-center justify-center" style={{ width: 90, height: 90 }}>
+          <svg width={90} height={90} style={{ transform: 'rotate(-90deg)', position: 'absolute' }}>
+            <circle cx={45} cy={45} r={38} fill="none" stroke="#1e293b" strokeWidth={8} />
+            <circle cx={45} cy={45} r={38} fill="none" stroke={timerColor} strokeWidth={8}
+              strokeDasharray={2 * Math.PI * 38}
+              strokeDashoffset={2 * Math.PI * 38 * (1 - timerPct / 100)}
+              style={{ transition: 'stroke-dashoffset 0.5s linear, stroke 0.5s' }} />
+          </svg>
+          <div style={{ textAlign: 'center', zIndex: 1 }}>
+            <p style={{ color: timerColor, fontSize: 22, fontWeight: 900, lineHeight: 1 }}>{speedTimer}</p>
+            <p style={{ color: '#475569', fontSize: 10 }}>sec</p>
+          </div>
+        </div>
+
+        {card && (
+          <FlipCard
+            question={card.question}
+            answer={card.answer}
+            category={card.category}
+            flippedState={speedFlipped}
+            onFlip={() => setSpeedFlipped(f => !f)}
+          />
+        )}
+
+        <AnimatePresence>
+          {speedFlipped && card && (
+            <motion.div className="flex gap-3 w-full max-w-[320px]"
+              initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+              <button onClick={() => handleSpeedAnswer(false)}
+                style={{ flex: 1, padding: '12px 0', borderRadius: 12, backgroundColor: '#450a0a', color: '#fca5a5', fontWeight: 700, fontSize: 14, border: '1px solid #7f1d1d', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+                <XCircle size={16} /> Forgot
+              </button>
+              <button onClick={() => handleSpeedAnswer(true)}
+                style={{ flex: 1, padding: '12px 0', borderRadius: 12, backgroundColor: '#052e16', color: '#86efac', fontWeight: 700, fontSize: 14, border: '1px solid #14532d', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+                <CheckCircle size={16} /> Knew it
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {!speedFlipped && card && (
+          <p style={{ color: '#475569', fontSize: 13, textAlign: 'center' }}>Tap card to reveal · Be quick!</p>
+        )}
+      </div>
+    );
+  }
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // BROWSE (TINDER SWIPE)
+  // ══════════════════════════════════════════════════════════════════════════
+  if (mode === 'browse') {
+    if (swipeDone) {
+      const missedCards = allCards.filter(c => missedIds.includes(c.id));
+      return (
+        <div className="flex flex-col items-center gap-6 py-6 px-4 max-w-lg mx-auto">
+          <button onClick={() => setMode('home')} style={{ alignSelf: 'flex-start', background: 'none', border: 'none', color: '#64748b', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4, fontSize: 14 }}>
+            <ArrowLeft size={16} /> Home
+          </button>
+
+          <div className="w-full rounded-2xl p-6 text-center" style={{ background: 'linear-gradient(135deg,#1e293b,#0f172a)', boxShadow: '0 8px 32px rgba(0,0,0,0.3)' }}>
+            <div style={{ fontSize: 40 }}>{revisingMissed ? '🔄' : '🃏'}</div>
+            <p style={{ color: '#f8fafc', fontSize: 20, fontWeight: 800, marginTop: 8 }}>
+              {revisingMissed ? 'Revision done!' : 'Deck complete!'}
+            </p>
+            <div className="flex justify-center gap-8 mt-5">
+              <div className="text-center">
+                <p style={{ color: '#4ade80', fontSize: 26, fontWeight: 800 }}>{swipeCards.length - missedIds.length}</p>
+                <p style={{ color: '#94a3b8', fontSize: 12 }}>Knew it ✓</p>
+              </div>
+              <div className="text-center">
+                <p style={{ color: '#f87171', fontSize: 26, fontWeight: 800 }}>{missedIds.length}</p>
+                <p style={{ color: '#94a3b8', fontSize: 12 }}>To review</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex gap-3 w-full">
+            {missedCards.length > 0 && (
+              <button onClick={() => startBrowse(missedCards)}
+                style={{ flex: 1, padding: '12px 0', borderRadius: 12, background: 'linear-gradient(135deg,#f59e0b,#d97706)', color: '#fff', fontWeight: 700, fontSize: 14, border: 'none', cursor: 'pointer' }}>
+                Revise {missedCards.length} missed
+              </button>
+            )}
+            <button onClick={() => setMode('home')}
+              style={{ flex: 1, padding: '12px 0', borderRadius: 12, backgroundColor: '#1e293b', color: '#94a3b8', fontWeight: 700, fontSize: 14, border: '1px solid #334155', cursor: 'pointer' }}>
+              Home
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className="flex flex-col items-center gap-5 py-4 px-4 max-w-lg mx-auto">
+        <div className="flex items-center justify-between w-full">
+          <button onClick={() => setMode('home')} style={{ background: 'none', border: 'none', color: '#64748b', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4, fontSize: 14 }}>
+            <ArrowLeft size={16} /> {revisingMissed ? 'End revision' : 'Home'}
+          </button>
+          <span style={{ color: '#64748b', fontSize: 13 }}>{swipeIdx + 1} / {swipeCards.length}</span>
+        </div>
+
+        <div className="flex gap-8">
+          <span style={{ color: '#ef4444', fontSize: 12, fontWeight: 600 }}>← Forgot</span>
+          <span style={{ color: '#22c55e', fontSize: 12, fontWeight: 600 }}>Knew it →</span>
+        </div>
+
+        {currentSwipeCard && (
+          <div className="relative mx-auto w-full max-w-[300px] sm:max-w-[320px]" style={{ height: 420 }}>
+            {swipeIdx + 2 < swipeCards.length && (
+              <div className="absolute inset-0 rounded-3xl" style={{ transform: 'scale(0.86) translateY(22px)', zIndex: 1, transformOrigin: 'bottom center', backgroundColor: '#e2e8f0', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
+            )}
+            {swipeIdx + 1 < swipeCards.length && (
+              <div className="absolute inset-0 rounded-3xl" style={{ transform: 'scale(0.93) translateY(11px)', zIndex: 2, transformOrigin: 'bottom center', backgroundColor: '#f1f5f9', boxShadow: '0 4px 16px rgba(0,0,0,0.12)' }} />
+            )}
+            <SwipeCard
+              key={currentSwipeCard.id + '-' + swipeIdx}
+              card={currentSwipeCard}
+              onSwipe={handleSwipe}
+              onFlip={() => setSwipeFlipped(f => !f)}
+              isFlipped={swipeFlipped}
+              isDraggable={true}
+            />
+          </div>
+        )}
+
+        <p style={{ color: '#334155', fontSize: 11, textAlign: 'center' }}>
+          Keyboard: ← Forgot &nbsp;|&nbsp; → Knew it &nbsp;|&nbsp; Space = flip
+        </p>
+      </div>
+    );
+  }
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // MASTERY TRACKER
+  // ══════════════════════════════════════════════════════════════════════════
+  if (mode === 'mastery') {
+    const weakCategories = categoryStats.filter(c => c.pct < 40);
+    const strongCategories = categoryStats.filter(c => c.pct >= 70);
+
+    return (
+      <div className="flex flex-col gap-5 py-4 px-4 max-w-lg mx-auto">
+        <div className="flex items-center gap-3">
+          <button onClick={() => setMode('home')} style={{ background: 'none', border: 'none', color: '#64748b', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4, fontSize: 14 }}>
+            <ArrowLeft size={16} />
+          </button>
+          <h2 style={{ color: '#f8fafc', fontSize: 18, fontWeight: 800, margin: 0 }}>Mastery Tracker</h2>
+        </div>
+
+        <div className="rounded-2xl p-5" style={{ background: 'linear-gradient(135deg,#1e293b,#0f172a)', boxShadow: '0 4px 20px rgba(0,0,0,0.2)' }}>
+          <div className="flex justify-between items-center mb-3">
+            <p style={{ color: '#94a3b8', fontSize: 13, margin: 0 }}>Overall Mastery</p>
+            <p style={{ color: '#fbbf24', fontSize: 22, fontWeight: 900, margin: 0 }}>{overallPct}%</p>
+          </div>
+          <div style={{ height: 10, borderRadius: 999, backgroundColor: '#334155', overflow: 'hidden' }}>
+            <div style={{ height: '100%', width: `${overallPct}%`, background: 'linear-gradient(to right,#fbbf24,#f59e0b)', borderRadius: 999, transition: 'width 0.8s ease' }} />
+          </div>
+          <p style={{ color: '#475569', fontSize: 12, marginTop: 8, marginBottom: 0 }}>{totalMastered} of {allCards.length} cards mastered</p>
+        </div>
+
+        {weakCategories.length > 0 && (
+          <div className="rounded-xl p-4" style={{ backgroundColor: '#450a0a', border: '1px solid #7f1d1d' }}>
+            <p style={{ color: '#fca5a5', fontSize: 13, fontWeight: 700, marginBottom: 8, marginTop: 0 }}>⚠ Focus areas — below 40%</p>
+            <div className="flex flex-wrap gap-2">
+              {weakCategories.map(c => (
+                <span key={c.cat} style={{ backgroundColor: '#7f1d1d', color: '#fca5a5', borderRadius: 999, fontSize: 11, fontWeight: 600, padding: '3px 10px' }}>
+                  {c.cat} ({c.pct}%)
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {strongCategories.length > 0 && (
+          <div className="rounded-xl p-4" style={{ backgroundColor: '#052e16', border: '1px solid #14532d' }}>
+            <p style={{ color: '#86efac', fontSize: 13, fontWeight: 700, marginBottom: 8, marginTop: 0 }}>✓ Strong areas — 70%+</p>
+            <div className="flex flex-wrap gap-2">
+              {strongCategories.map(c => (
+                <span key={c.cat} style={{ backgroundColor: '#14532d', color: '#86efac', borderRadius: 999, fontSize: 11, fontWeight: 600, padding: '3px 10px' }}>
+                  {c.cat} ({c.pct}%)
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <p style={{ color: '#64748b', fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', margin: 0 }}>All Categories</p>
+        {categoryStats.map(c => (
+          <div key={c.cat} className="rounded-xl p-3" style={{ backgroundColor: '#1e293b' }}>
+            <div className="flex justify-between mb-2">
+              <span style={{ color: '#e2e8f0', fontSize: 13, fontWeight: 600 }}>{c.cat}</span>
+              <span style={{ color: c.pct >= 70 ? '#4ade80' : c.pct >= 40 ? '#fbbf24' : '#f87171', fontSize: 13, fontWeight: 700 }}>{c.pct}%</span>
+            </div>
+            <div style={{ height: 5, borderRadius: 999, backgroundColor: '#334155', overflow: 'hidden' }}>
+              <div style={{ height: '100%', borderRadius: 999, transition: 'width 0.6s ease', width: `${c.pct}%`, background: c.pct >= 70 ? 'linear-gradient(to right,#4ade80,#22c55e)' : c.pct >= 40 ? 'linear-gradient(to right,#fbbf24,#f59e0b)' : 'linear-gradient(to right,#f87171,#ef4444)' }} />
+            </div>
+            <p style={{ color: '#475569', fontSize: 11, marginTop: 4, marginBottom: 0 }}>{c.done}/{c.total} mastered</p>
+          </div>
         ))}
       </div>
     );
   }
 
-  // ── FlipCard ──────────────────────────────────────────────────────────────
-  function FlipCard({ question, answer, category, flippedState, onFlip, height = 'h-60 max-w-[300px] sm:max-w-xs mx-auto' }: {
-    question: string; answer: string; category: string;
-    flippedState: boolean; onFlip: () => void; height?: string;
-  }) {
-    return (
-      <div className={`relative ${height} cursor-pointer select-none`} onClick={onFlip} style={{ perspective: 1200 }}>
-        <motion.div
-          className="relative w-full h-full"
-          animate={{ rotateY: flippedState ? 180 : 0 }}
-          transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
-          style={{ transformStyle: 'preserve-3d' }}>
-          <div style={{ position: 'absolute', inset: 0, borderRadius: 16, overflow: 'hidden', backfaceVisibility: 'hidden', backgroundColor: '#ffffff', boxShadow: '0 8px 30px rgba(0,0,0,0.12)', display: 'flex', flexDirection: 'column' }}>
-            <div style={{ padding: '16px 20px 6px' }}>
-              <span style={{ color: '#94a3b8', fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.15em' }}>{category}</span>
-            </div>
-            <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '6px 24px' }}>
-              <p style={{ color: '#0f172a', fontSize: '1.1rem', fontWeight: 700, textAlign: 'center', lineHeight: 1.5, margin: 0 }}>{question}</p>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'center', paddingBottom: 16 }}>
-              <span style={{ color: '#94a3b8', fontSize: 11 }}>&#8635; Tap to flip</span>
-            </div>
-            <div style={{ height: 4, background: 'linear-gradient(to right, #fbbf24, #facc15)', flexShrink: 0 }} />
-          </div>
-          <div style={{ position: 'absolute', inset: 0, borderRadius: 16, overflow: 'hidden', backfaceVisibility: 'hidden', transform: 'rotateY(180deg)', backgroundColor: '#0f172a', boxShadow: '0 8px 30px rgba(0,0,0,0.35)', display: 'flex', flexDirection: 'column' }}>
-            <div style={{ padding: '16px 20px 6px' }}>
-              <span style={{ color: '#60a5fa', fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.15em' }}>Answer</span>
-            </div>
-            <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '6px 24px' }}>
-              <p style={{ color: '#ffffff', fontSize: '1.1rem', fontWeight: 700, textAlign: 'center', lineHeight: 1.5, margin: 0 }}>{answer}</p>
-            </div>
-            <div style={{ height: 4, background: 'linear-gradient(to right, #3b82f6, #6366f1)', flexShrink: 0 }} />
-          </div>
-        </motion.div>
-      </div>
-    );
-  }
-
-
-  if (loading) return (
-    <div className="flex flex-col gap-4">
-      <div className="flex items-center bg-zinc-900 rounded-2xl p-1 gap-1 animate-pulse">
-        {['Browse','Daily','Speed','Mastery'].map(l => <div key={l} className="flex-1 py-2 rounded-xl bg-zinc-800" />)}
-      </div>
-      <div className="h-64 rounded-3xl bg-zinc-900 animate-pulse" />
-    </div>
-  );
-
-  // ── DAILY ──────────────────────────────────────────────────────────────────
-  if (mode === 'daily') {
-    if (!dailyCards.length) {
-      return (
-        <div className="flex flex-col gap-4">
-          <TabBar />
-          {isDailyDone() ? (
-            <div className="flex flex-col items-center gap-4 py-8">
-              <CheckCircle size={44} className="text-green-500" />
-              <h2 className="text-white font-bold text-lg">Daily Complete!</h2>
-              <p className="text-zinc-400 text-sm text-center">You have finished today's challenge.<br />Come back tomorrow!</p>
-              <div className="flex items-center gap-2 bg-zinc-900 rounded-2xl px-5 py-3 border border-zinc-800">
-                <Flame size={20} className="text-orange-400" />
-                <span className="text-white font-bold text-lg">{streak}</span>
-                <span className="text-zinc-400 text-sm">day streak</span>
-              </div>
-            </div>
-          ) : (
-            <div className="flex flex-col items-center gap-5 py-8">
-              <div className="text-5xl">🔥</div>
-              <h2 className="text-white font-bold text-lg">Daily Challenge</h2>
-              <p className="text-zinc-400 text-sm text-center">10 cards · ~5 minutes<br />Build your streak every day!</p>
-              <div className="flex items-center gap-2 bg-zinc-900 rounded-2xl px-5 py-3 border border-zinc-800">
-                <Flame size={20} className="text-orange-400" />
-                <span className="text-white font-bold text-lg">{streak}</span>
-                <span className="text-zinc-400 text-sm">day streak</span>
-              </div>
-              <button onClick={() => { setDailyCards(getDailyCards(allCards)); setDIdx(0); setDFlipped(false); setDScore(0); setDDone(false); }}
-                className="px-8 py-3 bg-red-600 hover:bg-red-500 text-white rounded-2xl font-semibold transition-all active:scale-95">
-                Start Today's Cards
-              </button>
-            </div>
-          )}
-        </div>
-      );
-    }
-    if (dDone) {
-      return (
-        <div className="flex flex-col gap-4">
-          <TabBar />
-          <div className="flex flex-col items-center gap-5 py-6">
-            <div className="text-5xl">{dScore >= 8 ? '🏆' : dScore >= 5 ? '🎉' : '📚'}</div>
-            <h2 className="text-white font-bold text-xl">{dScore >= 8 ? 'Outstanding!' : dScore >= 5 ? 'Great Job!' : 'Keep Practicing!'}</h2>
-            <div className="flex gap-4">
-              <div className="flex flex-col items-center gap-1 bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-3">
-                <span className="text-white font-black text-2xl">{dScore}</span>
-                <span className="text-zinc-500 text-xs">Score</span>
-              </div>
-              <div className="flex flex-col items-center gap-1 bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-3">
-                <span className="text-orange-400 font-black text-2xl flex items-center gap-1"><Flame size={18} />{streak}</span>
-                <span className="text-zinc-500 text-xs">Streak</span>
-              </div>
-            </div>
-            <button onClick={() => { setDailyCards([]); setDIdx(0); setDFlipped(false); }}
-              className="px-6 py-2.5 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-300 rounded-2xl font-medium text-sm transition">
-              Back to Daily
-            </button>
-          </div>
-        </div>
-      );
-    }
-    const dc = dailyCards[dIdx];
-    return (
-      <div className="flex flex-col gap-3">
-        <TabBar />
-        <div className="flex items-center justify-between px-0.5">
-          <span className="text-zinc-600 text-xs">{dIdx + 1} <span className="text-zinc-700">of</span> {dailyCards.length}</span>
-          <div className="flex items-center gap-1 text-orange-400 text-xs font-semibold"><Flame size={12} /> {streak} streak</div>
-        </div>
-        <div className="flex gap-1">
-          {dailyCards.map((_, i) => (
-            <div key={i} className={`h-1 flex-1 rounded-full transition-all ${i < dIdx ? 'bg-green-500' : i === dIdx ? 'bg-red-500' : 'bg-zinc-800'}`} />
-          ))}
-        </div>
-        <FlipCard question={dc.question} answer={dc.answer} category={dc.category} flippedState={dFlipped} onFlip={() => setDFlipped(f => !f)} height="h-60 max-w-[300px] sm:max-w-xs mx-auto" />
-        <AnimatePresence>
-          {dFlipped && (
-            <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="grid grid-cols-4 gap-1.5 max-w-[300px] sm:max-w-xs mx-auto w-full">
-              {[
-                { label: 'Again',   q: 1, color: 'text-red-400',   hover: 'hover:bg-red-950/40 hover:border-red-900' },
-                { label: 'Hard',    q: 3, color: 'text-amber-400', hover: 'hover:bg-amber-950/40 hover:border-amber-900' },
-                { label: 'Easy',    q: 4, color: 'text-green-400', hover: 'hover:bg-green-950/40 hover:border-green-900' },
-                { label: 'Perfect', q: 5, color: 'text-blue-400',  hover: 'hover:bg-blue-950/40 hover:border-blue-900' },
-              ].map(({ label, q, color, hover }) => (
-                <button key={label} onClick={() => {
-                  sm2(dc, q); if (q >= 3) setDScore(s => s + 1); setDFlipped(false);
-                  if (dIdx + 1 >= dailyCards.length) {
-                    localStorage.setItem(LS_LAST_DAY, todayStr());
-                    const ns = getStreak() + 1; localStorage.setItem(LS_STREAK, String(ns)); setStreak(ns); setDDone(true);
-                  } else { setDIdx(i => i + 1); }
-                }} className={`py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-xs font-semibold transition-all ${color} ${hover}`}>
-                  {label}
-                </button>
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    );
-  }
-
-  // ── SPEED ──────────────────────────────────────────────────────────────────
-  if (mode === 'speed') {
-    if (!sRunning && !sDone) {
-      return (
-        <div className="flex flex-col gap-4">
-          <TabBar />
-          <div className="flex flex-col items-center gap-5 py-8">
-            <div className="text-5xl">⚡</div>
-            <h2 className="text-white font-bold text-lg">Speed Round</h2>
-            <p className="text-zinc-400 text-sm text-center">60 seconds · Answer as many as you can!</p>
-            {pb > 0 && (
-              <div className="flex items-center gap-2 bg-zinc-900 rounded-2xl px-5 py-3 border border-zinc-800">
-                <Trophy size={16} className="text-amber-400" />
-                <span className="text-zinc-400 text-sm">Best:</span>
-                <span className="text-white font-bold">{pb} cards</span>
-              </div>
-            )}
-            <button onClick={startSpeed}
-              className="px-8 py-3 bg-red-600 hover:bg-red-500 text-white rounded-2xl font-semibold transition-all active:scale-95">
-              Start Blitz
-            </button>
-          </div>
-        </div>
-      );
-    }
-    if (sDone) {
-      return (
-        <div className="flex flex-col gap-4">
-          <TabBar />
-          <div className="flex flex-col items-center gap-5 py-6">
-            <div className="text-5xl">{sCorrect >= pb && sCorrect > 0 ? '🏆' : '⚡'}</div>
-            <h2 className="text-white font-bold text-xl">{sCorrect >= pb && sCorrect > 0 ? 'New Personal Best!' : "Time's Up!"}</h2>
-            <div className="flex gap-3">
-              <div className="flex flex-col items-center gap-1 bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-3">
-                <span className="text-green-400 font-black text-2xl">{sCorrect}</span>
-                <span className="text-zinc-500 text-xs">Correct</span>
-              </div>
-              <div className="flex flex-col items-center gap-1 bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-3">
-                <span className="text-red-400 font-black text-2xl">{sTotal - sCorrect}</span>
-                <span className="text-zinc-500 text-xs">Missed</span>
-              </div>
-              <div className="flex flex-col items-center gap-1 bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-3">
-                <span className="text-amber-400 font-black text-2xl">{pb}</span>
-                <span className="text-zinc-500 text-xs">Best</span>
-              </div>
-            </div>
-            <button onClick={() => { setSRunning(false); setSDone(false); }}
-              className="px-6 py-2.5 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-300 rounded-2xl font-medium text-sm transition">
-              Try Again
-            </button>
-          </div>
-        </div>
-      );
-    }
-    const sc = sCards[sIdx] || sCards[0];
-    if (!sc) return <div className="flex flex-col gap-4"><TabBar /><div className="text-center py-12 text-zinc-500 text-sm">No cards loaded.</div></div>;
-    const timerPct   = (sTime / 60) * 100;
-    const timerColor = sTime > 30 ? '#22c55e' : sTime > 15 ? '#f59e0b' : '#ef4444';
-    return (
-      <div className="flex flex-col gap-3">
-        <TabBar />
-        <div className="flex items-center gap-2">
-          <div className="flex-1 h-2 bg-zinc-800 rounded-full overflow-hidden">
-            <div className="h-full rounded-full transition-all duration-1000" style={{ width: `${timerPct}%`, backgroundColor: timerColor }} />
-          </div>
-          <div className="flex items-center gap-1 text-xs font-bold shrink-0" style={{ color: timerColor }}>
-            <Clock size={12} /> {sTime}s
-          </div>
-        </div>
-        <div className="flex items-center justify-between px-0.5 text-xs">
-          <span className="text-green-400">✓ {sCorrect}</span>
-          <span className="text-red-400">✗ {sTotal - sCorrect}</span>
-        </div>
-        <FlipCard question={sc.question} answer={sc.answer} category={sc.category} flippedState={sFlipped} onFlip={() => setSFlipped(f => !f)} height="h-60 max-w-[300px] sm:max-w-xs mx-auto" />
-        <AnimatePresence>
-          {sFlipped && (
-            <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="grid grid-cols-2 gap-2 max-w-[300px] sm:max-w-xs mx-auto w-full">
-              <button onClick={() => {
-                setSTotal(t => t + 1); setSFlipped(false);
-                const ni = sIdx + 1 < sCards.length ? sIdx + 1 : 0;
-                if (ni === 0) setSCards(s => [...s].sort(() => Math.random() - 0.5)); setSIdx(ni);
-              }} className="py-3 rounded-2xl bg-zinc-900 border border-zinc-800 text-red-400 font-semibold text-sm hover:bg-red-950/30 transition">
-                ✗ Missed
-              </button>
-              <button onClick={() => {
-                setSCorrect(c => c + 1); setSTotal(t => t + 1); setSFlipped(false);
-                const ni = sIdx + 1 < sCards.length ? sIdx + 1 : 0;
-                if (ni === 0) setSCards(s => [...s].sort(() => Math.random() - 0.5)); setSIdx(ni);
-              }} className="py-3 rounded-2xl bg-zinc-900 border border-zinc-800 text-green-400 font-semibold text-sm hover:bg-green-950/30 transition">
-                ✓ Got It
-              </button>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    );
-  }
-
-  // ── MASTERY ────────────────────────────────────────────────────────────────
-  if (mode === 'mastery') {
-    if (!allCards.length) return (
-      <div className="flex flex-col gap-4">
-        <TabBar />
-        <div className="text-center text-zinc-500 py-12"><Brain size={36} className="mx-auto mb-2 opacity-20" /><p className="text-sm">Loading cards...</p></div>
-      </div>
-    );
-    const cats    = Array.from(new Set(allCards.map(c => c.category))).sort();
-    const grouped: Record<string, Flashcard[]> = {};
-    cats.forEach(cat => { grouped[cat] = allCards.filter(c => c.category === cat); });
-    const totalM     = mastered.size;
-    const overallPct = Math.round((totalM / allCards.length) * 100);
-    return (
-      <div className="flex flex-col gap-4">
-        <TabBar />
-        <div className="bg-zinc-900/80 rounded-2xl p-4 border border-zinc-800">
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-white text-sm font-semibold">Overall Progress</span>
-            <span className="text-zinc-400 text-xs">{overallPct}%</span>
-          </div>
-          <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-red-600 to-amber-500 rounded-full transition-all duration-700" style={{ width: `${overallPct}%` }} />
-          </div>
-          <p className="text-zinc-600 text-xs mt-2">{totalM} of {allCards.length} cards mastered</p>
-        </div>
-        <div className="flex flex-col gap-1.5 overflow-y-auto max-h-80 pr-0.5" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' } as React.CSSProperties}>
-          {cats.map(cat => {
-            const catCards = grouped[cat];
-            const done     = catCards.filter(c => mastered.has(c.id)).length;
-            const pct      = Math.round((done / catCards.length) * 100);
-            const barColor = pct === 100 ? '#22c55e' : pct >= 50 ? '#f59e0b' : '#ef4444';
-            return (
-              <div key={cat} className="bg-zinc-900/80 rounded-xl px-3 py-2.5 border border-zinc-800/80">
-                <div className="flex justify-between items-center mb-1.5">
-                  <span className="text-white text-xs font-medium">{cat}{pct === 100 ? ' 🏆' : ''}</span>
-                  <span className="text-zinc-500 text-xs">{done}/{catCards.length}</span>
-                </div>
-                <div className="h-1 bg-zinc-800 rounded-full overflow-hidden">
-                  <div className="h-full rounded-full transition-all duration-500" style={{ width: `${pct}%`, backgroundColor: barColor }} />
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    );
-  }
-
-  // ── BROWSE — Tinder Swipe Stack ────────────────────────────────────────────
-  const categories = ['All', ...Array.from(new Set(allCards.map(c => c.category))).sort()];
-
-  if (swipeDone) {
-    return (
-      <div className="flex flex-col gap-4">
-        <TabBar />
-        {!isRevisingMissed && (
-          <div className="flex gap-1.5 overflow-x-auto pb-0.5" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' } as React.CSSProperties}>
-            {categories.map(cat => (
-              <button key={cat} onClick={() => setSelCat(cat)}
-                className={`shrink-0 px-2.5 py-1 rounded-full text-xs font-medium transition-all whitespace-nowrap
-                  ${selCat === cat ? 'bg-red-600 text-white' : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800 border border-zinc-800'}`}>
-                {cat}
-              </button>
-            ))}
-          </div>
-        )}
-        <div className="flex flex-col items-center gap-5 py-6">
-          <div className="text-5xl">🎉</div>
-          <h2 className="text-white font-bold text-xl">Deck Complete!</h2>
-          <p className="text-zinc-500 text-sm">{isRevisingMissed ? 'Revision round done!' : `${swipeCards.length} cards reviewed`}</p>
-          <div className="flex gap-4">
-            <div className="flex flex-col items-center gap-1.5 bg-green-900/30 border border-green-800/50 rounded-2xl px-6 py-4">
-              <span className="text-green-400 text-3xl font-black">{gotItIds.length}</span>
-              <span className="text-zinc-400 text-xs font-medium">Got It ✓</span>
-            </div>
-            <div className="flex flex-col items-center gap-1.5 bg-red-900/30 border border-red-800/50 rounded-2xl px-6 py-4">
-              <span className="text-red-400 text-3xl font-black">{reviseIds.length}</span>
-              <span className="text-zinc-400 text-xs font-medium">To Review</span>
-            </div>
-          </div>
-          {reviseIds.length > 0 && (
-            <button onClick={() => {
-              const missed = allCards.filter(c => reviseIds.includes(c.id));
-              setSwipeCards(missed); setSwipeIdx(0); setSwipeFlipped(false);
-              setGotItIds([]); setReviseIds([]); setSwipeDone(false); setIsRevisingMissed(true);
-            }}
-              className="px-6 py-3 bg-red-600 hover:bg-red-500 text-white rounded-2xl font-semibold text-sm transition-all active:scale-95">
-              📌 Revise {reviseIds.length} Missed Cards
-            </button>
-          )}
-          <button onClick={() => {
-            setIsRevisingMissed(false);
-            const cards = selCat === 'All' ? [...allCards] : allCards.filter(c => c.category === selCat);
-            setSwipeCards(cards); setSwipeIdx(0); setSwipeFlipped(false);
-            setGotItIds([]); setReviseIds([]); setSwipeDone(false);
-          }}
-            className="px-6 py-2.5 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-300 rounded-2xl font-medium text-sm transition">
-            🔄 Start Over
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  const currentCard = swipeCards[swipeIdx];
-  const progress    = swipeCards.length > 0 ? swipeIdx / swipeCards.length : 0;
-  const remaining   = swipeCards.length - swipeIdx;
-
-  if (!currentCard) return (
-    <div className="flex flex-col gap-4">
-      <TabBar />
-      <div className="text-center text-zinc-500 py-12"><Brain size={36} className="mx-auto mb-2 opacity-20" /><p className="text-sm">No cards to show.</p></div>
-    </div>
-  );
+  // ══════════════════════════════════════════════════════════════════════════
+  // HOME
+  // ══════════════════════════════════════════════════════════════════════════
+  const todayDailyDone = typeof window !== 'undefined' && localStorage.getItem('ct_last_daily') === new Date().toISOString().split('T')[0];
 
   return (
-    <div className="flex flex-col gap-3">
-      <TabBar />
-      {!isRevisingMissed && (
-        <div className="flex gap-1.5 overflow-x-auto pb-0.5" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' } as React.CSSProperties}>
-          {categories.map(cat => (
-            <button key={cat} onClick={() => setSelCat(cat)}
-              className={`shrink-0 px-2.5 py-1 rounded-full text-xs font-medium transition-all whitespace-nowrap
-                ${selCat === cat ? 'bg-red-600 text-white' : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800 border border-zinc-800'}`}>
-              {cat}
-            </button>
-          ))}
+    <div className="flex flex-col gap-5 py-4 px-4 max-w-lg mx-auto">
+      {/* Stats bar */}
+      <div className="flex items-center justify-between rounded-2xl px-5 py-3"
+        style={{ background: 'linear-gradient(135deg,#1e293b,#0f172a)', boxShadow: '0 4px 16px rgba(0,0,0,0.2)' }}>
+        <div className="flex items-center gap-2">
+          <Flame size={18} style={{ color: '#f59e0b' }} />
+          <div>
+            <p style={{ color: '#fbbf24', fontSize: 18, fontWeight: 900, lineHeight: 1, margin: 0 }}>{streak}</p>
+            <p style={{ color: '#64748b', fontSize: 10, margin: 0 }}>day streak</p>
+          </div>
         </div>
-      )}
-      <div className="flex items-center gap-2 mx-auto w-full max-w-[300px] sm:max-w-[320px]">
-        <div className="flex-1 h-1.5 bg-zinc-800 rounded-full overflow-hidden">
-          <div className="h-full bg-gradient-to-r from-red-600 to-amber-500 rounded-full transition-all duration-300" style={{ width: `${progress * 100}%` }} />
+        <div className="text-center">
+          <p style={{ color: '#f8fafc', fontSize: 13, fontWeight: 700, margin: 0 }}>GK Flashcards</p>
+          <p style={{ color: '#475569', fontSize: 11, margin: 0 }}>CLAT Edition</p>
         </div>
-        <span className="text-zinc-600 text-xs shrink-0">{swipeIdx}/{swipeCards.length}</span>
+        <div className="flex items-center gap-2">
+          <Trophy size={18} style={{ color: '#a78bfa' }} />
+          <div className="text-right">
+            <p style={{ color: '#a78bfa', fontSize: 18, fontWeight: 900, lineHeight: 1, margin: 0 }}>{overallPct}%</p>
+            <p style={{ color: '#64748b', fontSize: 10, margin: 0 }}>mastered</p>
+          </div>
+        </div>
       </div>
-      <div className="relative mx-auto w-full max-w-[300px] sm:max-w-[320px] h-[400px] sm:h-[440px]">
-        {swipeIdx + 2 < swipeCards.length && (
-          <div className="absolute inset-0 rounded-3xl" style={{ backgroundColor: '#f1f5f9', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}
-            style={{ transform: 'scale(0.86) translateY(22px)', zIndex: 1, transformOrigin: 'bottom center' }} />
+
+      {/* Quote */}
+      <p style={{ color: '#475569', fontSize: 12, textAlign: 'center', fontStyle: 'italic', lineHeight: 1.6, margin: 0 }}>{todayQuote}</p>
+
+      {/* Daily Dose */}
+      <button onClick={startDaily}
+        className="w-full rounded-2xl p-5 text-left relative overflow-hidden"
+        style={{ background: 'linear-gradient(135deg,#78350f,#92400e)', border: 'none', cursor: 'pointer', boxShadow: '0 4px 20px rgba(245,158,11,0.2)' }}>
+        {todayDailyDone && (
+          <span style={{ position: 'absolute', top: 12, right: 14, backgroundColor: '#4ade80', color: '#052e16', fontSize: 10, fontWeight: 700, borderRadius: 999, padding: '2px 8px' }}>✓ Done today</span>
         )}
-        {swipeIdx + 1 < swipeCards.length && (
-          <div className="absolute inset-0 rounded-3xl" style={{ backgroundColor: '#f8fafc', boxShadow: '0 4px 16px rgba(0,0,0,0.12)' }}
-            style={{ transform: 'scale(0.93) translateY(11px)', zIndex: 2, transformOrigin: 'bottom center' }} />
-        )}
-        <SwipeCard
-          key={currentCard.id + '-' + swipeIdx}
-          card={currentCard}
-          onSwipe={handleSwipe}
-          onFlip={() => setSwipeFlipped(f => !f)}
-          isFlipped={swipeFlipped}
-          isDraggable={true}
-        />
-      </div>
-      <div className="flex items-center justify-between px-1 pt-1 mx-auto w-full max-w-[300px] sm:max-w-[320px]">
-        <button onClick={() => handleSwipe('left')}
-          className="flex flex-col items-center gap-1 px-5 py-3 rounded-2xl bg-zinc-900 border border-zinc-700/80 text-red-400 hover:bg-red-950/30 hover:border-red-800/60 transition-all active:scale-95 text-xs font-semibold">
-          <ArrowLeft size={18} />
-          Review
-        </button>
-        <div className="flex flex-col items-center gap-0.5 text-center">
-          <span className="text-zinc-500 text-xs font-medium">{remaining} left</span>
-          <span className="text-zinc-700 text-[10px]">swipe or tap buttons</span>
+        <div className="flex items-center gap-3 mb-2">
+          <div style={{ width: 40, height: 40, borderRadius: 12, backgroundColor: 'rgba(251,191,36,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <BookOpen size={20} style={{ color: '#fbbf24' }} />
+          </div>
+          <div>
+            <p style={{ color: '#fbbf24', fontSize: 15, fontWeight: 800, margin: 0 }}>Daily Dose</p>
+            <p style={{ color: '#d97706', fontSize: 11, margin: 0 }}>15 curated cards · SM2 spaced repetition</p>
+          </div>
         </div>
-        <button onClick={() => handleSwipe('right')}
-          className="flex flex-col items-center gap-1 px-5 py-3 rounded-2xl bg-zinc-900 border border-zinc-700/80 text-green-400 hover:bg-green-950/30 hover:border-green-800/60 transition-all active:scale-95 text-xs font-semibold">
-          <ArrowRight size={18} />
-          Got It
-        </button>
+        <p style={{ color: '#a16207', backgroundColor: 'rgba(251,191,36,0.15)', borderRadius: 8, padding: '6px 10px', fontSize: 12, margin: 0 }}>
+          📖 Personalised daily deck based on what you need to review
+        </p>
+      </button>
+
+      {/* Exam Blitz */}
+      <button onClick={startSpeed}
+        className="w-full rounded-2xl p-5 text-left"
+        style={{ background: 'linear-gradient(135deg,#1e1b4b,#312e81)', border: 'none', cursor: 'pointer', boxShadow: '0 4px 20px rgba(99,102,241,0.2)' }}>
+        <div className="flex items-center gap-3 mb-2">
+          <div style={{ width: 40, height: 40, borderRadius: 12, backgroundColor: 'rgba(99,102,241,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <Zap size={20} style={{ color: '#818cf8' }} />
+          </div>
+          <div>
+            <p style={{ color: '#818cf8', fontSize: 15, fontWeight: 800, margin: 0 }}>Exam Blitz</p>
+            <p style={{ color: '#6366f1', fontSize: 11, margin: 0 }}>90 seconds · CLAT exam pressure training</p>
+          </div>
+        </div>
+        <p style={{ color: '#4338ca', backgroundColor: 'rgba(99,102,241,0.12)', borderRadius: 8, padding: '6px 10px', fontSize: 12, margin: 0 }}>
+          ⚡ Simulate real CLAT GK section · Personal best: <strong style={{ color: '#818cf8' }}>{speedBest}</strong>
+        </p>
+      </button>
+
+      {/* Browse & Swipe */}
+      <button onClick={() => startBrowse()}
+        className="w-full rounded-2xl p-5 text-left"
+        style={{ background: 'linear-gradient(135deg,#0c4a6e,#0369a1)', border: 'none', cursor: 'pointer', boxShadow: '0 4px 20px rgba(14,165,233,0.2)' }}>
+        <div className="flex items-center gap-3 mb-2">
+          <div style={{ width: 40, height: 40, borderRadius: 12, backgroundColor: 'rgba(14,165,233,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <RefreshCw size={20} style={{ color: '#38bdf8' }} />
+          </div>
+          <div>
+            <p style={{ color: '#38bdf8', fontSize: 15, fontWeight: 800, margin: 0 }}>Browse &amp; Swipe</p>
+            <p style={{ color: '#0284c7', fontSize: 11, margin: 0 }}>Swipe right = got it · left = review later</p>
+          </div>
+        </div>
+        <p style={{ color: '#075985', backgroundColor: 'rgba(14,165,233,0.1)', borderRadius: 8, padding: '6px 10px', fontSize: 12, margin: 0 }}>
+          🃏 Browse all {allCards.length} cards · Tinder-style · Missed cards auto-saved
+        </p>
+      </button>
+
+      {/* Mastery Tracker */}
+      <button onClick={() => setMode('mastery')}
+        className="w-full rounded-2xl p-5 text-left"
+        style={{ background: 'linear-gradient(135deg,#134e4a,#0f766e)', border: 'none', cursor: 'pointer', boxShadow: '0 4px 20px rgba(20,184,166,0.15)' }}>
+        <div className="flex items-center gap-3 mb-3">
+          <div style={{ width: 40, height: 40, borderRadius: 12, backgroundColor: 'rgba(20,184,166,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <BarChart2 size={20} style={{ color: '#2dd4bf' }} />
+          </div>
+          <div>
+            <p style={{ color: '#2dd4bf', fontSize: 15, fontWeight: 800, margin: 0 }}>Mastery Tracker</p>
+            <p style={{ color: '#0d9488', fontSize: 11, margin: 0 }}>{totalMastered} / {allCards.length} cards mastered</p>
+          </div>
+        </div>
+        <div style={{ height: 6, borderRadius: 999, backgroundColor: 'rgba(20,184,166,0.2)', overflow: 'hidden' }}>
+          <div style={{ height: '100%', width: `${overallPct}%`, background: 'linear-gradient(to right,#2dd4bf,#14b8a6)', borderRadius: 999 }} />
+        </div>
+      </button>
+
+      {/* Mentor Tip */}
+      <div className="rounded-xl p-4" style={{ backgroundColor: '#1e293b', border: '1px solid #334155' }}>
+        <p style={{ color: '#fbbf24', fontSize: 11, fontWeight: 700, marginBottom: 4, marginTop: 0 }}>💡 MENTOR TIP</p>
+        <p style={{ color: '#94a3b8', fontSize: 12, lineHeight: 1.6, margin: 0 }}>
+          CLAT GK tests current affairs from the last 12 months. Do your Daily Dose every morning — 15 minutes a day for 90 days covers the entire syllabus with spaced repetition.
+        </p>
       </div>
     </div>
   );
