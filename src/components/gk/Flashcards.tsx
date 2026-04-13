@@ -1,18 +1,7 @@
 'use client';
 import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import {
-  ChevronLeft,
-  ChevronRight,
-  RotateCcw,
-  Brain,
-  Zap,
-  Trophy,
-  Flame,
-  Clock,
-  CheckCircle,
-  XCircle,
-} from 'lucide-react';
+import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
+import { Brain, Zap, Trophy, Flame, Clock, CheckCircle, XCircle, ArrowLeft, ArrowRight } from 'lucide-react';
 
 const SUPABASE_URL = 'https://fjswchcothephgtzqbgq.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZqc3djaGNvdGhlcGhndHpxYmdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU3NTk2ODQsImV4cCI6MjA3MTMzNTY4NH0.AqKfl8rwkH4_Y0sVdcQLWu6HF1nrxhro-jMyEdUggV4';
@@ -58,21 +47,95 @@ function getDailyCards(cards: Flashcard[]): Flashcard[] {
 
 type Mode = 'browse' | 'daily' | 'speed' | 'mastery';
 
+// ── SwipeCard (standalone) ─────────────────────────────────────────────────
+interface SwipeCardProps {
+  card: Flashcard;
+  onSwipe: (dir: 'left' | 'right') => void;
+  onFlip: () => void;
+  isFlipped: boolean;
+  isDraggable: boolean;
+}
+function SwipeCard({ card, onSwipe, onFlip, isFlipped, isDraggable }: SwipeCardProps) {
+  const x            = useMotionValue(0);
+  const rotate       = useTransform(x, [-260, 260], [-16, 16]);
+  const gotItOpacity = useTransform(x, [20, 110], [0, 1]);
+  const revOpacity   = useTransform(x, [-20, -110], [0, 1]);
+  const isDragging   = React.useRef(false);
+
+  return (
+    <motion.div
+      className="absolute inset-0 cursor-grab active:cursor-grabbing select-none"
+      style={{ x: isDraggable ? x : undefined, rotate: isDraggable ? rotate : undefined }}
+      drag={isDraggable ? 'x' : false}
+      dragConstraints={{ left: 0, right: 0 }}
+      dragElastic={0.6}
+      onDragStart={() => { isDragging.current = true; }}
+      onDragEnd={(_, info) => {
+        isDragging.current = false;
+        if (Math.abs(info.offset.x) > 80) onSwipe(info.offset.x > 0 ? 'right' : 'left');
+      }}
+      onClick={() => { if (!isDragging.current) onFlip(); }}
+    >
+      <div className="w-full h-full rounded-3xl bg-zinc-800 border border-zinc-600 shadow-[0_20px_70px_rgba(0,0,0,0.8)] ring-1 ring-white/[0.07] relative overflow-hidden">
+        {isDraggable && (
+          <motion.div style={{ opacity: gotItOpacity, rotate: -22 }}
+            className="absolute top-7 left-6 z-20 border-[3px] border-green-400 text-green-400 rounded-xl px-3 py-1 font-black text-lg uppercase tracking-widest pointer-events-none">
+            GOT IT ✓
+          </motion.div>
+        )}
+        {isDraggable && (
+          <motion.div style={{ opacity: revOpacity, rotate: 22 }}
+            className="absolute top-7 right-6 z-20 border-[3px] border-red-400 text-red-400 rounded-xl px-3 py-1 font-black text-lg uppercase tracking-widest pointer-events-none">
+            REVIEW ✗
+          </motion.div>
+        )}
+        <AnimatePresence mode="wait" initial={false}>
+          {!isFlipped ? (
+            <motion.div key="front" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }}
+              className="absolute inset-0 flex flex-col items-center justify-center p-8 gap-4">
+              <span className="text-red-500/80 text-xs font-bold uppercase tracking-[0.2em]">{card.category}</span>
+              <p className="text-white text-xl font-semibold text-center leading-relaxed">{card.question}</p>
+              <span className="text-zinc-600 text-xs mt-1">tap to reveal · swipe to sort</span>
+            </motion.div>
+          ) : (
+            <motion.div key="back" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }}
+              className="absolute inset-0 flex flex-col items-center justify-center p-8 gap-4 bg-gradient-to-b from-red-950/40 to-zinc-800">
+              <span className="text-red-400 text-xs font-bold uppercase tracking-[0.2em]">Answer</span>
+              <p className="text-white text-2xl font-bold text-center leading-snug">{card.answer}</p>
+              <div className="flex gap-3 mt-3">
+                <button onClick={(e) => { e.stopPropagation(); onSwipe('left'); }}
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-red-900/50 border border-red-700/60 text-red-300 font-semibold text-sm hover:bg-red-900/70 active:scale-95 transition-all">
+                  <ArrowLeft size={14} /> Review
+                </button>
+                <button onClick={(e) => { e.stopPropagation(); onSwipe('right'); }}
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-green-900/50 border border-green-700/60 text-green-300 font-semibold text-sm hover:bg-green-900/70 active:scale-95 transition-all">
+                  Got It <ArrowRight size={14} />
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </motion.div>
+  );
+}
+
+// ── Main Component ─────────────────────────────────────────────────────────
 export default function Flashcards() {
   const [allCards,   setAllCards]   = React.useState<Flashcard[]>([]);
   const [loading,    setLoading]    = React.useState(true);
   const [mode,       setMode]       = React.useState<Mode>('browse');
   const [selCat,     setSelCat]     = React.useState('All');
-  const [curIdx,     setCurIdx]     = React.useState(0);
-  const [flipped,    setFlipped]    = React.useState(false);
   const [cardStates, setCardStates] = React.useState<Record<string, CardState>>({});
   const [mastered,   setMastered]   = React.useState<Set<string>>(new Set());
+  // Daily
   const [dailyCards, setDailyCards] = React.useState<Flashcard[]>([]);
   const [dIdx,       setDIdx]       = React.useState(0);
   const [dFlipped,   setDFlipped]   = React.useState(false);
   const [dScore,     setDScore]     = React.useState(0);
   const [dDone,      setDDone]      = React.useState(false);
   const [streak,     setStreak]     = React.useState(0);
+  // Speed
   const [sCards,     setSCards]     = React.useState<Flashcard[]>([]);
   const [sIdx,       setSIdx]       = React.useState(0);
   const [sFlipped,   setSFlipped]   = React.useState(false);
@@ -83,6 +146,16 @@ export default function Flashcards() {
   const [sDone,      setSDone]      = React.useState(false);
   const [pb,         setPb]         = React.useState(0);
   const timerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  // Swipe / Browse
+  const [swipeCards,       setSwipeCards]       = React.useState<Flashcard[]>([]);
+  const [swipeIdx,         setSwipeIdx]         = React.useState(0);
+  const [swipeFlipped,     setSwipeFlipped]     = React.useState(false);
+  const [gotItIds,         setGotItIds]         = React.useState<string[]>([]);
+  const [reviseIds,        setReviseIds]        = React.useState<string[]>([]);
+  const [swipeDone,        setSwipeDone]        = React.useState(false);
+  const [isRevisingMissed, setIsRevisingMissed] = React.useState(false);
+  const handleSwipeRef = React.useRef<(dir: 'left' | 'right') => void>(() => {});
+
   React.useEffect(() => {
     fetch(`${SUPABASE_URL}/rest/v1/flashcard?select=*&order=id.asc&limit=500`, {
       headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` },
@@ -102,269 +175,342 @@ export default function Flashcards() {
     return () => { if (timerRef.current) clearTimeout(timerRef.current); };
   }, [sRunning, sTime]);
 
-  const categories = React.useMemo(() => ['All', ...Array.from(new Set(allCards.map(c => c.category))).sort()], [allCards]);
-  const filtered   = React.useMemo(() => selCat === 'All' ? allCards : allCards.filter(c => c.category === selCat), [allCards, selCat]);
-  const card = filtered[curIdx];
+  React.useEffect(() => {
+    if (mode !== 'browse' || !allCards.length || isRevisingMissed) return;
+    const cards = selCat === 'All' ? [...allCards] : allCards.filter(c => c.category === selCat);
+    setSwipeCards(cards); setSwipeIdx(0); setSwipeFlipped(false);
+    setGotItIds([]); setReviseIds([]); setSwipeDone(false);
+  }, [allCards, selCat, mode]);
 
-  function toggleMastered(id: string) { const s = new Set(mastered); s.has(id) ? s.delete(id) : s.add(id); setMastered(s); saveMastered(s); }
-  function sm2(c: Flashcard, q: number) {
-    const prev = cardStates[c.id] || { repetitions: 0, interval: 1, easeFactor: 2.5, nextReviewDate: todayStr(), id: c.id };
-    setCardStates(s => ({ ...s, [c.id]: { ...prev, ...calculateSM2(prev, q) } }));
-    if (q >= 4) toggleMastered(c.id);
-  }
-  function goNext() { setCurIdx(i => Math.min(filtered.length - 1, i + 1)); setFlipped(false); }
-  function goPrev() { setCurIdx(i => Math.max(0, i - 1)); setFlipped(false); }
+  React.useEffect(() => {
+    if (mode !== 'browse') return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.code === 'Space') { setSwipeFlipped(f => !f); e.preventDefault(); }
+      else if (e.code === 'ArrowRight') handleSwipeRef.current('right');
+      else if (e.code === 'ArrowLeft')  handleSwipeRef.current('left');
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [mode]);
 
-  function startDaily() { setDailyCards(getDailyCards(allCards)); setDIdx(0); setDFlipped(false); setDScore(0); setDDone(false); setMode('daily'); }
-  function dailyAnswer(correct: boolean) {
-    const ns = dScore + (correct ? 1 : 0);
-    if (dIdx + 1 >= dailyCards.length) {
-      setDScore(ns); setDDone(true);
-      const yest = new Date(); yest.setDate(yest.getDate() - 1);
-      const last = localStorage.getItem(LS_LAST_DAY);
-      const newStreak = last === yest.toISOString().split('T')[0] ? streak + 1 : 1;
-      setStreak(newStreak); localStorage.setItem(LS_STREAK, String(newStreak)); localStorage.setItem(LS_LAST_DAY, todayStr());
-    } else { if (correct) setDScore(s => s + 1); setDIdx(i => i + 1); setDFlipped(false); }
+  function sm2(card: Flashcard, quality: number) {
+    const prev = cardStates[card.id] || { repetitions: 0, interval: 1, easeFactor: 2.5, nextReviewDate: todayStr() };
+    const next = calculateSM2(prev, quality);
+    setCardStates(cs => ({ ...cs, [card.id]: { id: card.id, ...next } }));
+    if (quality >= 4) { setMastered(m => { const n = new Set(m); n.add(card.id); saveMastered(n); return n; }); }
   }
-  function startSpeed() { setSCards([...allCards].sort(() => Math.random() - 0.5)); setSIdx(0); setSFlipped(false); setSCorrect(0); setSTotal(0); setSTime(60); setSDone(false); setSRunning(true); setMode('speed'); }
-  function speedAnswer(correct: boolean) {
-    if (!sRunning) return;
-    if (correct) setSCorrect(c => c + 1);
-    setSTotal(t => t + 1); setSIdx(i => (i + 1) % sCards.length); setSFlipped(false);
+
+  function startSpeed() {
+    const shuffled = [...allCards].sort(() => Math.random() - 0.5);
+    setSCards(shuffled); setSIdx(0); setSFlipped(false);
+    setSCorrect(0); setSTotal(0); setSTime(60); setSRunning(true); setSDone(false);
   }
   function endSpeed() {
+    if (timerRef.current) clearTimeout(timerRef.current);
     setSRunning(false); setSDone(true);
-    if (sCorrect > pb) { setPb(sCorrect); localStorage.setItem(LS_SPEED_PB, String(sCorrect)); }
+    if (sCorrect > pb) { localStorage.setItem(LS_SPEED_PB, String(sCorrect)); setPb(sCorrect); }
   }
 
-  const TabBar = () => (
-    <div className="flex items-center bg-zinc-900 rounded-2xl p-1 gap-1">
-      {([
-        { id: 'browse',  label: 'Browse',  Icon: Brain,  color: 'text-red-400' },
-        { id: 'daily',   label: 'Daily',   Icon: Flame,  color: 'text-orange-400' },
-        { id: 'speed',   label: 'Speed',   Icon: Zap,    color: 'text-yellow-400' },
-        { id: 'mastery', label: 'Mastery', Icon: Trophy, color: 'text-yellow-300' },
-      ] as const).map(({ id, label, Icon, color }) => (
-        <button
-          key={id}
-          onClick={() => {
-            if (id === 'daily')  { startDaily(); return; }
-            if (id === 'speed')  { setMode('speed'); setSRunning(false); setSDone(false); setSTotal(0); return; }
-            setMode(id as Mode);
-          }}
-          className={`relative flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-semibold transition-all duration-200
-            ${mode === id
-              ? id === 'browse'  ? 'bg-red-600 text-white shadow-lg shadow-red-900/40'
-              : id === 'daily'   ? 'bg-orange-600 text-white shadow-lg shadow-orange-900/40'
-              : id === 'speed'   ? 'bg-yellow-500 text-black shadow-lg shadow-yellow-900/40'
-              : 'bg-yellow-400 text-black shadow-lg shadow-yellow-900/40'
-              : `bg-transparent ${color} hover:bg-zinc-800`
-            }`}
-        >
-          <Icon size={13} />
-          {label}
-          {id === 'daily' && streak > 0 && (
-            <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-[9px] rounded-full min-w-[14px] h-[14px] flex items-center justify-center font-bold px-0.5 leading-none">
-              {streak > 9 ? '9+' : streak}
-            </span>
-          )}
-        </button>
-      ))}
-    </div>
-  );
-  const FlipCard = ({ question, answer, category, flippedState, onFlip, height = 'h-56' }: {
+  function handleSwipe(dir: 'left' | 'right') {
+    if (swipeDone || swipeIdx >= swipeCards.length) return;
+    const card = swipeCards[swipeIdx];
+    if (dir === 'right') setGotItIds(g => [...g, card.id]);
+    else setReviseIds(r => [...r, card.id]);
+    setSwipeFlipped(false);
+    const next = swipeIdx + 1;
+    if (next >= swipeCards.length) setSwipeDone(true);
+    setSwipeIdx(next);
+  }
+  handleSwipeRef.current = handleSwipe;
+
+  // ── TabBar ───────────────────────────────────────────────────────────────
+  function TabBar() {
+    const tabs = [
+      { key: 'browse'  as Mode, label: 'Browse',  icon: <Brain size={12} /> },
+      { key: 'daily'   as Mode, label: 'Daily',   icon: <Flame size={12} /> },
+      { key: 'speed'   as Mode, label: 'Speed',   icon: <Zap size={12} /> },
+      { key: 'mastery' as Mode, label: 'Mastery', icon: <Trophy size={12} /> },
+    ];
+    return (
+      <div className="flex items-center bg-zinc-900 rounded-2xl p-1 gap-1">
+        {tabs.map(t => (
+          <button key={t.key} onClick={() => setMode(t.key)}
+            className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-semibold transition-all duration-200
+              ${mode === t.key ? 'bg-red-600 text-white shadow-sm' : 'text-zinc-500 hover:text-zinc-300'}`}>
+            {t.icon}{t.label}
+          </button>
+        ))}
+      </div>
+    );
+  }
+
+  // ── FlipCard ──────────────────────────────────────────────────────────────
+  function FlipCard({ question, answer, category, flippedState, onFlip, height = 'h-56' }: {
     question: string; answer: string; category: string;
     flippedState: boolean; onFlip: () => void; height?: string;
-  }) => (
-    <motion.div className={`relative ${height} cursor-pointer select-none drop-shadow-2xl`} onClick={onFlip} style={{ perspective: 1200 }}>
-      <motion.div
-        className="absolute inset-0 rounded-2xl bg-zinc-800 border border-zinc-600 shadow-[0_12px_48px_rgba(0,0,0,0.6)] ring-1 ring-white/[0.06] flex flex-col items-center justify-center p-6 gap-3"
-        animate={{ rotateY: flippedState ? 180 : 0 }}
-        transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-        style={{ backfaceVisibility: 'hidden' }}
-      >
-        <span className="text-[10px] font-semibold tracking-[0.15em] uppercase text-zinc-500 bg-zinc-800 px-2.5 py-1 rounded-full">{category}</span>
-        <p className="text-white text-center font-medium leading-relaxed text-base">{question}</p>
-        <span className="text-zinc-600 text-xs mt-1">tap to flip</span>
-      </motion.div>
-      <motion.div
-        className="absolute inset-0 rounded-2xl border border-red-900/50 bg-gradient-to-br from-red-950/80 to-zinc-900 flex flex-col items-center justify-center p-6 gap-3"
-        initial={{ rotateY: 180 }}
-        animate={{ rotateY: flippedState ? 360 : 180 }}
-        transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-        style={{ backfaceVisibility: 'hidden' }}
-      >
-        <span className="text-[10px] font-semibold tracking-[0.15em] uppercase text-red-500/70">Answer</span>
-        <p className="text-red-200 text-2xl font-bold text-center leading-tight">{answer}</p>
-      </motion.div>
-    </motion.div>
-  );
+  }) {
+    return (
+      <div className={`relative ${height} cursor-pointer select-none drop-shadow-2xl`} onClick={onFlip} style={{ perspective: 1200 }}>
+        <motion.div
+          className="relative w-full h-full"
+          animate={{ rotateY: flippedState ? 180 : 0 }}
+          transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
+          style={{ transformStyle: 'preserve-3d' }}>
+          <div className="absolute inset-0 rounded-2xl bg-zinc-800 border border-zinc-600 shadow-[0_12px_48px_rgba(0,0,0,0.6)] ring-1 ring-white/[0.06] flex flex-col items-center justify-center p-6 gap-3"
+            style={{ backfaceVisibility: 'hidden' }}>
+            <span className="text-zinc-500 text-xs font-semibold uppercase tracking-widest">{category}</span>
+            <p className="text-white text-lg font-semibold text-center leading-snug">{question}</p>
+            <span className="text-zinc-700 text-xs">tap to flip</span>
+          </div>
+          <div className="absolute inset-0 rounded-2xl border border-red-900/50 bg-gradient-to-br from-red-950/80 to-zinc-900 flex flex-col items-center justify-center p-6 gap-3"
+            style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}>
+            <span className="text-red-400 text-xs font-semibold uppercase tracking-widest">Answer</span>
+            <p className="text-white text-xl font-bold text-center leading-snug">{answer}</p>
+          </div>
+        </motion.div>
+      </div>
+    );
+  }
 
   if (loading) return (
-    <div className="flex flex-col items-center justify-center h-64 gap-3">
-      <div className="animate-spin rounded-full h-10 w-10 border-2 border-zinc-700 border-t-red-500" />
-      <p className="text-zinc-500 text-sm">Loading flashcards…</p>
+    <div className="flex flex-col gap-4">
+      <div className="flex items-center bg-zinc-900 rounded-2xl p-1 gap-1 animate-pulse">
+        {['Browse','Daily','Speed','Mastery'].map(l => <div key={l} className="flex-1 py-2 rounded-xl bg-zinc-800" />)}
+      </div>
+      <div className="h-64 rounded-3xl bg-zinc-900 animate-pulse" />
     </div>
   );
 
+  // ── DAILY ──────────────────────────────────────────────────────────────────
   if (mode === 'daily') {
-    if (dDone) {
-      const pct = Math.round((dScore / dailyCards.length) * 100);
+    if (!dailyCards.length) {
       return (
         <div className="flex flex-col gap-4">
           <TabBar />
-          <div className="flex flex-col items-center gap-4 py-6">
-            <div className="text-5xl">{pct === 100 ? '🎯' : pct >= 70 ? '💪' : '📚'}</div>
-            <div className="text-center">
-              <h3 className="text-xl font-bold text-white">{pct === 100 ? 'Perfect!' : pct >= 70 ? 'Great job!' : 'Keep going!'}</h3>
-              <p className="text-zinc-400 text-sm mt-1">
-                <span className="text-red-400 font-bold text-lg">{dScore}</span>
-                <span className="text-zinc-500">/{dailyCards.length} correct</span>
-              </p>
+          {isDailyDone() ? (
+            <div className="flex flex-col items-center gap-4 py-8">
+              <CheckCircle size={44} className="text-green-500" />
+              <h2 className="text-white font-bold text-lg">Daily Complete!</h2>
+              <p className="text-zinc-400 text-sm text-center">You have finished today's challenge.<br />Come back tomorrow!</p>
+              <div className="flex items-center gap-2 bg-zinc-900 rounded-2xl px-5 py-3 border border-zinc-800">
+                <Flame size={20} className="text-orange-400" />
+                <span className="text-white font-bold text-lg">{streak}</span>
+                <span className="text-zinc-400 text-sm">day streak</span>
+              </div>
             </div>
-            <div className="flex items-center gap-2 bg-orange-500/10 border border-orange-500/20 rounded-2xl px-5 py-2.5">
-              <Flame size={18} className="text-orange-400" />
-              <span className="text-orange-300 font-semibold">{streak} day streak</span>
+          ) : (
+            <div className="flex flex-col items-center gap-5 py-8">
+              <div className="text-5xl">🔥</div>
+              <h2 className="text-white font-bold text-lg">Daily Challenge</h2>
+              <p className="text-zinc-400 text-sm text-center">10 cards · ~5 minutes<br />Build your streak every day!</p>
+              <div className="flex items-center gap-2 bg-zinc-900 rounded-2xl px-5 py-3 border border-zinc-800">
+                <Flame size={20} className="text-orange-400" />
+                <span className="text-white font-bold text-lg">{streak}</span>
+                <span className="text-zinc-400 text-sm">day streak</span>
+              </div>
+              <button onClick={() => { setDailyCards(getDailyCards(allCards)); setDIdx(0); setDFlipped(false); setDScore(0); setDDone(false); }}
+                className="px-8 py-3 bg-red-600 hover:bg-red-500 text-white rounded-2xl font-semibold transition-all active:scale-95">
+                Start Today's Cards
+              </button>
             </div>
-            <div className="flex gap-2 w-full">
-              <button onClick={() => setMode('browse')} className="flex-1 py-2.5 rounded-xl bg-zinc-800 text-white hover:bg-zinc-700 transition text-sm font-medium">Browse</button>
-              <button onClick={startSpeed} className="flex-1 py-2.5 rounded-xl bg-red-600 text-white hover:bg-red-700 transition text-sm font-medium flex items-center justify-center gap-1.5"><Zap size={14} />Speed</button>
+          )}
+        </div>
+      );
+    }
+    if (dDone) {
+      return (
+        <div className="flex flex-col gap-4">
+          <TabBar />
+          <div className="flex flex-col items-center gap-5 py-6">
+            <div className="text-5xl">{dScore >= 8 ? '🏆' : dScore >= 5 ? '🎉' : '📚'}</div>
+            <h2 className="text-white font-bold text-xl">{dScore >= 8 ? 'Outstanding!' : dScore >= 5 ? 'Great Job!' : 'Keep Practicing!'}</h2>
+            <div className="flex gap-4">
+              <div className="flex flex-col items-center gap-1 bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-3">
+                <span className="text-white font-black text-2xl">{dScore}</span>
+                <span className="text-zinc-500 text-xs">Score</span>
+              </div>
+              <div className="flex flex-col items-center gap-1 bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-3">
+                <span className="text-orange-400 font-black text-2xl flex items-center gap-1"><Flame size={18} />{streak}</span>
+                <span className="text-zinc-500 text-xs">Streak</span>
+              </div>
             </div>
+            <button onClick={() => { setDailyCards([]); setDIdx(0); setDFlipped(false); }}
+              className="px-6 py-2.5 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-300 rounded-2xl font-medium text-sm transition">
+              Back to Daily
+            </button>
           </div>
         </div>
       );
     }
     const dc = dailyCards[dIdx];
-    if (!dc) return null;
     return (
       <div className="flex flex-col gap-3">
         <TabBar />
         <div className="flex items-center justify-between px-0.5">
-          <div className="flex items-center gap-1.5"><Flame size={14} className="text-orange-400" /><span className="text-orange-400 text-xs font-bold">{streak} day streak</span></div>
-          <span className="text-zinc-500 text-xs font-medium">{dIdx + 1} / {dailyCards.length}</span>
-          <span className="text-green-400 text-xs font-bold">{dScore} ✓</span>
+          <span className="text-zinc-600 text-xs">{dIdx + 1} <span className="text-zinc-700">of</span> {dailyCards.length}</span>
+          <div className="flex items-center gap-1 text-orange-400 text-xs font-semibold"><Flame size={12} /> {streak} streak</div>
         </div>
-        <div className="h-1.5 bg-zinc-800 rounded-full overflow-hidden">
-          <motion.div className="h-full bg-gradient-to-r from-orange-500 to-red-500 rounded-full" animate={{ width: `${(dIdx / dailyCards.length) * 100}%` }} transition={{ duration: 0.3 }} />
+        <div className="flex gap-1">
+          {dailyCards.map((_, i) => (
+            <div key={i} className={`h-1 flex-1 rounded-full transition-all ${i < dIdx ? 'bg-green-500' : i === dIdx ? 'bg-red-500' : 'bg-zinc-800'}`} />
+          ))}
         </div>
-        <FlipCard question={dc.question} answer={dc.answer} category={dc.category} flippedState={dFlipped} onFlip={() => setDFlipped(f => !f)} height="h-52" />
+        <FlipCard question={dc.question} answer={dc.answer} category={dc.category} flippedState={dFlipped} onFlip={() => setDFlipped(f => !f)} height="h-56" />
         <AnimatePresence>
           {dFlipped && (
-            <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="flex gap-2">
-              <button onClick={() => dailyAnswer(false)} className="flex-1 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 text-white hover:border-red-800 hover:bg-red-950/30 transition flex items-center justify-center gap-1.5 text-sm font-medium"><XCircle size={15} className="text-red-400" /> Missed</button>
-              <button onClick={() => dailyAnswer(true)} className="flex-1 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 text-white hover:border-green-800 hover:bg-green-950/30 transition flex items-center justify-center gap-1.5 text-sm font-medium"><CheckCircle size={15} className="text-green-400" /> Got it!</button>
+            <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="grid grid-cols-4 gap-1.5">
+              {[
+                { label: 'Again',   q: 1, color: 'text-red-400',   hover: 'hover:bg-red-950/40 hover:border-red-900' },
+                { label: 'Hard',    q: 3, color: 'text-amber-400', hover: 'hover:bg-amber-950/40 hover:border-amber-900' },
+                { label: 'Easy',    q: 4, color: 'text-green-400', hover: 'hover:bg-green-950/40 hover:border-green-900' },
+                { label: 'Perfect', q: 5, color: 'text-blue-400',  hover: 'hover:bg-blue-950/40 hover:border-blue-900' },
+              ].map(({ label, q, color, hover }) => (
+                <button key={label} onClick={() => {
+                  sm2(dc, q); if (q >= 3) setDScore(s => s + 1); setDFlipped(false);
+                  if (dIdx + 1 >= dailyCards.length) {
+                    localStorage.setItem(LS_LAST_DAY, todayStr());
+                    const ns = getStreak() + 1; localStorage.setItem(LS_STREAK, String(ns)); setStreak(ns); setDDone(true);
+                  } else { setDIdx(i => i + 1); }
+                }} className={`py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-xs font-semibold transition-all ${color} ${hover}`}>
+                  {label}
+                </button>
+              ))}
             </motion.div>
           )}
         </AnimatePresence>
       </div>
     );
   }
+
+  // ── SPEED ──────────────────────────────────────────────────────────────────
   if (mode === 'speed') {
-    if (sDone) {
-      const isNewPB = sCorrect > 0 && sCorrect >= pb;
+    if (!sRunning && !sDone) {
       return (
         <div className="flex flex-col gap-4">
           <TabBar />
-          <div className="flex flex-col items-center gap-4 py-4">
-            <div className="text-5xl">{isNewPB ? '🎉' : '⚡'}</div>
-            <h3 className="text-xl font-bold text-white">{isNewPB ? 'New Record!' : "Time's Up!"}</h3>
-            <div className="grid grid-cols-3 gap-3 w-full">
-              {[
-                { val: sCorrect, label: 'Correct',  color: 'text-green-400' },
-                { val: sTotal,   label: 'Attempted', color: 'text-zinc-300' },
-                { val: pb,       label: 'Best',       color: 'text-yellow-400' },
-              ].map(({ val, label, color }) => (
-                <div key={label} className="bg-zinc-900 rounded-2xl p-3 text-center border border-zinc-800">
-                  <p className={`text-2xl font-bold ${color}`}>{val}</p>
-                  <p className="text-zinc-500 text-xs mt-0.5">{label}</p>
-                </div>
-              ))}
-            </div>
-            {sTotal > 0 && <p className="text-zinc-500 text-sm">Accuracy <span className="text-white font-semibold">{Math.round((sCorrect / sTotal) * 100)}%</span></p>}
-            <div className="flex gap-2 w-full">
-              <button onClick={() => setMode('browse')} className="flex-1 py-2.5 rounded-xl bg-zinc-800 text-white hover:bg-zinc-700 transition text-sm font-medium">Browse</button>
-              <button onClick={startSpeed} className="flex-1 py-2.5 rounded-xl bg-red-600 text-white hover:bg-red-700 transition text-sm font-medium flex items-center justify-center gap-1.5"><RotateCcw size={13} />Again</button>
-            </div>
-          </div>
-        </div>
-      );
-    }
-    if (!sRunning && sTotal === 0) {
-      return (
-        <div className="flex flex-col gap-4">
-          <TabBar />
-          <div className="flex flex-col items-center gap-4 py-6">
-            <div className="w-20 h-20 rounded-full bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center">
-              <Zap size={36} className="text-yellow-400" />
-            </div>
-            <div className="text-center">
-              <h3 className="text-xl font-bold text-white">Speed Round</h3>
-              <p className="text-zinc-400 text-sm mt-1">Flip cards as fast as you can in <span className="text-white font-semibold">60 seconds</span></p>
-            </div>
+          <div className="flex flex-col items-center gap-5 py-8">
+            <div className="text-5xl">⚡</div>
+            <h2 className="text-white font-bold text-lg">Speed Round</h2>
+            <p className="text-zinc-400 text-sm text-center">60 seconds · Answer as many as you can!</p>
             {pb > 0 && (
-              <div className="flex items-center gap-2 bg-yellow-500/10 border border-yellow-500/20 rounded-xl px-4 py-2">
-                <Trophy size={14} className="text-yellow-400" />
-                <span className="text-yellow-300 text-sm">Best: <strong>{pb}</strong> correct</span>
+              <div className="flex items-center gap-2 bg-zinc-900 rounded-2xl px-5 py-3 border border-zinc-800">
+                <Trophy size={16} className="text-amber-400" />
+                <span className="text-zinc-400 text-sm">Best:</span>
+                <span className="text-white font-bold">{pb} cards</span>
               </div>
             )}
-            <button onClick={startSpeed} className="w-full py-3 rounded-xl bg-red-600 text-white font-semibold hover:bg-red-700 transition flex items-center justify-center gap-2">
-              <Zap size={16} /> Start
+            <button onClick={startSpeed}
+              className="px-8 py-3 bg-red-600 hover:bg-red-500 text-white rounded-2xl font-semibold transition-all active:scale-95">
+              Start Blitz
             </button>
-            <button onClick={() => setMode('browse')} className="text-zinc-500 hover:text-zinc-300 text-sm transition">← Back to Browse</button>
           </div>
         </div>
       );
     }
-    const sc = sCards[sIdx];
-    if (!sc) return null;
+    if (sDone) {
+      return (
+        <div className="flex flex-col gap-4">
+          <TabBar />
+          <div className="flex flex-col items-center gap-5 py-6">
+            <div className="text-5xl">{sCorrect >= pb && sCorrect > 0 ? '🏆' : '⚡'}</div>
+            <h2 className="text-white font-bold text-xl">{sCorrect >= pb && sCorrect > 0 ? 'New Personal Best!' : "Time's Up!"}</h2>
+            <div className="flex gap-3">
+              <div className="flex flex-col items-center gap-1 bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-3">
+                <span className="text-green-400 font-black text-2xl">{sCorrect}</span>
+                <span className="text-zinc-500 text-xs">Correct</span>
+              </div>
+              <div className="flex flex-col items-center gap-1 bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-3">
+                <span className="text-red-400 font-black text-2xl">{sTotal - sCorrect}</span>
+                <span className="text-zinc-500 text-xs">Missed</span>
+              </div>
+              <div className="flex flex-col items-center gap-1 bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-3">
+                <span className="text-amber-400 font-black text-2xl">{pb}</span>
+                <span className="text-zinc-500 text-xs">Best</span>
+              </div>
+            </div>
+            <button onClick={() => { setSRunning(false); setSDone(false); }}
+              className="px-6 py-2.5 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-300 rounded-2xl font-medium text-sm transition">
+              Try Again
+            </button>
+          </div>
+        </div>
+      );
+    }
+    const sc = sCards[sIdx] || sCards[0];
+    if (!sc) return <div className="flex flex-col gap-4"><TabBar /><div className="text-center py-12 text-zinc-500 text-sm">No cards loaded.</div></div>;
     const timerPct   = (sTime / 60) * 100;
-    const timerColor = sTime > 30 ? '#22c55e' : sTime > 10 ? '#f59e0b' : '#ef4444';
+    const timerColor = sTime > 30 ? '#22c55e' : sTime > 15 ? '#f59e0b' : '#ef4444';
     return (
       <div className="flex flex-col gap-3">
         <TabBar />
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1.5"><Clock size={14} style={{ color: timerColor }} /><span className="font-bold text-lg tabular-nums" style={{ color: timerColor }}>{sTime}s</span></div>
-          <div className="text-sm font-medium"><span className="text-green-400">{sCorrect}</span><span className="text-zinc-600"> / {sTotal}</span></div>
-          <div className="flex items-center gap-1 text-yellow-500"><Trophy size={12} /><span className="text-xs font-semibold">{pb}</span></div>
+        <div className="flex items-center gap-2">
+          <div className="flex-1 h-2 bg-zinc-800 rounded-full overflow-hidden">
+            <div className="h-full rounded-full transition-all duration-1000" style={{ width: `${timerPct}%`, backgroundColor: timerColor }} />
+          </div>
+          <div className="flex items-center gap-1 text-xs font-bold shrink-0" style={{ color: timerColor }}>
+            <Clock size={12} /> {sTime}s
+          </div>
         </div>
-        <div className="h-1.5 bg-zinc-800 rounded-full overflow-hidden">
-          <motion.div className="h-full rounded-full" animate={{ width: `${timerPct}%`, backgroundColor: timerColor }} transition={{ duration: 1, ease: 'linear' }} />
+        <div className="flex items-center justify-between px-0.5 text-xs">
+          <span className="text-green-400">✓ {sCorrect}</span>
+          <span className="text-red-400">✗ {sTotal - sCorrect}</span>
         </div>
-        <FlipCard question={sc.question} answer={sc.answer} category={sc.category} flippedState={sFlipped} onFlip={() => !sFlipped && setSFlipped(true)} height="h-48" />
+        <FlipCard question={sc.question} answer={sc.answer} category={sc.category} flippedState={sFlipped} onFlip={() => setSFlipped(f => !f)} height="h-56" />
         <AnimatePresence>
           {sFlipped && (
-            <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="flex gap-2">
-              <button onClick={() => speedAnswer(false)} className="flex-1 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 text-white hover:border-red-800 hover:bg-red-950/30 transition flex items-center justify-center gap-1.5 text-sm font-medium"><XCircle size={15} className="text-red-400" /> Missed</button>
-              <button onClick={() => speedAnswer(true)} className="flex-1 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 text-white hover:border-green-800 hover:bg-green-950/30 transition flex items-center justify-center gap-1.5 text-sm font-medium"><CheckCircle size={15} className="text-green-400" /> Got it!</button>
+            <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="grid grid-cols-2 gap-2">
+              <button onClick={() => {
+                setSTotal(t => t + 1); setSFlipped(false);
+                const ni = sIdx + 1 < sCards.length ? sIdx + 1 : 0;
+                if (ni === 0) setSCards(s => [...s].sort(() => Math.random() - 0.5)); setSIdx(ni);
+              }} className="py-3 rounded-2xl bg-zinc-900 border border-zinc-800 text-red-400 font-semibold text-sm hover:bg-red-950/30 transition">
+                ✗ Missed
+              </button>
+              <button onClick={() => {
+                setSCorrect(c => c + 1); setSTotal(t => t + 1); setSFlipped(false);
+                const ni = sIdx + 1 < sCards.length ? sIdx + 1 : 0;
+                if (ni === 0) setSCards(s => [...s].sort(() => Math.random() - 0.5)); setSIdx(ni);
+              }} className="py-3 rounded-2xl bg-zinc-900 border border-zinc-800 text-green-400 font-semibold text-sm hover:bg-green-950/30 transition">
+                ✓ Got It
+              </button>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
     );
   }
+
+  // ── MASTERY ────────────────────────────────────────────────────────────────
   if (mode === 'mastery') {
-    const grouped = allCards.reduce((acc, c) => { if (!acc[c.category]) acc[c.category] = []; acc[c.category].push(c); return acc; }, {} as Record<string, Flashcard[]>);
-    const cats = Object.keys(grouped).sort();
-    const totalM = mastered.size;
-    const overallPct = allCards.length > 0 ? Math.round((totalM / allCards.length) * 100) : 0;
-    return (
-      <div className="flex flex-col gap-3">
+    if (!allCards.length) return (
+      <div className="flex flex-col gap-4">
         <TabBar />
-        <div className="bg-zinc-900 rounded-2xl p-4 border border-zinc-800">
+        <div className="text-center text-zinc-500 py-12"><Brain size={36} className="mx-auto mb-2 opacity-20" /><p className="text-sm">Loading cards...</p></div>
+      </div>
+    );
+    const cats    = Array.from(new Set(allCards.map(c => c.category))).sort();
+    const grouped: Record<string, Flashcard[]> = {};
+    cats.forEach(cat => { grouped[cat] = allCards.filter(c => c.category === cat); });
+    const totalM     = mastered.size;
+    const overallPct = Math.round((totalM / allCards.length) * 100);
+    return (
+      <div className="flex flex-col gap-4">
+        <TabBar />
+        <div className="bg-zinc-900/80 rounded-2xl p-4 border border-zinc-800">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-zinc-400 text-sm font-medium">Overall Mastery</span>
-            <span className="text-white font-bold text-sm">{overallPct}%</span>
+            <span className="text-white text-sm font-semibold">Overall Progress</span>
+            <span className="text-zinc-400 text-xs">{overallPct}%</span>
           </div>
-          <div className="h-2.5 bg-zinc-800 rounded-full overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-red-500 to-orange-400 rounded-full transition-all duration-700" style={{ width: `${overallPct}%` }} />
+          <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
+            <div className="h-full bg-gradient-to-r from-red-600 to-amber-500 rounded-full transition-all duration-700" style={{ width: `${overallPct}%` }} />
           </div>
           <p className="text-zinc-600 text-xs mt-2">{totalM} of {allCards.length} cards mastered</p>
         </div>
         <div className="flex flex-col gap-1.5 overflow-y-auto max-h-80 pr-0.5" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' } as React.CSSProperties}>
           {cats.map(cat => {
             const catCards = grouped[cat];
-            const done = catCards.filter(c => mastered.has(c.id)).length;
-            const pct  = Math.round((done / catCards.length) * 100);
+            const done     = catCards.filter(c => mastered.has(c.id)).length;
+            const pct      = Math.round((done / catCards.length) * 100);
             const barColor = pct === 100 ? '#22c55e' : pct >= 50 ? '#f59e0b' : '#ef4444';
             return (
               <div key={cat} className="bg-zinc-900/80 rounded-xl px-3 py-2.5 border border-zinc-800/80">
@@ -383,60 +529,125 @@ export default function Flashcards() {
     );
   }
 
-  if (!card) return (
+  // ── BROWSE — Tinder Swipe Stack ────────────────────────────────────────────
+  const categories = ['All', ...Array.from(new Set(allCards.map(c => c.category))).sort()];
+
+  if (swipeDone) {
+    return (
+      <div className="flex flex-col gap-4">
+        <TabBar />
+        {!isRevisingMissed && (
+          <div className="flex gap-1.5 overflow-x-auto pb-0.5" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' } as React.CSSProperties}>
+            {categories.map(cat => (
+              <button key={cat} onClick={() => setSelCat(cat)}
+                className={`shrink-0 px-2.5 py-1 rounded-full text-xs font-medium transition-all whitespace-nowrap
+                  ${selCat === cat ? 'bg-red-600 text-white' : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800 border border-zinc-800'}`}>
+                {cat}
+              </button>
+            ))}
+          </div>
+        )}
+        <div className="flex flex-col items-center gap-5 py-6">
+          <div className="text-5xl">🎉</div>
+          <h2 className="text-white font-bold text-xl">Deck Complete!</h2>
+          <p className="text-zinc-500 text-sm">{isRevisingMissed ? 'Revision round done!' : `${swipeCards.length} cards reviewed`}</p>
+          <div className="flex gap-4">
+            <div className="flex flex-col items-center gap-1.5 bg-green-900/30 border border-green-800/50 rounded-2xl px-6 py-4">
+              <span className="text-green-400 text-3xl font-black">{gotItIds.length}</span>
+              <span className="text-zinc-400 text-xs font-medium">Got It ✓</span>
+            </div>
+            <div className="flex flex-col items-center gap-1.5 bg-red-900/30 border border-red-800/50 rounded-2xl px-6 py-4">
+              <span className="text-red-400 text-3xl font-black">{reviseIds.length}</span>
+              <span className="text-zinc-400 text-xs font-medium">To Review</span>
+            </div>
+          </div>
+          {reviseIds.length > 0 && (
+            <button onClick={() => {
+              const missed = allCards.filter(c => reviseIds.includes(c.id));
+              setSwipeCards(missed); setSwipeIdx(0); setSwipeFlipped(false);
+              setGotItIds([]); setReviseIds([]); setSwipeDone(false); setIsRevisingMissed(true);
+            }}
+              className="px-6 py-3 bg-red-600 hover:bg-red-500 text-white rounded-2xl font-semibold text-sm transition-all active:scale-95">
+              📌 Revise {reviseIds.length} Missed Cards
+            </button>
+          )}
+          <button onClick={() => {
+            setIsRevisingMissed(false);
+            const cards = selCat === 'All' ? [...allCards] : allCards.filter(c => c.category === selCat);
+            setSwipeCards(cards); setSwipeIdx(0); setSwipeFlipped(false);
+            setGotItIds([]); setReviseIds([]); setSwipeDone(false);
+          }}
+            className="px-6 py-2.5 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-300 rounded-2xl font-medium text-sm transition">
+            🔄 Start Over
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  const currentCard = swipeCards[swipeIdx];
+  const progress    = swipeCards.length > 0 ? swipeIdx / swipeCards.length : 0;
+  const remaining   = swipeCards.length - swipeIdx;
+
+  if (!currentCard) return (
     <div className="flex flex-col gap-4">
       <TabBar />
-      <div className="text-center text-zinc-500 py-12"><Brain size={36} className="mx-auto mb-2 opacity-20" /><p className="text-sm">No cards in this category.</p></div>
+      <div className="text-center text-zinc-500 py-12"><Brain size={36} className="mx-auto mb-2 opacity-20" /><p className="text-sm">No cards to show.</p></div>
     </div>
   );
 
   return (
     <div className="flex flex-col gap-3">
       <TabBar />
-      <div className="flex gap-1.5 overflow-x-auto pb-0.5" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' } as React.CSSProperties}>
-        {categories.map(cat => (
-          <button key={cat}
-            onClick={() => { setSelCat(cat); setCurIdx(0); setFlipped(false); }}
-            className={`shrink-0 px-2.5 py-1 rounded-full text-xs font-medium transition-all duration-150 whitespace-nowrap
-              ${selCat === cat ? 'bg-red-600 text-white' : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200 border border-zinc-800'}`}
-          >
-            {cat}
-          </button>
-        ))}
+      {!isRevisingMissed && (
+        <div className="flex gap-1.5 overflow-x-auto pb-0.5" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' } as React.CSSProperties}>
+          {categories.map(cat => (
+            <button key={cat} onClick={() => setSelCat(cat)}
+              className={`shrink-0 px-2.5 py-1 rounded-full text-xs font-medium transition-all whitespace-nowrap
+                ${selCat === cat ? 'bg-red-600 text-white' : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800 border border-zinc-800'}`}>
+              {cat}
+            </button>
+          ))}
+        </div>
+      )}
+      <div className="flex items-center gap-2">
+        <div className="flex-1 h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+          <div className="h-full bg-gradient-to-r from-red-600 to-amber-500 rounded-full transition-all duration-300" style={{ width: `${progress * 100}%` }} />
+        </div>
+        <span className="text-zinc-600 text-xs shrink-0">{swipeIdx}/{swipeCards.length}</span>
       </div>
-      <div className="flex items-center justify-between px-0.5">
-        <span className="text-zinc-600 text-xs">{curIdx + 1} <span className="text-zinc-700">of</span> {filtered.length}</span>
-        {mastered.has(card.id) && (
-          <span className="text-xs text-green-500 font-medium flex items-center gap-1"><CheckCircle size={11} /> Mastered</span>
+      <div className="relative h-72 w-full">
+        {swipeIdx + 2 < swipeCards.length && (
+          <div className="absolute inset-0 rounded-3xl bg-zinc-800/70 border border-zinc-700/40"
+            style={{ transform: 'scale(0.86) translateY(22px)', zIndex: 1, transformOrigin: 'bottom center' }} />
         )}
+        {swipeIdx + 1 < swipeCards.length && (
+          <div className="absolute inset-0 rounded-3xl bg-zinc-800/85 border border-zinc-600/50"
+            style={{ transform: 'scale(0.93) translateY(11px)', zIndex: 2, transformOrigin: 'bottom center' }} />
+        )}
+        <SwipeCard
+          key={currentCard.id + '-' + swipeIdx}
+          card={currentCard}
+          onSwipe={handleSwipe}
+          onFlip={() => setSwipeFlipped(f => !f)}
+          isFlipped={swipeFlipped}
+          isDraggable={true}
+        />
       </div>
-      <FlipCard question={card.question} answer={card.answer} category={card.category} flippedState={flipped} onFlip={() => setFlipped(f => !f)} height="h-56" />
-      <AnimatePresence>
-        {flipped && (
-          <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="grid grid-cols-4 gap-1.5">
-            {[
-              { label: 'Again',   q: 1, color: 'text-red-400',   hover: 'hover:bg-red-950/40 hover:border-red-900' },
-              { label: 'Hard',    q: 3, color: 'text-amber-400', hover: 'hover:bg-amber-950/40 hover:border-amber-900' },
-              { label: 'Easy',    q: 4, color: 'text-green-400', hover: 'hover:bg-green-950/40 hover:border-green-900' },
-              { label: 'Perfect', q: 5, color: 'text-blue-400',  hover: 'hover:bg-blue-950/40 hover:border-blue-900' },
-            ].map(({ label, q, color, hover }) => (
-              <button key={label} onClick={() => { sm2(card, q); goNext(); }}
-                className={`py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-xs font-semibold transition-all ${color} ${hover}`}>
-                {label}
-              </button>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <div className="flex items-center justify-between pt-0.5">
-        <button onClick={goPrev} disabled={curIdx === 0} className="w-9 h-9 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center disabled:opacity-25 hover:bg-zinc-800 transition">
-          <ChevronLeft size={18} className="text-white" />
+      <div className="flex items-center justify-between px-1 pt-1">
+        <button onClick={() => handleSwipe('left')}
+          className="flex flex-col items-center gap-1 px-5 py-3 rounded-2xl bg-zinc-900 border border-zinc-700/80 text-red-400 hover:bg-red-950/30 hover:border-red-800/60 transition-all active:scale-95 text-xs font-semibold">
+          <ArrowLeft size={18} />
+          Review
         </button>
-        <button onClick={() => { setCurIdx(0); setFlipped(false); }} className="flex items-center gap-1 text-zinc-500 hover:text-zinc-300 text-xs transition font-medium">
-          <RotateCcw size={12} /> Reset
-        </button>
-        <button onClick={goNext} disabled={curIdx === filtered.length - 1} className="w-9 h-9 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center disabled:opacity-25 hover:bg-zinc-800 transition">
-          <ChevronRight size={18} className="text-white" />
+        <div className="flex flex-col items-center gap-0.5 text-center">
+          <span className="text-zinc-500 text-xs font-medium">{remaining} left</span>
+          <span className="text-zinc-700 text-[10px]">swipe or tap buttons</span>
+        </div>
+        <button onClick={() => handleSwipe('right')}
+          className="flex flex-col items-center gap-1 px-5 py-3 rounded-2xl bg-zinc-900 border border-zinc-700/80 text-green-400 hover:bg-green-950/30 hover:border-green-800/60 transition-all active:scale-95 text-xs font-semibold">
+          <ArrowRight size={18} />
+          Got It
         </button>
       </div>
     </div>
