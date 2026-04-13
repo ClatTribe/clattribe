@@ -76,42 +76,54 @@ function SwipeCard({ card, onSwipe, onFlip, isFlipped, isDraggable }: SwipeCardP
       }}
       onClick={() => { if (!isDragging.current) onFlip(); }}
     >
-      <div className="w-full h-full rounded-3xl bg-zinc-800 border border-zinc-600 shadow-[0_20px_70px_rgba(0,0,0,0.8)] ring-1 ring-white/[0.07] relative overflow-hidden">
+      <div className="w-full h-full rounded-3xl bg-white shadow-[0_12px_40px_rgba(0,0,0,0.18)] relative overflow-hidden">
         {isDraggable && (
           <motion.div style={{ opacity: gotItOpacity, rotate: -22 }}
-            className="absolute top-7 left-6 z-20 border-[3px] border-green-400 text-green-400 rounded-xl px-3 py-1 font-black text-lg uppercase tracking-widest pointer-events-none">
+            className="absolute top-7 left-5 z-20 border-[3px] border-green-500 bg-green-500/10 text-green-600 rounded-xl px-3 py-1 font-black text-lg uppercase tracking-widest pointer-events-none">
             GOT IT ✓
           </motion.div>
         )}
         {isDraggable && (
           <motion.div style={{ opacity: revOpacity, rotate: 22 }}
-            className="absolute top-7 right-6 z-20 border-[3px] border-red-400 text-red-400 rounded-xl px-3 py-1 font-black text-lg uppercase tracking-widest pointer-events-none">
+            className="absolute top-7 right-5 z-20 border-[3px] border-red-500 bg-red-500/10 text-red-600 rounded-xl px-3 py-1 font-black text-lg uppercase tracking-widest pointer-events-none">
             REVIEW ✗
           </motion.div>
         )}
         <AnimatePresence mode="wait" initial={false}>
           {!isFlipped ? (
             <motion.div key="front" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }}
-              className="absolute inset-0 flex flex-col items-center justify-center p-8 gap-4">
-              <span className="text-red-500/80 text-xs font-bold uppercase tracking-[0.2em]">{card.category}</span>
-              <p className="text-white text-xl font-semibold text-center leading-relaxed">{card.question}</p>
-              <span className="text-zinc-600 text-xs mt-1">tap to reveal · swipe to sort</span>
+              className="absolute inset-0 rounded-3xl overflow-hidden bg-white">
+              <div className="absolute top-5 left-6">
+                <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">{card.category}</span>
+              </div>
+              <div className="absolute inset-0 flex items-center justify-center px-8" style={{ paddingTop: '3.5rem', paddingBottom: '3.5rem' }}>
+                <p className="text-slate-900 text-xl font-bold text-center leading-snug">{card.question}</p>
+              </div>
+              <div className="absolute bottom-5 left-0 right-0 flex justify-center items-center gap-1.5">
+                <span className="text-slate-400 text-xs">&#8635; Tap to flip</span>
+              </div>
+              <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-gradient-to-r from-amber-400 to-yellow-400" />
             </motion.div>
           ) : (
             <motion.div key="back" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }}
-              className="absolute inset-0 flex flex-col items-center justify-center p-8 gap-4 bg-gradient-to-b from-red-950/40 to-zinc-800">
-              <span className="text-red-400 text-xs font-bold uppercase tracking-[0.2em]">Answer</span>
-              <p className="text-white text-2xl font-bold text-center leading-snug">{card.answer}</p>
-              <div className="flex gap-3 mt-3">
-                <button onClick={(e) => { e.stopPropagation(); onSwipe('left'); }}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-red-900/50 border border-red-700/60 text-red-300 font-semibold text-sm hover:bg-red-900/70 active:scale-95 transition-all">
-                  <ArrowLeft size={14} /> Review
-                </button>
-                <button onClick={(e) => { e.stopPropagation(); onSwipe('right'); }}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-green-900/50 border border-green-700/60 text-green-300 font-semibold text-sm hover:bg-green-900/70 active:scale-95 transition-all">
-                  Got It <ArrowRight size={14} />
-                </button>
+              className="absolute inset-0 rounded-3xl overflow-hidden bg-[#0f172a]">
+              <div className="absolute top-5 left-6">
+                <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-blue-400">Answer</span>
               </div>
+              <div className="absolute inset-0 flex flex-col items-center justify-center px-8 gap-5" style={{ paddingTop: '3.5rem', paddingBottom: '4.5rem' }}>
+                <p className="text-white text-xl font-bold text-center leading-snug">{card.answer}</p>
+                <div className="flex gap-3">
+                  <button onClick={(e) => { e.stopPropagation(); onSwipe('right'); }}
+                    className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-green-700 hover:bg-green-600 text-white font-semibold text-sm active:scale-95 transition-all shadow-md">
+                    <CheckCircle size={15} /> Knew it
+                  </button>
+                  <button onClick={(e) => { e.stopPropagation(); onSwipe('left'); }}
+                    className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-red-700 hover:bg-red-600 text-white font-semibold text-sm active:scale-95 transition-all shadow-md">
+                    <XCircle size={15} /> Forgot
+                  </button>
+                </div>
+              </div>
+              <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-gradient-to-r from-blue-500 to-indigo-500" />
             </motion.div>
           )}
         </AnimatePresence>
@@ -250,22 +262,34 @@ export default function Flashcards() {
     flippedState: boolean; onFlip: () => void; height?: string;
   }) {
     return (
-      <div className={`relative ${height} cursor-pointer select-none drop-shadow-2xl`} onClick={onFlip} style={{ perspective: 1200 }}>
+      <div className={`relative ${height} cursor-pointer select-none`} onClick={onFlip} style={{ perspective: 1200 }}>
         <motion.div
           className="relative w-full h-full"
           animate={{ rotateY: flippedState ? 180 : 0 }}
           transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
           style={{ transformStyle: 'preserve-3d' }}>
-          <div className="absolute inset-0 rounded-2xl bg-zinc-800 border border-zinc-600 shadow-[0_12px_48px_rgba(0,0,0,0.6)] ring-1 ring-white/[0.06] flex flex-col items-center justify-center p-6 gap-3"
+          <div className="absolute inset-0 rounded-2xl bg-white shadow-[0_8px_30px_rgba(0,0,0,0.12)] overflow-hidden"
             style={{ backfaceVisibility: 'hidden' }}>
-            <span className="text-zinc-500 text-xs font-semibold uppercase tracking-widest">{category}</span>
-            <p className="text-white text-lg font-semibold text-center leading-snug">{question}</p>
-            <span className="text-zinc-700 text-xs">tap to flip</span>
+            <div className="absolute top-4 left-5">
+              <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">{category}</span>
+            </div>
+            <div className="absolute inset-0 flex items-center justify-center px-6" style={{ paddingTop: '3rem', paddingBottom: '3rem' }}>
+              <p className="text-slate-900 text-lg font-bold text-center leading-snug">{question}</p>
+            </div>
+            <div className="absolute bottom-4 left-0 right-0 flex justify-center">
+              <span className="text-slate-400 text-xs">&#8635; Tap to flip</span>
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-gradient-to-r from-amber-400 to-yellow-400" />
           </div>
-          <div className="absolute inset-0 rounded-2xl border border-red-900/50 bg-gradient-to-br from-red-950/80 to-zinc-900 flex flex-col items-center justify-center p-6 gap-3"
+          <div className="absolute inset-0 rounded-2xl bg-[#0f172a] shadow-[0_8px_30px_rgba(0,0,0,0.35)] overflow-hidden"
             style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}>
-            <span className="text-red-400 text-xs font-semibold uppercase tracking-widest">Answer</span>
-            <p className="text-white text-xl font-bold text-center leading-snug">{answer}</p>
+            <div className="absolute top-4 left-5">
+              <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-blue-400">Answer</span>
+            </div>
+            <div className="absolute inset-0 flex items-center justify-center px-6" style={{ paddingTop: '3rem', paddingBottom: '3rem' }}>
+              <p className="text-white text-xl font-bold text-center leading-snug">{answer}</p>
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-gradient-to-r from-blue-500 to-indigo-500" />
           </div>
         </motion.div>
       </div>
@@ -618,11 +642,11 @@ export default function Flashcards() {
       </div>
       <div className="relative mx-auto w-full max-w-[300px] sm:max-w-[320px] h-[400px] sm:h-[440px]">
         {swipeIdx + 2 < swipeCards.length && (
-          <div className="absolute inset-0 rounded-3xl bg-zinc-800/70 border border-zinc-700/40"
+          <div className="absolute inset-0 rounded-3xl bg-white/70 shadow"
             style={{ transform: 'scale(0.86) translateY(22px)', zIndex: 1, transformOrigin: 'bottom center' }} />
         )}
         {swipeIdx + 1 < swipeCards.length && (
-          <div className="absolute inset-0 rounded-3xl bg-zinc-800/85 border border-zinc-600/50"
+          <div className="absolute inset-0 rounded-3xl bg-white/85 shadow-md"
             style={{ transform: 'scale(0.93) translateY(11px)', zIndex: 2, transformOrigin: 'bottom center' }} />
         )}
         <SwipeCard
