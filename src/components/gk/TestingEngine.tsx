@@ -108,7 +108,6 @@ function CustomTestBuilder({ onBack }: { onBack: () => void }) {
   const [selectedTypes, setSelectedTypes] = React.useState<string[]>([]);
   const [timeLimit, setTimeLimit] = React.useState<number>(30);
   const [isBuilding, setIsBuilding] = React.useState(false);
-  const [activeWeeklyQuiz, setActiveWeeklyQuiz] = React.useState<WeeklyQuiz | null>(null);
 
   const toggleTopic = (topic: string) => {
     setSelectedTopics(prev =>
@@ -440,6 +439,7 @@ function FeedbackScreen({
 
 export default function TestingEngine() {
   const [activeCategory, setActiveCategory] = React.useState<TestType>(null);
+  const [activeWeeklyQuiz, setActiveWeeklyQuiz] = React.useState<WeeklyQuiz | null>(null);
   const [testResult, setTestResult] = React.useState<TestResult | null>(null);
   const [history, setHistory] = React.useState<TestResult[]>(() => {
     if (typeof window !== 'undefined') {
