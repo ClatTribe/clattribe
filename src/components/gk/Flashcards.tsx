@@ -183,7 +183,7 @@ function FlipCard({ question, answer, category, flippedState, onFlip }: {
           style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)', backgroundColor: '#0f172a', boxShadow: '0 8px 32px rgba(0,0,0,0.25)' }}>
           <div className="flex-1 flex flex-col items-center justify-center p-6 gap-3">
             <span style={{ color: '#60a5fa', fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em' }}>Answer</span>
-            <p style={{ color: '#ffffff', fontSize: '1.05rem', fontWeight: 700, textAlign: 'center', lineHeight: 1.55 }}+
+            <p style={{ color: '#ffffff', fontSize: '1.05rem', fontWeight: 700, textAlign: 'center', lineHeight: 1.55 }}>
               {answer}
             </p>
           </div>
