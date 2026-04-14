@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { ArrowLeft, Clock, Target, Zap, BookOpen, AlertCircle, ChevronRight } from 'lucide-react';
 import { NLATMock } from '../data/nlat/types';
 
-type ExamFilter = 'clat' | 'nlat' | 'ailet';
+type ExamFilter = 'clat' | 'nlat' | 'ailet' | 'mhcet';
 
 interface FullMockListingProps {
   nlatMocks: NLATMock[];
@@ -12,9 +12,10 @@ interface FullMockListingProps {
 }
 
 const EXAM_TABS: { id: ExamFilter; label: string; color: string }[] = [
-  { id: 'clat', label: 'CLAT',  color: '#7c3aed' },
-  { id: 'nlat', label: 'NLAT',  color: '#0ea5e9' },
+  { id: 'clat', label: 'CLAT', color: '#7c3aed' },
+  { id: 'nlat', label: 'NLAT Mocks', color: '#0ea5e9' },
   { id: 'ailet', label: 'AILET', color: '#059669' },
+  { id: 'mhcet', label: 'MHCET Law', color: '#f97316' },
 ];
 
 // Placeholder CLAT mocks metadata (to be wired in when CLAT mocks are ready)
@@ -24,7 +25,7 @@ const CLAT_MOCK_META = Array.from({ length: 15 }, (_, i) => ({
   questions: 150,
   duration: 120,
   negativeMarking: 0.25,
-  available: false, // placeholder
+  available: false,
 }));
 
 const AILET_MOCK_META = Array.from({ length: 10 }, (_, i) => ({
@@ -36,11 +37,16 @@ const AILET_MOCK_META = Array.from({ length: 10 }, (_, i) => ({
   available: false,
 }));
 
-function NLATMockCard({ mock, onStart, index }: {
-  mock: NLATMock;
-  onStart: () => void;
-  index: number;
-}) {
+const MHCET_MOCK_META = Array.from({ length: 10 }, (_, i) => ({
+  id: i + 1,
+  name: `MHCET Law Mock Test ${String(i + 1).padStart(2, '0')}`,
+  questions: 150,
+  duration: 90,
+  negativeMarking: 0,
+  available: false,
+}));
+
+function NLATMockCard({ mock, onStart, index }: { mock: NLATMock; onStart: () => void; index: number; }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -50,7 +56,6 @@ function NLATMockCard({ mock, onStart, index }: {
     >
       {/* Background accent */}
       <div className="absolute -right-6 -top-6 w-28 h-28 bg-sky-500 opacity-5 group-hover:opacity-10 rounded-full transition-all duration-500" />
-
       <div className="flex items-start justify-between gap-4 relative">
         <div className="space-y-3 flex-1 min-w-0">
           {/* Mock number badge */}
@@ -59,11 +64,9 @@ function NLATMockCard({ mock, onStart, index }: {
               Mock {String(mock.id).padStart(2, '0')}
             </span>
           </div>
-
           <h3 className="text-base font-black text-brand-navy dark:text-white group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors leading-tight">
             {mock.name}
           </h3>
-
           {/* Specs row */}
           <div className="flex flex-wrap gap-x-4 gap-y-1">
             <span className="flex items-center gap-1 text-[11px] font-bold text-gray-500">
@@ -76,7 +79,6 @@ function NLATMockCard({ mock, onStart, index }: {
               <Zap size={12} /> No Negative Marking
             </span>
           </div>
-
           {/* Section pills */}
           <div className="flex flex-wrap gap-1.5">
             {['Verbal', 'GK & CA', 'Legal', 'Logical', 'Quant'].map(sec => (
@@ -86,15 +88,13 @@ function NLATMockCard({ mock, onStart, index }: {
             ))}
           </div>
         </div>
-
         {/* Start button */}
         <div className="flex-shrink-0">
           <button
             onClick={onStart}
             className="flex items-center gap-2 bg-sky-500 hover:bg-sky-400 text-white px-5 py-3 rounded-2xl font-black text-sm transition-all hover:shadow-lg hover:shadow-sky-500/30 group-hover:scale-105"
           >
-            Start
-            <ChevronRight size={16} />
+            Start <ChevronRight size={16} />
           </button>
         </div>
       </div>
@@ -146,7 +146,7 @@ export default function FullMockListing({ nlatMocks, onStartNLAT, onBack }: Full
       </div>
 
       {/* Exam filter tabs */}
-      <div className="flex gap-2 bg-gray-100 dark:bg-white/5 p-1.5 rounded-2xl w-fit">
+      <div className="flex gap-2 bg-gray-100 dark:bg-white/5 p-1.5 rounded-2xl w-fit flex-wrap">
         {EXAM_TABS.map(tab => (
           <button
             key={tab.id}
@@ -176,16 +176,11 @@ export default function FullMockListing({ nlatMocks, onStartNLAT, onBack }: Full
               </p>
             </div>
           </div>
-
           {/* Mock cards grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {nlatMocks.map((mock, i) => (
               <div key={mock.id}>
-                <NLATMockCard
-                  mock={mock}
-                  index={i}
-                  onStart={() => onStartNLAT(mock)}
-                />
+                <NLATMockCard mock={mock} index={i} onStart={() => onStartNLAT(mock)} />
               </div>
             ))}
           </div>
@@ -226,6 +221,26 @@ export default function FullMockListing({ nlatMocks, onStartNLAT, onBack }: Full
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {AILET_MOCK_META.map((m, i) => (
+              <div key={m.id}><ComingSoonCard name={m.name} index={i} /></div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* MHCET Law Mocks (Coming soon) */}
+      {activeExam === 'mhcet' && (
+        <div className="space-y-6">
+          <div className="bg-orange-50 dark:bg-orange-500/10 border border-orange-100 dark:border-orange-500/20 rounded-2xl p-5 flex items-start gap-4">
+            <AlertCircle size={22} className="text-orange-500 flex-shrink-0 mt-0.5" />
+            <div>
+              <p className="font-black text-orange-700 dark:text-orange-300 text-sm">MHCET Law Full Mocks — Coming Soon</p>
+              <p className="text-orange-600/70 dark:text-orange-400/70 text-xs font-medium mt-1">
+                MHCET Law-pattern mocks are being prepared. Stay tuned!
+              </p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {MHCET_MOCK_META.map((m, i) => (
               <div key={m.id}><ComingSoonCard name={m.name} index={i} /></div>
             ))}
           </div>
