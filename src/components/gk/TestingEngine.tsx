@@ -108,6 +108,7 @@ function CustomTestBuilder({ onBack }: { onBack: () => void }) {
   const [selectedTypes, setSelectedTypes] = React.useState<string[]>([]);
   const [timeLimit, setTimeLimit] = React.useState<number>(30);
   const [isBuilding, setIsBuilding] = React.useState(false);
+  const [activeWeeklyQuiz, setActiveWeeklyQuiz] = React.useState<WeeklyQuiz | null>(null);
 
   const toggleTopic = (topic: string) => {
     setSelectedTopics(prev =>
@@ -441,7 +442,6 @@ export default function TestingEngine() {
   const [activeCategory, setActiveCategory] = React.useState<TestType>(null);
   const [testResult, setTestResult] = React.useState<TestResult | null>(null);
   const [history, setHistory] = React.useState<TestResult[]>(() => {
-  const [activeWeeklyQuiz, setActiveWeeklyQuiz] = React.useState<WeeklyQuiz | null>(null);
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('clat_test_history');
       return saved ? JSON.parse(saved) : [];
