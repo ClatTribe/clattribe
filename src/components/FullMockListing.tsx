@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { ArrowLeft, Clock, Target, Zap, BookOpen, AlertCircle, ChevronRight } from 'lucide-react';
 import { NLATMock } from '../data/nlat/types';
 
