@@ -1,24 +1,24 @@
 import { WeeklyQuiz } from '../types';
 
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
-//  WEEKLY QUIZ â WEEK 1 | APRIL 1â7, 2026
+// ─────────────────────────────────────────────────────────────
+//  WEEKLY QUIZ — WEEK 1 | APRIL 1–7, 2026
 //  Coverage: Current Affairs, GK & Legal GK
 //  Target: CLAT, AILET, NLAT & other law entrance exams
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─────────────────────────────────────────────────────────────
 
 const week01: WeeklyQuiz = {
   id: 'wq-2026-04-w1',
-  title: 'Weekly Quiz â Week 1: April 1â7, 2026',
+  title: 'Weekly Quiz — Week 1: April 1–7, 2026',
   description:
     'Current affairs, GK, Legal GK and Important Days from the first week of April 2026. Covers national & international events relevant for CLAT, AILET, NLAT and other law entrance exams.',
   week: 1,
   month: 'April',
   year: 2026,
-  dateRange: 'April 1â7, 2026',
+  dateRange: 'April 1–7, 2026',
   totalQuestions: 30,
   questions: [
 
-    // âââ NATIONAL CURRENT AFFAIRS (Q1âQ10) âââââââââââââââââââ
+    // ─── NATIONAL CURRENT AFFAIRS (Q1–Q10) ───────────────────
 
     {
       id: 1,
@@ -33,7 +33,7 @@ const week01: WeeklyQuiz = {
       ],
       correct: 1,
       explanation:
-        'E20 fuel â a blend of 20% ethanol and 80% petrol â was rolled out nationwide from April 1, 2026. This initiative is part of India\'s National Biofuel Policy 2018, aimed at reducing crude-oil import dependence, boosting farm income through sugarcane and grain-based ethanol, and cutting vehicular carbon emissions.',
+        'E20 fuel — a blend of 20% ethanol and 80% petrol — was rolled out nationwide from April 1, 2026. This initiative is part of India\'s National Biofuel Policy 2018, aimed at reducing crude-oil import dependence, boosting farm income through sugarcane and grain-based ethanol, and cutting vehicular carbon emissions.',
       difficulty: 'Easy',
       tags: ['E20', 'ethanol blending', 'biofuel', 'energy'],
     },
@@ -74,10 +74,10 @@ const week01: WeeklyQuiz = {
       category: 'current_affairs_national',
       question_text:
         'On April 3, 2026, CBSE introduced a curriculum on computational thinking and Artificial Intelligence for which set of classes?',
-      options: ['Classes 1â5', 'Classes 6â10', 'Classes 3â8', 'Classes 9â12'],
+      options: ['Classes 1–5', 'Classes 6–10', 'Classes 3–8', 'Classes 9–12'],
       correct: 2,
       explanation:
-        'CBSE launched an AI and computational thinking curriculum for Classes 3â8 on April 3, 2026, in line with the National Education Policy (NEP) 2020\'s emphasis on integrating technology-based learning from an early age. The curriculum focuses on coding fundamentals, logical reasoning, and applied AI concepts.',
+        'CBSE launched an AI and computational thinking curriculum for Classes 3–8 on April 3, 2026, in line with the National Education Policy (NEP) 2020\'s emphasis on integrating technology-based learning from an early age. The curriculum focuses on coding fundamentals, logical reasoning, and applied AI concepts.',
       difficulty: 'Easy',
       tags: ['CBSE', 'AI curriculum', 'NEP 2020', 'education'],
     },
@@ -126,7 +126,7 @@ const week01: WeeklyQuiz = {
       options: ['Rajiv Kumar', 'Sushil Chandra', 'Gyanesh Kumar', 'Nasim Zaidi'],
       correct: 2,
       explanation:
-        'Parliament rejected the impeachment motion against Chief Election Commissioner Gyanesh Kumar on April 7, 2026. Under Article 324(5) of the Constitution, the CEC can only be removed in the same manner as a Judge of the Supreme Court â through a presidential order following an address by both Houses of Parliament passed with a special majority â making removal extremely rare.',
+        'Parliament rejected the impeachment motion against Chief Election Commissioner Gyanesh Kumar on April 7, 2026. Under Article 324(5) of the Constitution, the CEC can only be removed in the same manner as a Judge of the Supreme Court — through a presidential order following an address by both Houses of Parliament passed with a special majority — making removal extremely rare.',
       difficulty: 'Medium',
       tags: ['CEC', 'Gyanesh Kumar', 'Election Commission', 'impeachment', 'Article 324'],
     },
@@ -162,7 +162,7 @@ const week01: WeeklyQuiz = {
       ],
       correct: 2,
       explanation:
-        'Artemis II, launched on April 1, 2026, was the first crewed mission beyond low Earth orbit since Apollo 17 (December 1972), the last time humans travelled to the Moon. Artemis II performed a lunar flyby â it did not land on the Moon â but carried the first woman and a diverse crew as a precursor to the Artemis III lunar landing mission.',
+        'Artemis II, launched on April 1, 2026, was the first crewed mission beyond low Earth orbit since Apollo 17 (December 1972), the last time humans travelled to the Moon. Artemis II performed a lunar flyby — it did not land on the Moon — but carried the first woman and a diverse crew as a precursor to the Artemis III lunar landing mission.',
       difficulty: 'Easy',
       tags: ['NASA', 'Artemis II', 'Apollo 17', 'moon mission', 'space exploration'],
     },
@@ -185,24 +185,24 @@ const week01: WeeklyQuiz = {
       tags: ['Artemis II', 'NASA', 'distance record', 'Apollo 13', 'deep space'],
     },
 
-    // âââ INTERNATIONAL CURRENT AFFAIRS (Q11âQ15) âââââââââââââ
+    // ─── INTERNATIONAL CURRENT AFFAIRS (Q11–Q15) ─────────────
 
     {
       id: 11,
       category: 'current_affairs_international',
       question_text:
-        'Who was re-elected as President of Vietnam by the National Assembly in early April 2026 for the 2026â2031 term?',
+        'Who was re-elected as President of Vietnam by the National Assembly in early April 2026 for the 2026–2031 term?',
       options: [
-        'Nguyá»n PhÃº Trá»ng',
-        'TÃ´ LÃ¢m',
-        'LÃª Minh HÆ°ng',
-        'Pháº¡m Minh ChÃ­nh',
+        'Nguyễn Phú Trọng',
+        'Tô Lâm',
+        'Lê Minh Hưng',
+        'Phạm Minh Chính',
       ],
       correct: 1,
       explanation:
-        'The National Assembly of Vietnam re-elected TÃ´ LÃ¢m â who also serves as General Secretary of the Communist Party of Vietnam â as President for the 2026â2031 term. LÃª Minh HÆ°ng was simultaneously elected as Prime Minister. This election consolidated leadership under TÃ´ LÃ¢m, making him the most powerful figure in Vietnamese politics.',
+        'The National Assembly of Vietnam re-elected Tô Lâm — who also serves as General Secretary of the Communist Party of Vietnam — as President for the 2026–2031 term. Lê Minh Hưng was simultaneously elected as Prime Minister. This election consolidated leadership under Tô Lâm, making him the most powerful figure in Vietnamese politics.',
       difficulty: 'Medium',
-      tags: ['Vietnam', 'TÃ´ LÃ¢m', 'president', 'Southeast Asia', 'international'],
+      tags: ['Vietnam', 'Tô Lâm', 'president', 'Southeast Asia', 'international'],
     },
 
     {
@@ -226,7 +226,7 @@ const week01: WeeklyQuiz = {
       options: ['5%', '10%', '20%', '35%'],
       correct: 2,
       explanation:
-        'Approximately 20% of the world\'s total oil trade â roughly 17 million barrels per day â passes through the Strait of Hormuz, which lies between Iran and Oman/UAE. Its closure or threat of disruption causes immediate spikes in global oil prices. This is why India, as a major oil importer, closely monitors any conflict affecting the Strait.',
+        'Approximately 20% of the world\'s total oil trade — roughly 17 million barrels per day — passes through the Strait of Hormuz, which lies between Iran and Oman/UAE. Its closure or threat of disruption causes immediate spikes in global oil prices. This is why India, as a major oil importer, closely monitors any conflict affecting the Strait.',
       difficulty: 'Easy',
       tags: ['Strait of Hormuz', 'Iran', 'oil', 'US-Iran war', 'geopolitics'],
     },
@@ -262,7 +262,7 @@ const week01: WeeklyQuiz = {
       tags: ['India foreign policy', 'MEA', 'US-Iran ceasefire', 'Strait of Hormuz', 'energy security'],
     },
 
-    // âââ IMPORTANT DAYS (Q16âQ20) âââââââââââââââââââââââââââââ
+    // ─── IMPORTANT DAYS (Q16–Q20) ─────────────────────────────
 
     {
       id: 16,
@@ -301,7 +301,7 @@ const week01: WeeklyQuiz = {
       ],
       correct: 1,
       explanation:
-        'Odisha Day (Utkal Divas) is observed on April 1 to commemorate the formation of Odisha as a separate province on April 1, 1936, carved out of the Bengal Presidency on linguistic grounds. Odisha was the first province in British India to be carved out specifically on the basis of language â setting a precedent for linguistic reorganisation of states after Independence.',
+        'Odisha Day (Utkal Divas) is observed on April 1 to commemorate the formation of Odisha as a separate province on April 1, 1936, carved out of the Bengal Presidency on linguistic grounds. Odisha was the first province in British India to be carved out specifically on the basis of language — setting a precedent for linguistic reorganisation of states after Independence.',
       difficulty: 'Medium',
       tags: ['Odisha Day', 'Utkal Divas', 'April 1', 'state formation', 'history'],
     },
@@ -330,12 +330,12 @@ const week01: WeeklyQuiz = {
       ],
       correct: 1,
       explanation:
-        'Hanuman Jayanti is the Hindu festival celebrating the birth anniversary of Lord Hanuman, one of the most revered figures in Hinduism. In 2026, it was observed on April 2 (Chaitra Purnima â the full moon day of the Chaitra month). It is widely celebrated across India, especially in North and Central India, with special prayers, processions, and recitations of the Hanuman Chalisa.',
+        'Hanuman Jayanti is the Hindu festival celebrating the birth anniversary of Lord Hanuman, one of the most revered figures in Hinduism. In 2026, it was observed on April 2 (Chaitra Purnima — the full moon day of the Chaitra month). It is widely celebrated across India, especially in North and Central India, with special prayers, processions, and recitations of the Hanuman Chalisa.',
       difficulty: 'Easy',
       tags: ['Hanuman Jayanti', 'April 2', 'Hindu festival', 'Chaitra Purnima', 'important days'],
     },
 
-    // âââ STATIC GK (Q21âQ25) ââââââââââââââââââââââââââââââââââ
+    // ─── STATIC GK (Q21–Q25) ──────────────────────────────────
 
     {
       id: 21,
@@ -350,7 +350,7 @@ const week01: WeeklyQuiz = {
       ],
       correct: 1,
       explanation:
-        'In E20 blended fuel, the "E" stands for Ethanol and "20" represents 20% ethanol content by volume (mixed with 80% petrol). Similarly, E10 = 10% ethanol, E100 = pure ethanol. India\'s National Biofuel Policy 2018 set a target of 20% ethanol blending by 2025â26, a goal achieved with the April 1, 2026 nationwide rollout.',
+        'In E20 blended fuel, the "E" stands for Ethanol and "20" represents 20% ethanol content by volume (mixed with 80% petrol). Similarly, E10 = 10% ethanol, E100 = pure ethanol. India\'s National Biofuel Policy 2018 set a target of 20% ethanol blending by 2025–26, a goal achieved with the April 1, 2026 nationwide rollout.',
       difficulty: 'Easy',
       tags: ['E20', 'ethanol', 'biofuel', 'fuel blending', 'static GK'],
     },
@@ -368,7 +368,7 @@ const week01: WeeklyQuiz = {
       ],
       correct: 0,
       explanation:
-        'DFCCIL â Dedicated Freight Corridor Corporation of India Limited â is a Special Purpose Vehicle set up by the Ministry of Railways in 2006 to plan, build, commission, operate and maintain the Eastern and Western Dedicated Freight Corridors. The Eastern DFC runs from Ludhiana (Punjab) to Sonnagar (Jharkhand), while the Western DFC runs from Dadri (UP) to JNPT (Mumbai).',
+        'DFCCIL — Dedicated Freight Corridor Corporation of India Limited — is a Special Purpose Vehicle set up by the Ministry of Railways in 2006 to plan, build, commission, operate and maintain the Eastern and Western Dedicated Freight Corridors. The Eastern DFC runs from Ludhiana (Punjab) to Sonnagar (Jharkhand), while the Western DFC runs from Dadri (UP) to JNPT (Mumbai).',
       difficulty: 'Easy',
       tags: ['DFCCIL', 'freight corridor', 'railways', 'full form', 'infrastructure'],
     },
@@ -386,7 +386,7 @@ const week01: WeeklyQuiz = {
       ],
       correct: 1,
       explanation:
-        'NASA\'s Artemis program aims to return humans to the Moon â specifically the lunar south pole â and establish a sustainable human presence both on the lunar surface and in lunar orbit (via the Gateway station), using this as a proving ground for eventual crewed missions to Mars. Artemis is named after Apollo\'s twin sister in Greek mythology, symbolising the inclusion of women astronauts.',
+        'NASA\'s Artemis program aims to return humans to the Moon — specifically the lunar south pole — and establish a sustainable human presence both on the lunar surface and in lunar orbit (via the Gateway station), using this as a proving ground for eventual crewed missions to Mars. Artemis is named after Apollo\'s twin sister in Greek mythology, symbolising the inclusion of women astronauts.',
       difficulty: 'Easy',
       tags: ['NASA', 'Artemis program', 'Moon', 'Mars', 'space exploration'],
     },
@@ -417,7 +417,7 @@ const week01: WeeklyQuiz = {
       tags: ['NCERT', 'history', 'establishment', 'education', 'static GK'],
     },
 
-    // âââ LEGAL GK & POLITY (Q26âQ30) âââââââââââââââââââââââââ
+    // ─── LEGAL GK & POLITY (Q26–Q30) ─────────────────────────
 
     {
       id: 26,
@@ -441,7 +441,7 @@ const week01: WeeklyQuiz = {
       id: 27,
       category: 'legal_gk',
       question_text:
-        'Which Constitutional Amendment Act inserted Article 21A, making free and compulsory education a Fundamental Right for children aged 6â14 years?',
+        'Which Constitutional Amendment Act inserted Article 21A, making free and compulsory education a Fundamental Right for children aged 6–14 years?',
       options: [
         '83rd Constitutional Amendment Act, 2000',
         '84th Constitutional Amendment Act, 2001',
@@ -494,7 +494,7 @@ const week01: WeeklyQuiz = {
       ],
       correct: 1,
       explanation:
-        'The Jan Vishwas Act\'s core philosophy is "decriminalisation" â converting minor, technical, or regulatory offences (e.g., procedural non-compliance) from criminal offences carrying jail time into civil penalties (fines). This reduces the fear of arbitrary arrest for minor business infractions, improves India\'s ease-of-doing-business environment, and decongests criminal courts. It does not abolish penalties altogether, but changes their nature.',
+        'The Jan Vishwas Act\'s core philosophy is "decriminalisation" — converting minor, technical, or regulatory offences (e.g., procedural non-compliance) from criminal offences carrying jail time into civil penalties (fines). This reduces the fear of arbitrary arrest for minor business infractions, improves India\'s ease-of-doing-business environment, and decongests criminal courts. It does not abolish penalties altogether, but changes their nature.',
       difficulty: 'Medium',
       tags: ['Jan Vishwas Act', 'decriminalisation', 'ease of doing business', 'legal reform'],
     },
