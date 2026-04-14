@@ -23,6 +23,8 @@ import GKPassageTest from './PassageTest';
 import FullMockListing from '../FullMockListing';
 import { nlatMocks } from '../../data/nlat';
 import type { NLATMock } from '../../data/nlat/types';
+import { WeeklyQuizListing, WeeklyQuizRunner } from '../WeeklyQuizEngine';
+import { weeklyQuizzes, WeeklyQuiz } from '../../data/weekly-quiz';
 
 type TestType = 'weekly' | 'pyq' | 'mock' | 'sectional' | 'passage' | 'custom' | null;
 
@@ -439,6 +441,7 @@ export default function TestingEngine() {
   const [activeCategory, setActiveCategory] = React.useState<TestType>(null);
   const [testResult, setTestResult] = React.useState<TestResult | null>(null);
   const [history, setHistory] = React.useState<TestResult[]>(() => {
+  const [activeWeeklyQuiz, setActiveWeeklyQuiz] = React.useState<WeeklyQuiz | null>(null);
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('clat_test_history');
       return saved ? JSON.parse(saved) : [];
@@ -592,7 +595,27 @@ export default function TestingEngine() {
     );
   }
 
-  if (activeCategory) {
+    // ── Weekly Quizzes ─────────────────────────────────────────────────────
+  if (activeCategory === 'weekly') {
+    if (activeWeeklyQuiz) {
+      return (
+        <WeeklyQuizRunner
+          quiz={activeWeeklyQuiz}
+          onBack={() => setActiveWeeklyQuiz(null)}
+          onFinish={() => { setActiveWeeklyQuiz(null); }}
+        />
+      );
+    }
+    return (
+      <WeeklyQuizListing
+        quizzes={weeklyQuizzes}
+        onSelect={(quiz) => setActiveWeeklyQuiz(quiz)}
+        onBack={() => setActiveCategory(null)}
+      />
+    );
+  }
+
+if (activeCategory) {
     return (
       <div className="space-y-6 sm:space-y-8 px-4 sm:px-0">
         <button
