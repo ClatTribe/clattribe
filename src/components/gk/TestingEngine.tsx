@@ -20,6 +20,9 @@ import {
   Lightbulb
 } from 'lucide-react';
 import GKPassageTest from './PassageTest';
+import FullMockListing from '../FullMockListing';
+import { nlatMocks } from '../../data/nlat';
+import type { NLATMock } from '../../data/nlat/types';
 
 type TestType = 'weekly' | 'pyq' | 'mock' | 'sectional' | 'passage' | 'custom' | null;
 
@@ -571,6 +574,20 @@ export default function TestingEngine() {
           Back to Engine
         </button>
         <GKPassageTest onComplete={handleTestComplete} />
+      </div>
+    );
+  }
+
+  if (activeCategory === 'mock') {
+    return (
+      <div className="px-4 sm:px-0">
+        <FullMockListing
+          nlatMocks={nlatMocks}
+          onStartNLAT={(mock: NLATMock) => {
+            alert(`Starting ${mock.name} — full test UI coming soon!`);
+          }}
+          onBack={() => setActiveCategory(null)}
+        />
       </div>
     );
   }
