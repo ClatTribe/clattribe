@@ -51,7 +51,7 @@ const CATEGORIES: TestCategory[] = [
   },
   {
     id: 'pyq',
-    title: 'PYQs (2020-2025)',
+    title: 'PYQs (2020-2026)',
     description: 'Official Previous Year Questions with detailed legal explanations.',
     icon: <History size={24} />,
     count: '6 Years',
@@ -678,7 +678,7 @@ export default function TestingEngine() {
           </button>
           {pyqStep === 'select-exam' && (
             <div>
-              <h2 className="text-2xl font-bold text-white mb-2">PYQs (2020–2025)</h2>
+              <h2 className="text-2xl font-bold text-white mb-2">PYQs (2020–2026)</h2>
               <p className="text-gray-400 mb-8">Choose your exam to start a timed GK sectional test</p>
               <div className="grid grid-cols-2 gap-4">
                 {(['CLAT', 'AILET', 'MHCET', 'NLAT'] as const).map(exam => (
@@ -695,7 +695,7 @@ export default function TestingEngine() {
               <h2 className="text-2xl font-bold text-white mb-2">{pyqExam} — Select Year</h2>
               <p className="text-gray-400 mb-8">90 seconds per question · Timed GK section</p>
               <div className="grid grid-cols-3 gap-4">
-                {[2020, 2021, 2022, 2023, 2024, 2025].map(year => (
+                {[2020, 2021, 2022, 2023, 2024, 2025, 2026].map(year => (
                   <button key={year} onClick={() => { setPyqYear(year); loadPyqQuestions(pyqExam, year); }}
                     className="bg-[#0d1425] border border-blue-500/30 hover:border-blue-400 rounded-xl p-5 text-white text-lg font-semibold hover:bg-blue-500/10 transition-all">
                     {year}
