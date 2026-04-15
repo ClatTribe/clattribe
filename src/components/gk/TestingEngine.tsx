@@ -25,6 +25,7 @@ import { nlatMocks } from '../../data/nlat';
 import type { NLATMock } from '../../data/nlat/types';
 import { WeeklyQuizListing, WeeklyQuizRunner } from '../WeeklyQuizEngine';
 import { weeklyQuizzes, WeeklyQuiz } from '../../data/weekly-quiz';
+import { supabase } from '@/lib/gk-supabase';
 
 type TestType = 'weekly' | 'pyq' | 'mock' | 'sectional' | 'passage' | 'custom' | null;
 
@@ -441,6 +442,28 @@ export default function TestingEngine() {
   const [activeCategory, setActiveCategory] = React.useState<TestType>(null);
   const [activeWeeklyQuiz, setActiveWeeklyQuiz] = React.useState<WeeklyQuiz | null>(null);
   const [testResult, setTestResult] = React.useState<TestResult | null>(null);
+
+  // PYQ State
+  const [pyqExam, setPyqExam] = React.useState<string | null>(null);
+  const [pyqYear, setPyqYear] = React.useState<number | null>(null);
+  const [pyqQuestions, setPyqQuestions] = React.useState<any[]>([]);
+  const [pyqCurrentQ, setPyqCurrentQ] = React.useState(0);
+  const [pyqAnswers, setPyqAnswers] = React.useState<(number | null)[]>([]);
+  const [pyqTimeLeft, setPyqTimeLeft] = React.useState(0);
+  const [pyqTimerActive, setPyqTimerActive] = React.useState(false);
+  const [pyqLoading, setPyqLoading] = React.useState(false);
+  const [pyqStep, setPyqStep] = React.useState<'select-exam' | 'select-year' | 'test' | 'result'>('select-exam');
+
+  React.useEffect(() => {
+    if (!pyqTimerActive || pyqTimeLeft <= 0) return;
+    const interval = setInterval(() => {
+      setPyqTimeLeft(t => {
+        if (t <= 1) { setPyqTimerActive(false); setPyqStep('result'); return 0; }
+        return t - 1;
+      });
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [pyqTimerActive, pyqTimeLeft]);
   const [history, setHistory] = React.useState<TestResult[]>(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('clat_test_history');
@@ -612,6 +635,150 @@ export default function TestingEngine() {
         onSelect={(quiz) => setActiveWeeklyQuiz(quiz)}
         onBack={() => setActiveCategory(null)}
       />
+    );
+  }
+
+  if (activeCategory === 'pyq') {
+    const resetPyq = () => {
+      setActiveCategory(null);
+      setPyqStep('select-exam');
+      setPyqExam(null);
+      setPyqYear(null);
+      setPyqQuestions([]);
+      setPyqTimerActive(false);
+    };
+    const loadPyqQuestions = async (exam: string, year: number) => {
+      setPyqLoading(true);
+      const { data, error } = await supabase
+        .from('gk_pyq_questions')
+        .select('*')
+        .eq('exam', exam)
+        .eq('year', year)
+        .order('id');
+      if (!error && data && data.length > 0) {
+        setPyqQuestions(data);
+        setPyqAnswers(new Array(data.length).fill(null));
+        setPyqTimeLeft(data.length * 90);
+        setPyqCurrentQ(0);
+        setPyqStep('test');
+        setPyqTimerActive(true);
+      }
+      setPyqLoading(false);
+    };
+    const handlePyqAnswer = (idx: number) => {
+      setPyqAnswers(prev => { const a = [...prev]; a[pyqCurrentQ] = idx; return a; });
+    };
+    const fmtTime = (s: number) => `${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;
+    const pyqScore = pyqQuestions.length > 0 ? pyqAnswers.filter((a, i) => a === pyqQuestions[i]?.correct).length : 0;
+    return (
+      <div className="min-h-screen bg-[#060818] p-4 md:p-8">
+        <div className="max-w-3xl mx-auto">
+          <button onClick={resetPyq} className="flex items-center gap-2 text-gray-400 hover:text-white mb-6 transition-colors">
+            <ArrowLeft size={18} /> Back to Tests
+          </button>
+          {pyqStep === 'select-exam' && (
+            <div>
+              <h2 className="text-2xl font-bold text-white mb-2">PYQs (2020–2025)</h2>
+              <p className="text-gray-400 mb-8">Choose your exam to start a timed GK sectional test</p>
+              <div className="grid grid-cols-2 gap-4">
+                {(['CLAT', 'AILET', 'MHCET', 'NLAT'] as const).map(exam => (
+                  <button key={exam} onClick={() => { setPyqExam(exam); setPyqStep('select-year'); }}
+                    className="bg-[#0d1425] border border-blue-500/30 hover:border-blue-400 rounded-xl p-6 text-white text-xl font-bold hover:bg-blue-500/10 transition-all">
+                    {exam}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+          {pyqStep === 'select-year' && pyqExam && (
+            <div>
+              <h2 className="text-2xl font-bold text-white mb-2">{pyqExam} — Select Year</h2>
+              <p className="text-gray-400 mb-8">90 seconds per question · Timed GK section</p>
+              <div className="grid grid-cols-3 gap-4">
+                {[2020, 2021, 2022, 2023, 2024, 2025].map(year => (
+                  <button key={year} onClick={() => { setPyqYear(year); loadPyqQuestions(pyqExam, year); }}
+                    className="bg-[#0d1425] border border-blue-500/30 hover:border-blue-400 rounded-xl p-5 text-white text-lg font-semibold hover:bg-blue-500/10 transition-all">
+                    {year}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+          {pyqLoading && (
+            <div className="flex justify-center items-center h-48">
+              <div className="text-blue-400 text-lg animate-pulse">Loading questions...</div>
+            </div>
+          )}
+          {pyqStep === 'test' && !pyqLoading && pyqQuestions.length > 0 && (
+            <div>
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="text-white font-semibold">{pyqExam} {pyqYear} · GK</h3>
+                <div className={`flex items-center gap-2 px-4 py-2 rounded-lg font-mono text-lg font-bold ${pyqTimeLeft < 60 ? 'bg-red-500/20 text-red-400' : 'bg-blue-500/20 text-blue-300'}`}>
+                  <Clock size={18} /> {fmtTime(pyqTimeLeft)}
+                </div>
+              </div>
+              <div className="text-gray-400 text-sm mb-2">Question {pyqCurrentQ + 1} of {pyqQuestions.length}</div>
+              <div className="w-full bg-gray-800 rounded-full h-1.5 mb-6">
+                <div className="bg-blue-500 h-1.5 rounded-full transition-all" style={{width: `${((pyqCurrentQ+1)/pyqQuestions.length)*100}%`}} />
+              </div>
+              <div className="bg-[#0d1425] border border-white/10 rounded-xl p-6 mb-4">
+                <p className="text-white text-lg leading-relaxed">{pyqQuestions[pyqCurrentQ]?.question}</p>
+                {pyqQuestions[pyqCurrentQ]?.topic && (
+                  <span className="inline-block mt-3 text-xs text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded-full">{pyqQuestions[pyqCurrentQ].topic}</span>
+                )}
+              </div>
+              <div className="grid gap-3 mb-6">
+                {(pyqQuestions[pyqCurrentQ]?.options as string[])?.map((opt: string, i: number) => (
+                  <button key={i} onClick={() => handlePyqAnswer(i)}
+                    className={`text-left px-5 py-3.5 rounded-xl border transition-all ${pyqAnswers[pyqCurrentQ] === i ? 'bg-blue-500/20 border-blue-400 text-white' : 'bg-[#0d1425] border-white/10 text-gray-300 hover:border-blue-400/50'}`}>
+                    <span className="font-semibold mr-3 text-blue-400">{String.fromCharCode(65+i)}.</span>{opt}
+                  </button>
+                ))}
+              </div>
+              <div className="flex gap-3">
+                <button onClick={() => setPyqCurrentQ(q => Math.max(0, q-1))} disabled={pyqCurrentQ === 0}
+                  className="px-5 py-2.5 rounded-xl border border-white/10 text-gray-400 disabled:opacity-30 hover:border-white/30 transition-all">← Prev</button>
+                {pyqCurrentQ < pyqQuestions.length - 1 ? (
+                  <button onClick={() => setPyqCurrentQ(q => q+1)}
+                    className="flex-1 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-all">Next →</button>
+                ) : (
+                  <button onClick={() => { setPyqTimerActive(false); setPyqStep('result'); }}
+                    className="flex-1 px-5 py-2.5 rounded-xl bg-green-600 hover:bg-green-500 text-white font-semibold transition-all">Submit Test ✓</button>
+                )}
+              </div>
+            </div>
+          )}
+          {pyqStep === 'result' && !pyqLoading && (
+            <div>
+              <div className="bg-[#0d1425] border border-white/10 rounded-xl p-8 text-center mb-6">
+                <Trophy size={48} className="mx-auto text-yellow-400 mb-4" />
+                <h2 className="text-3xl font-bold text-white mb-1">{pyqScore} / {pyqQuestions.length}</h2>
+                <p className="text-gray-400">{pyqExam} {pyqYear} · {Math.round((pyqScore/pyqQuestions.length)*100)}% accuracy</p>
+              </div>
+              <div className="space-y-4 mb-6">
+                {pyqQuestions.map((q: any, i: number) => {
+                  const ua = pyqAnswers[i];
+                  const ok = ua === q.correct;
+                  return (
+                    <div key={i} className={`rounded-xl border p-4 ${ok ? 'border-green-500/30 bg-green-500/5' : 'border-red-500/30 bg-red-500/5'}`}>
+                      <p className="text-white text-sm font-medium mb-2">{i+1}. {q.question}</p>
+                      <p className={`text-sm ${ok ? 'text-green-400' : 'text-red-400'}`}>
+                        Your answer: {ua !== null ? (q.options as string[])[ua] : 'Not answered'}
+                        {!ok && <span className="text-green-400 ml-2"> · Correct: {(q.options as string[])[q.correct]}</span>}
+                      </p>
+                      {q.explanation && <p className="text-gray-500 text-xs mt-1">{q.explanation}</p>}
+                    </div>
+                  );
+                })}
+              </div>
+              <button onClick={() => { setPyqStep('select-year'); setPyqQuestions([]); }}
+                className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-all">
+                Try Another Year
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
     );
   }
 
