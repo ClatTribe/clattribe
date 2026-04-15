@@ -25,7 +25,7 @@ import { nlatMocks } from '../../data/nlat';
 import type { NLATMock } from '../../data/nlat/types';
 import { WeeklyQuizListing, WeeklyQuizRunner } from '../WeeklyQuizEngine';
 import { weeklyQuizzes, WeeklyQuiz } from '../../data/weekly-quiz';
-import { supabase } from '@/lib/gk-supabase';
+import { gkSupabase as supabase } from '@/lib/gk-supabase';
 
 type TestType = 'weekly' | 'pyq' | 'mock' | 'sectional' | 'passage' | 'custom' | null;
 
