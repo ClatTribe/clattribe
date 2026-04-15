@@ -76,6 +76,36 @@ function transformRow(row: any): EditorialCard {
     mcqs,
   };
 }
+// Clean scraped editorial content: strip footer, fix link fragments, split paragraphs
+function cleanEditorialContent(raw: string): string[] {
+  if (!raw) return [];
+  // Strip The Hindu footer junk - everything from the first footer marker
+  const footerMarkers = ['\nPublished\n', '\nRead Comments', '\nCopy link', '\nPrint\n', '\nShare\n'];
+  let text = raw;
+  for (const marker of footerMarkers) {
+    const idx = text.indexOf(marker);
+    if (idx > 200) { text = text.substring(0, idx); break; }
+  }
+  // Fix hanging punctuation: line starting with , or ; means it's continuation of previous
+  text = text.replace(/\n([,;])/g, '$1');
+  // Split into lines, merge fragments, form paragraphs
+  const lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+  const paragraphs: string[] = [];
+  let current = '';
+  for (const line of lines) {
+    if (!current) { current = line; continue; }
+    // Continuation: starts with lowercase letter or connecting punctuation
+    if (/^[a-z,;(]/.test(line)) {
+      current += ' ' + line;
+    } else {
+      paragraphs.push(current);
+      current = line;
+    }
+  }
+  if (current) paragraphs.push(current);
+  return paragraphs.filter(p => p.length > 10);
+}
+
 export default function Editorial() {
   const [selectedDate, setSelectedDate] = React.useState(String(new Date().getDate()));
   const [selectedEditorial, setSelectedEditorial] = React.useState<EditorialCard | null>(null);
@@ -356,10 +386,12 @@ function DetailedEditorial({ item, onBack, initialShowQuiz = false }: { item: Ed
           </div>
         </div>
 
-        <div className="prose dark:prose-invert max-w-none">
-          <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed whitespace-pre-line font-medium">
-            {item.content}
-          </p>
+        <div className="prose dark:prose-invert max-w-none space-y-5">
+          {cleanEditorialContent(item.content).map((para, idx) => (
+            <p key={idx} className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed font-medium">
+              {para}
+            </p>
+          ))}
         </div>
 
         <div className="pt-8 border-t border-gray-100 dark:border-white/5 flex justify-between items-center">
