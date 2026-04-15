@@ -24,7 +24,7 @@ export default function GKSubscriptionModal({ onSubscribe, onClose }: GKSubscrip
       <motion.div
         initial={{ opacity: 0, scale: 0.9, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
-        className="w-full max-w-lg bg-white dark:bg-[#060818] rounded-[3rem] shadow-2xl border border-gray-100 dark:border-white/10 overflow-hidden relative"
+        className="w-full max-w-lg bg-white dark:bg-[#060818] rounded-[3rem] shadow-2xl border border-gray-100 dark:border-white max-h-[90vh] overflow-y-auto/10 overflow-hidden relative"
       >
         <button
           onClick={onClose}
@@ -34,9 +34,9 @@ export default function GKSubscriptionModal({ onSubscribe, onClose }: GKSubscrip
         </button>
 
         {/* Header */}
-        <div className="bg-[#060818] p-10 text-center relative overflow-hidden">
+        <div className="bg-[#060818] p-6 text-center relative overflow-hidden">
           <div className="absolute inset-0 bg-[#F59E0B]/5 pointer-events-none" />
-          <div className="w-16 h-16 bg-[#F59E0B]/10 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-[#F59E0B]/20">
+          <div className="w-12 h-12 bg-[#F59E0B]/10 rounded-2xl flex items-center justify-center mx-auto mb-3 border border-[#F59E0B]/20">
             <Crown size={32} className="text-[#F59E0B]" />
           </div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F59E0B]/10 text-[#F59E0B] text-[10px] font-black uppercase tracking-widest mb-4">
@@ -50,7 +50,7 @@ export default function GKSubscriptionModal({ onSubscribe, onClose }: GKSubscrip
         </div>
 
         {/* Features */}
-        <div className="p-10 space-y-8">
+        <div className="p-6 space-y-5">
           <div className="space-y-4">
             {FEATURES.map((feature) => (
               <div key={feature} className="flex items-center gap-3">
