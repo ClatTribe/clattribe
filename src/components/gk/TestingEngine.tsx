@@ -722,7 +722,15 @@ export default function TestingEngine() {
                 <div className="bg-blue-500 h-1.5 rounded-full transition-all" style={{width: `${((pyqCurrentQ+1)/pyqQuestions.length)*100}%`}} />
               </div>
               <div className="bg-[#0d1425] border border-white/10 rounded-xl p-6 mb-4">
-                <p className="text-white text-lg leading-relaxed">{pyqQuestions[pyqCurrentQ]?.question}</p>
+                {pyqQuestions[pyqCurrentQ]?.passage_text && (
+                <div className="mb-5 p-4 bg-[#0a1628] border border-blue-500/20 rounded-lg">
+                  {pyqQuestions[pyqCurrentQ]?.passage_title && (
+                    <p className="text-blue-400 text-xs font-semibold mb-3 uppercase tracking-wide">{pyqQuestions[pyqCurrentQ].passage_title}</p>
+                  )}
+                  <p className="text-gray-300 text-sm leading-relaxed whitespace-pre-line">{pyqQuestions[pyqCurrentQ].passage_text}</p>
+                </div>
+              )}
+              <p className="text-white text-lg leading-relaxed">{pyqQuestions[pyqCurrentQ]?.question}</p>
                 {pyqQuestions[pyqCurrentQ]?.topic && (
                   <span className="inline-block mt-3 text-xs text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded-full">{pyqQuestions[pyqCurrentQ].topic}</span>
                 )}
@@ -761,7 +769,13 @@ export default function TestingEngine() {
                   const ok = ua === q.correct;
                   return (
                     <div key={i} className={`rounded-xl border p-4 ${ok ? 'border-green-500/30 bg-green-500/5' : 'border-red-500/30 bg-red-500/5'}`}>
-                      <p className="text-white text-sm font-medium mb-2">{i+1}. {q.question}</p>
+                      {q.passage_text && (i === 0 || questions[i-1]?.passage_id !== q.passage_id) && (
+                    <div className="mb-3 p-3 bg-[#0a1628] border border-blue-500/20 rounded-lg">
+                      {q.passage_title && <p className="text-blue-400 text-xs font-semibold mb-2 uppercase tracking-wide">{q.passage_title}</p>}
+                      <p className="text-gray-300 text-xs leading-relaxed whitespace-pre-line">{q.passage_text}</p>
+                    </div>
+                  )}
+                  <p className="text-white text-sm font-medium mb-2">{i+1}. {q.question}</p>
                       <p className={`text-sm ${ok ? 'text-green-400' : 'text-red-400'}`}>
                         Your answer: {ua !== null ? (q.options as string[])[ua] : 'Not answered'}
                         {!ok && <span className="text-green-400 ml-2"> · Correct: {(q.options as string[])[q.correct]}</span>}
