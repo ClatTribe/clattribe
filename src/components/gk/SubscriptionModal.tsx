@@ -68,7 +68,7 @@ export default function GKSubscriptionModal({ onSubscribe, onClose }: GKSubscrip
               Flat Monthly Fee
             </p>
             <div className="flex items-end justify-center gap-1">
-              <span className="text-5xl font-black text-[#060818] dark:text-white">₹299</span>
+              <span className="text-5xl font-black text-[#060818] dark:text-white">₹99</span>
               <span className="text-gray-400 font-bold mb-2">/month</span>
             </div>
             <p className="text-xs text-gray-400 mt-2">No hidden charges. Cancel anytime.</p>
