@@ -159,7 +159,7 @@ export default function Editorial() {
   }
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-8">
       {/* Daily Archives Section */}
       <section className="space-y-6">
         <div className="flex items-center gap-4">
@@ -313,6 +313,13 @@ const EditorialItem: React.FC<{ item: EditorialCard; onOpen: () => void; onQuiz:
           <BookOpen size={16} /> Read
         </button>
         <button
+          onClick={(e) => toggleBookmark(item.id, e)}
+          className={`p-3 rounded-2xl border transition-all ${bookmarkedIds.includes(item.id) ? 'bg-amber-50 dark:bg-amber-500/10 border-amber-300 dark:border-amber-500/30 text-amber-500' : 'bg-gray-50 dark:bg-white/5 border-gray-100 dark:border-white/10 text-gray-400 hover:text-amber-500'}`}
+          title="Bookmark"
+        >
+          <BookMarked size={16} />
+        </button>
+        <button
           onClick={(e) => { e.stopPropagation(); onQuiz(); }}
           className="p-3 rounded-2xl bg-gray-50 dark:bg-white/5 text-[#060818] dark:text-white hover:bg-[#F59E0B] hover:text-[#060818] transition-all"
           title="Take Quiz"
@@ -374,9 +381,18 @@ function DetailedEditorial({ item, onBack, initialShowQuiz = false }: { item: Ed
             </span>
             <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{item.date}</span>
           </div>
-          <h1 className="text-3xl font-black text-[#060818] dark:text-white leading-tight">
-            {item.title}
-          </h1>
+          <div className="flex items-start justify-between gap-4">
+            <h1 className="text-3xl font-black text-[#060818] dark:text-white leading-tight flex-1">
+              {item.title}
+            </h1>
+            <button
+              onClick={() => toggleBookmark(item.id)}
+              className={`p-2 rounded-xl transition-all shrink-0 ${bookmarkedIds.includes(item.id) ? 'text-amber-500 bg-amber-50 dark:bg-amber-500/10' : 'text-gray-400 hover:text-amber-500 bg-gray-50 dark:bg-white/5'}`}
+              title="Bookmark article"
+            >
+              <BookMarked size={20} />
+            </button>
+          </div>
           <div className="flex gap-2">
             {item.tags.map(tag => (
               <span key={tag} className="px-3 py-1 rounded-full bg-gray-50 dark:bg-white/5 text-[10px] font-black text-gray-400 uppercase tracking-widest">
@@ -394,7 +410,25 @@ function DetailedEditorial({ item, onBack, initialShowQuiz = false }: { item: Ed
           ))}
         </div>
 
-        <div className="pt-8 border-t border-gray-100 dark:border-white/5 flex justify-between items-center">
+        {/* Key GK Takeaways for CLAT */}
+        <div className="bg-amber-50 dark:bg-[#F59E0B]/10 border border-amber-200 dark:border-[#F59E0B]/20 rounded-2xl p-6">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-6 h-6 bg-[#F59E0B] rounded-lg flex items-center justify-center shrink-0">
+              <Zap size={12} className="text-[#060818]" />
+            </div>
+            <span className="text-xs font-black uppercase tracking-widest text-[#F59E0B]">Key GK Takeaways for CLAT</span>
+          </div>
+          <ul className="space-y-3">
+            {cleanEditorialContent(item.content).slice(0, 4).map((para, i) => (
+              <li key={i} className="flex items-start gap-3 text-sm text-gray-700 dark:text-gray-300 font-medium leading-relaxed">
+                <span className="w-5 h-5 bg-[#F59E0B]/20 text-[#F59E0B] rounded-full flex items-center justify-center shrink-0 text-[10px] font-black mt-0.5">{i + 1}</span>
+                <span>{para.length > 200 ? para.substring(0, 200) + '\u2026' : para}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+                <div className="pt-8 border-t border-gray-100 dark:border-white/5 flex justify-between items-center">
           <div className="flex items-center gap-4">
     0                   <button className="flex items-center gap-2 text-[#060818] dark:text-white font-bold hover:text-[#F59E0B] transition-colors">
               <FileText size={20} /> Download PDF
