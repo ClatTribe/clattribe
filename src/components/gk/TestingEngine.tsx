@@ -19,7 +19,7 @@ import {
   Lightbulb
 } from 'lucide-react';
 import GKPassageTest from './PassageTest';
-import GKSectionalTest from './GKSectionalTest';
+import GKSectionalTest from './GKSectionalTest';import GKWeeklyTest from './GKWeeklyTest';import GKPYQTest from './GKPYQTest';
 
 type TestType = 'weekly' | 'pyq' | 'mock' | 'sectional' | 'passage' | 'custom' | null;
 
@@ -45,7 +45,7 @@ const CATEGORIES: TestCategory[] = [
   },
   {
     id: 'pyq',
-    title: 'PYQs (2020-2025)',
+    title: 'PYQs (2020-2026)',
     description: 'Official Previous Year Questions with detailed legal explanations.',
     icon: <History size={24} />,
     count: '6 Years',
@@ -488,7 +488,7 @@ export default function TestingEngine() {
     return <CustomTestBuilder onBack={() => setActiveCategory(null)} />;
   }
 
-  if (activeCategory === 'passage') {
+  if (activeCategory === 'weekly') {    return (      <div className="space-y-6">        <GKWeeklyTest onComplete={handleTestComplete} onBack={() => setActiveCategory(null)} />      </div>    );  }  if (activeCategory === 'pyq') {    return (      <div className="space-y-6">        <GKPYQTest onComplete={handleTestComplete} onBack={() => setActiveCategory(null)} />      </div>    );  }  if (activeCategory === 'passage') {
     return (
       <div className="space-y-6">
         <button
