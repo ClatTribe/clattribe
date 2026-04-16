@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, useMotionValue, useTransform, AnimatePresence } from 'framer-motion';
-import { Brain, Zap, Trophy, Flame, Clock, CheckCircle, XCircle, ArrowLeft, ArrowRight, BookOpen, Star, Target, RefreshCw, ChevronRight, Award, TrendingUp, BarChart2 } from 'lucide-react';
+import { Brain, Zap, Trophy, Flame, Clock, CheckCircle, XCircle, ArrowLeft, ArrowRight, BookOpen, Star, Target, RefreshCw, ChevronRight, Award, TrendingUp, BarChart2, BookMarked } from 'lucide-react';
 
 // ── Supabase ──────────────────────────────────────────────────────────────────
 const SUPABASE_URL = 'https://fjswchcothephgtzqbgq.supabase.co';
@@ -196,6 +196,18 @@ function FlipCard({ question, answer, category, flippedState, onFlip }: {
 
 // ── Main Component ─────────────────────────────────────────────────────────────
 export default function Flashcards() {
+  const [bookmarkedIds, setBookmarkedIds] = React.useState<string[]>(() => {
+    try { return JSON.parse(localStorage.getItem('gk_flash_bookmarks') || '[]'); } catch { return []; }
+  });
+  const toggleFlashBookmark = (id: number) => {
+    setBookmarkedIds(prev => {
+      const next = prev.includes(String(id)) ? prev.filter((x: string) => x !== String(id)) : [...prev, String(id)];
+      localStorage.setItem('gk_flash_bookmarks', JSON.stringify(next));
+      return next;
+    });
+  };
+  const isSubscribed = localStorage.getItem('gk_isSubscribed') === 'true';
+  const FREE_DAILY_LIMIT = 3;
   const [allCards, setAllCards] = useState<FlashCard[]>([]);
   const [loading, setLoading] = useState(true);
   const [mode, setMode] = useState<Mode>('home');
@@ -308,7 +320,7 @@ export default function Flashcards() {
   const startDaily = () => {
     if (!allCards.length) return;
     const cards = getDailyCards(allCards);
-    setDailyCards(cards);
+    setDailyCards(isSubscribed ? cards : cards.slice(0, FREE_DAILY_LIMIT));
     setDailyIdx(0);
     setDailyFlipped(false);
     setDailyResults([]);
@@ -526,6 +538,7 @@ export default function Flashcards() {
           flippedState={dailyFlipped}
           onFlip={() => setDailyFlipped(f => !f)}
         />
+        <button onClick={() => toggleFlashBookmark(card.id)} title="Bookmark" className={`p-2 rounded-xl border transition-all ${bookmarkedIds.includes(String(card.id)) ? 'bg-amber-50 dark:bg-amber-500/10 border-amber-300 dark:border-amber-500/30 text-amber-500' : 'bg-gray-50 dark:bg-white/5 border-gray-100 dark:border-white/10 text-gray-400 hover:text-amber-500'}`}><BookMarked size={16} /></button>
 
         <AnimatePresence>
           {dailyFlipped && (
@@ -761,7 +774,7 @@ export default function Flashcards() {
     const strongCategories = categoryStats.filter(c => c.pct >= 70);
 
     return (
-      <div className="flex flex-col gap-5 py-4 px-4 max-w-lg mx-auto">
+      <div className="flex flex-col gap-5 pt-4 pb-8 px-4 max-w-lg mx-auto">
         <div className="flex items-center gap-3">
           <button onClick={() => setMode('home')} style={{ background: 'none', border: 'none', color: '#64748b', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4, fontSize: 14 }}>
             <ArrowLeft size={16} />
