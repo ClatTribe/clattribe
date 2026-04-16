@@ -189,7 +189,7 @@ function CustomTestBuilder({ onBack }: { onBack: () => void }) {
                 >
                   {type}
                 </button>
-     0        ))}
+              ))}
             </div>
           </div>
         </div>
