@@ -140,7 +140,7 @@ export default function GKDashboard() {
   const streakProgress = Math.min(((streak - prevMilestone) / (nextMilestone - prevMilestone)) * 100, 100);
 
   return (
-    <div className="space-y-12 relative">
+    <div className="space-y-8 relative">
       {toast && (
         <motion.div
           initial={{ opacity: 0, y: 50 }}
