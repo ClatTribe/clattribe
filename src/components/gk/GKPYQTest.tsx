@@ -2,7 +2,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  History,
   ArrowLeft,
   ArrowRight,
   CheckCircle2,
@@ -11,423 +10,435 @@ import {
   Timer,
   RefreshCw,
   AlertCircle,
-  Lightbulb,
-  BookOpen
+  BookOpen,
 } from 'lucide-react';
 import { gkSupabase } from '@/lib/gk-supabase';
 
-interface PYQQuestion {
-  id: number;
-  year: number;
-  question: string;
-  options: string[];
-  correct: number;
-  explanation: string;
-  topic?: string;
-  passage_text?: string;
-  passage_title?: string;
+interface Props {
+  onComplete: (score: number, total: number) => void;
+  onBack: () => void;
 }
 
-interface GKPYQTestProps {
-  onComplete?: (results: { score: number; total: number; timeSpent: number }) => void;
-  onBack?: () => void;
-}
+const EXAMS = ['CLAT', 'AILET', 'MHCET', 'NLAT'] as const;
+const YEARS = [2020, 2021, 2022, 2023, 2024, 2025];
+const SECONDS_PER_Q = 90;
 
-const YEARS = [2020, 2021, 2022, 2023, 2024, 2025, 2026];
+type Step = 'select-exam' | 'select-year' | 'quiz' | 'result';
 
-const YEAR_COLORS: Record<number, { bg: string; text: string; accent: string }> = {
-  2020: { bg: 'bg-blue-500', text: 'text-white', accent: 'bg-blue-500/10' },
-  2021: { bg: 'bg-purple-500', text: 'text-white', accent: 'bg-purple-500/10' },
-  2022: { bg: 'bg-emerald-500', text: 'text-white', accent: 'bg-emerald-500/10' },
-  2023: { bg: 'bg-rose-500', text: 'text-white', accent: 'bg-rose-500/10' },
-  2024: { bg: 'bg-orange-500', text: 'text-white', accent: 'bg-orange-500/10' },
-  2025: { bg: 'bg-cyan-500', text: 'text-white', accent: 'bg-cyan-500/10' },
-  2026: { bg: 'bg-[#F59E0B]', text: 'text-[#060818]', accent: 'bg-[#F59E0B]/10' },
-};
+export default function GKPYQTest({ onComplete, onBack }: Props) {
+  const [step, setStep] = React.useState<Step>('select-exam');
+  const [selectedExam, setSelectedExam] = React.useState<string | null>(null);
+  const [selectedYear, setSelectedYear] = React.useState<number | null>(null);
 
-function YearSelector({ onSelect, onBack }: { onSelect: (year: number) => void; onBack?: () => void }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="space-y-8"
-    >
-      <div className="flex items-center justify-between flex-wrap gap-4">
-        {onBack && (
+  // Quiz state
+  const [questions, setQuestions] = React.useState<any[]>([]);
+  const [answers, setAnswers] = React.useState<(number | null)[]>([]);
+  const [currentQ, setCurrentQ] = React.useState(0);
+  const [timeLeft, setTimeLeft] = React.useState(SECONDS_PER_Q);
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState<string | null>(null);
+  const [submitted, setSubmitted] = React.useState(false);
+
+  // Timer
+  React.useEffect(() => {
+    if (step !== 'quiz' || submitted) return;
+    if (timeLeft <= 0) {
+      handleNext();
+      return;
+    }
+    const t = setTimeout(() => setTimeLeft(prev => prev - 1), 1000);
+    return () => clearTimeout(t);
+  }, [step, timeLeft, submitted]);
+
+  async function loadQuestions(exam: string, year: number) {
+    setLoading(true);
+    setError(null);
+    const { data, error: err } = await gkSupabase
+      .from('gk_pyq_questions')
+      .select('*')
+      .eq('exam', exam)
+      .eq('year', year)
+      .order('id');
+    setLoading(false);
+    if (err || !data || data.length === 0) {
+      setError(err?.message || `No questions found for ${exam} ${year}`);
+      return;
+    }
+    setQuestions(data);
+    setAnswers(new Array(data.length).fill(null));
+    setCurrentQ(0);
+    setTimeLeft(SECONDS_PER_Q);
+    setSubmitted(false);
+    setStep('quiz');
+  }
+
+  function handleSelectExam(exam: string) {
+    setSelectedExam(exam);
+    setStep('select-year');
+  }
+
+  function handleSelectYear(year: number) {
+    setSelectedYear(year);
+    loadQuestions(selectedExam!, year);
+  }
+
+  function handleAnswer(idx: number) {
+    if (submitted) return;
+    setAnswers(prev => {
+      const next = [...prev];
+      next[currentQ] = idx;
+      return next;
+    });
+  }
+
+  function handleNext() {
+    if (currentQ < questions.length - 1) {
+      setCurrentQ(prev => prev + 1);
+      setTimeLeft(SECONDS_PER_Q);
+      setSubmitted(false);
+    } else {
+      finishQuiz();
+    }
+  }
+
+  function handlePrev() {
+    if (currentQ > 0) {
+      setCurrentQ(prev => prev - 1);
+      setTimeLeft(SECONDS_PER_Q);
+      setSubmitted(false);
+    }
+  }
+
+  function handleSubmitAnswer() {
+    setSubmitted(true);
+  }
+
+  function finishQuiz() {
+    const score = questions.reduce((acc, q, i) => {
+      const opts: string[] = [q.option_a, q.option_b, q.option_c, q.option_d];
+      const correctIdx = opts.findIndex(
+        (o: string) => o?.trim() === q.correct_answer?.trim()
+      );
+      return acc + (answers[i] === correctIdx ? 1 : 0);
+    }, 0);
+    onComplete(score, questions.length);
+    setStep('result');
+  }
+
+  function restart() {
+    setStep('select-exam');
+    setSelectedExam(null);
+    setSelectedYear(null);
+    setQuestions([]);
+    setAnswers([]);
+    setCurrentQ(0);
+    setTimeLeft(SECONDS_PER_Q);
+    setSubmitted(false);
+    setError(null);
+  }
+
+  // ── Select Exam ──────────────────────────────────────────────────────────────
+  if (step === 'select-exam') {
+    return (
+      <div className="space-y-6">
+        <div className="flex items-center gap-3 mb-6">
           <button
             onClick={onBack}
-            className="flex items-center gap-2 text-gray-500 hover:text-[#F59E0B] transition-colors font-bold uppercase text-[10px] tracking-widest"
+            className="p-2 rounded-lg bg-[#0d1425] border border-gray-700 hover:border-gray-500 text-gray-400 hover:text-white transition-all"
           >
-            <ArrowLeft size={16} /> Back to Engine
+            <ArrowLeft className="w-5 h-5" />
           </button>
-        )}
-        <div>
-          <h2 className="text-3xl font-black text-[#060818] dark:text-white tracking-tight">
-            PYQs (2020–2026)
-          </h2>
-          <p className="text-gray-500 dark:text-gray-400 font-medium text-sm mt-1">
-            Official Previous Year Questions with detailed legal explanations.
+          <div>
+            <h2 className="text-2xl font-bold text-white">PYQ Tests</h2>
+            <p className="text-gray-400 text-sm">Previous Year Questions — Select Exam</p>
+          </div>
+        </div>
+
+        <div className="bg-[#0d1425] border border-gray-800 rounded-2xl p-8">
+          <div className="flex items-center gap-3 mb-2">
+            <BookOpen className="w-6 h-6 text-blue-400" />
+            <h3 className="text-xl font-bold text-white">Choose Your Exam</h3>
+          </div>
+          <p className="text-gray-400 mb-8">
+            90 seconds per question · Timed GK section
           </p>
+          <div className="grid grid-cols-2 gap-4">
+            {EXAMS.map(exam => (
+              <motion.button
+                key={exam}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => handleSelectExam(exam)}
+                className="bg-[#0a0f1e] border border-blue-500/30 hover:border-blue-400 rounded-xl p-6 text-white text-xl font-bold hover:bg-blue-500/10 transition-all text-center"
+              >
+                {exam}
+                <p className="text-gray-400 text-sm font-normal mt-1">
+                  {exam === 'CLAT' && 'Common Law Admission Test'}
+                  {exam === 'AILET' && 'All India Law Entrance Test'}
+                  {exam === 'MHCET' && 'Maharashtra CET Law'}
+                  {exam === 'NLAT' && 'National Law Aptitude Test'}
+                </p>
+              </motion.button>
+            ))}
+          </div>
         </div>
       </div>
+    );
+  }
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {YEARS.map((year, idx) => {
-          const c = YEAR_COLORS[year];
-          return (
-            <motion.button
-              key={year}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.06 }}
-              whileHover={{ y: -6, scale: 1.02 }}
-              whileTap={{ scale: 0.97 }}
-              onClick={() => onSelect(year)}
-              className="group bg-white dark:bg-white/5 p-6 rounded-3xl border border-gray-100 dark:border-white/10 text-left hover:shadow-xl transition-all duration-300 space-y-4 overflow-hidden relative"
+  // ── Select Year ──────────────────────────────────────────────────────────────
+  if (step === 'select-year') {
+    return (
+      <div className="space-y-6">
+        <div className="flex items-center gap-3 mb-6">
+          <button
+            onClick={() => setStep('select-exam')}
+            className="p-2 rounded-lg bg-[#0d1425] border border-gray-700 hover:border-gray-500 text-gray-400 hover:text-white transition-all"
+          >
+            <ArrowLeft className="w-5 h-5" />
+          </button>
+          <div>
+            <h2 className="text-2xl font-bold text-white">{selectedExam} PYQs</h2>
+            <p className="text-gray-400 text-sm">Select a year to begin</p>
+          </div>
+        </div>
+
+        {error && (
+          <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-4 flex items-center gap-3 text-red-400">
+            <AlertCircle className="w-5 h-5 shrink-0" />
+            <span>{error}</span>
+          </div>
+        )}
+
+        <div className="bg-[#0d1425] border border-gray-800 rounded-2xl p-8">
+          <h3 className="text-xl font-bold text-white mb-2">
+            {selectedExam} — Select Year
+          </h3>
+          <p className="text-gray-400 mb-8">
+            90 seconds per question · Timed GK section
+          </p>
+
+          {loading ? (
+            <div className="flex items-center justify-center py-12">
+              <RefreshCw className="w-8 h-8 text-blue-400 animate-spin" />
+            </div>
+          ) : (
+            <div className="grid grid-cols-3 gap-4">
+              {YEARS.map(year => (
+                <motion.button
+                  key={year}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => handleSelectYear(year)}
+                  className="bg-[#0a0f1e] border border-blue-500/30 hover:border-blue-400 rounded-xl p-5 text-white text-lg font-semibold hover:bg-blue-500/10 transition-all"
+                >
+                  {year}
+                </motion.button>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  // ── Quiz ─────────────────────────────────────────────────────────────────────
+  if (step === 'quiz') {
+    const q = questions[currentQ];
+    if (!q) return null;
+    const options: string[] = [q.option_a, q.option_b, q.option_c, q.option_d];
+    const correctIdx = options.findIndex(
+      (o: string) => o?.trim() === q.correct_answer?.trim()
+    );
+    const chosen = answers[currentQ];
+    const timerPct = (timeLeft / SECONDS_PER_Q) * 100;
+    const timerColor =
+      timeLeft > 30 ? 'bg-green-500' : timeLeft > 10 ? 'bg-yellow-500' : 'bg-red-500';
+
+    return (
+      <div className="space-y-6">
+        {/* Header */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={restart}
+              className="p-2 rounded-lg bg-[#0d1425] border border-gray-700 hover:border-gray-500 text-gray-400 hover:text-white transition-all"
             >
-              <div className={`absolute -right-6 -top-6 w-24 h-24 ${c.bg} opacity-5 group-hover:opacity-10 rounded-full transition-all`} />
-              <div className={`w-12 h-12 ${c.bg} ${c.text} rounded-2xl flex items-center justify-center shadow-lg font-black text-sm relative`}>
-                {year}
-              </div>
-              <div className="relative">
-                <p className="font-black text-[#060818] dark:text-white text-lg group-hover:text-[#F59E0B] transition-colors">
-                  CLAT {year}
-                </p>
-                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-0.5">
-                  GK · Current Affairs
-                </p>
-              </div>
-              <div className="flex items-center justify-between pt-2 border-t border-gray-50 dark:border-white/5 relative">
-                <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">PYQ Set</span>
-                <ArrowRight size={14} className="text-gray-300 group-hover:text-[#F59E0B] group-hover:translate-x-1 transition-all" />
-              </div>
-            </motion.button>
-          );
-        })}
-      </div>
-    </motion.div>
-  );
-}
-
-function QuizScreen({
-  questions,
-  year,
-  onComplete,
-  onBack,
-}: {
-  questions: PYQQuestion[];
-  year: number;
-  onComplete: (r: { score: number; total: number; timeSpent: number }) => void;
-  onBack: () => void;
-}) {
-  const [current, setCurrent] = React.useState(0);
-  const [answers, setAnswers] = React.useState<(number | null)[]>(Array(questions.length).fill(null));
-  const [answered, setAnswered] = React.useState(false);
-  const [selected, setSelected] = React.useState<number | null>(null);
-  const [timeLeft, setTimeLeft] = React.useState(questions.length * 75);
-  const [startTime] = React.useState(Date.now());
-  const [showPassage, setShowPassage] = React.useState(false);
-
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      setTimeLeft(prev => {
-        if (prev <= 1) {
-          clearInterval(interval);
-          handleFinish(answers);
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const handleAnswer = (optIndex: number) => {
-    if (answered) return;
-    setSelected(optIndex);
-    setAnswered(true);
-    const updated = [...answers];
-    updated[current] = optIndex;
-    setAnswers(updated);
-  };
-
-  const handleFinish = (finalAnswers: (number | null)[]) => {
-    const timeSpent = Math.round((Date.now() - startTime) / 1000);
-    const score = finalAnswers.reduce((acc, ans, i) => {
-      return ans === questions[i].correct ? acc + 1 : acc;
-    }, 0) as number;
-    onComplete({ score, total: questions.length, timeSpent });
-  };
-
-  const handleNext = () => {
-    if (current < questions.length - 1) {
-      const next = current + 1;
-      setCurrent(next);
-      setAnswered(answers[next] !== null);
-      setSelected(answers[next]);
-      setShowPassage(false);
-    } else {
-      handleFinish(answers);
-    }
-  };
-
-  const q = questions[current];
-  const mins = Math.floor(timeLeft / 60);
-  const secs = timeLeft % 60;
-  const progress = ((current + 1) / questions.length) * 100;
-  const isCorrect = selected === q.correct;
-  const OPTION_LABELS = ['A', 'B', 'C', 'D'];
-
-  return (
-    <motion.div
-      key={current}
-      initial={{ opacity: 0, x: 30 }}
-      animate={{ opacity: 1, x: 0 }}
-      className="space-y-6 max-w-2xl mx-auto"
-    >
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <button
-          onClick={onBack}
-          className="flex items-center gap-2 text-gray-500 hover:text-[#F59E0B] transition-colors font-bold uppercase text-[10px] tracking-widest"
-        >
-          <ArrowLeft size={14} /> CLAT {year}
-        </button>
-        <div className={`flex items-center gap-2 px-4 py-2 rounded-2xl font-black text-sm ${
-          timeLeft < 60 ? 'bg-red-500/10 text-red-500' : 'bg-blue-500/10 text-blue-500'
-        }`}>
-          <Timer size={16} />
-          {mins}:{secs.toString().padStart(2, '0')}
+              <ArrowLeft className="w-5 h-5" />
+            </button>
+            <div>
+              <h2 className="text-lg font-bold text-white">
+                {selectedExam} {selectedYear}
+              </h2>
+              <p className="text-gray-400 text-sm">GK Section · PYQ</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 text-white font-mono text-lg">
+            <Timer className="w-5 h-5 text-blue-400" />
+            <span className={timeLeft <= 10 ? 'text-red-400' : ''}>{timeLeft}s</span>
+          </div>
         </div>
-      </div>
 
-      {/* Progress */}
-      <div className="space-y-2">
-        <div className="flex justify-between">
-          <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
-            Question {current + 1} of {questions.length}
-          </span>
-          <span className="text-[10px] font-black text-blue-500 uppercase tracking-widest">
-            CLAT {year} PYQ
-          </span>
-        </div>
-        <div className="h-1.5 bg-gray-100 dark:bg-white/10 rounded-full overflow-hidden">
-          <motion.div
-            className="h-full bg-blue-500 rounded-full"
-            initial={{ width: 0 }}
-            animate={{ width: `${progress}%` }}
-            transition={{ duration: 0.4 }}
+        {/* Progress bar */}
+        <div className="w-full bg-gray-800 rounded-full h-1.5">
+          <div
+            className={`${timerColor} h-1.5 rounded-full transition-all duration-1000`}
+            style={{ width: `${timerPct}%` }}
           />
         </div>
-      </div>
 
-      {/* Passage (if any) */}
-      {q.passage_text && (
-        <div className="bg-blue-50 dark:bg-blue-500/5 rounded-2xl border border-blue-100 dark:border-blue-500/10 overflow-hidden">
-          <button
-            onClick={() => setShowPassage(!showPassage)}
-            className="w-full flex items-center justify-between p-4 font-bold text-sm text-blue-700 dark:text-blue-300"
-          >
-            <span className="flex items-center gap-2">
-              <BookOpen size={16} />
-              {q.passage_title || 'Read Passage'}
-            </span>
-            <span className="text-[10px] uppercase tracking-widest">{showPassage ? 'Hide' : 'Show'}</span>
-          </button>
-          <AnimatePresence>
-            {showPassage && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: 'auto', opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                className="px-4 pb-4"
-              >
-                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{q.passage_text}</p>
-              </motion.div>
-            )}
-          </AnimatePresence>
+        {/* Question counter */}
+        <div className="text-gray-400 text-sm mb-2">
+          Question {currentQ + 1} of {questions.length}
         </div>
-      )}
 
-      {/* Question Card */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={current}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          className="bg-white dark:bg-white/5 p-8 rounded-[2.5rem] border border-gray-100 dark:border-white/10 space-y-6"
-        >
-          {q.topic && (
-            <span className="inline-block text-[10px] font-black uppercase tracking-widest text-blue-500 bg-blue-500/10 px-3 py-1 rounded-full">
-              {q.topic}
-            </span>
-          )}
-          <p className="text-base font-bold text-[#060818] dark:text-white leading-relaxed">
-            {q.question}
-          </p>
+        {/* Question card */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentQ}
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -30 }}
+            transition={{ duration: 0.25 }}
+            className="bg-[#0d1425] border border-gray-800 rounded-2xl p-6"
+          >
+            <p className="text-white text-lg font-medium mb-6 leading-relaxed">
+              {q.question}
+            </p>
+            <div className="space-y-3">
+              {options.map((opt, idx) => {
+                let cls =
+                  'w-full text-left p-4 rounded-xl border transition-all font-medium ';
+                if (!submitted) {
+                  cls +=
+                    chosen === idx
+                      ? 'bg-blue-500/20 border-blue-400 text-white'
+                      : 'bg-[#0a0f1e] border-gray-700 text-gray-300 hover:border-blue-500/50 hover:bg-blue-500/5';
+                } else {
+                  if (idx === correctIdx) {
+                    cls += 'bg-green-500/20 border-green-400 text-green-300';
+                  } else if (chosen === idx) {
+                    cls += 'bg-red-500/20 border-red-400 text-red-300';
+                  } else {
+                    cls += 'bg-[#0a0f1e] border-gray-700 text-gray-500';
+                  }
+                }
+                return (
+                  <button
+                    key={idx}
+                    onClick={() => handleAnswer(idx)}
+                    disabled={submitted}
+                    className={cls}
+                  >
+                    <span className="mr-3 text-gray-500 font-bold">
+                      {String.fromCharCode(65 + idx)}.
+                    </span>
+                    {opt}
+                    {submitted && idx === correctIdx && (
+                      <CheckCircle2 className="inline w-4 h-4 ml-2 text-green-400" />
+                    )}
+                    {submitted && chosen === idx && idx !== correctIdx && (
+                      <XCircle className="inline w-4 h-4 ml-2 text-red-400" />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
 
-          <div className="space-y-3">
-            {q.options.map((opt, i) => {
-              let style = 'bg-gray-50 dark:bg-white/5 border-gray-100 dark:border-white/10 text-gray-700 dark:text-gray-300 hover:border-blue-300/50';
-              if (answered) {
-                if (i === q.correct) style = 'bg-green-50 dark:bg-green-500/10 border-green-400 text-green-700 dark:text-green-300';
-                else if (i === selected && selected !== q.correct) style = 'bg-red-50 dark:bg-red-500/10 border-red-400 text-red-700 dark:text-red-300';
-                else style = 'bg-gray-50 dark:bg-white/5 border-gray-100 dark:border-white/10 text-gray-400 opacity-60';
-              }
-              return (
-                <motion.button
-                  key={i}
-                  whileTap={!answered ? { scale: 0.98 } : {}}
-                  onClick={() => handleAnswer(i)}
-                  disabled={answered}
-                  className={`w-full flex items-center gap-4 p-4 rounded-2xl border-2 transition-all text-left font-medium text-sm ${style} ${!answered ? 'cursor-pointer' : 'cursor-default'}`}
-                >
-                  <span className={`w-7 h-7 rounded-xl flex items-center justify-center text-[11px] font-black shrink-0 ${
-                    answered && i === q.correct ? 'bg-green-500 text-white' :
-                    answered && i === selected && selected !== q.correct ? 'bg-red-500 text-white' :
-                    'bg-gray-200 dark:bg-white/10 text-gray-500'
-                  }`}>
-                    {answered && i === q.correct ? <CheckCircle2 size={14} /> :
-                     answered && i === selected && selected !== q.correct ? <XCircle size={14} /> :
-                     OPTION_LABELS[i]}
-                  </span>
-                  {opt}
-                </motion.button>
-              );
-            })}
-          </div>
-
-          <AnimatePresence>
-            {answered && (
+            {/* Explanation */}
+            {submitted && q.explanation && (
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className={`p-4 rounded-2xl border ${
-                  isCorrect
-                    ? 'bg-green-50 dark:bg-green-500/10 border-green-200 dark:border-green-500/20'
-                    : 'bg-amber-50 dark:bg-[#F59E0B]/10 border-amber-200 dark:border-[#F59E0B]/20'
-                }`}
+                className="mt-4 p-4 bg-blue-500/10 border border-blue-500/30 rounded-xl text-blue-300 text-sm"
               >
-                <div className="flex items-center gap-2 mb-2">
-                  {isCorrect
-                    ? <CheckCircle2 size={14} className="text-green-600" />
-                    : <Lightbulb size={14} className="text-[#F59E0B]" />
-                  }
-                  <span className={`text-[10px] font-black uppercase tracking-widest ${isCorrect ? 'text-green-700' : 'text-[#F59E0B]'}`}>
-                    {isCorrect ? 'Correct!' : 'Explanation'}
-                  </span>
-                </div>
-                <p className="text-xs font-medium leading-relaxed text-gray-700 dark:text-gray-300">
-                  {q.explanation}
-                </p>
+                <strong className="text-blue-400">Explanation: </strong>
+                {q.explanation}
               </motion.div>
             )}
-          </AnimatePresence>
-        </motion.div>
-      </AnimatePresence>
+          </motion.div>
+        </AnimatePresence>
 
-      {answered && (
-        <motion.button
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          onClick={handleNext}
-          className="w-full py-4 bg-[#060818] dark:bg-[#F59E0B] text-white dark:text-[#060818] rounded-2xl font-black text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-xl"
-        >
-          {current < questions.length - 1 ? (
-            <><ArrowRight size={18} /> Next Question</>
-          ) : (
-            <><Trophy size={18} /> View Results</>
+        {/* Navigation */}
+        <div className="flex items-center justify-between">
+          <button
+            onClick={handlePrev}
+            disabled={currentQ === 0}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#0d1425] border border-gray-700 text-gray-400 hover:text-white hover:border-gray-500 disabled:opacity-30 transition-all"
+          >
+            <ArrowLeft className="w-4 h-4" /> Prev
+          </button>
+
+          {!submitted && chosen !== null && (
+            <button
+              onClick={handleSubmitAnswer}
+              className="px-6 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-all"
+            >
+              Check Answer
+            </button>
           )}
-        </motion.button>
-      )}
 
-      {/* Nav dots */}
-      <div className="flex flex-wrap gap-1.5 justify-center">
-        {questions.map((_, i) => (
+          {(submitted || chosen === null) && (
+            <button
+              onClick={handleNext}
+              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-all"
+            >
+              {currentQ === questions.length - 1 ? 'Finish' : 'Next'}
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  // ── Result ───────────────────────────────────────────────────────────────────
+  if (step === 'result') {
+    const score = questions.reduce((acc, q, i) => {
+      const opts: string[] = [q.option_a, q.option_b, q.option_c, q.option_d];
+      const correctIdx = opts.findIndex(
+        (o: string) => o?.trim() === q.correct_answer?.trim()
+      );
+      return acc + (answers[i] === correctIdx ? 1 : 0);
+    }, 0);
+    const pct = Math.round((score / questions.length) * 100);
+
+    return (
+      <div className="space-y-6 text-center">
+        <div className="bg-[#0d1425] border border-gray-800 rounded-2xl p-10">
+          <Trophy className="w-16 h-16 text-yellow-400 mx-auto mb-4" />
+          <h2 className="text-3xl font-bold text-white mb-1">
+            {selectedExam} {selectedYear} Complete!
+          </h2>
+          <p className="text-gray-400 mb-6">GK Section · PYQ</p>
+          <div className="text-6xl font-bold text-white mb-2">
+            {score}/{questions.length}
+          </div>
           <div
-            key={i}
-            className={`h-2 rounded-full transition-all ${
-              i === current ? 'w-4 bg-blue-500' :
-              answers[i] !== null
-                ? answers[i] === questions[i].correct ? 'w-2 bg-green-400' : 'w-2 bg-red-400'
-                : 'w-2 bg-gray-200 dark:bg-white/20'
+            className={`text-2xl font-semibold mb-8 ${
+              pct >= 70 ? 'text-green-400' : pct >= 40 ? 'text-yellow-400' : 'text-red-400'
             }`}
-          />
-        ))}
-      </div>
-    </motion.div>
-  );
-}
-
-export default function GKPYQTest({ onComplete, onBack }: GKPYQTestProps) {
-  const [selectedYear, setSelectedYear] = React.useState<number | null>(null);
-  const [questions, setQuestions] = React.useState<PYQQuestion[]>([]);
-  const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState<string | null>(null);
-
-  const loadYear = async (year: number) => {
-    setLoading(true);
-    setError(null);
-    try {
-      const { data, error: err } = await gkSupabase
-        .from('gk_pyq_questions')
-        .select('*')
-        .eq('year', year)
-        .order('id');
-
-      if (err) throw err;
-      if (!data || data.length === 0) throw new Error('No questions found for this year.');
-      setQuestions(data as PYQQuestion[]);
-      setSelectedYear(year);
-    } catch (e: unknown) {
-      const message = e instanceof Error ? e.message : 'Failed to load questions.';
-      setError(message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  if (loading) {
-    return (
-      <div className="flex flex-col items-center justify-center py-20 gap-4">
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}
-        >
-          <RefreshCw size={32} className="text-blue-500" />
-        </motion.div>
-        <p className="text-sm font-bold text-gray-500 dark:text-gray-400">Loading PYQs…</p>
+          >
+            {pct}%
+          </div>
+          <div className="flex gap-4 justify-center">
+            <button
+              onClick={restart}
+              className="flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-all"
+            >
+              <RefreshCw className="w-4 h-4" /> Try Another
+            </button>
+            <button
+              onClick={onBack}
+              className="flex items-center gap-2 px-6 py-3 rounded-xl bg-[#0a0f1e] border border-gray-700 hover:border-gray-500 text-gray-300 hover:text-white font-semibold transition-all"
+            >
+              <ArrowLeft className="w-4 h-4" /> Back
+            </button>
+          </div>
+        </div>
       </div>
     );
   }
 
-  if (error) {
-    return (
-      <div className="flex flex-col items-center justify-center py-20 gap-4 text-center">
-        <AlertCircle size={40} className="text-red-500" />
-        <p className="font-bold text-[#060818] dark:text-white">Failed to load questions</p>
-        <p className="text-sm text-gray-500">{error}</p>
-        <button
-          onClick={() => { setError(null); setSelectedYear(null); }}
-          className="px-5 py-2 bg-[#F59E0B] text-[#060818] rounded-xl font-black text-sm"
-        >
-          Try Again
-        </button>
-      </div>
-    );
-  }
-
-  if (!selectedYear) {
-    return <YearSelector onSelect={loadYear} onBack={onBack} />;
-  }
-
-  return (
-    <QuizScreen
-      questions={questions}
-      year={selectedYear}
-      onComplete={onComplete || (() => {})}
-      onBack={() => setSelectedYear(null)}
-    />
-  );
+  return null;
 }
