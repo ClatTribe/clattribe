@@ -25,7 +25,7 @@ interface GKLayoutProps {
 interface SearchResult {
   id: string;
   title: string;
-  type: "editorial" | "vault" | "flashcard";
+  type: "editorial" | "vault" | "flashcard" | "pyq";
   tab: string;
 }
 export default function GKLayout({
@@ -140,7 +140,26 @@ export default function GKLayout({
             }),
           );
         }
-        setSearchResults(results);
+        // Vault — static highlights
+const vaultItems = [
+  { id: "1", title: "Supreme Court on Electoral Bonds" },
+  { id: "2", title: "Israel-Palestine Conflict: UN Resolution" },
+  { id: "3", title: "New Digital Competition Bill" },
+];
+const q = searchQuery.toLowerCase();
+vaultItems.filter(v => v.title.toLowerCase().includes(q)).forEach(v =>
+  results.push({ id: v.id, title: v.title, type: "vault", tab: "vault" })
+);
+// PYQs
+const pyqResp = await fetch(
+  `${SUPABASE_URL}/rest/v1/gk_pyq_questions?question=ilike.*${encodeURIComponent(searchQuery)}*&select=id,question,exam,year&limit=3`,
+  { headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` } }
+);
+if (pyqResp.ok) {
+  const pyqRows: any[] = await pyqResp.json();
+  pyqRows.forEach(r => results.push({ id: r.id, title: r.question, type: "pyq", tab: "testing" }));
+}
+setSearchResults(results);
       } catch {
         setSearchResults([]);
       } finally {
@@ -402,7 +421,7 @@ export default function GKLayout({
                           >
                             {" "}
                             <div
-                              className={`w-6 h-6 rounded-lg flex items-center justify-center shrink-0 ${r.type === "editorial" ? "bg-blue-100 text-blue-600" : r.type === "flashcard" ? "bg-amber-100 text-amber-600" : "bg-green-100 text-green-600"}`}
+                              className={`w-6 h-6 rounded-lg flex items-center justify-center shrink-0 ${r.type === "editorial" ? "bg-blue-100 text-blue-600" : r.type === "flashcard" ? "bg-amber-100 text-amber-600" : r.type === "pyq" ? "bg-purple-100 text-purple-600" : "bg-green-100 text-green-600"}`}
                             >
                               {" "}
                               {r.type === "editorial" ? (
