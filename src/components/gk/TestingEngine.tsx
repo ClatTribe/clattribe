@@ -1,6 +1,6 @@
-'use client';
-import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+"use client";
+import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Zap,
   History,
@@ -16,12 +16,21 @@ import {
   Timer,
   TrendingDown,
   TrendingUp,
-  Lightbulb
-} from 'lucide-react';
-import GKPassageTest from './PassageTest';
-import GKSectionalTest from './GKSectionalTest';import GKWeeklyTest from './GKWeeklyTest';import GKPYQTest from './GKPYQTest';
+  Lightbulb,
+} from "lucide-react";
+import GKPassageTest from "./PassageTest";
+import GKSectionalTest from "./GKSectionalTest";
+import GKWeeklyTest from "./GKWeeklyTest";
+import GKPYQTest from "./GKPYQTest";
 
-type TestType = 'weekly' | 'pyq' | 'mock' | 'sectional' | 'passage' | 'custom' | null;
+type TestType =
+  | "weekly"
+  | "pyq"
+  | "mock"
+  | "sectional"
+  | "passage"
+  | "custom"
+  | null;
 
 interface TestCategory {
   id: TestType;
@@ -35,71 +44,70 @@ interface TestCategory {
 
 const CATEGORIES: TestCategory[] = [
   {
-    id: 'weekly',
-    title: 'Weekly Quizzes',
-    description: 'Fresh questions every Sunday covering the week\'s top current affairs.',
+    id: "weekly",
+    title: "Weekly Quizzes",
+    description:
+      "Fresh questions every Sunday covering the week's top current affairs.",
     icon: <Zap size={24} />,
-    count: '12 Available',
-    color: 'bg-[#F59E0B]',
-    accent: 'text-[#060818]'
+    count: "12 Available",
+    color: "bg-[#F59E0B]",
+    accent: "text-[#060818]",
   },
   {
-    id: 'pyq',
-    title: 'PYQs (2020-2026)',
-    description: 'Official Previous Year Questions with detailed legal explanations.',
+    id: "pyq",
+    title: "PYQs (2020-2026)",
+    description:
+      "Official Previous Year Questions with detailed legal explanations.",
     icon: <History size={24} />,
-    count: '6 Years',
-    color: 'bg-blue-500',
-    accent: 'text-white'
+    count: "6 Years",
+    color: "bg-blue-500",
+    accent: "text-white",
   },
   {
-    id: 'mock',
-    title: 'Full Mock Tests',
-    description: '120-minute simulated exams to build your speed and accuracy.',
+    id: "mock",
+    title: "Full Mock Tests",
+    description: "120-minute simulated exams to build your speed and accuracy.",
     icon: <Target size={24} />,
-    count: '15 Mocks',
-    color: 'bg-purple-500',
-    accent: 'text-white'
+    count: "15 Mocks",
+    color: "bg-purple-500",
+    accent: "text-white",
   },
   {
-    id: 'sectional',
-    title: 'GK Sectionals',
-    description: 'Focused 30-question sets purely for General Knowledge & Current Affairs.',
+    id: "sectional",
+    title: "GK Sectionals",
+    description:
+      "Focused 30-question sets purely for General Knowledge & Current Affairs.",
     icon: <FileText size={24} />,
-    count: '5 Sets',
-    color: 'bg-green-500',
-    accent: 'text-white'
+    count: "5 Sets",
+    color: "bg-green-500",
+    accent: "text-white",
   },
   {
-    id: 'passage',
-    title: 'Passage Practice',
-    description: 'Deductive reasoning practice based on recent legal passages.',
+    id: "passage",
+    title: "Passage Practice",
+    description: "Deductive reasoning practice based on recent legal passages.",
     icon: <BookOpen size={24} />,
-    count: '5 Tests',
-    color: 'bg-[#060818]',
-    accent: 'text-[#F59E0B]'
-  }
+    count: "5 Tests",
+    color: "bg-[#060818]",
+    accent: "text-[#F59E0B]",
+  },
 ];
 
 const TOPICS = [
-  'Legal Reasoning',
-  'Current Affairs',
-  'General Knowledge',
-  'Logical Reasoning',
-  'English Language'
+  "Legal Reasoning",
+  "Current Affairs",
+  "General Knowledge",
+  "Logical Reasoning",
+  "English Language",
 ];
 
-const QUESTION_TYPES = [
-  'Passage Based',
-  'Direct MCQ',
-  'True/False'
-];
+const QUESTION_TYPES = ["Passage Based", "Direct MCQ", "True/False"];
 
 const TIME_LIMITS = [
-  { label: '15 Mins', value: 15 },
-  { label: '30 Mins', value: 30 },
-  { label: '60 Mins', value: 60 },
-  { label: '120 Mins', value: 120 }
+  { label: "15 Mins", value: 15 },
+  { label: "30 Mins", value: 30 },
+  { label: "60 Mins", value: 60 },
+  { label: "120 Mins", value: 120 },
 ];
 
 function CustomTestBuilder({ onBack }: { onBack: () => void }) {
@@ -109,14 +117,14 @@ function CustomTestBuilder({ onBack }: { onBack: () => void }) {
   const [isBuilding, setIsBuilding] = React.useState(false);
 
   const toggleTopic = (topic: string) => {
-    setSelectedTopics(prev =>
-      prev.includes(topic) ? prev.filter(t => t !== topic) : [...prev, topic]
+    setSelectedTopics((prev) =>
+      prev.includes(topic) ? prev.filter((t) => t !== topic) : [...prev, topic],
     );
   };
 
   const toggleType = (type: string) => {
-    setSelectedTypes(prev =>
-      prev.includes(type) ? prev.filter(t => t !== type) : [...prev, type]
+    setSelectedTypes((prev) =>
+      prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type],
     );
   };
 
@@ -124,7 +132,9 @@ function CustomTestBuilder({ onBack }: { onBack: () => void }) {
     setIsBuilding(true);
     setTimeout(() => {
       setIsBuilding(false);
-      alert('Custom test generation logic would go here! Starting test with selected parameters...');
+      alert(
+        "Custom test generation logic would go here! Starting test with selected parameters...",
+      );
     }, 2000);
   };
 
@@ -141,7 +151,9 @@ function CustomTestBuilder({ onBack }: { onBack: () => void }) {
         >
           <ArrowLeft size={16} /> Back to Engine
         </button>
-        <h2 className="text-2xl font-black text-[#060818] dark:text-white">Configure Custom Test</h2>
+        <h2 className="text-2xl font-black text-[#060818] dark:text-white">
+          Configure Custom Test
+        </h2>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -154,14 +166,14 @@ function CustomTestBuilder({ onBack }: { onBack: () => void }) {
               Select Topics
             </h3>
             <div className="flex flex-wrap gap-3">
-              {TOPICS.map(topic => (
+              {TOPICS.map((topic) => (
                 <button
                   key={topic}
                   onClick={() => toggleTopic(topic)}
                   className={`px-6 py-3 rounded-2xl font-bold text-sm transition-all border-2 ${
                     selectedTopics.includes(topic)
-                      ? 'bg-[#F59E0B] border-[#F59E0B] text-[#060818]'
-                      : 'bg-gray-50 dark:bg-white/5 border-transparent text-gray-500 hover:border-gray-200'
+                      ? "bg-[#F59E0B] border-[#F59E0B] text-[#060818]"
+                      : "bg-gray-50 dark:bg-white/5 border-transparent text-gray-500 hover:border-gray-200"
                   }`}
                 >
                   {topic}
@@ -177,14 +189,14 @@ function CustomTestBuilder({ onBack }: { onBack: () => void }) {
               Question Types
             </h3>
             <div className="flex flex-wrap gap-3">
-              {QUESTION_TYPES.map(type => (
+              {QUESTION_TYPES.map((type) => (
                 <button
                   key={type}
                   onClick={() => toggleType(type)}
                   className={`px-6 py-3 rounded-2xl font-bold text-sm transition-all border-2 ${
                     selectedTypes.includes(type)
-                      ? 'bg-[#060818] border-[#060818] text-white'
-                      : 'bg-gray-50 dark:bg-white/5 border-transparent text-gray-500 hover:border-gray-200'
+                      ? "bg-[#060818] border-[#060818] text-white"
+                      : "bg-gray-50 dark:bg-white/5 border-transparent text-gray-500 hover:border-gray-200"
                   }`}
                 >
                   {type}
@@ -203,14 +215,14 @@ function CustomTestBuilder({ onBack }: { onBack: () => void }) {
               Time Limit
             </h3>
             <div className="grid grid-cols-2 gap-3">
-              {TIME_LIMITS.map(limit => (
+              {TIME_LIMITS.map((limit) => (
                 <button
                   key={limit.value}
                   onClick={() => setTimeLimit(limit.value)}
                   className={`p-4 rounded-2xl font-bold text-sm transition-all border-2 ${
                     timeLimit === limit.value
-                      ? 'bg-[#F59E0B] border-[#F59E0B] text-[#060818]'
-                      : 'bg-gray-50 dark:bg-white/5 border-transparent text-gray-500 hover:border-gray-200'
+                      ? "bg-[#F59E0B] border-[#F59E0B] text-[#060818]"
+                      : "bg-gray-50 dark:bg-white/5 border-transparent text-gray-500 hover:border-gray-200"
                   }`}
                 >
                   {limit.label}
@@ -222,13 +234,15 @@ function CustomTestBuilder({ onBack }: { onBack: () => void }) {
           {/* Start Button */}
           <div className="bg-[#060818] p-8 rounded-[2.5rem] space-y-6">
             <div className="space-y-2">
-              <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Test Summary</p>
+              <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                Test Summary
+              </p>
               <div className="space-y-1">
                 <p className="text-white font-bold text-sm flex justify-between">
-                  Topics: <span>{selectedTopics.length || 'All'}</span>
+                  Topics: <span>{selectedTopics.length || "All"}</span>
                 </p>
                 <p className="text-white font-bold text-sm flex justify-between">
-                  Types: <span>{selectedTypes.length || 'All'}</span>
+                  Types: <span>{selectedTypes.length || "All"}</span>
                 </p>
                 <p className="text-white font-bold text-sm flex justify-between">
                   Duration: <span>{timeLimit} Mins</span>
@@ -272,7 +286,13 @@ interface TestResult {
   suggestions: string[];
 }
 
-function FeedbackScreen({ result, onBack }: { result: TestResult; onBack: () => void }) {
+function FeedbackScreen({
+  result,
+  onBack,
+}: {
+  result: TestResult;
+  onBack: () => void;
+}) {
   const percentage = Math.round((result.score / result.total) * 100);
 
   return (
@@ -288,7 +308,9 @@ function FeedbackScreen({ result, onBack }: { result: TestResult; onBack: () => 
         >
           <ArrowLeft size={16} /> Back to Engine
         </button>
-        <h2 className="text-2xl font-black text-[#060818] dark:text-white">Performance Analysis</h2>
+        <h2 className="text-2xl font-black text-[#060818] dark:text-white">
+          Performance Analysis
+        </h2>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -314,26 +336,42 @@ function FeedbackScreen({ result, onBack }: { result: TestResult; onBack: () => 
                 fill="transparent"
                 strokeDasharray={364.4}
                 initial={{ strokeDashoffset: 364.4 }}
-                animate={{ strokeDashoffset: 364.4 - (364.4 * percentage) / 100 }}
+                animate={{
+                  strokeDashoffset: 364.4 - (364.4 * percentage) / 100,
+                }}
                 transition={{ duration: 1.5, ease: "easeOut" }}
                 className="text-[#F59E0B]"
               />
             </svg>
             <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <span className="text-3xl font-black text-white">{percentage}%</span>
+              <span className="text-3xl font-black text-white">
+                {percentage}%
+              </span>
             </div>
           </div>
           <div className="space-y-1">
-            <p className="text-white font-black text-2xl">{result.score} / {result.total}</p>
-            <p className="text-gray-400 text-xs font-bold uppercase tracking-widest">Correct Answers</p>
+            <p className="text-white font-black text-2xl">
+              {result.score} / {result.total}
+            </p>
+            <p className="text-gray-400 text-xs font-bold uppercase tracking-widest">
+              Correct Answers
+            </p>
           </div>
           <div className="pt-4 border-t border-white/10 flex justify-between items-center">
             <div className="text-left">
-              <p className="text-white/50 text-[10px] font-black uppercase tracking-widest">Time Taken</p>
-              <p className="text-white font-bold">{Math.floor(result.timeSpent / 60)}m {result.timeSpent % 60}s</p>
+              <p className="text-white/50 text-[10px] font-black uppercase tracking-widest">
+                Time Taken
+              </p>
+              <p className="text-white font-bold">
+                {Math.floor(result.timeSpent / 60)}m {result.timeSpent % 60}s
+              </p>
             </div>
             <p className="text-[#F59E0B] font-black text-sm uppercase tracking-widest">
-              {percentage >= 80 ? 'Excellent!' : percentage >= 50 ? 'Good!' : 'Retry!'}
+              {percentage >= 80
+                ? "Excellent!"
+                : percentage >= 50
+                  ? "Good!"
+                  : "Retry!"}
             </p>
           </div>
         </div>
@@ -350,14 +388,20 @@ function FeedbackScreen({ result, onBack }: { result: TestResult; onBack: () => 
               {result.topicBreakdown.map((item, i) => (
                 <div key={i} className="space-y-2">
                   <div className="flex justify-between text-sm font-bold">
-                    <span className="text-[#060818] dark:text-white">{item.topic}</span>
-                    <span className="text-gray-500">{item.correct}/{item.total}</span>
+                    <span className="text-[#060818] dark:text-white">
+                      {item.topic}
+                    </span>
+                    <span className="text-gray-500">
+                      {item.correct}/{item.total}
+                    </span>
                   </div>
                   <div className="h-2 bg-gray-100 dark:bg-white/5 rounded-full overflow-hidden">
                     <motion.div
-                      className={`h-full ${item.correct === item.total ? 'bg-green-500' : 'bg-[#F59E0B]'}`}
+                      className={`h-full ${item.correct === item.total ? "bg-green-500" : "bg-[#F59E0B]"}`}
                       initial={{ width: 0 }}
-                      animate={{ width: `${(item.correct / item.total) * 100}%` }}
+                      animate={{
+                        width: `${(item.correct / item.total) * 100}%`,
+                      }}
                     />
                   </div>
                 </div>
@@ -373,7 +417,10 @@ function FeedbackScreen({ result, onBack }: { result: TestResult; onBack: () => 
             </h3>
             <ul className="space-y-3">
               {result.suggestions.map((suggestion, i) => (
-                <li key={i} className="flex items-start gap-3 text-sm font-medium text-amber-900/70 dark:text-[#F59E0B]/70">
+                <li
+                  key={i}
+                  className="flex items-start gap-3 text-sm font-medium text-amber-900/70 dark:text-[#F59E0B]/70"
+                >
                   <div className="w-1.5 h-1.5 rounded-full bg-[#F59E0B] mt-1.5 flex-shrink-0" />
                   {suggestion}
                 </li>
@@ -405,8 +452,12 @@ export default function TestingEngine() {
   const [activeCategory, setActiveCategory] = React.useState<TestType>(null);
   const [testResult, setTestResult] = React.useState<TestResult | null>(null);
   const [history, setHistory] = React.useState<TestResult[]>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('clat_test_history');
+    if (typeof window !== "undefined") {
+      const saved = (
+        typeof window !== "undefined"
+          ? window.localStorage
+          : { getItem: () => null, setItem: () => null, removeItem: () => null }
+      ).getItem("clat_test_history");
       return saved ? JSON.parse(saved) : [];
     }
     return [];
@@ -415,10 +466,13 @@ export default function TestingEngine() {
   const insights = React.useMemo(() => {
     if (history.length === 0) return null;
 
-    const topicStats: Record<string, { correct: number; total: number; time: number; count: number }> = {};
+    const topicStats: Record<
+      string,
+      { correct: number; total: number; time: number; count: number }
+    > = {};
 
-    history.forEach(test => {
-      test.topicBreakdown.forEach(item => {
+    history.forEach((test) => {
+      test.topicBreakdown.forEach((item) => {
         if (!topicStats[item.topic]) {
           topicStats[item.topic] = { correct: 0, total: 0, time: 0, count: 0 };
         }
@@ -435,60 +489,120 @@ export default function TestingEngine() {
       topic,
       accuracy: Math.round((stats.correct / stats.total) * 100),
       avgTimePerQuestion: Math.round(stats.time / stats.total),
-      totalQuestions: stats.total
+      totalQuestions: stats.total,
     }));
 
     const weakAreas = analyzedTopics
-      .filter(t => t.accuracy < 70)
+      .filter((t) => t.accuracy < 70)
       .sort((a, b) => a.accuracy - b.accuracy);
 
     const slowAreas = analyzedTopics
-      .filter(t => t.avgTimePerQuestion > 60) // Assuming > 60s per question is slow
+      .filter((t) => t.avgTimePerQuestion > 60) // Assuming > 60s per question is slow
       .sort((a, b) => b.avgTimePerQuestion - a.avgTimePerQuestion);
 
     return { analyzedTopics, weakAreas, slowAreas };
   }, [history]);
 
-  const handleTestComplete = (results: { score: number; total: number; timeSpent: number }) => {
+  const handleTestComplete = (results: {
+    score: number;
+    total: number;
+    timeSpent: number;
+  }) => {
     // Generate mock feedback based on the score
     const breakdown = [
-      { topic: 'Legal Reasoning', correct: results.score, total: results.total },
-      { topic: 'Reading Comprehension', correct: Math.max(0, results.score - 1), total: results.total }
+      {
+        topic: "Legal Reasoning",
+        correct: results.score,
+        total: results.total,
+      },
+      {
+        topic: "Reading Comprehension",
+        correct: Math.max(0, results.score - 1),
+        total: results.total,
+      },
     ];
 
     const suggestions = [];
     if (results.score < results.total) {
-      suggestions.push("Focus on the 'Doctrine of Pith and Substance' as your understanding of legislative powers seems slightly incomplete.");
-      suggestions.push(`Try to improve your reading speed; you spent ${Math.floor(results.timeSpent / 60)}m ${results.timeSpent % 60}s which is slightly above the target for this passage.`);
+      suggestions.push(
+        "Focus on the 'Doctrine of Pith and Substance' as your understanding of legislative powers seems slightly incomplete.",
+      );
+      suggestions.push(
+        `Try to improve your reading speed; you spent ${Math.floor(results.timeSpent / 60)}m ${results.timeSpent % 60}s which is slightly above the target for this passage.`,
+      );
     } else {
-      suggestions.push(`Excellent speed! You finished in ${Math.floor(results.timeSpent / 60)}m ${results.timeSpent % 60}s.`);
-      suggestions.push("Your deductive reasoning is sharp. Keep practicing with 'Hard' difficulty passages.");
+      suggestions.push(
+        `Excellent speed! You finished in ${Math.floor(results.timeSpent / 60)}m ${results.timeSpent % 60}s.`,
+      );
+      suggestions.push(
+        "Your deductive reasoning is sharp. Keep practicing with 'Hard' difficulty passages.",
+      );
     }
 
     const newResult: TestResult = {
       ...results,
       id: Math.random().toString(36).substr(2, 9),
-      category: activeCategory === 'passage' ? 'Passage Practice' : (activeCategory || 'Test'),
-      date: new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }),
+      category:
+        activeCategory === "passage"
+          ? "Passage Practice"
+          : activeCategory || "Test",
+      date: new Date().toLocaleDateString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      }),
       topicBreakdown: breakdown,
-      suggestions
+      suggestions,
     };
 
     setTestResult(newResult);
     const newHistory = [newResult, ...history];
     setHistory(newHistory);
-    localStorage.setItem('clat_test_history', JSON.stringify(newHistory));
+    (typeof window !== "undefined"
+      ? window.localStorage
+      : { getItem: () => null, setItem: () => null, removeItem: () => null }
+    ).setItem("clat_test_history", JSON.stringify(newHistory));
   };
 
   if (testResult) {
-    return <FeedbackScreen result={testResult} onBack={() => { setTestResult(null); setActiveCategory(null); }} />;
+    return (
+      <FeedbackScreen
+        result={testResult}
+        onBack={() => {
+          setTestResult(null);
+          setActiveCategory(null);
+        }}
+      />
+    );
   }
 
-  if (activeCategory === 'custom') {
+  if (activeCategory === "custom") {
     return <CustomTestBuilder onBack={() => setActiveCategory(null)} />;
   }
 
-  if (activeCategory === 'weekly') {    return (      <div className="space-y-6">        <GKWeeklyTest onComplete={handleTestComplete} onBack={() => setActiveCategory(null)} />      </div>    );  }  if (activeCategory === 'pyq') {    return (      <div className="space-y-6">        <GKPYQTest onComplete={handleTestComplete} onBack={() => setActiveCategory(null)} />      </div>    );  }  if (activeCategory === 'passage') {
+  if (activeCategory === "weekly") {
+    return (
+      <div className="space-y-6">
+        {" "}
+        <GKWeeklyTest
+          onComplete={(score, total) => handleTestComplete({ score, total, timeSpent: 1200 })}
+          onBack={() => setActiveCategory(null)}
+        />{" "}
+      </div>
+    );
+  }
+  if (activeCategory === "pyq") {
+    return (
+      <div className="space-y-6">
+        {" "}
+        <GKPYQTest
+          onComplete={(score, total) => handleTestComplete({ score, total, timeSpent: 1200 })}
+          onBack={() => setActiveCategory(null)}
+        />{" "}
+      </div>
+    );
+  }
+  if (activeCategory === "passage") {
     return (
       <div className="space-y-6">
         <button
@@ -502,7 +616,7 @@ export default function TestingEngine() {
     );
   }
 
-  if (activeCategory === 'sectional') {
+  if (activeCategory === "sectional") {
     return (
       <div className="space-y-6">
         <button
@@ -531,10 +645,11 @@ export default function TestingEngine() {
             <Timer size={40} className="text-[#F59E0B]" />
           </div>
           <h2 className="text-3xl font-black text-[#060818] dark:text-white">
-            {CATEGORIES.find(c => c.id === activeCategory)?.title} Coming Soon
+            {CATEGORIES.find((c) => c.id === activeCategory)?.title} Coming Soon
           </h2>
           <p className="text-gray-500 dark:text-gray-400 max-w-md mx-auto font-medium">
-            We are currently curating the most relevant questions for this section. Stay tuned for the next update!
+            We are currently curating the most relevant questions for this
+            section. Stay tuned for the next update!
           </p>
           <button
             onClick={() => setActiveCategory(null)}
@@ -566,7 +681,9 @@ export default function TestingEngine() {
             <Trophy size={24} />
           </div>
           <div>
-            <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Total Tests Taken</p>
+            <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+              Total Tests Taken
+            </p>
             <p className="text-2xl font-black text-white">{history.length}</p>
           </div>
         </div>
@@ -575,11 +692,21 @@ export default function TestingEngine() {
             <CheckCircle2 size={24} />
           </div>
           <div>
-            <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Avg. Accuracy</p>
+            <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+              Avg. Accuracy
+            </p>
             <p className="text-2xl font-black text-[#060818] dark:text-white">
               {history.length > 0
-                ? Math.round(history.reduce((acc, curr) => acc + (curr.score / curr.total), 0) / history.length * 100)
-                : 0}%
+                ? Math.round(
+                    (history.reduce(
+                      (acc, curr) => acc + curr.score / curr.total,
+                      0,
+                    ) /
+                      history.length) *
+                      100,
+                  )
+                : 0}
+              %
             </p>
           </div>
         </div>
@@ -588,79 +715,107 @@ export default function TestingEngine() {
             <Timer size={24} />
           </div>
           <div>
-            <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Time Spent</p>
+            <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+              Time Spent
+            </p>
             <p className="text-2xl font-black text-[#060818] dark:text-white">
-              {Math.round(history.reduce((acc, curr) => acc + curr.timeSpent, 0) / 3600 * 10) / 10}h
+              {Math.round(
+                (history.reduce((acc, curr) => acc + curr.timeSpent, 0) /
+                  3600) *
+                  10,
+              ) / 10}
+              h
             </p>
           </div>
         </div>
       </div>
 
       {/* Personalized Insights */}
-      {insights && (insights.weakAreas.length > 0 || insights.slowAreas.length > 0) && (
-        <section className="space-y-6">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-[#F59E0B]/10 rounded-lg flex items-center justify-center text-[#F59E0B]">
-              <Lightbulb size={18} />
+      {insights &&
+        (insights.weakAreas.length > 0 || insights.slowAreas.length > 0) && (
+          <section className="space-y-6">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 bg-[#F59E0B]/10 rounded-lg flex items-center justify-center text-[#F59E0B]">
+                <Lightbulb size={18} />
+              </div>
+              <h3 className="text-2xl font-black tracking-tight dark:text-white">
+                Personalized Insights
+              </h3>
             </div>
-            <h3 className="text-2xl font-black tracking-tight dark:text-white">Personalized Insights</h3>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {insights.weakAreas.length > 0 && (
-              <div className="bg-red-50 dark:bg-red-500/5 p-8 rounded-[2.5rem] border border-red-100 dark:border-red-500/10 space-y-4">
-                <div className="flex items-center gap-2 text-red-600 dark:text-red-400 font-black text-[10px] uppercase tracking-widest">
-                  <TrendingDown size={14} />
-                  Weak Areas (Accuracy &lt; 70%)
-                </div>
-                <div className="space-y-4">
-                  {insights.weakAreas.slice(0, 2).map(area => (
-                    <div key={area.topic} className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm font-black text-[#060818] dark:text-white">{area.topic}</p>
-                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{area.totalQuestions} questions attempted</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {insights.weakAreas.length > 0 && (
+                <div className="bg-red-50 dark:bg-red-500/5 p-8 rounded-[2.5rem] border border-red-100 dark:border-red-500/10 space-y-4">
+                  <div className="flex items-center gap-2 text-red-600 dark:text-red-400 font-black text-[10px] uppercase tracking-widest">
+                    <TrendingDown size={14} />
+                    Weak Areas (Accuracy &lt; 70%)
+                  </div>
+                  <div className="space-y-4">
+                    {insights.weakAreas.slice(0, 2).map((area) => (
+                      <div
+                        key={area.topic}
+                        className="flex items-center justify-between"
+                      >
+                        <div>
+                          <p className="text-sm font-black text-[#060818] dark:text-white">
+                            {area.topic}
+                          </p>
+                          <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                            {area.totalQuestions} questions attempted
+                          </p>
+                        </div>
+                        <span className="text-lg font-black text-red-600">
+                          {area.accuracy}%
+                        </span>
                       </div>
-                      <span className="text-lg font-black text-red-600">{area.accuracy}%</span>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+                  <button
+                    onClick={() => setActiveCategory("custom")}
+                    className="w-full py-3 bg-red-600 text-white rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-red-700 transition-all"
+                  >
+                    Practice Weak Topics
+                  </button>
                 </div>
-                <button
-                  onClick={() => setActiveCategory('custom')}
-                  className="w-full py-3 bg-red-600 text-white rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-red-700 transition-all"
-                >
-                  Practice Weak Topics
-                </button>
-              </div>
-            )}
+              )}
 
-            {insights.slowAreas.length > 0 && (
-              <div className="bg-amber-50 dark:bg-[#F59E0B]/5 p-8 rounded-[2.5rem] border border-amber-100 dark:border-[#F59E0B]/10 space-y-4">
-                <div className="flex items-center gap-2 text-[#F59E0B] font-black text-[10px] uppercase tracking-widest">
-                  <Clock size={14} />
-                  Speed Bottlenecks
-                </div>
-                <div className="space-y-4">
-                  {insights.slowAreas.slice(0, 2).map(area => (
-                    <div key={area.topic} className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm font-black text-[#060818] dark:text-white">{area.topic}</p>
-                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Avg. {area.avgTimePerQuestion}s / question</p>
+              {insights.slowAreas.length > 0 && (
+                <div className="bg-amber-50 dark:bg-[#F59E0B]/5 p-8 rounded-[2.5rem] border border-amber-100 dark:border-[#F59E0B]/10 space-y-4">
+                  <div className="flex items-center gap-2 text-[#F59E0B] font-black text-[10px] uppercase tracking-widest">
+                    <Clock size={14} />
+                    Speed Bottlenecks
+                  </div>
+                  <div className="space-y-4">
+                    {insights.slowAreas.slice(0, 2).map((area) => (
+                      <div
+                        key={area.topic}
+                        className="flex items-center justify-between"
+                      >
+                        <div>
+                          <p className="text-sm font-black text-[#060818] dark:text-white">
+                            {area.topic}
+                          </p>
+                          <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                            Avg. {area.avgTimePerQuestion}s / question
+                          </p>
+                        </div>
+                        <span className="text-lg font-black text-[#F59E0B]">
+                          Slow
+                        </span>
                       </div>
-                      <span className="text-lg font-black text-[#F59E0B]">Slow</span>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+                  <button
+                    onClick={() => setActiveCategory("passage")}
+                    className="w-full py-3 bg-[#F59E0B] text-[#060818] rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-amber-400 transition-all"
+                  >
+                    Improve Reading Speed
+                  </button>
                 </div>
-                <button
-                  onClick={() => setActiveCategory('passage')}
-                  className="w-full py-3 bg-[#F59E0B] text-[#060818] rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-amber-400 transition-all"
-                >
-                  Improve Reading Speed
-                </button>
-              </div>
-            )}
-          </div>
-        </section>
-      )}
+              )}
+            </div>
+          </section>
+        )}
 
       {/* Categories Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -674,10 +829,14 @@ export default function TestingEngine() {
               className="group relative bg-white dark:bg-white/5 p-8 rounded-[2.5rem] border border-gray-100 dark:border-white/10 text-left hover:shadow-2xl hover:shadow-[#F59E0B]/10 transition-all duration-300 overflow-hidden"
             >
               {/* Background Accent */}
-              <div className={`absolute -right-8 -top-8 w-32 h-32 ${cat.color} opacity-5 group-hover:opacity-10 rounded-full transition-all duration-500`} />
+              <div
+                className={`absolute -right-8 -top-8 w-32 h-32 ${cat.color} opacity-5 group-hover:opacity-10 rounded-full transition-all duration-500`}
+              />
 
               <div className="space-y-6 relative">
-                <div className={`w-14 h-14 ${cat.color} ${cat.accent} rounded-2xl flex items-center justify-center shadow-lg shadow-current/10`}>
+                <div
+                  className={`w-14 h-14 ${cat.color} ${cat.accent} rounded-2xl flex items-center justify-center shadow-lg shadow-current/10`}
+                >
                   {cat.icon}
                 </div>
 
@@ -686,7 +845,10 @@ export default function TestingEngine() {
                     <h3 className="text-xl font-black text-[#060818] dark:text-white group-hover:text-[#F59E0B] transition-colors">
                       {cat.title}
                     </h3>
-                    <ChevronRight size={20} className="text-gray-300 group-hover:text-[#F59E0B] transition-all group-hover:translate-x-1" />
+                    <ChevronRight
+                      size={20}
+                      className="text-gray-300 group-hover:text-[#F59E0B] transition-all group-hover:translate-x-1"
+                    />
                   </div>
                   <p className="text-sm text-gray-500 dark:text-gray-400 font-medium leading-relaxed">
                     {cat.description}
@@ -714,11 +876,15 @@ export default function TestingEngine() {
               <Zap size={120} className="text-[#060818]" />
             </div>
             <div className="space-y-4 relative">
-              <h3 className="text-2xl font-black text-[#060818] leading-tight">Create Custom Test</h3>
-              <p className="text-[#060818]/60 text-sm font-bold">Mix topics and set your own timer for a personalized challenge.</p>
+              <h3 className="text-2xl font-black text-[#060818] leading-tight">
+                Create Custom Test
+              </h3>
+              <p className="text-[#060818]/60 text-sm font-bold">
+                Mix topics and set your own timer for a personalized challenge.
+              </p>
             </div>
             <button
-              onClick={() => setActiveCategory('custom')}
+              onClick={() => setActiveCategory("custom")}
               className="bg-[#060818] text-white px-6 py-3 rounded-2xl font-black text-sm w-fit mt-8 relative group-hover:bg-gray-800 transition-colors"
             >
               Build Test
@@ -729,7 +895,9 @@ export default function TestingEngine() {
         {/* Test History Sidebar */}
         <div className="space-y-8">
           <div className="flex items-center justify-between">
-            <h3 className="text-2xl font-black tracking-tight dark:text-white">Test History</h3>
+            <h3 className="text-2xl font-black tracking-tight dark:text-white">
+              Test History
+            </h3>
             <History size={20} className="text-[#F59E0B]" />
           </div>
 
@@ -739,7 +907,9 @@ export default function TestingEngine() {
                 <div className="w-12 h-12 bg-gray-50 dark:bg-white/5 rounded-full flex items-center justify-center mx-auto text-gray-300">
                   <History size={24} />
                 </div>
-                <p className="text-sm font-bold text-gray-400">No tests taken yet.</p>
+                <p className="text-sm font-bold text-gray-400">
+                  No tests taken yet.
+                </p>
               </div>
             ) : (
               history.map((test, idx) => (
@@ -751,20 +921,29 @@ export default function TestingEngine() {
                   onClick={() => setTestResult(test)}
                   className="w-full flex items-center gap-4 p-4 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all text-left group border border-transparent hover:border-[#F59E0B]/20"
                 >
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-black text-xs ${
-                    (test.score / test.total) >= 0.8 ? 'bg-emerald-500/10 text-emerald-500' :
-                    (test.score / test.total) >= 0.5 ? 'bg-amber-500/10 text-amber-500' :
-                    'bg-red-500/10 text-red-500'
-                  }`}>
+                  <div
+                    className={`w-10 h-10 rounded-xl flex items-center justify-center font-black text-xs ${
+                      test.score / test.total >= 0.8
+                        ? "bg-emerald-500/10 text-emerald-500"
+                        : test.score / test.total >= 0.5
+                          ? "bg-amber-500/10 text-amber-500"
+                          : "bg-red-500/10 text-red-500"
+                    }`}
+                  >
                     {Math.round((test.score / test.total) * 100)}%
                   </div>
                   <div className="flex-1">
                     <p className="text-sm font-black text-[#060818] dark:text-white group-hover:text-[#F59E0B] transition-colors">
                       {test.category}
                     </p>
-                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{test.date}</p>
+                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                      {test.date}
+                    </p>
                   </div>
-                  <ChevronRight size={16} className="text-gray-300 group-hover:text-[#F59E0B] transition-all group-hover:translate-x-1" />
+                  <ChevronRight
+                    size={16}
+                    className="text-gray-300 group-hover:text-[#F59E0B] transition-all group-hover:translate-x-1"
+                  />
                 </motion.button>
               ))
             )}

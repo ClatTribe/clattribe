@@ -1,14 +1,28 @@
-'use client';
-import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+"use client";
+import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
-  Clock, ChevronRight, ChevronLeft, CheckCircle2, Zap, RefreshCw,
-  BookOpen, Trophy, RotateCcw, FileText, ChevronDown, ChevronUp
-} from 'lucide-react';
-import { gkSupabase } from '@/lib/gk-supabase';
+  Clock,
+  ChevronRight,
+  ChevronLeft,
+  CheckCircle2,
+  Zap,
+  RefreshCw,
+  BookOpen,
+  Trophy,
+  RotateCcw,
+  FileText,
+  ChevronDown,
+  ChevronUp,
+} from "lucide-react";
+import { gkSupabase } from "@/lib/gk-supabase";
 
 interface PassageTestProps {
-  onComplete?: (results: { score: number; total: number; timeSpent: number }) => void;
+  onComplete?: (results: {
+    score: number;
+    total: number;
+    timeSpent: number;
+  }) => void;
 }
 
 interface PassageQuestion {
@@ -34,18 +48,58 @@ interface PassageGroup {
 }
 
 const TEST_THEMES = [
-  { num: 1, label: 'Test 1', subtitle: 'India–Pakistan & Operation Sindoor', color: '#EF4444', bg: 'bg-red-50 dark:bg-red-900/10', border: 'border-red-100 dark:border-red-900/20', icon: '🇮🇳' },
-  { num: 2, label: 'Test 2', subtitle: 'Constitution & Governance', color: '#8B5CF6', bg: 'bg-violet-50 dark:bg-violet-900/10', border: 'border-violet-100 dark:border-violet-900/20', icon: '⚖️' },
-  { num: 3, label: 'Test 3', subtitle: 'Economy & Trade', color: '#10B981', bg: 'bg-emerald-50 dark:bg-emerald-900/10', border: 'border-emerald-100 dark:border-emerald-900/20', icon: '📈' },
-  { num: 4, label: 'Test 4', subtitle: 'Science, Tech & Environment', color: '#3B82F6', bg: 'bg-blue-50 dark:bg-blue-900/10', border: 'border-blue-100 dark:border-blue-900/20', icon: '🔬' },
-  { num: 5, label: 'Test 5', subtitle: 'International Affairs & Law', color: '#F59E0B', bg: 'bg-amber-50 dark:bg-amber-900/10', border: 'border-amber-100 dark:border-amber-900/20', icon: '🌐' },
+  {
+    num: 1,
+    label: "Test 1",
+    subtitle: "India–Pakistan & Operation Sindoor",
+    color: "#EF4444",
+    bg: "bg-red-50 dark:bg-red-900/10",
+    border: "border-red-100 dark:border-red-900/20",
+    icon: "🇮🇳",
+  },
+  {
+    num: 2,
+    label: "Test 2",
+    subtitle: "Constitution & Governance",
+    color: "#8B5CF6",
+    bg: "bg-violet-50 dark:bg-violet-900/10",
+    border: "border-violet-100 dark:border-violet-900/20",
+    icon: "⚖️",
+  },
+  {
+    num: 3,
+    label: "Test 3",
+    subtitle: "Economy & Trade",
+    color: "#10B981",
+    bg: "bg-emerald-50 dark:bg-emerald-900/10",
+    border: "border-emerald-100 dark:border-emerald-900/20",
+    icon: "📈",
+  },
+  {
+    num: 4,
+    label: "Test 4",
+    subtitle: "Science, Tech & Environment",
+    color: "#3B82F6",
+    bg: "bg-blue-50 dark:bg-blue-900/10",
+    border: "border-blue-100 dark:border-blue-900/20",
+    icon: "🔬",
+  },
+  {
+    num: 5,
+    label: "Test 5",
+    subtitle: "International Affairs & Law",
+    color: "#F59E0B",
+    bg: "bg-amber-50 dark:bg-amber-900/10",
+    border: "border-amber-100 dark:border-amber-900/20",
+    icon: "🌐",
+  },
 ];
 
 const TIPS = [
-  'Read the passage once quickly to grasp the main idea, then re-read relevant sections for each question.',
+  "Read the passage once quickly to grasp the main idea, then re-read relevant sections for each question.",
   'For "NOT supported" questions, verify each option directly against the passage—don\'t rely on outside knowledge.',
-  'Vocabulary questions: use the surrounding sentence as context. The passage itself reveals the intended meaning.',
-  'Inference questions ask what MUST be true, not what could be true. Stick close to the text.',
+  "Vocabulary questions: use the surrounding sentence as context. The passage itself reveals the intended meaning.",
+  "Inference questions ask what MUST be true, not what could be true. Stick close to the text.",
   'For "author\'s purpose" questions, focus on the tone and the paragraph structure rather than individual facts.',
 ];
 
@@ -76,15 +130,17 @@ function TestSelector({ onSelect }: { onSelect: (n: number) => void }) {
             className={`text-left p-8 rounded-[2rem] border-2 ${t.bg} ${t.border} transition-all group relative overflow-hidden`}
           >
             <div className="text-4xl mb-4">{t.icon}</div>
-            <div className="text-xs font-black uppercase tracking-widest mb-1" style={{ color: t.color }}>
+            <div
+              className="text-xs font-black uppercase tracking-widest mb-1"
+              style={{ color: t.color }}
+            >
               {t.label}
             </div>
             <div className="text-lg font-black text-[#060818] dark:text-white leading-snug">
               {t.subtitle}
             </div>
             <div className="mt-4 flex items-center gap-2 text-xs font-bold text-gray-400">
-              <FileText size={13} />
-              5 Passages · 25 MCQs
+              <FileText size={13} />5 Passages · 25 MCQs
             </div>
             <div
               className="absolute -bottom-6 -right-6 w-24 h-24 rounded-full opacity-10"
@@ -120,7 +176,9 @@ function PassageViewer({
   const total = allQuestions.length;
 
   const [currentIdx, setCurrentIdx] = React.useState(0);
-  const [answers, setAnswers] = React.useState<(number | null)[]>(new Array(total).fill(null));
+  const [answers, setAnswers] = React.useState<(number | null)[]>(
+    new Array(total).fill(null),
+  );
   const [submitted, setSubmitted] = React.useState(false);
   const [reviewMode, setReviewMode] = React.useState(false);
   const [timeSpent, setTimeSpent] = React.useState(0);
@@ -134,7 +192,7 @@ function PassageViewer({
 
   const formatTime = (s: number) => {
     const m = Math.floor(s / 60);
-    return `${m.toString().padStart(2, '0')}:${(s % 60).toString().padStart(2, '0')}`;
+    return `${m.toString().padStart(2, "0")}:${(s % 60).toString().padStart(2, "0")}`;
   };
 
   const { pIdx, q } = allQuestions[currentIdx];
@@ -157,7 +215,10 @@ function PassageViewer({
   };
 
   const score = submitted
-    ? answers.reduce<number>((acc, ans, i) => (ans === allQuestions[i].q.correct ? acc + 1 : acc), 0)
+    ? answers.reduce<number>(
+        (acc, ans, i) => (ans === allQuestions[i].q.correct ? acc + 1 : acc),
+        0,
+      )
     : 0;
 
   const answered = answers.filter((a) => a !== null).length;
@@ -166,8 +227,22 @@ function PassageViewer({
   // ── Results Screen ──────────────────────────────────────────────────────────
   if (submitted && !reviewMode) {
     const pct = Math.round((score / total) * 100);
-    const grade = pct >= 80 ? 'Excellent' : pct >= 60 ? 'Good' : pct >= 40 ? 'Average' : 'Needs Work';
-    const gradeColor = pct >= 80 ? '#10B981' : pct >= 60 ? '#F59E0B' : pct >= 40 ? '#3B82F6' : '#EF4444';
+    const grade =
+      pct >= 80
+        ? "Excellent"
+        : pct >= 60
+          ? "Good"
+          : pct >= 40
+            ? "Average"
+            : "Needs Work";
+    const gradeColor =
+      pct >= 80
+        ? "#10B981"
+        : pct >= 60
+          ? "#F59E0B"
+          : pct >= 40
+            ? "#3B82F6"
+            : "#EF4444";
 
     return (
       <motion.div
@@ -177,38 +252,60 @@ function PassageViewer({
       >
         <div className="text-6xl">🏆</div>
         <div>
-          <h2 className="text-4xl font-black text-[#060818] dark:text-white">{grade}!</h2>
-          <p className="text-gray-500 dark:text-gray-400 mt-2">Test {testNum} · {theme.subtitle}</p>
+          <h2 className="text-4xl font-black text-[#060818] dark:text-white">
+            {grade}!
+          </h2>
+          <p className="text-gray-500 dark:text-gray-400 mt-2">
+            Test {testNum} · {theme.subtitle}
+          </p>
         </div>
 
         <div className="grid grid-cols-3 gap-4">
           {[
-            { label: 'Score', value: `${score}/${total}`, icon: Trophy },
-            { label: 'Accuracy', value: `${pct}%`, icon: CheckCircle2 },
-            { label: 'Time', value: formatTime(timeSpent), icon: Clock },
+            { label: "Score", value: `${score}/${total}`, icon: Trophy },
+            { label: "Accuracy", value: `${pct}%`, icon: CheckCircle2 },
+            { label: "Time", value: formatTime(timeSpent), icon: Clock },
           ].map(({ label, value, icon: Icon }) => (
-            <div key={label} className="bg-white dark:bg-white/5 rounded-2xl p-6 border border-gray-100 dark:border-white/5">
+            <div
+              key={label}
+              className="bg-white dark:bg-white/5 rounded-2xl p-6 border border-gray-100 dark:border-white/5"
+            >
               <Icon size={20} className="mx-auto mb-2 text-[#F59E0B]" />
-              <div className="text-2xl font-black text-[#060818] dark:text-white" style={{ color: gradeColor }}>{value}</div>
-              <div className="text-xs text-gray-400 font-bold uppercase tracking-widest mt-1">{label}</div>
+              <div
+                className="text-2xl font-black text-[#060818] dark:text-white"
+                style={{ color: gradeColor }}
+              >
+                {value}
+              </div>
+              <div className="text-xs text-gray-400 font-bold uppercase tracking-widest mt-1">
+                {label}
+              </div>
             </div>
           ))}
         </div>
 
         {/* Passage breakdown */}
         <div className="bg-white dark:bg-white/5 rounded-2xl p-6 border border-gray-100 dark:border-white/5 text-left space-y-3">
-          <div className="text-xs font-black uppercase tracking-widest text-gray-400 mb-4">Passage Breakdown</div>
+          <div className="text-xs font-black uppercase tracking-widest text-gray-400 mb-4">
+            Passage Breakdown
+          </div>
           {passages.map((p, pi) => {
             const pStart = pi * 5;
-            const pScore = answers.slice(pStart, pStart + 5).reduce<number>((acc, ans, qi) => {
-              return ans === allQuestions[pStart + qi].q.correct ? acc + 1 : acc;
-            }, 0);
+            const pScore = answers
+              .slice(pStart, pStart + 5)
+              .reduce<number>((acc, ans, qi) => {
+                return ans === allQuestions[pStart + qi].q.correct
+                  ? acc + 1
+                  : acc;
+              }, 0);
             return (
               <div key={pi} className="flex items-center justify-between">
                 <span className="text-sm font-bold text-gray-600 dark:text-gray-400 truncate max-w-[200px]">
                   P{pi + 1}: {p.passage_title}
                 </span>
-                <span className="text-sm font-black text-[#060818] dark:text-white">{pScore}/5</span>
+                <span className="text-sm font-black text-[#060818] dark:text-white">
+                  {pScore}/5
+                </span>
               </div>
             );
           })}
@@ -239,7 +336,9 @@ function PassageViewer({
     return (
       <div className="space-y-6">
         <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-black text-[#060818] dark:text-white">Review — Test {testNum}</h2>
+          <h2 className="text-2xl font-black text-[#060818] dark:text-white">
+            Review — Test {testNum}
+          </h2>
           <button
             onClick={onBack}
             className="flex items-center gap-2 text-sm font-black text-gray-400 hover:text-[#060818] dark:hover:text-white transition-colors"
@@ -249,16 +348,25 @@ function PassageViewer({
         </div>
 
         {passages.map((p, pi) => (
-          <div key={pi} className="bg-white dark:bg-white/5 rounded-[2rem] border border-gray-100 dark:border-white/5 overflow-hidden">
+          <div
+            key={pi}
+            className="bg-white dark:bg-white/5 rounded-[2rem] border border-gray-100 dark:border-white/5 overflow-hidden"
+          >
             <div className="p-6 border-b border-gray-100 dark:border-white/5">
-              <div className="text-[10px] font-black text-[#F59E0B] uppercase tracking-widest mb-1">Passage {pi + 1}</div>
-              <div className="text-lg font-black text-[#060818] dark:text-white">{p.passage_title}</div>
+              <div className="text-[10px] font-black text-[#F59E0B] uppercase tracking-widest mb-1">
+                Passage {pi + 1}
+              </div>
+              <div className="text-lg font-black text-[#060818] dark:text-white">
+                {p.passage_title}
+              </div>
               <details className="mt-3">
                 <summary className="text-xs font-bold text-gray-400 cursor-pointer hover:text-gray-600 dark:hover:text-gray-300">
                   Show Passage Text
                 </summary>
                 <div className="mt-3 text-sm text-gray-500 dark:text-gray-400 leading-relaxed space-y-3">
-                  {p.passage_text.split('\n\n').map((para, i) => <p key={i}>{para}</p>)}
+                  {p.passage_text.split("\n\n").map((para, i) => (
+                    <p key={i}>{para}</p>
+                  ))}
                 </div>
               </details>
             </div>
@@ -270,31 +378,54 @@ function PassageViewer({
                 return (
                   <div key={qi} className="p-6 space-y-4">
                     <div className="flex items-start gap-3">
-                      <div className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${isCorrect ? 'bg-green-100 dark:bg-green-900/30' : 'bg-red-100 dark:bg-red-900/30'}`}>
-                        {isCorrect
-                          ? <CheckCircle2 size={14} className="text-green-600 dark:text-green-400" />
-                          : <span className="text-red-500 font-black text-xs">✗</span>}
+                      <div
+                        className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${isCorrect ? "bg-green-100 dark:bg-green-900/30" : "bg-red-100 dark:bg-red-900/30"}`}
+                      >
+                        {isCorrect ? (
+                          <CheckCircle2
+                            size={14}
+                            className="text-green-600 dark:text-green-400"
+                          />
+                        ) : (
+                          <span className="text-red-500 font-black text-xs">
+                            ✗
+                          </span>
+                        )}
                       </div>
-                      <span className="font-bold text-[#060818] dark:text-white text-sm leading-snug">{q.question}</span>
+                      <span className="font-bold text-[#060818] dark:text-white text-sm leading-snug">
+                        {q.question}
+                      </span>
                     </div>
                     <div className="ml-9 space-y-2">
                       {q.options.map((opt, oi) => {
                         const isOpt = oi === q.correct;
                         const wasChosen = oi === userAns;
                         return (
-                          <div key={oi} className={`text-sm px-4 py-2.5 rounded-xl font-medium ${
-                            isOpt ? 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-900/40' :
-                            wasChosen && !isOpt ? 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-900/40' :
-                            'text-gray-500 dark:text-gray-500'
-                          }`}>
-                            <span className="font-black mr-2">{String.fromCharCode(65 + oi)}.</span>{opt}
+                          <div
+                            key={oi}
+                            className={`text-sm px-4 py-2.5 rounded-xl font-medium ${
+                              isOpt
+                                ? "bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-900/40"
+                                : wasChosen && !isOpt
+                                  ? "bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-900/40"
+                                  : "text-gray-500 dark:text-gray-500"
+                            }`}
+                          >
+                            <span className="font-black mr-2">
+                              {String.fromCharCode(65 + oi)}.
+                            </span>
+                            {opt}
                           </div>
                         );
                       })}
                     </div>
                     <div className="ml-9 bg-amber-50 dark:bg-[#F59E0B]/10 rounded-xl p-4 border border-amber-100 dark:border-[#F59E0B]/20">
-                      <span className="text-[10px] font-black text-[#F59E0B] uppercase tracking-widest block mb-1">Explanation</span>
-                      <p className="text-amber-900/80 dark:text-[#F59E0B]/80 text-sm font-medium leading-relaxed">{q.explanation}</p>
+                      <span className="text-[10px] font-black text-[#F59E0B] uppercase tracking-widest block mb-1">
+                        Explanation
+                      </span>
+                      <p className="text-amber-900/80 dark:text-[#F59E0B]/80 text-sm font-medium leading-relaxed">
+                        {q.explanation}
+                      </p>
                     </div>
                   </div>
                 );
@@ -328,7 +459,10 @@ function PassageViewer({
             <ChevronLeft size={18} />
           </button>
           <div>
-            <span className="text-[10px] font-black uppercase tracking-[0.2em]" style={{ color: theme.color }}>
+            <span
+              className="text-[10px] font-black uppercase tracking-[0.2em]"
+              style={{ color: theme.color }}
+            >
               Test {testNum} · Passage {pIdx + 1}/5
             </span>
             <h3 className="text-lg font-black text-[#060818] dark:text-white leading-tight">
@@ -357,9 +491,11 @@ function PassageViewer({
               key={i}
               onClick={() => setCurrentIdx(i)}
               className={`h-2 rounded-full transition-all ${
-                isCurrent ? 'w-6 bg-[#F59E0B]' :
-                isAnswered ? 'w-2 bg-green-400 dark:bg-green-500' :
-                'w-2 bg-gray-200 dark:bg-white/10'
+                isCurrent
+                  ? "w-6 bg-[#F59E0B]"
+                  : isAnswered
+                    ? "w-2 bg-green-400 dark:bg-green-500"
+                    : "w-2 bg-gray-200 dark:bg-white/10"
               }`}
             />
           );
@@ -376,27 +512,39 @@ function PassageViewer({
             className="w-full flex items-center justify-between px-8 py-5 border-b border-gray-50 dark:border-white/5 lg:cursor-default"
           >
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-xl flex items-center justify-center text-sm font-black" style={{ background: theme.color + '20', color: theme.color }}>
+              <div
+                className="w-8 h-8 rounded-xl flex items-center justify-center text-sm font-black"
+                style={{ background: theme.color + "20", color: theme.color }}
+              >
                 P{pIdx + 1}
               </div>
-              <span className="font-black text-[#060818] dark:text-white text-sm">{currentPassage.passage_title}</span>
+              <span className="font-black text-[#060818] dark:text-white text-sm">
+                {currentPassage.passage_title}
+              </span>
             </div>
             <span className="text-gray-400 lg:hidden">
-              {passageExpanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+              {passageExpanded ? (
+                <ChevronUp size={18} />
+              ) : (
+                <ChevronDown size={18} />
+              )}
             </span>
           </button>
 
           <AnimatePresence initial={false}>
-            {(passageExpanded) && (
+            {passageExpanded && (
               <motion.div
                 initial={{ height: 0 }}
-                animate={{ height: 'auto' }}
+                animate={{ height: "auto" }}
                 exit={{ height: 0 }}
                 className="overflow-hidden"
               >
                 <div className="p-8 lg:overflow-y-auto lg:max-h-[calc(100vh-340px)]">
-                  {currentPassage.passage_text.split('\n\n').map((para, i) => (
-                    <p key={i} className="text-gray-600 dark:text-gray-400 leading-relaxed mb-5 text-base font-medium">
+                  {currentPassage.passage_text.split("\n\n").map((para, i) => (
+                    <p
+                      key={i}
+                      className="text-gray-600 dark:text-gray-400 leading-relaxed mb-5 text-base font-medium"
+                    >
                       {para}
                     </p>
                   ))}
@@ -422,11 +570,15 @@ function PassageViewer({
                 <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">
                   Q{currentIdx + 1} of {total} &nbsp;·&nbsp; {q.topic}
                 </span>
-                <span className={`text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full ${
-                  q.difficulty === 'easy' ? 'bg-green-50 dark:bg-green-900/20 text-green-600' :
-                  q.difficulty === 'medium' ? 'bg-amber-50 dark:bg-amber-900/20 text-amber-600' :
-                  'bg-red-50 dark:bg-red-900/20 text-red-500'
-                }`}>
+                <span
+                  className={`text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full ${
+                    q.difficulty === "easy"
+                      ? "bg-green-50 dark:bg-green-900/20 text-green-600"
+                      : q.difficulty === "medium"
+                        ? "bg-amber-50 dark:bg-amber-900/20 text-amber-600"
+                        : "bg-red-50 dark:bg-red-900/20 text-red-500"
+                  }`}
+                >
                   {q.difficulty}
                 </span>
               </div>
@@ -442,16 +594,22 @@ function PassageViewer({
                     onClick={() => handleSelect(oi)}
                     className={`w-full text-left p-5 rounded-2xl border-2 transition-all flex items-center gap-4 group ${
                       selectedAns === oi
-                        ? 'border-[#F59E0B] bg-amber-50/40 dark:bg-[#F59E0B]/10'
-                        : 'border-gray-50 dark:border-white/5 hover:border-gray-200 dark:hover:border-white/10 bg-gray-50/50 dark:bg-white/5'
+                        ? "border-[#F59E0B] bg-amber-50/40 dark:bg-[#F59E0B]/10"
+                        : "border-gray-50 dark:border-white/5 hover:border-gray-200 dark:hover:border-white/10 bg-gray-50/50 dark:bg-white/5"
                     }`}
                   >
-                    <div className={`w-9 h-9 rounded-xl flex items-center justify-center font-black text-sm flex-shrink-0 transition-colors ${
-                      selectedAns === oi ? 'bg-[#F59E0B] text-[#060818]' : 'bg-white dark:bg-white/10 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300'
-                    }`}>
+                    <div
+                      className={`w-9 h-9 rounded-xl flex items-center justify-center font-black text-sm flex-shrink-0 transition-colors ${
+                        selectedAns === oi
+                          ? "bg-[#F59E0B] text-[#060818]"
+                          : "bg-white dark:bg-white/10 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300"
+                      }`}
+                    >
                       {String.fromCharCode(65 + oi)}
                     </div>
-                    <span className={`text-base font-bold leading-snug ${selectedAns === oi ? 'text-[#060818] dark:text-[#F59E0B]' : 'text-gray-600 dark:text-gray-400'}`}>
+                    <span
+                      className={`text-base font-bold leading-snug ${selectedAns === oi ? "text-[#060818] dark:text-[#F59E0B]" : "text-gray-600 dark:text-gray-400"}`}
+                    >
                       {opt}
                     </span>
                   </button>
@@ -517,14 +675,15 @@ export default function PassageTest({ onComplete }: PassageTestProps) {
     setDone(false);
     try {
       const { data, error: err } = await gkSupabase
-        .from('gk_passage_questions')
-        .select('*')
-        .eq('test_number', testNum)
-        .order('passage_number')
-        .order('question_number');
+        .from("gk_passage_questions")
+        .select("*")
+        .eq("test_number", testNum)
+        .order("passage_number")
+        .order("question_number");
 
       if (err) throw new Error(err.message);
-      if (!data || data.length === 0) throw new Error('No questions found for this test.');
+      if (!data || data.length === 0)
+        throw new Error("No questions found for this test.");
 
       // Group by passage
       const groups: Record<number, PassageGroup> = {};
@@ -540,11 +699,13 @@ export default function PassageTest({ onComplete }: PassageTestProps) {
         groups[row.passage_number].questions.push(row);
       });
 
-      const sorted = Object.values(groups).sort((a, b) => a.passage_number - b.passage_number);
+      const sorted = Object.values(groups).sort(
+        (a, b) => a.passage_number - b.passage_number,
+      );
       setPassages(sorted);
       setSelectedTest(testNum);
     } catch (e: unknown) {
-      setError(e instanceof Error ? e.message : 'Failed to load test');
+      setError(e instanceof Error ? e.message : "Failed to load test");
     } finally {
       setLoading(false);
     }
@@ -566,7 +727,9 @@ export default function PassageTest({ onComplete }: PassageTestProps) {
     return (
       <div className="flex flex-col items-center justify-center py-32 gap-4">
         <RefreshCw size={36} className="animate-spin text-[#F59E0B]" />
-        <p className="text-gray-500 dark:text-gray-400 font-bold">Loading passages…</p>
+        <p className="text-gray-500 dark:text-gray-400 font-bold">
+          Loading passages…
+        </p>
       </div>
     );
   }
@@ -578,7 +741,10 @@ export default function PassageTest({ onComplete }: PassageTestProps) {
         <div className="text-5xl">⚠️</div>
         <p className="text-gray-500 dark:text-gray-400 font-bold">{error}</p>
         <button
-          onClick={() => { setError(null); setSelectedTest(null); }}
+          onClick={() => {
+            setError(null);
+            setSelectedTest(null);
+          }}
           className="px-6 py-3 rounded-xl bg-[#F59E0B] text-[#060818] font-black hover:opacity-90 transition-opacity"
         >
           Go Back

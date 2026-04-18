@@ -1,11 +1,12 @@
-'use client';
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import GKFlashcards from "@/components/gk/Flashcards";
+import { Metadata } from "next";
 
-export default function FlashcardsRedirect() {
-  const router = useRouter();
-  useEffect(() => {
-    router.replace('/gk?tab=flashcards');
-  }, [router]);
-  return null;
+export const metadata: Metadata = {
+  title: "Flashcards - GK & Legal Portal | CLAT Tribe",
+  description:
+    "Memorize critical GK facts and Legal concepts using intelligent spaced repetition flashcards.",
+};
+
+export default function FlashcardsPage() {
+  return <GKFlashcards />;
 }

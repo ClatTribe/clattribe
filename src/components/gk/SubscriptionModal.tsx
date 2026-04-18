@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import { X, Zap, CheckCircle2, Crown } from 'lucide-react';
+import React from "react";
+import { motion } from "framer-motion";
+import { X, Zap, CheckCircle2, Crown } from "lucide-react";
 
 interface GKSubscriptionModalProps {
   onSubscribe: () => void;
@@ -10,15 +10,18 @@ interface GKSubscriptionModalProps {
 }
 
 const FEATURES = [
-  'Unlimited daily editorials & MCQs',
-  'Access to all 6 years of PYQs',
-  'Full mock test series (15 mocks)',
-  'AI-powered passage analysis',
-  'Spaced repetition flashcard system',
-  'Monthly GK capsule summaries',
+  "Unlimited daily editorials & MCQs",
+  "Access to all 6 years of PYQs",
+  "Full mock test series (15 mocks)",
+  "AI-powered passage analysis",
+  "Spaced repetition flashcard system",
+  "Monthly GK capsule summaries",
 ];
 
-export default function GKSubscriptionModal({ onSubscribe, onClose }: GKSubscriptionModalProps) {
+export default function GKSubscriptionModal({
+  onSubscribe,
+  onClose,
+}: GKSubscriptionModalProps) {
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[200] flex items-center justify-center p-4">
       <motion.div
@@ -57,7 +60,9 @@ export default function GKSubscriptionModal({ onSubscribe, onClose }: GKSubscrip
                 <div className="w-6 h-6 rounded-full bg-[#F59E0B]/10 flex items-center justify-center flex-shrink-0">
                   <CheckCircle2 size={14} className="text-[#F59E0B]" />
                 </div>
-                <p className="text-sm font-medium text-gray-700 dark:text-gray-300">{feature}</p>
+                <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  {feature}
+                </p>
               </div>
             ))}
           </div>
@@ -68,10 +73,14 @@ export default function GKSubscriptionModal({ onSubscribe, onClose }: GKSubscrip
               Flat Monthly Fee
             </p>
             <div className="flex items-end justify-center gap-1">
-              <span className="text-5xl font-black text-[#060818] dark:text-white">₹99</span>
+              <span className="text-5xl font-black text-[#060818] dark:text-white">
+                ₹99
+              </span>
               <span className="text-gray-400 font-bold mb-2">/month</span>
             </div>
-            <p className="text-xs text-gray-400 mt-2">No hidden charges. Cancel anytime.</p>
+            <p className="text-xs text-gray-400 mt-2">
+              No hidden charges. Cancel anytime.
+            </p>
           </div>
 
           <button
