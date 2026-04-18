@@ -18,7 +18,7 @@ import {
   TrendingUp,
   Lightbulb,
 } from "lucide-react";
-import GKPassageTest from "./PassageTest";
+import GKPassageTest from "./PassageTest"; 
 import GKSectionalTest from "./GKSectionalTest";
 import GKWeeklyTest from "./GKWeeklyTest";
 import GKPYQTest from "./GKPYQTest";
