@@ -152,6 +152,33 @@ export default function Editorial() {
     new Set(),
   );
 
+  const [bookmarkedIds, setBookmarkedIds] = React.useState<string[]>(() => {
+    if (typeof window === "undefined") return [];
+    try {
+      return JSON.parse(
+        window.localStorage.getItem("gk_editorial_bookmarks") || "[]",
+      );
+    } catch {
+      return [];
+    }
+  });
+
+  const toggleBookmark = (id: string, e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    setBookmarkedIds((prev) => {
+      const next = prev.includes(id)
+        ? prev.filter((x) => x !== id)
+        : [...prev, id];
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem(
+          "gk_editorial_bookmarks",
+          JSON.stringify(next),
+        );
+      }
+      return next;
+    });
+  };
+
   React.useEffect(() => {
     const now = new Date();
     // Fetch recent editorials (last 60 entries covers 1 month of daily data)
@@ -223,6 +250,8 @@ export default function Editorial() {
     return (
       <DetailedEditorial
         item={selectedEditorial}
+        bookmarkedIds={bookmarkedIds}
+        onToggleBookmark={toggleBookmark}
         onBack={() => {
           setSelectedEditorial(null);
           setQuizItemId(null);
@@ -314,7 +343,7 @@ export default function Editorial() {
       </section>
 
       {/* Editorials Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
         {/* The Hindu Column */}
         <div className="space-y-8">
           <div className="flex items-center justify-between border-b border-gray-100 dark:border-white/5 pb-4">
@@ -338,6 +367,8 @@ export default function Editorial() {
                 <EditorialItem
                   key={item.id}
                   item={item}
+                  bookmarkedIds={bookmarkedIds}
+                  onToggleBookmark={toggleBookmark}
                   onOpen={() => setSelectedEditorial(item)}
                   onQuiz={() => {
                     setQuizItemId(item.id);
@@ -378,6 +409,8 @@ export default function Editorial() {
                 <EditorialItem
                   key={item.id}
                   item={item}
+                  bookmarkedIds={bookmarkedIds}
+                  onToggleBookmark={toggleBookmark}
                   onOpen={() => setSelectedEditorial(item)}
                   onQuiz={() => {
                     setQuizItemId(item.id);
@@ -400,16 +433,18 @@ export default function Editorial() {
 
 const EditorialItem: React.FC<{
   item: EditorialCard;
+  bookmarkedIds: string[];
+  onToggleBookmark: (id: string, e: React.MouseEvent) => void;
   onOpen: () => void;
   onQuiz: () => void;
-}> = ({ item, onOpen, onQuiz }) => {
+}> = ({ item, bookmarkedIds, onToggleBookmark, onOpen, onQuiz }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       onClick={onOpen}
-      className="group bg-white dark:bg-white/5 p-8 rounded-[2.5rem] border border-gray-100 dark:border-white/10 hover:shadow-2xl hover:shadow-[#F59E0B]/5 transition-all duration-300 cursor-pointer"
+      className="group bg-white dark:bg-white/5 p-6 md:p-8 rounded-3xl md:rounded-[2.5rem] border border-gray-100 dark:border-white/10 hover:shadow-2xl hover:shadow-[#F59E0B]/5 transition-all duration-300 cursor-pointer"
     >
       <div className="flex justify-between items-start mb-6">
         <div className="flex gap-2">
@@ -440,7 +475,7 @@ const EditorialItem: React.FC<{
           <BookOpen size={16} /> Read
         </button>
         <button
-          onClick={(e) => toggleBookmark(item.id, e)}
+          onClick={(e) => onToggleBookmark(item.id, e)}
           className={`p-3 rounded-2xl border transition-all ${bookmarkedIds.includes(item.id) ? "bg-amber-50 dark:bg-amber-500/10 border-amber-300 dark:border-amber-500/30 text-amber-500" : "bg-gray-50 dark:bg-white/5 border-gray-100 dark:border-white/10 text-gray-400 hover:text-amber-500"}`}
           title="Bookmark"
         >
@@ -464,10 +499,14 @@ const EditorialItem: React.FC<{
 function DetailedEditorial({
   item,
   onBack,
+  bookmarkedIds,
+  onToggleBookmark,
   initialShowQuiz = false,
 }: {
   item: EditorialCard;
   onBack: () => void;
+  bookmarkedIds: string[];
+  onToggleBookmark: (id: string) => void;
   initialShowQuiz?: boolean;
 }) {
   const [showQuiz, setShowQuiz] = React.useState(initialShowQuiz);
@@ -511,7 +550,7 @@ function DetailedEditorial({
         <ChevronRight size={16} className="rotate-180" /> Back to Editorials
       </button>
 
-      <div className="bg-white dark:bg-white/5 p-10 rounded-[3rem] border border-gray-100 dark:border-white/10 space-y-8">
+      <div className="bg-white dark:bg-white/5 p-6 md:p-10 rounded-3xl md:rounded-[3rem] border border-gray-100 dark:border-white/10 space-y-8">
         <div className="space-y-4">
           <div className="flex items-center gap-3">
             <span
@@ -532,7 +571,7 @@ function DetailedEditorial({
               {item.title}
             </h1>
             <button
-              onClick={() => toggleBookmark(item.id)}
+              onClick={() => onToggleBookmark(item.id)}
               className={`p-2 rounded-xl transition-all shrink-0 ${bookmarkedIds.includes(item.id) ? "text-amber-500 bg-amber-50 dark:bg-amber-500/10" : "text-gray-400 hover:text-amber-500 bg-gray-50 dark:bg-white/5"}`}
               title="Bookmark article"
             >
@@ -555,7 +594,7 @@ function DetailedEditorial({
           {cleanEditorialContent(item.content).map((para, idx) => (
             <p
               key={idx}
-              className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed font-medium"
+              className="text-base md:text-lg text-gray-600 dark:text-gray-300 leading-relaxed font-medium"
             >
               {para}
             </p>
@@ -593,16 +632,15 @@ function DetailedEditorial({
           </ul>
         </div>
 
-        <div className="pt-8 border-t border-gray-100 dark:border-white/5 flex justify-between items-center">
+        <div className="pt-8 border-t border-gray-100 dark:border-white/5 flex flex-col sm:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-4">
-            0{" "}
             <button className="flex items-center gap-2 text-[#060818] dark:text-white font-bold hover:text-[#F59E0B] transition-colors">
               <FileText size={20} /> Download PDF
             </button>
           </div>
           <button
             onClick={() => setShowQuiz(true)}
-            className="bg-[#F59E0B] text-[#060818] px-8 py-4 rounded-2xl font-black text-sm shadow-xl shadow-[#F59E0B]/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2"
+            className="w-full sm:w-auto bg-[#F59E0B] text-[#060818] px-8 py-4 rounded-2xl font-black text-sm shadow-xl shadow-[#F59E0B]/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2"
           >
             <Zap size={18} fill="currentColor" /> Take Passage Quiz
           </button>
@@ -625,7 +663,6 @@ function DetailedEditorial({
 
             {!quizFinished ? (
               <div className="space-y-8">
-                0{" "}
                 <div className="space-y-2">
                   <p className="text-[10px] font-black text-[#F59E0B] uppercase tracking-widest">
                     Question {currentQuestion + 1} of {item.mcqs.length}
