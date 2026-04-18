@@ -281,7 +281,7 @@ export default function GKDashboard() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.1 }}
-            className="bg-white dark:bg-white/5 border border-gray-100 dark:border-white/5 rounded-[2rem] flex items-center justify-between p-8"
+            className="bg-white dark:bg-white/5 border border-gray-100 dark:border-white/5 rounded-3xl md:rounded-[2rem] flex items-center justify-between p-6 md:p-8"
           >
             <div>
               <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-2">
@@ -301,7 +301,7 @@ export default function GKDashboard() {
       </div>
 
       {/* Streak */}
-      <section className="bg-white dark:bg-white/5 border border-gray-100 dark:border-white/5 rounded-[2rem] p-10 relative overflow-hidden">
+      <section className="bg-white dark:bg-white/5 border border-gray-100 dark:border-white/5 rounded-3xl md:rounded-[2rem] p-6 md:p-10 relative overflow-hidden">
         <div className="absolute top-0 right-0 p-10 opacity-5 pointer-events-none">
           <Flame size={200} />
         </div>
@@ -337,14 +337,15 @@ export default function GKDashboard() {
                   <span
                     className={`text-[10px] font-black uppercase tracking-widest ${isToday ? "text-[#F59E0B]" : "text-gray-400"}`}
                   >
-                    {day}
+                    <span className="hidden sm:inline">{day}</span>
+                    <span className="sm:hidden">{day[0]}</span>
                   </span>
                   <div
-                    className={`w-full aspect-square rounded-2xl flex items-center justify-center transition-all border-2 ${
+                    className={`w-full aspect-square rounded-xl md:rounded-2xl flex items-center justify-center transition-all border-2 ${
                       isCompleted
                         ? "bg-orange-500 border-orange-500 text-white shadow-lg shadow-orange-500/20"
                         : "bg-gray-50 dark:bg-white/5 border-transparent text-gray-300 dark:text-gray-700"
-                    } ${isToday ? "ring-4 ring-[#F59E0B]/20" : ""}`}
+                    } ${isToday ? "ring-2 md:ring-4 ring-[#F59E0B]/20" : ""}`}
                   >
                     {isCompleted ? (
                       <CheckCircle2 size={20} />
@@ -399,7 +400,7 @@ export default function GKDashboard() {
                 onClick={() =>
                   handleTargetClick(target.id, target.is_completed)
                 }
-                className={`group p-6 rounded-[2rem] border transition-all duration-300 flex items-center gap-6 cursor-pointer ${
+                className={`group p-5 md:p-6 rounded-3xl md:rounded-[2rem] border transition-all duration-300 flex items-center gap-4 md:gap-6 cursor-pointer ${
                   target.is_completed
                     ? "bg-gray-50 dark:bg-white/5 border-transparent opacity-60"
                     : "bg-white dark:bg-white/5 border-gray-100 dark:border-white/5 hover:border-[#F59E0B] hover:shadow-xl hover:shadow-[#F59E0B]/5"
@@ -446,7 +447,7 @@ export default function GKDashboard() {
             </h3>
             <Trophy size={20} className="text-[#F59E0B]" />
           </div>
-          <div className="bg-white dark:bg-white/5 border border-gray-100 dark:border-white/5 rounded-[2rem] p-6 space-y-4">
+          <div className="bg-white dark:bg-white/5 border border-gray-100 dark:border-white/5 rounded-3xl md:rounded-[2rem] p-6 space-y-4">
             {leaderboard.map((student, idx) => (
               <motion.div
                 key={student.id}
@@ -510,8 +511,8 @@ export default function GKDashboard() {
       </section>
 
       {/* Promo + Strategy */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <section className="bg-[#060818] text-white p-10 rounded-[3rem] relative overflow-hidden group">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+        <section className="bg-[#060818] text-white p-8 md:p-10 rounded-3xl md:rounded-[3rem] relative overflow-hidden group">
           <div className="relative z-10">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-[#F59E0B] text-[10px] font-black uppercase tracking-widest mb-6">
               New Module
@@ -535,7 +536,7 @@ export default function GKDashboard() {
           <div className="absolute top-0 right-0 w-64 h-64 bg-[#F59E0B]/10 rounded-full -mr-32 -mt-32 blur-3xl group-hover:bg-[#F59E0B]/20 transition-all duration-700" />
         </section>
 
-        <section className="bg-white dark:bg-white/5 border border-gray-100 dark:border-white/5 rounded-[2rem] p-10 flex flex-col justify-center">
+        <section className="bg-white dark:bg-white/5 border border-gray-100 dark:border-white/5 rounded-3xl md:rounded-[2rem] p-8 md:p-10 flex flex-col justify-center">
           <div className="flex items-center gap-2 text-blue-600 dark:text-blue-400 font-black text-[10px] uppercase tracking-widest mb-6">
             <Clock size={14} />
             Strategy Tip

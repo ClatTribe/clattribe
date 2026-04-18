@@ -178,17 +178,17 @@ export default function GKPYQTest({ onComplete, onBack }: Props) {
             <BookOpen className="w-6 h-6 text-blue-400" />
             <h3 className="text-xl font-bold text-white">Choose Your Exam</h3>
           </div>
-          <p className="text-gray-400 mb-8">
+          <p className="text-gray-400 mb-6 md:mb-8 text-sm md:text-base">
             90 seconds per question · Timed GK section
           </p>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {EXAMS.map((exam) => (
               <motion.button
                 key={exam}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => handleSelectExam(exam)}
-                className="bg-[#0a0f1e] border border-blue-500/30 hover:border-blue-400 rounded-xl p-6 text-white text-xl font-bold hover:bg-blue-500/10 transition-all text-center"
+                className="bg-[#0a0f1e] border border-blue-500/30 hover:border-blue-400 rounded-xl p-6 text-white text-lg md:text-xl font-bold hover:bg-blue-500/10 transition-all text-center"
               >
                 {exam}
                 <p className="text-gray-400 text-sm font-normal mt-1">
@@ -233,7 +233,7 @@ export default function GKPYQTest({ onComplete, onBack }: Props) {
           <h3 className="text-xl font-bold text-white mb-2">
             {selectedExam} — Select Year
           </h3>
-          <p className="text-gray-400 mb-8">
+          <p className="text-gray-400 mb-6 md:mb-8 text-sm md:text-base">
             90 seconds per question · Timed GK section
           </p>
           {loading ? (
@@ -241,7 +241,7 @@ export default function GKPYQTest({ onComplete, onBack }: Props) {
               <RefreshCw className="w-8 h-8 text-blue-400 animate-spin" />
             </div>
           ) : (
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               {YEARS.map((year) => (
                 <motion.button
                   key={year}

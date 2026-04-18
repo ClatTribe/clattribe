@@ -187,7 +187,7 @@ export default function MonthlySummary() {
       <motion.div
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
-        className="max-w-4xl mx-auto space-y-6 sm:space-y-8"
+        className="max-w-4xl mx-auto space-y-6 md:space-y-8"
       >
         <button
           onClick={() => setSelectedNews(null)}
@@ -256,11 +256,11 @@ export default function MonthlySummary() {
           <h1 className="text-2xl sm:text-4xl font-black text-[#060818] dark:text-white tracking-tight">
             April 2026 Summary
           </h1>
-          <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400 font-medium">
-            Curated GK & Legal updates specifically for CLAT aspirants.
+          <p className="text-base sm:text-xl text-gray-500 dark:text-gray-400 mb-8 sm:mb-10 max-w-md mx-auto">
+            Master General Knowledge in just 10 minutes a day.
           </p>
         </div>
-        <div className="flex bg-gray-100 dark:bg-white/5 p-1.5 rounded-2xl border border-gray-200 dark:border-white/10 self-start">
+        <div className="flex bg-gray-100 dark:bg-white/5 p-1.5 rounded-2xl border border-gray-200 dark:border-white/10 self-start max-w-full overflow-x-auto no-scrollbar">
           <button
             onClick={() => setView("news")}
             className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl text-sm font-bold transition-all flex items-center gap-2 ${
@@ -302,7 +302,7 @@ export default function MonthlySummary() {
                 key={news.id}
                 whileHover={{ y: -4 }}
                 onClick={() => setSelectedNews(news)}
-                className="group bg-white dark:bg-white/5 rounded-[1.5rem] sm:rounded-[2.5rem] border border-gray-100 dark:border-white/10 overflow-hidden cursor-pointer hover:shadow-2xl hover:shadow-[#F59E0B]/10 transition-all duration-300"
+                className="group bg-white dark:bg-white/5 rounded-3xl md:rounded-[2.5rem] border border-gray-100 dark:border-white/10 overflow-hidden cursor-pointer hover:shadow-2xl hover:shadow-[#F59E0B]/10 transition-all duration-300"
               >
                 <div className="aspect-[16/10] overflow-hidden relative">
                   <img
@@ -317,7 +317,7 @@ export default function MonthlySummary() {
                     </span>
                   </div>
                 </div>
-                <div className="p-5 sm:p-8 space-y-3 sm:space-y-4">
+                <div className="p-6 md:p-8 space-y-3 md:space-y-4">
                   <div className="flex items-center gap-2 sm:gap-3 text-[10px] font-bold text-gray-400 uppercase tracking-widest flex-wrap">
                     <Calendar size={11} /> {news.date}
                     <span className="w-1 h-1 bg-gray-300 rounded-full" />

@@ -89,7 +89,7 @@ function SetSelector({
           </p>{" "}
         </div>{" "}
       </div>{" "}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {" "}
         {SET_LABELS.map((set, idx) => (
           <motion.button
@@ -358,10 +358,10 @@ function QuizScreen({
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="space-y-6"
+        className="space-y-6 max-w-2xl mx-auto"
       >
         {" "}
-        <div className="bg-[#060818] p-8 rounded-3xl text-center space-y-6">
+        <div className="bg-[#060818] p-8 md:p-12 rounded-3xl text-center space-y-6">
           {" "}
           <Trophy size={48} className="text-[#F59E0B] mx-auto" />{" "}
           <div>
@@ -484,7 +484,7 @@ function QuizScreen({
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -20 }}
-          className="bg-white dark:bg-white/5 rounded-3xl border border-gray-100 dark:border-white/10 p-6 space-y-5"
+          className="bg-white dark:bg-white/5 rounded-3xl border border-gray-100 dark:border-white/10 p-5 md:p-8 space-y-5"
         >
           {" "}
           <div className="flex items-center gap-2 flex-wrap">

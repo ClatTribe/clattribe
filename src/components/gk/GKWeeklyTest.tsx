@@ -84,7 +84,7 @@ function WeekSelector({
           </p>{" "}
         </div>{" "}
       </div>{" "}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
         {" "}
         {WEEK_LABELS.map((w, idx) => (
           <motion.button
@@ -277,7 +277,7 @@ function QuizScreen({
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
-          className="bg-white dark:bg-white/5 p-8 rounded-[2.5rem] border border-gray-100 dark:border-white/10 space-y-6"
+          className="bg-white dark:bg-white/5 p-6 sm:p-8 rounded-3xl md:rounded-[2.5rem] border border-gray-100 dark:border-white/10 space-y-6"
         >
           {" "}
           {q.topic && (

@@ -12,6 +12,7 @@ import {
   CalendarDays,
   Search,
   X,
+  Menu,
 } from "lucide-react";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
@@ -224,18 +225,26 @@ export default function GKLayout({
         {" "}
         <div className="mx-auto px-4 py-3 flex items-center justify-between">
           {" "}
-          <a
-            href="https://www.clattribe.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {" "}
-            <img
-              src="https://www.clattribe.com/heading.png"
-              alt="CLAT Tribe"
-              className="h-9 w-auto"
-            />{" "}
-          </a>{" "}
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => setIsMobileMenuOpen(true)}
+              className="md:hidden text-white/70 hover:text-white transition-colors"
+            >
+              <Menu size={24} />
+            </button>
+            <a
+              href="https://www.clattribe.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {" "}
+              <img
+                src="https://www.clattribe.com/heading.png"
+                alt="CLAT Tribe"
+                className="h-8 md:h-9 w-auto"
+              />{" "}
+            </a>{" "}
+          </div>
           <div className="hidden md:flex items-center gap-5 text-[13px] text-white/75">
             {" "}
             <a
@@ -299,9 +308,37 @@ export default function GKLayout({
           </div>{" "}
         </div>{" "}
       </header>{" "}
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 overflow-hidden relative">
         {" "}
-        <nav className="bg-white dark:bg-[#060818] border-r border-gray-100 dark:border-white/5 h-full flex flex-col overflow-y-auto w-56 shrink-0 transition-colors">
+        {/* Sidebar Backdrop */}{" "}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="fixed inset-0 bg-[#060818]/60 backdrop-blur-sm z-[70] md:hidden"
+            />
+          )}
+        </AnimatePresence>
+        <nav
+          className={`fixed md:relative inset-y-0 left-0 z-[80] bg-white dark:bg-[#060818] border-r border-gray-100 dark:border-white/5 h-full flex flex-col overflow-y-auto w-64 md:w-56 shrink-0 transition-all duration-300 transform ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
+        >
+          {/* Mobile Sidebar Close Button */}
+          <div className="flex md:hidden items-center justify-between p-4 border-b border-gray-100 dark:border-white/10 mb-2">
+            <img
+              src="https://www.clattribe.com/heading.png"
+              alt="CLAT Tribe"
+              className="h-6 w-auto brightness-0 dark:brightness-100"
+            />
+            <button
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="text-gray-400 hover:text-gray-600 dark:hover:text-white transition-colors"
+            >
+              <X size={20} />
+            </button>
+          </div>
           {" "}
           {/* Search bar */}{" "}
           <div className="px-3 pt-4 pb-2" ref={searchRef}>
@@ -425,8 +462,27 @@ export default function GKLayout({
               );
             })}{" "}
           </div>{" "}
+          {/* Mobile: Additional Site Links */}{" "}
+          <div className="md:hidden px-3 pt-2 pb-4 space-y-1">
+            <div className="h-px bg-gray-100 dark:bg-white/10 my-4 mx-2" />
+            <p className="px-3 text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">
+              CLAT Tribe Sites
+            </p>
+            <a
+              href="https://www.clattribe.com"
+              className="flex items-center gap-3 px-3 py-2 text-sm text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white transition-colors"
+            >
+              Home
+            </a>
+            <a
+              href="https://www.clattribe.com/blogs"
+              className="flex items-center gap-3 px-3 py-2 text-sm text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white transition-colors"
+            >
+              Blogs
+            </a>
+          </div>
           {/* Profile footer */}{" "}
-          <div className="px-3 pb-4 pt-2 border-t border-gray-100 dark:border-white/10">
+          <div className="px-3 pb-6 md:pb-4 pt-2 border-t border-gray-100 dark:border-white/10 mt-auto">
             {" "}
             <div
               onClick={() => router.push("/gk/profile")}
@@ -449,8 +505,10 @@ export default function GKLayout({
             </div>{" "}
           </div>{" "}
         </nav>{" "}
-        <main className="flex-1 overflow-auto max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
-          {children}
+        <main className="flex-1 overflow-auto w-full">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
+            {children}
+          </div>
         </main>{" "}
       </div>{" "}
     </div>

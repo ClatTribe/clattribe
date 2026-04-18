@@ -158,9 +158,9 @@ function CustomTestBuilder({ onBack }: { onBack: () => void }) {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left Column: Topics & Types */}
-        <div className="lg:col-span-2 space-y-8">
+        <div className="lg:col-span-2 space-y-6 md:space-y-8">
           {/* Topics */}
-          <div className="bg-white dark:bg-white/5 p-8 rounded-[2.5rem] border border-gray-100 dark:border-white/10 space-y-6">
+          <div className="bg-white dark:bg-white/5 p-6 md:p-8 rounded-3xl md:rounded-[2.5rem] border border-gray-100 dark:border-white/10 space-y-6">
             <h3 className="text-lg font-black text-[#060818] dark:text-white flex items-center gap-2">
               <BookOpen size={20} className="text-[#F59E0B]" />
               Select Topics
@@ -183,7 +183,7 @@ function CustomTestBuilder({ onBack }: { onBack: () => void }) {
           </div>
 
           {/* Question Types */}
-          <div className="bg-white dark:bg-white/5 p-8 rounded-[2.5rem] border border-gray-100 dark:border-white/10 space-y-6">
+          <div className="bg-white dark:bg-white/5 p-6 md:p-8 rounded-3xl md:rounded-[2.5rem] border border-gray-100 dark:border-white/10 space-y-6">
             <h3 className="text-lg font-black text-[#060818] dark:text-white flex items-center gap-2">
               <FileText size={20} className="text-[#F59E0B]" />
               Question Types
@@ -207,9 +207,9 @@ function CustomTestBuilder({ onBack }: { onBack: () => void }) {
         </div>
 
         {/* Right Column: Time & Summary */}
-        <div className="space-y-8">
+        <div className="space-y-6 md:space-y-8">
           {/* Time Limit */}
-          <div className="bg-white dark:bg-white/5 p-8 rounded-[2.5rem] border border-gray-100 dark:border-white/10 space-y-6">
+          <div className="bg-white dark:bg-white/5 p-6 md:p-8 rounded-3xl md:rounded-[2.5rem] border border-gray-100 dark:border-white/10 space-y-6">
             <h3 className="text-lg font-black text-[#060818] dark:text-white flex items-center gap-2">
               <Clock size={20} className="text-[#F59E0B]" />
               Time Limit
@@ -232,7 +232,7 @@ function CustomTestBuilder({ onBack }: { onBack: () => void }) {
           </div>
 
           {/* Start Button */}
-          <div className="bg-[#060818] p-8 rounded-[2.5rem] space-y-6">
+          <div className="bg-[#060818] p-6 md:p-8 rounded-3xl md:rounded-[2.5rem] space-y-6">
             <div className="space-y-2">
               <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
                 Test Summary
@@ -313,9 +313,9 @@ function FeedbackScreen({
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
         {/* Score Card */}
-        <div className="bg-[#060818] p-10 rounded-[3rem] text-center space-y-6 shadow-2xl">
+        <div className="bg-[#060818] p-8 md:p-10 rounded-3xl md:rounded-[3rem] text-center space-y-6 shadow-2xl">
           <div className="relative inline-block">
             <svg className="w-32 h-32 transform -rotate-90">
               <circle
@@ -377,9 +377,9 @@ function FeedbackScreen({
         </div>
 
         {/* Breakdown & Suggestions */}
-        <div className="lg:col-span-2 space-y-8">
+        <div className="lg:col-span-2 space-y-6 md:space-y-8">
           {/* Breakdown */}
-          <div className="bg-white dark:bg-white/5 p-8 rounded-[2.5rem] border border-gray-100 dark:border-white/10 space-y-6">
+          <div className="bg-white dark:bg-white/5 p-6 md:p-8 rounded-3xl md:rounded-[2.5rem] border border-gray-100 dark:border-white/10 space-y-6">
             <h3 className="text-lg font-black text-[#060818] dark:text-white flex items-center gap-2">
               <Target size={20} className="text-[#F59E0B]" />
               Topic Breakdown
@@ -410,7 +410,7 @@ function FeedbackScreen({
           </div>
 
           {/* Suggestions */}
-          <div className="bg-amber-50 dark:bg-[#F59E0B]/10 p-8 rounded-[2.5rem] border border-amber-100 dark:border-[#F59E0B]/20 space-y-4">
+          <div className="bg-amber-50 dark:bg-[#F59E0B]/10 p-6 md:p-8 rounded-3xl md:rounded-[2.5rem] border border-amber-100 dark:border-[#F59E0B]/20 space-y-4">
             <h3 className="text-lg font-black text-[#F59E0B] flex items-center gap-2">
               <Zap size={20} fill="currentColor" />
               Areas for Improvement
@@ -430,16 +430,16 @@ function FeedbackScreen({
         </div>
       </div>
 
-      <div className="flex justify-center gap-4">
+      <div className="flex flex-col sm:flex-row justify-center gap-4">
         <button
           onClick={onBack}
-          className="px-10 py-4 bg-white dark:bg-white/10 border border-gray-100 dark:border-white/10 text-[#060818] dark:text-white rounded-2xl font-bold hover:bg-gray-50 dark:hover:bg-white/20 transition-all"
+          className="px-6 md:px-10 py-4 bg-white dark:bg-white/10 border border-gray-100 dark:border-white/10 text-[#060818] dark:text-white rounded-2xl font-bold hover:bg-gray-50 dark:hover:bg-white/20 transition-all text-sm md:text-base"
         >
           Retake Test
         </button>
         <button
           onClick={onBack}
-          className="px-10 py-4 bg-[#F59E0B] text-[#060818] rounded-2xl font-bold hover:shadow-xl hover:shadow-[#F59E0B]/20 transition-all"
+          className="px-6 md:px-10 py-4 bg-[#F59E0B] text-[#060818] rounded-2xl font-bold hover:shadow-xl hover:shadow-[#F59E0B]/20 transition-all text-sm md:text-base"
         >
           Explore More Tests
         </button>
@@ -640,8 +640,8 @@ export default function TestingEngine() {
           <ArrowLeft size={16} /> Back to Engine
         </button>
 
-        <div className="bg-white dark:bg-white/5 p-12 rounded-[3rem] border border-gray-100 dark:border-white/10 text-center space-y-6">
-          <div className="w-20 h-20 bg-[#F59E0B]/10 rounded-full flex items-center justify-center mx-auto">
+        <div className="bg-white dark:bg-white/5 p-8 md:p-12 rounded-3xl md:rounded-[3rem] border border-gray-100 dark:border-white/10 text-center space-y-6">
+          <div className="w-16 h-16 md:w-20 md:h-20 bg-[#F59E0B]/10 rounded-full flex items-center justify-center mx-auto">
             <Timer size={40} className="text-[#F59E0B]" />
           </div>
           <h2 className="text-3xl font-black text-[#060818] dark:text-white">
@@ -745,7 +745,7 @@ export default function TestingEngine() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {insights.weakAreas.length > 0 && (
-                <div className="bg-red-50 dark:bg-red-500/5 p-8 rounded-[2.5rem] border border-red-100 dark:border-red-500/10 space-y-4">
+                <div className="bg-red-50 dark:bg-red-500/5 p-6 md:p-8 rounded-3xl md:rounded-[2.5rem] border border-red-100 dark:border-red-500/10 space-y-4">
                   <div className="flex items-center gap-2 text-red-600 dark:text-red-400 font-black text-[10px] uppercase tracking-widest">
                     <TrendingDown size={14} />
                     Weak Areas (Accuracy &lt; 70%)
@@ -780,7 +780,7 @@ export default function TestingEngine() {
               )}
 
               {insights.slowAreas.length > 0 && (
-                <div className="bg-amber-50 dark:bg-[#F59E0B]/5 p-8 rounded-[2.5rem] border border-amber-100 dark:border-[#F59E0B]/10 space-y-4">
+                <div className="bg-amber-50 dark:bg-[#F59E0B]/5 p-6 md:p-8 rounded-3xl md:rounded-[2.5rem] border border-amber-100 dark:border-[#F59E0B]/10 space-y-4">
                   <div className="flex items-center gap-2 text-[#F59E0B] font-black text-[10px] uppercase tracking-widest">
                     <Clock size={14} />
                     Speed Bottlenecks

@@ -830,7 +830,7 @@ export default function Flashcards() {
     if (dailyDone) {
       const score = Math.round((knewCount / dailyCards.length) * 100);
       return (
-        <div className="flex flex-col items-center gap-6 py-6 px-4 max-w-lg mx-auto">
+        <div className="flex flex-col items-center gap-6 py-6 px-4 w-full max-w-lg mx-auto">
           <button
             onClick={() => setMode("home")}
             style={{
@@ -875,24 +875,24 @@ export default function Flashcards() {
             <p style={{ color: "#94a3b8", fontSize: 14, marginTop: 4 }}>
               You knew {knewCount} out of {dailyCards.length} cards
             </p>
-            <div className="flex justify-center gap-6 mt-5">
-              <div className="text-center">
-                <p style={{ color: "#4ade80", fontSize: 28, fontWeight: 800 }}>
+            <div className="flex justify-center gap-4 sm:gap-8 mt-6 flex-wrap">
+              <div className="text-center px-4">
+                <p style={{ color: "#4ade80", fontSize: 24, sm: "28px", fontWeight: 800 }}>
                   {knewCount}
                 </p>
-                <p style={{ color: "#94a3b8", fontSize: 12 }}>Knew it</p>
+                <p style={{ color: "#94a3b8", fontSize: 11, sm: "12px", uppercase: true }}>Knew it</p>
               </div>
-              <div className="text-center">
-                <p style={{ color: "#f87171", fontSize: 28, fontWeight: 800 }}>
+              <div className="text-center px-4">
+                <p style={{ color: "#f87171", fontSize: 24, sm: "28px", fontWeight: 800 }}>
                   {forgotCount}
                 </p>
-                <p style={{ color: "#94a3b8", fontSize: 12 }}>Forgot</p>
+                <p style={{ color: "#94a3b8", fontSize: 11, sm: "12px", uppercase: true }}>Forgot</p>
               </div>
-              <div className="text-center">
-                <p style={{ color: "#fbbf24", fontSize: 28, fontWeight: 800 }}>
+              <div className="text-center px-4">
+                <p style={{ color: "#fbbf24", fontSize: 24, sm: "28px", fontWeight: 800 }}>
                   {streak}
                 </p>
-                <p style={{ color: "#94a3b8", fontSize: 12 }}>Day streak 🔥</p>
+                <p style={{ color: "#94a3b8", fontSize: 11, sm: "12px", uppercase: true }}>Streak 🔥</p>
               </div>
             </div>
           </div>
@@ -940,7 +940,7 @@ export default function Flashcards() {
             {todayQuote}
           </p>
 
-          <div className="flex gap-3 w-full">
+          <div className="flex flex-col sm:flex-row gap-3 w-full mt-4">
             {forgotCount > 0 && (
               <button
                 onClick={() =>
@@ -948,34 +948,14 @@ export default function Flashcards() {
                     dailyCards.filter((_, i) => dailyResults[i] === "forgot"),
                   )
                 }
-                style={{
-                  flex: 1,
-                  padding: "12px 0",
-                  borderRadius: 12,
-                  backgroundColor: "#1e293b",
-                  color: "#60a5fa",
-                  fontWeight: 700,
-                  fontSize: 14,
-                  border: "1px solid #334155",
-                  cursor: "pointer",
-                }}
+                className="flex-1 py-4 rounded-xl border-2 border-[#334155] bg-[#1e293b] text-[#60a5fa] font-bold text-sm hover:bg-slate-800 transition-all"
               >
                 Revise {forgotCount} missed
               </button>
             )}
             <button
               onClick={() => setMode("home")}
-              style={{
-                flex: 1,
-                padding: "12px 0",
-                borderRadius: 12,
-                background: "linear-gradient(135deg,#f59e0b,#d97706)",
-                color: "#fff",
-                fontWeight: 700,
-                fontSize: 14,
-                border: "none",
-                cursor: "pointer",
-              }}
+              className="flex-1 py-4 rounded-xl bg-gradient-to-br from-[#f59e0b] to-[#d97706] text-white font-bold text-sm hover:shadow-lg hover:shadow-orange-500/20 transition-all"
             >
               Back to Home
             </button>
@@ -1057,48 +1037,20 @@ export default function Flashcards() {
         <AnimatePresence>
           {dailyFlipped && (
             <motion.div
-              className="flex gap-3 w-full max-w-[320px]"
+              className="flex gap-3 w-full max-w-sm"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
             >
               <button
                 onClick={() => handleDailyAnswer(false)}
-                style={{
-                  flex: 1,
-                  padding: "14px 0",
-                  borderRadius: 12,
-                  backgroundColor: "#450a0a",
-                  color: "#fca5a5",
-                  fontWeight: 700,
-                  fontSize: 14,
-                  border: "1px solid #7f1d1d",
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: 6,
-                }}
+                className="flex-1 py-4 rounded-xl border border-red-900 bg-red-950 text-red-300 font-bold text-sm flex items-center justify-center gap-2 hover:bg-black transition-all"
               >
                 <XCircle size={18} /> Forgot
               </button>
               <button
                 onClick={() => handleDailyAnswer(true)}
-                style={{
-                  flex: 1,
-                  padding: "14px 0",
-                  borderRadius: 12,
-                  backgroundColor: "#052e16",
-                  color: "#86efac",
-                  fontWeight: 700,
-                  fontSize: 14,
-                  border: "1px solid #14532d",
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: 6,
-                }}
+                className="flex-1 py-4 rounded-xl border border-green-900 bg-green-950 text-green-300 font-bold text-sm flex items-center justify-center gap-2 hover:bg-black transition-all"
               >
                 <CheckCircle size={18} /> Knew it
               </button>
@@ -1830,19 +1782,20 @@ export default function Flashcards() {
     <div className="flex flex-col gap-5 py-4 px-4 max-w-lg mx-auto">
       {/* Stats bar */}
       <div
-        className="flex items-center justify-between rounded-2xl px-5 py-3"
+        className="flex items-center justify-between rounded-2xl px-4 sm:px-5 py-3"
         style={{
           background: "linear-gradient(135deg,#1e293b,#0f172a)",
           boxShadow: "0 4px 16px rgba(0,0,0,0.2)",
         }}
       >
-        <div className="flex items-center gap-2">
-          <Flame size={18} style={{ color: "#f59e0b" }} />
+        <div className="flex items-center gap-2 group">
+          <Flame size={18} className="text-[#f59e0b] group-hover:scale-110 transition-transform" />
           <div>
             <p
               style={{
                 color: "#fbbf24",
-                fontSize: 18,
+                fontSize: 16,
+                sm: "18px",
                 fontWeight: 900,
                 lineHeight: 1,
                 margin: 0,
@@ -1850,33 +1803,24 @@ export default function Flashcards() {
             >
               {streak}
             </p>
-            <p style={{ color: "#64748b", fontSize: 10, margin: 0 }}>
-              day streak
+            <p className="text-[9px] sm:text-[10px] text-gray-500 uppercase font-black tracking-widest">
+              streak
             </p>
           </div>
         </div>
         <div className="text-center">
-          <p
-            style={{
-              color: "#f8fafc",
-              fontSize: 13,
-              fontWeight: 700,
-              margin: 0,
-            }}
-          >
+          <p className="text-xs sm:text-sm font-black text-white tracking-tight uppercase">
             GK Flashcards
           </p>
-          <p style={{ color: "#475569", fontSize: 11, margin: 0 }}>
-            CLAT Edition
-          </p>
         </div>
-        <div className="flex items-center gap-2">
-          <Trophy size={18} style={{ color: "#a78bfa" }} />
+        <div className="flex items-center gap-2 group">
+          <Trophy size={18} className="text-[#a78bfa] group-hover:scale-110 transition-transform" />
           <div className="text-right">
             <p
               style={{
                 color: "#a78bfa",
-                fontSize: 18,
+                fontSize: 16,
+                sm: "18px",
                 fontWeight: 900,
                 lineHeight: 1,
                 margin: 0,
@@ -1884,8 +1828,8 @@ export default function Flashcards() {
             >
               {overallPct}%
             </p>
-            <p style={{ color: "#64748b", fontSize: 10, margin: 0 }}>
-              mastered
+            <p className="text-[9px] sm:text-[10px] text-gray-500 uppercase font-black tracking-widest">
+              done
             </p>
           </div>
         </div>
@@ -1908,130 +1852,61 @@ export default function Flashcards() {
       {/* Daily Dose */}
       <button
         onClick={startDaily}
-        className="w-full rounded-2xl p-5 text-left relative overflow-hidden"
+        className="w-full rounded-2xl p-4 sm:p-6 text-left relative overflow-hidden group hover:shadow-2xl transition-all duration-300"
         style={{
           background: "linear-gradient(135deg,#78350f,#92400e)",
           border: "none",
           cursor: "pointer",
-          boxShadow: "0 4px 20px rgba(245,158,11,0.2)",
         }}
       >
         {todayDailyDone && (
-          <span
-            style={{
-              position: "absolute",
-              top: 12,
-              right: 14,
-              backgroundColor: "#4ade80",
-              color: "#052e16",
-              fontSize: 10,
-              fontWeight: 700,
-              borderRadius: 999,
-              padding: "2px 8px",
-            }}
-          >
-            ✓ Done today
+          <span className="absolute top-4 right-4 bg-green-500/20 text-green-400 text-[9px] font-black uppercase tracking-widest px-2 py-1 rounded-full border border-green-500/30">
+            ✓ Done
           </span>
         )}
-        <div className="flex items-center gap-3 mb-2">
-          <div
-            style={{
-              width: 40,
-              height: 40,
-              borderRadius: 12,
-              backgroundColor: "rgba(251,191,36,0.2)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexShrink: 0,
-            }}
-          >
-            <BookOpen size={20} style={{ color: "#fbbf24" }} />
+        <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-white/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+            <BookOpen size={20} className="text-[#fbbf24]" />
           </div>
           <div>
-            <p
-              style={{
-                color: "#fbbf24",
-                fontSize: 15,
-                fontWeight: 800,
-                margin: 0,
-              }}
-            >
+            <p className="text-sm sm:text-lg font-black text-[#fbbf24] leading-tight">
               Daily Dose
             </p>
-            <p style={{ color: "#d97706", fontSize: 11, margin: 0 }}>
-              15 curated cards · SM2 spaced repetition
+            <p className="text-[10px] sm:text-xs text-[#d97706] font-bold uppercase tracking-widest">
+              Spaced Repetition
             </p>
           </div>
         </div>
-        <p
-          style={{
-            color: "#a16207",
-            backgroundColor: "rgba(251,191,36,0.15)",
-            borderRadius: 8,
-            padding: "6px 10px",
-            fontSize: 12,
-            margin: 0,
-          }}
-        >
-          📖 Personalised daily deck based on what you need to review
+        <p className="text-xs sm:text-sm text-white/70 leading-relaxed font-medium">
+          Personalised daily deck based on what you need to review today.
         </p>
       </button>
 
       {/* Exam Blitz */}
       <button
         onClick={startSpeed}
-        className="w-full rounded-2xl p-5 text-left"
+        className="w-full rounded-2xl p-4 sm:p-6 text-left relative overflow-hidden group hover:shadow-2xl transition-all duration-300"
         style={{
           background: "linear-gradient(135deg,#1e1b4b,#312e81)",
           border: "none",
           cursor: "pointer",
-          boxShadow: "0 4px 20px rgba(99,102,241,0.2)",
         }}
       >
-        <div className="flex items-center gap-3 mb-2">
-          <div
-            style={{
-              width: 40,
-              height: 40,
-              borderRadius: 12,
-              backgroundColor: "rgba(99,102,241,0.2)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexShrink: 0,
-            }}
-          >
-            <Zap size={20} style={{ color: "#818cf8" }} />
+        <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-white/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+            <Zap size={20} className="text-[#818cf8]" />
           </div>
           <div>
-            <p
-              style={{
-                color: "#818cf8",
-                fontSize: 15,
-                fontWeight: 800,
-                margin: 0,
-              }}
-            >
+            <p className="text-sm sm:text-lg font-black text-[#818cf8] leading-tight">
               Exam Blitz
             </p>
-            <p style={{ color: "#6366f1", fontSize: 11, margin: 0 }}>
-              90 seconds · CLAT exam pressure training
+            <p className="text-[10px] sm:text-xs text-[#6366f1] font-bold uppercase tracking-widest">
+              90s Speed Trial
             </p>
           </div>
         </div>
-        <p
-          style={{
-            color: "#4338ca",
-            backgroundColor: "rgba(99,102,241,0.12)",
-            borderRadius: 8,
-            padding: "6px 10px",
-            fontSize: 12,
-            margin: 0,
-          }}
-        >
-          ⚡ Simulate real CLAT GK section · Personal best:{" "}
-          <strong style={{ color: "#818cf8" }}>{speedBest}</strong>
+        <p className="text-xs sm:text-sm text-white/70 leading-relaxed font-medium">
+          Simulate real CLAT GK pressure. Best: <span className="text-white font-black">{speedBest}</span>
         </p>
       </button>
 

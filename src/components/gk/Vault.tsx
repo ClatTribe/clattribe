@@ -58,20 +58,20 @@ export default function Vault() {
             Stop reading.{" "}
             <span className="text-[#F59E0B]">Start learning.</span>
           </h2>
-          <p className="text-base sm:text-xl text-gray-500 dark:text-gray-400 mb-8 sm:mb-10">
+          <p className="text-base sm:text-xl text-gray-500 dark:text-gray-400 mb-8 sm:mb-10 max-w-md mx-auto">
             Master General Knowledge in just 10 minutes a day.
           </p>
           <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
             <button
               onClick={() => showToast("Audio briefing coming soon!")}
-              className="bg-[#060818] text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl font-bold flex items-center gap-3 hover:bg-gray-800 transition-all text-sm sm:text-base"
+              className="bg-[#060818] text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl font-bold flex items-center justify-center gap-3 hover:bg-gray-800 transition-all text-sm sm:text-base flex-1 sm:flex-none"
             >
               <Play size={18} fill="currentColor" className="text-[#F59E0B]" />{" "}
               Listen
             </button>
             <button
               onClick={() => showToast("Summary coming soon!")}
-              className="bg-white dark:bg-white/10 text-[#060818] dark:text-white border-2 border-gray-100 dark:border-white/10 px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl font-bold hover:border-[#F59E0B] transition-all text-sm sm:text-base"
+              className="bg-white dark:bg-white/10 text-[#060818] dark:text-white border-2 border-gray-100 dark:border-white/10 px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl font-bold hover:border-[#F59E0B] transition-all text-sm sm:text-base flex-1 sm:flex-none"
             >
               <span className="flex items-center gap-2">
                 <BookOpen size={18} /> Read Summary
