@@ -80,9 +80,10 @@ export default function GKAuthWrapper({ children }: { children: React.ReactNode 
             const lastShown = window.localStorage.getItem('gk_lastModalShown');
             const shouldShow = !lastShown || Math.ceil(Math.abs(now.getTime() - new Date(lastShown).getTime()) / (1000 * 60 * 60 * 24)) >= 3;
             
-            if (shouldShow) {
+            if (shouldShow && !sessionStorage.getItem('gk_modalShownThisSession')) {
               setShowSubModal(true);
               window.localStorage.setItem('gk_lastModalShown', now.toISOString());
+              sessionStorage.setItem('gk_modalShownThisSession', '1');
             }
           }
         }
