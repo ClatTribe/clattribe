@@ -17,6 +17,11 @@ import {
   TrendingDown,
   TrendingUp,
   Lightbulb,
+  Lock,
+  Star,
+  Award,
+  ChevronRightCircle,
+  PlayCircle,
 } from "lucide-react";
 import GKPassageTest from "./PassageTest"; 
 import GKSectionalTest from "./GKSectionalTest";
@@ -448,6 +453,331 @@ function FeedbackScreen({
   );
 }
 
+// --- FULL MOCK DATA & COMPONENTS ---
+
+type ExamType = "CLAT" | "AILET" | "NLAT" | "MHCET";
+
+/**
+ * HOW TO ADD REAL MOCKS LATER:
+ * 1. Create a new array of questions following the structure below.
+ * 2. Add it to the MOCK_DATABASE object under the respective exam and mock number.
+ * 3. Update the 'isAvailable' logic in MockSelectionFlow to unlock it.
+ */
+
+interface MockQuestion {
+  question: string;
+  options: [string, string, string, string];
+  correct: number;
+  explanation: string;
+}
+
+const SAMPLE_CLAT_MOCK_1: MockQuestion[] = [
+  {
+    question: "Which of the following is NOT a fundamental right under the Indian Constitution?",
+    options: ["Right to Equality", "Right to Property", "Right against Exploitation", "Right to Freedom of Religion"],
+    correct: 1,
+    explanation: "The Right to Property was removed from the list of Fundamental Rights by the 44th Amendment Act, 1978. It is now a legal right under Article 300A.",
+  },
+  {
+    question: "The power of 'Judicial Review' in India is based on:",
+    options: ["Procedure established by law", "Due process of law", "Rule of law", "Precedents and Conventions"],
+    correct: 0,
+    explanation: "Judicial Review in India is primarily based on the principle of 'Procedure established by law' as per Article 21.",
+  },
+  {
+    question: "Who appoints the Chief Justice of India?",
+    options: ["The Prime Minister", "The President", "The Law Minister", "The Parliament"],
+    correct: 1,
+    explanation: "The Chief Justice of India is appointed by the President of India under Article 124 of the Constitution.",
+  },
+  {
+    question: "Which landmark case dealt with the 'Right to Privacy'?",
+    options: ["K.S. Puttaswamy v. Union of India", "Navtej Singh Johar v. Union of India", "Joseph Shine v. Union of India", "Shayara Bano v. Union of India"],
+    correct: 0,
+    explanation: "Justice K.S. Puttaswamy (Retd.) v. Union of India (2017) is the landmark case where the SC declared Right to Privacy as a Fundamental Right.",
+  },
+  {
+    question: "The concept of 'Public Interest Litigation' (PIL) originated in which country?",
+    options: ["United Kingdom", "USA", "Australia", "Canada"],
+    correct: 1,
+    explanation: "The concept of PIL originated and developed in the USA in the 1960s.",
+  },
+];
+
+const MOCK_DATABASE: Record<string, Record<number, MockQuestion[]>> = {
+  CLAT: {
+    1: SAMPLE_CLAT_MOCK_1,
+    2: SAMPLE_CLAT_MOCK_1, // Reusing sample for testing
+  },
+  AILET: {
+    1: SAMPLE_CLAT_MOCK_1,
+  },
+  NLAT: {
+    1: SAMPLE_CLAT_MOCK_1,
+  },
+  MHCET: {
+    1: SAMPLE_CLAT_MOCK_1,
+  },
+};
+
+const EXAM_META: Record<ExamType, { color: string; accent: string; description: string }> = {
+  CLAT: {
+    color: "bg-purple-600",
+    accent: "text-purple-600",
+    description: "The gold standard for NLU admissions. 120 questions, 120 minutes.",
+  },
+  AILET: {
+    color: "bg-emerald-600",
+    accent: "text-emerald-600",
+    description: "National Law University, Delhi's specific entrance. 150 questions, 90 minutes.",
+  },
+  NLAT: {
+    color: "bg-blue-600",
+    accent: "text-blue-600",
+    description: "NMIMS Law Aptitude Test. 150 questions, 120 minutes, no negative marking.",
+  },
+  MHCET: {
+    color: "bg-orange-600",
+    accent: "text-orange-600",
+    description: "Maharashtra Common Entrance Test for Law. 150 questions, 120 minutes.",
+  },
+};
+
+const SAMPLE_QUESTIONS = SAMPLE_CLAT_MOCK_1; // Fallback
+
+function FullMockRunner({ 
+  examType, 
+  mockNumber, 
+  onBack, 
+  onComplete 
+}: { 
+  examType: ExamType; 
+  mockNumber: number; 
+  onBack: () => void; 
+  onComplete: (res: { score: number; total: number; timeSpent: number }) => void;
+}) {
+  const questions = MOCK_DATABASE[examType]?.[mockNumber] || SAMPLE_QUESTIONS;
+  const [current, setCurrent] = React.useState(0);
+  const [answers, setAnswers] = React.useState<(number | null)[]>(Array(questions.length).fill(null));
+  const [startTime] = React.useState(Date.now());
+  const [timeLeft, setTimeLeft] = React.useState(120 * 60);
+
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const handleFinish = () => {
+    const score = answers.reduce((acc, ans, i) => (ans === questions[i].correct ? acc + 1 : acc), 0);
+    const timeSpent = Math.round((Date.now() - startTime) / 1000);
+    onComplete({ score, total: questions.length, timeSpent });
+  };
+
+  const q = questions[current];
+
+  return (
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-3xl mx-auto space-y-8">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className={`w-10 h-10 ${EXAM_META[examType].color} rounded-xl flex items-center justify-center text-white`}>
+            <Star size={20} />
+          </div>
+          <div>
+            <h2 className="font-black text-[#060818] dark:text-white">{examType} Mock {mockNumber}</h2>
+            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Question {current + 1} of {questions.length}</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-2 bg-[#F59E0B]/10 text-[#F59E0B] px-4 py-2 rounded-2xl font-black text-sm">
+          <Clock size={16} />
+          {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, "0")}
+        </div>
+      </div>
+
+      <div className="bg-white dark:bg-white/5 p-8 rounded-[2.5rem] border border-gray-100 dark:border-white/10 space-y-8">
+        <p className="text-lg font-bold text-[#060818] dark:text-white leading-relaxed">{q.question}</p>
+        <div className="grid gap-3">
+          {q.options.map((opt, i) => (
+            <button
+              key={i}
+              onClick={() => {
+                const newAns = [...answers];
+                newAns[current] = i;
+                setAnswers(newAns);
+              }}
+              className={`w-full text-left p-5 rounded-2xl border-2 transition-all font-bold text-sm flex items-center gap-4 ${
+                answers[current] === i
+                  ? "bg-[#F59E0B]/10 border-[#F59E0B] text-[#060818] dark:text-white"
+                  : "bg-gray-50 dark:bg-white/5 border-transparent text-gray-500 hover:border-gray-200"
+              }`}
+            >
+              <span className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs ${answers[current] === i ? "bg-[#F59E0B] text-white" : "bg-gray-200 dark:bg-white/10"}`}>
+                {String.fromCharCode(65 + i)}
+              </span>
+              {opt}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between">
+        <button
+          onClick={() => setCurrent((c) => Math.max(0, c - 1))}
+          disabled={current === 0}
+          className="px-8 py-3 bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 text-gray-500 rounded-2xl font-bold disabled:opacity-30"
+        >
+          Previous
+        </button>
+        {current < questions.length - 1 ? (
+          <button
+            onClick={() => setCurrent((c) => c + 1)}
+            className="px-8 py-3 bg-[#060818] text-white rounded-2xl font-bold"
+          >
+            Next
+          </button>
+        ) : (
+          <button
+            onClick={handleFinish}
+            className="px-8 py-3 bg-[#F59E0B] text-[#060818] rounded-2xl font-black"
+          >
+            Finish Test
+          </button>
+        )}
+      </div>
+    </motion.div>
+  );
+}
+
+function MockSelectionFlow({ onBack, onComplete }: { onBack: () => void; onComplete: (res: { score: number; total: number; timeSpent: number }) => void }) {
+  const [selectedExam, setSelectedExam] = React.useState<ExamType | null>(null);
+  const [selectedMock, setSelectedMock] = React.useState<number | null>(null);
+
+  if (selectedMock && selectedExam) {
+    return <FullMockRunner examType={selectedExam} mockNumber={selectedMock} onBack={() => setSelectedMock(null)} onComplete={onComplete} />;
+  }
+
+  if (selectedExam) {
+    return (
+      <div className="space-y-8">
+        <div className="flex items-center justify-between">
+          <button
+            onClick={() => setSelectedExam(null)}
+            className="flex items-center gap-2 text-gray-500 hover:text-[#F59E0B] transition-colors font-bold uppercase text-[10px] tracking-widest"
+          >
+            <ArrowLeft size={16} /> Back to Exams
+          </button>
+          <div className="flex items-center gap-3">
+             <div className={`w-8 h-8 ${EXAM_META[selectedExam].color} rounded-lg flex items-center justify-center text-white`}>
+                <Award size={18} />
+             </div>
+             <h2 className="text-2xl font-black text-[#060818] dark:text-white">{selectedExam} Mocks</h2>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[1, 2, 3, 4, 5].map((num) => {
+            const isAvailable = (selectedExam === "CLAT" && (num === 1 || num === 2)) || (selectedExam !== "CLAT" && num === 1);
+            return (
+              <motion.button
+                key={num}
+                whileHover={isAvailable ? { y: -4, scale: 1.02 } : {}}
+                whileTap={isAvailable ? { scale: 0.98 } : {}}
+                onClick={() => isAvailable && setSelectedMock(num)}
+                className={`p-6 rounded-[2rem] border text-left flex flex-col justify-between h-48 transition-all relative overflow-hidden ${
+                  isAvailable 
+                    ? "bg-white dark:bg-white/5 border-gray-100 dark:border-white/10 hover:border-[#F59E0B] hover:shadow-xl hover:shadow-[#F59E0B]/5" 
+                    : "bg-gray-50 dark:bg-white/[0.02] border-transparent opacity-60"
+                }`}
+              >
+                {!isAvailable && <div className="absolute inset-0 bg-white/40 dark:bg-black/40 backdrop-blur-[1px] flex items-center justify-center z-10">
+                   <div className="bg-white dark:bg-[#060818] p-3 rounded-full shadow-lg">
+                      <Lock size={20} className="text-gray-400" />
+                   </div>
+                </div>}
+                <div className="flex justify-between items-start">
+                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${isAvailable ? EXAM_META[selectedExam].color : "bg-gray-200 dark:bg-white/10"}`}>
+                    <FileText size={24} className="text-white" />
+                  </div>
+                  {isAvailable && <Star size={16} className="text-[#F59E0B]" fill="currentColor" />}
+                </div>
+                <div>
+                  <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Mock Series</p>
+                  <h3 className="text-xl font-black text-[#060818] dark:text-white">Mock {num}</h3>
+                  <div className="flex items-center gap-4 mt-3">
+                     <span className="flex items-center gap-1 text-[10px] font-bold text-gray-500 uppercase tracking-widest">
+                        <Clock size={10} /> {selectedExam === "AILET" ? "90m" : "120m"}
+                     </span>
+                     <span className="flex items-center gap-1 text-[10px] font-bold text-gray-500 uppercase tracking-widest">
+                        <Target size={10} /> {selectedExam === "CLAT" ? "120 Qs" : "150 Qs"}
+                     </span>
+                  </div>
+                </div>
+              </motion.button>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-12">
+      <div className="flex items-center justify-between">
+        <button
+          onClick={onBack}
+          className="flex items-center gap-2 text-gray-500 hover:text-[#F59E0B] transition-colors font-bold uppercase text-[10px] tracking-widest"
+        >
+          <ArrowLeft size={16} /> Back to Engine
+        </button>
+        <h2 className="text-2xl font-black text-[#060818] dark:text-white">Select Exam Type</h2>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {(Object.keys(EXAM_META) as ExamType[]).map((type) => (
+          <motion.button
+            key={type}
+            whileHover={{ y: -6, scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => setSelectedExam(type)}
+            className="group relative bg-white dark:bg-white/5 p-8 rounded-[3rem] border border-gray-100 dark:border-white/10 text-left hover:shadow-2xl hover:border-[#F59E0B] transition-all overflow-hidden"
+          >
+            {/* Design Accents */}
+            <div className={`absolute -right-8 -top-8 w-40 h-40 ${EXAM_META[type].color} opacity-5 group-hover:opacity-10 rounded-full transition-all duration-500`} />
+            
+            <div className="space-y-6 relative z-10">
+              <div className={`w-16 h-16 ${EXAM_META[type].color} rounded-[1.5rem] flex items-center justify-center text-white shadow-xl group-hover:scale-110 transition-transform`}>
+                <Trophy size={32} />
+              </div>
+              
+              <div className="space-y-2">
+                <h3 className="text-3xl font-black text-[#060818] dark:text-white group-hover:text-[#F59E0B] transition-colors">
+                  {type}
+                </h3>
+                <p className="text-gray-500 dark:text-gray-400 font-medium leading-relaxed">
+                  {EXAM_META[type].description}
+                </p>
+              </div>
+
+              <div className="flex items-center justify-between pt-6 border-t border-gray-50 dark:border-white/5">
+                <div className="flex items-center gap-4">
+                  <span className="flex items-center gap-1 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                    <Star size={12} className="text-[#F59E0B]" fill="currentColor" />
+                    5 Mocks
+                  </span>
+                </div>
+                <div className="flex items-center gap-2 text-[#F59E0B] font-black text-xs uppercase tracking-widest">
+                  View Series <ChevronRight size={16} />
+                </div>
+              </div>
+            </div>
+          </motion.button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function TestingEngine() {
   const [activeCategory, setActiveCategory] = React.useState<TestType>(null);
   const [testResult, setTestResult] = React.useState<TestResult | null>(null);
@@ -627,6 +957,15 @@ export default function TestingEngine() {
         </button>
         <GKSectionalTest onComplete={handleTestComplete} />
       </div>
+    );
+  }
+
+  if (activeCategory === "mock") {
+    return (
+      <MockSelectionFlow
+        onBack={() => setActiveCategory(null)}
+        onComplete={handleTestComplete}
+      />
     );
   }
 
