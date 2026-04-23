@@ -1,3 +1,4 @@
+import { MockQuestion } from "./constants";
 import { NLAT_MOCK_1 } from "./data/nlat-mock-1";
 import { NLAT_MOCK_2 } from "./data/nlat-mock-2";
 import { NLAT_MOCK_3 } from "./data/nlat-mock-3";

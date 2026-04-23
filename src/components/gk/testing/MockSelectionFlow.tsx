@@ -54,8 +54,9 @@ export default function MockSelectionFlow({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[1, 2, 3, 4, 5].map((num) => {
             const isAvailable =
+              (selectedExam === "NLAT" && num <= 5) ||
               (selectedExam === "CLAT" && (num === 1 || num === 2)) ||
-              (selectedExam !== "CLAT" && num === 1);
+              (selectedExam !== "CLAT" && selectedExam !== "NLAT" && num === 1);
             return (
               <motion.button
                 key={num}
