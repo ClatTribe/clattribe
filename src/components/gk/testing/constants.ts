@@ -134,6 +134,10 @@ export const SAMPLE_CLAT_MOCK_1: MockQuestion[] = [
 ];
 
 import { NLAT_MOCK_1 } from "./data/nlat-mock-1";
+import { NLAT_MOCK_2 } from "./data/nlat-mock-2";
+import { NLAT_MOCK_3 } from "./data/nlat-mock-3";
+import { NLAT_MOCK_4 } from "./data/nlat-mock-4";
+import { NLAT_MOCK_5 } from "./data/nlat-mock-5";
 
 export const MOCK_DATABASE: Record<string, Record<number, MockQuestion[]>> = {
   CLAT: {
@@ -145,6 +149,10 @@ export const MOCK_DATABASE: Record<string, Record<number, MockQuestion[]>> = {
   },
   NLAT: {
     1: NLAT_MOCK_1,
+    2: NLAT_MOCK_2,
+    3: NLAT_MOCK_3,
+    4: NLAT_MOCK_4,
+    5: NLAT_MOCK_5,
   },
   MHCET: {
     1: SAMPLE_CLAT_MOCK_1,

@@ -48,48 +48,72 @@ export default function FullMockRunner({
       className="max-w-3xl mx-auto space-y-8"
     >
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
           <div
-            className={`w-10 h-10 ${EXAM_META[examType].color} rounded-xl flex items-center justify-center text-white`}
+            className={`w-12 h-12 ${EXAM_META[examType].color} rounded-2xl flex items-center justify-center text-white shadow-lg`}
           >
-            <Star size={20} />
+            <Star size={24} />
           </div>
           <div>
-            <h2 className="font-black text-[#060818] dark:text-white">
+            <h2 className="text-xl font-black text-[#060818] dark:text-white">
               {examType} Mock {mockNumber}
             </h2>
-            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-              Question {current + 1} of {questions.length}
-            </p>
+            <div className="flex items-center gap-2">
+              <span className="text-sm font-bold text-[#F59E0B]">
+                Question {current + 1}
+              </span>
+              <span className="text-sm font-medium text-gray-400">
+                of {questions.length}
+              </span>
+            </div>
           </div>
         </div>
-        <div className="flex items-center gap-2 bg-[#F59E0B]/10 text-[#F59E0B] px-4 py-2 rounded-2xl font-black text-sm">
-          <Clock size={16} />
+        <div className="flex items-center gap-3 bg-[#F59E0B]/10 text-[#F59E0B] px-5 py-2.5 rounded-2xl font-black text-lg border border-[#F59E0B]/20">
+          <Clock size={20} />
           {Math.floor(timeLeft / 60)}:
           {(timeLeft % 60).toString().padStart(2, "0")}
         </div>
       </div>
 
-      <div className="space-y-6">
-        {q.section && (
-          <div className="bg-[#060818] text-[#F59E0B] px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] w-fit">
-            {q.section}
-          </div>
-        )}
-        
-        {q.passage && (
-          <div className="bg-white dark:bg-white/5 p-8 rounded-[2.5rem] border border-gray-100 dark:border-white/10 shadow-sm leading-relaxed text-gray-700 dark:text-gray-300 italic text-sm max-h-[300px] overflow-y-auto">
-            {q.passage.split('\n').map((para, i) => (
-              <p key={i} className="mb-4 last:mb-0">{para}</p>
-            ))}
-          </div>
-        )}
+      {/* Progress Bar */}
+      <div className="w-full h-2 bg-gray-100 dark:bg-white/5 rounded-full overflow-hidden">
+        <motion.div 
+          className="h-full bg-[#F59E0B]"
+          initial={{ width: 0 }}
+          animate={{ width: `${((current + 1) / questions.length) * 100}%` }}
+        />
+      </div>
 
-        <div className="bg-white dark:bg-white/5 p-8 rounded-[2.5rem] border border-gray-100 dark:border-white/10 space-y-8">
-          <p className="text-lg font-bold text-[#060818] dark:text-white leading-relaxed">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <div className="space-y-6">
+          {q.section && (
+            <div className="bg-[#060818] text-[#F59E0B] px-6 py-3 rounded-xl text-xs font-black uppercase tracking-[0.2em] w-fit shadow-xl">
+              {q.section}
+            </div>
+          )}
+          
+          {q.passage ? (
+            <div className="bg-white dark:bg-white/5 p-8 rounded-[2.5rem] border border-gray-100 dark:border-white/10 shadow-sm leading-relaxed text-gray-700 dark:text-gray-300 italic text-base max-h-[500px] overflow-y-auto custom-scrollbar">
+              {q.passage.split('\n').map((para, i) => (
+                <p key={i} className="mb-4 last:mb-0">{para}</p>
+              ))}
+            </div>
+          ) : (
+            <div className="bg-gradient-to-br from-[#F59E0B]/5 to-transparent p-12 rounded-[3rem] border border-[#F59E0B]/10 flex flex-col items-center text-center space-y-4">
+               <div className="w-16 h-16 bg-[#F59E0B]/10 rounded-full flex items-center justify-center text-[#F59E0B]">
+                  <BookOpen size={32} />
+               </div>
+               <h3 className="text-lg font-black text-[#060818] dark:text-white">Direct Question</h3>
+               <p className="text-sm text-gray-500 font-medium">This question does not require a passage reference.</p>
+            </div>
+          )}
+        </div>
+
+        <div className="bg-white dark:bg-white/5 p-10 rounded-[3rem] border border-gray-100 dark:border-white/10 space-y-10 shadow-xl">
+          <p className="text-xl font-bold text-[#060818] dark:text-white leading-relaxed">
             {q.question}
           </p>
-          <div className="grid gap-3">
+          <div className="grid gap-4">
             {q.options.map((opt, i) => (
               <button
                 key={i}
@@ -98,14 +122,14 @@ export default function FullMockRunner({
                   newAns[current] = i;
                   setAnswers(newAns);
                 }}
-                className={`w-full text-left p-5 rounded-2xl border-2 transition-all font-bold text-sm flex items-center gap-4 ${
+                className={`w-full text-left p-6 rounded-[1.5rem] border-2 transition-all font-bold text-base flex items-center gap-5 ${
                   answers[current] === i
                     ? "bg-[#F59E0B]/10 border-[#F59E0B] text-[#060818] dark:text-white"
                     : "bg-gray-50 dark:bg-white/5 border-transparent text-gray-500 hover:border-gray-200"
                 }`}
               >
                 <span
-                  className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs ${answers[current] === i ? "bg-[#F59E0B] text-white" : "bg-gray-200 dark:bg-white/10"}`}
+                  className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-black ${answers[current] === i ? "bg-[#F59E0B] text-white" : "bg-gray-200 dark:bg-white/10"}`}
                 >
                   {String.fromCharCode(65 + i)}
                 </span>
