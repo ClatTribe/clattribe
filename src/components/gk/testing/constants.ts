@@ -91,10 +91,13 @@ export const TIME_LIMITS = [
 export type ExamType = "CLAT" | "AILET" | "NLAT" | "MHCET";
 
 export interface MockQuestion {
+  id: string;
   question: string;
   options: [string, string, string, string];
   correct: number;
   explanation: string;
+  passage?: string;
+  section?: string;
 }
 
 export const SAMPLE_CLAT_MOCK_1: MockQuestion[] = [
@@ -130,6 +133,8 @@ export const SAMPLE_CLAT_MOCK_1: MockQuestion[] = [
   },
 ];
 
+import { NLAT_MOCK_1 } from "./data/nlat-mock-1";
+
 export const MOCK_DATABASE: Record<string, Record<number, MockQuestion[]>> = {
   CLAT: {
     1: SAMPLE_CLAT_MOCK_1,
@@ -139,7 +144,7 @@ export const MOCK_DATABASE: Record<string, Record<number, MockQuestion[]>> = {
     1: SAMPLE_CLAT_MOCK_1,
   },
   NLAT: {
-    1: SAMPLE_CLAT_MOCK_1,
+    1: NLAT_MOCK_1,
   },
   MHCET: {
     1: SAMPLE_CLAT_MOCK_1,

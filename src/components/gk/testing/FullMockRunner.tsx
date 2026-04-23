@@ -70,33 +70,49 @@ export default function FullMockRunner({
         </div>
       </div>
 
-      <div className="bg-white dark:bg-white/5 p-8 rounded-[2.5rem] border border-gray-100 dark:border-white/10 space-y-8">
-        <p className="text-lg font-bold text-[#060818] dark:text-white leading-relaxed">
-          {q.question}
-        </p>
-        <div className="grid gap-3">
-          {q.options.map((opt, i) => (
-            <button
-              key={i}
-              onClick={() => {
-                const newAns = [...answers];
-                newAns[current] = i;
-                setAnswers(newAns);
-              }}
-              className={`w-full text-left p-5 rounded-2xl border-2 transition-all font-bold text-sm flex items-center gap-4 ${
-                answers[current] === i
-                  ? "bg-[#F59E0B]/10 border-[#F59E0B] text-[#060818] dark:text-white"
-                  : "bg-gray-50 dark:bg-white/5 border-transparent text-gray-500 hover:border-gray-200"
-              }`}
-            >
-              <span
-                className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs ${answers[current] === i ? "bg-[#F59E0B] text-white" : "bg-gray-200 dark:bg-white/10"}`}
+      <div className="space-y-6">
+        {q.section && (
+          <div className="bg-[#060818] text-[#F59E0B] px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] w-fit">
+            {q.section}
+          </div>
+        )}
+        
+        {q.passage && (
+          <div className="bg-white dark:bg-white/5 p-8 rounded-[2.5rem] border border-gray-100 dark:border-white/10 shadow-sm leading-relaxed text-gray-700 dark:text-gray-300 italic text-sm max-h-[300px] overflow-y-auto">
+            {q.passage.split('\n').map((para, i) => (
+              <p key={i} className="mb-4 last:mb-0">{para}</p>
+            ))}
+          </div>
+        )}
+
+        <div className="bg-white dark:bg-white/5 p-8 rounded-[2.5rem] border border-gray-100 dark:border-white/10 space-y-8">
+          <p className="text-lg font-bold text-[#060818] dark:text-white leading-relaxed">
+            {q.question}
+          </p>
+          <div className="grid gap-3">
+            {q.options.map((opt, i) => (
+              <button
+                key={i}
+                onClick={() => {
+                  const newAns = [...answers];
+                  newAns[current] = i;
+                  setAnswers(newAns);
+                }}
+                className={`w-full text-left p-5 rounded-2xl border-2 transition-all font-bold text-sm flex items-center gap-4 ${
+                  answers[current] === i
+                    ? "bg-[#F59E0B]/10 border-[#F59E0B] text-[#060818] dark:text-white"
+                    : "bg-gray-50 dark:bg-white/5 border-transparent text-gray-500 hover:border-gray-200"
+                }`}
               >
-                {String.fromCharCode(65 + i)}
-              </span>
-              {opt}
-            </button>
-          ))}
+                <span
+                  className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs ${answers[current] === i ? "bg-[#F59E0B] text-white" : "bg-gray-200 dark:bg-white/10"}`}
+                >
+                  {String.fromCharCode(65 + i)}
+                </span>
+                {opt}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
