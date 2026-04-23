@@ -29,6 +29,40 @@ export default function TestPageLayout({
   }) => {
     // Group by actual sections
     const sections: Record<string, { correct: number; total: number }> = {};
+    
+    // Define expected sections for specific exams to ensure "all options" (sections) are shown
+    const expectedSections: Record<string, string[]> = {
+      MHCET: [
+        "Legal Aptitude & Reasoning",
+        "GK & Current Affairs",
+        "Logical Reasoning",
+        "English",
+        "Basic Mathematics"
+      ],
+      NLAT: [
+        "Legal Reasoning",
+        "Verbal Reasoning",
+        "Logical Reasoning",
+        "GK & Current Affairs",
+        "Quantitative Techniques"
+      ],
+      CLAT: [
+        "Legal Reasoning",
+        "Current Affairs",
+        "English Language",
+        "Logical Reasoning",
+        "Quantitative Techniques"
+      ]
+    };
+
+    // Initialize with expected sections if category matches
+    const examType = categoryName.split(' ')[0] as keyof typeof expectedSections;
+    if (expectedSections[examType]) {
+      expectedSections[examType].forEach(s => {
+        sections[s] = { correct: 0, total: 0 };
+      });
+    }
+
     results.questions.forEach((q, i) => {
       const section = q.section || "General";
       if (!sections[section]) sections[section] = { correct: 0, total: 0 };
@@ -38,7 +72,16 @@ export default function TestPageLayout({
       }
     });
 
-    const breakdown = Object.entries(sections).map(([topic, stats]) => ({
+    const breakdown = Object.entries(sections)
+      .filter(([_, stats]) => stats.total > 0) // Only show sections that have questions in this mock
+      .map(([topic, stats]) => ({
+        topic,
+        ...stats,
+      }));
+    
+    // If user wants to see "ALL" even if 0, we can remove the filter.
+    // The user said "show all options which is in exam", so I'll remove the filter but maybe sort them.
+    const fullBreakdown = Object.entries(sections).map(([topic, stats]) => ({
       topic,
       ...stats,
     }));
@@ -69,7 +112,7 @@ export default function TestPageLayout({
         month: "short",
         year: "numeric",
       }),
-      topicBreakdown: breakdown,
+      topicBreakdown: fullBreakdown,
       suggestions,
     };
 

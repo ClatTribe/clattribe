@@ -111,7 +111,7 @@ export default function TestingEngine() {
           Testing Engine
         </h1>
         <p className="text-gray-500 dark:text-gray-400 font-medium">
-          Master the art of CLAT with our comprehensive test series.
+          Master NLAT and MHCET with our comprehensive mock test series.
         </p>
       </div>
 

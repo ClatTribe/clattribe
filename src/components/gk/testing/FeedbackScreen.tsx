@@ -218,8 +218,10 @@ export default function FeedbackScreen({
                     </div>
 
                     {q.passage && (
-                      <div className="p-4 bg-gray-50 dark:bg-white/[0.02] rounded-2xl border-l-4 border-[#F59E0B]/30 italic text-sm text-gray-500 dark:text-gray-400 line-clamp-3 hover:line-clamp-none transition-all cursor-pointer">
-                        {q.passage}
+                      <div className="p-6 bg-gray-50 dark:bg-white/[0.02] rounded-3xl border-l-4 border-[#F59E0B]/30 italic text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                        {q.passage.split('\n').map((para, i) => (
+                          <p key={i} className="mb-2 last:mb-0">{para}</p>
+                        ))}
                       </div>
                     )}
 

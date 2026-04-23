@@ -20,7 +20,7 @@ export const MHCET_MOCK_1: MockQuestion[] = [
   {
     id: "mhcet-1-q2",
     section: "Legal Aptitude & Reasoning",
-    passage: `The principle of Strict Liability...`,
+    passage: `The principle of Strict Liability, as laid down in the historic case of Rylands v. Fletcher (1868), states that if a person brings onto his land and keeps there anything likely to do mischief if it escapes, he must keep it at his peril. If he fails to do so, he is prima facie answerable for all the damage which is the natural consequence of its escape. This liability is independent of any negligence on the part of the defendant. However, the rule is not absolute and is subject to several key exceptions: (1) Act of God (Vis Major), which refers to extraordinary natural events that could not have been foreseen or prevented; (2) Plaintiff's own fault, where the escape is caused by the injured party's actions; (3) Consent of the Plaintiff, often applicable where a service is for the common benefit of both parties; (4) Act of a third party (stranger), where the escape is caused by someone over whom the defendant has no control; and (5) Statutory Authority, where the act is authorized by a specific law passed by the legislature.`,
     question: "Mr. X, a neighbor, sneaks into Aman's factory and accidentally breaks a valve, causing poisonous gas to escape and harm himself. Can Mr. X sue Aman under strict liability?",
     options: [
       "Yes, the gas escaped from Aman's land and caused harm.",
@@ -34,7 +34,7 @@ export const MHCET_MOCK_1: MockQuestion[] = [
   {
     id: "mhcet-1-q3",
     section: "Legal Aptitude & Reasoning",
-    passage: `The principle of Strict Liability...`,
+    passage: `The principle of Strict Liability, as laid down in the historic case of Rylands v. Fletcher (1868), states that if a person brings onto his land and keeps there anything likely to do mischief if it escapes, he must keep it at his peril. If he fails to do so, he is prima facie answerable for all the damage which is the natural consequence of its escape. This liability is independent of any negligence on the part of the defendant. However, the rule is not absolute and is subject to several key exceptions: (1) Act of God (Vis Major), which refers to extraordinary natural events that could not have been foreseen or prevented; (2) Plaintiff's own fault, where the escape is caused by the injured party's actions; (3) Consent of the Plaintiff, often applicable where a service is for the common benefit of both parties; (4) Act of a third party (stranger), where the escape is caused by someone over whom the defendant has no control; and (5) Statutory Authority, where the act is authorized by a specific law passed by the legislature.`,
     question: "Aman stores heavy chemicals on his land. A terrorist (third party) bombs the facility, causing chemicals to spill into Mr. X's well. Is Aman liable under Rylands v. Fletcher?",
     options: [
       "Yes, he is responsible for keeping the chemicals safe from everyone.",
@@ -48,7 +48,7 @@ export const MHCET_MOCK_1: MockQuestion[] = [
   {
     id: "mhcet-1-q4",
     section: "Legal Aptitude & Reasoning",
-    passage: `The principle of Strict Liability...`,
+    passage: `The principle of Strict Liability, as laid down in the historic case of Rylands v. Fletcher (1868), states that if a person brings onto his land and keeps there anything likely to do mischief if it escapes, he must keep it at his peril. If he fails to do so, he is prima facie answerable for all the damage which is the natural consequence of its escape. This liability is independent of any negligence on the part of the defendant. However, the rule is not absolute and is subject to several key exceptions: (1) Act of God (Vis Major), which refers to extraordinary natural events that could not have been foreseen or prevented; (2) Plaintiff's own fault, where the escape is caused by the injured party's actions; (3) Consent of the Plaintiff, often applicable where a service is for the common benefit of both parties; (4) Act of a third party (stranger), where the escape is caused by someone over whom the defendant has no control; and (5) Statutory Authority, where the act is authorized by a specific law passed by the legislature.`,
     question: "The Government builds a large dam under a specific legislative act. The dam leaks due to a minor defect and floods local houses. Is the government liable under strict liability?",
     options: [
       "Yes, the rule applies to the government just like individuals.",
@@ -78,7 +78,7 @@ export const MHCET_MOCK_1: MockQuestion[] = [
   {
     id: "mhcet-1-q6",
     section: "Legal Aptitude & Reasoning",
-    passage: `Every person has a right to defend...`,
+    passage: `Every person has a right to defend his own body, and the body of any other person, against any offence affecting the human body. However, this right is subject to certain restrictions: (1) The right of private defence is not available if there is time to have recourse to the protection of public authorities (like the police); (2) The force used must be proportionate to the threat; (3) The right starts as soon as a reasonable apprehension of danger arises and continues as long as such apprehension exists; and (4) The right does not extend to the inflicting of more harm than it is necessary to inflict for the purpose of defence. The right of private defence of the body extends to the causing of death if the offence which occasions the exercise of the right is an assault as may reasonably cause the apprehension that death or grievous hurt will otherwise be the consequence.`,
     question: "Aman catches a thief running away with his bag. After the thief has dropped the bag and surrendered, Aman continues to beat him with a stick. Is this protected by private defence?",
     options: [
       "Yes, because the thief committed a crime.",
@@ -92,7 +92,7 @@ export const MHCET_MOCK_1: MockQuestion[] = [
   {
     id: "mhcet-1-q7",
     section: "Legal Aptitude & Reasoning",
-    passage: `Every person has a right to defend...`,
+    passage: `Every person has a right to defend his own body, and the body of any other person, against any offence affecting the human body. However, this right is subject to certain restrictions: (1) The right of private defence is not available if there is time to have recourse to the protection of public authorities (like the police); (2) The force used must be proportionate to the threat; (3) The right starts as soon as a reasonable apprehension of danger arises and continues as long as such apprehension exists; and (4) The right does not extend to the inflicting of more harm than it is necessary to inflict for the purpose of defence. The right of private defence of the body extends to the causing of death if the offence which occasions the exercise of the right is an assault as may reasonably cause the apprehension that death or grievous hurt will otherwise be the consequence.`,
     question: "Aman is attacked by a group of people with knives. In the struggle, Aman grabs a knife and kills one of the attackers. Is he liable for murder?",
     options: [
       "Yes, killing a person is always murder.",
@@ -106,7 +106,7 @@ export const MHCET_MOCK_1: MockQuestion[] = [
   {
     id: "mhcet-1-q8",
     section: "Legal Aptitude & Reasoning",
-    passage: `Every person has a right to defend...`,
+    passage: `Every person has a right to defend his own body, and the body of any other person, against any offence affecting the human body. However, this right is subject to certain restrictions: (1) The right of private defence is not available if there is time to have recourse to the protection of public authorities (like the police); (2) The force used must be proportionate to the threat; (3) The right starts as soon as a reasonable apprehension of danger arises and continues as long as such apprehension exists; and (4) The right does not extend to the inflicting of more harm than it is necessary to inflict for the purpose of defence. The right of private defence of the body extends to the causing of death if the offence which occasions the exercise of the right is an assault as may reasonably cause the apprehension that death or grievous hurt will otherwise be the consequence.`,
     question: "Aman hits Mr. X after Mr. X verbally abuses his family. Can Aman use the defense of private defence?",
     options: [
       "Yes, verbal abuse is an attack on family honor.",
@@ -136,7 +136,7 @@ export const MHCET_MOCK_1: MockQuestion[] = [
   {
     id: "mhcet-1-q10",
     section: "Legal Aptitude & Reasoning",
-    passage: `Consent is said to be 'free'...`,
+    passage: `Consent is said to be 'free' when it is not caused by: (1) Coercion, (2) Undue Influence, (3) Fraud, (4) Misrepresentation, or (5) Mistake. 'Coercion' is the committing, or threatening to commit, any act forbidden by the Indian Penal Code, or the unlawful detaining of any property, with the intention of causing any person to enter into an agreement. An agreement reached through coercion is 'voidable' at the option of the party whose consent was so caused. This means the injured party can choose to either continue with the contract or cancel it. If they cancel it, they must return any benefit received. 'Undue Influence' occurs where one party is in a position to dominate the will of the other and uses that position to obtain an unfair advantage (e.g., a doctor and a patient).`,
     question: "Aman, an elderly man's caregiver, convinces the man to leave all his property to Aman by telling him that his children have abandoned him (which was false). This is an example of:",
     options: [
       "Coercion",
@@ -150,7 +150,7 @@ export const MHCET_MOCK_1: MockQuestion[] = [
   {
     id: "mhcet-1-q11",
     section: "Legal Aptitude & Reasoning",
-    passage: `Consent is said to be 'free'...`,
+    passage: `Consent is said to be 'free' when it is not caused by: (1) Coercion, (2) Undue Influence, (3) Fraud, (4) Misrepresentation, or (5) Mistake. 'Coercion' is the committing, or threatening to commit, any act forbidden by the Indian Penal Code, or the unlawful detaining of any property, with the intention of causing any person to enter into an agreement. An agreement reached through coercion is 'voidable' at the option of the party whose consent was so caused. This means the injured party can choose to either continue with the contract or cancel it. If they cancel it, they must return any benefit received. 'Undue Influence' occurs where one party is in a position to dominate the will of the other and uses that position to obtain an unfair advantage (e.g., a doctor and a patient).`,
     question: "What happens if a party decides to 'void' (cancel) a contract that was entered into through coercion?",
     options: [
       "They can keep all the money and the property.",
@@ -164,7 +164,7 @@ export const MHCET_MOCK_1: MockQuestion[] = [
   {
     id: "mhcet-1-q12",
     section: "Legal Aptitude & Reasoning",
-    passage: `Consent is said to be 'free'...`,
+    passage: `Consent is said to be 'free' when it is not caused by: (1) Coercion, (2) Undue Influence, (3) Fraud, (4) Misrepresentation, or (5) Mistake. 'Coercion' is the committing, or threatening to commit, any act forbidden by the Indian Penal Code, or the unlawful detaining of any property, with the intention of causing any person to enter into an agreement. An agreement reached through coercion is 'voidable' at the option of the party whose consent was so caused. This means the injured party can choose to either continue with the contract or cancel it. If they cancel it, they must return any benefit received. 'Undue Influence' occurs where one party is in a position to dominate the will of the other and uses that position to obtain an unfair advantage (e.g., a doctor and a patient).`,
     question: "Aman threatens to commit suicide unless his wife signs a property document. The wife signs. Is this considered 'coercion' under Indian law?",
     options: [
       "No, suicide is a personal choice, not an act against another.",
@@ -194,7 +194,7 @@ export const MHCET_MOCK_1: MockQuestion[] = [
   {
     id: "mhcet-1-q14",
     section: "Legal Aptitude & Reasoning",
-    passage: `Article 14 of the Indian Constitution...`,
+    passage: `Article 14 of the Indian Constitution guarantees equality before the law and equal protection of the laws within the territory of India. However, 'equality' does not mean that every single law must apply to every single person in the same way. The State can make 'reasonable classifications' based on an 'intelligible differentia'—meaning there must be a clear and logical reason for separating people into groups. Furthermore, the classification must have a 'rational nexus' with the objective the law seeks to achieve. For example, the State can have different tax slabs for people with different income levels. Article 15 prohibits discrimination on grounds only of religion, race, caste, sex, or place of birth. However, Article 15(3) allows the State to make 'special provisions' for women and children (protective discrimination).`,
     question: "The Government reserves seats for women in local panchayat elections. A man argues this is discrimination based on 'sex' and violates Article 15. Is he correct?",
     options: [
       "Yes, Article 15 strictly prohibits discrimination based on sex.",
@@ -208,7 +208,7 @@ export const MHCET_MOCK_1: MockQuestion[] = [
   {
     id: "mhcet-1-q15",
     section: "Legal Aptitude & Reasoning",
-    passage: `Article 14 of the Indian Constitution...`,
+    passage: `Article 14 of the Indian Constitution guarantees equality before the law and equal protection of the laws within the territory of India. However, 'equality' does not mean that every single law must apply to every single person in the same way. The State can make 'reasonable classifications' based on an 'intelligible differentia'—meaning there must be a clear and logical reason for separating people into groups. Furthermore, the classification must have a 'rational nexus' with the objective the law seeks to achieve. For example, the State can have different tax slabs for people with different income levels. Article 15 prohibits discrimination on grounds only of religion, race, caste, sex, or place of birth. However, Article 15(3) allows the State to make 'special provisions' for women and children (protective discrimination).`,
     question: "What is the meaning of 'Intelligible Differentia'?",
     options: [
       "A difference that is impossible to understand.",
@@ -222,7 +222,7 @@ export const MHCET_MOCK_1: MockQuestion[] = [
   {
     id: "mhcet-1-q16",
     section: "Legal Aptitude & Reasoning",
-    passage: `Article 14 of the Indian Constitution...`,
+    passage: `Article 14 of the Indian Constitution guarantees equality before the law and equal protection of the laws within the territory of India. However, 'equality' does not mean that every single law must apply to every single person in the same way. The State can make 'reasonable classifications' based on an 'intelligible differentia'—meaning there must be a clear and logical reason for separating people into groups. Furthermore, the classification must have a 'rational nexus' with the objective the law seeks to achieve. For example, the State can have different tax slabs for people with different income levels. Article 15 prohibits discrimination on grounds only of religion, race, caste, sex, or place of birth. However, Article 15(3) allows the State to make 'special provisions' for women and children (protective discrimination).`,
     question: "If a law treats people differently but has NO 'rational nexus' to its goal, what will happen to that law?",
     options: [
       "It will remain valid.",
@@ -252,7 +252,7 @@ export const MHCET_MOCK_1: MockQuestion[] = [
   {
     id: "mhcet-1-q18",
     section: "Legal Aptitude & Reasoning",
-    passage: `Negligence is the breach...`,
+    passage: `Negligence is the breach of a 'duty of care' which results in damage to the plaintiff. To succeed in an action for negligence, the plaintiff must prove: (1) The defendant owed them a duty of care; (2) The defendant breached that duty; and (3) The breach caused actual damage. A 'duty of care' is owed to anyone whom the defendant could reasonably foresee might be injured by their actions (the 'neighbor principle' from Donoghue v. Stevenson). The standard of care is that of a 'reasonable person'. However, there is a defense called 'Contributory Negligence'—if the plaintiff themselves were partially responsible for the accident, the compensation they receive may be reduced or denied. Another concept is 'Res Ipsa Loquitur' (the thing speaks for itself), where negligence is inferred from the nature of the accident itself without direct proof.`,
     question: "Aman is driving a car at night without headlights. He hits Mr. X, who was crossing the road while looking at his phone and not at the crosswalk. What is the most likely legal defense for Aman?",
     options: [
       "Act of God",
@@ -266,7 +266,7 @@ export const MHCET_MOCK_1: MockQuestion[] = [
   {
     id: "mhcet-1-q19",
     section: "Legal Aptitude & Reasoning",
-    passage: `Negligence is the breach...`,
+    passage: `Negligence is the breach of a 'duty of care' which results in damage to the plaintiff. To succeed in an action for negligence, the plaintiff must prove: (1) The defendant owed them a duty of care; (2) The defendant breached that duty; and (3) The breach caused actual damage. A 'duty of care' is owed to anyone whom the defendant could reasonably foresee might be injured by their actions (the 'neighbor principle' from Donoghue v. Stevenson). The standard of care is that of a 'reasonable person'. However, there is a defense called 'Contributory Negligence'—if the plaintiff themselves were partially responsible for the accident, the compensation they receive may be reduced or denied. Another concept is 'Res Ipsa Loquitur' (the thing speaks for itself), where negligence is inferred from the nature of the accident itself without direct proof.`,
     question: "Who is a 'neighbor' in the context of the duty of care established in Donoghue v. Stevenson?",
     options: [
       "Only the person living in the house next door.",
@@ -280,7 +280,7 @@ export const MHCET_MOCK_1: MockQuestion[] = [
   {
     id: "mhcet-1-q20",
     section: "Legal Aptitude & Reasoning",
-    passage: `Negligence is the breach...`,
+    passage: `Negligence is the breach of a 'duty of care' which results in damage to the plaintiff. To succeed in an action for negligence, the plaintiff must prove: (1) The defendant owed them a duty of care; (2) The defendant breached that duty; and (3) The breach caused actual damage. A 'duty of care' is owed to anyone whom the defendant could reasonably foresee might be injured by their actions (the 'neighbor principle' from Donoghue v. Stevenson). The standard of care is that of a 'reasonable person'. However, there is a defense called 'Contributory Negligence'—if the plaintiff themselves were partially responsible for the accident, the compensation they receive may be reduced or denied. Another concept is 'Res Ipsa Loquitur' (the thing speaks for itself), where negligence is inferred from the nature of the accident itself without direct proof.`,
     question: "A doctor forgets a surgical sponge inside a patient's abdomen during surgery. This is a clear case of:",
     options: [
       "Medical Innovation",
@@ -310,7 +310,7 @@ export const MHCET_MOCK_1: MockQuestion[] = [
   {
     id: "mhcet-1-q22",
     section: "Legal Aptitude & Reasoning",
-    passage: `Under the Consumer Protection Act, 2019...`,
+    passage: `Under the Consumer Protection Act, 2019, every consumer has certain fundamental rights: (1) Right to Safety: Protection against goods and services which are hazardous to life and property; (2) Right to be Informed: To know the quality, quantity, potency, purity, standard, and price of goods; (3) Right to Choose: To have access to a variety of goods and services at competitive prices; (4) Right to be Heard: To have consumer interests considered at appropriate forums; (5) Right to seek Redressal: To seek compensation against unfair trade practices or unscrupulous exploitation; and (6) Right to Consumer Education. Consumers can file complaints against 'deficiency in service' (for services like banking, insurance, transport) or 'defect in goods' (for products).`,
     question: "Aman orders a laptop online. The website shows 'No returns allowed under any circumstances'. Is this legal?",
     options: [
       "Yes, companies can make their own rules.",
@@ -324,7 +324,7 @@ export const MHCET_MOCK_1: MockQuestion[] = [
   {
     id: "mhcet-1-q23",
     section: "Legal Aptitude & Reasoning",
-    passage: `Under the Consumer Protection Act, 2019...`,
+    passage: `Under the Consumer Protection Act, 2019, every consumer has certain fundamental rights: (1) Right to Safety: Protection against goods and services which are hazardous to life and property; (2) Right to be Informed: To know the quality, quantity, potency, purity, standard, and price of goods; (3) Right to Choose: To have access to a variety of goods and services at competitive prices; (4) Right to be Heard: To have consumer interests considered at appropriate forums; (5) Right to seek Redressal: To seek compensation against unfair trade practices or unscrupulous exploitation; and (6) Right to Consumer Education. Consumers can file complaints against 'deficiency in service' (for services like banking, insurance, transport) or 'defect in goods' (for products).`,
     question: "Aman goes to a hospital for a check-up. The hospital refuses to give him his medical reports. Which right is he most likely to claim?",
     options: [
       "Right to Choose",
@@ -338,7 +338,7 @@ export const MHCET_MOCK_1: MockQuestion[] = [
   {
     id: "mhcet-1-q24",
     section: "Legal Aptitude & Reasoning",
-    passage: `Under the Consumer Protection Act, 2019...`,
+    passage: `Under the Consumer Protection Act, 2019, every consumer has certain fundamental rights: (1) Right to Safety: Protection against goods and services which are hazardous to life and property; (2) Right to be Informed: To know the quality, quantity, potency, purity, standard, and price of goods; (3) Right to Choose: To have access to a variety of goods and services at competitive prices; (4) Right to be Heard: To have consumer interests considered at appropriate forums; (5) Right to seek Redressal: To seek compensation against unfair trade practices or unscrupulous exploitation; and (6) Right to Consumer Education. Consumers can file complaints against 'deficiency in service' (for services like banking, insurance, transport) or 'defect in goods' (for products).`,
     question: "What is the primary objective of the 'Consumer Protection Act'?",
     options: [
       "To help companies make more profit.",

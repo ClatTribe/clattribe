@@ -20,7 +20,7 @@ export const MHCET_MOCK_3: MockQuestion[] = [
   {
     id: "mhcet-3-q2",
     section: "Legal Aptitude & Reasoning",
-    passage: `Principles of Natural Justice...`,
+    passage: `Principles of Natural Justice (PNJ) are the fundamental rules for fair decision-making by any authority (judicial or administrative). There are two main principles: (1) Nemo judex in causa sua: 'No one should be a judge in their own cause'. This means the deciding authority must be impartial and free from bias (Personal, Pecuniary, or Subject-matter bias). (2) Audi alteram partem: 'Hear the other side'. No person should be condemned unheard. This includes the right to receive a notice of the charges, the right to present a defense, and usually, the right to a 'reasoned order' (speaking order). A decision taken in violation of PNJ is void. However, PNJ can be excluded in cases of extreme urgency (e.g., immediate public safety) or by specific statutory provisions.`,
     question: "A student is expelled from college for cheating without being given a chance to explain. This violates:",
     options: [
       "Nemo judex in causa sua",
@@ -34,7 +34,7 @@ export const MHCET_MOCK_3: MockQuestion[] = [
   {
     id: "mhcet-3-q3",
     section: "Legal Aptitude & Reasoning",
-    passage: `Principles of Natural Justice...`,
+    passage: `Principles of Natural Justice (PNJ) are the fundamental rules for fair decision-making by any authority (judicial or administrative). There are two main principles: (1) Nemo judex in causa sua: 'No one should be a judge in their own cause'. This means the deciding authority must be impartial and free from bias (Personal, Pecuniary, or Subject-matter bias). (2) Audi alteram partem: 'Hear the other side'. No person should be condemned unheard. This includes the right to receive a notice of the charges, the right to present a defense, and usually, the right to a 'reasoned order' (speaking order). A decision taken in violation of PNJ is void. However, PNJ can be excluded in cases of extreme urgency (e.g., immediate public safety) or by specific statutory provisions.`,
     question: "A judge has a small financial investment in a company that is a party to the case he is hearing. This is:",
     options: ["Personal Bias", "Pecuniary Bias", "Subject-matter Bias", "Allowed in small amounts"],
     correct: 1,
@@ -43,7 +43,7 @@ export const MHCET_MOCK_3: MockQuestion[] = [
   {
     id: "mhcet-3-q4",
     section: "Legal Aptitude & Reasoning",
-    passage: `Principles of Natural Justice...`,
+    passage: `Principles of Natural Justice (PNJ) are the fundamental rules for fair decision-making by any authority (judicial or administrative). There are two main principles: (1) Nemo judex in causa sua: 'No one should be a judge in their own cause'. This means the deciding authority must be impartial and free from bias (Personal, Pecuniary, or Subject-matter bias). (2) Audi alteram partem: 'Hear the other side'. No person should be condemned unheard. This includes the right to receive a notice of the charges, the right to present a defense, and usually, the right to a 'reasoned order' (speaking order). A decision taken in violation of PNJ is void. However, PNJ can be excluded in cases of extreme urgency (e.g., immediate public safety) or by specific statutory provisions.`,
     question: "When can 'Audi alteram partem' be legally excluded?",
     options: [
       "When the judge is tired.",

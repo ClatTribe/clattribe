@@ -20,7 +20,7 @@ export const MHCET_MOCK_4: MockQuestion[] = [
   {
     id: "mhcet-4-q2",
     section: "Legal Aptitude & Reasoning",
-    passage: `In Torts, several defenses...`,
+    passage: `In Torts, several defenses can be used to avoid liability: (1) Volenti non fit injuria: 'To a willing person, no injury is done'. If a person consents to a risk (e.g., watching a cricket match where a ball might hit you), they cannot sue. However, consent must be free and with full knowledge. (2) Vis Major (Act of God): Extraordinary natural events that cannot be foreseen (e.g., a freak earthquake). (3) Inevitable Accident: An accident that could not have been avoided by the exercise of ordinary care and skill (different from Act of God as it can be human-related). (4) Necessity: An act done to prevent a greater harm (e.g., breaking into a house to save someone from a fire). (5) Private Defence: Reasonable force used to protect oneself or property.`,
     question: "To save a whole forest from catching fire, Aman burns down Mr. X's small hut which was in the path of the fire. Mr. X sues. Aman's best defense is:",
     options: [
       "Volenti non fit injuria",
@@ -34,7 +34,7 @@ export const MHCET_MOCK_4: MockQuestion[] = [
   {
     id: "mhcet-4-q3",
     section: "Legal Aptitude & Reasoning",
-    passage: `In Torts, several defenses...`,
+    passage: `In Torts, several defenses can be used to avoid liability: (1) Volenti non fit injuria: 'To a willing person, no injury is done'. If a person consents to a risk (e.g., watching a cricket match where a ball might hit you), they cannot sue. However, consent must be free and with full knowledge. (2) Vis Major (Act of God): Extraordinary natural events that cannot be foreseen (e.g., a freak earthquake). (3) Inevitable Accident: An accident that could not have been avoided by the exercise of ordinary care and skill (different from Act of God as it can be human-related). (4) Necessity: An act done to prevent a greater harm (e.g., breaking into a house to save someone from a fire). (5) Private Defence: Reasonable force used to protect oneself or property.`,
     question: "Aman is driving carefully at 30 km/h. Suddenly, his car's tire bursts due to a hidden manufacturing defect that no one could have seen. He hits a lamp post. This is an example of:",
     options: [
       "Act of God",
@@ -48,7 +48,7 @@ export const MHCET_MOCK_4: MockQuestion[] = [
   {
     id: "mhcet-4-q4",
     section: "Legal Aptitude & Reasoning",
-    passage: `In Torts, several defenses...`,
+    passage: `In Torts, several defenses can be used to avoid liability: (1) Volenti non fit injuria: 'To a willing person, no injury is done'. If a person consents to a risk (e.g., watching a cricket match where a ball might hit you), they cannot sue. However, consent must be free and with full knowledge. (2) Vis Major (Act of God): Extraordinary natural events that cannot be foreseen (e.g., a freak earthquake). (3) Inevitable Accident: An accident that could not have been avoided by the exercise of ordinary care and skill (different from Act of God as it can be human-related). (4) Necessity: An act done to prevent a greater harm (e.g., breaking into a house to save someone from a fire). (5) Private Defence: Reasonable force used to protect oneself or property.`,
     question: "Mr. X attacks Aman with a knife. Aman grabs a heavy bag and swings it at Mr. X, breaking Mr. X's arm. Mr. X sues for battery. Aman's defense is:",
     options: [
       "Private Defence",

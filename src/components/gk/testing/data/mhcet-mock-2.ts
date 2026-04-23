@@ -20,7 +20,7 @@ export const MHCET_MOCK_2: MockQuestion[] = [
   {
     id: "mhcet-2-q2",
     section: "Legal Aptitude & Reasoning",
-    passage: `Article 32 of the Indian Constitution...`,
+    passage: `Article 32 of the Indian Constitution, described by Dr. B.R. Ambedkar as the 'heart and soul' of the Constitution, provides the right to move the Supreme Court for the enforcement of Fundamental Rights. Under this Article (and Article 226 for High Courts), the courts can issue five types of writs: (1) Habeas Corpus: Literally 'to have the body', used to release a person who has been unlawfully detained; (2) Mandamus: Literally 'we command', used to order a public official or authority to perform their legal duty; (3) Quo Warranto: Literally 'by what authority', used to challenge a person's right to hold a public office; (4) Prohibition: Issued by a higher court to a lower court to stop it from exceeding its jurisdiction; and (5) Certiorari: Issued to quash an order already passed by a lower court or quasi-judicial body due to lack of jurisdiction or error of law.`,
     question: "A government department refuses to issue a license to Aman even though he has fulfilled all legal requirements. Aman wants the court to order the department to issue the license. Which writ is appropriate?",
     options: [
       "Prohibition",
@@ -34,7 +34,7 @@ export const MHCET_MOCK_2: MockQuestion[] = [
   {
     id: "mhcet-2-q3",
     section: "Legal Aptitude & Reasoning",
-    passage: `Article 32 of the Indian Constitution...`,
+    passage: `Article 32 of the Indian Constitution, described by Dr. B.R. Ambedkar as the 'heart and soul' of the Constitution, provides the right to move the Supreme Court for the enforcement of Fundamental Rights. Under this Article (and Article 226 for High Courts), the courts can issue five types of writs: (1) Habeas Corpus: Literally 'to have the body', used to release a person who has been unlawfully detained; (2) Mandamus: Literally 'we command', used to order a public official or authority to perform their legal duty; (3) Quo Warranto: Literally 'by what authority', used to challenge a person's right to hold a public office; (4) Prohibition: Issued by a higher court to a lower court to stop it from exceeding its jurisdiction; and (5) Certiorari: Issued to quash an order already passed by a lower court or quasi-judicial body due to lack of jurisdiction or error of law.`,
     question: "A person who is not qualified for the post of a University Vice-Chancellor is appointed to that position. A citizen wants to challenge this appointment. Which writ can be used?",
     options: [
       "Quo Warranto",
@@ -48,7 +48,7 @@ export const MHCET_MOCK_2: MockQuestion[] = [
   {
     id: "mhcet-2-q4",
     section: "Legal Aptitude & Reasoning",
-    passage: `Article 32 of the Indian Constitution...`,
+    passage: `Article 32 of the Indian Constitution, described by Dr. B.R. Ambedkar as the 'heart and soul' of the Constitution, provides the right to move the Supreme Court for the enforcement of Fundamental Rights. Under this Article (and Article 226 for High Courts), the courts can issue five types of writs: (1) Habeas Corpus: Literally 'to have the body', used to release a person who has been unlawfully detained; (2) Mandamus: Literally 'we command', used to order a public official or authority to perform their legal duty; (3) Quo Warranto: Literally 'by what authority', used to challenge a person's right to hold a public office; (4) Prohibition: Issued by a higher court to a lower court to stop it from exceeding its jurisdiction; and (5) Certiorari: Issued to quash an order already passed by a lower court or quasi-judicial body due to lack of jurisdiction or error of law.`,
     question: "What is the difference between Prohibition and Certiorari?",
     options: [
       "Prohibition is for private individuals, Certiorari is for the State.",
@@ -78,7 +78,7 @@ export const MHCET_MOCK_2: MockQuestion[] = [
   {
     id: "mhcet-2-q6",
     section: "Legal Aptitude & Reasoning",
-    passage: `Vicarious liability...`,
+    passage: `Vicarious liability is the legal responsibility of one person for the torts committed by another. The most common form is the liability of an Employer (Master) for the acts of an Employee (Servant). For such liability to arise, the act must be committed in the 'course of employment'. An act is in the course of employment if it is: (i) authorized by the employer, or (ii) a wrongful and unauthorized mode of doing some act authorized by the employer. However, if the employee is on a 'frolic of his own'—doing something entirely for his own purpose, unrelated to his work—the employer is not liable. Another rule is 'Qui facit per alium facit per se' (he who acts through another acts himself). Furthermore, the State is generally vicariously liable for the torts of its servants, except when they are exercising 'Sovereign Functions' (like maintaining law and order or defense).`,
     question: "A police officer, while chasing a criminal, accidentally breaks the window of a shop. Can the shop owner sue the State for damages?",
     options: [
       "Yes, the State is always liable for its employees.",
@@ -92,7 +92,7 @@ export const MHCET_MOCK_2: MockQuestion[] = [
   {
     id: "mhcet-2-q7",
     section: "Legal Aptitude & Reasoning",
-    passage: `Vicarious liability...`,
+    passage: `Vicarious liability is the legal responsibility of one person for the torts committed by another. The most common form is the liability of an Employer (Master) for the acts of an Employee (Servant). For such liability to arise, the act must be committed in the 'course of employment'. An act is in the course of employment if it is: (i) authorized by the employer, or (ii) a wrongful and unauthorized mode of doing some act authorized by the employer. However, if the employee is on a 'frolic of his own'—doing something entirely for his own purpose, unrelated to his work—the employer is not liable. Another rule is 'Qui facit per alium facit per se' (he who acts through another acts himself). Furthermore, the State is generally vicariously liable for the torts of its servants, except when they are exercising 'Sovereign Functions' (like maintaining law and order or defense).`,
     question: "What does 'Qui facit per alium facit per se' mean?",
     options: [
       "The king can do no wrong.",
@@ -106,7 +106,7 @@ export const MHCET_MOCK_2: MockQuestion[] = [
   {
     id: "mhcet-2-q8",
     section: "Legal Aptitude & Reasoning",
-    passage: `Vicarious liability...`,
+    passage: `Vicarious liability is the legal responsibility of one person for the torts committed by another. The most common form is the liability of an Employer (Master) for the acts of an Employee (Servant). For such liability to arise, the act must be committed in the 'course of employment'. An act is in the course of employment if it is: (i) authorized by the employer, or (ii) a wrongful and unauthorized mode of doing some act authorized by the employer. However, if the employee is on a 'frolic of his own'—doing something entirely for his own purpose, unrelated to his work—the employer is not liable. Another rule is 'Qui facit per alium facit per se' (he who acts through another acts himself). Furthermore, the State is generally vicariously liable for the torts of its servants, except when they are exercising 'Sovereign Functions' (like maintaining law and order or defense).`,
     question: "A delivery boy, after finishing his last delivery, goes 20 km away from his route to meet his girlfriend. On the way, he hits a pedestrian. Is the employer liable?",
     options: [
       "Yes, he was still wearing the company uniform.",
@@ -136,7 +136,7 @@ export const MHCET_MOCK_2: MockQuestion[] = [
   {
     id: "mhcet-2-q10",
     section: "Legal Aptitude & Reasoning",
-    passage: `Under Section 2(d) of the Indian Contract Act...`,
+    passage: `Under Section 2(d) of the Indian Contract Act, 'Consideration' is defined as when, at the desire of the promisor, the promisee or any other person has done or abstained from doing something. A contract without consideration is 'void' (Nudum Pactum). Key rules: (1) Consideration must move at the 'desire of the promisor'; (2) It may move from the 'promisee or any other person' (Privity of Consideration is not required in India); (3) It may be past, present, or future; (4) It need not be 'adequate' (e.g., a house can be sold for ₹1 if both agree), but it must be 'real' and have some value in the eyes of law. There are exceptions to the rule 'No Consideration, No Contract' (Section 25): (a) Agreements made out of natural love and affection between near relatives (if written and registered); (b) Compensation for past voluntary services; and (c) Promise to pay a time-barred debt.`,
     question: "Aman's father promises to give him ₹10 lakhs out of love and affection. They write it down on a plain paper and sign it. Is this a binding contract?",
     options: [
       "Yes, love is a great consideration.",
@@ -150,7 +150,7 @@ export const MHCET_MOCK_2: MockQuestion[] = [
   {
     id: "mhcet-2-q11",
     section: "Legal Aptitude & Reasoning",
-    passage: `Under Section 2(d) of the Indian Contract Act...`,
+    passage: `Under Section 2(d) of the Indian Contract Act, 'Consideration' is defined as when, at the desire of the promisor, the promisee or any other person has done or abstained from doing something. A contract without consideration is 'void' (Nudum Pactum). Key rules: (1) Consideration must move at the 'desire of the promisor'; (2) It may move from the 'promisee or any other person' (Privity of Consideration is not required in India); (3) It may be past, present, or future; (4) It need not be 'adequate' (e.g., a house can be sold for ₹1 if both agree), but it must be 'real' and have some value in the eyes of law. There are exceptions to the rule 'No Consideration, No Contract' (Section 25): (a) Agreements made out of natural love and affection between near relatives (if written and registered); (b) Compensation for past voluntary services; and (c) Promise to pay a time-barred debt.`,
     question: "In India, can a person who is not a party to the contract (a third party) provide the consideration for a contract?",
     options: [
       "No, only the parties to the contract can provide consideration.",
@@ -164,7 +164,7 @@ export const MHCET_MOCK_2: MockQuestion[] = [
   {
     id: "mhcet-2-q12",
     section: "Legal Aptitude & Reasoning",
-    passage: `Under Section 2(d) of the Indian Contract Act...`,
+    passage: `Under Section 2(d) of the Indian Contract Act, 'Consideration' is defined as when, at the desire of the promisor, the promisee or any other person has done or abstained from doing something. A contract without consideration is 'void' (Nudum Pactum). Key rules: (1) Consideration must move at the 'desire of the promisor'; (2) It may move from the 'promisee or any other person' (Privity of Consideration is not required in India); (3) It may be past, present, or future; (4) It need not be 'adequate' (e.g., a house can be sold for ₹1 if both agree), but it must be 'real' and have some value in the eyes of law. There are exceptions to the rule 'No Consideration, No Contract' (Section 25): (a) Agreements made out of natural love and affection between near relatives (if written and registered); (b) Compensation for past voluntary services; and (c) Promise to pay a time-barred debt.`,
     question: "Aman agrees to sell his ₹1 crore car to Mr. X for ₹10,000. Later, Aman tries to cancel the deal saying the price was too low (inadequate consideration). Will he succeed?",
     options: [
       "Yes, the law requires the price to be fair.",

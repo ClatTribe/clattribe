@@ -20,7 +20,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q2",
     section: "Legal Reasoning",
-    passage: `The principle of 'Strict Liability'...`,
+    passage: `The principle of 'Strict Liability' was established in the English case of Rylands v. Fletcher (1868). It holds that if a person brings onto their land something that is likely to cause mischief if it escapes, they are prima facie liable for all the damage which is the natural consequence of its escape, even if they were not negligent. However, this rule is subject to several exceptions: (1) Act of God (Vis Major); (2) Plaintiff's own fault; (3) Consent of the Plaintiff (Volenti non fit injuria); (4) Act of a third party (stranger); and (5) Statutory Authority. In contrast, the Supreme Court of India, in the case of M.C. Mehta v. Union of India (1987) – also known as the Oleum Gas Leak case – evolved the principle of 'Absolute Liability'. This principle applies to enterprises engaged in hazardous or inherently dangerous activities. Unlike strict liability, absolute liability has NO exceptions. The enterprise is liable even if the escape was caused by an act of God or a third party. The Court reasoned that an enterprise carrying out such dangerous activities for profit must bear the cost of any harm caused, and that the compensation should be proportional to the size and financial capacity of the enterprise to act as a deterrent.`,
     question: "Aman keeps a pet python in a secure glass cage. A burglar breaks into Aman's house and smashes the cage. The python escapes and bites the neighbor. Is Aman liable under the rule in Rylands v. Fletcher?",
     options: [
       "Yes, he brought the dangerous animal onto his land.",
@@ -34,7 +34,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q3",
     section: "Legal Reasoning",
-    passage: `The principle of 'Strict Liability'...`,
+    passage: `The principle of 'Strict Liability' was established in the English case of Rylands v. Fletcher (1868). It holds that if a person brings onto their land something that is likely to cause mischief if it escapes, they are prima facie liable for all the damage which is the natural consequence of its escape, even if they were not negligent. However, this rule is subject to several exceptions: (1) Act of God (Vis Major); (2) Plaintiff's own fault; (3) Consent of the Plaintiff (Volenti non fit injuria); (4) Act of a third party (stranger); and (5) Statutory Authority. In contrast, the Supreme Court of India, in the case of M.C. Mehta v. Union of India (1987) – also known as the Oleum Gas Leak case – evolved the principle of 'Absolute Liability'. This principle applies to enterprises engaged in hazardous or inherently dangerous activities. Unlike strict liability, absolute liability has NO exceptions. The enterprise is liable even if the escape was caused by an act of God or a third party. The Court reasoned that an enterprise carrying out such dangerous activities for profit must bear the cost of any harm caused, and that the compensation should be proportional to the size and financial capacity of the enterprise to act as a deterrent.`,
     question: "The main difference between Strict Liability and Absolute Liability is:",
     options: [
       "Strict liability requires proof of negligence, while absolute liability does not.",
@@ -48,7 +48,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q4",
     section: "Legal Reasoning",
-    passage: `The principle of 'Strict Liability'...`,
+    passage: `The principle of 'Strict Liability' was established in the English case of Rylands v. Fletcher (1868). It holds that if a person brings onto their land something that is likely to cause mischief if it escapes, they are prima facie liable for all the damage which is the natural consequence of its escape, even if they were not negligent. However, this rule is subject to several exceptions: (1) Act of God (Vis Major); (2) Plaintiff's own fault; (3) Consent of the Plaintiff (Volenti non fit injuria); (4) Act of a third party (stranger); and (5) Statutory Authority. In contrast, the Supreme Court of India, in the case of M.C. Mehta v. Union of India (1987) – also known as the Oleum Gas Leak case – evolved the principle of 'Absolute Liability'. This principle applies to enterprises engaged in hazardous or inherently dangerous activities. Unlike strict liability, absolute liability has NO exceptions. The enterprise is liable even if the escape was caused by an act of God or a third party. The Court reasoned that an enterprise carrying out such dangerous activities for profit must bear the cost of any harm caused, and that the compensation should be proportional to the size and financial capacity of the enterprise to act as a deterrent.`,
     question: "Why did the Supreme Court of India create the principle of 'Absolute Liability'?",
     options: [
       "To follow the English law more closely.",
@@ -62,7 +62,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q5",
     section: "Legal Reasoning",
-    passage: `The principle of 'Strict Liability'...`,
+    passage: `The principle of 'Strict Liability' was established in the English case of Rylands v. Fletcher (1868). It holds that if a person brings onto their land something that is likely to cause mischief if it escapes, they are prima facie liable for all the damage which is the natural consequence of its escape, even if they were not negligent. However, this rule is subject to several exceptions: (1) Act of God (Vis Major); (2) Plaintiff's own fault; (3) Consent of the Plaintiff (Volenti non fit injuria); (4) Act of a third party (stranger); and (5) Statutory Authority. In contrast, the Supreme Court of India, in the case of M.C. Mehta v. Union of India (1987) – also known as the Oleum Gas Leak case – evolved the principle of 'Absolute Liability'. This principle applies to enterprises engaged in hazardous or inherently dangerous activities. Unlike strict liability, absolute liability has NO exceptions. The enterprise is liable even if the escape was caused by an act of God or a third party. The Court reasoned that an enterprise carrying out such dangerous activities for profit must bear the cost of any harm caused, and that the compensation should be proportional to the size and financial capacity of the enterprise to act as a deterrent.`,
     question: "Aman and his neighbor Mr. X agree to install a shared water pipe for their mutual benefit. The pipe bursts without any fault of Aman and floods Mr. X's basement. Is Aman liable under strict liability?",
     options: [
       "Yes, he is the owner of the pipe.",
@@ -76,7 +76,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q6",
     section: "Legal Reasoning",
-    passage: `The principle of 'Strict Liability'...`,
+    passage: `The principle of 'Strict Liability' was established in the English case of Rylands v. Fletcher (1868). It holds that if a person brings onto their land something that is likely to cause mischief if it escapes, they are prima facie liable for all the damage which is the natural consequence of its escape, even if they were not negligent. However, this rule is subject to several exceptions: (1) Act of God (Vis Major); (2) Plaintiff's own fault; (3) Consent of the Plaintiff (Volenti non fit injuria); (4) Act of a third party (stranger); and (5) Statutory Authority. In contrast, the Supreme Court of India, in the case of M.C. Mehta v. Union of India (1987) – also known as the Oleum Gas Leak case – evolved the principle of 'Absolute Liability'. This principle applies to enterprises engaged in hazardous or inherently dangerous activities. Unlike strict liability, absolute liability has NO exceptions. The enterprise is liable even if the escape was caused by an act of God or a third party. The Court reasoned that an enterprise carrying out such dangerous activities for profit must bear the cost of any harm caused, and that the compensation should be proportional to the size and financial capacity of the enterprise to act as a deterrent.`,
     question: "If an enterprise is found 'Absolutely Liable', how is the compensation determined according to the M.C. Mehta judgment?",
     options: [
       "Based on the actual medical bills of the victims only.",
@@ -106,7 +106,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q8",
     section: "Legal Reasoning",
-    passage: `The doctrine of Separation of Powers...`,
+    passage: `The doctrine of Separation of Powers, traditionally attributed to Montesquieu, suggests that the three branches of government—the Legislature, the Executive, and the Judiciary—should be separate and independent. In India, while there is no rigid separation of powers as in the USA, the Constitution provides for a system of 'Checks and Balances'. The Legislature makes laws, the Executive implements them, and the Judiciary interprets them. The Judiciary has the power of 'Judicial Review' (Article 13, 32, 226) to strike down laws that violate the Constitution. However, the Judiciary is expected to practice 'Judicial Restraint' and not interfere in the policy-making domain of the Executive, unless it is unconstitutional. Conversely, 'Judicial Activism' occurs when the courts take a proactive role in protecting rights and filling legislative vacuums (e.g., the Vishaka Guidelines). The 'Basic Structure Doctrine' (Kesavananda Bharati, 1973) is the ultimate check on the Parliament's power to amend the Constitution, ensuring that the core identity of the Constitution remains untouched.`,
     question: "The Parliament passes a law that takes away the Supreme Court's power of Judicial Review. The Supreme Court strikes down this law. On what basis would the Court most likely do this?",
     options: [
       "It violates the principle of separation of powers.",
@@ -120,7 +120,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q9",
     section: "Legal Reasoning",
-    passage: `The doctrine of Separation of Powers...`,
+    passage: `The doctrine of Separation of Powers, traditionally attributed to Montesquieu, suggests that the three branches of government—the Legislature, the Executive, and the Judiciary—should be separate and independent. In India, while there is no rigid separation of powers as in the USA, the Constitution provides for a system of 'Checks and Balances'. The Legislature makes laws, the Executive implements them, and the Judiciary interprets them. The Judiciary has the power of 'Judicial Review' (Article 13, 32, 226) to strike down laws that violate the Constitution. However, the Judiciary is expected to practice 'Judicial Restraint' and not interfere in the policy-making domain of the Executive, unless it is unconstitutional. Conversely, 'Judicial Activism' occurs when the courts take a proactive role in protecting rights and filling legislative vacuums (e.g., the Vishaka Guidelines). The 'Basic Structure Doctrine' (Kesavananda Bharati, 1973) is the ultimate check on the Parliament's power to amend the Constitution, ensuring that the core identity of the Constitution remains untouched.`,
     question: "In India, the 'Separation of Powers' is most accurately described as:",
     options: [
       "A rigid separation where no branch can ever interact with another.",
@@ -134,7 +134,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q10",
     section: "Legal Reasoning",
-    passage: `The doctrine of Separation of Powers...`,
+    passage: `The doctrine of Separation of Powers, traditionally attributed to Montesquieu, suggests that the three branches of government—the Legislature, the Executive, and the Judiciary—should be separate and independent. In India, while there is no rigid separation of powers as in the USA, the Constitution provides for a system of 'Checks and Balances'. The Legislature makes laws, the Executive implements them, and the Judiciary interprets them. The Judiciary has the power of 'Judicial Review' (Article 13, 32, 226) to strike down laws that violate the Constitution. However, the Judiciary is expected to practice 'Judicial Restraint' and not interfere in the policy-making domain of the Executive, unless it is unconstitutional. Conversely, 'Judicial Activism' occurs when the courts take a proactive role in protecting rights and filling legislative vacuums (e.g., the Vishaka Guidelines). The 'Basic Structure Doctrine' (Kesavananda Bharati, 1973) is the ultimate check on the Parliament's power to amend the Constitution, ensuring that the core identity of the Constitution remains untouched.`,
     question: "Which organ of the government is primarily responsible for 'Policy Making'?",
     options: [
       "The Judiciary",
@@ -148,7 +148,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q11",
     section: "Legal Reasoning",
-    passage: `The doctrine of Separation of Powers...`,
+    passage: `The doctrine of Separation of Powers, traditionally attributed to Montesquieu, suggests that the three branches of government—the Legislature, the Executive, and the Judiciary—should be separate and independent. In India, while there is no rigid separation of powers as in the USA, the Constitution provides for a system of 'Checks and Balances'. The Legislature makes laws, the Executive implements them, and the Judiciary interprets them. The Judiciary has the power of 'Judicial Review' (Article 13, 32, 226) to strike down laws that violate the Constitution. However, the Judiciary is expected to practice 'Judicial Restraint' and not interfere in the policy-making domain of the Executive, unless it is unconstitutional. Conversely, 'Judicial Activism' occurs when the courts take a proactive role in protecting rights and filling legislative vacuums (e.g., the Vishaka Guidelines). The 'Basic Structure Doctrine' (Kesavananda Bharati, 1973) is the ultimate check on the Parliament's power to amend the Constitution, ensuring that the core identity of the Constitution remains untouched.`,
     question: "When a court refuses to hear a case because it believes the matter is 'purely political' and should be decided by the Parliament, it is practicing:",
     options: [
       "Judicial Review",
@@ -162,7 +162,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q12",
     section: "Legal Reasoning",
-    passage: `The doctrine of Separation of Powers...`,
+    passage: `The doctrine of Separation of Powers, traditionally attributed to Montesquieu, suggests that the three branches of government—the Legislature, the Executive, and the Judiciary—should be separate and independent. In India, while there is no rigid separation of powers as in the USA, the Constitution provides for a system of 'Checks and Balances'. The Legislature makes laws, the Executive implements them, and the Judiciary interprets them. The Judiciary has the power of 'Judicial Review' (Article 13, 32, 226) to strike down laws that violate the Constitution. However, the Judiciary is expected to practice 'Judicial Restraint' and not interfere in the policy-making domain of the Executive, unless it is unconstitutional. Conversely, 'Judicial Activism' occurs when the courts take a proactive role in protecting rights and filling legislative vacuums (e.g., the Vishaka Guidelines). The 'Basic Structure Doctrine' (Kesavananda Bharati, 1973) is the ultimate check on the Parliament's power to amend the Constitution, ensuring that the core identity of the Constitution remains untouched.`,
     question: "Which landmark case established the 'Basic Structure Doctrine' in India?",
     options: [
       "Golaknath v. State of Punjab",
@@ -192,7 +192,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q14",
     section: "Legal Reasoning",
-    passage: `A contract is a legally binding...`,
+    passage: `A contract is a legally binding agreement. The first step in forming a contract is a valid 'Offer' (or Proposal) and its 'Acceptance'. An offer must be clear, definite, and communicated to the offeree. It must be distinguished from an 'Invitation to Treat', which is a mere expression of willingness to negotiate. For example, a display of goods in a shop window with price tags is an invitation to treat, not an offer. The customer makes the offer when they take the item to the counter. Acceptance must be absolute, unqualified, and communicated in the manner prescribed. The 'Postal Rule' states that in the case of acceptance by post, the acceptance is complete as soon as the letter is posted, whereas in modern communication (like email or phone), acceptance is only complete when it is received by the offeror. Furthermore, an offer can be revoked at any time before it is accepted. A 'Counter-Offer' (e.g., bargaining on the price) kills the original offer; the original offer cannot then be accepted unless the offeror renews it.`,
     question: "Aman sends an email to Mr. X: 'I want to sell my car for ₹5 lakhs.' Mr. X replies: 'I'll buy it for ₹4.5 lakhs.' Aman refuses. Mr. X then says: 'Okay, I'll buy it for ₹5 lakhs.' Is Aman bound to sell?",
     options: [
       "Yes, Mr. X finally accepted the original offer.",
@@ -206,7 +206,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q15",
     section: "Legal Reasoning",
-    passage: `A contract is a legally binding...`,
+    passage: `A contract is a legally binding agreement. The first step in forming a contract is a valid 'Offer' (or Proposal) and its 'Acceptance'. An offer must be clear, definite, and communicated to the offeree. It must be distinguished from an 'Invitation to Treat', which is a mere expression of willingness to negotiate. For example, a display of goods in a shop window with price tags is an invitation to treat, not an offer. The customer makes the offer when they take the item to the counter. Acceptance must be absolute, unqualified, and communicated in the manner prescribed. The 'Postal Rule' states that in the case of acceptance by post, the acceptance is complete as soon as the letter is posted, whereas in modern communication (like email or phone), acceptance is only complete when it is received by the offeror. Furthermore, an offer can be revoked at any time before it is accepted. A 'Counter-Offer' (e.g., bargaining on the price) kills the original offer; the original offer cannot then be accepted unless the offeror renews it.`,
     question: "Under the 'Postal Rule' of contract law, when is an acceptance complete?",
     options: [
       "When the letter is written.",
@@ -220,7 +220,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q16",
     section: "Legal Reasoning",
-    passage: `A contract is a legally binding...`,
+    passage: `A contract is a legally binding agreement. The first step in forming a contract is a valid 'Offer' (or Proposal) and its 'Acceptance'. An offer must be clear, definite, and communicated to the offeree. It must be distinguished from an 'Invitation to Treat', which is a mere expression of willingness to negotiate. For example, a display of goods in a shop window with price tags is an invitation to treat, not an offer. The customer makes the offer when they take the item to the counter. Acceptance must be absolute, unqualified, and communicated in the manner prescribed. The 'Postal Rule' states that in the case of acceptance by post, the acceptance is complete as soon as the letter is posted, whereas in modern communication (like email or phone), acceptance is only complete when it is received by the offeror. Furthermore, an offer can be revoked at any time before it is accepted. A 'Counter-Offer' (e.g., bargaining on the price) kills the original offer; the original offer cannot then be accepted unless the offeror renews it.`,
     question: "Aman loses his dog and advertises a reward of ₹10,000 for whoever finds it. Mr. X, who hasn't seen the advertisement, finds the dog and returns it to Aman. Later, he sees the ad and asks for the reward. Is Aman bound to pay?",
     options: [
       "Yes, the reward was for everyone.",
@@ -234,7 +234,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q17",
     section: "Legal Reasoning",
-    passage: `A contract is a legally binding...`,
+    passage: `A contract is a legally binding agreement. The first step in forming a contract is a valid 'Offer' (or Proposal) and its 'Acceptance'. An offer must be clear, definite, and communicated to the offeree. It must be distinguished from an 'Invitation to Treat', which is a mere expression of willingness to negotiate. For example, a display of goods in a shop window with price tags is an invitation to treat, not an offer. The customer makes the offer when they take the item to the counter. Acceptance must be absolute, unqualified, and communicated in the manner prescribed. The 'Postal Rule' states that in the case of acceptance by post, the acceptance is complete as soon as the letter is posted, whereas in modern communication (like email or phone), acceptance is only complete when it is received by the offeror. Furthermore, an offer can be revoked at any time before it is accepted. A 'Counter-Offer' (e.g., bargaining on the price) kills the original offer; the original offer cannot then be accepted unless the offeror renews it.`,
     question: "What is 'Consensus ad Idem'?",
     options: [
       "A contract for a large sum of money.",
@@ -248,7 +248,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q18",
     section: "Legal Reasoning",
-    passage: `A contract is a legally binding...`,
+    passage: `A contract is a legally binding agreement. The first step in forming a contract is a valid 'Offer' (or Proposal) and its 'Acceptance'. An offer must be clear, definite, and communicated to the offeree. It must be distinguished from an 'Invitation to Treat', which is a mere expression of willingness to negotiate. For example, a display of goods in a shop window with price tags is an invitation to treat, not an offer. The customer makes the offer when they take the item to the counter. Acceptance must be absolute, unqualified, and communicated in the manner prescribed. The 'Postal Rule' states that in the case of acceptance by post, the acceptance is complete as soon as the letter is posted, whereas in modern communication (like email or phone), acceptance is only complete when it is received by the offeror. Furthermore, an offer can be revoked at any time before it is accepted. A 'Counter-Offer' (e.g., bargaining on the price) kills the original offer; the original offer cannot then be accepted unless the offeror renews it.`,
     question: "Aman says to Mr. X, 'I will sell you my house for ₹1 crore. If I don't hear from you by Friday, I will assume you have accepted.' Mr. X remains silent. Is there a contract?",
     options: [
       "Yes, silence is acceptance if the offeror says so.",
@@ -278,7 +278,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q20",
     section: "Legal Reasoning",
-    passage: `The Indian Penal Code (IPC)...`,
+    passage: `The Indian Penal Code (IPC) and the new Bharatiya Nyaya Sanhita (BNS) provide for certain 'General Exceptions' where an act, though otherwise a crime, is not punishable. (1) Insanity (Section 84 IPC): An act done by a person who, at the time of doing it, by reason of unsoundness of mind, is incapable of knowing the nature of the act or that it was wrong. (2) Infancy: Acts by children under 7 are never crimes (Doli incapax). Acts by children between 7 and 12 depend on their 'maturity of understanding'. (3) Necessity: An act done in good faith to prevent a greater harm, even if it causes a smaller harm. (4) Private Defence: Acts done to protect oneself or others from an immediate threat of violence. (5) Intoxication: Only if the person was intoxicated against their will or without their knowledge. Voluntary intoxication is generally not a defense unless it negates a specific intent.`,
     question: "A 6-year-old child picks up a loaded gun and accidentally shoots his playmate. Is the child liable for murder?",
     options: [
       "Yes, murder is a serious crime.",
@@ -292,7 +292,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q21",
     section: "Legal Reasoning",
-    passage: `The Indian Penal Code (IPC)...`,
+    passage: `The Indian Penal Code (IPC) and the new Bharatiya Nyaya Sanhita (BNS) provide for certain 'General Exceptions' where an act, though otherwise a crime, is not punishable. (1) Insanity (Section 84 IPC): An act done by a person who, at the time of doing it, by reason of unsoundness of mind, is incapable of knowing the nature of the act or that it was wrong. (2) Infancy: Acts by children under 7 are never crimes (Doli incapax). Acts by children between 7 and 12 depend on their 'maturity of understanding'. (3) Necessity: An act done in good faith to prevent a greater harm, even if it causes a smaller harm. (4) Private Defence: Acts done to protect oneself or others from an immediate threat of violence. (5) Intoxication: Only if the person was intoxicated against their will or without their knowledge. Voluntary intoxication is generally not a defense unless it negates a specific intent.`,
     question: "A ship is sinking. To save the lives of 100 passengers, the captain throws off a heavy cargo container which crushes a small fishing boat nearby, killing one person. Can the captain use the defense of 'Necessity'?",
     options: [
       "No, life is more valuable than cargo.",
@@ -306,7 +306,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q22",
     section: "Legal Reasoning",
-    passage: `The Indian Penal Code (IPC)...`,
+    passage: `The Indian Penal Code (IPC) and the new Bharatiya Nyaya Sanhita (BNS) provide for certain 'General Exceptions' where an act, though otherwise a crime, is not punishable. (1) Insanity (Section 84 IPC): An act done by a person who, at the time of doing it, by reason of unsoundness of mind, is incapable of knowing the nature of the act or that it was wrong. (2) Infancy: Acts by children under 7 are never crimes (Doli incapax). Acts by children between 7 and 12 depend on their 'maturity of understanding'. (3) Necessity: An act done in good faith to prevent a greater harm, even if it causes a smaller harm. (4) Private Defence: Acts done to protect oneself or others from an immediate threat of violence. (5) Intoxication: Only if the person was intoxicated against their will or without their knowledge. Voluntary intoxication is generally not a defense unless it negates a specific intent.`,
     question: "Aman gets drunk at a party voluntarily. While driving home, he hits a pedestrian. He claims he didn't intend to hit anyone because he was too drunk to see. Is he liable?",
     options: [
       "No, intoxication negates Mens Rea.",
@@ -320,7 +320,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q23",
     section: "Legal Reasoning",
-    passage: `The Indian Penal Code (IPC)...`,
+    passage: `The Indian Penal Code (IPC) and the new Bharatiya Nyaya Sanhita (BNS) provide for certain 'General Exceptions' where an act, though otherwise a crime, is not punishable. (1) Insanity (Section 84 IPC): An act done by a person who, at the time of doing it, by reason of unsoundness of mind, is incapable of knowing the nature of the act or that it was wrong. (2) Infancy: Acts by children under 7 are never crimes (Doli incapax). Acts by children between 7 and 12 depend on their 'maturity of understanding'. (3) Necessity: An act done in good faith to prevent a greater harm, even if it causes a smaller harm. (4) Private Defence: Acts done to protect oneself or others from an immediate threat of violence. (5) Intoxication: Only if the person was intoxicated against their will or without their knowledge. Voluntary intoxication is generally not a defense unless it negates a specific intent.`,
     question: "Aman is kidnapped by a gang and forced, at gunpoint, to help them break into a bank. Is Aman liable for the theft?",
     options: [
       "Yes, he physically helped them.",
@@ -334,7 +334,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q24",
     section: "Legal Reasoning",
-    passage: `The Indian Penal Code (IPC)...`,
+    passage: `The Indian Penal Code (IPC) and the new Bharatiya Nyaya Sanhita (BNS) provide for certain 'General Exceptions' where an act, though otherwise a crime, is not punishable. (1) Insanity (Section 84 IPC): An act done by a person who, at the time of doing it, by reason of unsoundness of mind, is incapable of knowing the nature of the act or that it was wrong. (2) Infancy: Acts by children under 7 are never crimes (Doli incapax). Acts by children between 7 and 12 depend on their 'maturity of understanding'. (3) Necessity: An act done in good faith to prevent a greater harm, even if it causes a smaller harm. (4) Private Defence: Acts done to protect oneself or others from an immediate threat of violence. (5) Intoxication: Only if the person was intoxicated against their will or without their knowledge. Voluntary intoxication is generally not a defense unless it negates a specific intent.`,
     question: "Aman sees a thief running away with his laptop. Aman chases him and hits him with a stick after the thief has dropped the laptop and is trying to climb a wall to escape. Is this protected under 'Private Defence'?",
     options: [
       "Yes, he is protecting his property.",
@@ -364,7 +364,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q26",
     section: "Legal Reasoning",
-    passage: `The Consumer Protection Act, 2019...`,
+    passage: `The Consumer Protection Act, 2019, aims to protect the interests of consumers in the digital age. A 'Consumer' is defined as any person who buys goods or hires services for consideration (payment), but does not include those who obtain goods for resale or commercial purpose. The Act established a three-tier quasi-judicial machinery: District Commission (claims up to ₹1 crore), State Commission (up to ₹10 crore), and National Commission (above ₹10 crore). One of the landmark features of the 2019 Act is the inclusion of 'Product Liability'. A product manufacturer, service provider, or seller can be held liable to compensate for any harm caused by a defective product or deficient service. Furthermore, the Act established the Central Consumer Protection Authority (CCPA) to regulate matters relating to violation of consumer rights, unfair trade practices, and misleading advertisements. E-commerce platforms are also now under the ambit of the Act, and 'unfair contracts' can be challenged before the Commissions.`,
     question: "Aman orders a pizza through an e-commerce app. The delivery boy is 2 hours late, and the pizza is cold. Can Aman sue for 'deficiency of service'?",
     options: [
       "No, it's just a pizza.",
@@ -378,7 +378,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q27",
     section: "Legal Reasoning",
-    passage: `The Consumer Protection Act, 2019...`,
+    passage: `The Consumer Protection Act, 2019, aims to protect the interests of consumers in the digital age. A 'Consumer' is defined as any person who buys goods or hires services for consideration (payment), but does not include those who obtain goods for resale or commercial purpose. The Act established a three-tier quasi-judicial machinery: District Commission (claims up to ₹1 crore), State Commission (up to ₹10 crore), and National Commission (above ₹10 crore). One of the landmark features of the 2019 Act is the inclusion of 'Product Liability'. A product manufacturer, service provider, or seller can be held liable to compensate for any harm caused by a defective product or deficient service. Furthermore, the Act established the Central Consumer Protection Authority (CCPA) to regulate matters relating to violation of consumer rights, unfair trade practices, and misleading advertisements. E-commerce platforms are also now under the ambit of the Act, and 'unfair contracts' can be challenged before the Commissions.`,
     question: "Aman buys a car for ₹1.5 crore. It has a major engine defect. Which commission should he approach for a claim?",
     options: [
       "District Commission",
@@ -392,7 +392,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q28",
     section: "Legal Reasoning",
-    passage: `The Consumer Protection Act, 2019...`,
+    passage: `The Consumer Protection Act, 2019, aims to protect the interests of consumers in the digital age. A 'Consumer' is defined as any person who buys goods or hires services for consideration (payment), but does not include those who obtain goods for resale or commercial purpose. The Act established a three-tier quasi-judicial machinery: District Commission (claims up to ₹1 crore), State Commission (up to ₹10 crore), and National Commission (above ₹10 crore). One of the landmark features of the 2019 Act is the inclusion of 'Product Liability'. A product manufacturer, service provider, or seller can be held liable to compensate for any harm caused by a defective product or deficient service. Furthermore, the Act established the Central Consumer Protection Authority (CCPA) to regulate matters relating to violation of consumer rights, unfair trade practices, and misleading advertisements. E-commerce platforms are also now under the ambit of the Act, and 'unfair contracts' can be challenged before the Commissions.`,
     question: "What is 'Product Liability' as per the new Act?",
     options: [
       "The consumer is liable for breaking a product.",
@@ -406,7 +406,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q29",
     section: "Legal Reasoning",
-    passage: `The Consumer Protection Act, 2019...`,
+    passage: `The Consumer Protection Act, 2019, aims to protect the interests of consumers in the digital age. A 'Consumer' is defined as any person who buys goods or hires services for consideration (payment), but does not include those who obtain goods for resale or commercial purpose. The Act established a three-tier quasi-judicial machinery: District Commission (claims up to ₹1 crore), State Commission (up to ₹10 crore), and National Commission (above ₹10 crore). One of the landmark features of the 2019 Act is the inclusion of 'Product Liability'. A product manufacturer, service provider, or seller can be held liable to compensate for any harm caused by a defective product or deficient service. Furthermore, the Act established the Central Consumer Protection Authority (CCPA) to regulate matters relating to violation of consumer rights, unfair trade practices, and misleading advertisements. E-commerce platforms are also now under the ambit of the Act, and 'unfair contracts' can be challenged before the Commissions.`,
     question: "Which authority is responsible for taking action against 'Misleading Advertisements' in India?",
     options: [
       "The Police",
@@ -420,7 +420,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q30",
     section: "Legal Reasoning",
-    passage: `The Consumer Protection Act, 2019...`,
+    passage: `The Consumer Protection Act, 2019, aims to protect the interests of consumers in the digital age. A 'Consumer' is defined as any person who buys goods or hires services for consideration (payment), but does not include those who obtain goods for resale or commercial purpose. The Act established a three-tier quasi-judicial machinery: District Commission (claims up to ₹1 crore), State Commission (up to ₹10 crore), and National Commission (above ₹10 crore). One of the landmark features of the 2019 Act is the inclusion of 'Product Liability'. A product manufacturer, service provider, or seller can be held liable to compensate for any harm caused by a defective product or deficient service. Furthermore, the Act established the Central Consumer Protection Authority (CCPA) to regulate matters relating to violation of consumer rights, unfair trade practices, and misleading advertisements. E-commerce platforms are also now under the ambit of the Act, and 'unfair contracts' can be challenged before the Commissions.`,
     question: "Aman buys a mobile phone from a shop. He doesn't get a receipt. The phone stops working after 1 day. Can he file a consumer complaint?",
     options: [
       "No, a receipt is mandatory to prove he is a consumer.",
@@ -451,7 +451,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q32",
     section: "Verbal Reasoning",
-    passage: `Climate change is no longer...`,
+    passage: `Climate change is no longer a distant existential threat; it is a current economic reality that is reshuffling the global financial landscape. The increasing frequency of extreme weather events—hurricanes, droughts, and wildfires—is causing multi-billion dollar losses annually. Insurance companies, once the bedrock of risk management, are now struggling to price 'uninsurable' risks, leading to a 'protection gap' in vulnerable regions. Moreover, the transition to a low-carbon economy requires a massive reallocation of capital, often referred to as 'green finance'. While this transition presents opportunities for innovation in renewable energy and carbon capture, it also risks creating 'stranded assets'—fossil fuel reserves and infrastructure that may become economically unviable due to regulatory changes. Economists warn that the 'cost of inaction' far outweighs the investment required for mitigation. However, for developing nations, the dilemma is acute: how to achieve industrial growth to lift millions out of poverty while adhering to stringent international emissions targets? The concept of 'Climate Justice' argues that developed nations, having historically contributed the most to carbon levels, should bear a larger share of the financial burden for global adaptation.`,
     question: "According to the passage, what is the 'protection gap'?",
     options: [
       "The physical distance between people and storm shelters.",
@@ -465,7 +465,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q33",
     section: "Verbal Reasoning",
-    passage: `Climate change is no longer...`,
+    passage: `Climate change is no longer a distant existential threat; it is a current economic reality that is reshuffling the global financial landscape. The increasing frequency of extreme weather events—hurricanes, droughts, and wildfires—is causing multi-billion dollar losses annually. Insurance companies, once the bedrock of risk management, are now struggling to price 'uninsurable' risks, leading to a 'protection gap' in vulnerable regions. Moreover, the transition to a low-carbon economy requires a massive reallocation of capital, often referred to as 'green finance'. While this transition presents opportunities for innovation in renewable energy and carbon capture, it also risks creating 'stranded assets'—fossil fuel reserves and infrastructure that may become economically unviable due to regulatory changes. Economists warn that the 'cost of inaction' far outweighs the investment required for mitigation. However, for developing nations, the dilemma is acute: how to achieve industrial growth to lift millions out of poverty while adhering to stringent international emissions targets? The concept of 'Climate Justice' argues that developed nations, having historically contributed the most to carbon levels, should bear a larger share of the financial burden for global adaptation.`,
     question: "What is the core argument of 'Climate Justice'?",
     options: [
       "Every country should be punished equally for pollution.",
@@ -479,7 +479,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q34",
     section: "Verbal Reasoning",
-    passage: `Climate change is no longer...`,
+    passage: `Climate change is no longer a distant existential threat; it is a current economic reality that is reshuffling the global financial landscape. The increasing frequency of extreme weather events—hurricanes, droughts, and wildfires—is causing multi-billion dollar losses annually. Insurance companies, once the bedrock of risk management, are now struggling to price 'uninsurable' risks, leading to a 'protection gap' in vulnerable regions. Moreover, the transition to a low-carbon economy requires a massive reallocation of capital, often referred to as 'green finance'. While this transition presents opportunities for innovation in renewable energy and carbon capture, it also risks creating 'stranded assets'—fossil fuel reserves and infrastructure that may become economically unviable due to regulatory changes. Economists warn that the 'cost of inaction' far outweighs the investment required for mitigation. However, for developing nations, the dilemma is acute: how to achieve industrial growth to lift millions out of poverty while adhering to stringent international emissions targets? The concept of 'Climate Justice' argues that developed nations, having historically contributed the most to carbon levels, should bear a larger share of the financial burden for global adaptation.`,
     question: "The author suggests that the 'cost of inaction' is:",
     options: [
       "Smaller than the cost of building solar plants.",
@@ -493,7 +493,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q35",
     section: "Verbal Reasoning",
-    passage: `Climate change is no longer...`,
+    passage: `Climate change is no longer a distant existential threat; it is a current economic reality that is reshuffling the global financial landscape. The increasing frequency of extreme weather events—hurricanes, droughts, and wildfires—is causing multi-billion dollar losses annually. Insurance companies, once the bedrock of risk management, are now struggling to price 'uninsurable' risks, leading to a 'protection gap' in vulnerable regions. Moreover, the transition to a low-carbon economy requires a massive reallocation of capital, often referred to as 'green finance'. While this transition presents opportunities for innovation in renewable energy and carbon capture, it also risks creating 'stranded assets'—fossil fuel reserves and infrastructure that may become economically unviable due to regulatory changes. Economists warn that the 'cost of inaction' far outweighs the investment required for mitigation. However, for developing nations, the dilemma is acute: how to achieve industrial growth to lift millions out of poverty while adhering to stringent international emissions targets? The concept of 'Climate Justice' argues that developed nations, having historically contributed the most to carbon levels, should bear a larger share of the financial burden for global adaptation.`,
     question: "The tone of the passage is:",
     options: [
       "Highly emotional and angry",
@@ -507,7 +507,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q36",
     section: "Verbal Reasoning",
-    passage: `Climate change is no longer...`,
+    passage: `Climate change is no longer a distant existential threat; it is a current economic reality that is reshuffling the global financial landscape. The increasing frequency of extreme weather events—hurricanes, droughts, and wildfires—is causing multi-billion dollar losses annually. Insurance companies, once the bedrock of risk management, are now struggling to price 'uninsurable' risks, leading to a 'protection gap' in vulnerable regions. Moreover, the transition to a low-carbon economy requires a massive reallocation of capital, often referred to as 'green finance'. While this transition presents opportunities for innovation in renewable energy and carbon capture, it also risks creating 'stranded assets'—fossil fuel reserves and infrastructure that may become economically unviable due to regulatory changes. Economists warn that the 'cost of inaction' far outweighs the investment required for mitigation. However, for developing nations, the dilemma is acute: how to achieve industrial growth to lift millions out of poverty while adhering to stringent international emissions targets? The concept of 'Climate Justice' argues that developed nations, having historically contributed the most to carbon levels, should bear a larger share of the financial burden for global adaptation.`,
     question: "The word 'stringent' in the context of emissions targets means:",
     options: ["Strict and demanding", "Easy and flexible", "Optional", "Secret"],
     correct: 0,
@@ -532,7 +532,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q38",
     section: "Verbal Reasoning",
-    passage: `Social media platforms...`,
+    passage: `Social media platforms are not neutral conduits of information; they are designed ecosystems engineered to maximize 'user engagement' through psychological principles. At the heart of this is the 'dopamine loop'—a cycle where the receipt of likes, comments, and notifications triggers a release of dopamine in the brain, creating a craving for more interaction. This is further amplified by 'variable reward' schedules, a concept borrowed from slot machines, where the unpredictability of when a positive social signal will appear keeps the user constantly checking their feed. While these features facilitate connection and community building, they also contribute to the 'attention economy', where human attention is treated as a scarce commodity to be harvested and sold to advertisers. Critics argue that this leads to 'context collapse', where the boundaries between private and public life vanish, and individuals feel pressured to maintain a curated, idealized version of themselves. This 'performative' aspect of social media is linked to rising levels of anxiety and the 'Fear of Missing Out' (FOMO). To mitigate these effects, digital literacy and 'mindful consumption' are becoming essential survival skills in the 21st century.`,
     question: "Why does the author compare social media to 'slot machines'?",
     options: [
       "Because you can win money on social media.",
@@ -546,7 +546,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q39",
     section: "Verbal Reasoning",
-    passage: `Social media platforms...`,
+    passage: `Social media platforms are not neutral conduits of information; they are designed ecosystems engineered to maximize 'user engagement' through psychological principles. At the heart of this is the 'dopamine loop'—a cycle where the receipt of likes, comments, and notifications triggers a release of dopamine in the brain, creating a craving for more interaction. This is further amplified by 'variable reward' schedules, a concept borrowed from slot machines, where the unpredictability of when a positive social signal will appear keeps the user constantly checking their feed. While these features facilitate connection and community building, they also contribute to the 'attention economy', where human attention is treated as a scarce commodity to be harvested and sold to advertisers. Critics argue that this leads to 'context collapse', where the boundaries between private and public life vanish, and individuals feel pressured to maintain a curated, idealized version of themselves. This 'performative' aspect of social media is linked to rising levels of anxiety and the 'Fear of Missing Out' (FOMO). To mitigate these effects, digital literacy and 'mindful consumption' are becoming essential survival skills in the 21st century.`,
     question: "What is 'context collapse'?",
     options: [
       "The failure of the internet during a storm.",
@@ -560,7 +560,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q40",
     section: "Verbal Reasoning",
-    passage: `Social media platforms...`,
+    passage: `Social media platforms are not neutral conduits of information; they are designed ecosystems engineered to maximize 'user engagement' through psychological principles. At the heart of this is the 'dopamine loop'—a cycle where the receipt of likes, comments, and notifications triggers a release of dopamine in the brain, creating a craving for more interaction. This is further amplified by 'variable reward' schedules, a concept borrowed from slot machines, where the unpredictability of when a positive social signal will appear keeps the user constantly checking their feed. While these features facilitate connection and community building, they also contribute to the 'attention economy', where human attention is treated as a scarce commodity to be harvested and sold to advertisers. Critics argue that this leads to 'context collapse', where the boundaries between private and public life vanish, and individuals feel pressured to maintain a curated, idealized version of themselves. This 'performative' aspect of social media is linked to rising levels of anxiety and the 'Fear of Missing Out' (FOMO). To mitigate these effects, digital literacy and 'mindful consumption' are becoming essential survival skills in the 21st century.`,
     question: "The 'attention economy' refers to a system where:",
     options: [
       "Everyone pays attention to the government.",
@@ -574,7 +574,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q41",
     section: "Verbal Reasoning",
-    passage: `Social media platforms...`,
+    passage: `Social media platforms are not neutral conduits of information; they are designed ecosystems engineered to maximize 'user engagement' through psychological principles. At the heart of this is the 'dopamine loop'—a cycle where the receipt of likes, comments, and notifications triggers a release of dopamine in the brain, creating a craving for more interaction. This is further amplified by 'variable reward' schedules, a concept borrowed from slot machines, where the unpredictability of when a positive social signal will appear keeps the user constantly checking their feed. While these features facilitate connection and community building, they also contribute to the 'attention economy', where human attention is treated as a scarce commodity to be harvested and sold to advertisers. Critics argue that this leads to 'context collapse', where the boundaries between private and public life vanish, and individuals feel pressured to maintain a curated, idealized version of themselves. This 'performative' aspect of social media is linked to rising levels of anxiety and the 'Fear of Missing Out' (FOMO). To mitigate these effects, digital literacy and 'mindful consumption' are becoming essential survival skills in the 21st century.`,
     question: "According to the passage, how can users mitigate the negative effects of social media?",
     options: [
       "By deleting all their accounts immediately.",
@@ -588,7 +588,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q42",
     section: "Verbal Reasoning",
-    passage: `Social media platforms...`,
+    passage: `Social media platforms are not neutral conduits of information; they are designed ecosystems engineered to maximize 'user engagement' through psychological principles. At the heart of this is the 'dopamine loop'—a cycle where the receipt of likes, comments, and notifications triggers a release of dopamine in the brain, creating a craving for more interaction. This is further amplified by 'variable reward' schedules, a concept borrowed from slot machines, where the unpredictability of when a positive social signal will appear keeps the user constantly checking their feed. While these features facilitate connection and community building, they also contribute to the 'attention economy', where human attention is treated as a scarce commodity to be harvested and sold to advertisers. Critics argue that this leads to 'context collapse', where the boundaries between private and public life vanish, and individuals feel pressured to maintain a curated, idealized version of themselves. This 'performative' aspect of social media is linked to rising levels of anxiety and the 'Fear of Missing Out' (FOMO). To mitigate these effects, digital literacy and 'mindful consumption' are becoming essential survival skills in the 21st century.`,
     question: "The word 'performative' suggests that users are:",
     options: [
       "Acting as professional actors.",
@@ -618,7 +618,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q44",
     section: "Verbal Reasoning",
-    passage: `Stoicism...`,
+    passage: `Stoicism, an ancient Greek philosophy founded by Zeno of Citium, has experienced a remarkable resurgence in the modern era. Its core tenet is the 'dichotomy of control'—the realization that we must distinguish between what is within our power and what is not. According to Stoics like Epictetus and Marcus Aurelius, our own thoughts, values, and actions are within our control, while external events—the weather, the opinions of others, or global politics—are not. By focusing exclusively on the former, an individual can achieve 'ataraxia', or a state of internal tranquility, regardless of external chaos. Stoicism is not about suppressing emotions, as is often misunderstood; rather, it is about transforming them through reason. A Stoic practices 'premeditatio malorum'—the visualization of potential setbacks—not out of pessimism, but to prepare the mind for any outcome. This 'mental armor' allows one to act with virtue and courage in the face of adversity. In a world characterized by 'VUCA' (Volatility, Uncertainty, Complexity, and Ambiguity), the timeless wisdom of Stoicism provides a practical toolkit for resilience and ethical living.`,
     question: "What is 'ataraxia'?",
     options: [
       "A state of extreme anger.",
@@ -632,7 +632,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q45",
     section: "Verbal Reasoning",
-    passage: `Stoicism...`,
+    passage: `Stoicism, an ancient Greek philosophy founded by Zeno of Citium, has experienced a remarkable resurgence in the modern era. Its core tenet is the 'dichotomy of control'—the realization that we must distinguish between what is within our power and what is not. According to Stoics like Epictetus and Marcus Aurelius, our own thoughts, values, and actions are within our control, while external events—the weather, the opinions of others, or global politics—are not. By focusing exclusively on the former, an individual can achieve 'ataraxia', or a state of internal tranquility, regardless of external chaos. Stoicism is not about suppressing emotions, as is often misunderstood; rather, it is about transforming them through reason. A Stoic practices 'premeditatio malorum'—the visualization of potential setbacks—not out of pessimism, but to prepare the mind for any outcome. This 'mental armor' allows one to act with virtue and courage in the face of adversity. In a world characterized by 'VUCA' (Volatility, Uncertainty, Complexity, and Ambiguity), the timeless wisdom of Stoicism provides a practical toolkit for resilience and ethical living.`,
     question: "Why do Stoics practice 'premeditatio malorum'?",
     options: [
       "To attract bad luck through negative thinking.",
@@ -646,7 +646,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q46",
     section: "Verbal Reasoning",
-    passage: `Stoicism...`,
+    passage: `Stoicism, an ancient Greek philosophy founded by Zeno of Citium, has experienced a remarkable resurgence in the modern era. Its core tenet is the 'dichotomy of control'—the realization that we must distinguish between what is within our power and what is not. According to Stoics like Epictetus and Marcus Aurelius, our own thoughts, values, and actions are within our control, while external events—the weather, the opinions of others, or global politics—are not. By focusing exclusively on the former, an individual can achieve 'ataraxia', or a state of internal tranquility, regardless of external chaos. Stoicism is not about suppressing emotions, as is often misunderstood; rather, it is about transforming them through reason. A Stoic practices 'premeditatio malorum'—the visualization of potential setbacks—not out of pessimism, but to prepare the mind for any outcome. This 'mental armor' allows one to act with virtue and courage in the face of adversity. In a world characterized by 'VUCA' (Volatility, Uncertainty, Complexity, and Ambiguity), the timeless wisdom of Stoicism provides a practical toolkit for resilience and ethical living.`,
     question: "According to the passage, Stoicism is NOT about:",
     options: [
       "Using reason to transform emotions.",
@@ -660,7 +660,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q47",
     section: "Verbal Reasoning",
-    passage: `Stoicism...`,
+    passage: `Stoicism, an ancient Greek philosophy founded by Zeno of Citium, has experienced a remarkable resurgence in the modern era. Its core tenet is the 'dichotomy of control'—the realization that we must distinguish between what is within our power and what is not. According to Stoics like Epictetus and Marcus Aurelius, our own thoughts, values, and actions are within our control, while external events—the weather, the opinions of others, or global politics—are not. By focusing exclusively on the former, an individual can achieve 'ataraxia', or a state of internal tranquility, regardless of external chaos. Stoicism is not about suppressing emotions, as is often misunderstood; rather, it is about transforming them through reason. A Stoic practices 'premeditatio malorum'—the visualization of potential setbacks—not out of pessimism, but to prepare the mind for any outcome. This 'mental armor' allows one to act with virtue and courage in the face of adversity. In a world characterized by 'VUCA' (Volatility, Uncertainty, Complexity, and Ambiguity), the timeless wisdom of Stoicism provides a practical toolkit for resilience and ethical living.`,
     question: "The acronym 'VUCA' stands for:",
     options: [
       "Victory, Unity, Courage, Ambition",
@@ -674,7 +674,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q48",
     section: "Verbal Reasoning",
-    passage: `Stoicism...`,
+    passage: `Stoicism, an ancient Greek philosophy founded by Zeno of Citium, has experienced a remarkable resurgence in the modern era. Its core tenet is the 'dichotomy of control'—the realization that we must distinguish between what is within our power and what is not. According to Stoics like Epictetus and Marcus Aurelius, our own thoughts, values, and actions are within our control, while external events—the weather, the opinions of others, or global politics—are not. By focusing exclusively on the former, an individual can achieve 'ataraxia', or a state of internal tranquility, regardless of external chaos. Stoicism is not about suppressing emotions, as is often misunderstood; rather, it is about transforming them through reason. A Stoic practices 'premeditatio malorum'—the visualization of potential setbacks—not out of pessimism, but to prepare the mind for any outcome. This 'mental armor' allows one to act with virtue and courage in the face of adversity. In a world characterized by 'VUCA' (Volatility, Uncertainty, Complexity, and Ambiguity), the timeless wisdom of Stoicism provides a practical toolkit for resilience and ethical living.`,
     question: "The author's perspective on Stoicism is:",
     options: [
       "It is an outdated philosophy with no modern use.",
@@ -798,7 +798,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q62",
     section: "Logical Reasoning",
-    passage: `Eight friends...`,
+    passage: `Eight friends—A, B, C, D, E, F, G, and H—are sitting around a circular table facing the center. A is third to the left of F, who is to the immediate right of H. D is third to the right of H. B is not an immediate neighbor of A or D. G is second to the left of B. C is an immediate neighbor of G.`,
     question: "Who is sitting opposite to H?",
     options: ["A", "B", "C", "D"],
     correct: 1,
@@ -807,7 +807,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q63",
     section: "Logical Reasoning",
-    passage: `Eight friends...`,
+    passage: `Eight friends—A, B, C, D, E, F, G, and H—are sitting around a circular table facing the center. A is third to the left of F, who is to the immediate right of H. D is third to the right of H. B is not an immediate neighbor of A or D. G is second to the left of B. C is an immediate neighbor of G.`,
     question: "Who is second to the right of G?",
     options: ["B", "E", "H", "F"],
     correct: 0,
@@ -816,7 +816,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q64",
     section: "Logical Reasoning",
-    passage: `Eight friends...`,
+    passage: `Eight friends—A, B, C, D, E, F, G, and H—are sitting around a circular table facing the center. A is third to the left of F, who is to the immediate right of H. D is third to the right of H. B is not an immediate neighbor of A or D. G is second to the left of B. C is an immediate neighbor of G.`,
     question: "Which of the following is true?",
     options: ["D is opposite to F", "E is between B and A", "G is to the left of H", "C is second to the right of E"],
     correct: 1,
@@ -825,7 +825,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q65",
     section: "Logical Reasoning",
-    passage: `Eight friends...`,
+    passage: `Eight friends—A, B, C, D, E, F, G, and H—are sitting around a circular table facing the center. A is third to the left of F, who is to the immediate right of H. D is third to the right of H. B is not an immediate neighbor of A or D. G is second to the left of B. C is an immediate neighbor of G.`,
     question: "Who are the immediate neighbors of F?",
     options: ["G & H", "A & D", "E & B", "C & G"],
     correct: 0,
@@ -1050,7 +1050,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q92",
     section: "Quantitative Reasoning",
-    passage: `In a law school entrance exam...`,
+    passage: `In a law school entrance exam, 10,000 students appeared. 60% were male and 40% were female. 20% of males and 30% of females cleared the exam.`,
     question: "What is the ratio of males who cleared to females who cleared?",
     options: ["1:1", "2:3", "3:2", "4:5"],
     correct: 0,
@@ -1059,7 +1059,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q93",
     section: "Quantitative Reasoning",
-    passage: `In a law school entrance exam...`,
+    passage: `In a law school entrance exam, 10,000 students appeared. 60% were male and 40% were female. 20% of males and 30% of females cleared the exam.`,
     question: "What percentage of the total students who appeared were females who cleared?",
     options: ["10%", "12%", "15%", "20%"],
     correct: 1,
@@ -1068,7 +1068,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q94",
     section: "Quantitative Reasoning",
-    passage: `In a law school entrance exam...`,
+    passage: `In a law school entrance exam, 10,000 students appeared. 60% were male and 40% were female. 20% of males and 30% of females cleared the exam.`,
     question: "How many males did NOT clear the exam?",
     options: ["4000", "4800", "5000", "5200"],
     correct: 1,
@@ -1077,7 +1077,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
   {
     id: "nlat-2-q95",
     section: "Quantitative Reasoning",
-    passage: `In a law school entrance exam...`,
+    passage: `In a law school entrance exam, 10,000 students appeared. 60% were male and 40% were female. 20% of males and 30% of females cleared the exam.`,
     question: "If 1000 more females had appeared and cleared at the same rate (30%), how many total females would have cleared?",
     options: ["1300", "1500", "1800", "2000"],
     correct: 1,

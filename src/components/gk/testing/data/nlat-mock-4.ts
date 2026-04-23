@@ -20,7 +20,7 @@ export const NLAT_MOCK_4: MockQuestion[] = [
   {
     id: "nlat-4-q2",
     section: "Legal Reasoning",
-    passage: `Copyright protection...`,
+    passage: `Copyright protection is granted to 'original' literary, dramatic, musical, and artistic works, as well as cinematograph films and sound recordings. Under the Copyright Act, 1957, 'originality' does not mean 'novelty' (as in patents); it means that the work must not have been copied from another work and must involve some 'modicum of creativity' or 'skill, judgment, and labor' (the 'Sweat of the Brow' vs. 'Modicum of Creativity' debate). The Supreme Court of India in Eastern Book Company v. D.B. Modak (2008) adopted a standard that requires more than just labor but less than a revolutionary spark. Copyright exists the moment a work is created in a fixed form; registration is not mandatory but serves as prima facie evidence. The duration of copyright for literary works is the 'lifetime of the author plus 60 years'. The Act also provides for 'Fair Dealing'—exceptions where copyrighted work can be used without permission for research, private study, criticism, review, or reporting of current events.`,
     question: "A student photocopies 20% of a textbook for their own personal exam preparation. Does this constitute copyright infringement?",
     options: [
       "Yes, any copying without permission is infringement.",
@@ -34,7 +34,7 @@ export const NLAT_MOCK_4: MockQuestion[] = [
   {
     id: "nlat-4-q3",
     section: "Legal Reasoning",
-    passage: `Copyright protection...`,
+    passage: `Copyright protection is granted to 'original' literary, dramatic, musical, and artistic works, as well as cinematograph films and sound recordings. Under the Copyright Act, 1957, 'originality' does not mean 'novelty' (as in patents); it means that the work must not have been copied from another work and must involve some 'modicum of creativity' or 'skill, judgment, and labor' (the 'Sweat of the Brow' vs. 'Modicum of Creativity' debate). The Supreme Court of India in Eastern Book Company v. D.B. Modak (2008) adopted a standard that requires more than just labor but less than a revolutionary spark. Copyright exists the moment a work is created in a fixed form; registration is not mandatory but serves as prima facie evidence. The duration of copyright for literary works is the 'lifetime of the author plus 60 years'. The Act also provides for 'Fair Dealing'—exceptions where copyrighted work can be used without permission for research, private study, criticism, review, or reporting of current events.`,
     question: "What is the duration of copyright for an original novel in India?",
     options: [
       "60 years from the date of publication.",
@@ -48,7 +48,7 @@ export const NLAT_MOCK_4: MockQuestion[] = [
   {
     id: "nlat-4-q4",
     section: "Legal Reasoning",
-    passage: `Copyright protection...`,
+    passage: `Copyright protection is granted to 'original' literary, dramatic, musical, and artistic works, as well as cinematograph films and sound recordings. Under the Copyright Act, 1957, 'originality' does not mean 'novelty' (as in patents); it means that the work must not have been copied from another work and must involve some 'modicum of creativity' or 'skill, judgment, and labor' (the 'Sweat of the Brow' vs. 'Modicum of Creativity' debate). The Supreme Court of India in Eastern Book Company v. D.B. Modak (2008) adopted a standard that requires more than just labor but less than a revolutionary spark. Copyright exists the moment a work is created in a fixed form; registration is not mandatory but serves as prima facie evidence. The duration of copyright for literary works is the 'lifetime of the author plus 60 years'. The Act also provides for 'Fair Dealing'—exceptions where copyrighted work can be used without permission for research, private study, criticism, review, or reporting of current events.`,
     question: "Is registration of copyright mandatory in India to sue for infringement?",
     options: [
       "Yes, without registration, no legal action can be taken.",
@@ -62,7 +62,7 @@ export const NLAT_MOCK_4: MockQuestion[] = [
   {
     id: "nlat-4-q5",
     section: "Legal Reasoning",
-    passage: `Copyright protection...`,
+    passage: `Copyright protection is granted to 'original' literary, dramatic, musical, and artistic works, as well as cinematograph films and sound recordings. Under the Copyright Act, 1957, 'originality' does not mean 'novelty' (as in patents); it means that the work must not have been copied from another work and must involve some 'modicum of creativity' or 'skill, judgment, and labor' (the 'Sweat of the Brow' vs. 'Modicum of Creativity' debate). The Supreme Court of India in Eastern Book Company v. D.B. Modak (2008) adopted a standard that requires more than just labor but less than a revolutionary spark. Copyright exists the moment a work is created in a fixed form; registration is not mandatory but serves as prima facie evidence. The duration of copyright for literary works is the 'lifetime of the author plus 60 years'. The Act also provides for 'Fair Dealing'—exceptions where copyrighted work can be used without permission for research, private study, criticism, review, or reporting of current events.`,
     question: "A journalist uses a short clip from a copyrighted movie in a news report about the lead actor's award win. Is this allowed?",
     options: [
       "No, they should have paid royalties.",
@@ -76,7 +76,7 @@ export const NLAT_MOCK_4: MockQuestion[] = [
   {
     id: "nlat-4-q6",
     section: "Legal Reasoning",
-    passage: `Copyright protection...`,
+    passage: `Copyright protection is granted to 'original' literary, dramatic, musical, and artistic works, as well as cinematograph films and sound recordings. Under the Copyright Act, 1957, 'originality' does not mean 'novelty' (as in patents); it means that the work must not have been copied from another work and must involve some 'modicum of creativity' or 'skill, judgment, and labor' (the 'Sweat of the Brow' vs. 'Modicum of Creativity' debate). The Supreme Court of India in Eastern Book Company v. D.B. Modak (2008) adopted a standard that requires more than just labor but less than a revolutionary spark. Copyright exists the moment a work is created in a fixed form; registration is not mandatory but serves as prima facie evidence. The duration of copyright for literary works is the 'lifetime of the author plus 60 years'. The Act also provides for 'Fair Dealing'—exceptions where copyrighted work can be used without permission for research, private study, criticism, review, or reporting of current events.`,
     question: "Which of the following is NOT protected by copyright?",
     options: [
       "A computer program",
@@ -106,7 +106,7 @@ export const NLAT_MOCK_4: MockQuestion[] = [
   {
     id: "nlat-4-q8",
     section: "Legal Reasoning",
-    passage: `Nuisance...`,
+    passage: `Nuisance is the 'unreasonable interference' with a person's use or enjoyment of land. It can be Public or Private. (1) Public Nuisance: An act that affects the public at large or a significant section of it (e.g., blocking a public highway). It is generally a crime. (2) Private Nuisance: An act that affects a specific person's property or rights (e.g., constant loud noise, smoke, or vibrations). For an action in private nuisance to succeed, the interference must be: (i) Unreasonable (a certain amount of 'give and take' is expected between neighbors); (ii) Continuous (usually, though a single isolated event can sometimes be a nuisance); and (iii) Cause actual damage or substantial discomfort. Defenses include 'Prescription' (if the nuisance has continued for 20 years without objection) and 'Statutory Authority'. 'Coming to the nuisance' (e.g., buying a house near a pre-existing factory) is NOT a valid defense for the factory.`,
     question: "Mr. X builds a wall on his own land that blocks the 'beautiful view' from Aman's window. Can Aman sue for nuisance?",
     options: [
       "Yes, he has a right to a view.",
@@ -120,7 +120,7 @@ export const NLAT_MOCK_4: MockQuestion[] = [
   {
     id: "nlat-4-q9",
     section: "Legal Reasoning",
-    passage: `Nuisance...`,
+    passage: `Nuisance is the 'unreasonable interference' with a person's use or enjoyment of land. It can be Public or Private. (1) Public Nuisance: An act that affects the public at large or a significant section of it (e.g., blocking a public highway). It is generally a crime. (2) Private Nuisance: An act that affects a specific person's property or rights (e.g., constant loud noise, smoke, or vibrations). For an action in private nuisance to succeed, the interference must be: (i) Unreasonable (a certain amount of 'give and take' is expected between neighbors); (ii) Continuous (usually, though a single isolated event can sometimes be a nuisance); and (iii) Cause actual damage or substantial discomfort. Defenses include 'Prescription' (if the nuisance has continued for 20 years without objection) and 'Statutory Authority'. 'Coming to the nuisance' (e.g., buying a house near a pre-existing factory) is NOT a valid defense for the factory.`,
     question: "Aman buys a house next to a busy airport. He then sues the airport for the noise of the planes. The airport argues that 'he came to the nuisance'. Is this a good defense?",
     options: [
       "Yes, he knew about the airport before buying.",
@@ -134,7 +134,7 @@ export const NLAT_MOCK_4: MockQuestion[] = [
   {
     id: "nlat-4-q10",
     section: "Legal Reasoning",
-    passage: `Nuisance...`,
+    passage: `Nuisance is the 'unreasonable interference' with a person's use or enjoyment of land. It can be Public or Private. (1) Public Nuisance: An act that affects the public at large or a significant section of it (e.g., blocking a public highway). It is generally a crime. (2) Private Nuisance: An act that affects a specific person's property or rights (e.g., constant loud noise, smoke, or vibrations). For an action in private nuisance to succeed, the interference must be: (i) Unreasonable (a certain amount of 'give and take' is expected between neighbors); (ii) Continuous (usually, though a single isolated event can sometimes be a nuisance); and (iii) Cause actual damage or substantial discomfort. Defenses include 'Prescription' (if the nuisance has continued for 20 years without objection) and 'Statutory Authority'. 'Coming to the nuisance' (e.g., buying a house near a pre-existing factory) is NOT a valid defense for the factory.`,
     question: "A chemical factory operates under a specific license from the government. It releases some smell that is within the allowed limits but still bothers the neighbors. Which defense can the factory use?",
     options: [
       "Act of God",
@@ -148,7 +148,7 @@ export const NLAT_MOCK_4: MockQuestion[] = [
   {
     id: "nlat-4-q11",
     section: "Legal Reasoning",
-    passage: `Nuisance...`,
+    passage: `Nuisance is the 'unreasonable interference' with a person's use or enjoyment of land. It can be Public or Private. (1) Public Nuisance: An act that affects the public at large or a significant section of it (e.g., blocking a public highway). It is generally a crime. (2) Private Nuisance: An act that affects a specific person's property or rights (e.g., constant loud noise, smoke, or vibrations). For an action in private nuisance to succeed, the interference must be: (i) Unreasonable (a certain amount of 'give and take' is expected between neighbors); (ii) Continuous (usually, though a single isolated event can sometimes be a nuisance); and (iii) Cause actual damage or substantial discomfort. Defenses include 'Prescription' (if the nuisance has continued for 20 years without objection) and 'Statutory Authority'. 'Coming to the nuisance' (e.g., buying a house near a pre-existing factory) is NOT a valid defense for the factory.`,
     question: "What is 'Prescription' in the context of Nuisance?",
     options: [
       "A doctor's note.",
@@ -162,7 +162,7 @@ export const NLAT_MOCK_4: MockQuestion[] = [
   {
     id: "nlat-4-q12",
     section: "Legal Reasoning",
-    passage: `Nuisance...`,
+    passage: `Nuisance is the 'unreasonable interference' with a person's use or enjoyment of land. It can be Public or Private. (1) Public Nuisance: An act that affects the public at large or a significant section of it (e.g., blocking a public highway). It is generally a crime. (2) Private Nuisance: An act that affects a specific person's property or rights (e.g., constant loud noise, smoke, or vibrations). For an action in private nuisance to succeed, the interference must be: (i) Unreasonable (a certain amount of 'give and take' is expected between neighbors); (ii) Continuous (usually, though a single isolated event can sometimes be a nuisance); and (iii) Cause actual damage or substantial discomfort. Defenses include 'Prescription' (if the nuisance has continued for 20 years without objection) and 'Statutory Authority'. 'Coming to the nuisance' (e.g., buying a house near a pre-existing factory) is NOT a valid defense for the factory.`,
     question: "Aman's neighbor's tree has branches that hang over into Aman's yard. Aman cuts the branches himself without going to court. This is called:",
     options: [
       "Self-Help/Abatement of Nuisance",

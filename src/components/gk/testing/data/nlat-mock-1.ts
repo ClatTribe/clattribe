@@ -20,7 +20,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q2",
     section: "Legal Reasoning",
-    passage: `In the landmark judgment of Justice K.S. Puttaswamy...`,
+    passage: `In the landmark judgment of Justice K.S. Puttaswamy (Retd.) v. Union of India (2017), a nine-judge bench of the Supreme Court of India unanimously held that the Right to Privacy is a fundamental right protected under Part III of the Constitution. The Court declared that privacy is an essential facet of human dignity and is protected as an intrinsic part of the right to life and personal liberty under Article 21. This right, however, is not absolute. Any state intervention into privacy must meet a three-fold test: (i) Legality: There must be a law in existence to justify the interference; (ii) Need: The state must demonstrate a legitimate state aim or need for the interference; and (iii) Proportionality: The extent of the interference must be proportionate to the objective sought to be achieved, ensuring that the least restrictive measure is used. With the advent of the Digital Personal Data Protection Act (DPDP), 2023, the legal framework for data privacy has further evolved, establishing obligations for 'Data Fiduciaries' and rights for 'Data Principals'. A Data Fiduciary is an entity that determines the purpose and means of processing personal data, while a Data Principal is the individual to whom the personal data relates. The Act mandates that data must be processed only for a lawful purpose for which the Data Principal has given consent, or for certain 'legitimate uses'. Failure to comply with these provisions can lead to significant financial penalties, although the Act does not provide for criminal liability or compensation to the data principal.`,
     question: "The Government of India issues an executive order (not a legislative act) mandating that all citizens must link their private healthcare records to a central database to monitor public health trends. Does this order meet the 'three-fold test' established in the Puttaswamy judgment?",
     options: [
       "Yes, because monitoring public health is a 'legitimate state aim'.",
@@ -34,7 +34,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q3",
     section: "Legal Reasoning",
-    passage: `In the landmark judgment of Justice K.S. Puttaswamy...`,
+    passage: `In the landmark judgment of Justice K.S. Puttaswamy (Retd.) v. Union of India (2017), a nine-judge bench of the Supreme Court of India unanimously held that the Right to Privacy is a fundamental right protected under Part III of the Constitution. The Court declared that privacy is an essential facet of human dignity and is protected as an intrinsic part of the right to life and personal liberty under Article 21. This right, however, is not absolute. Any state intervention into privacy must meet a three-fold test: (i) Legality: There must be a law in existence to justify the interference; (ii) Need: The state must demonstrate a legitimate state aim or need for the interference; and (iii) Proportionality: The extent of the interference must be proportionate to the objective sought to be achieved, ensuring that the least restrictive measure is used. With the advent of the Digital Personal Data Protection Act (DPDP), 2023, the legal framework for data privacy has further evolved, establishing obligations for 'Data Fiduciaries' and rights for 'Data Principals'. A Data Fiduciary is an entity that determines the purpose and means of processing personal data, while a Data Principal is the individual to whom the personal data relates. The Act mandates that data must be processed only for a lawful purpose for which the Data Principal has given consent, or for certain 'legitimate uses'. Failure to comply with these provisions can lead to significant financial penalties, although the Act does not provide for criminal liability or compensation to the data principal.`,
     question: "Under the DPDP Act, 2023, an individual whose data is being processed is referred to as the:",
     options: [
       "Data Processor",
@@ -48,7 +48,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q4",
     section: "Legal Reasoning",
-    passage: `In the landmark judgment of Justice K.S. Puttaswamy...`,
+    passage: `In the landmark judgment of Justice K.S. Puttaswamy (Retd.) v. Union of India (2017), a nine-judge bench of the Supreme Court of India unanimously held that the Right to Privacy is a fundamental right protected under Part III of the Constitution. The Court declared that privacy is an essential facet of human dignity and is protected as an intrinsic part of the right to life and personal liberty under Article 21. This right, however, is not absolute. Any state intervention into privacy must meet a three-fold test: (i) Legality: There must be a law in existence to justify the interference; (ii) Need: The state must demonstrate a legitimate state aim or need for the interference; and (iii) Proportionality: The extent of the interference must be proportionate to the objective sought to be achieved, ensuring that the least restrictive measure is used. With the advent of the Digital Personal Data Protection Act (DPDP), 2023, the legal framework for data privacy has further evolved, establishing obligations for 'Data Fiduciaries' and rights for 'Data Principals'. A Data Fiduciary is an entity that determines the purpose and means of processing personal data, while a Data Principal is the individual to whom the personal data relates. The Act mandates that data must be processed only for a lawful purpose for which the Data Principal has given consent, or for certain 'legitimate uses'. Failure to comply with these provisions can lead to significant financial penalties, although the Act does not provide for criminal liability or compensation to the data principal.`,
     question: "A bank processes a customer's personal data to prevent a suspected case of money laundering without the customer's explicit consent. Is this allowed under the DPDP Act?",
     options: [
       "No, consent is mandatory for every single act of data processing.",
@@ -62,7 +62,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q5",
     section: "Legal Reasoning",
-    passage: `In the landmark judgment of Justice K.S. Puttaswamy...`,
+    passage: `In the landmark judgment of Justice K.S. Puttaswamy (Retd.) v. Union of India (2017), a nine-judge bench of the Supreme Court of India unanimously held that the Right to Privacy is a fundamental right protected under Part III of the Constitution. The Court declared that privacy is an essential facet of human dignity and is protected as an intrinsic part of the right to life and personal liberty under Article 21. This right, however, is not absolute. Any state intervention into privacy must meet a three-fold test: (i) Legality: There must be a law in existence to justify the interference; (ii) Need: The state must demonstrate a legitimate state aim or need for the interference; and (iii) Proportionality: The extent of the interference must be proportionate to the objective sought to be achieved, ensuring that the least restrictive measure is used. With the advent of the Digital Personal Data Protection Act (DPDP), 2023, the legal framework for data privacy has further evolved, establishing obligations for 'Data Fiduciaries' and rights for 'Data Principals'. A Data Fiduciary is an entity that determines the purpose and means of processing personal data, while a Data Principal is the individual to whom the personal data relates. The Act mandates that data must be processed only for a lawful purpose for which the Data Principal has given consent, or for certain 'legitimate uses'. Failure to comply with these provisions can lead to significant financial penalties, although the Act does not provide for criminal liability or compensation to the data principal.`,
     question: "What is the primary remedy available to a Data Principal if a Data Fiduciary violates their privacy under the DPDP Act, 2023?",
     options: [
       "The Data Principal can claim multi-crore compensation in a civil court.",
@@ -76,7 +76,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q6",
     section: "Legal Reasoning",
-    passage: `In the landmark judgment of Justice K.S. Puttaswamy...`,
+    passage: `In the landmark judgment of Justice K.S. Puttaswamy (Retd.) v. Union of India (2017), a nine-judge bench of the Supreme Court of India unanimously held that the Right to Privacy is a fundamental right protected under Part III of the Constitution. The Court declared that privacy is an essential facet of human dignity and is protected as an intrinsic part of the right to life and personal liberty under Article 21. This right, however, is not absolute. Any state intervention into privacy must meet a three-fold test: (i) Legality: There must be a law in existence to justify the interference; (ii) Need: The state must demonstrate a legitimate state aim or need for the interference; and (iii) Proportionality: The extent of the interference must be proportionate to the objective sought to be achieved, ensuring that the least restrictive measure is used. With the advent of the Digital Personal Data Protection Act (DPDP), 2023, the legal framework for data privacy has further evolved, establishing obligations for 'Data Fiduciaries' and rights for 'Data Principals'. A Data Fiduciary is an entity that determines the purpose and means of processing personal data, while a Data Principal is the individual to whom the personal data relates. The Act mandates that data must be processed only for a lawful purpose for which the Data Principal has given consent, or for certain 'legitimate uses'. Failure to comply with these provisions can lead to significant financial penalties, although the Act does not provide for criminal liability or compensation to the data principal.`,
     question: "Which of the following best describes the 'Proportionality' test for state interference in privacy?",
     options: [
       "The state must pay the citizen a proportional amount of money for the data taken.",
@@ -106,7 +106,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q8",
     section: "Legal Reasoning",
-    passage: `Vicarious liability is a legal principle...`,
+    passage: `Vicarious liability is a legal principle where one person is held liable for the torts (wrongful acts) committed by another. The most common form is the liability of a Master for the acts of his Servant. For vicarious liability to arise, two conditions must be met: (i) There must be a 'Master-Servant' relationship (determined by the 'control test', though this has evolved into the 'integration test' in modern times); and (ii) The tort must be committed in the 'course of employment'. An act is in the course of employment if it is either a wrongful act authorized by the master, or a wrongful and unauthorized mode of doing some act authorized by the master. However, if an employee goes on a 'frolic of his own'—meaning he does something entirely for his own purposes, completely unrelated to his work—the employer is not liable. For example, if a driver takes a long detour to visit his family and has an accident during that detour, the employer may not be held vicariously liable. Another important distinction is between an 'employee' (servant) and an 'independent contractor'. A master is generally not liable for the torts of an independent contractor, as the master controls 'what' is to be done but not 'how' it is to be done.`,
     question: "Aman, a delivery partner for a food app, is instructed to deliver a pizza within 30 minutes. To meet the deadline, Aman drives on the wrong side of the road and hits a pedestrian. Is the food app company vicariously liable?",
     options: [
       "No, the company never authorized driving on the wrong side of the road.",
@@ -120,7 +120,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q9",
     section: "Legal Reasoning",
-    passage: `Vicarious liability is a legal principle...`,
+    passage: `Vicarious liability is a legal principle where one person is held liable for the torts (wrongful acts) committed by another. The most common form is the liability of a Master for the acts of his Servant. For vicarious liability to arise, two conditions must be met: (i) There must be a 'Master-Servant' relationship (determined by the 'control test', though this has evolved into the 'integration test' in modern times); and (ii) The tort must be committed in the 'course of employment'. An act is in the course of employment if it is either a wrongful act authorized by the master, or a wrongful and unauthorized mode of doing some act authorized by the master. However, if an employee goes on a 'frolic of his own'—meaning he does something entirely for his own purposes, completely unrelated to his work—the employer is not liable. For example, if a driver takes a long detour to visit his family and has an accident during that detour, the employer may not be held vicariously liable. Another important distinction is between an 'employee' (servant) and an 'independent contractor'. A master is generally not liable for the torts of an independent contractor, as the master controls 'what' is to be done but not 'how' it is to be done.`,
     question: "A homeowner hires a professional electrician from a well-known company to fix the wiring. The electrician accidentally causes a short circuit that burns down the neighbor's fence. Who is vicariously liable?",
     options: [
       "The homeowner, as the master of the electrician.",
@@ -134,7 +134,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q10",
     section: "Legal Reasoning",
-    passage: `Vicarious liability is a legal principle...`,
+    passage: `Vicarious liability is a legal principle where one person is held liable for the torts (wrongful acts) committed by another. The most common form is the liability of a Master for the acts of his Servant. For vicarious liability to arise, two conditions must be met: (i) There must be a 'Master-Servant' relationship (determined by the 'control test', though this has evolved into the 'integration test' in modern times); and (ii) The tort must be committed in the 'course of employment'. An act is in the course of employment if it is either a wrongful act authorized by the master, or a wrongful and unauthorized mode of doing some act authorized by the master. However, if an employee goes on a 'frolic of his own'—meaning he does something entirely for his own purposes, completely unrelated to his work—the employer is not liable. For example, if a driver takes a long detour to visit his family and has an accident during that detour, the employer may not be held vicariously liable. Another important distinction is between an 'employee' (servant) and an 'independent contractor'. A master is generally not liable for the torts of an independent contractor, as the master controls 'what' is to be done but not 'how' it is to be done.`,
     question: "A truck driver is told to drive from City A to City B via the shortest highway. Instead, he drives 50 km in the opposite direction to watch a movie. While returning to the highway from the cinema, he crashes into a car. Is the employer liable?",
     options: [
       "Yes, he was still the employer's driver at the time.",
@@ -148,7 +148,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q11",
     section: "Legal Reasoning",
-    passage: `Vicarious liability is a legal principle...`,
+    passage: `Vicarious liability is a legal principle where one person is held liable for the torts (wrongful acts) committed by another. The most common form is the liability of a Master for the acts of his Servant. For vicarious liability to arise, two conditions must be met: (i) There must be a 'Master-Servant' relationship (determined by the 'control test', though this has evolved into the 'integration test' in modern times); and (ii) The tort must be committed in the 'course of employment'. An act is in the course of employment if it is either a wrongful act authorized by the master, or a wrongful and unauthorized mode of doing some act authorized by the master. However, if an employee goes on a 'frolic of his own'—meaning he does something entirely for his own purposes, completely unrelated to his work—the employer is not liable. For example, if a driver takes a long detour to visit his family and has an accident during that detour, the employer may not be held vicariously liable. Another important distinction is between an 'employee' (servant) and an 'independent contractor'. A master is generally not liable for the torts of an independent contractor, as the master controls 'what' is to be done but not 'how' it is to be done.`,
     question: "Which of the following factors is most important in the 'Control Test' for determining a master-servant relationship?",
     options: [
       "The amount of salary paid.",
@@ -162,7 +162,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q12",
     section: "Legal Reasoning",
-    passage: `Vicarious liability is a legal principle...`,
+    passage: `Vicarious liability is a legal principle where one person is held liable for the torts (wrongful acts) committed by another. The most common form is the liability of a Master for the acts of his Servant. For vicarious liability to arise, two conditions must be met: (i) There must be a 'Master-Servant' relationship (determined by the 'control test', though this has evolved into the 'integration test' in modern times); and (ii) The tort must be committed in the 'course of employment'. An act is in the course of employment if it is either a wrongful act authorized by the master, or a wrongful and unauthorized mode of doing some act authorized by the master. However, if an employee goes on a 'frolic of his own'—meaning he does something entirely for his own purposes, completely unrelated to his work—the employer is not liable. For example, if a driver takes a long detour to visit his family and has an accident during that detour, the employer may not be held vicariously liable. Another important distinction is between an 'employee' (servant) and an 'independent contractor'. A master is generally not liable for the torts of an independent contractor, as the master controls 'what' is to be done but not 'how' it is to be done.`,
     question: "In modern law, the 'Integration Test' suggests that a person is a servant if:",
     options: [
       "They are integrated into the organization and their work is an integral part of the business.",
@@ -192,7 +192,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q14",
     section: "Legal Reasoning",
-    passage: `The Indian Constitution provides for three types...`,
+    passage: `The Indian Constitution provides for three types of emergencies: National Emergency (Article 352), State Emergency or President's Rule (Article 356), and Financial Emergency (Article 360). A National Emergency can be declared by the President when the security of India or any part thereof is threatened by war, external aggression, or 'armed rebellion'. Notably, the term 'armed rebellion' was inserted by the 44th Amendment Act, 1978, replacing the term 'internal disturbance'. A National Emergency can be proclaimed for the whole of India or only a part. During a National Emergency, the federal structure of the country becomes unitary. Under Article 358, Fundamental Rights under Article 19 are automatically suspended in case of emergency declared on grounds of war or external aggression, but not armed rebellion. Under Article 359, the President may suspend the right to move any court for the enforcement of other fundamental rights (except Articles 20 and 21). Article 356 allows for President's Rule in a state if the constitutional machinery fails. The landmark S.R. Bommai v. Union of India (1994) case established that the power under Article 356 is subject to judicial review and that secularism is a basic feature of the Constitution.`,
     question: "During a National Emergency, the President issues an order suspending the enforcement of all Fundamental Rights. Is this order valid?",
     options: [
       "Yes, the President has absolute power during an emergency.",
@@ -206,7 +206,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q15",
     section: "Legal Reasoning",
-    passage: `The Indian Constitution provides for three types...`,
+    passage: `The Indian Constitution provides for three types of emergencies: National Emergency (Article 352), State Emergency or President's Rule (Article 356), and Financial Emergency (Article 360). A National Emergency can be declared by the President when the security of India or any part thereof is threatened by war, external aggression, or 'armed rebellion'. Notably, the term 'armed rebellion' was inserted by the 44th Amendment Act, 1978, replacing the term 'internal disturbance'. A National Emergency can be proclaimed for the whole of India or only a part. During a National Emergency, the federal structure of the country becomes unitary. Under Article 358, Fundamental Rights under Article 19 are automatically suspended in case of emergency declared on grounds of war or external aggression, but not armed rebellion. Under Article 359, the President may suspend the right to move any court for the enforcement of other fundamental rights (except Articles 20 and 21). Article 356 allows for President's Rule in a state if the constitutional machinery fails. The landmark S.R. Bommai v. Union of India (1994) case established that the power under Article 356 is subject to judicial review and that secularism is a basic feature of the Constitution.`,
     question: "The term 'internal disturbance' was replaced with 'armed rebellion' in Article 352 by which amendment?",
     options: [
       "42nd Amendment Act",
@@ -220,7 +220,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q16",
     section: "Legal Reasoning",
-    passage: `The Indian Constitution provides for three types...`,
+    passage: `The Indian Constitution provides for three types of emergencies: National Emergency (Article 352), State Emergency or President's Rule (Article 356), and Financial Emergency (Article 360). A National Emergency can be declared by the President when the security of India or any part thereof is threatened by war, external aggression, or 'armed rebellion'. Notably, the term 'armed rebellion' was inserted by the 44th Amendment Act, 1978, replacing the term 'internal disturbance'. A National Emergency can be proclaimed for the whole of India or only a part. During a National Emergency, the federal structure of the country becomes unitary. Under Article 358, Fundamental Rights under Article 19 are automatically suspended in case of emergency declared on grounds of war or external aggression, but not armed rebellion. Under Article 359, the President may suspend the right to move any court for the enforcement of other fundamental rights (except Articles 20 and 21). Article 356 allows for President's Rule in a state if the constitutional machinery fails. The landmark S.R. Bommai v. Union of India (1994) case established that the power under Article 356 is subject to judicial review and that secularism is a basic feature of the Constitution.`,
     question: "In the S.R. Bommai case, the Supreme Court held that the 'basic feature' of the Constitution which justifies the dismissal of a state government acting against it is:",
     options: [
       "Socialism",
@@ -234,7 +234,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q17",
     section: "Legal Reasoning",
-    passage: `The Indian Constitution provides for three types...`,
+    passage: `The Indian Constitution provides for three types of emergencies: National Emergency (Article 352), State Emergency or President's Rule (Article 356), and Financial Emergency (Article 360). A National Emergency can be declared by the President when the security of India or any part thereof is threatened by war, external aggression, or 'armed rebellion'. Notably, the term 'armed rebellion' was inserted by the 44th Amendment Act, 1978, replacing the term 'internal disturbance'. A National Emergency can be proclaimed for the whole of India or only a part. During a National Emergency, the federal structure of the country becomes unitary. Under Article 358, Fundamental Rights under Article 19 are automatically suspended in case of emergency declared on grounds of war or external aggression, but not armed rebellion. Under Article 359, the President may suspend the right to move any court for the enforcement of other fundamental rights (except Articles 20 and 21). Article 356 allows for President's Rule in a state if the constitutional machinery fails. The landmark S.R. Bommai v. Union of India (1994) case established that the power under Article 356 is subject to judicial review and that secularism is a basic feature of the Constitution.`,
     question: "Which Article deals with the declaration of a 'Financial Emergency'?",
     options: [
       "Article 352",
@@ -248,7 +248,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q18",
     section: "Legal Reasoning",
-    passage: `The Indian Constitution provides for three types...`,
+    passage: `The Indian Constitution provides for three types of emergencies: National Emergency (Article 352), State Emergency or President's Rule (Article 356), and Financial Emergency (Article 360). A National Emergency can be declared by the President when the security of India or any part thereof is threatened by war, external aggression, or 'armed rebellion'. Notably, the term 'armed rebellion' was inserted by the 44th Amendment Act, 1978, replacing the term 'internal disturbance'. A National Emergency can be proclaimed for the whole of India or only a part. During a National Emergency, the federal structure of the country becomes unitary. Under Article 358, Fundamental Rights under Article 19 are automatically suspended in case of emergency declared on grounds of war or external aggression, but not armed rebellion. Under Article 359, the President may suspend the right to move any court for the enforcement of other fundamental rights (except Articles 20 and 21). Article 356 allows for President's Rule in a state if the constitutional machinery fails. The landmark S.R. Bommai v. Union of India (1994) case established that the power under Article 356 is subject to judicial review and that secularism is a basic feature of the Constitution.`,
     question: "When a National Emergency is in operation, the Parliament gains the power to make laws on subjects mentioned in the:",
     options: [
       "Union List only",
@@ -278,7 +278,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q20",
     section: "Legal Reasoning",
-    passage: `The fundamental principle of criminal law...`,
+    passage: `The fundamental principle of criminal law is 'Actus non facit reum nisi mens sit rea', which means 'the act itself does not make a man guilty unless his mind is also guilty'. For a crime to be committed, two elements must generally coexist: (i) Actus Reus (the physical act or omission); and (ii) Mens Rea (the guilty mind or criminal intent). Mens Rea can take various forms: (a) Intention: The person desires the specific outcome; (b) Knowledge: The person is aware that the outcome is likely to occur; (c) Recklessness: The person foresees the risk but takes it anyway; and (d) Negligence: The person fails to exercise the care that a reasonable person would. However, there is an exception to the requirement of Mens Rea called 'Strict Liability' offenses. In strict liability, a person can be held guilty even if they had no criminal intent. Examples include public nuisance, food adulteration, and statutory offenses like minor's kidnapping. Mistake of Fact is a valid defense if the person acted in good faith, but Mistake of Law is never an excuse ('Ignorantia juris non excusat').`,
     question: "Aman is walking in a park when he sees a person drowning in a shallow pond. Aman is an expert swimmer but chooses to watch and walk away. The person dies. Is Aman liable for a crime?",
     options: [
       "Yes, he had the Mens Rea of allowing someone to die.",
@@ -292,7 +292,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q21",
     section: "Legal Reasoning",
-    passage: `The fundamental principle of criminal law...`,
+    passage: `The fundamental principle of criminal law is 'Actus non facit reum nisi mens sit rea', which means 'the act itself does not make a man guilty unless his mind is also guilty'. For a crime to be committed, two elements must generally coexist: (i) Actus Reus (the physical act or omission); and (ii) Mens Rea (the guilty mind or criminal intent). Mens Rea can take various forms: (a) Intention: The person desires the specific outcome; (b) Knowledge: The person is aware that the outcome is likely to occur; (c) Recklessness: The person foresees the risk but takes it anyway; and (d) Negligence: The person fails to exercise the care that a reasonable person would. However, there is an exception to the requirement of Mens Rea called 'Strict Liability' offenses. In strict liability, a person can be held guilty even if they had no criminal intent. Examples include public nuisance, food adulteration, and statutory offenses like minor's kidnapping. Mistake of Fact is a valid defense if the person acted in good faith, but Mistake of Law is never an excuse ('Ignorantia juris non excusat').`,
     question: "A shopkeeper sells adulterated milk. He argues he bought it from a supplier and didn't know it was contaminated. Is he liable?",
     options: [
       "No, he lacked Mens Rea.",
@@ -306,7 +306,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q22",
     section: "Legal Reasoning",
-    passage: `The fundamental principle of criminal law...`,
+    passage: `The fundamental principle of criminal law is 'Actus non facit reum nisi mens sit rea', which means 'the act itself does not make a man guilty unless his mind is also guilty'. For a crime to be committed, two elements must generally coexist: (i) Actus Reus (the physical act or omission); and (ii) Mens Rea (the guilty mind or criminal intent). Mens Rea can take various forms: (a) Intention: The person desires the specific outcome; (b) Knowledge: The person is aware that the outcome is likely to occur; (c) Recklessness: The person foresees the risk but takes it anyway; and (d) Negligence: The person fails to exercise the care that a reasonable person would. However, there is an exception to the requirement of Mens Rea called 'Strict Liability' offenses. In strict liability, a person can be held guilty even if they had no criminal intent. Examples include public nuisance, food adulteration, and statutory offenses like minor's kidnapping. Mistake of Fact is a valid defense if the person acted in good faith, but Mistake of Law is never an excuse ('Ignorantia juris non excusat').`,
     question: "Aman enters a restricted government building by mistake, thinking it was the public library. He is charged with trespassing. Can he use a defense?",
     options: [
       "No, trespassing is a strict liability crime.",
@@ -320,7 +320,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q23",
     section: "Legal Reasoning",
-    passage: `The fundamental principle of criminal law...`,
+    passage: `The fundamental principle of criminal law is 'Actus non facit reum nisi mens sit rea', which means 'the act itself does not make a man guilty unless his mind is also guilty'. For a crime to be committed, two elements must generally coexist: (i) Actus Reus (the physical act or omission); and (ii) Mens Rea (the guilty mind or criminal intent). Mens Rea can take various forms: (a) Intention: The person desires the specific outcome; (b) Knowledge: The person is aware that the outcome is likely to occur; (c) Recklessness: The person foresees the risk but takes it anyway; and (d) Negligence: The person fails to exercise the care that a reasonable person would. However, there is an exception to the requirement of Mens Rea called 'Strict Liability' offenses. In strict liability, a person can be held guilty even if they had no criminal intent. Examples include public nuisance, food adulteration, and statutory offenses like minor's kidnapping. Mistake of Fact is a valid defense if the person acted in good faith, but Mistake of Law is never an excuse ('Ignorantia juris non excusat').`,
     question: "Aman commits a crime and argues that he didn't know the law had changed recently to make that act illegal. Is he liable?",
     options: [
       "No, because he lacked the knowledge of the law.",
@@ -334,7 +334,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q24",
     section: "Legal Reasoning",
-    passage: `The fundamental principle of criminal law...`,
+    passage: `The fundamental principle of criminal law is 'Actus non facit reum nisi mens sit rea', which means 'the act itself does not make a man guilty unless his mind is also guilty'. For a crime to be committed, two elements must generally coexist: (i) Actus Reus (the physical act or omission); and (ii) Mens Rea (the guilty mind or criminal intent). Mens Rea can take various forms: (a) Intention: The person desires the specific outcome; (b) Knowledge: The person is aware that the outcome is likely to occur; (c) Recklessness: The person foresees the risk but takes it anyway; and (d) Negligence: The person fails to exercise the care that a reasonable person would. However, there is an exception to the requirement of Mens Rea called 'Strict Liability' offenses. In strict liability, a person can be held guilty even if they had no criminal intent. Examples include public nuisance, food adulteration, and statutory offenses like minor's kidnapping. Mistake of Fact is a valid defense if the person acted in good faith, but Mistake of Law is never an excuse ('Ignorantia juris non excusat').`,
     question: "In criminal law, 'Mens Rea' literally means:",
     options: [
       "Guilty act",
@@ -364,7 +364,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q26",
     section: "Legal Reasoning",
-    passage: `Copyright is a form of intellectual property...`,
+    passage: `Copyright is a form of intellectual property protection granted to the creators of original works of authorship, including literary, dramatic, musical, and artistic works, as well as cinematograph films and sound recordings. In India, copyright is governed by the Copyright Act, 1957. Copyright protection begins the moment the work is created and fixed in a tangible medium. Registration is not mandatory for protection but is prima facie evidence of ownership. The duration of copyright for most works is the lifetime of the author plus 60 years. One key doctrine in copyright law is 'Fair Use' (or Fair Dealing). Section 52 of the Act lists certain acts that do not constitute infringement, such as use for private research, criticism or review, reporting current events, and use in educational instruction. Crucially, copyright protects the 'expression' of an idea, not the 'idea' itself. This is known as the 'Idea-Expression Dichotomy'. Two people can write different books about the same historical event (the idea), but they cannot copy the specific words and structure (the expression) of each other's books.`,
     question: "A filmmaker wants to make a movie about a 'heroic policeman who fights corruption'. Another filmmaker has already made a movie with the exact same premise. Can the first filmmaker sue for copyright infringement?",
     options: [
       "Yes, because the premise is identical.",
@@ -378,7 +378,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q27",
     section: "Legal Reasoning",
-    passage: `Copyright is a form of intellectual property...`,
+    passage: `Copyright is a form of intellectual property protection granted to the creators of original works of authorship, including literary, dramatic, musical, and artistic works, as well as cinematograph films and sound recordings. In India, copyright is governed by the Copyright Act, 1957. Copyright protection begins the moment the work is created and fixed in a tangible medium. Registration is not mandatory for protection but is prima facie evidence of ownership. The duration of copyright for most works is the lifetime of the author plus 60 years. One key doctrine in copyright law is 'Fair Use' (or Fair Dealing). Section 52 of the Act lists certain acts that do not constitute infringement, such as use for private research, criticism or review, reporting current events, and use in educational instruction. Crucially, copyright protects the 'expression' of an idea, not the 'idea' itself. This is known as the 'Idea-Expression Dichotomy'. Two people can write different books about the same historical event (the idea), but they cannot copy the specific words and structure (the expression) of each other's books.`,
     question: "How long does copyright protection generally last for a literary work in India?",
     options: [
       "20 years from creation",
@@ -392,7 +392,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q28",
     section: "Legal Reasoning",
-    passage: `Copyright is a form of intellectual property...`,
+    passage: `Copyright is a form of intellectual property protection granted to the creators of original works of authorship, including literary, dramatic, musical, and artistic works, as well as cinematograph films and sound recordings. In India, copyright is governed by the Copyright Act, 1957. Copyright protection begins the moment the work is created and fixed in a tangible medium. Registration is not mandatory for protection but is prima facie evidence of ownership. The duration of copyright for most works is the lifetime of the author plus 60 years. One key doctrine in copyright law is 'Fair Use' (or Fair Dealing). Section 52 of the Act lists certain acts that do not constitute infringement, such as use for private research, criticism or review, reporting current events, and use in educational instruction. Crucially, copyright protects the 'expression' of an idea, not the 'idea' itself. This is known as the 'Idea-Expression Dichotomy'. Two people can write different books about the same historical event (the idea), but they cannot copy the specific words and structure (the expression) of each other's books.`,
     question: "Is registration of a work mandatory to get copyright protection in India?",
     options: [
       "Yes, protection only starts from the date of registration.",
@@ -406,7 +406,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q29",
     section: "Legal Reasoning",
-    passage: `Copyright is a form of intellectual property...`,
+    passage: `Copyright is a form of intellectual property protection granted to the creators of original works of authorship, including literary, dramatic, musical, and artistic works, as well as cinematograph films and sound recordings. In India, copyright is governed by the Copyright Act, 1957. Copyright protection begins the moment the work is created and fixed in a tangible medium. Registration is not mandatory for protection but is prima facie evidence of ownership. The duration of copyright for most works is the lifetime of the author plus 60 years. One key doctrine in copyright law is 'Fair Use' (or Fair Dealing). Section 52 of the Act lists certain acts that do not constitute infringement, such as use for private research, criticism or review, reporting current events, and use in educational instruction. Crucially, copyright protects the 'expression' of an idea, not the 'idea' itself. This is known as the 'Idea-Expression Dichotomy'. Two people can write different books about the same historical event (the idea), but they cannot copy the specific words and structure (the expression) of each other's books.`,
     question: "An artist paints a portrait of a famous actor. The actor sues the artist for using his 'face' without permission. Is this a copyright issue?",
     options: [
       "Yes, the actor owns the copyright to his own face.",
@@ -420,7 +420,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q30",
     section: "Legal Reasoning",
-    passage: `Copyright is a form of intellectual property...`,
+    passage: `Copyright is a form of intellectual property protection granted to the creators of original works of authorship, including literary, dramatic, musical, and artistic works, as well as cinematograph films and sound recordings. In India, copyright is governed by the Copyright Act, 1957. Copyright protection begins the moment the work is created and fixed in a tangible medium. Registration is not mandatory for protection but is prima facie evidence of ownership. The duration of copyright for most works is the lifetime of the author plus 60 years. One key doctrine in copyright law is 'Fair Use' (or Fair Dealing). Section 52 of the Act lists certain acts that do not constitute infringement, such as use for private research, criticism or review, reporting current events, and use in educational instruction. Crucially, copyright protects the 'expression' of an idea, not the 'idea' itself. This is known as the 'Idea-Expression Dichotomy'. Two people can write different books about the same historical event (the idea), but they cannot copy the specific words and structure (the expression) of each other's books.`,
     question: "Which of the following is NOT protected under the Copyright Act, 1957?",
     options: [
       "A computer program",
@@ -451,7 +451,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q32",
     section: "Verbal Reasoning",
-    passage: `Artificial Intelligence (AI) has rapidly...`,
+    passage: `Artificial Intelligence (AI) has rapidly transitioned from a science-fiction trope to an omnipresent force in modern society. While its potential to revolutionize healthcare, logistics, and climate modeling is undeniable, it brings with it a complex web of ethical dilemmas. One of the most pressing concerns is 'algorithmic bias'. AI systems are trained on vast datasets that often reflect historical human prejudices. Consequently, if an AI is used in recruitment or judicial sentencing, it may inadvertently perpetuate discrimination against marginalized groups. Furthermore, the 'black box' problem—where the decision-making process of advanced neural networks is opaque even to their creators—raises questions about accountability. If an autonomous vehicle causes an accident, who is responsible: the developer, the car owner, or the AI itself? Critics also warn of the 'alignment problem', the challenge of ensuring that super-intelligent systems act in accordance with human values. As AI becomes more autonomous, the need for robust regulatory frameworks becomes critical. However, over-regulation risks stifling innovation and ceding a competitive edge to less-regulated nations. The challenge for policymakers, therefore, is to strike a delicate balance between fostering technological progress and safeguarding fundamental human rights.`,
     question: "According to the passage, how does 'algorithmic bias' occur?",
     options: [
       "AI systems are programmed by people who hate diversity.",
@@ -465,7 +465,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q33",
     section: "Verbal Reasoning",
-    passage: `Artificial Intelligence (AI) has rapidly...`,
+    passage: `Artificial Intelligence (AI) has rapidly transitioned from a science-fiction trope to an omnipresent force in modern society. While its potential to revolutionize healthcare, logistics, and climate modeling is undeniable, it brings with it a complex web of ethical dilemmas. One of the most pressing concerns is 'algorithmic bias'. AI systems are trained on vast datasets that often reflect historical human prejudices. Consequently, if an AI is used in recruitment or judicial sentencing, it may inadvertently perpetuate discrimination against marginalized groups. Furthermore, the 'black box' problem—where the decision-making process of advanced neural networks is opaque even to their creators—raises questions about accountability. If an autonomous vehicle causes an accident, who is responsible: the developer, the car owner, or the AI itself? Critics also warn of the 'alignment problem', the challenge of ensuring that super-intelligent systems act in accordance with human values. As AI becomes more autonomous, the need for robust regulatory frameworks becomes critical. However, over-regulation risks stifling innovation and ceding a competitive edge to less-regulated nations. The challenge for policymakers, therefore, is to strike a delicate balance between fostering technological progress and safeguarding fundamental human rights.`,
     question: "What is the 'alignment problem' mentioned in the passage?",
     options: [
       "The difficulty of making AI work on different operating systems.",
@@ -479,7 +479,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q34",
     section: "Verbal Reasoning",
-    passage: `Artificial Intelligence (AI) has rapidly...`,
+    passage: `Artificial Intelligence (AI) has rapidly transitioned from a science-fiction trope to an omnipresent force in modern society. While its potential to revolutionize healthcare, logistics, and climate modeling is undeniable, it brings with it a complex web of ethical dilemmas. One of the most pressing concerns is 'algorithmic bias'. AI systems are trained on vast datasets that often reflect historical human prejudices. Consequently, if an AI is used in recruitment or judicial sentencing, it may inadvertently perpetuate discrimination against marginalized groups. Furthermore, the 'black box' problem—where the decision-making process of advanced neural networks is opaque even to their creators—raises questions about accountability. If an autonomous vehicle causes an accident, who is responsible: the developer, the car owner, or the AI itself? Critics also warn of the 'alignment problem', the challenge of ensuring that super-intelligent systems act in accordance with human values. As AI becomes more autonomous, the need for robust regulatory frameworks becomes critical. However, over-regulation risks stifling innovation and ceding a competitive edge to less-regulated nations. The challenge for policymakers, therefore, is to strike a delicate balance between fostering technological progress and safeguarding fundamental human rights.`,
     question: "The author suggests that over-regulation of AI could lead to:",
     options: [
       "Better protection of human rights.",
@@ -493,7 +493,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q35",
     section: "Verbal Reasoning",
-    passage: `Artificial Intelligence (AI) has rapidly...`,
+    passage: `Artificial Intelligence (AI) has rapidly transitioned from a science-fiction trope to an omnipresent force in modern society. While its potential to revolutionize healthcare, logistics, and climate modeling is undeniable, it brings with it a complex web of ethical dilemmas. One of the most pressing concerns is 'algorithmic bias'. AI systems are trained on vast datasets that often reflect historical human prejudices. Consequently, if an AI is used in recruitment or judicial sentencing, it may inadvertently perpetuate discrimination against marginalized groups. Furthermore, the 'black box' problem—where the decision-making process of advanced neural networks is opaque even to their creators—raises questions about accountability. If an autonomous vehicle causes an accident, who is responsible: the developer, the car owner, or the AI itself? Critics also warn of the 'alignment problem', the challenge of ensuring that super-intelligent systems act in accordance with human values. As AI becomes more autonomous, the need for robust regulatory frameworks becomes critical. However, over-regulation risks stifling innovation and ceding a competitive edge to less-regulated nations. The challenge for policymakers, therefore, is to strike a delicate balance between fostering technological progress and safeguarding fundamental human rights.`,
     question: "The tone of the passage is best described as:",
     options: [
       "Alarmist and pessimistic",
@@ -507,7 +507,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q36",
     section: "Verbal Reasoning",
-    passage: `Artificial Intelligence (AI) has rapidly...`,
+    passage: `Artificial Intelligence (AI) has rapidly transitioned from a science-fiction trope to an omnipresent force in modern society. While its potential to revolutionize healthcare, logistics, and climate modeling is undeniable, it brings with it a complex web of ethical dilemmas. One of the most pressing concerns is 'algorithmic bias'. AI systems are trained on vast datasets that often reflect historical human prejudices. Consequently, if an AI is used in recruitment or judicial sentencing, it may inadvertently perpetuate discrimination against marginalized groups. Furthermore, the 'black box' problem—where the decision-making process of advanced neural networks is opaque even to their creators—raises questions about accountability. If an autonomous vehicle causes an accident, who is responsible: the developer, the car owner, or the AI itself? Critics also warn of the 'alignment problem', the challenge of ensuring that super-intelligent systems act in accordance with human values. As AI becomes more autonomous, the need for robust regulatory frameworks becomes critical. However, over-regulation risks stifling innovation and ceding a competitive edge to less-regulated nations. The challenge for policymakers, therefore, is to strike a delicate balance between fostering technological progress and safeguarding fundamental human rights.`,
     question: "Which word from the passage means 'present everywhere'?",
     options: [
       "Opaque",
@@ -537,7 +537,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q38",
     section: "Verbal Reasoning",
-    passage: `Language is not a static monolith...`,
+    passage: `Language is not a static monolith; it is a living, breathing entity that evolves in response to social, technological, and cultural shifts. The rise of digital communication has accelerated this process significantly. In the past, linguistic changes occurred over centuries as populations migrated and cultures merged. Today, a single internet meme can introduce a new word or grammatical structure to millions of people overnight. This 'linguistic fluidity' is often viewed with skepticism by traditionalists, who see the proliferation of 'netspeak' and slang as a degradation of the language. However, linguists argue that these changes represent a natural adaptation to new modes of communication. For example, the use of emojis and acronyms like 'LOL' is not a sign of laziness, but rather an attempt to reintroduce the nuances of tone and facial expression into text-based interactions. Furthermore, the global dominance of English has led to the emergence of 'World Englishes'—localized varieties that incorporate regional vocabulary and syntax. Rather than being 'incorrect' versions of standard English, these varieties are a testament to the language's versatility and its role as a global lingua franca.`,
     question: "According to the passage, why do people use emojis and acronyms?",
     options: [
       "Because they are too lazy to type full words.",
@@ -551,7 +551,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q39",
     section: "Verbal Reasoning",
-    passage: `Language is not a static monolith...`,
+    passage: `Language is not a static monolith; it is a living, breathing entity that evolves in response to social, technological, and cultural shifts. The rise of digital communication has accelerated this process significantly. In the past, linguistic changes occurred over centuries as populations migrated and cultures merged. Today, a single internet meme can introduce a new word or grammatical structure to millions of people overnight. This 'linguistic fluidity' is often viewed with skepticism by traditionalists, who see the proliferation of 'netspeak' and slang as a degradation of the language. However, linguists argue that these changes represent a natural adaptation to new modes of communication. For example, the use of emojis and acronyms like 'LOL' is not a sign of laziness, but rather an attempt to reintroduce the nuances of tone and facial expression into text-based interactions. Furthermore, the global dominance of English has led to the emergence of 'World Englishes'—localized varieties that incorporate regional vocabulary and syntax. Rather than being 'incorrect' versions of standard English, these varieties are a testament to the language's versatility and its role as a global lingua franca.`,
     question: "What are 'World Englishes'?",
     options: [
       "Incorrect versions of English used by non-native speakers.",
@@ -565,7 +565,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q40",
     section: "Verbal Reasoning",
-    passage: `Language is not a static monolith...`,
+    passage: `Language is not a static monolith; it is a living, breathing entity that evolves in response to social, technological, and cultural shifts. The rise of digital communication has accelerated this process significantly. In the past, linguistic changes occurred over centuries as populations migrated and cultures merged. Today, a single internet meme can introduce a new word or grammatical structure to millions of people overnight. This 'linguistic fluidity' is often viewed with skepticism by traditionalists, who see the proliferation of 'netspeak' and slang as a degradation of the language. However, linguists argue that these changes represent a natural adaptation to new modes of communication. For example, the use of emojis and acronyms like 'LOL' is not a sign of laziness, but rather an attempt to reintroduce the nuances of tone and facial expression into text-based interactions. Furthermore, the global dominance of English has led to the emergence of 'World Englishes'—localized varieties that incorporate regional vocabulary and syntax. Rather than being 'incorrect' versions of standard English, these varieties are a testament to the language's versatility and its role as a global lingua franca.`,
     question: "The author's view of 'netspeak' and slang is:",
     options: [
       "Hostile and dismissive.",
@@ -579,7 +579,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q41",
     section: "Verbal Reasoning",
-    passage: `Language is not a static monolith...`,
+    passage: `Language is not a static monolith; it is a living, breathing entity that evolves in response to social, technological, and cultural shifts. The rise of digital communication has accelerated this process significantly. In the past, linguistic changes occurred over centuries as populations migrated and cultures merged. Today, a single internet meme can introduce a new word or grammatical structure to millions of people overnight. This 'linguistic fluidity' is often viewed with skepticism by traditionalists, who see the proliferation of 'netspeak' and slang as a degradation of the language. However, linguists argue that these changes represent a natural adaptation to new modes of communication. For example, the use of emojis and acronyms like 'LOL' is not a sign of laziness, but rather an attempt to reintroduce the nuances of tone and facial expression into text-based interactions. Furthermore, the global dominance of English has led to the emergence of 'World Englishes'—localized varieties that incorporate regional vocabulary and syntax. Rather than being 'incorrect' versions of standard English, these varieties are a testament to the language's versatility and its role as a global lingua franca.`,
     question: "What does 'lingua franca' mean in the context of the passage?",
     options: [
       "A language of the French people.",
@@ -593,7 +593,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q42",
     section: "Verbal Reasoning",
-    passage: `Language is not a static monolith...`,
+    passage: `Language is not a static monolith; it is a living, breathing entity that evolves in response to social, technological, and cultural shifts. The rise of digital communication has accelerated this process significantly. In the past, linguistic changes occurred over centuries as populations migrated and cultures merged. Today, a single internet meme can introduce a new word or grammatical structure to millions of people overnight. This 'linguistic fluidity' is often viewed with skepticism by traditionalists, who see the proliferation of 'netspeak' and slang as a degradation of the language. However, linguists argue that these changes represent a natural adaptation to new modes of communication. For example, the use of emojis and acronyms like 'LOL' is not a sign of laziness, but rather an attempt to reintroduce the nuances of tone and facial expression into text-based interactions. Furthermore, the global dominance of English has led to the emergence of 'World Englishes'—localized varieties that incorporate regional vocabulary and syntax. Rather than being 'incorrect' versions of standard English, these varieties are a testament to the language's versatility and its role as a global lingua franca.`,
     question: "The word 'monolith' in the first sentence is used to describe something that is:",
     options: [
       "Small and insignificant.",
@@ -623,7 +623,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q44",
     section: "Verbal Reasoning",
-    passage: `In his seminal work...`,
+    passage: `In his seminal work on the psychology of influence, Robert Cialdini identifies six 'weapons of influence' that govern how we are persuaded. The first is 'Reciprocity'—the internal drive to return a favor. When a brand gives us a free sample, we feel a subtle obligation to purchase their product. 'Social Proof' is the tendency to follow the actions of others in uncertain situations; hence the power of user testimonials and 'bestseller' labels. 'Authority' suggests that we are more likely to be persuaded by those we perceive as experts or figures of power. 'Liking' is the simple fact that we say 'yes' to those we find attractive, similar to us, or who give us compliments. 'Consistency' refers to our desire to be true to our past commitments and public statements. Finally, 'Scarcity' exploits our fear of missing out; 'limited time offers' and 'last items in stock' trigger an urgent response in the brain. Understanding these principles is not just useful for marketers but essential for consumers. By recognizing these psychological triggers, we can make more rational decisions and resist the subtle manipulations that permeate our daily environment.`,
     question: "What does the principle of 'Reciprocity' imply?",
     options: [
       "The more people use a product, the better it is.",
@@ -637,7 +637,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q45",
     section: "Verbal Reasoning",
-    passage: `In his seminal work...`,
+    passage: `In his seminal work on the psychology of influence, Robert Cialdini identifies six 'weapons of influence' that govern how we are persuaded. The first is 'Reciprocity'—the internal drive to return a favor. When a brand gives us a free sample, we feel a subtle obligation to purchase their product. 'Social Proof' is the tendency to follow the actions of others in uncertain situations; hence the power of user testimonials and 'bestseller' labels. 'Authority' suggests that we are more likely to be persuaded by those we perceive as experts or figures of power. 'Liking' is the simple fact that we say 'yes' to those we find attractive, similar to us, or who give us compliments. 'Consistency' refers to our desire to be true to our past commitments and public statements. Finally, 'Scarcity' exploits our fear of missing out; 'limited time offers' and 'last items in stock' trigger an urgent response in the brain. Understanding these principles is not just useful for marketers but essential for consumers. By recognizing these psychological triggers, we can make more rational decisions and resist the subtle manipulations that permeate our daily environment.`,
     question: "Why do companies use celebrity endorsements according to Cialdini's principles?",
     options: [
       "To trigger the 'Scarcity' principle.",
@@ -651,7 +651,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q46",
     section: "Verbal Reasoning",
-    passage: `In his seminal work...`,
+    passage: `In his seminal work on the psychology of influence, Robert Cialdini identifies six 'weapons of influence' that govern how we are persuaded. The first is 'Reciprocity'—the internal drive to return a favor. When a brand gives us a free sample, we feel a subtle obligation to purchase their product. 'Social Proof' is the tendency to follow the actions of others in uncertain situations; hence the power of user testimonials and 'bestseller' labels. 'Authority' suggests that we are more likely to be persuaded by those we perceive as experts or figures of power. 'Liking' is the simple fact that we say 'yes' to those we find attractive, similar to us, or who give us compliments. 'Consistency' refers to our desire to be true to our past commitments and public statements. Finally, 'Scarcity' exploits our fear of missing out; 'limited time offers' and 'last items in stock' trigger an urgent response in the brain. Understanding these principles is not just useful for marketers but essential for consumers. By recognizing these psychological triggers, we can make more rational decisions and resist the subtle manipulations that permeate our daily environment.`,
     question: "According to the passage, why should consumers understand these principles?",
     options: [
       "To become better marketers themselves.",
@@ -665,7 +665,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q47",
     section: "Verbal Reasoning",
-    passage: `In his seminal work...`,
+    passage: `In his seminal work on the psychology of influence, Robert Cialdini identifies six 'weapons of influence' that govern how we are persuaded. The first is 'Reciprocity'—the internal drive to return a favor. When a brand gives us a free sample, we feel a subtle obligation to purchase their product. 'Social Proof' is the tendency to follow the actions of others in uncertain situations; hence the power of user testimonials and 'bestseller' labels. 'Authority' suggests that we are more likely to be persuaded by those we perceive as experts or figures of power. 'Liking' is the simple fact that we say 'yes' to those we find attractive, similar to us, or who give us compliments. 'Consistency' refers to our desire to be true to our past commitments and public statements. Finally, 'Scarcity' exploits our fear of missing out; 'limited time offers' and 'last items in stock' trigger an urgent response in the brain. Understanding these principles is not just useful for marketers but essential for consumers. By recognizing these psychological triggers, we can make more rational decisions and resist the subtle manipulations that permeate our daily environment.`,
     question: "The word 'permeate' in the last sentence most nearly means:",
     options: [
       "Ignore",
@@ -679,7 +679,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q48",
     section: "Verbal Reasoning",
-    passage: `In his seminal work...`,
+    passage: `In his seminal work on the psychology of influence, Robert Cialdini identifies six 'weapons of influence' that govern how we are persuaded. The first is 'Reciprocity'—the internal drive to return a favor. When a brand gives us a free sample, we feel a subtle obligation to purchase their product. 'Social Proof' is the tendency to follow the actions of others in uncertain situations; hence the power of user testimonials and 'bestseller' labels. 'Authority' suggests that we are more likely to be persuaded by those we perceive as experts or figures of power. 'Liking' is the simple fact that we say 'yes' to those we find attractive, similar to us, or who give us compliments. 'Consistency' refers to our desire to be true to our past commitments and public statements. Finally, 'Scarcity' exploits our fear of missing out; 'limited time offers' and 'last items in stock' trigger an urgent response in the brain. Understanding these principles is not just useful for marketers but essential for consumers. By recognizing these psychological triggers, we can make more rational decisions and resist the subtle manipulations that permeate our daily environment.`,
     question: "Which of the following is an example of 'Social Proof'?",
     options: [
       "Buying a book because it has a 'Bestseller' badge and thousands of 5-star reviews.",
@@ -803,7 +803,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q62",
     section: "Logical Reasoning",
-    passage: `Six law students...`,
+    passage: `Six law students—Arjun, Bimal, Chitra, Divya, Esha, and Farhan—are sitting in a row facing North. Arjun sits second to the left of Farhan. Chitra sits at one of the extreme ends. There are two people sitting between Chitra and Bimal. Esha is not an immediate neighbor of Arjun or Bimal. Divya sits to the immediate left of Bimal.`,
     question: "Who is sitting exactly between Arjun and Bimal?",
     options: ["Farhan", "Esha", "Divya", "Chitra"],
     correct: 2,
@@ -812,7 +812,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q63",
     section: "Logical Reasoning",
-    passage: `Six law students...`,
+    passage: `Six law students—Arjun, Bimal, Chitra, Divya, Esha, and Farhan—are sitting in a row facing North. Arjun sits second to the left of Farhan. Chitra sits at one of the extreme ends. There are two people sitting between Chitra and Bimal. Esha is not an immediate neighbor of Arjun or Bimal. Divya sits to the immediate left of Bimal.`,
     question: "How many people are sitting between Esha and Farhan?",
     options: ["Two", "Three", "Four", "One"],
     correct: 1,
@@ -821,7 +821,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q64",
     section: "Logical Reasoning",
-    passage: `Six law students...`,
+    passage: `Six law students—Arjun, Bimal, Chitra, Divya, Esha, and Farhan—are sitting in a row facing North. Arjun sits second to the left of Farhan. Chitra sits at one of the extreme ends. There are two people sitting between Chitra and Bimal. Esha is not an immediate neighbor of Arjun or Bimal. Divya sits to the immediate left of Bimal.`,
     question: "If Chitra and Farhan swap their seats, who will be to the immediate right of Esha?",
     options: ["Arjun", "Bimal", "Farhan", "Divya"],
     correct: 0,
@@ -830,7 +830,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q65",
     section: "Logical Reasoning",
-    passage: `Six law students...`,
+    passage: `Six law students—Arjun, Bimal, Chitra, Divya, Esha, and Farhan—are sitting in a row facing North. Arjun sits second to the left of Farhan. Chitra sits at one of the extreme ends. There are two people sitting between Chitra and Bimal. Esha is not an immediate neighbor of Arjun or Bimal. Divya sits to the immediate left of Bimal.`,
     question: "Which of the following pairs is sitting at the extreme ends?",
     options: ["Arjun & Farhan", "Chitra & Esha", "Chitra & Farhan", "Divya & Bimal"],
     correct: 2,
@@ -1055,7 +1055,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q92",
     section: "Quantitative Reasoning",
-    passage: `A law firm has 120 employees...`,
+    passage: `A law firm has 120 employees. 40% are lawyers, 30% are paralegals, 20% are administrative staff, and the rest are interns. Among lawyers, 60% are female. Among paralegals, 50% are female.`,
     question: "What is the total number of female lawyers and female paralegals combined?",
     options: ["42", "45", "46", "48"],
     correct: 2,
@@ -1064,7 +1064,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q93",
     section: "Quantitative Reasoning",
-    passage: `A law firm has 120 employees...`,
+    passage: `A law firm has 120 employees. 40% are lawyers, 30% are paralegals, 20% are administrative staff, and the rest are interns. Among lawyers, 60% are female. Among paralegals, 50% are female.`,
     question: "What is the ratio of lawyers to administrative staff?",
     options: ["2:1", "1:2", "3:2", "4:3"],
     correct: 0,
@@ -1073,7 +1073,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q94",
     section: "Quantitative Reasoning",
-    passage: `A law firm has 120 employees...`,
+    passage: `A law firm has 120 employees. 40% are lawyers, 30% are paralegals, 20% are administrative staff, and the rest are interns. Among lawyers, 60% are female. Among paralegals, 50% are female.`,
     question: "If 5 new lawyers join the firm, what will be the new total number of employees?",
     options: ["125", "130", "140", "150"],
     correct: 0,
@@ -1082,7 +1082,7 @@ export const NLAT_MOCK_1: MockQuestion[] = [
   {
     id: "nlat-1-q95",
     section: "Quantitative Reasoning",
-    passage: `A law firm has 120 employees...`,
+    passage: `A law firm has 120 employees. 40% are lawyers, 30% are paralegals, 20% are administrative staff, and the rest are interns. Among lawyers, 60% are female. Among paralegals, 50% are female.`,
     question: "How many female lawyers are there in the firm? (Assuming 60% of 48)",
     options: ["24", "28", "29", "30"],
     correct: 2,

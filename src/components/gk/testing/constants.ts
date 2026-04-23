@@ -93,7 +93,7 @@ export type ExamType = "NLAT" | "MHCET"; // | "CLAT" | "AILET";
 export interface MockQuestion {
   id: string;
   question: string;
-  options: [string, string, string, string];
+  options: string[];
   correct: number;
   explanation: string;
   passage?: string;

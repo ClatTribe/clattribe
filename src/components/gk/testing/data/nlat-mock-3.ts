@@ -20,7 +20,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q2",
     section: "Legal Reasoning",
-    passage: `Article 19(1)(a) of the Indian Constitution...`,
+    passage: `Article 19(1)(a) of the Indian Constitution guarantees the freedom of speech and expression. However, this right is not absolute and is subject to 'reasonable restrictions' under Article 19(2) in the interests of the sovereignty and integrity of India, the security of the State, friendly relations with foreign States, public order, decency or morality, or in relation to contempt of court, defamation, or incitement to an offence. One of the most controversial restrictions has been the law of 'Sedition' (Section 124A of the IPC, now replaced by similar provisions in the BNS). In the landmark case of Kedar Nath Singh v. State of Bihar (1962), the Supreme Court upheld the constitutionality of sedition but narrowed its scope. The Court held that criticism of the government, however strongly worded, is not sedition unless it involves an 'incitement to violence' or the 'intention to create public disorder'. Mere 'disaffection' or 'bad feelings' toward the government are not sufficient to constitute a crime. Recently, in S.G. Vombatkere v. Union of India (2022), the Supreme Court put the law of sedition in abeyance, directing governments not to file new cases until the law is reviewed.`,
     question: "The Government bans a book because it contains 'strong language' that some people might find 'indecent'. Under which head of Article 19(2) can the government justify this restriction?",
     options: [
       "Security of the State",
@@ -34,7 +34,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q3",
     section: "Legal Reasoning",
-    passage: `Article 19(1)(a) of the Indian Constitution...`,
+    passage: `Article 19(1)(a) of the Indian Constitution guarantees the freedom of speech and expression. However, this right is not absolute and is subject to 'reasonable restrictions' under Article 19(2) in the interests of the sovereignty and integrity of India, the security of the State, friendly relations with foreign States, public order, decency or morality, or in relation to contempt of court, defamation, or incitement to an offence. One of the most controversial restrictions has been the law of 'Sedition' (Section 124A of the IPC, now replaced by similar provisions in the BNS). In the landmark case of Kedar Nath Singh v. State of Bihar (1962), the Supreme Court upheld the constitutionality of sedition but narrowed its scope. The Court held that criticism of the government, however strongly worded, is not sedition unless it involves an 'incitement to violence' or the 'intention to create public disorder'. Mere 'disaffection' or 'bad feelings' toward the government are not sufficient to constitute a crime. Recently, in S.G. Vombatkere v. Union of India (2022), the Supreme Court put the law of sedition in abeyance, directing governments not to file new cases until the law is reviewed.`,
     question: "What did the Supreme Court decide in the S.G. Vombatkere (2022) case regarding sedition?",
     options: [
       "It declared sedition unconstitutional and removed it from the IPC.",
@@ -48,7 +48,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q4",
     section: "Legal Reasoning",
-    passage: `Article 19(1)(a) of the Indian Constitution...`,
+    passage: `Article 19(1)(a) of the Indian Constitution guarantees the freedom of speech and expression. However, this right is not absolute and is subject to 'reasonable restrictions' under Article 19(2) in the interests of the sovereignty and integrity of India, the security of the State, friendly relations with foreign States, public order, decency or morality, or in relation to contempt of court, defamation, or incitement to an offence. One of the most controversial restrictions has been the law of 'Sedition' (Section 124A of the IPC, now replaced by similar provisions in the BNS). In the landmark case of Kedar Nath Singh v. State of Bihar (1962), the Supreme Court upheld the constitutionality of sedition but narrowed its scope. The Court held that criticism of the government, however strongly worded, is not sedition unless it involves an 'incitement to violence' or the 'intention to create public disorder'. Mere 'disaffection' or 'bad feelings' toward the government are not sufficient to constitute a crime. Recently, in S.G. Vombatkere v. Union of India (2022), the Supreme Court put the law of sedition in abeyance, directing governments not to file new cases until the law is reviewed.`,
     question: "Aman makes a speech in a public square urging people to 'pick up arms and overthrow the elected government'. Is this protected under Article 19(1)(a)?",
     options: [
       "Yes, it is just an expression of his opinion.",
@@ -62,7 +62,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q5",
     section: "Legal Reasoning",
-    passage: `Article 19(1)(a) of the Indian Constitution...`,
+    passage: `Article 19(1)(a) of the Indian Constitution guarantees the freedom of speech and expression. However, this right is not absolute and is subject to 'reasonable restrictions' under Article 19(2) in the interests of the sovereignty and integrity of India, the security of the State, friendly relations with foreign States, public order, decency or morality, or in relation to contempt of court, defamation, or incitement to an offence. One of the most controversial restrictions has been the law of 'Sedition' (Section 124A of the IPC, now replaced by similar provisions in the BNS). In the landmark case of Kedar Nath Singh v. State of Bihar (1962), the Supreme Court upheld the constitutionality of sedition but narrowed its scope. The Court held that criticism of the government, however strongly worded, is not sedition unless it involves an 'incitement to violence' or the 'intention to create public disorder'. Mere 'disaffection' or 'bad feelings' toward the government are not sufficient to constitute a crime. Recently, in S.G. Vombatkere v. Union of India (2022), the Supreme Court put the law of sedition in abeyance, directing governments not to file new cases until the law is reviewed.`,
     question: "The term 'Disaffection' in the context of sedition law traditionally meant:",
     options: [
       "Criticism of policies",
@@ -76,7 +76,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q6",
     section: "Legal Reasoning",
-    passage: `Article 19(1)(a) of the Indian Constitution...`,
+    passage: `Article 19(1)(a) of the Indian Constitution guarantees the freedom of speech and expression. However, this right is not absolute and is subject to 'reasonable restrictions' under Article 19(2) in the interests of the sovereignty and integrity of India, the security of the State, friendly relations with foreign States, public order, decency or morality, or in relation to contempt of court, defamation, or incitement to an offence. One of the most controversial restrictions has been the law of 'Sedition' (Section 124A of the IPC, now replaced by similar provisions in the BNS). In the landmark case of Kedar Nath Singh v. State of Bihar (1962), the Supreme Court upheld the constitutionality of sedition but narrowed its scope. The Court held that criticism of the government, however strongly worded, is not sedition unless it involves an 'incitement to violence' or the 'intention to create public disorder'. Mere 'disaffection' or 'bad feelings' toward the government are not sufficient to constitute a crime. Recently, in S.G. Vombatkere v. Union of India (2022), the Supreme Court put the law of sedition in abeyance, directing governments not to file new cases until the law is reviewed.`,
     question: "Which of the following is NOT a ground for restricting free speech under Article 19(2)?",
     options: [
       "Public Order",
@@ -106,7 +106,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q8",
     section: "Legal Reasoning",
-    passage: `For an agreement to be a valid contract...`,
+    passage: `For an agreement to be a valid contract, the parties must be 'competent' to contract. Under Section 11 of the Indian Contract Act, every person is competent to contract who is: (i) of the age of majority (18 years), (ii) of sound mind, and (iii) not disqualified from contracting by any law. In the landmark case of Mohori Bibee v. Dharmodas Ghose (1903), the Privy Council held that a contract with a minor is 'void ab initio'—meaning it is void from the very beginning. Unlike some other legal systems, a minor's contract in India cannot even be 'ratified' (approved) by the minor after they turn 18. However, a minor can be a beneficiary under a contract (e.g., they can be a promisee but not a promisor). Furthermore, under Section 68, if a person supplies 'necessaries' (food, clothing, education) to a minor, they are entitled to be reimbursed from the minor's property. Regarding 'soundness of mind', a person is of sound mind if, at the time of making the contract, they are capable of understanding it and of forming a rational judgment as to its effect upon their interests.`,
     question: "Aman, aged 16, buys a luxury watch on credit. The shopkeeper sues for the money. Can Aman be forced to pay?",
     options: [
       "Yes, a minor must pay for what they buy.",
@@ -120,7 +120,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q9",
     section: "Legal Reasoning",
-    passage: `For an agreement to be a valid contract...`,
+    passage: `For an agreement to be a valid contract, the parties must be 'competent' to contract. Under Section 11 of the Indian Contract Act, every person is competent to contract who is: (i) of the age of majority (18 years), (ii) of sound mind, and (iii) not disqualified from contracting by any law. In the landmark case of Mohori Bibee v. Dharmodas Ghose (1903), the Privy Council held that a contract with a minor is 'void ab initio'—meaning it is void from the very beginning. Unlike some other legal systems, a minor's contract in India cannot even be 'ratified' (approved) by the minor after they turn 18. However, a minor can be a beneficiary under a contract (e.g., they can be a promisee but not a promisor). Furthermore, under Section 68, if a person supplies 'necessaries' (food, clothing, education) to a minor, they are entitled to be reimbursed from the minor's property. Regarding 'soundness of mind', a person is of sound mind if, at the time of making the contract, they are capable of understanding it and of forming a rational judgment as to its effect upon their interests.`,
     question: "A shopkeeper provides food and basic clothing to Aman, an orphan aged 10. Can the shopkeeper recover the cost?",
     options: [
       "No, contracts with 10-year-olds are void.",
@@ -134,7 +134,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q10",
     section: "Legal Reasoning",
-    passage: `For an agreement to be a valid contract...`,
+    passage: `For an agreement to be a valid contract, the parties must be 'competent' to contract. Under Section 11 of the Indian Contract Act, every person is competent to contract who is: (i) of the age of majority (18 years), (ii) of sound mind, and (iii) not disqualified from contracting by any law. In the landmark case of Mohori Bibee v. Dharmodas Ghose (1903), the Privy Council held that a contract with a minor is 'void ab initio'—meaning it is void from the very beginning. Unlike some other legal systems, a minor's contract in India cannot even be 'ratified' (approved) by the minor after they turn 18. However, a minor can be a beneficiary under a contract (e.g., they can be a promisee but not a promisor). Furthermore, under Section 68, if a person supplies 'necessaries' (food, clothing, education) to a minor, they are entitled to be reimbursed from the minor's property. Regarding 'soundness of mind', a person is of sound mind if, at the time of making the contract, they are capable of understanding it and of forming a rational judgment as to its effect upon their interests.`,
     question: "Aman, who is usually of sound mind, enters into a contract while he is in a state of severe intoxication and cannot understand the terms. Is the contract valid?",
     options: [
       "Yes, he is usually of sound mind.",
@@ -148,7 +148,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q11",
     section: "Legal Reasoning",
-    passage: `For an agreement to be a valid contract...`,
+    passage: `For an agreement to be a valid contract, the parties must be 'competent' to contract. Under Section 11 of the Indian Contract Act, every person is competent to contract who is: (i) of the age of majority (18 years), (ii) of sound mind, and (iii) not disqualified from contracting by any law. In the landmark case of Mohori Bibee v. Dharmodas Ghose (1903), the Privy Council held that a contract with a minor is 'void ab initio'—meaning it is void from the very beginning. Unlike some other legal systems, a minor's contract in India cannot even be 'ratified' (approved) by the minor after they turn 18. However, a minor can be a beneficiary under a contract (e.g., they can be a promisee but not a promisor). Furthermore, under Section 68, if a person supplies 'necessaries' (food, clothing, education) to a minor, they are entitled to be reimbursed from the minor's property. Regarding 'soundness of mind', a person is of sound mind if, at the time of making the contract, they are capable of understanding it and of forming a rational judgment as to its effect upon their interests.`,
     question: "Aman, aged 17, represents to a bank that he is 19 and takes a loan. Can the bank sue him for fraud?",
     options: [
       "Yes, he lied about his age.",
@@ -162,7 +162,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q12",
     section: "Legal Reasoning",
-    passage: `For an agreement to be a valid contract...`,
+    passage: `For an agreement to be a valid contract, the parties must be 'competent' to contract. Under Section 11 of the Indian Contract Act, every person is competent to contract who is: (i) of the age of majority (18 years), (ii) of sound mind, and (iii) not disqualified from contracting by any law. In the landmark case of Mohori Bibee v. Dharmodas Ghose (1903), the Privy Council held that a contract with a minor is 'void ab initio'—meaning it is void from the very beginning. Unlike some other legal systems, a minor's contract in India cannot even be 'ratified' (approved) by the minor after they turn 18. However, a minor can be a beneficiary under a contract (e.g., they can be a promisee but not a promisor). Furthermore, under Section 68, if a person supplies 'necessaries' (food, clothing, education) to a minor, they are entitled to be reimbursed from the minor's property. Regarding 'soundness of mind', a person is of sound mind if, at the time of making the contract, they are capable of understanding it and of forming a rational judgment as to its effect upon their interests.`,
     question: "Which of the following can a minor legally do?",
     options: [
       "Sign a mortgage deed as a borrower.",
@@ -192,7 +192,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q14",
     section: "Legal Reasoning",
-    passage: `Defamation is the publication...`,
+    passage: `Defamation is the publication of a false statement that tends to lower the reputation of a person in the estimation of right-thinking members of society. In India, defamation is both a civil wrong (tort) and a criminal offense (under BNS/IPC). There are two types: (1) Slander: Defamation in a transient form (spoken words, gestures); and (2) Libel: Defamation in a permanent form (writing, printing, pictures). For a statement to be defamatory, it must satisfy three conditions: (i) The statement must be defamatory; (ii) It must refer to the plaintiff; and (iii) It must be published (communicated to at least one person other than the plaintiff). Defenses to defamation include: (a) Truth/Justification: The statement is true; (b) Fair Comment: Honest opinion on a matter of public interest; and (c) Privilege: Situations where free speech is protected (e.g., statements made in Parliament or during judicial proceedings). Absolute privilege means no action can be taken even if the statement was made with malice, whereas Qualified privilege is lost if the plaintiff proves malice.`,
     question: "During a trial, a witness falsely states that the defendant has a criminal past. Can the defendant sue the witness for defamation?",
     options: [
       "Yes, it is a false and defamatory statement.",
@@ -206,7 +206,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q15",
     section: "Legal Reasoning",
-    passage: `Defamation is the publication...`,
+    passage: `Defamation is the publication of a false statement that tends to lower the reputation of a person in the estimation of right-thinking members of society. In India, defamation is both a civil wrong (tort) and a criminal offense (under BNS/IPC). There are two types: (1) Slander: Defamation in a transient form (spoken words, gestures); and (2) Libel: Defamation in a permanent form (writing, printing, pictures). For a statement to be defamatory, it must satisfy three conditions: (i) The statement must be defamatory; (ii) It must refer to the plaintiff; and (iii) It must be published (communicated to at least one person other than the plaintiff). Defenses to defamation include: (a) Truth/Justification: The statement is true; (b) Fair Comment: Honest opinion on a matter of public interest; and (c) Privilege: Situations where free speech is protected (e.g., statements made in Parliament or during judicial proceedings). Absolute privilege means no action can be taken even if the statement was made with malice, whereas Qualified privilege is lost if the plaintiff proves malice.`,
     question: "A journalist writes a review of a new movie, saying the acting was 'pathetic' and the director 'wasted public time'. Is this defamation?",
     options: [
       "Yes, it lowers the reputation of the director.",
@@ -220,7 +220,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q16",
     section: "Legal Reasoning",
-    passage: `Defamation is the publication...`,
+    passage: `Defamation is the publication of a false statement that tends to lower the reputation of a person in the estimation of right-thinking members of society. In India, defamation is both a civil wrong (tort) and a criminal offense (under BNS/IPC). There are two types: (1) Slander: Defamation in a transient form (spoken words, gestures); and (2) Libel: Defamation in a permanent form (writing, printing, pictures). For a statement to be defamatory, it must satisfy three conditions: (i) The statement must be defamatory; (ii) It must refer to the plaintiff; and (iii) It must be published (communicated to at least one person other than the plaintiff). Defenses to defamation include: (a) Truth/Justification: The statement is true; (b) Fair Comment: Honest opinion on a matter of public interest; and (c) Privilege: Situations where free speech is protected (e.g., statements made in Parliament or during judicial proceedings). Absolute privilege means no action can be taken even if the statement was made with malice, whereas Qualified privilege is lost if the plaintiff proves malice.`,
     question: "What is the difference between Libel and Slander in English Law?",
     options: [
       "Libel is criminal, Slander is civil.",
@@ -234,7 +234,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q17",
     section: "Legal Reasoning",
-    passage: `Defamation is the publication...`,
+    passage: `Defamation is the publication of a false statement that tends to lower the reputation of a person in the estimation of right-thinking members of society. In India, defamation is both a civil wrong (tort) and a criminal offense (under BNS/IPC). There are two types: (1) Slander: Defamation in a transient form (spoken words, gestures); and (2) Libel: Defamation in a permanent form (writing, printing, pictures). For a statement to be defamatory, it must satisfy three conditions: (i) The statement must be defamatory; (ii) It must refer to the plaintiff; and (iii) It must be published (communicated to at least one person other than the plaintiff). Defenses to defamation include: (a) Truth/Justification: The statement is true; (b) Fair Comment: Honest opinion on a matter of public interest; and (c) Privilege: Situations where free speech is protected (e.g., statements made in Parliament or during judicial proceedings). Absolute privilege means no action can be taken even if the statement was made with malice, whereas Qualified privilege is lost if the plaintiff proves malice.`,
     question: "Aman posts a photo of Mr. X with a caption: 'This man is a habitual gambler.' The statement is 100% true. Mr. X sues for defamation. Will he succeed?",
     options: [
       "Yes, it still hurts his reputation.",
@@ -248,7 +248,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q18",
     section: "Legal Reasoning",
-    passage: `Defamation is the publication...`,
+    passage: `Defamation is the publication of a false statement that tends to lower the reputation of a person in the estimation of right-thinking members of society. In India, defamation is both a civil wrong (tort) and a criminal offense (under BNS/IPC). There are two types: (1) Slander: Defamation in a transient form (spoken words, gestures); and (2) Libel: Defamation in a permanent form (writing, printing, pictures). For a statement to be defamatory, it must satisfy three conditions: (i) The statement must be defamatory; (ii) It must refer to the plaintiff; and (iii) It must be published (communicated to at least one person other than the plaintiff). Defenses to defamation include: (a) Truth/Justification: The statement is true; (b) Fair Comment: Honest opinion on a matter of public interest; and (c) Privilege: Situations where free speech is protected (e.g., statements made in Parliament or during judicial proceedings). Absolute privilege means no action can be taken even if the statement was made with malice, whereas Qualified privilege is lost if the plaintiff proves malice.`,
     question: "A newspaper mistakenly publishes a photo of 'Aman Sharma' (a doctor) next to a story about a 'thief caught in the city'. The story doesn't mention the doctor's name, but people recognize him. Is this defamation?",
     options: [
       "No, the newspaper didn't intend to defame him.",
@@ -278,7 +278,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q20",
     section: "Legal Reasoning",
-    passage: `The distinction between 'Culpable Homicide'...`,
+    passage: `The distinction between 'Culpable Homicide' and 'Murder' is one of the most complex areas of criminal law. All murders are culpable homicides, but not all culpable homicides are murders. Culpable Homicide (Section 299 IPC/BNS) is causing death by doing an act: (i) with the intention of causing death; (ii) with the intention of causing such bodily injury as is likely to cause death; or (iii) with the knowledge that the act is likely to cause death. Murder (Section 300 IPC/BNS) is a more aggravated form. It is murder if the act is done: (i) with the intention of causing death; (ii) with the intention of causing such bodily injury as the offender knows to be likely to cause death to the particular person; (iii) if the bodily injury is sufficient in the 'ordinary course of nature' to cause death; or (iv) if the act is so imminently dangerous that it must, in all probability, cause death. Murder is reduced to culpable homicide in five exceptions: (a) Grave and Sudden Provocation; (b) Private Defence (exceeding it in good faith); (c) Public Servant (exceeding power in good faith); (d) Sudden Fight; and (e) Consent (victim above 18).`,
     question: "Aman discovers his wife in an uncompromising position with another man. In a fit of uncontrollable rage, he kills the man. What is the most likely charge?",
     options: [
       "Murder",
@@ -292,7 +292,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q21",
     section: "Legal Reasoning",
-    passage: `The distinction between 'Culpable Homicide'...`,
+    passage: `The distinction between 'Culpable Homicide' and 'Murder' is one of the most complex areas of criminal law. All murders are culpable homicides, but not all culpable homicides are murders. Culpable Homicide (Section 299 IPC/BNS) is causing death by doing an act: (i) with the intention of causing death; (ii) with the intention of causing such bodily injury as is likely to cause death; or (iii) with the knowledge that the act is likely to cause death. Murder (Section 300 IPC/BNS) is a more aggravated form. It is murder if the act is done: (i) with the intention of causing death; (ii) with the intention of causing such bodily injury as the offender knows to be likely to cause death to the particular person; (iii) if the bodily injury is sufficient in the 'ordinary course of nature' to cause death; or (iv) if the act is so imminently dangerous that it must, in all probability, cause death. Murder is reduced to culpable homicide in five exceptions: (a) Grave and Sudden Provocation; (b) Private Defence (exceeding it in good faith); (c) Public Servant (exceeding power in good faith); (d) Sudden Fight; and (e) Consent (victim above 18).`,
     question: "Aman fires a gun into a crowded room without intending to kill anyone in particular. He kills Mr. X. This is murder because:",
     options: [
       "He intended to cause death.",
@@ -306,7 +306,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q22",
     section: "Legal Reasoning",
-    passage: `The distinction between 'Culpable Homicide'...`,
+    passage: `The distinction between 'Culpable Homicide' and 'Murder' is one of the most complex areas of criminal law. All murders are culpable homicides, but not all culpable homicides are murders. Culpable Homicide (Section 299 IPC/BNS) is causing death by doing an act: (i) with the intention of causing death; (ii) with the intention of causing such bodily injury as is likely to cause death; or (iii) with the knowledge that the act is likely to cause death. Murder (Section 300 IPC/BNS) is a more aggravated form. It is murder if the act is done: (i) with the intention of causing death; (ii) with the intention of causing such bodily injury as the offender knows to be likely to cause death to the particular person; (iii) if the bodily injury is sufficient in the 'ordinary course of nature' to cause death; or (iv) if the act is so imminently dangerous that it must, in all probability, cause death. Murder is reduced to culpable homicide in five exceptions: (a) Grave and Sudden Provocation; (b) Private Defence (exceeding it in good faith); (c) Public Servant (exceeding power in good faith); (d) Sudden Fight; and (e) Consent (victim above 18).`,
     question: "What is the key difference between 'Likely to cause death' and 'Ordinary course of nature to cause death'?",
     options: [
       "There is no difference.",
@@ -320,7 +320,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q23",
     section: "Legal Reasoning",
-    passage: `The distinction between 'Culpable Homicide'...`,
+    passage: `The distinction between 'Culpable Homicide' and 'Murder' is one of the most complex areas of criminal law. All murders are culpable homicides, but not all culpable homicides are murders. Culpable Homicide (Section 299 IPC/BNS) is causing death by doing an act: (i) with the intention of causing death; (ii) with the intention of causing such bodily injury as is likely to cause death; or (iii) with the knowledge that the act is likely to cause death. Murder (Section 300 IPC/BNS) is a more aggravated form. It is murder if the act is done: (i) with the intention of causing death; (ii) with the intention of causing such bodily injury as the offender knows to be likely to cause death to the particular person; (iii) if the bodily injury is sufficient in the 'ordinary course of nature' to cause death; or (iv) if the act is so imminently dangerous that it must, in all probability, cause death. Murder is reduced to culpable homicide in five exceptions: (a) Grave and Sudden Provocation; (b) Private Defence (exceeding it in good faith); (c) Public Servant (exceeding power in good faith); (d) Sudden Fight; and (e) Consent (victim above 18).`,
     question: "Aman and Mr. X get into a sudden fight in a bar. In the heat of the moment, Aman stabs Mr. X with a knife. Aman had no prior enmity. Which exception applies?",
     options: [
       "Private Defence",
@@ -334,7 +334,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q24",
     section: "Legal Reasoning",
-    passage: `The distinction between 'Culpable Homicide'...`,
+    passage: `The distinction between 'Culpable Homicide' and 'Murder' is one of the most complex areas of criminal law. All murders are culpable homicides, but not all culpable homicides are murders. Culpable Homicide (Section 299 IPC/BNS) is causing death by doing an act: (i) with the intention of causing death; (ii) with the intention of causing such bodily injury as is likely to cause death; or (iii) with the knowledge that the act is likely to cause death. Murder (Section 300 IPC/BNS) is a more aggravated form. It is murder if the act is done: (i) with the intention of causing death; (ii) with the intention of causing such bodily injury as the offender knows to be likely to cause death to the particular person; (iii) if the bodily injury is sufficient in the 'ordinary course of nature' to cause death; or (iv) if the act is so imminently dangerous that it must, in all probability, cause death. Murder is reduced to culpable homicide in five exceptions: (a) Grave and Sudden Provocation; (b) Private Defence (exceeding it in good faith); (c) Public Servant (exceeding power in good faith); (d) Sudden Fight; and (e) Consent (victim above 18).`,
     question: "If a person kills another with their 'Consent' (victim is above 18), it is:",
     options: [
       "Murder",
@@ -364,7 +364,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q26",
     section: "Legal Reasoning",
-    passage: `The Hindu Marriage Act, 1955...`,
+    passage: `The Hindu Marriage Act, 1955, governs the marriage, divorce, and restitution of conjugal rights among Hindus (including Sikhs, Jains, and Buddhists). For a valid Hindu marriage (Section 5): (i) Neither party should have a living spouse (monogamy); (ii) Parties should be of sound mind and capable of giving consent; (iii) The groom must be at least 21 and the bride at least 18; (iv) The parties should not be within 'prohibited degrees of relationship' unless custom allows; and (v) They should not be 'sapindas' of each other. Divorce can be obtained on grounds like adultery, cruelty, desertion (for 2 years), conversion, insanity, or leprosy (Section 13). Mutual Consent divorce (Section 13B) requires a joint petition and a waiting period of 6 to 18 months. 'Restitution of Conjugal Rights' (Section 9) is a remedy where one spouse can ask the court to order the other spouse to live with them if they have withdrawn without reasonable excuse.`,
     question: "Aman and his wife decide to divorce peacefully. They agree on all terms. Which section of the Act should they use?",
     options: [
       "Section 9",
@@ -378,7 +378,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q27",
     section: "Legal Reasoning",
-    passage: `The Hindu Marriage Act, 1955...`,
+    passage: `The Hindu Marriage Act, 1955, governs the marriage, divorce, and restitution of conjugal rights among Hindus (including Sikhs, Jains, and Buddhists). For a valid Hindu marriage (Section 5): (i) Neither party should have a living spouse (monogamy); (ii) Parties should be of sound mind and capable of giving consent; (iii) The groom must be at least 21 and the bride at least 18; (iv) The parties should not be within 'prohibited degrees of relationship' unless custom allows; and (v) They should not be 'sapindas' of each other. Divorce can be obtained on grounds like adultery, cruelty, desertion (for 2 years), conversion, insanity, or leprosy (Section 13). Mutual Consent divorce (Section 13B) requires a joint petition and a waiting period of 6 to 18 months. 'Restitution of Conjugal Rights' (Section 9) is a remedy where one spouse can ask the court to order the other spouse to live with them if they have withdrawn without reasonable excuse.`,
     question: "Aman's wife leaves his house and refuses to return without any valid reason. Aman wants her to come back. Which legal remedy can he seek?",
     options: [
       "Divorce",
@@ -392,7 +392,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q28",
     section: "Legal Reasoning",
-    passage: `The Hindu Marriage Act, 1955...`,
+    passage: `The Hindu Marriage Act, 1955, governs the marriage, divorce, and restitution of conjugal rights among Hindus (including Sikhs, Jains, and Buddhists). For a valid Hindu marriage (Section 5): (i) Neither party should have a living spouse (monogamy); (ii) Parties should be of sound mind and capable of giving consent; (iii) The groom must be at least 21 and the bride at least 18; (iv) The parties should not be within 'prohibited degrees of relationship' unless custom allows; and (v) They should not be 'sapindas' of each other. Divorce can be obtained on grounds like adultery, cruelty, desertion (for 2 years), conversion, insanity, or leprosy (Section 13). Mutual Consent divorce (Section 13B) requires a joint petition and a waiting period of 6 to 18 months. 'Restitution of Conjugal Rights' (Section 9) is a remedy where one spouse can ask the court to order the other spouse to live with them if they have withdrawn without reasonable excuse.`,
     question: "What is the minimum age of marriage for a male under the Hindu Marriage Act?",
     options: [
       "18 years",
@@ -406,7 +406,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q29",
     section: "Legal Reasoning",
-    passage: `The Hindu Marriage Act, 1955...`,
+    passage: `The Hindu Marriage Act, 1955, governs the marriage, divorce, and restitution of conjugal rights among Hindus (including Sikhs, Jains, and Buddhists). For a valid Hindu marriage (Section 5): (i) Neither party should have a living spouse (monogamy); (ii) Parties should be of sound mind and capable of giving consent; (iii) The groom must be at least 21 and the bride at least 18; (iv) The parties should not be within 'prohibited degrees of relationship' unless custom allows; and (v) They should not be 'sapindas' of each other. Divorce can be obtained on grounds like adultery, cruelty, desertion (for 2 years), conversion, insanity, or leprosy (Section 13). Mutual Consent divorce (Section 13B) requires a joint petition and a waiting period of 6 to 18 months. 'Restitution of Conjugal Rights' (Section 9) is a remedy where one spouse can ask the court to order the other spouse to live with them if they have withdrawn without reasonable excuse.`,
     question: "A marriage between two people who are 'Sapindas' is:",
     options: [
       "Valid",
@@ -420,7 +420,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q30",
     section: "Legal Reasoning",
-    passage: `The Hindu Marriage Act, 1955...`,
+    passage: `The Hindu Marriage Act, 1955, governs the marriage, divorce, and restitution of conjugal rights among Hindus (including Sikhs, Jains, and Buddhists). For a valid Hindu marriage (Section 5): (i) Neither party should have a living spouse (monogamy); (ii) Parties should be of sound mind and capable of giving consent; (iii) The groom must be at least 21 and the bride at least 18; (iv) The parties should not be within 'prohibited degrees of relationship' unless custom allows; and (v) They should not be 'sapindas' of each other. Divorce can be obtained on grounds like adultery, cruelty, desertion (for 2 years), conversion, insanity, or leprosy (Section 13). Mutual Consent divorce (Section 13B) requires a joint petition and a waiting period of 6 to 18 months. 'Restitution of Conjugal Rights' (Section 9) is a remedy where one spouse can ask the court to order the other spouse to live with them if they have withdrawn without reasonable excuse.`,
     question: "Can a Buddhist person be governed by the Hindu Marriage Act?",
     options: [
       "No, it is only for Hindus.",
@@ -451,7 +451,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q32",
     section: "Verbal Reasoning",
-    passage: `The new space age...`,
+    passage: `The new space age is no longer the exclusive domain of national superpowers; it is being shaped by a dynamic interplay between government agencies like NASA and ISRO and private titans like SpaceX and Blue Origin. This 'democratization' of space has drastically reduced the cost of launching payloads, opening the doors to orbital tourism and large-scale satellite constellations like Starlink. However, this progress comes with significant risks. The problem of 'space debris'—thousands of fragments of defunct satellites and rocket stages—is reaching a tipping point. Scientists warn of the 'Kessler Syndrome', a scenario where a single collision could trigger a catastrophic chain reaction, rendering low-Earth orbit (LEO) unusable for generations. Furthermore, the push toward 'space mining'—the extraction of minerals from asteroids—raises complex questions about planetary sovereignty and environmental ethics. While the promise of becoming a multi-planetary species offers hope for human survival, the immediate priority must be the sustainable management of our 'celestial backyard'. The establishment of international legal frameworks, such as an updated Outer Space Treaty, is essential to prevent space from becoming a lawless frontier.`,
     question: "According to the passage, how has the space industry been 'democratized'?",
     options: [
       "Everyone can now vote for the next astronaut.",
@@ -465,7 +465,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q33",
     section: "Verbal Reasoning",
-    passage: `The new space age...`,
+    passage: `The new space age is no longer the exclusive domain of national superpowers; it is being shaped by a dynamic interplay between government agencies like NASA and ISRO and private titans like SpaceX and Blue Origin. This 'democratization' of space has drastically reduced the cost of launching payloads, opening the doors to orbital tourism and large-scale satellite constellations like Starlink. However, this progress comes with significant risks. The problem of 'space debris'—thousands of fragments of defunct satellites and rocket stages—is reaching a tipping point. Scientists warn of the 'Kessler Syndrome', a scenario where a single collision could trigger a catastrophic chain reaction, rendering low-Earth orbit (LEO) unusable for generations. Furthermore, the push toward 'space mining'—the extraction of minerals from asteroids—raises complex questions about planetary sovereignty and environmental ethics. While the promise of becoming a multi-planetary species offers hope for human survival, the immediate priority must be the sustainable management of our 'celestial backyard'. The establishment of international legal frameworks, such as an updated Outer Space Treaty, is essential to prevent space from becoming a lawless frontier.`,
     question: "What is 'space mining'?",
     options: [
       "Searching for water on the Moon.",
@@ -479,7 +479,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q34",
     section: "Verbal Reasoning",
-    passage: `The new space age...`,
+    passage: `The new space age is no longer the exclusive domain of national superpowers; it is being shaped by a dynamic interplay between government agencies like NASA and ISRO and private titans like SpaceX and Blue Origin. This 'democratization' of space has drastically reduced the cost of launching payloads, opening the doors to orbital tourism and large-scale satellite constellations like Starlink. However, this progress comes with significant risks. The problem of 'space debris'—thousands of fragments of defunct satellites and rocket stages—is reaching a tipping point. Scientists warn of the 'Kessler Syndrome', a scenario where a single collision could trigger a catastrophic chain reaction, rendering low-Earth orbit (LEO) unusable for generations. Furthermore, the push toward 'space mining'—the extraction of minerals from asteroids—raises complex questions about planetary sovereignty and environmental ethics. While the promise of becoming a multi-planetary species offers hope for human survival, the immediate priority must be the sustainable management of our 'celestial backyard'. The establishment of international legal frameworks, such as an updated Outer Space Treaty, is essential to prevent space from becoming a lawless frontier.`,
     question: "The author suggests that the immediate priority in space should be:",
     options: [
       "Mining as many asteroids as possible.",
@@ -493,7 +493,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q35",
     section: "Verbal Reasoning",
-    passage: `The new space age...`,
+    passage: `The new space age is no longer the exclusive domain of national superpowers; it is being shaped by a dynamic interplay between government agencies like NASA and ISRO and private titans like SpaceX and Blue Origin. This 'democratization' of space has drastically reduced the cost of launching payloads, opening the doors to orbital tourism and large-scale satellite constellations like Starlink. However, this progress comes with significant risks. The problem of 'space debris'—thousands of fragments of defunct satellites and rocket stages—is reaching a tipping point. Scientists warn of the 'Kessler Syndrome', a scenario where a single collision could trigger a catastrophic chain reaction, rendering low-Earth orbit (LEO) unusable for generations. Furthermore, the push toward 'space mining'—the extraction of minerals from asteroids—raises complex questions about planetary sovereignty and environmental ethics. While the promise of becoming a multi-planetary species offers hope for human survival, the immediate priority must be the sustainable management of our 'celestial backyard'. The establishment of international legal frameworks, such as an updated Outer Space Treaty, is essential to prevent space from becoming a lawless frontier.`,
     question: "The tone of the passage is best described as:",
     options: [
       "Purely optimistic and celebratory",
@@ -507,7 +507,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q36",
     section: "Verbal Reasoning",
-    passage: `The new space age...`,
+    passage: `The new space age is no longer the exclusive domain of national superpowers; it is being shaped by a dynamic interplay between government agencies like NASA and ISRO and private titans like SpaceX and Blue Origin. This 'democratization' of space has drastically reduced the cost of launching payloads, opening the doors to orbital tourism and large-scale satellite constellations like Starlink. However, this progress comes with significant risks. The problem of 'space debris'—thousands of fragments of defunct satellites and rocket stages—is reaching a tipping point. Scientists warn of the 'Kessler Syndrome', a scenario where a single collision could trigger a catastrophic chain reaction, rendering low-Earth orbit (LEO) unusable for generations. Furthermore, the push toward 'space mining'—the extraction of minerals from asteroids—raises complex questions about planetary sovereignty and environmental ethics. While the promise of becoming a multi-planetary species offers hope for human survival, the immediate priority must be the sustainable management of our 'celestial backyard'. The establishment of international legal frameworks, such as an updated Outer Space Treaty, is essential to prevent space from becoming a lawless frontier.`,
     question: "Which word in the passage means 'no longer working'?",
     options: [
       "Democratization",
@@ -803,7 +803,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q62",
     section: "Logical Reasoning",
-    passage: `Five lawyers...`,
+    passage: `Five lawyers—P, Q, R, S, and T—specialize in five different areas: Criminal, Civil, Corporate, Tax, and Intellectual Property (IP), but not necessarily in that order. Each lawyer uses a different brand of car: Audi, BMW, Mercedes, Tesla, and Volvo. (1) P specializes in Corporate law and does not use a BMW. (2) The lawyer who uses a Tesla specializes in Tax law. (3) S uses a Volvo. (4) R specializes in Civil law and does not use an Audi or BMW. (5) Q does not use a BMW or Tesla. (6) T specializes in IP law.`,
     question: "Who is the Tax lawyer?",
     options: ["Q", "S", "T", "P"],
     correct: 0,
@@ -812,7 +812,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q63",
     section: "Logical Reasoning",
-    passage: `Five lawyers...`,
+    passage: `Five lawyers—P, Q, R, S, and T—specialize in five different areas: Criminal, Civil, Corporate, Tax, and Intellectual Property (IP), but not necessarily in that order. Each lawyer uses a different brand of car: Audi, BMW, Mercedes, Tesla, and Volvo. (1) P specializes in Corporate law and does not use a BMW. (2) The lawyer who uses a Tesla specializes in Tax law. (3) S uses a Volvo. (4) R specializes in Civil law and does not use an Audi or BMW. (5) Q does not use a BMW or Tesla. (6) T specializes in IP law.`,
     question: "What is S's specialization?",
     options: ["Criminal", "Tax", "IP", "Civil"],
     correct: 0,
@@ -821,7 +821,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q64",
     section: "Logical Reasoning",
-    passage: `Five lawyers...`,
+    passage: `Five lawyers—P, Q, R, S, and T—specialize in five different areas: Criminal, Civil, Corporate, Tax, and Intellectual Property (IP), but not necessarily in that order. Each lawyer uses a different brand of car: Audi, BMW, Mercedes, Tesla, and Volvo. (1) P specializes in Corporate law and does not use a BMW. (2) The lawyer who uses a Tesla specializes in Tax law. (3) S uses a Volvo. (4) R specializes in Civil law and does not use an Audi or BMW. (5) Q does not use a BMW or Tesla. (6) T specializes in IP law.`,
     question: "Which car does P (Corporate) use?",
     options: ["BMW", "Audi", "Tesla", "Volvo"],
     correct: 1,
@@ -830,7 +830,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q65",
     section: "Logical Reasoning",
-    passage: `Five lawyers...`,
+    passage: `Five lawyers—P, Q, R, S, and T—specialize in five different areas: Criminal, Civil, Corporate, Tax, and Intellectual Property (IP), but not necessarily in that order. Each lawyer uses a different brand of car: Audi, BMW, Mercedes, Tesla, and Volvo. (1) P specializes in Corporate law and does not use a BMW. (2) The lawyer who uses a Tesla specializes in Tax law. (3) S uses a Volvo. (4) R specializes in Civil law and does not use an Audi or BMW. (5) Q does not use a BMW or Tesla. (6) T specializes in IP law.`,
     question: "Which car does the IP lawyer (T) use?",
     options: ["Audi", "BMW", "Mercedes", "Tesla"],
     correct: 1,
@@ -1055,7 +1055,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q92",
     section: "Quantitative Reasoning",
-    passage: `In a library...`,
+    passage: `In a library, there are 5000 books. 40% are Fiction, 30% are Non-Fiction, 20% are Academic, and the rest are Children's books.`,
     question: "What is the total number of Fiction and Academic books combined?",
     options: ["2000", "2500", "3000", "3500"],
     correct: 2,
@@ -1064,7 +1064,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q93",
     section: "Quantitative Reasoning",
-    passage: `In a library...`,
+    passage: `In a library, there are 5000 books. 40% are Fiction, 30% are Non-Fiction, 20% are Academic, and the rest are Children's books.`,
     question: "What is the ratio of Fiction books to Non-Fiction books?",
     options: ["4:3", "3:4", "2:1", "1:2"],
     correct: 0,
@@ -1073,7 +1073,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q94",
     section: "Quantitative Reasoning",
-    passage: `In a library...`,
+    passage: `In a library, there are 5000 books. 40% are Fiction, 30% are Non-Fiction, 20% are Academic, and the rest are Children's books.`,
     question: "If 1000 Academic books are added, what will be the new total percentage of Academic books?",
     options: ["25%", "33.33%", "40%", "50%"],
     correct: 1,
@@ -1082,7 +1082,7 @@ export const NLAT_MOCK_3: MockQuestion[] = [
   {
     id: "nlat-3-q95",
     section: "Quantitative Reasoning",
-    passage: `In a library...`,
+    passage: `In a library, there are 5000 books. 40% are Fiction, 30% are Non-Fiction, 20% are Academic, and the rest are Children's books.`,
     question: "How many Non-Fiction books are there?",
     options: ["1000", "1200", "1500", "1800"],
     correct: 2,

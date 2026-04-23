@@ -20,7 +20,7 @@ export const MHCET_MOCK_5: MockQuestion[] = [
   {
     id: "mhcet-5-q2",
     section: "Legal Aptitude & Reasoning",
-    passage: `A crime generally has four stages...`,
+    passage: `A crime generally has four stages: (1) Intention, (2) Preparation, (3) Attempt, and (4) Completion (Accomplishment). Mere 'intention' and 'preparation' are usually not punishable (except for serious crimes like dacoity or waging war against the state). An 'Attempt' is punishable under Section 511 of the IPC/BNS. An attempt occurs when a person does an act toward the commission of an offense, which goes beyond mere preparation but fails to accomplish the crime. The distinction between preparation and attempt is often the 'Proximity Test'—how close the act was to the final result. If the crime is completed, the person is punished for the crime itself, not the attempt.`,
     question: "Aman puts his hand into Mr. X's pocket to steal his wallet. However, the pocket was empty. Has Aman committed a crime?",
     options: [
       "No, he didn't take anything.",
@@ -34,7 +34,7 @@ export const MHCET_MOCK_5: MockQuestion[] = [
   {
     id: "mhcet-5-q3",
     section: "Legal Aptitude & Reasoning",
-    passage: `A crime generally has four stages...`,
+    passage: `A crime generally has four stages: (1) Intention, (2) Preparation, (3) Attempt, and (4) Completion (Accomplishment). Mere 'intention' and 'preparation' are usually not punishable (except for serious crimes like dacoity or waging war against the state). An 'Attempt' is punishable under Section 511 of the IPC/BNS. An attempt occurs when a person does an act toward the commission of an offense, which goes beyond mere preparation but fails to accomplish the crime. The distinction between preparation and attempt is often the 'Proximity Test'—how close the act was to the final result. If the crime is completed, the person is punished for the crime itself, not the attempt.`,
     question: "What is the fourth and final stage of a crime?",
     options: [
       "Attempt",
@@ -48,7 +48,7 @@ export const MHCET_MOCK_5: MockQuestion[] = [
   {
     id: "mhcet-5-q4",
     section: "Legal Aptitude & Reasoning",
-    passage: `A crime generally has four stages...`,
+    passage: `A crime generally has four stages: (1) Intention, (2) Preparation, (3) Attempt, and (4) Completion (Accomplishment). Mere 'intention' and 'preparation' are usually not punishable (except for serious crimes like dacoity or waging war against the state). An 'Attempt' is punishable under Section 511 of the IPC/BNS. An attempt occurs when a person does an act toward the commission of an offense, which goes beyond mere preparation but fails to accomplish the crime. The distinction between preparation and attempt is often the 'Proximity Test'—how close the act was to the final result. If the crime is completed, the person is punished for the crime itself, not the attempt.`,
     question: "Aman buys poison to kill his wife. He keeps it in his cupboard but never uses it. Is he guilty of attempt?",
     options: [
       "Yes, poison is dangerous.",
