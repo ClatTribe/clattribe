@@ -55,8 +55,9 @@ export default function MockSelectionFlow({
           {[1, 2, 3, 4, 5].map((num) => {
             const isAvailable =
               (selectedExam === "NLAT" && num <= 5) ||
+              (selectedExam === "MHCET" && num <= 5) ||
               (selectedExam === "CLAT" && (num === 1 || num === 2)) ||
-              (selectedExam !== "CLAT" && selectedExam !== "NLAT" && num === 1);
+              (selectedExam !== "CLAT" && selectedExam !== "NLAT" && selectedExam !== "MHCET" && num === 1);
             return (
               <motion.button
                 key={num}
@@ -131,7 +132,10 @@ export default function MockSelectionFlow({
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {(Object.keys(EXAM_META) as ExamType[]).map((type) => (
+        {(Object.keys(EXAM_META) as ExamType[])
+          .filter(type => type === "NLAT" || type === "MHCET")
+          .sort((a, b) => (a === "NLAT" ? -1 : 1)) // NLAT first
+          .map((type) => (
           <motion.button
             key={type}
             whileHover={{ y: -6, scale: 1.02 }}

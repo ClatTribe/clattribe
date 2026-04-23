@@ -138,6 +138,11 @@ import { NLAT_MOCK_2 } from "./data/nlat-mock-2";
 import { NLAT_MOCK_3 } from "./data/nlat-mock-3";
 import { NLAT_MOCK_4 } from "./data/nlat-mock-4";
 import { NLAT_MOCK_5 } from "./data/nlat-mock-5";
+import { MHCET_MOCK_1 } from "./data/mhcet-mock-1";
+import { MHCET_MOCK_2 } from "./data/mhcet-mock-2";
+import { MHCET_MOCK_3 } from "./data/mhcet-mock-3";
+import { MHCET_MOCK_4 } from "./data/mhcet-mock-4";
+import { MHCET_MOCK_5 } from "./data/mhcet-mock-5";
 
 export const MOCK_DATABASE: Record<string, Record<number, MockQuestion[]>> = {
   CLAT: {
@@ -155,7 +160,11 @@ export const MOCK_DATABASE: Record<string, Record<number, MockQuestion[]>> = {
     5: NLAT_MOCK_5,
   },
   MHCET: {
-    1: SAMPLE_CLAT_MOCK_1,
+    1: MHCET_MOCK_1,
+    2: MHCET_MOCK_2,
+    3: MHCET_MOCK_3,
+    4: MHCET_MOCK_4,
+    5: MHCET_MOCK_5,
   },
 };
 
@@ -178,7 +187,7 @@ export const EXAM_META: Record<ExamType, { color: string; accent: string; descri
   MHCET: {
     color: "bg-orange-600",
     accent: "text-orange-600",
-    description: "Maharashtra Common Entrance Test for Law. 150 questions, 120 minutes.",
+    description: "Maharashtra Common Entrance Test. 120 questions, 120 minutes, no negative marking.",
   },
 };
 
