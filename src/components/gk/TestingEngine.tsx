@@ -2,792 +2,43 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Zap,
   History,
-  FileText,
-  Target,
   ChevronRight,
   Clock,
   Trophy,
-  BookOpen,
   ArrowLeft,
   CheckCircle2,
-  AlertCircle,
   Timer,
   TrendingDown,
-  TrendingUp,
   Lightbulb,
-  Lock,
-  Star,
-  Award,
-  ChevronRightCircle,
-  PlayCircle,
+  Zap,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
+
+// Local imports
 import GKPassageTest from "./PassageTest"; 
 import GKSectionalTest from "./GKSectionalTest";
 import GKWeeklyTest from "./GKWeeklyTest";
 import GKPYQTest from "./GKPYQTest";
 
-type TestType =
-  | "weekly"
-  | "pyq"
-  | "mock"
-  | "sectional"
-  | "passage"
-  | "custom"
-  | null;
-
-interface TestCategory {
-  id: TestType;
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-  count: string;
-  color: string;
-  accent: string;
-}
-
-const CATEGORIES: TestCategory[] = [
-  {
-    id: "weekly",
-    title: "Weekly Quizzes",
-    description:
-      "Fresh questions every Sunday covering the week's top current affairs.",
-    icon: <Zap size={24} />,
-    count: "12 Available",
-    color: "bg-[#F59E0B]",
-    accent: "text-[#060818]",
-  },
-  {
-    id: "pyq",
-    title: "PYQs (2020-2026)",
-    description:
-      "Official Previous Year Questions with detailed legal explanations.",
-    icon: <History size={24} />,
-    count: "6 Years",
-    color: "bg-blue-500",
-    accent: "text-white",
-  },
-  {
-    id: "mock",
-    title: "Full Mock Tests",
-    description: "120-minute simulated exams to build your speed and accuracy.",
-    icon: <Target size={24} />,
-    count: "15 Mocks",
-    color: "bg-purple-500",
-    accent: "text-white",
-  },
-  {
-    id: "sectional",
-    title: "GK Sectionals",
-    description:
-      "Focused 30-question sets purely for General Knowledge & Current Affairs.",
-    icon: <FileText size={24} />,
-    count: "5 Sets",
-    color: "bg-green-500",
-    accent: "text-white",
-  },
-  {
-    id: "passage",
-    title: "Passage Practice",
-    description: "Deductive reasoning practice based on recent legal passages.",
-    icon: <BookOpen size={24} />,
-    count: "5 Tests",
-    color: "bg-[#060818]",
-    accent: "text-[#F59E0B]",
-  },
-];
-
-const TOPICS = [
-  "Legal Reasoning",
-  "Current Affairs",
-  "General Knowledge",
-  "Logical Reasoning",
-  "English Language",
-];
-
-const QUESTION_TYPES = ["Passage Based", "Direct MCQ", "True/False"];
-
-const TIME_LIMITS = [
-  { label: "15 Mins", value: 15 },
-  { label: "30 Mins", value: 30 },
-  { label: "60 Mins", value: 60 },
-  { label: "120 Mins", value: 120 },
-];
-
-function CustomTestBuilder({ onBack }: { onBack: () => void }) {
-  const [selectedTopics, setSelectedTopics] = React.useState<string[]>([]);
-  const [selectedTypes, setSelectedTypes] = React.useState<string[]>([]);
-  const [timeLimit, setTimeLimit] = React.useState<number>(30);
-  const [isBuilding, setIsBuilding] = React.useState(false);
-
-  const toggleTopic = (topic: string) => {
-    setSelectedTopics((prev) =>
-      prev.includes(topic) ? prev.filter((t) => t !== topic) : [...prev, topic],
-    );
-  };
-
-  const toggleType = (type: string) => {
-    setSelectedTypes((prev) =>
-      prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type],
-    );
-  };
-
-  const handleStart = () => {
-    setIsBuilding(true);
-    setTimeout(() => {
-      setIsBuilding(false);
-      alert(
-        "Custom test generation logic would go here! Starting test with selected parameters...",
-      );
-    }, 2000);
-  };
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="max-w-4xl mx-auto space-y-8"
-    >
-      <div className="flex items-center justify-between">
-        <button
-          onClick={onBack}
-          className="flex items-center gap-2 text-gray-500 hover:text-[#F59E0B] transition-colors font-bold uppercase text-[10px] tracking-widest"
-        >
-          <ArrowLeft size={16} /> Back to Engine
-        </button>
-        <h2 className="text-2xl font-black text-[#060818] dark:text-white">
-          Configure Custom Test
-        </h2>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Left Column: Topics & Types */}
-        <div className="lg:col-span-2 space-y-6 md:space-y-8">
-          {/* Topics */}
-          <div className="bg-white dark:bg-white/5 p-6 md:p-8 rounded-3xl md:rounded-[2.5rem] border border-gray-100 dark:border-white/10 space-y-6">
-            <h3 className="text-lg font-black text-[#060818] dark:text-white flex items-center gap-2">
-              <BookOpen size={20} className="text-[#F59E0B]" />
-              Select Topics
-            </h3>
-            <div className="flex flex-wrap gap-3">
-              {TOPICS.map((topic) => (
-                <button
-                  key={topic}
-                  onClick={() => toggleTopic(topic)}
-                  className={`px-6 py-3 rounded-2xl font-bold text-sm transition-all border-2 ${
-                    selectedTopics.includes(topic)
-                      ? "bg-[#F59E0B] border-[#F59E0B] text-[#060818]"
-                      : "bg-gray-50 dark:bg-white/5 border-transparent text-gray-500 hover:border-gray-200"
-                  }`}
-                >
-                  {topic}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Question Types */}
-          <div className="bg-white dark:bg-white/5 p-6 md:p-8 rounded-3xl md:rounded-[2.5rem] border border-gray-100 dark:border-white/10 space-y-6">
-            <h3 className="text-lg font-black text-[#060818] dark:text-white flex items-center gap-2">
-              <FileText size={20} className="text-[#F59E0B]" />
-              Question Types
-            </h3>
-            <div className="flex flex-wrap gap-3">
-              {QUESTION_TYPES.map((type) => (
-                <button
-                  key={type}
-                  onClick={() => toggleType(type)}
-                  className={`px-6 py-3 rounded-2xl font-bold text-sm transition-all border-2 ${
-                    selectedTypes.includes(type)
-                      ? "bg-[#060818] border-[#060818] text-white"
-                      : "bg-gray-50 dark:bg-white/5 border-transparent text-gray-500 hover:border-gray-200"
-                  }`}
-                >
-                  {type}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Right Column: Time & Summary */}
-        <div className="space-y-6 md:space-y-8">
-          {/* Time Limit */}
-          <div className="bg-white dark:bg-white/5 p-6 md:p-8 rounded-3xl md:rounded-[2.5rem] border border-gray-100 dark:border-white/10 space-y-6">
-            <h3 className="text-lg font-black text-[#060818] dark:text-white flex items-center gap-2">
-              <Clock size={20} className="text-[#F59E0B]" />
-              Time Limit
-            </h3>
-            <div className="grid grid-cols-2 gap-3">
-              {TIME_LIMITS.map((limit) => (
-                <button
-                  key={limit.value}
-                  onClick={() => setTimeLimit(limit.value)}
-                  className={`p-4 rounded-2xl font-bold text-sm transition-all border-2 ${
-                    timeLimit === limit.value
-                      ? "bg-[#F59E0B] border-[#F59E0B] text-[#060818]"
-                      : "bg-gray-50 dark:bg-white/5 border-transparent text-gray-500 hover:border-gray-200"
-                  }`}
-                >
-                  {limit.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Start Button */}
-          <div className="bg-[#060818] p-6 md:p-8 rounded-3xl md:rounded-[2.5rem] space-y-6">
-            <div className="space-y-2">
-              <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
-                Test Summary
-              </p>
-              <div className="space-y-1">
-                <p className="text-white font-bold text-sm flex justify-between">
-                  Topics: <span>{selectedTopics.length || "All"}</span>
-                </p>
-                <p className="text-white font-bold text-sm flex justify-between">
-                  Types: <span>{selectedTypes.length || "All"}</span>
-                </p>
-                <p className="text-white font-bold text-sm flex justify-between">
-                  Duration: <span>{timeLimit} Mins</span>
-                </p>
-              </div>
-            </div>
-            <button
-              disabled={isBuilding}
-              onClick={handleStart}
-              className="w-full bg-[#F59E0B] text-[#060818] py-4 rounded-2xl font-black text-lg shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3 disabled:opacity-50"
-            >
-              {isBuilding ? (
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
-                >
-                  <Clock size={24} />
-                </motion.div>
-              ) : (
-                <>
-                  Start Custom Test
-                  <Zap size={20} fill="currentColor" />
-                </>
-              )}
-            </button>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
-interface TestResult {
-  id: string;
-  score: number;
-  total: number;
-  timeSpent: number;
-  category: string;
-  date: string;
-  topicBreakdown: { topic: string; correct: number; total: number }[];
-  suggestions: string[];
-}
-
-function FeedbackScreen({
-  result,
-  onBack,
-}: {
-  result: TestResult;
-  onBack: () => void;
-}) {
-  const percentage = Math.round((result.score / result.total) * 100);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      className="max-w-4xl mx-auto space-y-8"
-    >
-      <div className="flex items-center justify-between">
-        <button
-          onClick={onBack}
-          className="flex items-center gap-2 text-gray-500 hover:text-[#F59E0B] transition-colors font-bold uppercase text-[10px] tracking-widest"
-        >
-          <ArrowLeft size={16} /> Back to Engine
-        </button>
-        <h2 className="text-2xl font-black text-[#060818] dark:text-white">
-          Performance Analysis
-        </h2>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
-        {/* Score Card */}
-        <div className="bg-[#060818] p-8 md:p-10 rounded-3xl md:rounded-[3rem] text-center space-y-6 shadow-2xl">
-          <div className="relative inline-block">
-            <svg className="w-32 h-32 transform -rotate-90">
-              <circle
-                cx="64"
-                cy="64"
-                r="58"
-                stroke="currentColor"
-                strokeWidth="12"
-                fill="transparent"
-                className="text-white/10"
-              />
-              <motion.circle
-                cx="64"
-                cy="64"
-                r="58"
-                stroke="currentColor"
-                strokeWidth="12"
-                fill="transparent"
-                strokeDasharray={364.4}
-                initial={{ strokeDashoffset: 364.4 }}
-                animate={{
-                  strokeDashoffset: 364.4 - (364.4 * percentage) / 100,
-                }}
-                transition={{ duration: 1.5, ease: "easeOut" }}
-                className="text-[#F59E0B]"
-              />
-            </svg>
-            <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <span className="text-3xl font-black text-white">
-                {percentage}%
-              </span>
-            </div>
-          </div>
-          <div className="space-y-1">
-            <p className="text-white font-black text-2xl">
-              {result.score} / {result.total}
-            </p>
-            <p className="text-gray-400 text-xs font-bold uppercase tracking-widest">
-              Correct Answers
-            </p>
-          </div>
-          <div className="pt-4 border-t border-white/10 flex justify-between items-center">
-            <div className="text-left">
-              <p className="text-white/50 text-[10px] font-black uppercase tracking-widest">
-                Time Taken
-              </p>
-              <p className="text-white font-bold">
-                {Math.floor(result.timeSpent / 60)}m {result.timeSpent % 60}s
-              </p>
-            </div>
-            <p className="text-[#F59E0B] font-black text-sm uppercase tracking-widest">
-              {percentage >= 80
-                ? "Excellent!"
-                : percentage >= 50
-                  ? "Good!"
-                  : "Retry!"}
-            </p>
-          </div>
-        </div>
-
-        {/* Breakdown & Suggestions */}
-        <div className="lg:col-span-2 space-y-6 md:space-y-8">
-          {/* Breakdown */}
-          <div className="bg-white dark:bg-white/5 p-6 md:p-8 rounded-3xl md:rounded-[2.5rem] border border-gray-100 dark:border-white/10 space-y-6">
-            <h3 className="text-lg font-black text-[#060818] dark:text-white flex items-center gap-2">
-              <Target size={20} className="text-[#F59E0B]" />
-              Topic Breakdown
-            </h3>
-            <div className="space-y-4">
-              {result.topicBreakdown.map((item, i) => (
-                <div key={i} className="space-y-2">
-                  <div className="flex justify-between text-sm font-bold">
-                    <span className="text-[#060818] dark:text-white">
-                      {item.topic}
-                    </span>
-                    <span className="text-gray-500">
-                      {item.correct}/{item.total}
-                    </span>
-                  </div>
-                  <div className="h-2 bg-gray-100 dark:bg-white/5 rounded-full overflow-hidden">
-                    <motion.div
-                      className={`h-full ${item.correct === item.total ? "bg-green-500" : "bg-[#F59E0B]"}`}
-                      initial={{ width: 0 }}
-                      animate={{
-                        width: `${(item.correct / item.total) * 100}%`,
-                      }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Suggestions */}
-          <div className="bg-amber-50 dark:bg-[#F59E0B]/10 p-6 md:p-8 rounded-3xl md:rounded-[2.5rem] border border-amber-100 dark:border-[#F59E0B]/20 space-y-4">
-            <h3 className="text-lg font-black text-[#F59E0B] flex items-center gap-2">
-              <Zap size={20} fill="currentColor" />
-              Areas for Improvement
-            </h3>
-            <ul className="space-y-3">
-              {result.suggestions.map((suggestion, i) => (
-                <li
-                  key={i}
-                  className="flex items-start gap-3 text-sm font-medium text-amber-900/70 dark:text-[#F59E0B]/70"
-                >
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#F59E0B] mt-1.5 flex-shrink-0" />
-                  {suggestion}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div className="flex flex-col sm:flex-row justify-center gap-4">
-        <button
-          onClick={onBack}
-          className="px-6 md:px-10 py-4 bg-white dark:bg-white/10 border border-gray-100 dark:border-white/10 text-[#060818] dark:text-white rounded-2xl font-bold hover:bg-gray-50 dark:hover:bg-white/20 transition-all text-sm md:text-base"
-        >
-          Retake Test
-        </button>
-        <button
-          onClick={onBack}
-          className="px-6 md:px-10 py-4 bg-[#F59E0B] text-[#060818] rounded-2xl font-bold hover:shadow-xl hover:shadow-[#F59E0B]/20 transition-all text-sm md:text-base"
-        >
-          Explore More Tests
-        </button>
-      </div>
-    </motion.div>
-  );
-}
-
-// --- FULL MOCK DATA & COMPONENTS ---
-
-type ExamType = "CLAT" | "AILET" | "NLAT" | "MHCET";
-
-/**
- * HOW TO ADD REAL MOCKS LATER:
- * 1. Create a new array of questions following the structure below.
- * 2. Add it to the MOCK_DATABASE object under the respective exam and mock number.
- * 3. Update the 'isAvailable' logic in MockSelectionFlow to unlock it.
- */
-
-interface MockQuestion {
-  question: string;
-  options: [string, string, string, string];
-  correct: number;
-  explanation: string;
-}
-
-const SAMPLE_CLAT_MOCK_1: MockQuestion[] = [
-  {
-    question: "Which of the following is NOT a fundamental right under the Indian Constitution?",
-    options: ["Right to Equality", "Right to Property", "Right against Exploitation", "Right to Freedom of Religion"],
-    correct: 1,
-    explanation: "The Right to Property was removed from the list of Fundamental Rights by the 44th Amendment Act, 1978. It is now a legal right under Article 300A.",
-  },
-  {
-    question: "The power of 'Judicial Review' in India is based on:",
-    options: ["Procedure established by law", "Due process of law", "Rule of law", "Precedents and Conventions"],
-    correct: 0,
-    explanation: "Judicial Review in India is primarily based on the principle of 'Procedure established by law' as per Article 21.",
-  },
-  {
-    question: "Who appoints the Chief Justice of India?",
-    options: ["The Prime Minister", "The President", "The Law Minister", "The Parliament"],
-    correct: 1,
-    explanation: "The Chief Justice of India is appointed by the President of India under Article 124 of the Constitution.",
-  },
-  {
-    question: "Which landmark case dealt with the 'Right to Privacy'?",
-    options: ["K.S. Puttaswamy v. Union of India", "Navtej Singh Johar v. Union of India", "Joseph Shine v. Union of India", "Shayara Bano v. Union of India"],
-    correct: 0,
-    explanation: "Justice K.S. Puttaswamy (Retd.) v. Union of India (2017) is the landmark case where the SC declared Right to Privacy as a Fundamental Right.",
-  },
-  {
-    question: "The concept of 'Public Interest Litigation' (PIL) originated in which country?",
-    options: ["United Kingdom", "USA", "Australia", "Canada"],
-    correct: 1,
-    explanation: "The concept of PIL originated and developed in the USA in the 1960s.",
-  },
-];
-
-const MOCK_DATABASE: Record<string, Record<number, MockQuestion[]>> = {
-  CLAT: {
-    1: SAMPLE_CLAT_MOCK_1,
-    2: SAMPLE_CLAT_MOCK_1, // Reusing sample for testing
-  },
-  AILET: {
-    1: SAMPLE_CLAT_MOCK_1,
-  },
-  NLAT: {
-    1: SAMPLE_CLAT_MOCK_1,
-  },
-  MHCET: {
-    1: SAMPLE_CLAT_MOCK_1,
-  },
-};
-
-const EXAM_META: Record<ExamType, { color: string; accent: string; description: string }> = {
-  CLAT: {
-    color: "bg-purple-600",
-    accent: "text-purple-600",
-    description: "The gold standard for NLU admissions. 120 questions, 120 minutes.",
-  },
-  AILET: {
-    color: "bg-emerald-600",
-    accent: "text-emerald-600",
-    description: "National Law University, Delhi's specific entrance. 150 questions, 90 minutes.",
-  },
-  NLAT: {
-    color: "bg-blue-600",
-    accent: "text-blue-600",
-    description: "NMIMS Law Aptitude Test. 150 questions, 120 minutes, no negative marking.",
-  },
-  MHCET: {
-    color: "bg-orange-600",
-    accent: "text-orange-600",
-    description: "Maharashtra Common Entrance Test for Law. 150 questions, 120 minutes.",
-  },
-};
-
-const SAMPLE_QUESTIONS = SAMPLE_CLAT_MOCK_1; // Fallback
-
-function FullMockRunner({ 
-  examType, 
-  mockNumber, 
-  onBack, 
-  onComplete 
-}: { 
-  examType: ExamType; 
-  mockNumber: number; 
-  onBack: () => void; 
-  onComplete: (res: { score: number; total: number; timeSpent: number }) => void;
-}) {
-  const questions = MOCK_DATABASE[examType]?.[mockNumber] || SAMPLE_QUESTIONS;
-  const [current, setCurrent] = React.useState(0);
-  const [answers, setAnswers] = React.useState<(number | null)[]>(Array(questions.length).fill(null));
-  const [startTime] = React.useState(Date.now());
-  const [timeLeft, setTimeLeft] = React.useState(120 * 60);
-
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const handleFinish = () => {
-    const score = answers.reduce((acc, ans, i) => (ans === questions[i].correct ? acc + 1 : acc), 0);
-    const timeSpent = Math.round((Date.now() - startTime) / 1000);
-    onComplete({ score, total: questions.length, timeSpent });
-  };
-
-  const q = questions[current];
-
-  return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-3xl mx-auto space-y-8">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className={`w-10 h-10 ${EXAM_META[examType].color} rounded-xl flex items-center justify-center text-white`}>
-            <Star size={20} />
-          </div>
-          <div>
-            <h2 className="font-black text-[#060818] dark:text-white">{examType} Mock {mockNumber}</h2>
-            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Question {current + 1} of {questions.length}</p>
-          </div>
-        </div>
-        <div className="flex items-center gap-2 bg-[#F59E0B]/10 text-[#F59E0B] px-4 py-2 rounded-2xl font-black text-sm">
-          <Clock size={16} />
-          {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, "0")}
-        </div>
-      </div>
-
-      <div className="bg-white dark:bg-white/5 p-8 rounded-[2.5rem] border border-gray-100 dark:border-white/10 space-y-8">
-        <p className="text-lg font-bold text-[#060818] dark:text-white leading-relaxed">{q.question}</p>
-        <div className="grid gap-3">
-          {q.options.map((opt, i) => (
-            <button
-              key={i}
-              onClick={() => {
-                const newAns = [...answers];
-                newAns[current] = i;
-                setAnswers(newAns);
-              }}
-              className={`w-full text-left p-5 rounded-2xl border-2 transition-all font-bold text-sm flex items-center gap-4 ${
-                answers[current] === i
-                  ? "bg-[#F59E0B]/10 border-[#F59E0B] text-[#060818] dark:text-white"
-                  : "bg-gray-50 dark:bg-white/5 border-transparent text-gray-500 hover:border-gray-200"
-              }`}
-            >
-              <span className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs ${answers[current] === i ? "bg-[#F59E0B] text-white" : "bg-gray-200 dark:bg-white/10"}`}>
-                {String.fromCharCode(65 + i)}
-              </span>
-              {opt}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div className="flex items-center justify-between">
-        <button
-          onClick={() => setCurrent((c) => Math.max(0, c - 1))}
-          disabled={current === 0}
-          className="px-8 py-3 bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 text-gray-500 rounded-2xl font-bold disabled:opacity-30"
-        >
-          Previous
-        </button>
-        {current < questions.length - 1 ? (
-          <button
-            onClick={() => setCurrent((c) => c + 1)}
-            className="px-8 py-3 bg-[#060818] text-white rounded-2xl font-bold"
-          >
-            Next
-          </button>
-        ) : (
-          <button
-            onClick={handleFinish}
-            className="px-8 py-3 bg-[#F59E0B] text-[#060818] rounded-2xl font-black"
-          >
-            Finish Test
-          </button>
-        )}
-      </div>
-    </motion.div>
-  );
-}
-
-function MockSelectionFlow({ onBack, onComplete }: { onBack: () => void; onComplete: (res: { score: number; total: number; timeSpent: number }) => void }) {
-  const [selectedExam, setSelectedExam] = React.useState<ExamType | null>(null);
-  const [selectedMock, setSelectedMock] = React.useState<number | null>(null);
-
-  if (selectedMock && selectedExam) {
-    return <FullMockRunner examType={selectedExam} mockNumber={selectedMock} onBack={() => setSelectedMock(null)} onComplete={onComplete} />;
-  }
-
-  if (selectedExam) {
-    return (
-      <div className="space-y-8">
-        <div className="flex items-center justify-between">
-          <button
-            onClick={() => setSelectedExam(null)}
-            className="flex items-center gap-2 text-gray-500 hover:text-[#F59E0B] transition-colors font-bold uppercase text-[10px] tracking-widest"
-          >
-            <ArrowLeft size={16} /> Back to Exams
-          </button>
-          <div className="flex items-center gap-3">
-             <div className={`w-8 h-8 ${EXAM_META[selectedExam].color} rounded-lg flex items-center justify-center text-white`}>
-                <Award size={18} />
-             </div>
-             <h2 className="text-2xl font-black text-[#060818] dark:text-white">{selectedExam} Mocks</h2>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[1, 2, 3, 4, 5].map((num) => {
-            const isAvailable = (selectedExam === "CLAT" && (num === 1 || num === 2)) || (selectedExam !== "CLAT" && num === 1);
-            return (
-              <motion.button
-                key={num}
-                whileHover={isAvailable ? { y: -4, scale: 1.02 } : {}}
-                whileTap={isAvailable ? { scale: 0.98 } : {}}
-                onClick={() => isAvailable && setSelectedMock(num)}
-                className={`p-6 rounded-[2rem] border text-left flex flex-col justify-between h-48 transition-all relative overflow-hidden ${
-                  isAvailable 
-                    ? "bg-white dark:bg-white/5 border-gray-100 dark:border-white/10 hover:border-[#F59E0B] hover:shadow-xl hover:shadow-[#F59E0B]/5" 
-                    : "bg-gray-50 dark:bg-white/[0.02] border-transparent opacity-60"
-                }`}
-              >
-                {!isAvailable && <div className="absolute inset-0 bg-white/40 dark:bg-black/40 backdrop-blur-[1px] flex items-center justify-center z-10">
-                   <div className="bg-white dark:bg-[#060818] p-3 rounded-full shadow-lg">
-                      <Lock size={20} className="text-gray-400" />
-                   </div>
-                </div>}
-                <div className="flex justify-between items-start">
-                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${isAvailable ? EXAM_META[selectedExam].color : "bg-gray-200 dark:bg-white/10"}`}>
-                    <FileText size={24} className="text-white" />
-                  </div>
-                  {isAvailable && <Star size={16} className="text-[#F59E0B]" fill="currentColor" />}
-                </div>
-                <div>
-                  <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Mock Series</p>
-                  <h3 className="text-xl font-black text-[#060818] dark:text-white">Mock {num}</h3>
-                  <div className="flex items-center gap-4 mt-3">
-                     <span className="flex items-center gap-1 text-[10px] font-bold text-gray-500 uppercase tracking-widest">
-                        <Clock size={10} /> {selectedExam === "AILET" ? "90m" : "120m"}
-                     </span>
-                     <span className="flex items-center gap-1 text-[10px] font-bold text-gray-500 uppercase tracking-widest">
-                        <Target size={10} /> {selectedExam === "CLAT" ? "120 Qs" : "150 Qs"}
-                     </span>
-                  </div>
-                </div>
-              </motion.button>
-            );
-          })}
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="space-y-12">
-      <div className="flex items-center justify-between">
-        <button
-          onClick={onBack}
-          className="flex items-center gap-2 text-gray-500 hover:text-[#F59E0B] transition-colors font-bold uppercase text-[10px] tracking-widest"
-        >
-          <ArrowLeft size={16} /> Back to Engine
-        </button>
-        <h2 className="text-2xl font-black text-[#060818] dark:text-white">Select Exam Type</h2>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {(Object.keys(EXAM_META) as ExamType[]).map((type) => (
-          <motion.button
-            key={type}
-            whileHover={{ y: -6, scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => setSelectedExam(type)}
-            className="group relative bg-white dark:bg-white/5 p-8 rounded-[3rem] border border-gray-100 dark:border-white/10 text-left hover:shadow-2xl hover:border-[#F59E0B] transition-all overflow-hidden"
-          >
-            {/* Design Accents */}
-            <div className={`absolute -right-8 -top-8 w-40 h-40 ${EXAM_META[type].color} opacity-5 group-hover:opacity-10 rounded-full transition-all duration-500`} />
-            
-            <div className="space-y-6 relative z-10">
-              <div className={`w-16 h-16 ${EXAM_META[type].color} rounded-[1.5rem] flex items-center justify-center text-white shadow-xl group-hover:scale-110 transition-transform`}>
-                <Trophy size={32} />
-              </div>
-              
-              <div className="space-y-2">
-                <h3 className="text-3xl font-black text-[#060818] dark:text-white group-hover:text-[#F59E0B] transition-colors">
-                  {type}
-                </h3>
-                <p className="text-gray-500 dark:text-gray-400 font-medium leading-relaxed">
-                  {EXAM_META[type].description}
-                </p>
-              </div>
-
-              <div className="flex items-center justify-between pt-6 border-t border-gray-50 dark:border-white/5">
-                <div className="flex items-center gap-4">
-                  <span className="flex items-center gap-1 text-[10px] font-black text-gray-400 uppercase tracking-widest">
-                    <Star size={12} className="text-[#F59E0B]" fill="currentColor" />
-                    5 Mocks
-                  </span>
-                </div>
-                <div className="flex items-center gap-2 text-[#F59E0B] font-black text-xs uppercase tracking-widest">
-                  View Series <ChevronRight size={16} />
-                </div>
-              </div>
-            </div>
-          </motion.button>
-        ))}
-      </div>
-    </div>
-  );
-}
+// Extracted components and constants
+import { 
+  CATEGORIES, 
+  TestType, 
+  TestResult, 
+  TestCategory 
+} from "./testing/constants";
+import CustomTestBuilder from "./testing/CustomTestBuilder";
+import FeedbackScreen from "./testing/FeedbackScreen";
+import MockSelectionFlow from "./testing/MockSelectionFlow";
 
 export default function TestingEngine() {
+  const router = useRouter();
   const [activeCategory, setActiveCategory] = React.useState<TestType>(null);
   const [testResult, setTestResult] = React.useState<TestResult | null>(null);
   const [history, setHistory] = React.useState<TestResult[]>(() => {
     if (typeof window !== "undefined") {
-      const saved = (
-        typeof window !== "undefined"
-          ? window.localStorage
-          : { getItem: () => null, setItem: () => null, removeItem: () => null }
-      ).getItem("clat_test_history");
+      const saved = window.localStorage.getItem("clat_test_history");
       return saved ? JSON.parse(saved) : [];
     }
     return [];
@@ -808,7 +59,6 @@ export default function TestingEngine() {
         }
         topicStats[item.topic].correct += item.correct;
         topicStats[item.topic].total += item.total;
-        // Distribute test time proportionally to total questions in topic (rough estimate)
         const topicWeight = item.total / test.total;
         topicStats[item.topic].time += test.timeSpent * topicWeight;
         topicStats[item.topic].count += 1;
@@ -827,71 +77,18 @@ export default function TestingEngine() {
       .sort((a, b) => a.accuracy - b.accuracy);
 
     const slowAreas = analyzedTopics
-      .filter((t) => t.avgTimePerQuestion > 60) // Assuming > 60s per question is slow
+      .filter((t) => t.avgTimePerQuestion > 60)
       .sort((a, b) => b.avgTimePerQuestion - a.avgTimePerQuestion);
 
     return { analyzedTopics, weakAreas, slowAreas };
   }, [history]);
 
-  const handleTestComplete = (results: {
-    score: number;
-    total: number;
-    timeSpent: number;
-  }) => {
-    // Generate mock feedback based on the score
-    const breakdown = [
-      {
-        topic: "Legal Reasoning",
-        correct: results.score,
-        total: results.total,
-      },
-      {
-        topic: "Reading Comprehension",
-        correct: Math.max(0, results.score - 1),
-        total: results.total,
-      },
-    ];
-
-    const suggestions = [];
-    if (results.score < results.total) {
-      suggestions.push(
-        "Focus on the 'Doctrine of Pith and Substance' as your understanding of legislative powers seems slightly incomplete.",
-      );
-      suggestions.push(
-        `Try to improve your reading speed; you spent ${Math.floor(results.timeSpent / 60)}m ${results.timeSpent % 60}s which is slightly above the target for this passage.`,
-      );
-    } else {
-      suggestions.push(
-        `Excellent speed! You finished in ${Math.floor(results.timeSpent / 60)}m ${results.timeSpent % 60}s.`,
-      );
-      suggestions.push(
-        "Your deductive reasoning is sharp. Keep practicing with 'Hard' difficulty passages.",
-      );
+  const handleCategoryClick = (catId: TestType) => {
+    if (catId === "mock") {
+      setActiveCategory("mock");
+    } else if (catId) {
+      router.push(`/gk/testing/${catId}`);
     }
-
-    const newResult: TestResult = {
-      ...results,
-      id: Math.random().toString(36).substr(2, 9),
-      category:
-        activeCategory === "passage"
-          ? "Passage Practice"
-          : activeCategory || "Test",
-      date: new Date().toLocaleDateString("en-IN", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      }),
-      topicBreakdown: breakdown,
-      suggestions,
-    };
-
-    setTestResult(newResult);
-    const newHistory = [newResult, ...history];
-    setHistory(newHistory);
-    (typeof window !== "undefined"
-      ? window.localStorage
-      : { getItem: () => null, setItem: () => null, removeItem: () => null }
-    ).setItem("clat_test_history", JSON.stringify(newHistory));
   };
 
   if (testResult) {
@@ -906,97 +103,13 @@ export default function TestingEngine() {
     );
   }
 
-  if (activeCategory === "custom") {
-    return <CustomTestBuilder onBack={() => setActiveCategory(null)} />;
-  }
-
-  if (activeCategory === "weekly") {
-    return (
-      <div className="space-y-6">
-        {" "}
-        <GKWeeklyTest
-          onComplete={(score, total) => handleTestComplete({ score, total, timeSpent: 1200 })}
-          onBack={() => setActiveCategory(null)}
-        />{" "}
-      </div>
-    );
-  }
-  if (activeCategory === "pyq") {
-    return (
-      <div className="space-y-6">
-        {" "}
-        <GKPYQTest
-          onComplete={(score, total) => handleTestComplete({ score, total, timeSpent: 1200 })}
-          onBack={() => setActiveCategory(null)}
-        />{" "}
-      </div>
-    );
-  }
-  if (activeCategory === "passage") {
-    return (
-      <div className="space-y-6">
-        <button
-          onClick={() => setActiveCategory(null)}
-          className="flex items-center gap-2 text-gray-500 hover:text-[#F59E0B] transition-colors font-bold uppercase text-[10px] tracking-widest"
-        >
-          <ArrowLeft size={16} /> Back to Engine
-        </button>
-        <GKPassageTest onComplete={handleTestComplete} />
-      </div>
-    );
-  }
-
-  if (activeCategory === "sectional") {
-    return (
-      <div className="space-y-6">
-        <button
-          onClick={() => setActiveCategory(null)}
-          className="flex items-center gap-2 text-gray-500 hover:text-[#F59E0B] transition-colors font-bold uppercase text-[10px] tracking-widest"
-        >
-          <ArrowLeft size={16} /> Back to Engine
-        </button>
-        <GKSectionalTest onComplete={handleTestComplete} />
-      </div>
-    );
-  }
-
+  // Handle the 'mock' selection state internally as per user request to keep URL same until exam is selected
   if (activeCategory === "mock") {
     return (
-      <MockSelectionFlow
-        onBack={() => setActiveCategory(null)}
-        onComplete={handleTestComplete}
-      />
-    );
-  }
-
-  if (activeCategory) {
-    return (
-      <div className="space-y-8">
-        <button
-          onClick={() => setActiveCategory(null)}
-          className="flex items-center gap-2 text-gray-500 hover:text-[#F59E0B] transition-colors font-bold uppercase text-[10px] tracking-widest"
-        >
-          <ArrowLeft size={16} /> Back to Engine
-        </button>
-
-        <div className="bg-white dark:bg-white/5 p-8 md:p-12 rounded-3xl md:rounded-[3rem] border border-gray-100 dark:border-white/10 text-center space-y-6">
-          <div className="w-16 h-16 md:w-20 md:h-20 bg-[#F59E0B]/10 rounded-full flex items-center justify-center mx-auto">
-            <Timer size={40} className="text-[#F59E0B]" />
-          </div>
-          <h2 className="text-3xl font-black text-[#060818] dark:text-white">
-            {CATEGORIES.find((c) => c.id === activeCategory)?.title} Coming Soon
-          </h2>
-          <p className="text-gray-500 dark:text-gray-400 max-w-md mx-auto font-medium">
-            We are currently curating the most relevant questions for this
-            section. Stay tuned for the next update!
-          </p>
-          <button
-            onClick={() => setActiveCategory(null)}
-            className="btn-primary mx-auto"
-          >
-            Explore Other Tests
-          </button>
-        </div>
+      <div className="p-4 md:p-8">
+        <MockSelectionFlow
+          onBack={() => setActiveCategory(null)}
+        />
       </div>
     );
   }
@@ -1164,10 +277,9 @@ export default function TestingEngine() {
               key={cat.id}
               whileHover={{ y: -8, scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              onClick={() => setActiveCategory(cat.id)}
+              onClick={() => handleCategoryClick(cat.id)}
               className="group relative bg-white dark:bg-white/5 p-8 rounded-[2.5rem] border border-gray-100 dark:border-white/10 text-left hover:shadow-2xl hover:shadow-[#F59E0B]/10 transition-all duration-300 overflow-hidden"
             >
-              {/* Background Accent */}
               <div
                 className={`absolute -right-8 -top-8 w-32 h-32 ${cat.color} opacity-5 group-hover:opacity-10 rounded-full transition-all duration-500`}
               />
@@ -1223,7 +335,7 @@ export default function TestingEngine() {
               </p>
             </div>
             <button
-              onClick={() => setActiveCategory("custom")}
+              onClick={() => handleCategoryClick("custom")}
               className="bg-[#060818] text-white px-6 py-3 rounded-2xl font-black text-sm w-fit mt-8 relative group-hover:bg-gray-800 transition-colors"
             >
               Build Test
