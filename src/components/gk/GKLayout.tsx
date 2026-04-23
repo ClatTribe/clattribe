@@ -327,7 +327,7 @@ setSearchResults(results);
           </div>{" "}
         </div>{" "}
       </header>{" "}
-      <div className="flex flex-1 overflow-hidden relative">
+      <div className="flex flex-1 relative">
         {" "}
         {/* Sidebar Backdrop */}{" "}
         <AnimatePresence>
@@ -342,7 +342,7 @@ setSearchResults(results);
           )}
         </AnimatePresence>
         <nav
-          className={`fixed md:relative inset-y-0 left-0 z-[80] bg-white dark:bg-[#060818] border-r border-gray-100 dark:border-white/5 h-full flex flex-col overflow-y-auto w-64 md:w-56 shrink-0 transition-all duration-300 transform ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
+          className={`fixed md:sticky md:top-[60px] inset-y-0 left-0 z-[80] bg-white dark:bg-[#060818] border-r border-gray-100 dark:border-white/5 h-full md:h-[calc(100vh-60px)] flex flex-col overflow-y-auto no-scrollbar w-64 md:w-56 shrink-0 transition-all duration-300 transform ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
         >
           {/* Mobile Sidebar Close Button */}
           <div className="flex md:hidden items-center justify-between p-4 border-b border-gray-100 dark:border-white/10 mb-2">
@@ -524,7 +524,7 @@ setSearchResults(results);
             </div>{" "}
           </div>{" "}
         </nav>{" "}
-        <main className="flex-1 overflow-auto w-full">
+        <main className="flex-1 w-full">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
             {children}
           </div>
