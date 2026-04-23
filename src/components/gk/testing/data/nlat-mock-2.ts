@@ -509,8 +509,7 @@ export const NLAT_MOCK_2: MockQuestion[] = [
     section: "Verbal Reasoning",
     passage: `Climate change is no longer...`,
     question: "The word 'stringent' in the context of emissions targets means:",
-    options: ["Strict and demanding", "Easy and flexible", "Optional", "Secret"]
-    ],
+    options: ["Strict and demanding", "Easy and flexible", "Optional", "Secret"],
     correct: 0,
     explanation: "Stringent means strict, precise, and exacting."
   },
