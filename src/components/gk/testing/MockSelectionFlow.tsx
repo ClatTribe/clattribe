@@ -17,12 +17,12 @@ export default function MockSelectionFlow({
 
   const handleExamSelect = (type: ExamType) => {
     setSelectedExam(type);
-    router.push(`/gk/testing/${type.toLowerCase()}`);
+    router.push(`/gk/testing/exam/${type.toLowerCase()}`);
   };
 
   const handleMockSelect = (num: number) => {
     if (selectedExam) {
-      router.push(`/gk/testing/${selectedExam.toLowerCase()}/mock-${num}`);
+      router.push(`/gk/testing/exam/${selectedExam.toLowerCase()}/mock-${num}`);
     }
   };
 
@@ -33,7 +33,7 @@ export default function MockSelectionFlow({
           <button
             onClick={() => {
               setSelectedExam(null);
-              router.push("/gk/testing");
+              router.push("/gk/testing/exam");
             }}
             className="flex items-center gap-2 text-gray-500 hover:text-[#F59E0B] transition-colors font-bold uppercase text-[10px] tracking-widest"
           >

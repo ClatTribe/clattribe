@@ -85,7 +85,7 @@ export default function TestingEngine() {
 
   const handleCategoryClick = (catId: TestType) => {
     if (catId === "mock") {
-      setActiveCategory("mock");
+      router.push("/gk/testing/exam");
     } else if (catId) {
       router.push(`/gk/testing/${catId}`);
     }
@@ -100,17 +100,6 @@ export default function TestingEngine() {
           setActiveCategory(null);
         }}
       />
-    );
-  }
-
-  // Handle the 'mock' selection state internally as per user request to keep URL same until exam is selected
-  if (activeCategory === "mock") {
-    return (
-      <div className="p-4 md:p-8">
-        <MockSelectionFlow
-          onBack={() => setActiveCategory(null)}
-        />
-      </div>
     );
   }
 
