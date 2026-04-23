@@ -11,16 +11,18 @@ const week02_april2026: WeeklyQuiz = {
   id: 'week02-april-2026',
   title: 'Weekly Quiz \u2014 Week 2: April 8\u201314, 2026',
   description: 'Current affairs, GK, Legal GK & Static GK from April 8\u201314, 2026.',
-  dateRange: 'April 8\u201314, 2026',
-  year: 2026,
   week: 2,
+  month: 'April',
+  year: 2026,
+  dateRange: 'April 8\u201314, 2026',
+  totalQuestions: 30,
   questions: [
 
     // ── Q1 · NATIONAL CURRENT AFFAIRS · Easy ─────────────────────────────────
     {
-      id: 'w02-q01',
-      category: 'NATIONAL CURRENT AFFAIRS',
-      question:
+      id: 1,
+      category: 'current_affairs_national',
+      question_text:
         'India\'s Finance Ministry announced the launch of which digital platform in April 2026 to streamline grievance redressal for taxpayers under the Income Tax Department?',
       options: [
         'e-Nivaran 2.0',
@@ -37,9 +39,9 @@ const week02_april2026: WeeklyQuiz = {
 
     // ── Q2 · NATIONAL CURRENT AFFAIRS · Medium ───────────────────────────────
     {
-      id: 'w02-q02',
-      category: 'NATIONAL CURRENT AFFAIRS',
-      question:
+      id: 2,
+      category: 'current_affairs_national',
+      question_text:
         'The Supreme Court of India, in April 2026, delivered a landmark ruling holding that silent protests and sit-ins on public roads cannot be indefinitely prolonged. This ruling cited which earlier judgment as precedent?',
       options: [
         'Ramlila Maidan Incident v. Home Secretary (2012)',
@@ -56,9 +58,9 @@ const week02_april2026: WeeklyQuiz = {
 
     // ── Q3 · NATIONAL CURRENT AFFAIRS · Hard ─────────────────────────────────
     {
-      id: 'w02-q03',
-      category: 'NATIONAL CURRENT AFFAIRS',
-      question:
+      id: 3,
+      category: 'current_affairs_national',
+      question_text:
         'In April 2026, the Cabinet approved the National Cooperative Exports Limited (NCEL) being granted "mini-ratna" status. Under DPE guidelines, a Mini-Ratna Category-I CPSE must have made profit in the last three years and have a pre-tax profit of at least how much in one of those three years?',
       options: [
         '\u20b930 crore',
@@ -75,9 +77,9 @@ const week02_april2026: WeeklyQuiz = {
 
     // ── Q4 · NATIONAL CURRENT AFFAIRS · Easy ─────────────────────────────────
     {
-      id: 'w02-q04',
-      category: 'NATIONAL CURRENT AFFAIRS',
-      question:
+      id: 4,
+      category: 'current_affairs_national',
+      question_text:
         'Which state launched the "Mukhyamantri Bal Seva Yojana 2.0" in April 2026, extending monthly financial assistance to children orphaned due to causes other than COVID-19?',
       options: [
         'Rajasthan',
@@ -94,9 +96,9 @@ const week02_april2026: WeeklyQuiz = {
 
     // ── Q5 · INTERNATIONAL CURRENT AFFAIRS · Medium ──────────────────────────
     {
-      id: 'w02-q05',
-      category: 'INTERNATIONAL CURRENT AFFAIRS',
-      question:
+      id: 5,
+      category: 'current_affairs_international',
+      question_text:
         'In April 2026, the International Court of Justice (ICJ) issued provisional measures in a case filed by Nicaragua against Germany, accusing Germany of complicity in genocide by supplying arms to which country?',
       options: [
         'Saudi Arabia',
@@ -113,9 +115,9 @@ const week02_april2026: WeeklyQuiz = {
 
     // ── Q6 · INTERNATIONAL CURRENT AFFAIRS · Easy ────────────────────────────
     {
-      id: 'w02-q06',
-      category: 'INTERNATIONAL CURRENT AFFAIRS',
-      question:
+      id: 6,
+      category: 'current_affairs_international',
+      question_text:
         'Which country assumed the rotating Presidency of the United Nations Security Council for April 2026?',
       options: [
         'France',
@@ -132,9 +134,9 @@ const week02_april2026: WeeklyQuiz = {
 
     // ── Q7 · INTERNATIONAL CURRENT AFFAIRS · Hard ────────────────────────────
     {
-      id: 'w02-q07',
-      category: 'INTERNATIONAL CURRENT AFFAIRS',
-      question:
+      id: 7,
+      category: 'current_affairs_international',
+      question_text:
         'The "Artemis Accords," to which India acceded in 2023, are administered by which agency and are based on the principles of which foundational space law treaty?',
       options: [
         'UNOOSA; Moon Agreement (1979)',
@@ -151,9 +153,9 @@ const week02_april2026: WeeklyQuiz = {
 
     // ── Q8 · NATIONAL CURRENT AFFAIRS · Medium ───────────────────────────────
     {
-      id: 'w02-q08',
-      category: 'NATIONAL CURRENT AFFAIRS',
-      question:
+      id: 8,
+      category: 'current_affairs_national',
+      question_text:
         'The National Green Tribunal (NGT) in April 2026 directed the Central Pollution Control Board (CPCB) to submit an action-taken report on violations of which standard by municipal solid waste processing plants across India?',
       options: [
         'Solid Waste Management Rules, 2016',
@@ -170,9 +172,9 @@ const week02_april2026: WeeklyQuiz = {
 
     // ── Q9 · LEGAL GK · Medium ───────────────────────────────────────────────
     {
-      id: 'w02-q09',
-      category: 'LEGAL GK',
-      question:
+      id: 9,
+      category: 'legal_gk',
+      question_text:
         'The Bharatiya Nyaya Sanhita (BNS), 2023, which replaced the Indian Penal Code, was enforced from which date?',
       options: [
         '1 January 2024',
@@ -189,9 +191,9 @@ const week02_april2026: WeeklyQuiz = {
 
     // ── Q10 · LEGAL GK · Hard ────────────────────────────────────────────────
     {
-      id: 'w02-q10',
-      category: 'LEGAL GK',
-      question:
+      id: 10,
+      category: 'legal_gk',
+      question_text:
         'Under the Bharatiya Nyaya Sanhita (BNS), 2023, the offence of "sedition" as it existed in Section 124A of the IPC has been:',
       options: [
         'Retained with the same punishment',
@@ -208,9 +210,9 @@ const week02_april2026: WeeklyQuiz = {
 
     // ── Q11 · LEGAL GK · Easy ────────────────────────────────────────────────
     {
-      id: 'w02-q11',
-      category: 'LEGAL GK',
-      question:
+      id: 11,
+      category: 'legal_gk',
+      question_text:
         'Which Article of the Indian Constitution grants the Supreme Court original jurisdiction in disputes between states or between states and the Union?',
       options: [
         'Article 131',
@@ -227,9 +229,9 @@ const week02_april2026: WeeklyQuiz = {
 
     // ── Q12 · STATIC GK · Easy ───────────────────────────────────────────────
     {
-      id: 'w02-q12',
-      category: 'STATIC GK',
-      question:
+      id: 12,
+      category: 'static_gk',
+      question_text:
         'The "Doctrine of Basic Structure," which holds that Parliament cannot amend the Constitution to destroy its basic features, was established by the Supreme Court in which landmark case?',
       options: [
         'Golak Nath v. State of Punjab (1967)',
@@ -246,9 +248,9 @@ const week02_april2026: WeeklyQuiz = {
 
     // ── Q13 · STATIC GK · Medium ─────────────────────────────────────────────
     {
-      id: 'w02-q13',
-      category: 'STATIC GK',
-      question:
+      id: 13,
+      category: 'static_gk',
+      question_text:
         'The Pradhan Mantri MUDRA Yojana (PMMY) classifies loans into three categories. Which of the following correctly matches the category with its loan limit?',
       options: [
         'Shishu: up to \u20b950,000 | Kishore: \u20b950,001\u20135 lakh | Tarun: \u20b95\u201310 lakh',
@@ -265,9 +267,9 @@ const week02_april2026: WeeklyQuiz = {
 
     // ── Q14 · NATIONAL CURRENT AFFAIRS · Medium ──────────────────────────────
     {
-      id: 'w02-q14',
-      category: 'NATIONAL CURRENT AFFAIRS',
-      question:
+      id: 14,
+      category: 'current_affairs_national',
+      question_text:
         'India\'s first indigenously developed Quantum Computing system, demonstrated at IIT Delhi in April 2026, operates using which physical principle for qubits?',
       options: [
         'Trapped ion technology',
@@ -284,9 +286,9 @@ const week02_april2026: WeeklyQuiz = {
 
     // ── Q15 · INTERNATIONAL CURRENT AFFAIRS · Medium ─────────────────────────
     {
-      id: 'w02-q15',
-      category: 'INTERNATIONAL CURRENT AFFAIRS',
-      question:
+      id: 15,
+      category: 'current_affairs_international',
+      question_text:
         'The "Comprehensive and Progressive Agreement for Trans-Pacific Partnership" (CPTPP) is a trade bloc. Which of the following major economies is NOT a member of CPTPP as of April 2026?',
       options: [
         'Canada',
@@ -303,9 +305,9 @@ const week02_april2026: WeeklyQuiz = {
 
     // ── Q16 · NATIONAL CURRENT AFFAIRS · Hard ────────────────────────────────
     {
-      id: 'w02-q16',
-      category: 'NATIONAL CURRENT AFFAIRS',
-      question:
+      id: 16,
+      category: 'current_affairs_national',
+      question_text:
         'In April 2026, the RBI released its Annual Report noting that India\'s Gross NPA ratio of scheduled commercial banks fell to a multi-year low. Under RBI\'s prudential norms, an asset is classified as a "Non-Performing Asset" if interest or principal remains overdue for how many days?',
       options: [
         '30 days',
@@ -322,9 +324,9 @@ const week02_april2026: WeeklyQuiz = {
 
     // ── Q17 · IMPORTANT DAYS · Easy ──────────────────────────────────────────
     {
-      id: 'w02-q17',
-      category: 'IMPORTANT DAYS',
-      question:
+      id: 17,
+      category: 'important_days',
+      question_text:
         'World Homeopathy Day is observed every year on 10 April to commemorate the birth anniversary of which founder of homeopathy?',
       options: [
         'Samuel Hahnemann',
@@ -341,9 +343,9 @@ const week02_april2026: WeeklyQuiz = {
 
     // ── Q18 · IMPORTANT DAYS · Easy ──────────────────────────────────────────
     {
-      id: 'w02-q18',
-      category: 'IMPORTANT DAYS',
-      question:
+      id: 18,
+      category: 'important_days',
+      question_text:
         'World Health Day is observed every year on 7 April. The theme for World Health Day 2026 was:',
       options: [
         '"Our Planet, Our Health"',
@@ -360,9 +362,9 @@ const week02_april2026: WeeklyQuiz = {
 
     // ── Q19 · STATIC GK · Medium ─────────────────────────────────────────────
     {
-      id: 'w02-q19',
-      category: 'STATIC GK',
-      question:
+      id: 19,
+      category: 'static_gk',
+      question_text:
         'The "Marginal Standing Facility" (MSF) rate at which scheduled commercial banks can borrow overnight funds from the RBI is typically fixed at what spread above the repo rate?',
       options: [
         '0.10%',
@@ -379,9 +381,9 @@ const week02_april2026: WeeklyQuiz = {
 
     // ── Q20 · LEGAL GK · Hard ────────────────────────────────────────────────
     {
-      id: 'w02-q20',
-      category: 'LEGAL GK',
-      question:
+      id: 20,
+      category: 'legal_gk',
+      question_text:
         'In April 2026, the Supreme Court reiterated that "bail is the rule, jail is the exception." This principle flows from which constitutional provision and landmark judgment?',
       options: [
         'Article 20(3); Maneka Gandhi v. Union of India (1978)',
@@ -398,9 +400,9 @@ const week02_april2026: WeeklyQuiz = {
 
     // ── Q21 · NATIONAL CURRENT AFFAIRS · Easy ────────────────────────────────
     {
-      id: 'w02-q21',
-      category: 'NATIONAL CURRENT AFFAIRS',
-      question:
+      id: 21,
+      category: 'current_affairs_national',
+      question_text:
         'Which ministry launched the "PM Vishwakarma Skill Development Scheme 2.0" in April 2026, expanding the artisan support programme to cover more traditional craft categories?',
       options: [
         'Ministry of Skill Development & Entrepreneurship',
@@ -417,9 +419,9 @@ const week02_april2026: WeeklyQuiz = {
 
     // ── Q22 · INTERNATIONAL CURRENT AFFAIRS · Hard ───────────────────────────
     {
-      id: 'w02-q22',
-      category: 'INTERNATIONAL CURRENT AFFAIRS',
-      question:
+      id: 22,
+      category: 'current_affairs_international',
+      question_text:
         'The "Budapest Convention on Cybercrime," to which India has not yet formally acceded, was adopted by the Council of Europe. What is the primary legal significance of this convention for non-member states of the Council of Europe?',
       options: [
         'Non-members cannot be signatories under any circumstances',
@@ -436,9 +438,9 @@ const week02_april2026: WeeklyQuiz = {
 
     // ── Q23 · STATIC GK · Medium ─────────────────────────────────────────────
     {
-      id: 'w02-q23',
-      category: 'STATIC GK',
-      question:
+      id: 23,
+      category: 'static_gk',
+      question_text:
         'The "Palk Strait" separates India from Sri Lanka. On the Indian side, it is bounded by which two bodies of water?',
       options: [
         'Arabian Sea and Lakshadweep Sea',
@@ -455,9 +457,9 @@ const week02_april2026: WeeklyQuiz = {
 
     // ── Q24 · NATIONAL CURRENT AFFAIRS · Medium ──────────────────────────────
     {
-      id: 'w02-q24',
-      category: 'NATIONAL CURRENT AFFAIRS',
-      question:
+      id: 24,
+      category: 'current_affairs_national',
+      question_text:
         'India\'s Defence Acquisition Council (DAC) cleared a major procurement of Light Combat Helicopters (LCH) "Prachand" in April 2026. The LCH Prachand is manufactured by which entity and is notable for being the world\'s lightest attack helicopter capable of operating at high altitude?',
       options: [
         'DRDO, Hyderabad',
@@ -474,9 +476,9 @@ const week02_april2026: WeeklyQuiz = {
 
     // ── Q25 · LEGAL GK · Medium ──────────────────────────────────────────────
     {
-      id: 'w02-q25',
-      category: 'LEGAL GK',
-      question:
+      id: 25,
+      category: 'legal_gk',
+      question_text:
         'Under the Protection of Children from Sexual Offences (POCSO) Act, 2012, a "child" is defined as any person below the age of:',
       options: [
         '14 years',
@@ -493,9 +495,9 @@ const week02_april2026: WeeklyQuiz = {
 
     // ── Q26 · STATIC GK · Hard ───────────────────────────────────────────────
     {
-      id: 'w02-q26',
-      category: 'STATIC GK',
-      question:
+      id: 26,
+      category: 'static_gk',
+      question_text:
         'The "Doctrine of Promissory Estoppel" in Indian contract and administrative law prevents the government from going back on a promise if a party has acted upon it to its detriment. In which case did the Supreme Court first apply this doctrine against the government?',
       options: [
         'Central London Property Trust Ltd. v. High Trees House Ltd. (1947)',
@@ -512,9 +514,9 @@ const week02_april2026: WeeklyQuiz = {
 
     // ── Q27 · NATIONAL CURRENT AFFAIRS · Medium ──────────────────────────────
     {
-      id: 'w02-q27',
-      category: 'NATIONAL CURRENT AFFAIRS',
-      question:
+      id: 27,
+      category: 'current_affairs_national',
+      question_text:
         'The "One Nation One Subscription" (ONOS) scheme, launched by the Government of India, provides free access to research journals to which category of institutions?',
       options: [
         'Only central government ministries and departments',
@@ -531,9 +533,9 @@ const week02_april2026: WeeklyQuiz = {
 
     // ── Q28 · INTERNATIONAL CURRENT AFFAIRS · Easy ───────────────────────────
     {
-      id: 'w02-q28',
-      category: 'INTERNATIONAL CURRENT AFFAIRS',
-      question:
+      id: 28,
+      category: 'current_affairs_international',
+      question_text:
         'In April 2026, which country successfully conducted the first test of its "Harop-2" loitering munition (kamikaze drone), reported to have a range of over 1,000 km?',
       options: [
         'Turkey',
@@ -550,9 +552,9 @@ const week02_april2026: WeeklyQuiz = {
 
     // ── Q29 · LEGAL GK · Easy ────────────────────────────────────────────────
     {
-      id: 'w02-q29',
-      category: 'LEGAL GK',
-      question:
+      id: 29,
+      category: 'legal_gk',
+      question_text:
         'A Public Interest Litigation (PIL) can be filed in India by:',
       options: [
         'Only the affected party who has suffered a legal injury',
@@ -569,9 +571,9 @@ const week02_april2026: WeeklyQuiz = {
 
     // ── Q30 · STATIC GK · Hard ───────────────────────────────────────────────
     {
-      id: 'w02-q30',
-      category: 'STATIC GK',
-      question:
+      id: 30,
+      category: 'static_gk',
+      question_text:
         'The "Directive Principles of State Policy" (DPSPs) in Part IV of the Constitution are characterised by which of the following in terms of judicial enforceability and constitutional relationship with Fundamental Rights?',
       options: [
         'DPSPs are fully justiciable and override Fundamental Rights in case of conflict',

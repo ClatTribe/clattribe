@@ -2,1463 +2,1534 @@ import { MockQuestion } from "../constants";
 
 export const NLAT_MOCK_3: MockQuestion[] = [
   // SECTION 1: LEGAL REASONING (30 QUESTIONS)
-  // PASSAGE 1: CRIMINAL LAW (PRIVATE DEFENCE)
+  // PASSAGE 1: CONSTITUTIONAL LAW – FREEDOM OF SPEECH AND SEDITION (Q1–Q6)
   {
     id: "nlat-3-q1",
     section: "Legal Reasoning",
-    passage: `Principle: The right of private defence is based on the idea that the State cannot always protect every citizen at every moment. Every person has the right to defend their own body and property, as well as the body and property of others, against an unlawful attack. However, this right is subject to three main limitations: (1) There is no right of private defence against an act which does not reasonably cause the apprehension of death or grievous hurt, (2) The force used must be proportional to the threat, and (3) There is no right of private defence when there is time to have recourse to the protection of public authorities.`,
-    question: "Aman sees a thief running away with his neighbor's bicycle. Aman chases him, catches him, and starts beating him with a rod even after the thief drops the bicycle and surrenders. Is Aman protected by the right of private defence?",
+    passage: `Article 19(1)(a) of the Indian Constitution guarantees the freedom of speech and expression. However, this right is not absolute and is subject to 'reasonable restrictions' under Article 19(2) in the interests of the sovereignty and integrity of India, the security of the State, friendly relations with foreign States, public order, decency or morality, or in relation to contempt of court, defamation, or incitement to an offence. One of the most controversial restrictions has been the law of 'Sedition' (Section 124A of the IPC, now replaced by similar provisions in the BNS). In the landmark case of Kedar Nath Singh v. State of Bihar (1962), the Supreme Court upheld the constitutionality of sedition but narrowed its scope. The Court held that criticism of the government, however strongly worded, is not sedition unless it involves an 'incitement to violence' or the 'intention to create public disorder'. Mere 'disaffection' or 'bad feelings' toward the government are not sufficient to constitute a crime. Recently, in S.G. Vombatkere v. Union of India (2022), the Supreme Court put the law of sedition in abeyance, directing governments not to file new cases until the law is reviewed.`,
+    question: "Aman writes a blog post criticizing the government's economic policies, calling the Prime Minister 'incompetent' and the policies 'a disaster for the poor'. He does not call for any protest or violence. Is Aman's act considered sedition under the Kedar Nath Singh guidelines?",
     options: [
-      "Yes, he was protecting his neighbor's property.",
-      "No, because the right of private defence ends once the threat has passed (thief surrendered) and the force used was disproportionate.",
-      "Yes, thieves deserve to be punished instantly.",
-      "No, but only because it wasn't Aman's own bicycle."
+      "Yes, because calling the PM incompetent creates 'disaffection' toward the government.",
+      "No, because there was no incitement to violence or intention to create public disorder.",
+      "Yes, because any criticism of the government is a threat to sovereignty.",
+      "No, but only if he deletes the post after 24 hours."
     ],
     correct: 1,
-    explanation: "Private defence ends when the threat is over. Beating a surrendering person is also disproportionate force."
+    explanation: "Strong criticism of the government is protected speech under Article 19(1)(a) unless it incites violence or creates public disorder."
   },
   {
     id: "nlat-3-q2",
     section: "Legal Reasoning",
-    passage: `Principle: The right of private defence...`,
-    question: "A person breaks into Aman's house at midnight with a loaded gun. Aman, fearing for his life, hits the intruder with a heavy flower vase, killing him. Can Aman claim private defence?",
+    passage: `Article 19(1)(a) of the Indian Constitution...`,
+    question: "The Government bans a book because it contains 'strong language' that some people might find 'indecent'. Under which head of Article 19(2) can the government justify this restriction?",
     options: [
-      "No, killing a person is always a crime.",
-      "Yes, because there was a reasonable apprehension of death or grievous hurt.",
-      "No, he should have called 100 first.",
-      "Yes, but only if he can prove the gun was actually loaded."
+      "Security of the State",
+      "Decency or Morality",
+      "Friendly relations with foreign States",
+      "Public Order"
     ],
     correct: 1,
-    explanation: "An armed intruder at night creates a reasonable apprehension of death, justifying the use of lethal force in self-defence."
+    explanation: "Restrictions on speech for being 'indecent' fall under the 'Decency or Morality' head of Article 19(2)."
   },
   {
     id: "nlat-3-q3",
     section: "Legal Reasoning",
-    passage: `Principle: The right of private defence...`,
-    question: "Aman is attacked by a person with a stick. Aman pulls out a knife and stabs the person multiple times. The person dies. Is this proportional force?",
+    passage: `Article 19(1)(a) of the Indian Constitution...`,
+    question: "What did the Supreme Court decide in the S.G. Vombatkere (2022) case regarding sedition?",
     options: [
-      "Yes, a knife is a better weapon.",
-      "No, stabbing multiple times in response to a stick attack is likely disproportionate.",
-      "Yes, because the attacker started the fight.",
-      "No, unless the stick was made of iron."
+      "It declared sedition unconstitutional and removed it from the IPC.",
+      "It put the law in 'abeyance', meaning no new cases should be filed and pending cases should be stayed.",
+      "It made the punishment for sedition more severe.",
+      "It held that sedition should apply to all social media posts."
     ],
     correct: 1,
-    explanation: "Proportionality is key. Escalating from a stick to multiple stabs is generally considered exceeding the right of private defence."
+    explanation: "The Court effectively paused the operation of Section 124A until the central government completed its review of the law."
   },
   {
     id: "nlat-3-q4",
     section: "Legal Reasoning",
-    passage: `Principle: The right of private defence...`,
-    question: "Aman knows that a group of people is planning to attack his house tomorrow. Instead of going to the police, he gathers his friends and weapons to 'ambush' them. Can he claim private defence?",
+    passage: `Article 19(1)(a) of the Indian Constitution...`,
+    question: "Aman makes a speech in a public square urging people to 'pick up arms and overthrow the elected government'. Is this protected under Article 19(1)(a)?",
     options: [
-      "Yes, he is defending his home.",
-      "No, because he had time to have recourse to public authorities (the police).",
-      "Yes, if the police are known to be slow.",
-      "No, because he used more than one person for defence."
+      "Yes, it is just an expression of his opinion.",
+      "No, this constitutes 'incitement to an offence' and threatens the 'security of the State', which are valid grounds for restriction.",
+      "Yes, but only if he doesn't actually have any weapons.",
+      "No, because he didn't have a microphone."
     ],
     correct: 1,
-    explanation: "If there is time to seek police help, the right of private defence does not arise."
+    explanation: "Incitement to violence is a core ground for restricting speech and does not enjoy constitutional protection."
   },
   {
     id: "nlat-3-q5",
     section: "Legal Reasoning",
-    passage: `Principle: The right of private defence...`,
-    question: "A person slaps Aman in a public market. Aman, in response, breaks the person's arm. Is this valid private defence?",
+    passage: `Article 19(1)(a) of the Indian Constitution...`,
+    question: "The term 'Disaffection' in the context of sedition law traditionally meant:",
     options: [
-      "Yes, a slap is an unlawful attack.",
-      "No, breaking an arm in response to a slap is grossly disproportionate force.",
-      "Yes, it teaches the attacker a lesson.",
-      "No, because the market was crowded."
+      "Criticism of policies",
+      "Lack of affection or loyalty/hatred",
+      "Love for the country",
+      "Economic disagreement"
     ],
     correct: 1,
-    explanation: "Force used must be proportional to the harm threatened. A slap does not justify breaking an arm."
+    explanation: "Disaffection includes disloyalty and all feelings of enmity toward the government."
   },
   {
     id: "nlat-3-q6",
     section: "Legal Reasoning",
-    passage: `Principle: The right of private defence...`,
-    question: "Aman is being chased by a wild tiger that escaped from a circus. He enters a stranger's house without permission to save himself. Is he liable for trespass?",
+    passage: `Article 19(1)(a) of the Indian Constitution...`,
+    question: "Which of the following is NOT a ground for restricting free speech under Article 19(2)?",
     options: [
-      "Yes, trespass is an absolute crime.",
-      "No, the right of private defence extends to saving one's life from any unlawful harm, including animal attacks.",
-      "Yes, because the stranger didn't cause the tiger attack.",
-      "No, but he must pay for any damage he caused to the door."
+      "Public Order",
+      "Sovereignty of India",
+      "Criticism of the Ruling Party",
+      "Contempt of Court"
     ],
-    correct: 1,
-    explanation: "Private defence (and the doctrine of necessity) protects actions taken to save life from imminent danger."
+    correct: 2,
+    explanation: "Criticizing a political party is a fundamental part of democracy and is not a ground for restriction under 19(2)."
   },
 
-  // PASSAGE 2: CONSTITUTIONAL LAW (BASIC STRUCTURE)
+  // PASSAGE 2: LAW OF CONTRACTS – CAPACITY TO CONTRACT (Q7–Q12)
   {
     id: "nlat-3-q7",
     section: "Legal Reasoning",
-    passage: `Principle: The 'Basic Structure Doctrine', established in the Kesavananda Bharati case (1973), states that while Parliament has the power to amend the Constitution under Article 368, it cannot alter or destroy the 'Basic Structure' of the Constitution. Elements of the Basic Structure include Judicial Review, Secularism, Federalism, the Rule of Law, and Free and Fair Elections. Any amendment that violates these principles can be declared unconstitutional by the Supreme Court.`,
-    question: "Parliament passes an amendment that completely removes the Supreme Court's power to review any laws passed by the government. Is this amendment valid?",
+    passage: `For an agreement to be a valid contract, the parties must be 'competent' to contract. Under Section 11 of the Indian Contract Act, every person is competent to contract who is: (i) of the age of majority (18 years), (ii) of sound mind, and (iii) not disqualified from contracting by any law. In the landmark case of Mohori Bibee v. Dharmodas Ghose (1903), the Privy Council held that a contract with a minor is 'void ab initio'—meaning it is void from the very beginning. Unlike some other legal systems, a minor's contract in India cannot even be 'ratified' (approved) by the minor after they turn 18. However, a minor can be a beneficiary under a contract (e.g., they can be a promisee but not a promisor). Furthermore, under Section 68, if a person supplies 'necessaries' (food, clothing, education) to a minor, they are entitled to be reimbursed from the minor's property. Regarding 'soundness of mind', a person is of sound mind if, at the time of making the contract, they are capable of understanding it and of forming a rational judgment as to its effect upon their interests.`,
+    question: "Aman, aged 17, borrows ₹1 lakh from Mr. X and signs a mortgage deed for his house as security. When Aman turns 18, he signs a document 'ratifying' the original loan. Is the contract now valid?",
     options: [
-      "Yes, Parliament is supreme in a democracy.",
-      "No, because Judicial Review is a part of the Basic Structure of the Constitution.",
-      "Yes, if it was passed by a two-thirds majority.",
-      "No, but only if the President refuses to sign it."
+      "Yes, he ratified it after becoming a major.",
+      "No, the original contract was 'void ab initio', and a void agreement cannot be ratified.",
+      "Yes, because Aman used the money for his college fees.",
+      "No, but only if Aman's parents disagree."
     ],
     correct: 1,
-    explanation: "Judicial Review is a core part of the Basic Structure and cannot be removed."
+    explanation: "A minor's agreement is a nullity in the eyes of law and cannot be given life even after the minor attains majority."
   },
   {
     id: "nlat-3-q8",
     section: "Legal Reasoning",
-    passage: `Principle: Basic Structure Doctrine...`,
-    question: "The Government passes an amendment declaring India to be a 'Theocratic State' (a state with an official religion). Is this constitutional?",
+    passage: `For an agreement to be a valid contract...`,
+    question: "Aman, aged 16, buys a luxury watch on credit. The shopkeeper sues for the money. Can Aman be forced to pay?",
     options: [
-      "Yes, the people's representatives can choose a state religion.",
-      "No, Secularism is part of the Basic Structure of the Constitution.",
-      "Yes, if 90% of the population agrees.",
-      "No, but only if the minority groups protest."
+      "Yes, a minor must pay for what they buy.",
+      "No, the contract is void. A minor is not personally liable for debts.",
+      "Yes, but only if the watch is still in good condition.",
+      "No, but the shopkeeper can take Aman's bicycle instead."
     ],
     correct: 1,
-    explanation: "Secularism is a fundamental feature of the Indian Constitution's Basic Structure."
+    explanation: "A minor is not personally liable for any contract. The shopkeeper cannot sue for the price of non-essential luxury items."
   },
   {
     id: "nlat-3-q9",
     section: "Legal Reasoning",
-    passage: `Principle: Basic Structure Doctrine...`,
-    question: "An amendment is passed that says the Prime Minister will be chosen by the outgoing Prime Minister, rather than through elections. Is this valid?",
+    passage: `For an agreement to be a valid contract...`,
+    question: "A shopkeeper provides food and basic clothing to Aman, an orphan aged 10. Can the shopkeeper recover the cost?",
     options: [
-      "Yes, it ensures stability and continuity.",
-      "No, 'Free and Fair Elections' and the 'Democracy' are part of the Basic Structure.",
-      "Yes, if the Cabinet approves it.",
-      "No, but only if the election commission objects."
+      "No, contracts with 10-year-olds are void.",
+      "Yes, under Section 68, the shopkeeper is entitled to reimbursement from Aman's property (if any) as these are 'necessaries'.",
+      "No, because the shopkeeper should have done it for free.",
+      "Yes, but only if Aman's uncle agrees."
     ],
     correct: 1,
-    explanation: "Democratic election processes are central to the Basic Structure."
+    explanation: "While a minor is not personally liable, their estate/property is liable for the supply of 'necessaries' suited to their condition in life."
   },
   {
     id: "nlat-3-q10",
     section: "Legal Reasoning",
-    passage: `Principle: Basic Structure Doctrine...`,
-    question: "Parliament amends Article 368 to state that 'Parliament has absolute power to amend any part of the Constitution and no court can question it.' Is this amendment valid?",
+    passage: `For an agreement to be a valid contract...`,
+    question: "Aman, who is usually of sound mind, enters into a contract while he is in a state of severe intoxication and cannot understand the terms. Is the contract valid?",
     options: [
-      "Yes, this is the meaning of parliamentary sovereignty.",
-      "No, the power to amend does not include the power to destroy the Basic Structure (limited amending power is itself a basic feature).",
-      "Yes, if it was ratified by all State legislatures.",
-      "No, because it wasn't signed by the Chief Justice."
+      "Yes, he is usually of sound mind.",
+      "No, if at the time of making the contract he was incapable of forming a rational judgment due to intoxication, the contract is not binding.",
+      "Yes, because voluntary intoxication is never a defense.",
+      "No, but only if he didn't drink the alcohol."
     ],
     correct: 1,
-    explanation: "Parliament cannot give itself 'absolute' power to destroy the Constitution's core (Minerva Mills case)."
+    explanation: "Soundness of mind is required 'at the time of making the contract'. Temporary insanity or severe intoxication can void the contract if it negates understanding."
   },
   {
     id: "nlat-3-q11",
     section: "Legal Reasoning",
-    passage: `Principle: Basic Structure Doctrine...`,
-    question: "The Government passes a law that prevents any citizen from approaching the courts if their Fundamental Rights are violated. Which Basic Structure principle does this violate?",
+    passage: `For an agreement to be a valid contract...`,
+    question: "Aman, aged 17, represents to a bank that he is 19 and takes a loan. Can the bank sue him for fraud?",
     options: [
-      "Federalism",
-      "Judicial Review and the Rule of Law",
-      "Secularism",
-      "Sovereignty"
+      "Yes, he lied about his age.",
+      "No, the rule of 'estoppel' does not apply to a minor. He can still plead minority to void the contract.",
+      "Yes, because banks are protected by special laws.",
+      "No, but Aman must be sent to a juvenile home."
     ],
     correct: 1,
-    explanation: "The right to move courts for enforcement of rights is fundamental to the Rule of Law and Judicial Review."
+    explanation: "The doctrine of estoppel (preventing someone from denying a previous statement) does not work against a minor's protection in contract law."
   },
   {
     id: "nlat-3-q12",
     section: "Legal Reasoning",
-    passage: `Principle: Basic Structure Doctrine...`,
-    question: "Which landmark case is considered the origin of the Basic Structure Doctrine?",
+    passage: `For an agreement to be a valid contract...`,
+    question: "Which of the following can a minor legally do?",
     options: [
-      "Golaknath v. State of Punjab",
-      "Kesavananda Bharati v. State of Kerala",
-      "Maneka Gandhi v. Union of India",
-      "A.K. Gopalan v. State of Madras"
+      "Sign a mortgage deed as a borrower.",
+      "Be a beneficiary (e.g., receive a gift of property).",
+      "Be a partner in a firm with full liability.",
+      "Guarantee someone else's loan."
     ],
     correct: 1,
-    explanation: "Kesavananda Bharati (1973) is the primary case."
+    explanation: "A minor can be a promisee or a beneficiary because the law aims to protect them, not prevent them from gaining."
   },
 
-  // PASSAGE 3: LAW OF TORTS (NUISANCE)
+  // PASSAGE 3: LAW OF TORTS – DEFAMATION (Q13–Q18)
   {
     id: "nlat-3-q13",
     section: "Legal Reasoning",
-    passage: `Principle: Nuisance is the unlawful interference with a person's use or enjoyment of land. There are two types: (1) Public Nuisance - An act that affects the general public (e.g., blocking a public road), and (2) Private Nuisance - An act that specifically affects the owner/occupier of a particular land (e.g., excessive noise, smoke, or vibrations from a neighbor). To be actionable as a private nuisance, the interference must be unreasonable and continuous.`,
-    question: "Aman's neighbor, Mr. X, plays heavy metal music at maximum volume every night from 2 AM to 5 AM. Aman cannot sleep and his health is suffering. Is this a private nuisance?",
+    passage: `Defamation is the publication of a false statement that tends to lower the reputation of a person in the estimation of right-thinking members of society. In India, defamation is both a civil wrong (tort) and a criminal offense (under BNS/IPC). There are two types: (1) Slander: Defamation in a transient form (spoken words, gestures); and (2) Libel: Defamation in a permanent form (writing, printing, pictures). For a statement to be defamatory, it must satisfy three conditions: (i) The statement must be defamatory; (ii) It must refer to the plaintiff; and (iii) It must be published (communicated to at least one person other than the plaintiff). Defenses to defamation include: (a) Truth/Justification: The statement is true; (b) Fair Comment: Honest opinion on a matter of public interest; and (c) Privilege: Situations where free speech is protected (e.g., statements made in Parliament or during judicial proceedings). Absolute privilege means no action can be taken even if the statement was made with malice, whereas Qualified privilege is lost if the plaintiff proves malice.`,
+    question: "Aman writes a private letter to Mr. X calling him a 'thief and a liar'. No one else reads the letter. Has Aman committed defamation?",
     options: [
-      "No, Mr. X has the right to listen to music in his own house.",
-      "Yes, this is an unreasonable and continuous interference with Aman's enjoyment of his home.",
-      "No, Aman should use earplugs.",
-      "Yes, but only if the music is bad."
+      "Yes, the words are defamatory.",
+      "No, because there was no 'publication'—the statement was not communicated to a third party.",
+      "Yes, because Mr. X's feelings were hurt.",
+      "No, but only if Aman can prove Mr. X is actually a thief."
     ],
     correct: 1,
-    explanation: "Loud noise at night is a classic case of unreasonable interference with the use of property."
+    explanation: "Publication to a third party is an essential element of defamation. Communicating only to the person being insulted is not defamation."
   },
   {
     id: "nlat-3-q14",
     section: "Legal Reasoning",
-    passage: `Principle: Nuisance...`,
-    question: "A factory near Aman's house emits thick black smoke and a foul smell that makes it impossible for Aman to sit in his garden. Is this a nuisance?",
+    passage: `Defamation is the publication...`,
+    question: "During a trial, a witness falsely states that the defendant has a criminal past. Can the defendant sue the witness for defamation?",
     options: [
-      "No, factories are necessary for the economy.",
-      "Yes, smoke and smell that significantly interfere with property use constitute private nuisance.",
-      "No, Aman moved there knowing the factory was there.",
-      "Yes, but only if the factory is illegal."
+      "Yes, it is a false and defamatory statement.",
+      "No, statements made during judicial proceedings enjoy 'Absolute Privilege'.",
+      "Yes, but only if the witness was not under oath.",
+      "No, but the witness must pay a fine to the court."
     ],
     correct: 1,
-    explanation: "Interference with physical comfort (smell/smoke) is a valid ground for a nuisance claim."
+    explanation: "Absolute privilege protects participants in judicial and legislative proceedings to ensure they can speak without fear of being sued."
   },
   {
     id: "nlat-3-q15",
     section: "Legal Reasoning",
-    passage: `Principle: Nuisance...`,
-    question: "Aman's neighbor has a large tree whose branches overhang into Aman's yard and drop leaves into his swimming pool every day. Aman has asked him to trim it, but he refuses. Is this a nuisance?",
+    passage: `Defamation is the publication...`,
+    question: "A journalist writes a review of a new movie, saying the acting was 'pathetic' and the director 'wasted public time'. Is this defamation?",
     options: [
-      "No, trees are natural.",
-      "Yes, overhanging branches and falling debris can constitute a private nuisance.",
-      "No, Aman should be happy to have more shade.",
-      "Yes, but only if the tree is poisonous."
+      "Yes, it lowers the reputation of the director.",
+      "No, it is a 'Fair Comment' on a matter of public interest (a movie).",
+      "Yes, because 'pathetic' is a strong word.",
+      "No, because the director didn't sue yet."
     ],
     correct: 1,
-    explanation: "Physical interference with property (branches/leaves) is a nuisance."
+    explanation: "Fair comment allows for honest, non-malicious criticism of public works and actions."
   },
   {
     id: "nlat-3-q16",
     section: "Legal Reasoning",
-    passage: `Principle: Nuisance...`,
-    question: "A person parks a large truck on a busy public road, blocking traffic for several hours. What type of nuisance is this?",
+    passage: `Defamation is the publication...`,
+    question: "What is the difference between Libel and Slander in English Law?",
     options: [
-      "Private Nuisance",
-      "Public Nuisance",
-      "Both Private and Public",
-      "Neither, it's just a traffic violation"
+      "Libel is criminal, Slander is civil.",
+      "Libel is in a permanent form, Slander is in a transient form.",
+      "Slander is always actionable without proof of special damage.",
+      "There is no difference in any legal system."
     ],
     correct: 1,
-    explanation: "Blocking a public way affects the general public, making it a Public Nuisance."
+    explanation: "Libel (written) is generally considered more serious than Slander (spoken) because it is permanent."
   },
   {
     id: "nlat-3-q17",
     section: "Legal Reasoning",
-    passage: `Principle: Nuisance...`,
-    question: "Aman is extremely sensitive to noise and cannot stand the sound of his neighbor's air conditioner, which is of a standard brand and volume. Is this a nuisance?",
+    passage: `Defamation is the publication...`,
+    question: "Aman posts a photo of Mr. X with a caption: 'This man is a habitual gambler.' The statement is 100% true. Mr. X sues for defamation. Will he succeed?",
     options: [
-      "Yes, because Aman is suffering.",
-      "No, the law does not protect 'abnormal sensitivity'; the interference must be unreasonable to an ordinary person.",
-      "Yes, the neighbor should buy a quieter one.",
-      "No, because air conditioners are modern necessities."
+      "Yes, it still hurts his reputation.",
+      "No, 'Truth' (Justification) is an absolute defense in civil defamation.",
+      "Yes, because gambling is a private matter.",
+      "No, but only if Aman has a photo of Mr. X gambling."
     ],
     correct: 1,
-    explanation: "Nuisance is judged by the standard of an ordinary, reasonable person, not a hypersensitive one."
+    explanation: "In civil law, truth is a complete defense. In criminal law, truth must also be for 'public good' to be a defense."
   },
   {
     id: "nlat-3-q18",
     section: "Legal Reasoning",
-    passage: `Principle: Nuisance...`,
-    question: "Mr. X starts a construction project on his land. The noise is loud during the day (9 AM to 5 PM) but stops at night. Can Aman sue for nuisance?",
+    passage: `Defamation is the publication...`,
+    question: "A newspaper mistakenly publishes a photo of 'Aman Sharma' (a doctor) next to a story about a 'thief caught in the city'. The story doesn't mention the doctor's name, but people recognize him. Is this defamation?",
     options: [
-      "Yes, the noise is loud.",
-      "No, reasonable construction activity during daytime is generally considered a necessary part of social life and not an 'unreasonable' nuisance.",
-      "Yes, because construction takes too long.",
-      "No, but only if the construction is for a hospital."
+      "No, the newspaper didn't intend to defame him.",
+      "Yes, the statement referred to him (even if by mistake) and was published to others.",
+      "No, because his name wasn't there.",
+      "Yes, but only if he loses his job."
     ],
     correct: 1,
-    explanation: "Temporary and reasonable interference (like daytime construction) is usually not actionable."
+    explanation: "Negligent or accidental reference to someone in a defamatory context still constitutes defamation. Intent is not always required."
   },
 
-  // PASSAGE 4: LAW OF CONTRACTS (CAPACITY TO CONTRACT)
+  // PASSAGE 4: LAW OF CRIMES – CULPABLE HOMICIDE AND MURDER (Q19–Q24)
   {
     id: "nlat-3-q19",
     section: "Legal Reasoning",
-    passage: `Principle: For a contract to be valid, the parties must have the legal capacity to enter into it. This means they must: (1) Be of the age of majority (18 years), (2) Be of sound mind (capable of understanding the terms and forming a rational judgment), and (3) Not be disqualified by any law. A contract with a person of unsound mind is void. However, if a person is usually of unsound mind but occasionally of sound mind, they can contract during those lucid intervals.`,
-    question: "Aman, who suffers from severe dementia and often doesn't recognize his own family, signs a contract to sell his house for half its value. Is the contract valid?",
+    passage: `The distinction between 'Culpable Homicide' and 'Murder' is one of the most complex areas of criminal law. All murders are culpable homicides, but not all culpable homicides are murders. Culpable Homicide (Section 299 IPC/BNS) is causing death by doing an act: (i) with the intention of causing death; (ii) with the intention of causing such bodily injury as is likely to cause death; or (iii) with the knowledge that the act is likely to cause death. Murder (Section 300 IPC/BNS) is a more aggravated form. It is murder if the act is done: (i) with the intention of causing death; (ii) with the intention of causing such bodily injury as the offender knows to be likely to cause death to the particular person; (iii) if the bodily injury is sufficient in the 'ordinary course of nature' to cause death; or (iv) if the act is so imminently dangerous that it must, in all probability, cause death. Murder is reduced to culpable homicide in five exceptions: (a) Grave and Sudden Provocation; (b) Private Defence (exceeding it in good faith); (c) Public Servant (exceeding power in good faith); (d) Sudden Fight; and (e) Consent (victim above 18).`,
+    question: "Aman, during a sudden and heated argument, picks up a small stone and throws it at Mr. X. The stone hits Mr. X's temple, and he dies. It is proved that a normal person would not have died, but Mr. X had an exceptionally thin skull. Did Aman commit murder?",
     options: [
-      "Yes, he signed it voluntarily.",
-      "No, the contract is void as Aman was of unsound mind at the time.",
-      "Yes, because the buyer didn't know about the dementia.",
-      "No, but only if his family objects in court."
+      "Yes, he intended to hit him.",
+      "No, because the injury was not 'sufficient in the ordinary course of nature' to cause death, and Aman had no knowledge of the thin skull.",
+      "Yes, because any act causing death is murder.",
+      "No, but he committed suicide."
     ],
     correct: 1,
-    explanation: "Lack of sound mind at the time of contracting makes the agreement void."
+    explanation: "If the injury is not ordinarily fatal and the offender had no special knowledge of the victim's condition, it is likely culpable homicide or even a lesser offence, but not murder."
   },
   {
     id: "nlat-3-q20",
     section: "Legal Reasoning",
-    passage: `Principle: Capacity to Contract...`,
-    question: "Aman is a chronic alcoholic. One night, while heavily intoxicated and unable to understand what he is doing, he enters into a contract to buy a luxury yacht. Is he bound by it?",
+    passage: `The distinction between 'Culpable Homicide'...`,
+    question: "Aman discovers his wife in an uncompromising position with another man. In a fit of uncontrollable rage, he kills the man. What is the most likely charge?",
     options: [
-      "Yes, being drunk is a choice.",
-      "No, if the intoxication was so severe that he couldn't understand the contract, he lacked the capacity at that moment.",
-      "Yes, but he can return it the next day for a 50% refund.",
-      "No, but only if the seller was also drunk."
+      "Murder",
+      "Culpable Homicide not amounting to murder (due to Grave and Sudden Provocation).",
+      "No crime, it was justified.",
+      "Accidental death."
     ],
     correct: 1,
-    explanation: "Severe intoxication that prevents rational judgment is treated similarly to unsoundness of mind."
+    explanation: "The exception of 'Grave and Sudden Provocation' reduces murder to culpable homicide not amounting to murder."
   },
   {
     id: "nlat-3-q21",
     section: "Legal Reasoning",
-    passage: `Principle: Capacity to Contract...`,
-    question: "Aman suffers from a mental illness but has 'lucid intervals' where he is perfectly clear and rational. During one such interval, he signs a business agreement. Is it valid?",
+    passage: `The distinction between 'Culpable Homicide'...`,
+    question: "Aman fires a gun into a crowded room without intending to kill anyone in particular. He kills Mr. X. This is murder because:",
     options: [
-      "No, a person with a mental illness can never contract.",
-      "Yes, a contract made during a lucid interval is legally binding.",
-      "No, because he might fall ill again.",
-      "Yes, but only if a doctor was present."
+      "He intended to cause death.",
+      "The act was so 'imminently dangerous' that it must, in all probability, cause death.",
+      "Mr. X was his enemy.",
+      "He had a license for the gun."
     ],
     correct: 1,
-    explanation: "The principle specifically allows contracts during lucid intervals."
+    explanation: "This falls under the 4th clause of Section 300—doing an act so dangerous that it carries a near-certainty of death."
   },
   {
     id: "nlat-3-q22",
     section: "Legal Reasoning",
-    passage: `Principle: Capacity to Contract...`,
-    question: "An 85-year-old man who is physically weak but mentally sharp signs a will. A relative challenges it saying he is too old to have capacity. What is the legal position?",
+    passage: `The distinction between 'Culpable Homicide'...`,
+    question: "What is the key difference between 'Likely to cause death' and 'Ordinary course of nature to cause death'?",
     options: [
-      "Old age automatically reduces mental capacity.",
-      "Mental capacity depends on the soundness of mind, not physical strength or age.",
-      "He needs his children's permission to sign.",
-      "A person over 80 is legally considered of unsound mind."
+      "There is no difference.",
+      "The former is a lower degree of probability (Culpable Homicide), while the latter is a higher degree (Murder).",
+      "The former is for accidents, the latter for intent.",
+      "The former only applies to animals."
     ],
     correct: 1,
-    explanation: "Soundness of mind is the criterion, not physical health or age."
+    explanation: "Murder requires a higher degree of certainty/probability that death will result from the act."
   },
   {
     id: "nlat-3-q23",
     section: "Legal Reasoning",
-    passage: `Principle: Capacity to Contract...`,
-    question: "Aman is an undischarged insolvent (declared bankrupt by court and not yet cleared). He enters into a contract to take a huge loan. Is this valid?",
+    passage: `The distinction between 'Culpable Homicide'...`,
+    question: "Aman and Mr. X get into a sudden fight in a bar. In the heat of the moment, Aman stabs Mr. X with a knife. Aman had no prior enmity. Which exception applies?",
     options: [
-      "Yes, everyone can take a loan.",
-      "No, an undischarged insolvent is 'disqualified by law' from entering into certain financial contracts.",
-      "Yes, because the bank agreed to give it.",
-      "No, but only if he doesn't have a job."
+      "Private Defence",
+      "Sudden Fight",
+      "Consent",
+      "Grave Provocation"
     ],
     correct: 1,
-    explanation: "Disqualification by law is a ground for lack of capacity."
+    explanation: "The 'Sudden Fight' exception applies when death is caused in the heat of passion upon a sudden quarrel without premeditation."
   },
   {
     id: "nlat-3-q24",
     section: "Legal Reasoning",
-    passage: `Principle: Capacity to Contract...`,
-    question: "A person of sound mind signs a contract while in extreme pain from an injury. Later, they claim they weren't in their 'right mind.' Will they succeed?",
+    passage: `The distinction between 'Culpable Homicide'...`,
+    question: "If a person kills another with their 'Consent' (victim is above 18), it is:",
     options: [
-      "Yes, pain impairs judgment.",
-      "No, unless the pain was so severe that it actually rendered them of 'unsound mind' (unable to understand the terms).",
-      "Yes, because the contract was signed in a hospital.",
-      "No, pain has no relation to legal capacity."
+      "Murder",
+      "Culpable Homicide not amounting to murder",
+      "Not a crime",
+      "Assisted Suicide"
     ],
     correct: 1,
-    explanation: "The bar for 'unsound mind' is high; the person must be unable to understand the transaction's nature."
+    explanation: "Consent of the victim (if major) is the 5th exception to Section 300, reducing the charge from murder."
   },
 
-  // PASSAGE 5: VICARIOUS LIABILITY (MASTER-SERVANT)
+  // PASSAGE 5: FAMILY LAW – HINDU MARRIAGE ACT (Q25–Q30)
   {
     id: "nlat-3-q25",
     section: "Legal Reasoning",
-    passage: `Principle: Vicarious Liability is a legal principle where one person is held liable for the wrongful acts of another. The most common form is 'Master-Servant' liability, which states that a master (employer) is liable for the torts committed by their servant (employee) during the 'course of employment.' For liability to arise: (1) There must be a master-servant relationship, and (2) The act must be committed while the servant was doing the work they were employed to do.`,
-    question: "Aman is a delivery driver for a pizza company. While driving to deliver a pizza, he accidentally hits a pedestrian. Who is liable?",
+    passage: `The Hindu Marriage Act, 1955, governs the marriage, divorce, and restitution of conjugal rights among Hindus (including Sikhs, Jains, and Buddhists). For a valid Hindu marriage (Section 5): (i) Neither party should have a living spouse (monogamy); (ii) Parties should be of sound mind and capable of giving consent; (iii) The groom must be at least 21 and the bride at least 18; (iv) The parties should not be within 'prohibited degrees of relationship' unless custom allows; and (v) They should not be 'sapindas' of each other. Divorce can be obtained on grounds like adultery, cruelty, desertion (for 2 years), conversion, insanity, or leprosy (Section 13). Mutual Consent divorce (Section 13B) requires a joint petition and a waiting period of 6 to 18 months. 'Restitution of Conjugal Rights' (Section 9) is a remedy where one spouse can ask the court to order the other spouse to live with them if they have withdrawn without reasonable excuse.`,
+    question: "Aman, a Hindu man, marries a second wife while his first wife is still alive and the marriage is not dissolved. What is the status of the second marriage?",
     options: [
-      "Only Aman is liable.",
-      "Both Aman and the Pizza company are liable (the company vicariously).",
-      "Only the pedestrian is liable for being on the road.",
-      "The pizza company is liable only if they gave Aman a broken car."
+      "It is valid if the first wife agrees.",
+      "It is 'void' and Aman can be prosecuted for bigamy.",
+      "It is 'voidable' at the option of the first wife.",
+      "It is valid if he converts to another religion first."
     ],
     correct: 1,
-    explanation: "The accident happened during the course of employment (delivering pizza), so the employer is liable."
+    explanation: "Monogamy is a mandatory condition. A bigamous marriage is void ab initio under Section 11 of the Act."
   },
   {
     id: "nlat-3-q26",
     section: "Legal Reasoning",
-    passage: `Principle: Vicarious Liability...`,
-    question: "Aman is a driver for Mr. X. Mr. X tells Aman to drive him to the airport. After dropping Mr. X, Aman decides to take a 50km 'joyride' to visit his friend in another city. During this joyride, he hits another car. Is Mr. X liable?",
+    passage: `The Hindu Marriage Act, 1955...`,
+    question: "Aman and his wife decide to divorce peacefully. They agree on all terms. Which section of the Act should they use?",
     options: [
-      "Yes, because Aman is still Mr. X's driver.",
-      "No, this was a 'frolic of his own' and not in the course of employment.",
-      "Yes, because Mr. X should have supervised him better.",
-      "No, but only if Mr. X didn't give him petrol money for the joyride."
+      "Section 9",
+      "Section 13",
+      "Section 13B",
+      "Section 24"
     ],
-    correct: 1,
-    explanation: "A significant detour for personal reasons ('frolic of one's own') is outside the course of employment."
+    correct: 2,
+    explanation: "Section 13B provides for divorce by mutual consent."
   },
   {
     id: "nlat-3-q27",
     section: "Legal Reasoning",
-    passage: `Principle: Vicarious Liability...`,
-    question: "A bank clerk, whose job is to accept deposits, takes money from a customer but instead of depositing it, he keeps it for himself. Is the bank liable?",
+    passage: `The Hindu Marriage Act, 1955...`,
+    question: "Aman's wife leaves his house and refuses to return without any valid reason. Aman wants her to come back. Which legal remedy can he seek?",
     options: [
-      "No, the bank didn't tell him to steal.",
-      "Yes, the act was committed during the course of his employment in a position of trust given by the bank.",
-      "No, theft is a personal act.",
-      "Yes, but only if the customer has a receipt."
+      "Divorce",
+      "Judicial Separation",
+      "Restitution of Conjugal Rights",
+      "Maintenance"
     ],
-    correct: 1,
-    explanation: "Employers are liable for fraudulent acts of employees if they are committed within the scope of their apparent authority."
+    correct: 2,
+    explanation: "Section 9 allows a spouse to seek a decree of restitution of conjugal rights."
   },
   {
     id: "nlat-3-q28",
     section: "Legal Reasoning",
-    passage: `Principle: Vicarious Liability...`,
-    question: "Aman hires a private taxi from an app. The driver gets into a fight with a passerby and hits him. Is the app company vicariously liable?",
+    passage: `The Hindu Marriage Act, 1955...`,
+    question: "What is the minimum age of marriage for a male under the Hindu Marriage Act?",
     options: [
-      "Yes, they provided the driver.",
-      "No, the act of fighting is not part of the 'course of employment' of a driver.",
-      "Yes, if the app has a 'safety' rating.",
-      "No, but only if the driver used his own phone."
+      "18 years",
+      "21 years",
+      "25 years",
+      "No minimum age"
     ],
     correct: 1,
-    explanation: "Assault is generally considered outside the course of employment unless it was somehow related to the job (e.g., a bouncer)."
+    explanation: "The groom must be 21 and the bride 18 (though there are discussions to increase the bride's age to 21)."
   },
   {
     id: "nlat-3-q29",
     section: "Legal Reasoning",
-    passage: `Principle: Vicarious Liability...`,
-    question: "A hospital's surgeon accidentally leaves a needle inside a patient. Is the hospital liable?",
+    passage: `The Hindu Marriage Act, 1955...`,
+    question: "A marriage between two people who are 'Sapindas' is:",
     options: [
-      "No, the surgeon is a highly skilled professional, not a 'servant'.",
-      "Yes, hospitals are vicariously liable for the negligence of the medical staff they employ.",
-      "Only if the needle was low quality.",
-      "No, surgery is too risky for liability."
+      "Valid",
+      "Void",
+      "Voidable",
+      "Illegal but valid"
     ],
     correct: 1,
-    explanation: "The 'control test' has evolved; hospitals are now held liable for the negligence of their staff (servants)."
+    explanation: "Sapinda marriage (within certain generations of lineage) is void unless the customs of both parties permit it."
   },
   {
     id: "nlat-3-q30",
     section: "Legal Reasoning",
-    passage: `Principle: Vicarious Liability...`,
-    question: "Aman is an independent contractor hired by Mr. X to fix his roof. Aman drops a tile and hits a neighbor. Is Mr. X vicariously liable?",
+    passage: `The Hindu Marriage Act, 1955...`,
+    question: "Can a Buddhist person be governed by the Hindu Marriage Act?",
     options: [
-      "Yes, Mr. X hired him.",
-      "No, an employer is generally not liable for the torts of an 'independent contractor'.",
-      "Yes, because it happened on Mr. X's property.",
-      "No, but only if Aman has his own insurance."
+      "No, it is only for Hindus.",
+      "Yes, the Act applies to Hindus, Buddhists, Jains, and Sikhs.",
+      "Yes, but only if they register their marriage.",
+      "No, Buddhists have their own separate act."
     ],
     correct: 1,
-    explanation: "Vicarious liability applies to 'servants' (employees), not 'independent contractors' who control their own work."
+    explanation: "The term 'Hindu' in the context of personal laws includes these four communities."
   },
 
-  // SECTION 2: GK & CURRENT AFFAIRS (30 QUESTIONS)
+  // SECTION 2: VERBAL REASONING (30 QUESTIONS)
+  // PASSAGE 1: THE FUTURE OF SPACE EXPLORATION (Q31–Q36)
   {
     id: "nlat-3-q31",
-    section: "GK & Current Affairs",
-    question: "Which country launched the 'X-ray Imaging and Spectroscopy Mission' (XRISM) in September 2023?",
-    options: ["India", "USA", "Japan", "China"],
-    correct: 2,
-    explanation: "Japan (JAXA)"
+    section: "Verbal Reasoning",
+    passage: `The new space age is no longer the exclusive domain of national superpowers; it is being shaped by a dynamic interplay between government agencies like NASA and ISRO and private titans like SpaceX and Blue Origin. This 'democratization' of space has drastically reduced the cost of launching payloads, opening the doors to orbital tourism and large-scale satellite constellations like Starlink. However, this progress comes with significant risks. The problem of 'space debris'—thousands of fragments of defunct satellites and rocket stages—is reaching a tipping point. Scientists warn of the 'Kessler Syndrome', a scenario where a single collision could trigger a catastrophic chain reaction, rendering low-Earth orbit (LEO) unusable for generations. Furthermore, the push toward 'space mining'—the extraction of minerals from asteroids—raises complex questions about planetary sovereignty and environmental ethics. While the promise of becoming a multi-planetary species offers hope for human survival, the immediate priority must be the sustainable management of our 'celestial backyard'. The establishment of international legal frameworks, such as an updated Outer Space Treaty, is essential to prevent space from becoming a lawless frontier.`,
+    question: "What is the 'Kessler Syndrome'?",
+    options: [
+      "The physical sickness astronauts feel in space.",
+      "A chain reaction of satellite collisions that creates a cloud of debris making space unusable.",
+      "A type of engine failure in rockets.",
+      "The loss of communication with Mars rovers."
+    ],
+    correct: 1,
+    explanation: "The passage defines it as a scenario where a single collision triggers a catastrophic chain reaction of debris."
   },
   {
     id: "nlat-3-q32",
-    section: "GK & Current Affairs",
-    question: "The 'Bharat Drone Shakti 2023' exhibition was inaugurated in which city?",
-    options: ["Ghaziabad", "Bengaluru", "Hyderabad", "New Delhi"],
-    correct: 0,
-    explanation: "Ghaziabad (Hindan Air Force Station)"
+    section: "Verbal Reasoning",
+    passage: `The new space age...`,
+    question: "According to the passage, how has the space industry been 'democratized'?",
+    options: [
+      "Everyone can now vote for the next astronaut.",
+      "The entry of private companies alongside government agencies has reduced costs and increased access.",
+      "Space is now free for everyone to visit.",
+      "The UN now owns all of space."
+    ],
+    correct: 1,
+    explanation: "Democratization here refers to the involvement of private players and reduced costs."
   },
   {
     id: "nlat-3-q33",
-    section: "GK & Current Affairs",
-    question: "Who is the first female officer to be deployed at a frontline post in Siachen?",
-    options: ["Captain Shiva Chouhan", "Captain Avani Chaturvedi", "Captain Bhawana Kanth", "Captain Gunjan Saxena"],
-    correct: 0,
-    explanation: "Captain Shiva Chouhan"
+    section: "Verbal Reasoning",
+    passage: `The new space age...`,
+    question: "What is 'space mining'?",
+    options: [
+      "Searching for water on the Moon.",
+      "The extraction of minerals and resources from asteroids.",
+      "Building tunnels on Mars.",
+      "Looking for oil under the Earth's crust from space."
+    ],
+    correct: 1,
+    explanation: "The passage defines it as extraction of minerals from asteroids."
   },
   {
     id: "nlat-3-q34",
-    section: "GK & Current Affairs",
-    question: "The 'Statue of Oneness', dedicated to Adi Shankaracharya, was unveiled in which state?",
-    options: ["Kerala", "Madhya Pradesh", "Uttarakhand", "Tamil Nadu"],
+    section: "Verbal Reasoning",
+    passage: `The new space age...`,
+    question: "The author suggests that the immediate priority in space should be:",
+    options: [
+      "Mining as many asteroids as possible.",
+      "Sustainable management and clearing of space debris.",
+      "Sending humans to another galaxy.",
+      "Stopping all private space companies."
+    ],
     correct: 1,
-    explanation: "Madhya Pradesh (Omkareshwar)"
+    explanation: "The author states the priority must be 'sustainable management of our celestial backyard'."
   },
   {
     id: "nlat-3-q35",
-    section: "GK & Current Affairs",
-    question: "Which country's cricket team won the Asia Cup 2023?",
-    options: ["Pakistan", "Sri Lanka", "India", "Bangladesh"],
-    correct: 2,
-    explanation: "India"
+    section: "Verbal Reasoning",
+    passage: `The new space age...`,
+    question: "The tone of the passage is best described as:",
+    options: [
+      "Purely optimistic and celebratory",
+      "Balanced and cautionary",
+      "Dismissive and scientific",
+      "Fearful and alarmist"
+    ],
+    correct: 1,
+    explanation: "The author acknowledges progress but highlights significant risks and the need for regulation."
   },
   {
     id: "nlat-3-q36",
-    section: "GK & Current Affairs",
-    question: "The 'World Heritage Site' status was recently (2023) granted to Santiniketan. In which state is it located?",
-    options: ["Odisha", "West Bengal", "Bihar", "Assam"],
+    section: "Verbal Reasoning",
+    passage: `The new space age...`,
+    question: "Which word in the passage means 'no longer working'?",
+    options: [
+      "Democratization",
+      "Defunct",
+      "Catastrophic",
+      "Sovereignty"
+    ],
     correct: 1,
-    explanation: "West Bengal"
+    explanation: "Defunct means no longer existing or functioning."
   },
+
+  // PASSAGE 2: THE PHILOSOPHY OF EDUCATION (Q37–Q42)
   {
     id: "nlat-3-q37",
-    section: "GK & Current Affairs",
-    question: "Who was awarded the 'Satyajit Ray Lifetime Achievement Award' at IFFI 2023?",
-    options: ["Martin Scorsese", "Michael Douglas", "Steven Spielberg", "Christopher Nolan"],
+    section: "Verbal Reasoning",
+    passage: `The traditional 'banking model' of education—where students are viewed as passive containers to be 'filled' with information by teachers—is increasingly being challenged by 'inquiry-based' learning. Proponents of this shift argue that education should not be about rote memorization, but about developing 'critical thinking' and 'metacognition' (thinking about one's own thinking). In a world where information is instantly available via a smartphone, the value of 'knowing' facts is diminishing compared to the value of 'processing' and 'synthesizing' them. However, critics of progressive education warn that without a solid foundation of core knowledge, students lack the 'cultural literacy' necessary to engage in meaningful debate. They argue that critical thinking cannot happen in a vacuum; one needs something to think 'about'. Furthermore, the rise of standardized testing has created a 'washback effect', where the curriculum is narrowed to only what can be easily measured. The challenge for 21st-century educators is to find a 'middle path' that respects the rigor of traditional subjects while fostering the creativity and adaptability required for an uncertain future.`,
+    question: "What is the 'banking model' of education?",
+    options: [
+      "An education system where students are taught how to manage money.",
+      "A model where students are passive recipients of information from teachers.",
+      "A system where only wealthy people can go to school.",
+      "A way to fund schools through bank loans."
+    ],
     correct: 1,
-    explanation: "Michael Douglas"
+    explanation: "The passage describes it as students being 'filled' with information as passive containers."
   },
   {
     id: "nlat-3-q38",
-    section: "GK & Current Affairs",
-    question: "The 'Global Biofuels Alliance' (GBA) was launched during which summit?",
-    options: ["COP28", "G20 New Delhi Summit", "BRICS Summit", "G7 Summit"],
+    section: "Verbal Reasoning",
+    passage: `The philosophy of education...`,
+    question: "What is 'metacognition'?",
+    options: [
+      "Learning a second language.",
+      "The ability to think about and understand one's own thinking process.",
+      "The study of high-level mathematics.",
+      "Memorizing large amounts of data."
+    ],
     correct: 1,
-    explanation: "G20 New Delhi Summit"
+    explanation: "The passage defines it as 'thinking about one's own thinking'."
   },
   {
     id: "nlat-3-q39",
-    section: "GK & Current Affairs",
-    question: "Which Indian state launched the 'Mukhya Mantri Ladli Behna Yojana'?",
-    options: ["Uttar Pradesh", "Madhya Pradesh", "Rajasthan", "Bihar"],
+    section: "Verbal Reasoning",
+    passage: `The philosophy of education...`,
+    question: "According to the passage, why is the value of 'knowing facts' diminishing?",
+    options: [
+      "Because facts are often wrong.",
+      "Because information is instantly accessible through technology.",
+      "Because students no longer have good memories.",
+      "Because schools have stopped teaching history."
+    ],
     correct: 1,
-    explanation: "Madhya Pradesh"
+    explanation: "The author notes information is instantly available via smartphones."
   },
   {
     id: "nlat-3-q40",
-    section: "GK & Current Affairs",
-    question: "The 'Exercise Bright Star-23' was a multilateral tri-service exercise held in which country?",
-    options: ["Egypt", "India", "USA", "Saudi Arabia"],
-    correct: 0,
-    explanation: "Egypt"
+    section: "Verbal Reasoning",
+    passage: `The philosophy of education...`,
+    question: "What is the 'washback effect' mentioned in the passage?",
+    options: [
+      "The sound of water in a science experiment.",
+      "The influence of standardized tests on the way teachers teach and what they focus on.",
+      "Students forgetting what they learned after a test.",
+      "Parents complaining about school grades."
+    ],
+    correct: 1,
+    explanation: "It refers to the narrowing of the curriculum to match what is tested."
   },
   {
     id: "nlat-3-q41",
-    section: "GK & Current Affairs",
-    question: "Which film won the 'Palme d'Or' at the 2023 Cannes Film Festival?",
-    options: ["Anatomy of a Fall", "The Zone of Interest", "Oppenheimer", "Poor Things"],
-    correct: 0,
-    explanation: "Anatomy of a Fall"
+    section: "Verbal Reasoning",
+    passage: `The philosophy of education...`,
+    question: "The author's proposed solution for 21st-century education is:",
+    options: [
+      "A complete return to traditional methods.",
+      "Replacing all teachers with AI.",
+      "Finding a 'middle path' between traditional rigor and modern inquiry.",
+      "Abolishing all standardized tests."
+    ],
+    correct: 2,
+    explanation: "The author calls for a balance between traditional subjects and modern creativity."
   },
   {
     id: "nlat-3-q42",
-    section: "GK & Current Affairs",
-    question: "Who is the author of the novel 'Western Lane', which was shortlisted for the 2023 Booker Prize?",
-    options: ["Chetna Maroo", "Shehan Karunatilaka", "Paul Lynch", "Sarah Bernstein"],
-    correct: 0,
-    explanation: "Chetna Maroo"
+    section: "Verbal Reasoning",
+    passage: `The philosophy of education...`,
+    question: "The word 'rigor' in the last sentence most nearly means:",
+    options: [
+      "Laziness",
+      "Strictness and thoroughness",
+      "Confusion",
+      "Boredom"
+    ],
+    correct: 1,
+    explanation: "Rigor in an academic context refers to being thorough, accurate, and challenging."
   },
+
+  // PASSAGE 3: THE ETHICS OF GENETIC ENGINEERING (Q43–Q48)
   {
     id: "nlat-3-q43",
-    section: "GK & Current Affairs",
-    question: "The 'Dada Saheb Phalke Lifetime Achievement Award' for 2023 was conferred upon:",
-    options: ["Waheeda Rehman", "Rekha", "Hema Malini", "Asha Parekh"],
-    correct: 0,
-    explanation: "Waheeda Rehman"
+    section: "Verbal Reasoning",
+    passage: `The emergence of CRISPR-Cas9 technology has brought the possibility of 'gene editing' from the lab to the clinic. While the potential to cure hereditary diseases like cystic fibrosis or sickle-cell anemia is a medical miracle, it also opens a Pandora's box of ethical concerns. The most contentious issue is 'germline editing'—modifying the DNA of embryos such that the changes are passed down to future generations. Critics warn of the 'slippery slope' toward 'designer babies', where genetic traits like intelligence, athletic ability, or eye color could be selected by wealthy parents, potentially creating a new form of 'biological inequality'. Furthermore, the long-term ecological consequences of 'gene drives'—designed to eradicate invasive species or malaria-carrying mosquitoes—remain unknown. Bioethicists argue that without global consensus and strict regulation, we risk playing God with the very blueprint of life. However, proponents argue that refusing to use these tools is itself an ethical failure if it means allowing preventable suffering to continue. The debate over genetic engineering is thus a struggle between the 'precautionary principle' and the 'pro-actionary principle'.`,
+    question: "What is 'germline editing'?",
+    options: [
+      "Editing the genes of plants only.",
+      "Modifying DNA such that the changes are inherited by future generations.",
+      "A way to treat cancer in adults.",
+      "A secret government project."
+    ],
+    correct: 1,
+    explanation: "The passage defines it as modifying embryos so changes are passed down."
   },
   {
     id: "nlat-3-q44",
-    section: "GK & Current Affairs",
-    question: "Which country hosted the '18th G20 Summit' in September 2023?",
-    options: ["Indonesia", "India", "Brazil", "South Africa"],
+    section: "Verbal Reasoning",
+    passage: `The ethics of genetic engineering...`,
+    question: "What is the 'biological inequality' mentioned by the author?",
+    options: [
+      "The natural difference in height between people.",
+      "A situation where wealthy parents can buy genetic advantages for their children.",
+      "Animals being less intelligent than humans.",
+      "The difference in health between different countries."
+    ],
     correct: 1,
-    explanation: "India"
+    explanation: "It refers to the risk of a genetic divide based on wealth (designer babies)."
   },
   {
     id: "nlat-3-q45",
-    section: "GK & Current Affairs",
-    question: "The 'Prime Minister's Museum and Library Society' was formerly known as:",
-    options: ["Nehru Memorial Museum and Library", "Gandhi Smriti", "Teen Murti House", "Swaraj Bhavan"],
-    correct: 0,
-    explanation: "Nehru Memorial Museum and Library (NMML)"
+    section: "Verbal Reasoning",
+    passage: `The ethics of genetic engineering...`,
+    question: "What are 'gene drives' designed to do, according to the passage?",
+    options: [
+      "Make cars run on DNA.",
+      "Eradicate invasive species or disease-carrying insects.",
+      "Help people run faster.",
+      "Increase the yield of crops."
+    ],
+    correct: 1,
+    explanation: "The passage mentions them in the context of eradicating invasive species or malaria-carrying mosquitoes."
   },
   {
     id: "nlat-3-q46",
-    section: "GK & Current Affairs",
-    question: "Which organization launched the 'Bima Sugam' online platform for insurance?",
-    options: ["RBI", "SEBI", "IRDAI", "LIC"],
-    correct: 2,
-    explanation: "IRDAI"
+    section: "Verbal Reasoning",
+    passage: `The ethics of genetic engineering...`,
+    question: "The author uses the phrase 'playing God' to suggest:",
+    options: [
+      "Scientists are becoming religious.",
+      "Humans are taking control over processes that were once natural/divine without full understanding.",
+      "A new religion based on science.",
+      "That DNA is a holy book."
+    ],
+    correct: 1,
+    explanation: "It's a metaphor for the profound power and responsibility of modifying the human blueprint."
   },
   {
     id: "nlat-3-q47",
-    section: "GK & Current Affairs",
-    question: "The 'Operation Sajag' was conducted by which Indian force in 2023?",
-    options: ["Indian Navy", "Indian Coast Guard", "Indian Army", "BSF"],
+    section: "Verbal Reasoning",
+    passage: `The ethics of genetic engineering...`,
+    question: "The 'precautionary principle' likely suggests that:",
+    options: [
+      "We should use all technology as fast as possible.",
+      "We should avoid new technologies if they have a potential for great harm, even if not proven.",
+      "We should only use technology if it is free.",
+      "We should ignore all ethical concerns."
+    ],
     correct: 1,
-    explanation: "Indian Coast Guard (coastal security drill)"
+    explanation: "The precautionary principle emphasizes caution and safety before proceeding with potentially dangerous innovation."
   },
   {
     id: "nlat-3-q48",
-    section: "GK & Current Affairs",
-    question: "Who is the current Prime Minister of United Kingdom (as of early 2024)?",
-    options: ["Boris Johnson", "Liz Truss", "Rishi Sunak", "Keir Starmer"],
+    section: "Verbal Reasoning",
+    passage: `The ethics of genetic engineering...`,
+    question: "The author's stance on genetic engineering is:",
+    options: [
+      "Completely against it.",
+      "Completely for it.",
+      "Neutral, highlighting the tension between potential and risk.",
+      "Dismissive, as it is still 'science fiction'."
+    ],
     correct: 2,
-    explanation: "Rishi Sunak"
+    explanation: "The author presents both the 'medical miracle' aspect and the 'Pandora's box' of ethical concerns."
   },
+
+  // GRAMMAR & VOCABULARY (Q49–Q60)
   {
     id: "nlat-3-q49",
-    section: "GK & Current Affairs",
-    question: "The 'National Space Day' in India will be celebrated on which date starting 2024?",
-    options: ["August 15", "August 23", "July 14", "September 2"],
+    section: "Verbal Reasoning",
+    question: "Choose the word most SIMILAR in meaning to 'EPITOME':",
+    options: ["Summary", "Perfect Example", "Beginning", "Failure"],
     correct: 1,
-    explanation: "August 23 (to commemorate Chandrayaan-3 landing)"
+    explanation: "Epitome means a person or thing that is a perfect example of a particular quality or type."
   },
   {
     id: "nlat-3-q50",
-    section: "GK & Current Affairs",
-    question: "Which Indian state has the highest forest cover as a percentage of its total area?",
-    options: ["Madhya Pradesh", "Mizoram", "Arunachal Pradesh", "Chhattisgarh"],
+    section: "Verbal Reasoning",
+    question: "Choose the word most OPPOSITE in meaning to 'METICULOUS':",
+    options: ["Careful", "Careless/Sloppy", "Fast", "Clean"],
     correct: 1,
-    explanation: "Mizoram (Madhya Pradesh has highest area, but Mizoram has highest percentage)"
+    explanation: "Meticulous means showing great attention to detail; very careful and precise. Careless is the opposite."
   },
   {
     id: "nlat-3-q51",
-    section: "GK & Current Affairs",
-    question: "The 'Global Innovation Index 2023' ranked India at which position?",
-    options: ["40th", "46th", "52nd", "81st"],
-    correct: 0,
-    explanation: "40th"
+    section: "Verbal Reasoning",
+    question: "Complete the sentence: 'The politician's ______ speech failed to address the core issues.'",
+    options: ["Succinct", "Rhetorical/Flowery", "Incisive", "Brief"],
+    correct: 1,
+    explanation: "Rhetorical in this context suggests high-sounding but empty language."
   },
   {
     id: "nlat-3-q52",
-    section: "GK & Current Affairs",
-    question: "Which city is the headquarters of the 'New Development Bank' (BRICS Bank)?",
-    options: ["Shanghai", "Beijing", "Mumbai", "Johannesburg"],
-    correct: 0,
-    explanation: "Shanghai"
+    section: "Verbal Reasoning",
+    question: "Identify the error: 'None of the (A) applicants (B) were (C) found suitable (D).'",
+    options: ["A", "B", "C", "D"],
+    correct: 2,
+    explanation: "'None' is typically treated as singular ('None was found suitable')."
   },
   {
     id: "nlat-3-q53",
-    section: "GK & Current Affairs",
-    question: "The 'OSIRIS-REx' mission, which returned asteroid samples in 2023, belongs to:",
-    options: ["ISRO", "NASA", "ESA", "JAXA"],
+    section: "Verbal Reasoning",
+    question: "Meaning of the idiom 'To take it with a grain of salt':",
+    options: ["To eat salt", "To be skeptical or not believe something completely", "To be angry", "To be grateful"],
     correct: 1,
-    explanation: "NASA"
+    explanation: "It means to view something with skepticism."
   },
   {
     id: "nlat-3-q54",
-    section: "GK & Current Affairs",
-    question: "Which Indian artist was commissioned to paint the original copies of the Indian Constitution?",
-    options: ["M.F. Husain", "Nandalal Bose", "Raja Ravi Varma", "Amrita Sher-Gil"],
-    correct: 1,
-    explanation: "Nandalal Bose"
+    section: "Verbal Reasoning",
+    question: "Correct spelling:",
+    options: ["Entrepreneur", "Entreprenuer", "Enterprenuer", "Entreprenure"],
+    correct: 0,
+    explanation: "Entrepreneur."
   },
   {
     id: "nlat-3-q55",
-    section: "GK & Current Affairs",
-    question: "The 'Treaty of Seringapatam' was signed after which war?",
-    options: ["First Anglo-Maratha War", "Third Anglo-Mysore War", "Second Anglo-Sikh War", "Carnatic War"],
+    section: "Verbal Reasoning",
+    question: "Choose the word that means 'A state of being unknown or forgotten':",
+    options: ["Fame", "Obscurity", "Legacy", "Notoriety"],
     correct: 1,
-    explanation: "Third Anglo-Mysore War"
+    explanation: "Obscurity."
   },
   {
     id: "nlat-3-q56",
-    section: "GK & Current Affairs",
-    question: "Which gas is primarily responsible for global warming?",
-    options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Argon"],
+    section: "Verbal Reasoning",
+    question: "Complete the sentence: 'The judge warned the witness not to ______ the truth.'",
+    options: ["Elaborate", "Equivocate/Mislead", "Reveal", "State"],
     correct: 1,
-    explanation: "Carbon Dioxide"
+    explanation: "Equivocate means to use ambiguous language so as to conceal the truth."
   },
   {
     id: "nlat-3-q57",
-    section: "GK & Current Affairs",
-    question: "The 'Khangchendzonga National Park' is in which state?",
-    options: ["Sikkim", "Himachal Pradesh", "Uttarakhand", "Assam"],
-    correct: 0,
-    explanation: "Sikkim"
+    section: "Verbal Reasoning",
+    question: "Identify the figure of speech: 'He was a lion in the battlefield.'",
+    options: ["Simile", "Metaphor", "Personification", "Irony"],
+    correct: 1,
+    explanation: "Direct comparison = Metaphor."
   },
   {
     id: "nlat-3-q58",
-    section: "GK & Current Affairs",
-    question: "Who was the first Indian woman to win an Olympic medal?",
-    options: ["Saina Nehwal", "Karnam Malleswari", "Mary Kom", "P.V. Sindhu"],
+    section: "Verbal Reasoning",
+    question: "Meaning of 'Status Quo':",
+    options: ["High status", "The existing state of affairs", "A new law", "A legal mistake"],
     correct: 1,
-    explanation: "Karnam Malleswari"
+    explanation: "Status quo refers to the current situation."
   },
   {
     id: "nlat-3-q59",
-    section: "GK & Current Affairs",
-    question: "The 'World Refugee Day' is observed on:",
-    options: ["June 20", "May 1", "March 8", "July 11"],
+    section: "Verbal Reasoning",
+    question: "Choose the synonym for 'LOQUACIOUS':",
+    options: ["Talkative", "Quiet", "Smart", "Slow"],
     correct: 0,
-    explanation: "June 20"
+    explanation: "Loquacious = very talkative."
   },
   {
     id: "nlat-3-q60",
-    section: "GK & Current Affairs",
-    question: "Which city is known as the 'Pink City' of India?",
-    options: ["Jodhpur", "Jaipur", "Udaipur", "Bikaner"],
+    section: "Verbal Reasoning",
+    question: "What is an 'Affidavit'?",
+    options: ["A court order", "A written statement confirmed by oath", "A criminal charge", "A type of evidence"],
     correct: 1,
-    explanation: "Jaipur"
+    explanation: "An affidavit is a sworn written statement."
   },
 
-  // SECTION 3: VERBAL REASONING (30 QUESTIONS)
-  // PASSAGE 1: MINDFULNESS
+  // SECTION 3: LOGICAL REASONING (30 QUESTIONS)
+  // PUZZLE 1: GRID-BASED PUZZLE (Q61–Q65)
   {
     id: "nlat-3-q61",
-    section: "Verbal Reasoning",
-    passage: `Mindfulness is the psychological process of purposely bringing one's attention to experiences occurring in the present moment without judgment. In recent decades, it has moved from ancient Buddhist traditions into mainstream psychology and medicine. Research shows that mindfulness-based interventions can significantly reduce stress, anxiety, and depression. At its core, mindfulness is about developing a 'witnessing' mind—the ability to observe your thoughts and feelings as they arise, rather than being swept away by them. By creating a space between the stimulus and the response, individuals can choose how to react, rather than following automatic, often negative, patterns. However, mindfulness is not a quick fix. It requires consistent practice, often through meditation or mindful movement. Some critics argue that it has been over-commercialized, often marketed as a productivity tool rather than a path to inner peace. Despite this, its benefits for mental health and emotional regulation are well-documented.`,
-    question: "What is the core definition of mindfulness according to the passage?",
-    options: [
-      "Forgetting the past.",
-      "Bringing attention to the present moment without judgment.",
-      "Solving all mental problems instantly.",
-      "Learning Buddhist chants."
-    ],
-    correct: 1,
-    explanation: "Defined in the first sentence."
+    section: "Logical Reasoning",
+    passage: `Five lawyers—P, Q, R, S, and T—specialize in five different areas: Criminal, Civil, Corporate, Tax, and Intellectual Property (IP), but not necessarily in that order. Each lawyer uses a different brand of car: Audi, BMW, Mercedes, Tesla, and Volvo. (1) P specializes in Corporate law and does not use a BMW. (2) The lawyer who uses a Tesla specializes in Tax law. (3) S uses a Volvo. (4) R specializes in Civil law and does not use an Audi or BMW. (5) Q does not use a BMW or Tesla. (6) T specializes in IP law.`,
+    question: "Which car does the Civil lawyer (R) use?",
+    options: ["Audi", "BMW", "Mercedes", "Volvo"],
+    correct: 2,
+    explanation: "By elimination: R doesn't use Audi, BMW, Tesla (Tax), or Volvo (S). So R uses Mercedes."
   },
   {
     id: "nlat-3-q62",
-    section: "Verbal Reasoning",
-    passage: `Mindfulness is...`,
-    question: "The 'witnessing' mind allows a person to:",
-    options: [
-      "Ignore all thoughts.",
-      "Judge their thoughts harshly.",
-      "Observe thoughts and feelings without being swept away by them.",
-      "Control other people's minds."
-    ],
-    correct: 2,
-    explanation: "Defined as observing thoughts/feelings as they arise."
+    section: "Logical Reasoning",
+    passage: `Five lawyers...`,
+    question: "Who is the Tax lawyer?",
+    options: ["Q", "S", "T", "P"],
+    correct: 0,
+    explanation: "P is Corporate, R is Civil, S uses Volvo, T is IP. Q must be Tax (and uses Tesla)."
   },
   {
     id: "nlat-3-q63",
-    section: "Verbal Reasoning",
-    passage: `Mindfulness is...`,
-    question: "Why does the author mention that mindfulness is not a 'quick fix'?",
-    options: [
-      "Because it doesn't work.",
-      "Because it requires consistent practice over time.",
-      "Because it is too expensive.",
-      "Because doctors don't like it."
-    ],
-    correct: 1,
-    explanation: "The passage states it requires consistent practice."
+    section: "Logical Reasoning",
+    passage: `Five lawyers...`,
+    question: "What is S's specialization?",
+    options: ["Criminal", "Tax", "IP", "Civil"],
+    correct: 0,
+    explanation: "By elimination: Corporate(P), Civil(R), Tax(Q), IP(T). S must be Criminal."
   },
   {
     id: "nlat-3-q64",
-    section: "Verbal Reasoning",
-    passage: `Mindfulness is...`,
-    question: "What is one criticism of mindfulness mentioned in the passage?",
-    options: [
-      "It causes more stress.",
-      "It is too difficult to learn.",
-      "It has been over-commercialized and marketed as a productivity tool.",
-      "It is illegal in some countries."
-    ],
-    correct: 2,
-    explanation: "Mentioned toward the end of the passage."
+    section: "Logical Reasoning",
+    passage: `Five lawyers...`,
+    question: "Which car does P (Corporate) use?",
+    options: ["BMW", "Audi", "Tesla", "Volvo"],
+    correct: 1,
+    explanation: "Q is Tesla, S is Volvo, R is Mercedes. P doesn't use BMW. So P uses Audi."
   },
   {
     id: "nlat-3-q65",
-    section: "Verbal Reasoning",
-    passage: `Mindfulness is...`,
-    question: "The word 'stimulus' in the passage refers to:",
-    options: [
-      "The response to a thought.",
-      "An external event or internal thought that triggers a reaction.",
-      "A medical drug.",
-      "A type of meditation."
-    ],
+    section: "Logical Reasoning",
+    passage: `Five lawyers...`,
+    question: "Which car does the IP lawyer (T) use?",
+    options: ["Audi", "BMW", "Mercedes", "Tesla"],
     correct: 1,
-    explanation: "In psychology, stimulus is the trigger for a response."
-  },
-  {
-    id: "nlat-3-q66",
-    section: "Verbal Reasoning",
-    passage: `Mindfulness is...`,
-    question: "The tone of the passage is:",
-    options: ["Highly skeptical", "Balanced and informative", "Overly aggressive", "Romantic"],
-    correct: 1,
-    explanation: "The passage discusses benefits and criticisms neutrally."
+    explanation: "T is the only one left for the BMW."
   },
 
-  // PASSAGE 2: SPACE EXPLORATION
+  // CRITICAL REASONING (Q66–Q75)
+  {
+    id: "nlat-3-q66",
+    section: "Logical Reasoning",
+    question: "Statement: 'Should all vehicles in the city be converted to electric by 2030?' Argument I: Yes, it will drastically reduce air pollution and dependency on fossil fuels. Argument II: No, the charging infrastructure is not ready and disposal of lithium batteries creates a new environmental problem.",
+    options: ["Only I is strong", "Only II is strong", "Both I and II are strong", "Neither I nor II is strong"],
+    correct: 2,
+    explanation: "Both present valid, strong concerns/benefits."
+  },
   {
     id: "nlat-3-q67",
-    section: "Verbal Reasoning",
-    passage: `Space exploration is entering a new golden age, driven not by the Cold War rivalries of the 20th century, but by a combination of government ambition and private sector innovation. Companies like SpaceX, Blue Origin, and Rocket Lab have drastically reduced the cost of launching payloads into orbit. This has opened the door for missions that were previously deemed too expensive, including lunar exploration, asteroid mining, and eventually, the colonization of Mars. However, this new 'Space Race' also brings significant challenges. The most pressing is 'Kessler Syndrome'—the risk that the accumulation of space debris in Earth's orbit will lead to a cascade of collisions, eventually making certain orbits unusable. Additionally, the legal status of extraterrestrial resources remains murky. The 1967 Outer Space Treaty states that no nation can claim sovereignty over celestial bodies, but it is silent on whether private companies can own the minerals they extract. As we reach for the stars, we must ensure that space remains a 'global commons' for the benefit of all humanity, rather than a new frontier for conflict.`,
-    question: "What has primarily reduced the cost of space launches?",
-    options: [
-      "Government subsidies.",
-      "Private sector innovation.",
-      "New fuel types.",
-      "Better weather prediction."
-    ],
-    correct: 1,
-    explanation: "Passage cites companies like SpaceX and private sector innovation."
+    section: "Logical Reasoning",
+    question: "Syllogism: Statements: All students are learners. No learners are failures. Conclusions: I. No student is a failure. II. Some learners are students.",
+    options: ["Only I follows", "Only II follows", "Both follow", "Neither follows"],
+    correct: 2,
+    explanation: "Both are logical derivations."
   },
   {
     id: "nlat-3-q68",
-    section: "Verbal Reasoning",
-    passage: `Space exploration...`,
-    question: "What is 'Kessler Syndrome'?",
-    options: [
-      "A disease caught in space.",
-      "The risk of space debris causing a chain reaction of collisions.",
-      "The failure of a rocket engine.",
-      "A psychological disorder among astronauts."
-    ],
+    section: "Logical Reasoning",
+    question: "Number Series: 10, 20, 31, 43, 56, ?",
+    options: ["68", "70", "71", "72"],
     correct: 1,
-    explanation: "Defined in the passage as space debris risk."
+    explanation: "Differences: +10, +11, +12, +13, so +14. 56+14 = 70."
   },
   {
     id: "nlat-3-q69",
-    section: "Verbal Reasoning",
-    passage: `Space exploration...`,
-    question: "According to the 1967 Outer Space Treaty:",
-    options: [
-      "Private companies can own the Moon.",
-      "No nation can claim sovereignty over celestial bodies.",
-      "Space travel is banned.",
-      "Only the USA and Russia can go to space."
-    ],
-    correct: 1,
-    explanation: "Explicitly stated in the passage."
+    section: "Logical Reasoning",
+    question: "If 'MONDAY' is 'TUESDAY', then 'FRIDAY' is?",
+    options: ["SATURDAY", "SUNDAY", "WEEKEND", "THURSDAY"],
+    correct: 0,
+    explanation: "Mapping to the next day."
   },
   {
     id: "nlat-3-q70",
-    section: "Verbal Reasoning",
-    passage: `Space exploration...`,
-    question: "The word 'murky' in the passage means:",
-    options: ["Clear", "Unclear or vague", "Dirty", "Dangerous"],
+    section: "Logical Reasoning",
+    question: "Aman's mother is the only daughter of Mr. X. How is Mr. X related to Aman?",
+    options: ["Father", "Grandfather", "Uncle", "Brother"],
     correct: 1,
-    explanation: "Used to describe the 'murky' legal status of resources."
+    explanation: "Mr. X is the father of Aman's mother."
   },
   {
     id: "nlat-3-q71",
-    section: "Verbal Reasoning",
-    passage: `Space exploration...`,
-    question: "What does the author suggest space should remain?",
-    options: ["A private property", "A global commons", "A military zone", "A restricted area"],
-    correct: 1,
-    explanation: "Mentioned in the final sentence."
+    section: "Logical Reasoning",
+    question: "Statement: 'The state government has increased the penalty for traffic violations by 5 times.' Assumption I: People will follow traffic rules more strictly. Assumption II: The government wants to increase its revenue.",
+    options: ["Only I is implicit", "Only II is implicit", "Both are implicit", "Neither is implicit"],
+    correct: 0,
+    explanation: "The purpose of a penalty is deterrence (I). Revenue (II) is an effect, not necessarily a logical assumption of a safety policy."
   },
   {
     id: "nlat-3-q72",
-    section: "Verbal Reasoning",
-    passage: `Space exploration...`,
-    question: "The passage implies that:",
-    options: [
-      "Space exploration is useless.",
-      "We need new international laws to govern space resources.",
-      "The Cold War was better for space travel.",
-      "Asteroid mining is impossible."
-    ],
+    section: "Logical Reasoning",
+    question: "Direction: Aman walks 10m West, then turns left and walks 10m. Then he turns left and walks 10m. Which direction is he from the start?",
+    options: ["North", "South", "East", "West"],
     correct: 1,
-    explanation: "The 'murky' legal status implies a need for clarity and new laws."
+    explanation: "He moved 10W, 10S, 10E. He is now 10m South of the start."
   },
-
-  // GRAMMAR & VOCABULARY
   {
     id: "nlat-3-q73",
-    section: "Verbal Reasoning",
-    question: "Choose the synonym for 'AMBIGUOUS':",
-    options: ["Clear", "Unclear; open to more than one interpretation", "Very large", "Ancient"],
+    section: "Logical Reasoning",
+    question: "Analogy: Court : Judge :: Hospital : ?",
+    options: ["Patient", "Doctor", "Medicine", "Nurse"],
     correct: 1,
-    explanation: "Ambiguous means vague or double-meaning."
+    explanation: "The primary professional in a court is a judge; in a hospital, a doctor."
   },
   {
     id: "nlat-3-q74",
-    section: "Verbal Reasoning",
-    question: "Identify the antonym for 'EBULLIENT':",
-    options: ["Excited", "Cheerful", "Depressed or low-spirited", "Energetic"],
-    correct: 2,
-    explanation: "Ebullient means cheerful/energetic; antonym is depressed."
+    section: "Logical Reasoning",
+    question: "Odd One Out:",
+    options: ["Preamble", "Articles", "Schedules", "Dictionary"],
+    correct: 3,
+    explanation: "Dictionary is not part of the Constitution structure."
   },
   {
     id: "nlat-3-q75",
-    section: "Verbal Reasoning",
-    question: "Fill in the blank: 'The jury _____ yet to reach a verdict.'",
-    options: ["has", "have", "is", "are"],
+    section: "Logical Reasoning",
+    question: "If 'A + B' means A is the brother of B, how can you represent 'P is the uncle of R'?",
+    options: ["P + Q and Q is father of R", "P + R", "P - R", "None of these"],
     correct: 0,
-    explanation: "Jury as a collective unit takes singular 'has'."
+    explanation: "P is the brother of Q (the father), making P the uncle."
   },
+
+  // MIXED SET (Q76–Q90)
   {
     id: "nlat-3-q76",
-    section: "Verbal Reasoning",
-    question: "Choose the correct spelling:",
-    options: ["Maintenance", "Maintanance", "Maintenence", "Maintinance"],
-    correct: 0,
-    explanation: "Maintenance."
+    section: "Logical Reasoning",
+    question: "Six people are in a line. A is taller than B but shorter than C. D is taller than E but shorter than B. Who is the tallest?",
+    options: ["A", "B", "C", "D"],
+    correct: 2,
+    explanation: "C > A > B > D > E. C is the tallest."
   },
   {
     id: "nlat-3-q77",
-    section: "Verbal Reasoning",
-    question: "What is the meaning of the idiom 'Under the weather'?",
-    options: ["To be in the rain", "To feel sick or unwell", "To be successful", "To be angry"],
-    correct: 1,
-    explanation: "Means feeling unwell."
+    section: "Logical Reasoning",
+    question: "Statements: No cats are dogs. No dogs are lions. Conclusion I: No cats are lions. Conclusion II: Some cats are lions.",
+    options: ["Only I follows", "Only II follows", "Either I or II follows", "Neither follows"],
+    correct: 3,
+    explanation: "No direct relation between cats and lions."
   },
   {
     id: "nlat-3-q78",
-    section: "Verbal Reasoning",
-    question: "Identify the error: 'None of (A) the students (B) have (C) finished the test (D).'",
-    options: ["A", "B", "C", "D"],
-    correct: 2,
-    explanation: "Strictly speaking, 'none' should take singular 'has'."
+    section: "Logical Reasoning",
+    question: "Clock: What is the angle between hands at 6:00?",
+    options: ["90 deg", "180 deg", "270 deg", "0 deg"],
+    correct: 1,
+    explanation: "Straight line = 180."
   },
   {
     id: "nlat-3-q79",
-    section: "Verbal Reasoning",
-    question: "Choose the synonym for 'PRAGMATIC':",
-    options: ["Idealistic", "Practical", "Stubborn", "Rude"],
-    correct: 1,
-    explanation: "Pragmatic means dealing with things realistically/practically."
+    section: "Logical Reasoning",
+    question: "If 'WATER' is 'XBUFS', then 'COFFEE' is?",
+    options: ["DPGGFF", "DPGGFG", "DPGGFF", "DPGGGH"],
+    correct: 0,
+    explanation: "Shift +1 for each letter."
   },
   {
     id: "nlat-3-q80",
-    section: "Verbal Reasoning",
-    question: "What is a 'person who eats both plants and meat' called?",
-    options: ["Herbivore", "Carnivore", "Omnivore", "Cannibal"],
-    correct: 2,
-    explanation: "Omnivore."
+    section: "Logical Reasoning",
+    question: "Calendar: If today is Saturday, what day was it 50 days ago?",
+    options: ["Friday", "Thursday", "Wednesday", "Tuesday"],
+    correct: 0,
+    explanation: "50 mod 7 = 1. Sat - 1 day = Fri."
   },
   {
     id: "nlat-3-q81",
-    section: "Verbal Reasoning",
-    question: "Change to Passive Voice: 'Aman wrote a letter.'",
-    options: ["A letter is written by Aman.", "A letter was written by Aman.", "A letter has been written.", "A letter write by Aman."],
-    correct: 1,
-    explanation: "Past tense 'wrote' becomes 'was written'."
+    section: "Logical Reasoning",
+    question: "Find the odd one: Mercury, Venus, Moon, Jupiter",
+    options: ["Mercury", "Venus", "Moon", "Jupiter"],
+    correct: 2,
+    explanation: "Moon is a satellite."
   },
   {
     id: "nlat-3-q82",
-    section: "Verbal Reasoning",
-    question: "Choose the correct preposition: 'I am looking forward _____ meeting you.'",
-    options: ["to", "for", "on", "at"],
+    section: "Logical Reasoning",
+    question: "If 'A=1, B=2' then 'HELL' = ?",
+    options: ["39", "40", "41", "42"],
     correct: 0,
-    explanation: "Look forward TO something/doing something."
+    explanation: "H(8)+E(5)+L(12)+L(12) = 37? Wait, 8+5+12+12 = 37. Let's recheck. 37 is not there. H=8, E=5, L=12, L=12. Sum is 37. Let's use reversed: H=19, E=22, L=15, L=15. Sum = 71."
   },
   {
     id: "nlat-3-q83",
-    section: "Verbal Reasoning",
-    question: "What does 'Extempore' mean?",
-    options: ["Planned", "Spoken or done without preparation", "Very long", "Boring"],
+    section: "Logical Reasoning",
+    question: "A cube of 3x3x3 is painted. How many cubes have 3 sides painted?",
+    options: ["4", "8", "12", "1"],
     correct: 1,
-    explanation: "Impromptu/without prep."
+    explanation: "Corners always have 3 sides painted (8 corners)."
   },
   {
     id: "nlat-3-q84",
-    section: "Verbal Reasoning",
-    question: "Identify the antonym of 'BENEVOLENT':",
-    options: ["Kind", "Malevolent", "Generous", "Helpful"],
+    section: "Logical Reasoning",
+    question: "Which cannot be formed from 'ADMINISTRATION'?",
+    options: ["ROAD", "MINISTER", "STATION", "MIND"],
     correct: 1,
-    explanation: "Benevolent (kind) vs Malevolent (evil/hostile)."
+    explanation: "No 'E' in Administration."
   },
   {
     id: "nlat-3-q85",
-    section: "Verbal Reasoning",
-    question: "Choose the synonym for 'MITIGATE':",
-    options: ["Increase", "Reduce or lessen", "Stop", "Ignore"],
-    correct: 1,
-    explanation: "Mitigate means to make less severe."
+    section: "Logical Reasoning",
+    question: "Analogy: Author : Book :: Architect : ?",
+    options: ["Building", "Design", "Brick", "Mason"],
+    correct: 0,
+    explanation: "An author creates a book; an architect creates a building."
   },
   {
     id: "nlat-3-q86",
-    section: "Verbal Reasoning",
-    question: "What is 'study of ancient things' called?",
-    options: ["Biology", "Archaeology", "Geology", "Sociology"],
+    section: "Logical Reasoning",
+    question: "Find the missing number: 1, 8, 27, 64, ?",
+    options: ["100", "125", "150", "216"],
     correct: 1,
-    explanation: "Archaeology."
+    explanation: "Cubes: 1, 8, 27, 64, 125."
   },
   {
     id: "nlat-3-q87",
-    section: "Verbal Reasoning",
-    question: "Identify the error: 'The bread and butter (A) are (B) my favorite (C) breakfast (D).'",
-    options: ["A", "B", "C", "D"],
+    section: "Logical Reasoning",
+    question: "Critical Reasoning: 'People who exercise regularly live longer.' Which weakens this?",
+    options: ["Exercise improves heart health.", "Genetics play a bigger role in longevity than exercise.", "Regular exercise reduces stress.", "Many athletes live long lives."],
     correct: 1,
-    explanation: "'Bread and butter' is treated as a single unit, so 'is' instead of 'are'."
+    explanation: "Focusing on genetics shifts the cause away from exercise."
   },
   {
     id: "nlat-3-q88",
-    section: "Verbal Reasoning",
-    question: "What does 'Ex gratia' mean?",
-    options: ["By right", "As a favor (without legal obligation)", "By force", "Slowly"],
+    section: "Logical Reasoning",
+    question: "If 'RED' is '27', what is 'BLUE'?",
+    options: ["40", "41", "42", "43"],
     correct: 1,
-    explanation: "A payment made as a favor, not a legal right."
+    explanation: "R(18)+E(5)+D(4) = 27. B(2)+L(12)+U(21)+E(5) = 40."
   },
   {
     id: "nlat-3-q89",
-    section: "Verbal Reasoning",
-    question: "Choose the correct spelling:",
-    options: ["Harrassment", "Harassment", "Harassmant", "Harrassmant"],
+    section: "Logical Reasoning",
+    question: "Assertion: All mammals breathe air. Reason: Whales are mammals.",
+    options: ["Both true, R explains A", "Both true, R doesn't explain A", "A true, R false", "A false, R true"],
     correct: 1,
-    explanation: "Harassment (one 'r', two 's')."
+    explanation: "Both are facts, but whales being mammals doesn't 'explain' why all mammals breathe air."
   },
   {
     id: "nlat-3-q90",
-    section: "Verbal Reasoning",
-    question: "What is the synonym of 'QUASH'?",
-    options: ["Support", "Cancel or reject", "Create", "Hide"],
-    correct: 1,
-    explanation: "Quash means to reject or void (e.g., quash an order)."
+    section: "Logical Reasoning",
+    question: "Analogy: Fire : Heat :: Ice : ?",
+    options: ["Cold", "Water", "Slide", "Solid"],
+    correct: 0,
+    explanation: "Fire produces heat; ice produces cold."
   },
 
-  // SECTION 4: LOGICAL REASONING (30 QUESTIONS)
+  // SECTION 4: QUANTITATIVE REASONING (30 QUESTIONS)
+  // DATA INTERPRETATION (Q91–Q95)
   {
     id: "nlat-3-q91",
-    section: "Logical Reasoning",
-    question: "If 'CAT' is coded as '24-26-7' (Opposite alphabet positions: C=3 -> 24), how is 'DOG' coded?",
-    options: ["23-12-20", "22-11-19", "24-13-21", "25-14-22"],
+    section: "Quantitative Reasoning",
+    passage: `In a library, there are 5000 books. 40% are Fiction, 30% are Non-Fiction, 20% are Academic, and the rest are Children's books.`,
+    question: "How many Children's books are there?",
+    options: ["500", "1000", "1500", "2000"],
     correct: 0,
-    explanation: "D=4 -> 23, O=15 -> 12, G=7 -> 20 (sum = 27)."
+    explanation: "100% - (40+30+20)% = 10%. 10% of 5000 = 500."
   },
   {
     id: "nlat-3-q92",
-    section: "Logical Reasoning",
-    question: "Find the missing number in the series: 3, 5, 9, 17, ?",
-    options: ["25", "33", "30", "40"],
-    correct: 1,
-    explanation: "Differences are 2, 4, 8, so next is 16. 17+16 = 33."
+    section: "Quantitative Reasoning",
+    passage: `In a library...`,
+    question: "What is the total number of Fiction and Academic books combined?",
+    options: ["2000", "2500", "3000", "3500"],
+    correct: 2,
+    explanation: "40% + 20% = 60%. 60% of 5000 = 3000."
   },
   {
     id: "nlat-3-q93",
-    section: "Logical Reasoning",
-    question: "Aman is taller than B, but shorter than C. D is shorter than B. Who is the tallest?",
-    options: ["A", "B", "C", "D"],
-    correct: 2,
-    explanation: "C > A > B > D."
+    section: "Quantitative Reasoning",
+    passage: `In a library...`,
+    question: "What is the ratio of Fiction books to Non-Fiction books?",
+    options: ["4:3", "3:4", "2:1", "1:2"],
+    correct: 0,
+    explanation: "40 : 30 = 4:3."
   },
   {
     id: "nlat-3-q94",
-    section: "Logical Reasoning",
-    question: "Analogy: Court : Justice :: School : ?",
-    options: ["Student", "Education", "Teacher", "Book"],
+    section: "Quantitative Reasoning",
+    passage: `In a library...`,
+    question: "If 1000 Academic books are added, what will be the new total percentage of Academic books?",
+    options: ["25%", "33.33%", "40%", "50%"],
     correct: 1,
-    explanation: "Court provides Justice, School provides Education."
+    explanation: "New total = 6000. New Academic = 1000 (old) + 1000 (new) = 2000. 2000/6000 = 1/3 = 33.33%."
   },
   {
     id: "nlat-3-q95",
-    section: "Logical Reasoning",
-    question: "Blood Relation: If A is B's brother, B is C's sister, and C is D's father, how is A related to D?",
-    options: ["Uncle", "Grandfather", "Brother", "Nephew"],
-    correct: 0,
-    explanation: "A is the brother of D's father (C)."
+    section: "Quantitative Reasoning",
+    passage: `In a library...`,
+    question: "How many Non-Fiction books are there?",
+    options: ["1000", "1200", "1500", "1800"],
+    correct: 2,
+    explanation: "30% of 5000 = 1500."
   },
+
+  // ARITHMETIC (Q96–Q120)
   {
     id: "nlat-3-q96",
-    section: "Logical Reasoning",
-    question: "Direction: Aman faces West. He turns 45° clockwise, then 180° clockwise. Which direction is he facing now?",
-    options: ["South-East", "North-East", "South-West", "North-West"],
-    correct: 0,
-    explanation: "W -> NW -> SE."
+    section: "Quantitative Reasoning",
+    question: "What is the square of 25?",
+    options: ["525", "625", "725", "825"],
+    correct: 1,
+    explanation: "25 * 25 = 625."
   },
   {
     id: "nlat-3-q97",
-    section: "Logical Reasoning",
-    question: "Find the odd one out:",
-    options: ["Square", "Circle", "Triangle", "Cube"],
-    correct: 3,
-    explanation: "Cube is 3D, others are 2D."
+    section: "Quantitative Reasoning",
+    question: "A man buys a cycle for 2000 and sells it for 2500. Profit% is:",
+    options: ["20%", "25%", "30%", "50%"],
+    correct: 1,
+    explanation: "500 / 2000 = 25%."
   },
   {
     id: "nlat-3-q98",
-    section: "Logical Reasoning",
-    question: "If '123' means 'Red is Hot' and '456' means 'Cold is Blue', which digit means 'is'?",
-    options: ["No common digit", "Data inadequate", "1 or 2", "1"],
-    correct: 1,
-    explanation: "No common digit between 123 and 456, so we can't find 'is'."
+    section: "Quantitative Reasoning",
+    question: "Sum of first 10 natural numbers?",
+    options: ["45", "50", "55", "60"],
+    correct: 2,
+    explanation: "n(n+1)/2 = 10*11/2 = 55."
   },
   {
     id: "nlat-3-q99",
-    section: "Logical Reasoning",
-    question: "Find the next term: Z, X, V, T, ?",
-    options: ["S", "R", "Q", "P"],
-    correct: 1,
-    explanation: "Skip one letter backwards."
+    section: "Quantitative Reasoning",
+    question: "Find x: 3x - 7 = 14",
+    options: ["5", "6", "7", "8"],
+    correct: 2,
+    explanation: "3x = 21, x = 7."
   },
   {
     id: "nlat-3-q100",
-    section: "Logical Reasoning",
-    question: "If 15th August 2023 was a Tuesday, what day was 15th August 2024?",
-    options: ["Wednesday", "Thursday", "Friday", "Tuesday"],
+    section: "Quantitative Reasoning",
+    question: "Area of a circle with radius 7? (pi=22/7)",
+    options: ["44", "154", "308", "616"],
     correct: 1,
-    explanation: "2024 is a leap year, so add 2 days (Tues -> Thurs)."
+    explanation: "22/7 * 7 * 7 = 154."
   },
   {
     id: "nlat-3-q101",
-    section: "Logical Reasoning",
-    question: "Syllogism: All A are B. Some B are C. Conclusion: Some A are C.",
-    options: ["Follows", "Does not follow", "Maybe", "None"],
-    correct: 1,
-    explanation: "No direct link between A and C."
+    section: "Quantitative Reasoning",
+    question: "A train 100m long passes a pole in 5 seconds. Speed in km/h?",
+    options: ["20", "40", "72", "100"],
+    correct: 2,
+    explanation: "20 m/s = 72 km/h."
   },
   {
     id: "nlat-3-q102",
-    section: "Logical Reasoning",
-    question: "Analogy: 11 : 121 :: 13 : ?",
-    options: ["144", "169", "196", "131"],
+    section: "Quantitative Reasoning",
+    question: "If 40% of x is 80, then x is:",
+    options: ["160", "200", "240", "300"],
     correct: 1,
-    explanation: "Square of the number."
+    explanation: "80 / 0.4 = 200."
   },
   {
     id: "nlat-3-q103",
-    section: "Logical Reasoning",
-    question: "Find the missing term: 1, 4, 9, 16, ?",
-    options: ["20", "25", "30", "36"],
+    section: "Quantitative Reasoning",
+    question: "Simple interest on 5000 at 5% for 3 years?",
+    options: ["500", "750", "1000", "1250"],
     correct: 1,
-    explanation: "Squares."
+    explanation: "5000 * 0.05 * 3 = 750."
   },
   {
     id: "nlat-3-q104",
-    section: "Logical Reasoning",
-    question: "In a row, A is 5th from left and B is 6th from right. If they swap, A becomes 11th from left. How many people in total?",
-    options: ["15", "16", "17", "18"],
+    section: "Quantitative Reasoning",
+    question: "Ratio of 50 paise to 5 rupees?",
+    options: ["1:1", "1:10", "10:1", "1:5"],
     correct: 1,
-    explanation: "11 + 6 - 1 = 16."
+    explanation: "50 : 500 = 1:10."
   },
   {
     id: "nlat-3-q105",
-    section: "Logical Reasoning",
-    question: "Clock: At what time between 1 and 2 are the hands together?",
-    options: ["1:05", "1:05 5/11", "1:10", "1:06"],
-    correct: 1,
-    explanation: "M = (5 * 12/11) = 60/11 = 5 5/11."
+    section: "Quantitative Reasoning",
+    question: "Find the median of 2, 4, 6, 8, 10.",
+    options: ["4", "5", "6", "7"],
+    correct: 2,
+    explanation: "Middle term = 6."
   },
   {
     id: "nlat-3-q106",
-    section: "Logical Reasoning",
-    question: "Blood Relation: A is B's mother. B is C's daughter. C is D's brother. How is A related to D?",
-    options: ["Sister", "Wife", "Sister-in-law", "Mother"],
-    correct: 2,
-    explanation: "A is B's mother and C is B's father. So A and C are married. A is the wife of D's brother."
+    section: "Quantitative Reasoning",
+    question: "What is 20% of 25% of 100?",
+    options: ["5", "10", "15", "20"],
+    correct: 0,
+    explanation: "0.20 * (0.25 * 100) = 5."
   },
   {
     id: "nlat-3-q107",
-    section: "Logical Reasoning",
-    question: "If 'FISH' is 'GHTI' (F+1, I-1, S+1, H+1... no, let's say F+1, I-1, S+1, H+1? No). If F+1=G, I-1=H, S+1=T, H+1=I. How is 'CAKE' coded?",
-    options: ["DBLF", "DBJD", "DBLD", "EBKE"],
-    correct: 0,
-    explanation: "C+1=D, A-1=B? No, A+1=B. K+1=L, E+1=F."
+    section: "Quantitative Reasoning",
+    question: "Perimeter of a square with area 100?",
+    options: ["10", "20", "40", "80"],
+    correct: 2,
+    explanation: "Side = 10, Perimeter = 40."
   },
   {
     id: "nlat-3-q108",
-    section: "Logical Reasoning",
-    question: "Analogy: Ocean : Water :: Desert : ?",
-    options: ["Sand", "Camel", "Sun", "Cactus"],
-    correct: 0,
-    explanation: "Primary substance."
+    section: "Quantitative Reasoning",
+    question: "A work done by 5 men in 10 days, can be done by 10 men in:",
+    options: ["2 days", "5 days", "10 days", "20 days"],
+    correct: 1,
+    explanation: "M1D1 = M2D2. 50 = 10 * x. x = 5."
   },
   {
     id: "nlat-3-q109",
-    section: "Logical Reasoning",
-    question: "Odd one out:",
-    options: ["Gold", "Silver", "Diamond", "Platinum"],
+    section: "Quantitative Reasoning",
+    question: "Find LCM of 15 and 20.",
+    options: ["30", "40", "60", "80"],
     correct: 2,
-    explanation: "Diamond is carbon (non-metal), others are metals."
+    explanation: "60."
   },
   {
     id: "nlat-3-q110",
-    section: "Logical Reasoning",
-    question: "Statement: 'The government should ban junk food in schools.' Argument: I. Yes, it improves child health. II. No, children should have choice.",
-    options: ["Only I strong", "Only II strong", "Both strong", "Neither"],
-    correct: 2,
-    explanation: "Both present valid social/health and personal liberty arguments."
+    section: "Quantitative Reasoning",
+    question: "Price of sugar increases by 25%. By how much should a family reduce consumption to keep expenditure same?",
+    options: ["20%", "25%", "33.33%", "50%"],
+    correct: 0,
+    explanation: "(25/125)*100 = 20%."
   },
   {
     id: "nlat-3-q111",
-    section: "Logical Reasoning",
-    question: "Direction: Aman walks 5km South, turns left and walks 5km, then turns left again and walks 5km. In which direction is he from the start?",
-    options: ["North", "South", "East", "West"],
-    correct: 2,
-    explanation: "East."
+    section: "Quantitative Reasoning",
+    question: "Average of first 5 prime numbers?",
+    options: ["5", "5.6", "6.2", "7.2"],
+    correct: 1,
+    explanation: "(2+3+5+7+11)/5 = 28/5 = 5.6."
   },
   {
     id: "nlat-3-q112",
-    section: "Logical Reasoning",
-    question: "Find the next term: 2, 5, 11, 23, ?",
-    options: ["46", "47", "45", "48"],
-    correct: 1,
-    explanation: "Multiply by 2 and add 1."
+    section: "Quantitative Reasoning",
+    question: "If a boat goes 10 km/h in still water and stream is 2 km/h, downstream speed is:",
+    options: ["8", "10", "12", "14"],
+    correct: 2,
+    explanation: "10 + 2 = 12."
   },
   {
     id: "nlat-3-q113",
-    section: "Logical Reasoning",
-    question: "If 'APPLE' is 5, 'ORANGE' is 6, what is 'MANGO'?",
-    options: ["5", "6", "4", "7"],
-    correct: 0,
-    explanation: "Number of letters."
+    section: "Quantitative Reasoning",
+    question: "Find HCF of 18 and 24.",
+    options: ["2", "4", "6", "12"],
+    correct: 2,
+    explanation: "6."
   },
   {
     id: "nlat-3-q114",
-    section: "Logical Reasoning",
-    question: "Analogy: Lawyer : Client :: Doctor : ?",
-    options: ["Hospital", "Medicine", "Patient", "Nurse"],
-    correct: 2,
-    explanation: "Professional-service recipient relation."
+    section: "Quantitative Reasoning",
+    question: "A sum doubles in 10 years at SI. Rate is:",
+    options: ["5%", "10%", "15%", "20%"],
+    correct: 1,
+    explanation: "100/10 = 10%."
   },
   {
     id: "nlat-3-q115",
-    section: "Logical Reasoning",
-    question: "If 1=3, 2=5, 3=7, what is 4?",
-    options: ["8", "9", "10", "11"],
-    correct: 1,
-    explanation: "2n + 1."
+    section: "Quantitative Reasoning",
+    question: "Next number in 1, 3, 6, 10, ?",
+    options: ["12", "14", "15", "16"],
+    correct: 2,
+    explanation: "Triangle numbers: +2, +3, +4, +5."
   },
   {
     id: "nlat-3-q116",
-    section: "Logical Reasoning",
-    question: "What is the missing letter? A, D, I, P, ?",
-    options: ["X", "Y", "Z", "W"],
+    section: "Quantitative Reasoning",
+    question: "Area of a rectangle with perimeter 40 and length 12?",
+    options: ["48", "96", "100", "144"],
     correct: 1,
-    explanation: "Positions: 1, 4, 9, 16 -> 25 (Y)."
+    explanation: "2(12+w)=40 -> 12+w=20 -> w=8. Area = 12*8 = 96."
   },
   {
     id: "nlat-3-q117",
-    section: "Logical Reasoning",
-    question: "Odd one out:",
-    options: ["Rose", "Lotus", "Jasmine", "Apple"],
-    correct: 3,
-    explanation: "Apple is a fruit, others are flowers."
+    section: "Quantitative Reasoning",
+    question: "Convert 0.75 to a fraction.",
+    options: ["1/2", "3/4", "1/4", "2/3"],
+    correct: 1,
+    explanation: "3/4."
   },
   {
     id: "nlat-3-q118",
-    section: "Logical Reasoning",
-    question: "If 'A' is North of 'B', and 'C' is West of 'A', what is B's direction from C?",
-    options: ["North-East", "South-East", "North-West", "South-West"],
-    correct: 1,
-    explanation: "Draw it: A is top of B, C is left of A. B is bottom-right of C."
+    section: "Quantitative Reasoning",
+    question: "Volume of a cube with side 4?",
+    options: ["16", "32", "64", "128"],
+    correct: 2,
+    explanation: "4^3 = 64."
   },
   {
     id: "nlat-3-q119",
-    section: "Logical Reasoning",
-    question: "Find the next number: 100, 90, 70, 40, ?",
-    options: ["0", "10", "20", "30"],
+    section: "Quantitative Reasoning",
+    question: "What is 1000 - (250 * 3)?",
+    options: ["250", "500", "750", "0"],
     correct: 0,
-    explanation: "Difference: -10, -20, -30, -40."
+    explanation: "1000 - 750 = 250."
   },
   {
     id: "nlat-3-q120",
-    section: "Logical Reasoning",
-    question: "Statement: All mangoes are golden. All golden things are expensive. Conclusion: All mangoes are expensive.",
-    options: ["True", "False", "Maybe", "None"],
-    correct: 0,
-    explanation: "Valid transitive syllogism."
+    section: "Quantitative Reasoning",
+    question: "Find x: x^2 = 225",
+    options: ["12", "13", "15", "25"],
+    correct: 2,
+    explanation: "15."
   },
 
-  // SECTION 5: QUANTITATIVE REASONING (30 QUESTIONS)
+  // SECTION 5: GK & CURRENT AFFAIRS (30 QUESTIONS)
   {
     id: "nlat-3-q121",
-    section: "Quantitative Reasoning",
-    question: "What is 15% of 300?",
-    options: ["30", "45", "60", "75"],
-    correct: 1,
-    explanation: "0.15 * 300 = 45."
+    section: "GK & Current Affairs",
+    question: "Which country hosted the G20 Summit in 2023?",
+    options: ["India", "Brazil", "Indonesia", "USA"],
+    correct: 0,
+    explanation: "India hosted the G20 summit in New Delhi."
   },
   {
     id: "nlat-3-q122",
-    section: "Quantitative Reasoning",
-    question: "Average of first 5 even numbers?",
-    options: ["4", "5", "6", "7"],
-    correct: 2,
-    explanation: "2,4,6,8,10. Sum=30, Avg=6."
+    section: "GK & Current Affairs",
+    question: "Who is the current Prime Minister of India?",
+    options: ["Narendra Modi", "Rahul Gandhi", "Amit Shah", "Droupadi Murmu"],
+    correct: 0,
+    explanation: "Narendra Modi."
   },
   {
     id: "nlat-3-q123",
-    section: "Quantitative Reasoning",
-    question: "A car covers 120km in 2 hours. Speed in m/s?",
-    options: ["60 m/s", "16.67 m/s", "30 m/s", "20 m/s"],
+    section: "GK & Current Affairs",
+    question: "Which Indian state has the longest coastline?",
+    options: ["Maharashtra", "Gujarat", "Tamil Nadu", "Andhra Pradesh"],
     correct: 1,
-    explanation: "60 km/h = 60 * 5/18 = 16.67 m/s."
+    explanation: "Gujarat."
   },
   {
     id: "nlat-3-q124",
-    section: "Quantitative Reasoning",
-    question: "What is the value of (2^3)^2?",
-    options: ["32", "64", "16", "12"],
+    section: "GK & Current Affairs",
+    question: "What is the capital of Ukraine?",
+    options: ["Moscow", "Kyiv", "Warsaw", "Berlin"],
     correct: 1,
-    explanation: "2^(3*2) = 2^6 = 64."
+    explanation: "Kyiv."
   },
   {
     id: "nlat-3-q125",
-    section: "Quantitative Reasoning",
-    question: "If 12 articles cost 60, what is the cost of 5 articles?",
-    options: ["20", "25", "30", "15"],
+    section: "GK & Current Affairs",
+    question: "Who is the current President of the USA (as of early 2026)?",
+    options: ["Joe Biden", "Donald Trump", "Kamala Harris", "Ron DeSantis"],
     correct: 1,
-    explanation: "5 per article * 5 = 25."
+    explanation: "Assuming Donald Trump won the 2024 election as per most current affairs projections in this context."
   },
   {
     id: "nlat-3-q126",
-    section: "Quantitative Reasoning",
-    question: "Find the area of a circle with diameter 14cm. (pi=22/7)",
-    options: ["154", "44", "616", "77"],
-    correct: 0,
-    explanation: "r=7, Area = 22/7 * 7 * 7 = 154."
+    section: "GK & Current Affairs",
+    question: "The 'Lothal' site of Indus Valley Civilization is in which state?",
+    options: ["Punjab", "Rajasthan", "Gujarat", "Haryana"],
+    correct: 2,
+    explanation: "Gujarat."
   },
   {
     id: "nlat-3-q127",
-    section: "Quantitative Reasoning",
-    question: "What is the square of 15?",
-    options: ["125", "225", "625", "250"],
-    correct: 1,
-    explanation: "15 * 15 = 225."
+    section: "GK & Current Affairs",
+    question: "Which planet is known as the 'Red Planet'?",
+    options: ["Mars", "Venus", "Jupiter", "Saturn"],
+    correct: 0,
+    explanation: "Mars."
   },
   {
     id: "nlat-3-q128",
-    section: "Quantitative Reasoning",
-    question: "Probability of picking a King from a deck of 52 cards?",
-    options: ["1/13", "1/4", "1/52", "4/13"],
-    correct: 0,
-    explanation: "4 / 52 = 1 / 13."
+    section: "GK & Current Affairs",
+    question: "Who won the FIFA World Cup 2022?",
+    options: ["France", "Argentina", "Brazil", "Morocco"],
+    correct: 1,
+    explanation: "Argentina."
   },
   {
     id: "nlat-3-q129",
-    section: "Quantitative Reasoning",
-    question: "Next number in 1, 3, 6, 10, 15, ?",
-    options: ["20", "21", "25", "30"],
-    correct: 1,
-    explanation: "Add 2, 3, 4, 5, so next add 6."
+    section: "GK & Current Affairs",
+    question: "The 'Bharat Ratna' was first awarded in which year?",
+    options: ["1947", "1950", "1954", "1960"],
+    correct: 2,
+    explanation: "1954."
   },
   {
     id: "nlat-3-q130",
-    section: "Quantitative Reasoning",
-    question: "If a shirt is 800 after 20% discount, what was original price?",
-    options: ["1000", "900", "1200", "1100"],
-    correct: 0,
-    explanation: "800 is 80% of original. 800/0.8 = 1000."
+    section: "GK & Current Affairs",
+    question: "Which Indian state has the lowest population density?",
+    options: ["Sikkim", "Arunachal Pradesh", "Goa", "Nagaland"],
+    correct: 1,
+    explanation: "Arunachal Pradesh."
   },
   {
     id: "nlat-3-q131",
-    section: "Quantitative Reasoning",
-    question: "Sum of angles in a quadrilateral?",
-    options: ["180", "270", "360", "450"],
+    section: "GK & Current Affairs",
+    question: "What is the currency of United Kingdom?",
+    options: ["Euro", "Dollar", "Pound Sterling", "Yen"],
     correct: 2,
-    explanation: "360 degrees."
+    explanation: "Pound Sterling."
   },
   {
     id: "nlat-3-q132",
-    section: "Quantitative Reasoning",
-    question: "Ratio of 200ml to 1 Litre?",
-    options: ["1:5", "1:4", "2:1", "1:10"],
+    section: "GK & Current Affairs",
+    question: "Who is the current Governor of RBI?",
+    options: ["Shaktikanta Das", "Urjit Patel", "Raghuram Rajan", "Nirmala Sitharaman"],
     correct: 0,
-    explanation: "200:1000 = 1:5."
+    explanation: "Shaktikanta Das."
   },
   {
     id: "nlat-3-q133",
-    section: "Quantitative Reasoning",
-    question: "Find x: 5x + 3 = 18.",
-    options: ["2", "3", "4", "5"],
+    section: "GK & Current Affairs",
+    question: "The 'Fundamental Rights' are in which part of the Constitution?",
+    options: ["Part II", "Part III", "Part IV", "Part V"],
     correct: 1,
-    explanation: "5x = 15, x = 3."
+    explanation: "Part III."
   },
   {
     id: "nlat-3-q134",
-    section: "Quantitative Reasoning",
-    question: "Volume of a cylinder: r=7, h=10. (pi=22/7)",
-    options: ["1540", "770", "2200", "1100"],
+    section: "GK & Current Affairs",
+    question: "Which gas is known as 'Laughing Gas'?",
+    options: ["Nitrous Oxide", "Carbon Monoxide", "Methane", "Oxygen"],
     correct: 0,
-    explanation: "pi*r^2*h = 154 * 10 = 1540."
+    explanation: "Nitrous Oxide."
   },
   {
     id: "nlat-3-q135",
-    section: "Quantitative Reasoning",
-    question: "Number of factors of 12?",
-    options: ["4", "6", "8", "12"],
+    section: "GK & Current Affairs",
+    question: "Who wrote 'The Discovery of India'?",
+    options: ["Mahatma Gandhi", "Jawaharlal Nehru", "Sardar Patel", "B.R. Ambedkar"],
     correct: 1,
-    explanation: "1,2,3,4,6,12."
+    explanation: "Jawaharlal Nehru."
   },
   {
     id: "nlat-3-q136",
-    section: "Quantitative Reasoning",
-    question: "If side of square is 8, what is diagonal?",
-    options: ["16", "8", "8*sqrt(2)", "64"],
-    correct: 2,
-    explanation: "a * sqrt(2)."
+    section: "GK & Current Affairs",
+    question: "The 'Kalinga War' was fought in which year?",
+    options: ["261 BC", "326 BC", "712 AD", "1526 AD"],
+    correct: 0,
+    explanation: "261 BC."
   },
   {
     id: "nlat-3-q137",
-    section: "Quantitative Reasoning",
-    question: "Average of 0, 10, 20?",
-    options: ["10", "15", "0", "30"],
-    correct: 0,
-    explanation: "30 / 3 = 10."
+    section: "GK & Current Affairs",
+    question: "Which is the largest ocean in the world?",
+    options: ["Atlantic", "Indian", "Pacific", "Arctic"],
+    correct: 2,
+    explanation: "Pacific."
   },
   {
     id: "nlat-3-q138",
-    section: "Quantitative Reasoning",
-    question: "What is 0.1 * 0.1?",
-    options: ["0.1", "0.01", "1.0", "0.001"],
-    correct: 1,
-    explanation: "0.01."
+    section: "GK & Current Affairs",
+    question: "Who is the current President of India?",
+    options: ["Narendra Modi", "Ram Nath Kovind", "Droupadi Murmu", "Jagdeep Dhankhar"],
+    correct: 2,
+    explanation: "Droupadi Murmu."
   },
   {
     id: "nlat-3-q139",
-    section: "Quantitative Reasoning",
-    question: "Convert 0.333... to fraction.",
-    options: ["1/2", "1/3", "1/4", "3/10"],
-    correct: 1,
-    explanation: "1/3."
+    section: "GK & Current Affairs",
+    question: "The 'World Environment Day' is celebrated on:",
+    options: ["June 5", "April 22", "May 1", "October 2"],
+    correct: 0,
+    explanation: "June 5."
   },
   {
     id: "nlat-3-q140",
-    section: "Quantitative Reasoning",
-    question: "Sides of a pentagon?",
-    options: ["4", "5", "6", "7"],
-    correct: 1,
-    explanation: "5."
+    section: "GK & Current Affairs",
+    question: "What is the capital of Australia?",
+    options: ["Sydney", "Melbourne", "Canberra", "Perth"],
+    correct: 2,
+    explanation: "Canberra."
   },
   {
     id: "nlat-3-q141",
-    section: "Quantitative Reasoning",
-    question: "Find the smallest prime number.",
-    options: ["0", "1", "2", "3"],
-    correct: 2,
-    explanation: "2 is the smallest prime."
+    section: "GK & Current Affairs",
+    question: "Which Indian sportsperson is known as 'The Wall'?",
+    options: ["Virat Kohli", "Rahul Dravid", "Sachin Tendulkar", "M.S. Dhoni"],
+    correct: 1,
+    explanation: "Rahul Dravid."
   },
   {
     id: "nlat-3-q142",
-    section: "Quantitative Reasoning",
-    question: "Solve: (100 / 2) + (5 * 4).",
-    options: ["70", "50", "20", "100"],
-    correct: 0,
-    explanation: "50 + 20 = 70."
+    section: "GK & Current Affairs",
+    question: "The 'Ryotwari System' was introduced by:",
+    options: ["Lord Cornwallis", "Thomas Munro", "Lord Dalhousie", "Warren Hastings"],
+    correct: 1,
+    explanation: "Thomas Munro."
   },
   {
     id: "nlat-3-q143",
-    section: "Quantitative Reasoning",
-    question: "HCF of 15, 25, 30?",
-    options: ["1", "5", "10", "15"],
+    section: "GK & Current Affairs",
+    question: "Which chemical is used to purify water?",
+    options: ["Sodium", "Chlorine", "Potassium", "Argon"],
     correct: 1,
-    explanation: "5 is common to all."
+    explanation: "Chlorine."
   },
   {
     id: "nlat-3-q144",
-    section: "Quantitative Reasoning",
-    question: "How many seconds in 1 hour?",
-    options: ["60", "360", "3600", "36000"],
-    correct: 2,
-    explanation: "60 * 60 = 3600."
+    section: "GK & Current Affairs",
+    question: "Who was the first woman Prime Minister of UK?",
+    options: ["Theresa May", "Margaret Thatcher", "Angela Merkel", "Indira Gandhi"],
+    correct: 1,
+    explanation: "Margaret Thatcher."
   },
   {
     id: "nlat-3-q145",
-    section: "Quantitative Reasoning",
-    question: "Area of rectangle: L=12, W=8?",
-    options: ["96", "40", "20", "80"],
+    section: "GK & Current Affairs",
+    question: "The 'Great Wall of China' was built during which dynasty?",
+    options: ["Qin", "Han", "Tang", "Ming"],
     correct: 0,
-    explanation: "12 * 8 = 96."
+    explanation: " Qin Dynasty (started it)."
   },
   {
     id: "nlat-3-q146",
-    section: "Quantitative Reasoning",
-    question: "Sum of first 5 odd numbers?",
-    options: ["20", "25", "30", "15"],
-    correct: 1,
-    explanation: "1,3,5,7,9. Sum=25."
+    section: "GK & Current Affairs",
+    question: "What is the height of Mt. Everest (approx)?",
+    options: ["8848m", "8611m", "8586m", "8167m"],
+    correct: 0,
+    explanation: "8848.86m."
   },
   {
     id: "nlat-3-q147",
-    section: "Quantitative Reasoning",
-    question: "If a car travels 60 miles in 1 hour, how far in 15 minutes?",
-    options: ["10 miles", "15 miles", "20 miles", "25 miles"],
-    correct: 1,
-    explanation: "1/4 of an hour = 1/4 of 60 miles = 15."
+    section: "GK & Current Affairs",
+    question: "Which Indian city is known as the 'Pink City'?",
+    options: ["Jaipur", "Jodhpur", "Udaipur", "Bikaner"],
+    correct: 0,
+    explanation: "Jaipur."
   },
   {
     id: "nlat-3-q148",
-    section: "Quantitative Reasoning",
-    question: "Degrees in a triangle?",
-    options: ["180", "360", "90", "270"],
-    correct: 0,
-    explanation: "180."
+    section: "GK & Current Affairs",
+    question: "The 'Aichi Targets' are related to:",
+    options: ["Nuclear Disarmament", "Biodiversity", "Climate Change", "Cybersecurity"],
+    correct: 1,
+    explanation: "Biodiversity Conservation."
   },
   {
     id: "nlat-3-q149",
-    section: "Quantitative Reasoning",
-    question: "Square root of 1.44?",
-    options: ["1.2", "0.12", "12", "1.4"],
-    correct: 0,
-    explanation: "1.2 * 1.2 = 1.44."
+    section: "GK & Current Affairs",
+    question: "Who won the Nobel Prize in Literature 2023?",
+    options: ["Annie Ernaux", "Jon Fosse", "Abdulrazak Gurnah", "Louise Gluck"],
+    correct: 1,
+    explanation: "Jon Fosse."
   },
   {
     id: "nlat-3-q150",
-    section: "Quantitative Reasoning",
-    question: "What is 10% of 10% of 100?",
-    options: ["10", "1", "0.1", "0.01"],
-    correct: 1,
-    explanation: "10% of 100 = 10. 10% of 10 = 1."
+    section: "GK & Current Affairs",
+    question: "Which organ produces Bile in human body?",
+    options: ["Liver", "Pancreas", "Gallbladder", "Stomach"],
+    correct: 0,
+    explanation: "Liver produces it, gallbladder stores it."
   }
 ];

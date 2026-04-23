@@ -10,7 +10,7 @@ export default function WeeklyTestPage() {
     <TestPageLayout categoryName="Weekly Quiz">
       {(onComplete) => (
         <GKWeeklyTest
-          onComplete={(score, total) => onComplete({ score, total, timeSpent: 1200 })}
+          onComplete={onComplete}
           onBack={() => router.push("/gk/testing")}
         />
       )}

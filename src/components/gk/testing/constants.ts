@@ -88,7 +88,7 @@ export const TIME_LIMITS = [
   { label: "120 Mins", value: 120 },
 ];
 
-export type ExamType = "CLAT" | "AILET" | "NLAT" | "MHCET";
+export type ExamType = "NLAT" | "MHCET"; // | "CLAT" | "AILET";
 
 export interface MockQuestion {
   id: string;
@@ -102,30 +102,35 @@ export interface MockQuestion {
 
 export const SAMPLE_CLAT_MOCK_1: MockQuestion[] = [
   {
+    id: "sample-1",
     question: "Which of the following is NOT a fundamental right under the Indian Constitution?",
     options: ["Right to Equality", "Right to Property", "Right against Exploitation", "Right to Freedom of Religion"],
     correct: 1,
     explanation: "The Right to Property was removed from the list of Fundamental Rights by the 44th Amendment Act, 1978. It is now a legal right under Article 300A.",
   },
   {
+    id: "sample-2",
     question: "The power of 'Judicial Review' in India is based on:",
     options: ["Procedure established by law", "Due process of law", "Rule of law", "Precedents and Conventions"],
     correct: 0,
     explanation: "Judicial Review in India is primarily based on the principle of 'Procedure established by law' as per Article 21.",
   },
   {
+    id: "sample-3",
     question: "Who appoints the Chief Justice of India?",
     options: ["The Prime Minister", "The President", "The Law Minister", "The Parliament"],
     correct: 1,
     explanation: "The Chief Justice of India is appointed by the President of India under Article 124 of the Constitution.",
   },
   {
+    id: "sample-4",
     question: "Which landmark case dealt with the 'Right to Privacy'?",
     options: ["K.S. Puttaswamy v. Union of India", "Navtej Singh Johar v. Union of India", "Joseph Shine v. Union of India", "Shayara Bano v. Union of India"],
     correct: 0,
     explanation: "Justice K.S. Puttaswamy (Retd.) v. Union of India (2017) is the landmark case where the SC declared Right to Privacy as a Fundamental Right.",
   },
   {
+    id: "sample-5",
     question: "The concept of 'Public Interest Litigation' (PIL) originated in which country?",
     options: ["United Kingdom", "USA", "Australia", "Canada"],
     correct: 1,
@@ -145,6 +150,7 @@ import { MHCET_MOCK_4 } from "./data/mhcet-mock-4";
 import { MHCET_MOCK_5 } from "./data/mhcet-mock-5";
 
 export const MOCK_DATABASE: Record<string, Record<number, MockQuestion[]>> = {
+  /*
   CLAT: {
     1: SAMPLE_CLAT_MOCK_1,
     2: SAMPLE_CLAT_MOCK_1,
@@ -152,6 +158,7 @@ export const MOCK_DATABASE: Record<string, Record<number, MockQuestion[]>> = {
   AILET: {
     1: SAMPLE_CLAT_MOCK_1,
   },
+  */
   NLAT: {
     1: NLAT_MOCK_1,
     2: NLAT_MOCK_2,
@@ -169,16 +176,6 @@ export const MOCK_DATABASE: Record<string, Record<number, MockQuestion[]>> = {
 };
 
 export const EXAM_META: Record<ExamType, { color: string; accent: string; description: string }> = {
-  CLAT: {
-    color: "bg-purple-600",
-    accent: "text-purple-600",
-    description: "The gold standard for NLU admissions. 120 questions, 120 minutes.",
-  },
-  AILET: {
-    color: "bg-emerald-600",
-    accent: "text-emerald-600",
-    description: "National Law University, Delhi's specific entrance. 150 questions, 90 minutes.",
-  },
   NLAT: {
     color: "bg-blue-600",
     accent: "text-blue-600",
@@ -189,6 +186,18 @@ export const EXAM_META: Record<ExamType, { color: string; accent: string; descri
     accent: "text-orange-600",
     description: "Maharashtra Common Entrance Test. 120 questions, 120 minutes, no negative marking.",
   },
+  /*
+  CLAT: {
+    color: "bg-purple-600",
+    accent: "text-purple-600",
+    description: "The gold standard for NLU admissions. 120 questions, 120 minutes.",
+  },
+  AILET: {
+    color: "bg-emerald-600",
+    accent: "text-emerald-600",
+    description: "National Law University, Delhi's specific entrance. 150 questions, 90 minutes.",
+  },
+  */
 };
 
 export interface TestResult {
@@ -200,4 +209,6 @@ export interface TestResult {
   date: string;
   topicBreakdown: { topic: string; correct: number; total: number }[];
   suggestions: string[];
+  answers?: (number | null)[];
+  questions?: MockQuestion[];
 }

@@ -1,1132 +1,1128 @@
 import { MockQuestion } from "../constants";
 
 export const MHCET_MOCK_2: MockQuestion[] = [
-  // SECTION 1: LEGAL APTITUDE (24 QUESTIONS)
-  // PASSAGE 1: LAW OF CRIMES (THEFT)
+  // SECTION 1: LEGAL APTITUDE & LEGAL REASONING (24 QUESTIONS)
+  // PASSAGE 1: CONSTITUTIONAL LAW – WRITS (Q1–Q4)
   {
     id: "mhcet-2-q1",
-    section: "Legal Aptitude",
-    passage: `Principle: Theft - Whoever, intending to take dishonestly any moveable property out of the possession of any person without that person's consent, moves that property in order to such taking, is said to commit theft. (1) Property must be moveable. (2) It must be in someone's possession. (3) Consent (express or implied) must be absent. (4) Dishonest intention must exist at the time of moving.`,
-    question: "Aman finds Mr. X's ring on the road. He picks it up to keep it. Has he committed theft?",
+    section: "Legal Aptitude & Reasoning",
+    passage: `Article 32 of the Indian Constitution, described by Dr. B.R. Ambedkar as the 'heart and soul' of the Constitution, provides the right to move the Supreme Court for the enforcement of Fundamental Rights. Under this Article (and Article 226 for High Courts), the courts can issue five types of writs: (1) Habeas Corpus: Literally 'to have the body', used to release a person who has been unlawfully detained; (2) Mandamus: Literally 'we command', used to order a public official or authority to perform their legal duty; (3) Quo Warranto: Literally 'by what authority', used to challenge a person's right to hold a public office; (4) Prohibition: Issued by a higher court to a lower court to stop it from exceeding its jurisdiction; and (5) Certiorari: Issued to quash an order already passed by a lower court or quasi-judicial body due to lack of jurisdiction or error of law.`,
+    question: "Aman is arrested by the police but is not produced before a magistrate within 24 hours as required by law. His family wants to secure his release. Which writ should they apply for?",
     options: [
-      "Yes, he moved it dishonestly.",
-      "No, because the property was not in anyone's 'possession' (it was lost).",
-      "Yes, because it's not his ring.",
-      "No, but he must give it to the police."
+      "Mandamus",
+      "Habeas Corpus",
+      "Certiorari",
+      "Quo Warranto"
     ],
     correct: 1,
-    explanation: "Theft requires taking out of 'possession'. A lost object is not in possession. This is 'Criminal Misappropriation', not theft."
+    explanation: "Habeas Corpus is the remedy for illegal detention or arrest without following legal procedure."
   },
   {
     id: "mhcet-2-q2",
-    section: "Legal Aptitude",
-    passage: `Principle: Theft...`,
-    question: "Aman goes to Mr. X's house for dinner. He sees a golden spoon on the table and hides it under the carpet, intending to take it away later when no one is looking. Has he committed theft?",
+    section: "Legal Aptitude & Reasoning",
+    passage: `Article 32 of the Indian Constitution...`,
+    question: "A government department refuses to issue a license to Aman even though he has fulfilled all legal requirements. Aman wants the court to order the department to issue the license. Which writ is appropriate?",
     options: [
-      "No, he hasn't taken it out of the house yet.",
-      "Yes, he moved the property with dishonest intention out of the owner's possession without consent.",
-      "No, hiding is not stealing.",
-      "Yes, but only if he successfully takes it out."
+      "Prohibition",
+      "Mandamus",
+      "Certiorari",
+      "Habeas Corpus"
     ],
     correct: 1,
-    explanation: "Theft is complete as soon as the property is moved with dishonest intention."
+    explanation: "Mandamus is used to command a public authority to perform a duty they are legally bound to do."
   },
   {
     id: "mhcet-2-q3",
-    section: "Legal Aptitude",
-    passage: `Principle: Theft...`,
-    question: "Aman cuts down a tree on Mr. X's land without permission to sell the wood. Has he committed theft?",
+    section: "Legal Aptitude & Reasoning",
+    passage: `Article 32 of the Indian Constitution...`,
+    question: "A person who is not qualified for the post of a University Vice-Chancellor is appointed to that position. A citizen wants to challenge this appointment. Which writ can be used?",
     options: [
-      "No, a tree is not moveable property.",
-      "Yes, as soon as the tree is severed from the earth, it becomes moveable property and its moving constitutes theft.",
-      "No, because the tree was still in the ground when he started.",
-      "Yes, but only if the tree is more than 10 years old."
+      "Quo Warranto",
+      "Mandamus",
+      "Certiorari",
+      "Prohibition"
     ],
-    correct: 1,
-    explanation: "Severing something from the earth makes it moveable and capable of being stolen."
+    correct: 0,
+    explanation: "Quo Warranto is used to inquire into the legality of the claim which a person asserts to a public office."
   },
   {
     id: "mhcet-2-q4",
-    section: "Legal Aptitude",
-    passage: `Principle: Theft...`,
-    question: "Aman takes Mr. X's book from his desk to read it for one hour and then return it without Mr. X knowing. Is this theft?",
+    section: "Legal Aptitude & Reasoning",
+    passage: `Article 32 of the Indian Constitution...`,
+    question: "What is the difference between Prohibition and Certiorari?",
     options: [
-      "Yes, any taking without consent is theft.",
-      "No, there was no 'dishonest intention' to cause permanent loss; it was a temporary taking.",
-      "Yes, because Mr. X might have needed it.",
-      "No, but he must apologize."
+      "Prohibition is for private individuals, Certiorari is for the State.",
+      "Prohibition is preventive (issued before a decision), while Certiorari is curative (issued after a decision to quash it).",
+      "There is no difference; they are the same.",
+      "Prohibition is only for criminal cases."
     ],
     correct: 1,
-    explanation: "Temporary use without intent to cause wrongful loss/gain is generally not theft under Indian law (needs dishonest intent)."
+    explanation: "Prohibition stops a lower court from continuing an illegal proceeding, while Certiorari quashes the final result of such a proceeding."
   },
+
+  // PASSAGE 2: LAW OF TORTS – VICARIOUS LIABILITY (Q5–Q8)
   {
     id: "mhcet-2-q5",
-    section: "Legal Aptitude",
-    passage: `Principle: Theft...`,
-    question: "Aman's servant takes a cycle belonging to Aman's guest to go to the market and bring groceries for the guest. Is this theft?",
+    section: "Legal Aptitude & Reasoning",
+    passage: `Vicarious liability is the legal responsibility of one person for the torts committed by another. The most common form is the liability of an Employer (Master) for the acts of an Employee (Servant). For such liability to arise, the act must be committed in the 'course of employment'. An act is in the course of employment if it is: (i) authorized by the employer, or (ii) a wrongful and unauthorized mode of doing some act authorized by the employer. However, if the employee is on a 'frolic of his own'—doing something entirely for his own purpose, unrelated to his work—the employer is not liable. Another rule is 'Qui facit per alium facit per se' (he who acts through another acts himself). Furthermore, the State is generally vicariously liable for the torts of its servants, except when they are exercising 'Sovereign Functions' (like maintaining law and order or defense).`,
+    question: "A driver of a company bus, while taking employees to the office, stops at a petrol pump. While the bus is being refueled, he lights a cigarette despite warning signs, causing a fire. Is the company liable?",
     options: [
-      "Yes, he took it without asking.",
-      "No, there is 'implied consent' for the purpose of the guest's own service; no dishonest intention.",
-      "Yes, servants cannot touch guests' things.",
-      "No, but only if he doesn't crash the cycle."
+      "No, the company didn't authorize smoking.",
+      "Yes, because he was performing an authorized task (driving/refueling) in a negligent/wrongful manner.",
+      "No, because smoking is a personal habit.",
+      "Yes, but only if the bus was full of people."
     ],
     correct: 1,
-    explanation: "Absence of dishonest intention prevents it from being theft."
+    explanation: "This is a classic example of doing an authorized act (managing the vehicle) in an unauthorized and negligent mode."
   },
   {
     id: "mhcet-2-q6",
-    section: "Legal Aptitude",
-    passage: `Principle: Theft...`,
-    question: "Aman sees a cow with a gold chain around its neck grazing on the road. He lures the cow with grass to follow him into his yard. Has he committed theft?",
+    section: "Legal Aptitude & Reasoning",
+    passage: `Vicarious liability...`,
+    question: "A police officer, while chasing a criminal, accidentally breaks the window of a shop. Can the shop owner sue the State for damages?",
     options: [
-      "No, the cow followed him voluntarily.",
-      "Yes, by luring the animal, he 'moved' the property (the chain and cow) dishonestly.",
-      "No, luring is not moving.",
-      "Yes, but only of the chain, not the cow."
+      "Yes, the State is always liable for its employees.",
+      "No, the police officer was performing a 'Sovereign Function' (maintaining law and order), for which the State has immunity.",
+      "Yes, because the shop owner is a citizen.",
+      "No, because the criminal should pay for it."
     ],
     correct: 1,
-    explanation: "Inducing an animal to move is considered moving the property it carries."
+    explanation: "Traditional law provides immunity to the State for acts done in the exercise of sovereign powers like police actions."
   },
-
-  // PASSAGE 2: LAW OF CONTRACTS (CONSIDERATION)
   {
     id: "mhcet-2-q7",
-    section: "Legal Aptitude",
-    passage: `Principle: An agreement without 'consideration' is void. Consideration is 'something in return' (Quid Pro Quo). It can be a benefit to one party or a detriment to the other. Exceptions: (1) Natural love and affection between near relatives, expressed in writing and registered. (2) Promise to compensate for past voluntary services. (3) Promise to pay a time-barred debt.`,
-    question: "Aman promises to give ₹10,000 to his friend Mr. X for no reason. Later, he refuses. Can Mr. X sue?",
+    section: "Legal Aptitude & Reasoning",
+    passage: `Vicarious liability...`,
+    question: "What does 'Qui facit per alium facit per se' mean?",
     options: [
-      "Yes, a promise is a promise.",
-      "No, the agreement is void due to lack of consideration.",
-      "Yes, if there were witnesses.",
-      "No, but only if Aman is poor."
+      "The king can do no wrong.",
+      "He who acts through another, acts himself.",
+      "Let the buyer beware.",
+      "In good faith."
     ],
     correct: 1,
-    explanation: "Purely gratuitous promises without consideration are not legally binding."
+    explanation: "This is the fundamental maxim of vicarious liability and agency."
   },
   {
     id: "mhcet-2-q8",
-    section: "Legal Aptitude",
-    passage: `Principle: Consideration...`,
-    question: "A father, out of natural love and affection, promises in a registered written document to give his son ₹1 Lakh. Later, they have a fight and the father refuses. Is the contract valid?",
+    section: "Legal Aptitude & Reasoning",
+    passage: `Vicarious liability...`,
+    question: "A delivery boy, after finishing his last delivery, goes 20 km away from his route to meet his girlfriend. On the way, he hits a pedestrian. Is the employer liable?",
     options: [
-      "No, the son gave nothing in return.",
-      "Yes, it falls under the 'natural love and affection' exception (written and registered).",
-      "No, because the fight cancelled the love.",
-      "Yes, but only if the son is a minor."
+      "Yes, he was still wearing the company uniform.",
+      "No, he was on a 'frolic of his own', completely outside the course of employment.",
+      "Yes, because he was using the company bike.",
+      "No, but only if the girlfriend lives in another city."
     ],
     correct: 1,
-    explanation: "Written, registered agreements between near relatives based on love are valid even without consideration."
+    explanation: "A significant detour for purely personal reasons is considered a 'frolic' and the employer is not liable."
   },
+
+  // PASSAGE 3: LAW OF CONTRACTS – CONSIDERATION (Q9–Q12)
   {
     id: "mhcet-2-q9",
-    section: "Legal Aptitude",
-    passage: `Principle: Consideration...`,
-    question: "Mr. X saves Aman's house from fire voluntarily. Later, Aman is so happy that he promises to pay Mr. X ₹5,000. Aman then changes his mind. Can Mr. X sue?",
+    section: "Legal Aptitude & Reasoning",
+    passage: `Under Section 2(d) of the Indian Contract Act, 'Consideration' is defined as when, at the desire of the promisor, the promisee or any other person has done or abstained from doing something. A contract without consideration is 'void' (Nudum Pactum). Key rules: (1) Consideration must move at the 'desire of the promisor'; (2) It may move from the 'promisee or any other person' (Privity of Consideration is not required in India); (3) It may be past, present, or future; (4) It need not be 'adequate' (e.g., a house can be sold for ₹1 if both agree), but it must be 'real' and have some value in the eyes of law. There are exceptions to the rule 'No Consideration, No Contract' (Section 25): (a) Agreements made out of natural love and affection between near relatives (if written and registered); (b) Compensation for past voluntary services; and (c) Promise to pay a time-barred debt.`,
+    question: "Aman sees a house on fire and saves the owner's child without being asked. Later, the grateful owner promises to pay Aman ₹50,000. Is this promise a valid contract?",
     options: [
-      "No, it was a voluntary act.",
-      "Yes, a promise to compensate for past voluntary services is a valid exception to the rule of consideration.",
-      "No, because ₹5,000 is too little for a house.",
-      "Yes, but only if the fire was big."
+      "No, there was no consideration at the time of the act.",
+      "Yes, this falls under the exception of 'compensation for past voluntary services'.",
+      "No, because Aman didn't sign a document.",
+      "Yes, but only if the child is above 18."
     ],
     correct: 1,
-    explanation: "Promise to pay for a past voluntary service is binding."
+    explanation: "Past voluntary service is a valid exception to the requirement of fresh consideration under Section 25."
   },
   {
     id: "mhcet-2-q10",
-    section: "Legal Aptitude",
-    passage: `Principle: Consideration...`,
-    question: "Aman owes ₹10,000 to Mr. X, but the debt is now 5 years old and legally 'time-barred' (cannot be sued for). Aman signs a written promise to pay ₹5,000 of that debt. Is this valid?",
+    section: "Legal Aptitude & Reasoning",
+    passage: `Under Section 2(d) of the Indian Contract Act...`,
+    question: "Aman's father promises to give him ₹10 lakhs out of love and affection. They write it down on a plain paper and sign it. Is this a binding contract?",
     options: [
-      "No, it was time-barred.",
-      "Yes, a written promise to pay a time-barred debt is a valid exception.",
-      "No, he must pay the full ₹10,000.",
-      "Yes, but only if he pays in cash."
+      "Yes, love is a great consideration.",
+      "No, for an agreement based on natural love and affection to be valid without consideration, it must be in writing AND registered.",
+      "Yes, because it is in writing.",
+      "No, because fathers cannot be sued by sons."
     ],
     correct: 1,
-    explanation: "Promise to pay time-barred debt is enforceable if in writing and signed."
+    explanation: "Registration is a mandatory requirement for this specific exception under Section 25."
   },
   {
     id: "mhcet-2-q11",
-    section: "Legal Aptitude",
-    passage: `Principle: Consideration...`,
-    question: "Aman agrees to sell his ₹1 Crore bungalow to Mr. X for just ₹10. Aman later says the contract is void because ₹10 is 'inadequate' consideration. What will the court say?",
+    section: "Legal Aptitude & Reasoning",
+    passage: `Under Section 2(d) of the Indian Contract Act...`,
+    question: "In India, can a person who is not a party to the contract (a third party) provide the consideration for a contract?",
     options: [
-      "The contract is void; the price is too low.",
-      "The contract is valid; consideration must be real/something of value, but it need not be 'adequate' or equal to the market value.",
-      "The contract is voidable at Aman's option.",
-      "The court will set a fair price."
+      "No, only the parties to the contract can provide consideration.",
+      "Yes, consideration can move from the promisee or 'any other person'.",
+      "Yes, but only if they are a relative.",
+      "No, this would violate the 'privity of contract' rule."
     ],
     correct: 1,
-    explanation: "Law doesn't care about the 'adequacy' of consideration as long as it exists and consent was free."
+    explanation: "Unlike English law, Indian law allows 'Stranger to Consideration' but not 'Stranger to Contract'."
   },
   {
     id: "mhcet-2-q12",
-    section: "Legal Aptitude",
-    passage: `Principle: Consideration...`,
-    question: "Can consideration be provided by a third person (someone other than the promisee)?",
+    section: "Legal Aptitude & Reasoning",
+    passage: `Under Section 2(d) of the Indian Contract Act...`,
+    question: "Aman agrees to sell his ₹1 crore car to Mr. X for ₹10,000. Later, Aman tries to cancel the deal saying the price was too low (inadequate consideration). Will he succeed?",
     options: [
-      "No, only the parties to the contract can provide consideration.",
-      "Yes, in India, consideration may move from the promisee or any other person.",
-      "No, unless the third person is a relative.",
-      "Yes, but only if the court allows it."
+      "Yes, the law requires the price to be fair.",
+      "No, consideration need not be 'adequate' as long as it is 'real' and given with free consent.",
+      "Yes, but only if the car is new.",
+      "No, but Mr. X must pay some extra tax."
     ],
     correct: 1,
-    explanation: "Privity of consideration does not exist in India; anyone can pay on behalf of the party."
+    explanation: "Inadequacy of consideration is not a ground for voiding a contract unless it proves that consent was not free."
   },
 
-  // PASSAGE 3: CONSTITUTIONAL LAW (CITIZENSHIP)
+  // PASSAGE 4: CRIMINAL LAW – THEFT AND EXTORTION (Q13–Q16)
   {
     id: "mhcet-2-q13",
-    section: "Legal Aptitude",
-    passage: `Principle: Citizenship in India is governed by Part II (Articles 5-11) and the Citizenship Act, 1955. (1) India provides for 'Single Citizenship' only. (2) If an Indian citizen voluntarily acquires the citizenship of another country, they automatically lose their Indian citizenship. (3) Parliament has the power to regulate the right of citizenship by law. (4) Citizenship can be acquired by Birth, Descent, Registration, Naturalization, or Incorporation of Territory.`,
-    question: "Aman, an Indian citizen, moves to Canada and officially becomes a Canadian citizen. He still wants to keep his Indian passport. Is this allowed?",
+    section: "Legal Aptitude & Reasoning",
+    passage: `Theft (Section 378 IPC/BNS) is defined as: (i) Dishonest intention to take property; (ii) The property must be 'movable'; (iii) It must be taken out of the 'possession' of another person; (iv) It must be taken 'without that person's consent'; and (v) There must be some 'moving' of the property to effect the taking. In contrast, 'Extortion' (Section 383 IPC/BNS) occurs when a person intentionally puts another in fear of any injury and thereby dishonestly induces them to deliver any property or valuable security. The key difference is that in theft, the property is taken without consent, while in extortion, consent is obtained by fear. If extortion is committed by putting the person in fear of 'instant death' or 'instant hurt', it becomes 'Robbery'.`,
+    question: "Aman sees a diamond ring on Mr. X's table. He hides the ring in a corner of the same room, intending to come back and take it later when no one is looking. Has Aman committed theft?",
     options: [
-      "Yes, India allows dual citizenship.",
-      "No, India follows 'Single Citizenship' and his Indian citizenship is terminated the moment he becomes a Canadian citizen.",
-      "Yes, but he cannot vote in India.",
-      "No, but he can get it back in 10 years."
+      "No, he hasn't taken it out of the house yet.",
+      "Yes, the moment he 'moved' the property with dishonest intent, the theft was complete.",
+      "No, because the ring is still in Mr. X's house.",
+      "Yes, but only if the ring is worth more than ₹1000."
     ],
     correct: 1,
-    explanation: "India does not allow dual citizenship."
+    explanation: "Even a small 'moving' of the property with dishonest intent is enough to complete the act of theft."
   },
   {
     id: "mhcet-2-q14",
-    section: "Legal Aptitude",
-    passage: `Principle: Citizenship...`,
-    question: "India acquires a new island in the Indian Ocean. Do the people living there become Indian citizens?",
+    section: "Legal Aptitude & Reasoning",
+    passage: `Theft and Extortion...`,
+    question: "Aman tells Mr. X: 'Give me your watch, or I will publish a scandalous story about you in the newspaper.' Mr. X gives the watch. What crime has Aman committed?",
     options: [
-      "No, they stay foreigners.",
-      "Yes, under the provision of 'Incorporation of Territory', the Government of India can specify them as citizens.",
-      "Yes, but they must pass a test.",
-      "No, they must wait for 20 years."
+      "Theft",
+      "Extortion",
+      "Robbery",
+      "Cheating"
     ],
     correct: 1,
-    explanation: "One of the modes of acquiring citizenship."
+    explanation: "Consent was obtained by putting the person in fear of injury (reputational injury), which is extortion."
   },
   {
     id: "mhcet-2-q15",
-    section: "Legal Aptitude",
-    passage: `Principle: Citizenship...`,
-    question: "Which of the following Fundamental Rights are available ONLY to citizens and NOT to foreigners?",
+    section: "Legal Aptitude & Reasoning",
+    passage: `Theft and Extortion...`,
+    question: "Can a person commit 'theft' of their own property?",
     options: [
-      "Right to Life (Article 21)",
-      "Equality before Law (Article 14)",
-      "Freedom of Speech and Expression (Article 19)",
-      "Right against Exploitation (Article 23)"
+      "No, it's their own property.",
+      "Yes, if they take it dishonestly from someone who has legal possession of it (e.g., taking a car from a repair shop without paying).",
+      "No, that would be called 'reclaiming'.",
+      "Yes, but only if they are drunk."
     ],
-    correct: 2,
-    explanation: "Article 19 (and 15, 16, 29, 30) are exclusive to citizens."
+    correct: 1,
+    explanation: "Theft is an offence against 'possession', not necessarily against 'ownership'."
   },
   {
     id: "mhcet-2-q16",
-    section: "Legal Aptitude",
-    passage: `Principle: Citizenship...`,
-    question: "Who has the final power to make laws regarding citizenship in India?",
-    options: ["The President", "The Supreme Court", "The Parliament", "The State Governments"],
+    section: "Legal Aptitude & Reasoning",
+    passage: `Theft and Extortion...`,
+    question: "Aman points a gun at Mr. X and says: 'Give me your wallet now or I will shoot you.' Mr. X gives the wallet. This is:",
+    options: [
+      "Theft",
+      "Extortion",
+      "Robbery",
+      "Dacoity"
+    ],
     correct: 2,
-    explanation: "Article 11 gives this power to the Parliament."
+    explanation: "Extortion becomes robbery when there is a threat of 'instant death' or 'instant hurt'."
   },
+
+  // PASSAGE 5: INTELLECTUAL PROPERTY – PATENTS (Q17–Q20)
   {
     id: "mhcet-2-q17",
-    section: "Legal Aptitude",
-    passage: `Principle: Citizenship...`,
-    question: "A person born in India on Jan 26, 1950, is considered an Indian citizen by:",
-    options: ["Naturalization", "Birth", "Descent", "Registration"],
+    section: "Legal Aptitude & Reasoning",
+    passage: `A Patent is an exclusive right granted by the government for an 'Invention'. Under the Patents Act, 1970, for an invention to be patentable, it must satisfy three criteria: (i) Novelty: It must be new and not known anywhere in the world; (ii) Inventive Step: It must not be obvious to a person skilled in the art; and (iii) Industrial Application: It must be capable of being used in an industry. In India, 'Product Patents' were introduced in 2005 (earlier only 'Process Patents' were allowed for food/drugs). However, Section 3(d) of the Act prevents 'evergreening' of patents—it states that a mere discovery of a new form of a known substance, which does not result in the enhancement of 'known efficacy', is NOT an invention. The duration of a patent is 20 years from the date of filing.`,
+    question: "A pharmaceutical company discovers that a slightly different crystal form of a known cancer drug is easier to swallow, but it works exactly the same way as the old drug. Can they get a new patent for this in India?",
+    options: [
+      "Yes, any new form is patentable.",
+      "No, under Section 3(d), a new form of a known substance without enhanced 'efficacy' is not patentable.",
+      "Yes, because it is an 'Industrial Application'.",
+      "No, because patents are only for machines."
+    ],
     correct: 1,
-    explanation: "Standard rule for commencement of the Constitution."
+    explanation: "Section 3(d) is a unique Indian provision to prevent companies from extending their patent monopolies through minor, non-efficacious changes."
   },
   {
     id: "mhcet-2-q18",
-    section: "Legal Aptitude",
-    passage: `Principle: Citizenship...`,
-    question: "What is 'Naturalization'?",
+    section: "Legal Aptitude & Reasoning",
+    passage: `Intellectual Property – Patents...`,
+    question: "What is the standard duration of a patent in India?",
     options: [
-      "Getting citizenship by being born in a forest.",
-      "A legal process by which a foreigner can acquire citizenship after living in the country for a specific period.",
-      "Getting citizenship by marrying a citizen.",
-      "None of the above."
+      "10 years",
+      "20 years",
+      "50 years",
+      "Lifetime of the inventor"
     ],
     correct: 1,
-    explanation: "Legal term for foreigner-to-citizen conversion."
+    explanation: "The standard term for all patents is 20 years from the date of filing the application."
   },
-
-  // PASSAGE 4: LAW OF TORTS (NEGLIGENCE)
   {
     id: "mhcet-2-q19",
-    section: "Legal Aptitude",
-    passage: `Principle: Negligence is the breach of a 'Duty of Care' which results in damage to the plaintiff. For a claim to succeed: (1) The defendant must owe a legal duty of care to the plaintiff. (2) The defendant must have breached that duty. (3) The plaintiff must have suffered actual loss/injury as a result. (4) The damage must be 'foreseeable' and not too remote.`,
-    question: "Aman is driving a car at 100 km/h in a school zone (limit 20 km/h). He hits a child crossing the road. Is he liable for negligence?",
+    section: "Legal Aptitude & Reasoning",
+    passage: `Intellectual Property – Patents...`,
+    question: "Can a naturally occurring plant or animal be patented in India?",
     options: [
-      "No, the child should have looked.",
-      "Yes, he had a duty to drive safely, especially in a school zone, and his breach caused the injury.",
-      "No, if the car's brakes failed suddenly.",
-      "Yes, but only if he was drunk."
+      "Yes, if you find it first.",
+      "No, plants and animals in their natural state are not 'inventions' and are excluded from patentability.",
+      "Yes, but only if they are colorful.",
+      "No, only the government can own them."
     ],
     correct: 1,
-    explanation: "Clear breach of duty of care."
+    explanation: "Discoveries of living things occurring in nature are not patentable inventions."
   },
   {
     id: "mhcet-2-q20",
-    section: "Legal Aptitude",
-    passage: `Principle: Negligence...`,
-    question: "A doctor leaves a surgical sponge inside a patient during surgery. The patient suffers infection later. Is the doctor liable?",
+    section: "Legal Aptitude & Reasoning",
+    passage: `Intellectual Property – Patents...`,
+    question: "What is an 'Inventive Step'?",
     options: [
-      "No, surgery is risky.",
-      "Yes, this is 'Res Ipsa Loquitur' (The thing speaks for itself) - clear negligence.",
-      "No, because the patient survived.",
-      "Yes, but only if the sponge was big."
+      "A step taken to sell the product.",
+      "A feature of an invention that involves technical advance or economic significance and is NOT obvious to an expert in that field.",
+      "The first step of building a factory.",
+      "A new name for an old product."
     ],
     correct: 1,
-    explanation: "Doctors owe a high duty of care; leaving objects inside is a classic breach."
+    explanation: "The 'non-obviousness' or inventive step is a crucial test for a patent."
   },
+
+  // PASSAGE 6: FAMILY LAW – ADOPTION (Q21–Q24)
   {
     id: "mhcet-2-q21",
-    section: "Legal Aptitude",
-    passage: `Principle: Negligence...`,
-    question: "Aman spills water on his shop's floor and doesn't clean it or put a 'Wet Floor' sign. A customer slips and breaks her leg. Is Aman liable?",
+    section: "Legal Aptitude & Reasoning",
+    passage: `The Hindu Adoptions and Maintenance Act (HAMA), 1956, governs adoption among Hindus. For a valid adoption: (i) The person adopting must have the capacity and right to take in adoption; (ii) The person giving in adoption must have the capacity; (iii) The person adopted must be capable of being taken; and (iv) The adoption must be made in compliance with the Act. A Hindu male or female of sound mind who is not a minor can adopt. If they have a spouse, consent of the spouse is mandatory. A crucial rule is that if you are adopting a child of the opposite sex, the age difference between the adopter and the adopted child must be at least 21 years. Adoption, once made, is 'irrevocable'—it cannot be cancelled by either party. The child's ties with their biological family are severed and replaced by ties with the adoptive family.`,
+    question: "Aman, aged 30, wants to adopt a girl child aged 15. Can he legally do so under HAMA?",
     options: [
-      "No, customers should watch their step.",
-      "Yes, a shopkeeper owes a duty of care to ensure the safety of customers on the premises.",
-      "No, because he didn't spill it on purpose.",
-      "Yes, but only if the customer bought something."
+      "Yes, he is an adult and can adopt.",
+      "No, because the age difference between him and the child is only 15 years, and the law requires a 21-year gap for adopting a child of the opposite sex.",
+      "Yes, but only if he gets permission from the girl's parents.",
+      "No, only married couples can adopt."
     ],
     correct: 1,
-    explanation: "Duty of care includes maintaining safe premises for visitors."
+    explanation: "The 21-year age gap is a mandatory safety provision in HAMA when adopting a child of the opposite sex."
   },
   {
     id: "mhcet-2-q22",
-    section: "Legal Aptitude",
-    passage: `Principle: Negligence...`,
-    question: "Aman is fixing his roof. He accidentally drops a hammer. It hits Mr. X, who was walking on the public sidewalk. Is Aman liable?",
+    section: "Legal Aptitude & Reasoning",
+    passage: `Adoption...`,
+    question: "Aman adopts a son. After 2 years, he discovers the son is very naughty and wants to 'return' him to his biological parents. Is this allowed?",
     options: [
-      "No, it was an accident.",
-      "Yes, he should have taken precautions (like putting a net) when working near a public path.",
-      "No, because Aman didn't see Mr. X.",
-      "Yes, but only if Mr. X was wearing a helmet."
+      "Yes, adoption is like a contract that can be cancelled.",
+      "No, a valid adoption is 'irrevocable' and cannot be cancelled by the adopter or the adopted child.",
+      "Yes, but only if the biological parents agree.",
+      "No, but he can give the child for adoption to someone else."
     ],
     correct: 1,
-    explanation: "Accidents caused by lack of precaution are negligence."
+    explanation: "Section 15 of HAMA clearly states that a valid adoption cannot be cancelled."
   },
   {
     id: "mhcet-2-q23",
-    section: "Legal Aptitude",
-    passage: `Principle: Negligence...`,
-    question: "Aman drives carefully, but his tyre bursts due to a hidden manufacturing defect that no one could have seen. He hits another car. Is he liable for negligence?",
+    section: "Legal Aptitude & Reasoning",
+    passage: `Adoption...`,
+    question: "Can a single woman adopt a child under HAMA?",
     options: [
-      "Yes, his car caused the hit.",
-      "No, there was no breach of 'duty of care' by Aman as the defect was 'latent' (hidden/unforeseeable).",
-      "Yes, because he should have checked the tyres.",
-      "No, but the tyre company is liable."
+      "No, only a husband and wife together can adopt.",
+      "Yes, any Hindu female who is an adult and of sound mind (whether unmarried, widowed, or divorced) can adopt.",
+      "Yes, but only a girl child.",
+      "No, but she can be a foster parent."
     ],
     correct: 1,
-    explanation: "Negligence requires a breach of duty. If he was careful and the defect was unforeseeable, he is not negligent."
+    explanation: "Single women have full capacity to adopt under modern Hindu law."
   },
   {
     id: "mhcet-2-q24",
-    section: "Legal Aptitude",
-    passage: `Principle: Negligence...`,
-    question: "What is 'Contributory Negligence'?",
+    section: "Legal Aptitude & Reasoning",
+    passage: `Adoption...`,
+    question: "If a person has a living son, can they adopt another son under HAMA?",
     options: [
-      "When the defendant is very negligent.",
-      "When the plaintiff's own lack of care also contributed to the injury.",
-      "When two people commit a crime together.",
-      "None of the above."
+      "Yes, they can adopt as many as they want.",
+      "No, HAMA prohibits adopting a child of the same sex if you already have a living child, grandchild, or great-grandchild of that sex.",
+      "Yes, but they must pay a fine.",
+      "No, unless the living son is a major."
     ],
     correct: 1,
-    explanation: "Legal term for when the victim is also at fault."
+    explanation: "You cannot adopt a son if you already have one, and you cannot adopt a daughter if you already have one."
   },
 
   // SECTION 2: GK & CURRENT AFFAIRS (24 QUESTIONS)
-  // MAHARASHTRA SPECIFIC (4-5 Qs)
   {
     id: "mhcet-2-q25",
     section: "GK & Current Affairs",
-    question: "In which year was the 'Samaj Swasthya' magazine started by R.D. Karve?",
-    options: ["1927", "1935", "1942", "1950"],
+    question: "Who is the 'Miss World 2024' (crowned in Mumbai)?",
+    options: ["Krystyna Pyszková", "Yasmina Zaytoun", "Karolina Bielawska", "Sini Shetty"],
     correct: 0,
-    explanation: "R.D. Karve (son of D.K. Karve) started it to promote sex education and family planning in Maharashtra."
+    explanation: "Krystyna Pyszková from the Czech Republic was crowned in Mumbai in March 2024."
   },
   {
     id: "mhcet-2-q26",
     section: "GK & Current Affairs",
-    question: "Which fort was the first capital of Chhatrapati Shivaji Maharaj's Swarajya?",
-    options: ["Raigad", "Rajgad", "Pratapgad", "Sinhagad"],
-    correct: 1,
-    explanation: "Rajgad (for 26 years before Raigad)."
+    question: "The 'Dadasaheb Phalke Award' for 2023 was conferred upon:",
+    options: ["Waheeda Rehman", "Asha Parekh", "Rajinikanth", "Amitabh Bachchan"],
+    correct: 0,
+    explanation: "Waheeda Rehman received the 53rd Dadasaheb Phalke Award."
   },
   {
     id: "mhcet-2-q27",
     section: "GK & Current Affairs",
-    question: "The 'Satyashodhak Samaj' was founded by Jyotirao Phule in which city?",
-    options: ["Mumbai", "Pune", "Satara", "Kolhapur"],
+    question: "Which country is the largest trading partner of India in 2023-24?",
+    options: ["China", "USA", "UAE", "Saudi Arabia"],
     correct: 1,
-    explanation: "Pune (1873)."
+    explanation: "The USA remains India's largest trading partner."
   },
   {
     id: "mhcet-2-q28",
     section: "GK & Current Affairs",
-    question: "Which Marathi writer won the first-ever 'Jnanpith Award' from Maharashtra?",
-    options: ["V.S. Khandekar", "V.V. Shirwadkar (Kusumagraj)", "Vinda Karandikar", "Bhalchandra Nemade"],
-    correct: 0,
-    explanation: "V.S. Khandekar (for 'Yayati' in 1974)."
+    question: "The 'World Happiness Report 2024' ranked which country at the top?",
+    options: ["Denmark", "Finland", "Iceland", "Norway"],
+    correct: 1,
+    explanation: "Finland has been the happiest country for seven consecutive years."
   },
   {
     id: "mhcet-2-q29",
     section: "GK & Current Affairs",
-    question: "The 'Lonar Lake' in Maharashtra was created by:",
-    options: ["Volcanic eruption", "Meteorite impact", "Tectonic shift", "Man-made dam"],
+    question: "Who is the current President of the World Bank?",
+    options: ["David Malpass", "Ajay Banga", "Kristalina Georgieva", "Jim Yong Kim"],
     correct: 1,
-    explanation: "It is a hyper-velocity meteorite impact crater lake."
+    explanation: "Indian-American Ajay Banga is the current President."
   },
-
-  // CURRENT AFFAIRS & STATIC
   {
     id: "mhcet-2-q30",
     section: "GK & Current Affairs",
-    question: "Which country hosted the 'COP28' Climate Summit in late 2023?",
-    options: ["Egypt", "UAE", "India", "UK"],
+    question: "The 'NITI Aayog' was established in which year?",
+    options: ["2014", "2015", "2016", "2017"],
     correct: 1,
-    explanation: "UAE (Dubai)."
+    explanation: "It replaced the Planning Commission on January 1, 2015."
   },
   {
     id: "mhcet-2-q31",
     section: "GK & Current Affairs",
-    question: "Who was awarded the 'Saraswati Samman 2023'?",
-    options: ["Shiva Shankari", "S.L. Bhyrappa", "Amitav Ghosh", "Prabha Varma"],
-    correct: 3,
-    explanation: "Prabha Varma (for 'Roudra Sathwikam')."
+    question: "Which city is the venue for the 2024 Summer Olympics?",
+    options: ["Tokyo", "Paris", "Los Angeles", "Brisbane"],
+    correct: 1,
+    explanation: "Paris, France."
   },
   {
     id: "mhcet-2-q32",
     section: "GK & Current Affairs",
-    question: "The 'Atal Setu' (MTHL) connects Mumbai with which city?",
-    options: ["Navi Mumbai", "Pune", "Alibaug", "Thane"],
-    correct: 0,
-    explanation: "Navi Mumbai (Nhava Sheva)."
+    question: "The 'Nilgiri Tahr' is the state animal of which Indian state?",
+    options: ["Kerala", "Tamil Nadu", "Karnataka", "Andhra Pradesh"],
+    correct: 1,
+    explanation: "Tamil Nadu."
   },
   {
     id: "mhcet-2-q33",
     section: "GK & Current Affairs",
-    question: "Who is the first female fighter pilot to participate in an international aerial exercise 'Veer Guardian 2023'?",
-    options: ["Avani Chaturvedi", "Bhavana Kanth", "Mohana Singh", "Shivangi Singh"],
+    question: "Who won the 'Booker Prize 2023'?",
+    options: ["Paul Lynch", "Shehan Karunatilaka", "Damon Galgut", "Douglas Stuart"],
     correct: 0,
-    explanation: "Avani Chaturvedi."
+    explanation: "Paul Lynch won for his novel 'Prophet Song'."
   },
   {
     id: "mhcet-2-q34",
     section: "GK & Current Affairs",
-    question: "Which Indian state has the longest coastline?",
-    options: ["Maharashtra", "Gujarat", "Andhra Pradesh", "Tamil Nadu"],
-    correct: 1,
-    explanation: "Gujarat."
+    question: "The 'Lata Mangeshkar Award 2023' of Maharashtra government was given to:",
+    options: ["Suresh Wadkar", "Asha Bhosle", "A.R. Rahman", "Shreya Ghoshal"],
+    correct: 0,
+    explanation: "Veteran singer Suresh Wadkar was selected for the award."
   },
   {
     id: "mhcet-2-q35",
     section: "GK & Current Affairs",
-    question: "The 'Fundamental Duties' were added to the Constitution based on the recommendation of:",
-    options: ["Sarkaria Commission", "Swaran Singh Committee", "Verma Committee", "Mandala Commission"],
+    question: "Which Indian state has the highest forest cover by area?",
+    options: ["Arunachal Pradesh", "Madhya Pradesh", "Chhattisgarh", "Odisha"],
     correct: 1,
-    explanation: "Swaran Singh Committee (1976)."
+    explanation: "Madhya Pradesh has the largest forest cover by area."
   },
   {
     id: "mhcet-2-q36",
     section: "GK & Current Affairs",
-    question: "What is the rank of India in the 'Global Hunger Index 2023'?",
-    options: ["101", "107", "111", "120"],
-    correct: 2,
-    explanation: "111th."
+    question: "The 'First Women's Premier League' (WPL) 2023 was won by:",
+    options: ["Delhi Capitals", "Mumbai Indians", "Royal Challengers Bangalore", "UP Warriorz"],
+    correct: 1,
+    explanation: "Mumbai Indians won the inaugural title."
   },
   {
     id: "mhcet-2-q37",
     section: "GK & Current Affairs",
-    question: "The 'Silicon Valley' of the world is located in:",
-    options: ["California, USA", "Bengaluru, India", "Shenzhen, China", "London, UK"],
+    question: "Who is the current National Security Advisor (NSA) of India?",
+    options: ["Ajit Doval", "Brijesh Mishra", "Shivshankar Menon", "S. Jaishankar"],
     correct: 0,
-    explanation: "California."
+    explanation: "Ajit Doval."
   },
   {
     id: "mhcet-2-q38",
     section: "GK & Current Affairs",
-    question: "Who is the author of the book 'A Train to Pakistan'?",
-    options: ["Khushwant Singh", "Amrita Pritam", "Vikram Seth", "R.K. Narayan"],
-    correct: 0,
-    explanation: "Khushwant Singh."
+    question: "The 'Vande Bharat' mission was related to:",
+    options: ["High-speed trains", "Evacuation of Indian citizens during COVID-19", "Space exploration", "Cleaning rivers"],
+    correct: 1,
+    explanation: "It was a massive repatriation operation."
   },
   {
     id: "mhcet-2-q39",
     section: "GK & Current Affairs",
-    question: "The 'National Science Day' in India is celebrated on Feb 28 to commemorate:",
-    options: ["Discovery of Raman Effect", "Birth of Homi Bhabha", "First satellite launch", "Birth of APJ Abdul Kalam"],
-    correct: 0,
-    explanation: "C.V. Raman's discovery."
+    question: "Which Indian city has the world's longest railway platform?",
+    options: ["Gorakhpur", "Hubballi", "Kollam", "Kharagpur"],
+    correct: 1,
+    explanation: "Shree Siddharoodha Swamiji Hubballi Junction in Karnataka."
   },
   {
     id: "mhcet-2-q40",
     section: "GK & Current Affairs",
-    question: "Which of the following is the largest organ in the human body?",
-    options: ["Liver", "Skin", "Heart", "Lungs"],
-    correct: 1,
-    explanation: "Skin."
+    question: "The 'Oscar' for Best Original Song in 2023 was won by:",
+    options: ["Naatu Naatu", "Hold My Hand", "Lift Me Up", "This is a Life"],
+    correct: 0,
+    explanation: "From the movie RRR."
   },
   {
     id: "mhcet-2-q41",
     section: "GK & Current Affairs",
-    question: "The 'Great Barrier Reef' is located in which country?",
-    options: ["Australia", "Brazil", "South Africa", "Japan"],
-    correct: 0,
-    explanation: "Australia."
+    question: "Who is the author of 'The India Way'?",
+    options: ["Shashi Tharoor", "S. Jaishankar", "Raghuram Rajan", "Amartya Sen"],
+    correct: 1,
+    explanation: "Dr. S. Jaishankar, the External Affairs Minister."
   },
   {
     id: "mhcet-2-q42",
     section: "GK & Current Affairs",
-    question: "Who was the first woman to win a Nobel Prize?",
-    options: ["Marie Curie", "Mother Teresa", "Malala Yousafzai", "Rosalind Franklin"],
-    correct: 0,
-    explanation: "Marie Curie (Physics 1903)."
+    question: "The 'Project Tiger' completed how many years in 2023?",
+    options: ["25", "40", "50", "60"],
+    correct: 2,
+    explanation: "Launched in 1973, it completed 50 years in 2023."
   },
   {
     id: "mhcet-2-q43",
     section: "GK & Current Affairs",
-    question: "Which planet is known as the 'Morning Star'?",
-    options: ["Mars", "Venus", "Jupiter", "Mercury"],
+    question: "Which country is the host of the 2024 ICC Men's T20 World Cup?",
+    options: ["India", "USA and West Indies", "Australia", "England"],
     correct: 1,
-    explanation: "Venus."
+    explanation: "USA and West Indies co-hosted."
   },
   {
     id: "mhcet-2-q44",
     section: "GK & Current Affairs",
-    question: "The 'Brics' summit 2024 will be held in:",
-    options: ["Russia", "China", "South Africa", "Brazil"],
+    question: "The 'Ramon Magsaysay Award' 2023 from India was given to:",
+    options: ["Dr. Ravi Kannan R.", "Sonam Wangchuk", "Arvind Kejriwal", "Kiran Bedi"],
     correct: 0,
-    explanation: "Kazan, Russia."
+    explanation: "Surgical oncologist Dr. Ravi Kannan R. from Assam."
   },
   {
     id: "mhcet-2-q45",
     section: "GK & Current Affairs",
-    question: "Who was the founder of the 'Maurya Empire'?",
-    options: ["Ashoka", "Chandragupta Maurya", "Bindusara", "Harsha"],
-    correct: 1,
-    explanation: "Chandragupta Maurya."
+    question: "Which state is the 'First Organic State' of India?",
+    options: ["Sikkim", "Uttarakhand", "Himachal Pradesh", "Kerala"],
+    correct: 0,
+    explanation: "Sikkim."
   },
   {
     id: "mhcet-2-q46",
     section: "GK & Current Affairs",
-    question: "The 'World Bank' is headquartered in:",
-    options: ["New York", "Washington D.C.", "Geneva", "Paris"],
+    question: "The 'New Education Policy' (NEP) was launched in which year?",
+    options: ["2019", "2020", "2021", "2022"],
     correct: 1,
-    explanation: "Washington D.C."
+    explanation: "2020."
   },
   {
     id: "mhcet-2-q47",
     section: "GK & Current Affairs",
-    question: "Which layer of the atmosphere contains the Ozone layer?",
-    options: ["Troposphere", "Stratosphere", "Mesosphere", "Exosphere"],
+    question: "Who is the CEO of Google/Alphabet?",
+    options: ["Satya Nadella", "Sundar Pichai", "Tim Cook", "Elon Musk"],
     correct: 1,
-    explanation: "Stratosphere."
+    explanation: "Sundar Pichai."
   },
   {
     id: "mhcet-2-q48",
     section: "GK & Current Affairs",
-    question: "What is the chemical name of common salt?",
-    options: ["Sodium Bicarbonate", "Sodium Chloride", "Calcium Chloride", "Potassium Nitrate"],
-    correct: 1,
-    explanation: "NaCl."
+    question: "The 'COP 28' climate summit was held in:",
+    options: ["Glasgow", "Sharm El-Sheikh", "Dubai", "Baku"],
+    correct: 2,
+    explanation: "Dubai, UAE."
   },
 
   // SECTION 3: LOGICAL & ANALYTICAL REASONING (24 QUESTIONS)
   {
     id: "mhcet-2-q49",
     section: "Logical Reasoning",
-    question: "Syllogism: All pens are tools. No tools are useless. Conclusion: No pen is useless.",
-    options: ["True", "False", "Maybe", "None"],
-    correct: 0,
-    explanation: "Standard deduction."
+    question: "Find the missing number in the series: 1, 9, 25, 49, ?, 121",
+    options: ["64", "81", "100", "91"],
+    correct: 1,
+    explanation: "Squares of odd numbers: 1^2, 3^2, 5^2, 7^2, 9^2 (81), 11^2."
   },
   {
     id: "mhcet-2-q50",
     section: "Logical Reasoning",
-    question: "Syllogism: Some actors are singers. All singers are dancers. Conclusion: Some actors are dancers.",
-    options: ["True", "False", "Maybe", "None"],
+    question: "If 'BIRD' is 'CJSE', then 'CAT' is:",
+    options: ["DBU", "BZS", "DAU", "DBS"],
     correct: 0,
-    explanation: "Intersection."
+    explanation: "Pattern: +1. C+1=D, A+1=B, T+1=U. DBU."
   },
   {
     id: "mhcet-2-q51",
     section: "Logical Reasoning",
-    question: "Seating: A, B, C, D, E sit in a circle facing the center. A is left of B. C is between A and D. Who is right of B?",
-    options: ["A", "C", "D", "E"],
-    correct: 2,
-    explanation: "Circle order: B-A-C-D-E. Right of B is E (wait, logic check: B is right of A, so E is right of B)."
+    question: "Pointing to a man, a woman said, 'His mother is the only daughter of my father.' How is the woman related to the man?",
+    options: ["Sister", "Mother", "Aunt", "Daughter"],
+    correct: 1,
+    explanation: "The woman is the only daughter of her father. So she is the mother of the man."
   },
   {
     id: "mhcet-2-q52",
     section: "Logical Reasoning",
-    question: "Blood Relation: Showing a photo, Aman says: 'The man in the photo is the son of my father's only son.' Who is the man?",
-    options: ["Aman's Son", "Aman's Father", "Aman's Brother", "Aman himself"],
-    correct: 0,
-    explanation: "My father's only son = Me. Son of Me = My Son."
+    question: "Odd one out: January, May, July, November",
+    options: ["January", "May", "July", "November"],
+    correct: 3,
+    explanation: "November has 30 days; others have 31."
   },
   {
     id: "mhcet-2-q53",
     section: "Logical Reasoning",
-    question: "Analogy: Doctor : Hospital :: Lawyer : ?",
-    options: ["Court", "Office", "Police", "Justice"],
+    question: "In a certain code, 'GOOD' is '715154'. What is 'BAD'?",
+    options: ["214", "124", "412", "241"],
     correct: 0,
-    explanation: "Workplace."
+    explanation: "Alphabet positions: G=7, O=15, D=4. So B=2, A=1, D=4. 214."
   },
   {
     id: "mhcet-2-q54",
     section: "Logical Reasoning",
-    question: "Series: 1, 8, 27, 64, ?",
-    options: ["100", "125", "150", "200"],
+    question: "A man is facing North. He turns 45 degrees clockwise, then 90 degrees anti-clockwise. Which direction is he facing now?",
+    options: ["North-East", "North-West", "South-East", "South-West"],
     correct: 1,
-    explanation: "Cubes: 1^3, 2^3, 3^3, 4^3, 5^3=125."
+    explanation: "N + 45 CW = NE. NE - 90 ACW = NW."
   },
   {
     id: "mhcet-2-q55",
     section: "Logical Reasoning",
-    question: "Statement: 'Most birds fly.' Conclusion: I. All birds fly. II. Some birds do not fly.",
-    options: ["Only I", "Only II", "Both", "None"],
+    question: "Analogy: Library : Books :: Forest : ?",
+    options: ["Animals", "Trees", "Water", "Sky"],
     correct: 1,
-    explanation: "Most implies some do not."
+    explanation: "Library is made of books; forest is made of trees."
   },
   {
     id: "mhcet-2-q56",
     section: "Logical Reasoning",
-    question: "Direction: Aman walks 10m North, then 10m East. Distance from start?",
-    options: ["10m", "20m", "14.14m", "100m"],
+    question: "All lawyers are humans. Some humans are doctors. Conclusion: Some lawyers are doctors.",
+    options: ["True", "False", "Maybe", "Data Inadequate"],
     correct: 2,
-    explanation: "Pythagoras: sqrt(10^2 + 10^2) = 14.14."
+    explanation: "Maybe. There's no direct overlap guaranteed."
   },
   {
     id: "mhcet-2-q57",
     section: "Logical Reasoning",
-    question: "Coding: If 'INDIA' is 'JOEJB' (each +1), what is 'BHARAT'?",
-    options: ["CIBSBU", "CJBSBU", "CIBSCU", "CIATBU"],
-    correct: 0,
-    explanation: "B+1=C, H+1=I, A+1=B, R+1=S, A+1=B, T+1=U."
+    question: "If 'A' is to the West of 'B', and 'C' is to the South of 'A', then 'C' is in which direction of 'B'?",
+    options: ["North-East", "South-West", "South-East", "North-West"],
+    correct: 1,
+    explanation: "A is West, C is South of A. So C is South-West of B."
   },
   {
     id: "mhcet-2-q58",
     section: "Logical Reasoning",
-    question: "Analogy: Clock : Time :: Thermometer : ?",
-    options: ["Heat", "Temperature", "Cold", "Radiation"],
-    correct: 1,
-    explanation: "Measurement."
+    question: "Missing number: 5, 10, 20, 40, ?",
+    options: ["60", "70", "80", "100"],
+    correct: 2,
+    explanation: "Pattern: x2. 40*2 = 80."
   },
   {
     id: "mhcet-2-q59",
     section: "Logical Reasoning",
-    question: "Series: 10, 20, 30, 40, ?",
-    options: ["45", "50", "60", "100"],
-    correct: 1,
-    explanation: "Simple arithmetic."
+    question: "If the day after tomorrow is Sunday, what day was yesterday?",
+    options: ["Thursday", "Friday", "Saturday", "Wednesday"],
+    correct: 0,
+    explanation: "Day after tomorrow is Sunday -> Tomorrow is Saturday -> Today is Friday -> Yesterday was Thursday."
   },
   {
     id: "mhcet-2-q60",
     section: "Logical Reasoning",
-    question: "Find odd one out:",
-    options: ["Guitar", "Piano", "Flute", "Violin"],
-    correct: 2,
-    explanation: "Flute is a wind instrument, others are string/key based."
+    question: "Find the odd one: Apple, Rose, Lily, Lotus",
+    options: ["Apple", "Rose", "Lily", "Lotus"],
+    correct: 0,
+    explanation: "Apple is a fruit; others are flowers."
   },
   {
     id: "mhcet-2-q61",
     section: "Logical Reasoning",
-    question: "Blood Relation: P is Q's brother. R is Q's mother. S is R's father. How is P related to S?",
-    options: ["Son", "Grandson", "Father", "Nephew"],
-    correct: 1,
-    explanation: "P is son of R, who is daughter of S."
+    question: "Arrange logically: 1. Rain, 2. Cloud, 3. Sun, 4. Rainbow, 5. Vapor",
+    options: ["3, 5, 2, 1, 4", "1, 2, 3, 4, 5", "5, 2, 1, 4, 3", "3, 2, 5, 1, 4"],
+    correct: 0,
+    explanation: "Sun -> Vapor -> Cloud -> Rain -> Rainbow."
   },
   {
     id: "mhcet-2-q62",
     section: "Logical Reasoning",
-    question: "Statement: No man is a bird. All birds fly. Conclusion: All men fly.",
-    options: ["True", "False", "Can't say", "Some fly"],
-    correct: 1,
-    explanation: "Invalid deduction."
+    question: "If 'P' is the brother of 'Q', and 'R' is the mother of 'Q', how is 'R' related to 'P'?",
+    options: ["Sister", "Aunt", "Mother", "Daughter"],
+    correct: 2,
+    explanation: "R is mother of Q, P is brother of Q. So R is mother of P."
   },
   {
     id: "mhcet-2-q63",
     section: "Logical Reasoning",
-    question: "Analogy: 5 : 25 :: 10 : ?",
-    options: ["50", "100", "200", "500"],
-    correct: 1,
-    explanation: "Square."
+    question: "Next term: A, C, F, J, ?",
+    options: ["L", "M", "N", "O"],
+    correct: 3,
+    explanation: "Gaps: +2, +3, +4, so +5. J(10)+5 = 15(O)."
   },
   {
     id: "mhcet-2-q64",
     section: "Logical Reasoning",
-    question: "If 'SUN' is '3', 'MOON' is '4', what is 'STAR'?",
-    options: ["3", "4", "5", "6"],
+    question: "A cube is painted green on all faces. If it's cut into 27 small cubes, how many have 2 faces painted?",
+    options: ["8", "12", "6", "4"],
     correct: 1,
-    explanation: "Number of letters."
+    explanation: "Cubes with 2 sides painted are on the edges. 1 per edge x 12 edges = 12."
   },
   {
     id: "mhcet-2-q65",
     section: "Logical Reasoning",
-    question: "Direction: North-East becomes South. What does North become?",
-    options: ["South-West", "South-East", "East", "West"],
+    question: "Angle between hands at 3:30?",
+    options: ["75 deg", "85 deg", "90 deg", "105 deg"],
     correct: 0,
-    explanation: "Rotation of 135° clockwise. North turns to South-East (wait, check rotation: NE to S is 135. N to SE is 135)."
+    explanation: "|(30*3 - 5.5*30)| = |90 - 165| = 75 degrees."
   },
   {
     id: "mhcet-2-q66",
     section: "Logical Reasoning",
-    question: "Find odd one out:",
-    options: ["Mew", "Bark", "Moow", "Talk"],
-    correct: 3,
-    explanation: "Others are animal sounds."
+    question: "If 'WATER' is '12345', what is 'WET'?",
+    options: ["143", "134", "142", "124"],
+    correct: 0,
+    explanation: "W=1, E=4, T=3. 143."
   },
   {
     id: "mhcet-2-q67",
     section: "Logical Reasoning",
-    question: "Series: 2, 4, 8, 16, ?",
-    options: ["24", "30", "32", "40"],
+    question: "Syllogism: No paper is pen. No pen is pencil. Conclusion: No paper is pencil.",
+    options: ["True", "False", "Maybe", "Data Inadequate"],
     correct: 2,
-    explanation: "Doubling."
+    explanation: "Maybe. There's no direct relation defined."
   },
   {
     id: "mhcet-2-q68",
     section: "Logical Reasoning",
-    question: "Blood Relation: My father's sister's only brother's daughter is my:",
-    options: ["Cousin", "Sister", "Mother", "Aunt"],
-    correct: 1,
-    explanation: "Father's sister's only brother = My Father. Daughter = My Sister."
+    question: "If 10 men can do a work in 10 days, 1 man can do it in:",
+    options: ["1 day", "10 days", "100 days", "1000 days"],
+    correct: 2,
+    explanation: "10 * 10 = 1 * x. x = 100."
   },
   {
     id: "mhcet-2-q69",
     section: "Logical Reasoning",
-    question: "Coding: If 'RED' is '3', 'BLUE' is '4', 'YELLOW' is?",
-    options: ["5", "6", "7", "8"],
-    correct: 1,
-    explanation: "Number of letters."
+    question: "Choose the odd one: Delhi, Mumbai, Kolkata, Sri Lanka",
+    options: ["Delhi", "Mumbai", "Kolkata", "Sri Lanka"],
+    correct: 3,
+    explanation: "Sri Lanka is a country."
   },
   {
     id: "mhcet-2-q70",
     section: "Logical Reasoning",
-    question: "Analogy: Paper : Tree :: Glass : ?",
-    options: ["Sand", "Water", "Stone", "Window"],
-    correct: 0,
-    explanation: "Raw material."
+    question: "If 'A' is older than 'B', 'C' is older than 'A', then who is the youngest?",
+    options: ["A", "B", "C", "Cannot say"],
+    correct: 1,
+    explanation: "C > A > B. B is youngest."
   },
   {
     id: "mhcet-2-q71",
     section: "Logical Reasoning",
-    question: "If 1st Jan 2024 is Monday, what is 8th Jan 2024?",
-    options: ["Sunday", "Monday", "Tuesday", "Wednesday"],
+    question: "Next number: 100, 90, 80, 70, ?",
+    options: ["50", "60", "65", "55"],
     correct: 1,
-    explanation: "Same day after 7 days."
+    explanation: "Pattern: -10."
   },
   {
     id: "mhcet-2-q72",
     section: "Logical Reasoning",
-    question: "Find missing: B, D, F, H, ?",
-    options: ["I", "J", "K", "L"],
-    correct: 1,
-    explanation: "Jump of 2."
+    question: "Analogy: Pen : Write :: Knife : ?",
+    options: ["Cut", "Kill", "Sharp", "Steel"],
+    correct: 0,
+    explanation: "Purpose of pen is to write; purpose of knife is to cut."
   },
 
   // SECTION 4: ENGLISH LANGUAGE (24 QUESTIONS)
-  // RC PASSAGE 1 (5 Qs)
   {
     id: "mhcet-2-q73",
     section: "English Language",
-    passage: `Artificial Intelligence (AI) is transforming the way we live and work. From self-driving cars to personalized recommendations on streaming platforms, AI is everywhere. However, this progress comes with significant ethical concerns. The potential for job displacement, bias in algorithms, and the loss of privacy are major issues that need to be addressed. It is crucial to develop AI in a way that is transparent, accountable, and beneficial to all of humanity.`,
-    question: "What is the main topic of the passage?",
-    options: ["Self-driving cars", "The transformation and ethics of AI", "Streaming platforms", "Losing privacy"],
+    question: "Synonym of 'ABANDON':",
+    options: ["Keep", "Leave/Forsake", "Start", "Help"],
     correct: 1,
-    explanation: "Passage covers both the spread and concerns of AI."
+    explanation: "Abandon = leave behind."
   },
   {
     id: "mhcet-2-q74",
     section: "English Language",
-    passage: `Artificial...`,
-    question: "Which of the following is NOT an ethical concern mentioned?",
-    options: ["Job displacement", "Algorithm bias", "Loss of privacy", "High cost of computers"],
-    correct: 3,
-    explanation: "Cost is not mentioned as an ethical concern."
+    question: "Antonym of 'COURAGE':",
+    options: ["Bravery", "Fear", "Cowardice", "Strength"],
+    correct: 2,
+    explanation: "Cowardice is the opposite of courage."
   },
   {
     id: "mhcet-2-q75",
     section: "English Language",
-    passage: `Artificial...`,
-    question: "AI should be developed in a way that is:",
-    options: ["Secretive", "Transparent and accountable", "Expensive", "Only for rich people"],
+    question: "Meaning of 'Once in a blue moon':",
+    options: ["Daily", "Very rarely", "Monthly", "Never"],
     correct: 1,
-    explanation: "Last sentence of the passage."
+    explanation: "Rarely occurring."
   },
   {
     id: "mhcet-2-q76",
     section: "English Language",
-    passage: `Artificial...`,
-    question: "Personalized recommendations are an example of:",
-    options: ["AI usage", "Human intervention", "Bad technology", "Privacy breach"],
+    question: "Correct spelling:",
+    options: ["Separate", "Seperate", "Seprate", "Saperate"],
     correct: 0,
-    explanation: "Used as an example of AI in the text."
+    explanation: "Separate."
   },
   {
     id: "mhcet-2-q77",
     section: "English Language",
-    passage: `Artificial...`,
-    question: "The word 'displacement' in the context of jobs means:",
-    options: ["Movement", "Loss or replacement", "Improvement", "Promotion"],
+    question: "Fill: 'She has been working here ______ 2010.'",
+    options: ["for", "since", "from", "at"],
     correct: 1,
-    explanation: "Refers to people losing jobs to machines."
+    explanation: "Since (specific point in time)."
   },
-
-  // RC PASSAGE 2 (5 Qs)
   {
     id: "mhcet-2-q78",
     section: "English Language",
-    passage: `Tourism is one of the fastest-growing industries in the world. It provides millions of jobs and helps in cultural exchange. However, mass tourism can lead to the degradation of historical sites and environmental pollution. Overtourism in cities like Venice and Kyoto has forced local governments to implement restrictions. Sustainable tourism is the need of the hour, focusing on minimal impact on the environment and local culture while generating income for the local population.`,
-    question: "A benefit of tourism mentioned is:",
-    options: ["Pollution", "Cultural exchange", "Historical degradation", "Restrictions"],
-    correct: 1,
-    explanation: "Explicitly stated as a benefit."
+    question: "Identify error: 'She (A) is (B) more taller (C) than me (D).'",
+    options: ["A", "B", "C", "D"],
+    correct: 2,
+    explanation: "Double comparative is wrong. Just 'taller'."
   },
   {
     id: "mhcet-2-q79",
     section: "English Language",
-    passage: `Tourism...`,
-    question: "Venice and Kyoto are examples of cities facing:",
-    options: ["No tourists", "Overtourism", "Cheap travel", "Natural disasters"],
-    correct: 1,
-    explanation: "Used as examples of overtourism."
+    question: "Meaning of 'Veni, Vidi, Vici':",
+    options: ["I came, I saw, I conquered", "I am, I was, I will", "Live and let live", "Truth alone triumphs"],
+    correct: 0,
+    explanation: "Julius Caesar's famous quote."
   },
   {
     id: "mhcet-2-q80",
     section: "English Language",
-    passage: `Tourism...`,
-    question: "Sustainable tourism aims to:",
-    options: ["Stop all travel", "Maximize pollution", "Minimize impact on environment/culture", "Only help rich tourists"],
-    correct: 2,
-    explanation: "Focuses on minimal impact."
+    question: "Opposite of 'OPTIMIST':",
+    options: ["Realist", "Pessimist", "Idealist", "Cynic"],
+    correct: 1,
+    explanation: "Pessimist."
   },
   {
     id: "mhcet-2-q81",
     section: "English Language",
-    passage: `Tourism...`,
-    question: "Mass tourism can negatively affect:",
-    options: ["Historical sites", "Environment", "Local cultures", "All of the above"],
-    correct: 3,
-    explanation: "All are mentioned as risks."
+    question: "Choose correct phrasal verb: 'He ______ his father.'",
+    options: ["takes after", "takes on", "takes out", "takes off"],
+    correct: 0,
+    explanation: "Takes after = resembles."
   },
   {
     id: "mhcet-2-q82",
     section: "English Language",
-    passage: `Tourism...`,
-    question: "The word 'degradation' means:",
-    options: ["Improvement", "Deterioration or decay", "Decoration", "Discovery"],
-    correct: 1,
-    explanation: "Context of historical sites decaying."
+    question: "Passive: 'They are playing football.'",
+    options: ["Football is being played by them.", "Football was played by them.", "Football is played.", "They played football."],
+    correct: 0,
+    explanation: "Is being played."
   },
-
-  // GRAMMAR & VOCAB (14 Qs)
   {
     id: "mhcet-2-q83",
     section: "English Language",
-    question: "Synonym of 'FRUGAL':",
-    options: ["Expensive", "Economical/Saving", "Angry", "Fast"],
+    question: "Meaning of 'Status quo ante':",
+    options: ["Current state", "State as it was before", "Future state", "Legal state"],
     correct: 1,
-    explanation: "Frugal means using money carefully."
+    explanation: "Previous state of affairs."
   },
   {
     id: "mhcet-2-q84",
     section: "English Language",
-    question: "Antonym of 'BRAVE':",
-    options: ["Valiant", "Timid/Cowardly", "Strong", "Loud"],
-    correct: 1,
-    explanation: "Opposite of brave."
+    question: "One word for 'A collection of poems':",
+    options: ["Anthology", "Catalogue", "Dictionary", "Biography"],
+    correct: 0,
+    explanation: "Anthology."
   },
   {
     id: "mhcet-2-q85",
     section: "English Language",
-    question: "Passive Voice: 'He opened the door.'",
-    options: ["The door was opened by him.", "The door is opened by him.", "Door opened him.", "He has opened door."],
+    question: "Correct spelling:",
+    options: ["Maintenance", "Maintainance", "Maintenence", "Maintenace"],
     correct: 0,
-    explanation: "Past simple passive."
+    explanation: "Maintenance."
   },
   {
     id: "mhcet-2-q86",
     section: "English Language",
-    question: "Identify the error: 'He (A) don't (B) like (C) apples (D).'",
-    options: ["A", "B", "C", "D"],
+    question: "Synonym of 'GENUINE':",
+    options: ["Fake", "Authentic", "Bad", "New"],
     correct: 1,
-    explanation: "He takes 'doesn't', not 'don't'."
+    explanation: "Authentic."
   },
   {
     id: "mhcet-2-q87",
     section: "English Language",
-    question: "Meaning of idiom 'At the eleventh hour'?",
-    options: ["At 11 PM", "At the last moment", "Very early", "Never"],
+    question: "Meaning of 'Pro rata':",
+    options: ["For a reason", "In proportion", "By law", "Against the rule"],
     correct: 1,
-    explanation: "Means the latest possible time."
+    explanation: "Proportionally."
   },
   {
     id: "mhcet-2-q88",
     section: "English Language",
-    question: "Choose correct spelling:",
-    options: ["Manteinance", "Maintenance", "Maintainance", "Maintenence"],
+    question: "Figure of speech: 'Life is a roller coaster.'",
+    options: ["Simile", "Metaphor", "Personification", "Alliteration"],
     correct: 1,
-    explanation: "Maintenance."
+    explanation: "Metaphor."
   },
   {
     id: "mhcet-2-q89",
     section: "English Language",
-    question: "Fill in the blank: 'If I _____ you, I would go.'",
-    options: ["was", "were", "am", "be"],
-    correct: 1,
-    explanation: "Subjunctive 'were'."
+    question: "Choose word that means 'A person who is centenarian':",
+    options: ["10 years old", "50 years old", "100 years old", "1000 years old"],
+    correct: 2,
+    explanation: "100 years old."
   },
   {
     id: "mhcet-2-q90",
     section: "English Language",
-    question: "Synonym of 'OBSOLETE':",
-    options: ["New", "Outdated", "Beautiful", "Quick"],
+    question: "Antonym of 'VANITY':",
+    options: ["Pride", "Humility", "Beauty", "Worth"],
     correct: 1,
-    explanation: "Means no longer in use."
+    explanation: "Humility."
   },
   {
     id: "mhcet-2-q91",
     section: "English Language",
-    question: "Antonym of 'OPTIMISTIC':",
-    options: ["Hopeful", "Pessimistic", "Joyful", "Active"],
-    correct: 1,
-    explanation: "Opposite."
+    question: "Meaning of 'Amicus Curiae':",
+    options: ["Friend of the court", "Enemy of the law", "Legal fee", "A new witness"],
+    correct: 0,
+    explanation: "Friend of the court (neutral expert)."
   },
   {
     id: "mhcet-2-q92",
     section: "English Language",
-    question: "Identify one word for 'One who knows everything':",
-    options: ["Omnipresent", "Omniscient", "Omnipotent", "Polyglot"],
-    correct: 1,
-    explanation: "Omniscient (Scire = to know)."
+    question: "Identify error: 'Each (A) of the (B) boys (C) are (D) here.'",
+    options: ["A", "B", "C", "D"],
+    correct: 3,
+    explanation: "Should be 'is'."
   },
   {
     id: "mhcet-2-q93",
     section: "English Language",
-    question: "Fill in blank: 'He died _____ cancer.'",
-    options: ["from", "of", "with", "by"],
+    question: "Meaning of 'In toto':",
+    options: ["In parts", "In total/completely", "In court", "In future"],
     correct: 1,
-    explanation: "Die of a disease."
+    explanation: "Completely."
   },
   {
     id: "mhcet-2-q94",
     section: "English Language",
-    question: "Antonym of 'LENIENT':",
-    options: ["Soft", "Strict", "Kind", "Calm"],
+    question: "Synonym of 'CAUTIOUS':",
+    options: ["Brave", "Careful", "Careless", "Fast"],
     correct: 1,
-    explanation: "Lenient (easy-going) vs Strict."
+    explanation: "Careful."
   },
   {
     id: "mhcet-2-q95",
     section: "English Language",
-    question: "Synonym of 'ELOQUENT':",
-    options: ["Fluent and persuasive", "Silent", "Boring", "Confused"],
-    correct: 0,
-    explanation: "Means good at speaking."
+    question: "Antonym of 'LEND':",
+    options: ["Give", "Borrow", "Keep", "Lose"],
+    correct: 1,
+    explanation: "Borrow."
   },
   {
     id: "mhcet-2-q96",
     section: "English Language",
-    question: "Meaning of 'Status Quo'?",
-    options: ["The current state of affairs", "A high status", "Change of mind", "Legal order"],
+    question: "One word for 'A story with a hidden moral':",
+    options: ["Allegory", "Essay", "Report", "News"],
     correct: 0,
-    explanation: "Latin for existing state."
+    explanation: "Allegory."
   },
 
   // SECTION 5: BASIC MATHEMATICS (24 QUESTIONS)
   {
     id: "mhcet-2-q97",
     section: "Basic Mathematics",
-    question: "What is 15% of 200?",
-    options: ["15", "30", "45", "60"],
+    question: "What is 20% of 500?",
+    options: ["50", "100", "150", "200"],
     correct: 1,
-    explanation: "0.15 * 200 = 30."
+    explanation: "100."
   },
   {
     id: "mhcet-2-q98",
     section: "Basic Mathematics",
-    question: "Average of 5, 10, 15, 20?",
-    options: ["10", "12.5", "15", "17.5"],
+    question: "Find x: 2x + 10 = 40",
+    options: ["10", "15", "20", "25"],
     correct: 1,
-    explanation: "50 / 4 = 12.5."
+    explanation: "2x = 30, x = 15."
   },
   {
     id: "mhcet-2-q99",
     section: "Basic Mathematics",
-    question: "Solve for x: 3x - 6 = 12.",
-    options: ["4", "6", "8", "2"],
+    question: "Area of a triangle with base 10 and height 5?",
+    options: ["15", "25", "50", "100"],
     correct: 1,
-    explanation: "3x = 18, x = 6."
+    explanation: "0.5 * 10 * 5 = 25."
   },
   {
     id: "mhcet-2-q100",
     section: "Basic Mathematics",
-    question: "Ratio: Divide 500 in 2:3 ratio.",
-    options: ["200, 300", "100, 400", "250, 250", "150, 350"],
-    correct: 0,
-    explanation: "200 and 300."
+    question: "Next number in 1, 4, 9, 16, ?",
+    options: ["20", "24", "25", "30"],
+    correct: 2,
+    explanation: "25."
   },
   {
     id: "mhcet-2-q101",
     section: "Basic Mathematics",
-    question: "Percentage: Change in area if side of square increases by 10%?",
-    options: ["10%", "20%", "21%", "11%"],
-    correct: 2,
-    explanation: "1.1 * 1.1 = 1.21. Increase is 21%."
+    question: "If a pen costs 5, how many for 100?",
+    options: ["10", "20", "30", "40"],
+    correct: 1,
+    explanation: "20."
   },
   {
     id: "mhcet-2-q102",
     section: "Basic Mathematics",
-    question: "Interest: SI on 5000 at 5% for 3 years?",
-    options: ["250", "500", "750", "1000"],
-    correct: 2,
-    explanation: "5000 * 0.05 * 3 = 750."
+    question: "Sum of 0.5 and 0.25?",
+    options: ["0.7", "0.75", "0.8", "1.0"],
+    correct: 1,
+    explanation: "0.75."
   },
   {
     id: "mhcet-2-q103",
     section: "Basic Mathematics",
-    question: "Speed: Distance 400km, Time 8h. Speed?",
-    options: ["40", "50", "60", "80"],
+    question: "Average of 5, 10, 15?",
+    options: ["5", "10", "15", "30"],
     correct: 1,
-    explanation: "400/8 = 50."
+    explanation: "10."
   },
   {
     id: "mhcet-2-q104",
     section: "Basic Mathematics",
-    question: "Algebra: Value of x^2 + 2x + 1 when x = 2.",
-    options: ["4", "6", "9", "8"],
-    correct: 2,
-    explanation: "4 + 4 + 1 = 9."
+    question: "Square of 11?",
+    options: ["111", "121", "131", "141"],
+    correct: 1,
+    explanation: "121."
   },
   {
     id: "mhcet-2-q105",
     section: "Basic Mathematics",
-    question: "Profit: CP=200, Loss=20%. SP?",
-    options: ["160", "180", "220", "240"],
-    correct: 0,
-    explanation: "200 - 40 = 160."
+    question: "HCF of 12 and 18?",
+    options: ["2", "3", "6", "12"],
+    correct: 2,
+    explanation: "6."
   },
   {
     id: "mhcet-2-q106",
     section: "Basic Mathematics",
-    question: "Geometry: Perimeter of rectangle L=10, W=5.",
-    options: ["15", "30", "50", "25"],
+    question: "LCM of 10 and 20?",
+    options: ["10", "20", "30", "40"],
     correct: 1,
-    explanation: "2 * (10+5) = 30."
+    explanation: "20."
   },
   {
     id: "mhcet-2-q107",
     section: "Basic Mathematics",
-    question: "Number System: Smallest prime number?",
-    options: ["0", "1", "2", "3"],
+    question: "If 10% of a number is 50, the number is:",
+    options: ["50", "100", "500", "1000"],
     correct: 2,
-    explanation: "2 is the smallest prime."
+    explanation: "500."
   },
   {
     id: "mhcet-2-q108",
     section: "Basic Mathematics",
-    question: "Ratio: If x:y = 1:2, then 2x+y : x+y = ?",
-    options: ["4:3", "3:4", "1:1", "2:3"],
-    correct: 0,
-    explanation: "(2+2) : (1+2) = 4:3."
+    question: "Perimeter of a square with side 4?",
+    options: ["8", "12", "16", "20"],
+    correct: 2,
+    explanation: "16."
   },
   {
     id: "mhcet-2-q109",
     section: "Basic Mathematics",
-    question: "Time & Work: A does work in 20 days. How much work in 5 days?",
-    options: ["1/2", "1/4", "1/5", "1/10"],
-    correct: 1,
-    explanation: "5/20 = 1/4."
+    question: "What is 3^4?",
+    options: ["12", "27", "64", "81"],
+    correct: 3,
+    explanation: "81."
   },
   {
     id: "mhcet-2-q110",
     section: "Basic Mathematics",
-    question: "Percentage: If salary is 100, increases by 10% then decreases by 10%. Final?",
-    options: ["100", "99", "101", "110"],
-    correct: 1,
-    explanation: "100 -> 110 -> 99."
+    question: "If a car travels 40 km in 30 mins, its speed in km/h is:",
+    options: ["40", "60", "80", "100"],
+    correct: 2,
+    explanation: "80 km/h."
   },
   {
     id: "mhcet-2-q111",
     section: "Basic Mathematics",
-    question: "LCM of 12 and 18?",
-    options: ["18", "24", "36", "72"],
-    correct: 2,
-    explanation: "36."
+    question: "Square root of 625?",
+    options: ["15", "25", "35", "45"],
+    correct: 1,
+    explanation: "25."
   },
   {
     id: "mhcet-2-q112",
     section: "Basic Mathematics",
-    question: "Algebra: (x+y)(x-y) = ?",
-    options: ["x^2+y^2", "x^2-y^2", "2x-2y", "x+y"],
-    correct: 1,
-    explanation: "Standard identity."
+    question: "What is 1/4 as a percentage?",
+    options: ["10%", "20%", "25%", "40%"],
+    correct: 2,
+    explanation: "25%."
   },
   {
     id: "mhcet-2-q113",
     section: "Basic Mathematics",
-    question: "Interest: Amount if 1000 is kept for 1 yr at 10% SI?",
-    options: ["100", "1100", "1010", "1200"],
-    correct: 1,
-    explanation: "1000 + 100."
+    question: "Volume of a box 2x3x4?",
+    options: ["9", "12", "24", "48"],
+    correct: 2,
+    explanation: "24."
   },
   {
     id: "mhcet-2-q114",
     section: "Basic Mathematics",
-    question: "Profit: Buy for 50, Sell for 60. Profit %?",
-    options: ["10%", "20%", "25%", "15%"],
+    question: "If today is June 1, what date is 10 days later?",
+    options: ["June 10", "June 11", "June 12", "June 13"],
     correct: 1,
-    explanation: "10/50 * 100 = 20%."
+    explanation: "June 11."
   },
   {
     id: "mhcet-2-q115",
     section: "Basic Mathematics",
-    question: "Speed: m/s to km/h conversion factor?",
-    options: ["5/18", "18/5", "10/3", "3.6"],
+    question: "How many degrees in a straight line?",
+    options: ["90", "180", "270", "360"],
     correct: 1,
-    explanation: "18/5."
+    explanation: "180."
   },
   {
     id: "mhcet-2-q116",
     section: "Basic Mathematics",
-    question: "Geometry: Sum of angles in a quadrilateral?",
-    options: ["180", "270", "360", "540"],
-    correct: 2,
-    explanation: "360."
+    question: "Find the odd one: 2, 4, 6, 9, 10",
+    options: ["2", "4", "6", "9"],
+    correct: 3,
+    explanation: "9 is odd; others are even."
   },
   {
     id: "mhcet-2-q117",
     section: "Basic Mathematics",
-    question: "Age: A is 10 yrs older than B. In 5 yrs, sum is 40. B's age now?",
-    options: ["10", "15", "5", "12"],
-    correct: 0,
-    explanation: "A=B+10. (A+5)+(B+5)=40 -> B+15+B+5=40 -> 2B=20 -> B=10."
+    question: "What is 1000 - 99?",
+    options: ["900", "901", "911", "801"],
+    correct: 1,
+    explanation: "901."
   },
   {
     id: "mhcet-2-q118",
     section: "Basic Mathematics",
-    question: "Percentage: What % of a day is 3 hours?",
-    options: ["10%", "12.5%", "25%", "15%"],
-    correct: 1,
-    explanation: "3/24 = 1/8 = 12.5%."
+    question: "Number of seconds in 2 minutes?",
+    options: ["60", "100", "120", "200"],
+    correct: 2,
+    explanation: "120."
   },
   {
     id: "mhcet-2-q119",
     section: "Basic Mathematics",
-    question: "Solve: 1/2 + 1/3.",
-    options: ["2/5", "5/6", "1/6", "1/5"],
-    correct: 1,
-    explanation: "3/6 + 2/6 = 5/6."
+    question: "If a shirt is 200 after 50% discount, original price was:",
+    options: ["100", "300", "400", "500"],
+    correct: 2,
+    explanation: "400."
   },
   {
     id: "mhcet-2-q120",
     section: "Basic Mathematics",
-    question: "Find x: x/4 = 25.",
-    options: ["50", "75", "100", "125"],
+    question: "1/2 of 1/4 is:",
+    options: ["1/4", "1/6", "1/8", "1/10"],
     correct: 2,
-    explanation: "x = 100."
+    explanation: "1/8."
   }
 ];

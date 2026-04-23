@@ -2,13 +2,19 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import FeedbackScreen from "./FeedbackScreen";
-import { TestResult } from "./constants";
+import { TestResult, MockQuestion } from "./constants";
 
 export default function TestPageLayout({
   children,
   categoryName,
 }: {
-  children: (onComplete: (res: { score: number; total: number; timeSpent: number }) => void) => React.ReactNode;
+  children: (onComplete: (res: { 
+    score: number; 
+    total: number; 
+    timeSpent: number;
+    answers: (number | null)[];
+    questions: MockQuestion[];
+  }) => void) => React.ReactNode;
   categoryName: string;
 }) {
   const router = useRouter();
@@ -18,19 +24,24 @@ export default function TestPageLayout({
     score: number;
     total: number;
     timeSpent: number;
+    answers: (number | null)[];
+    questions: MockQuestion[];
   }) => {
-    const breakdown = [
-      {
-        topic: "Legal Reasoning",
-        correct: results.score,
-        total: results.total,
-      },
-      {
-        topic: "Reading Comprehension",
-        correct: Math.max(0, results.score - 1),
-        total: results.total,
-      },
-    ];
+    // Group by actual sections
+    const sections: Record<string, { correct: number; total: number }> = {};
+    results.questions.forEach((q, i) => {
+      const section = q.section || "General";
+      if (!sections[section]) sections[section] = { correct: 0, total: 0 };
+      sections[section].total++;
+      if (results.answers[i] === q.correct) {
+        sections[section].correct++;
+      }
+    });
+
+    const breakdown = Object.entries(sections).map(([topic, stats]) => ({
+      topic,
+      ...stats,
+    }));
 
     const suggestions = [];
     if (results.score < results.total) {
@@ -38,14 +49,14 @@ export default function TestPageLayout({
         "Focus on the 'Doctrine of Pith and Substance' as your understanding of legislative powers seems slightly incomplete.",
       );
       suggestions.push(
-        `Try to improve your reading speed; you spent ${Math.floor(results.timeSpent / 60)}m ${results.timeSpent % 60}s which is slightly above the target for this passage.`,
+        `Try to improve your reading speed; you spent ${Math.floor(results.timeSpent / 60)}m ${results.timeSpent % 60}s which is slightly above the target for this test.`,
       );
     } else {
       suggestions.push(
         `Excellent speed! You finished in ${Math.floor(results.timeSpent / 60)}m ${results.timeSpent % 60}s.`,
       );
       suggestions.push(
-        "Your deductive reasoning is sharp. Keep practicing with 'Hard' difficulty passages.",
+        "Your deductive reasoning is sharp. Keep practicing with 'Hard' difficulty mocks.",
       );
     }
 

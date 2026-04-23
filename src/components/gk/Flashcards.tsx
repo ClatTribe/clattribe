@@ -877,22 +877,22 @@ export default function Flashcards() {
             </p>
             <div className="flex justify-center gap-4 sm:gap-8 mt-6 flex-wrap">
               <div className="text-center px-4">
-                <p style={{ color: "#4ade80", fontSize: 24, sm: "28px", fontWeight: 800 }}>
+                <p style={{ color: "#4ade80", fontSize: 24, fontWeight: 800 }}>
                   {knewCount}
                 </p>
-                <p style={{ color: "#94a3b8", fontSize: 11, sm: "12px", uppercase: true }}>Knew it</p>
+                <p style={{ color: "#94a3b8", fontSize: 11, textTransform: "uppercase" }}>Knew it</p>
               </div>
               <div className="text-center px-4">
-                <p style={{ color: "#f87171", fontSize: 24, sm: "28px", fontWeight: 800 }}>
+                <p style={{ color: "#f87171", fontSize: 24, fontWeight: 800 }}>
                   {forgotCount}
                 </p>
-                <p style={{ color: "#94a3b8", fontSize: 11, sm: "12px", uppercase: true }}>Forgot</p>
+                <p style={{ color: "#94a3b8", fontSize: 11, textTransform: "uppercase" }}>Forgot</p>
               </div>
               <div className="text-center px-4">
-                <p style={{ color: "#fbbf24", fontSize: 24, sm: "28px", fontWeight: 800 }}>
+                <p style={{ color: "#fbbf24", fontSize: 24, fontWeight: 800 }}>
                   {streak}
                 </p>
-                <p style={{ color: "#94a3b8", fontSize: 11, sm: "12px", uppercase: true }}>Streak 🔥</p>
+                <p style={{ color: "#94a3b8", fontSize: 11, textTransform: "uppercase" }}>Streak 🔥</p>
               </div>
             </div>
           </div>
@@ -1795,7 +1795,6 @@ export default function Flashcards() {
               style={{
                 color: "#fbbf24",
                 fontSize: 16,
-                sm: "18px",
                 fontWeight: 900,
                 lineHeight: 1,
                 margin: 0,
@@ -1820,7 +1819,6 @@ export default function Flashcards() {
               style={{
                 color: "#a78bfa",
                 fontSize: 16,
-                sm: "18px",
                 fontWeight: 900,
                 lineHeight: 1,
                 margin: 0,

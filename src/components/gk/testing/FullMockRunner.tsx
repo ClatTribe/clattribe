@@ -2,7 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Star, Clock, BookOpen } from "lucide-react";
-import { ExamType, MOCK_DATABASE, EXAM_META, SAMPLE_CLAT_MOCK_1 } from "./constants";
+import { ExamType, MOCK_DATABASE, EXAM_META, SAMPLE_CLAT_MOCK_1, MockQuestion } from "./constants";
 
 export default function FullMockRunner({
   examType,
@@ -13,7 +13,13 @@ export default function FullMockRunner({
   examType: ExamType;
   mockNumber: number;
   onBack: () => void;
-  onComplete: (res: { score: number; total: number; timeSpent: number }) => void;
+  onComplete: (res: { 
+    score: number; 
+    total: number; 
+    timeSpent: number;
+    answers: (number | null)[];
+    questions: MockQuestion[];
+  }) => void;
 }) {
   const questions = MOCK_DATABASE[examType]?.[mockNumber] || SAMPLE_CLAT_MOCK_1;
   const [current, setCurrent] = React.useState(0);
@@ -31,12 +37,12 @@ export default function FullMockRunner({
   }, []);
 
   const handleFinish = () => {
-    const score = answers.reduce(
+    const score = (answers as (number | null)[]).reduce<number>(
       (acc, ans, i) => (ans === questions[i].correct ? acc + 1 : acc),
       0,
     );
     const timeSpent = Math.round((Date.now() - startTime) / 1000);
-    onComplete({ score, total: questions.length, timeSpent });
+    onComplete({ score, total: questions.length, timeSpent, answers, questions });
   };
 
   const q = questions[current];

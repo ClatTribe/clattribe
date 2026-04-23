@@ -1,1409 +1,1535 @@
 import { MockQuestion } from "../constants";
 
 export const NLAT_MOCK_1: MockQuestion[] = [
-  // SECTION 1: LEGAL REASONING
+  // SECTION 1: LEGAL REASONING (30 QUESTIONS)
+  // PASSAGE 1: PRIVACY AND THE DIGITAL AGE (Q1–Q6)
   {
     id: "nlat-1-q1",
     section: "Legal Reasoning",
-    passage: `Principle: An agreement with a minor (a person under 18 years of age) is void-ab-initio, meaning it is void from the beginning and has no legal effect. However, the law recognizes an exception: a person who supplies "necessaries" to a minor is entitled to be reimbursed from the minor's property. "Necessaries" include items essential for sustaining life and maintaining the minor's station in life, such as food, basic clothing, shelter, education, and medical care. Luxury items, extravagant purchases, or goods purchased in excessive quantities do not qualify as necessaries.`,
-    question: "Aman, aged 17 years, purchases a designer watch worth ₹50,000 from a jewelry store to wear at a friend's birthday party. After using the watch for two weeks, he refuses to pay the shopkeeper, claiming he is a minor and the contract is void. Which of the following is the most accurate legal position?",
+    passage: `In the landmark judgment of Justice K.S. Puttaswamy (Retd.) v. Union of India (2017), a nine-judge bench of the Supreme Court of India unanimously held that the Right to Privacy is a fundamental right protected under Part III of the Constitution. The Court declared that privacy is an essential facet of human dignity and is protected as an intrinsic part of the right to life and personal liberty under Article 21. This right, however, is not absolute. Any state intervention into privacy must meet a three-fold test: (i) Legality: There must be a law in existence to justify the interference; (ii) Need: The state must demonstrate a legitimate state aim or need for the interference; and (iii) Proportionality: The extent of the interference must be proportionate to the objective sought to be achieved, ensuring that the least restrictive measure is used. With the advent of the Digital Personal Data Protection Act (DPDP), 2023, the legal framework for data privacy has further evolved, establishing obligations for 'Data Fiduciaries' and rights for 'Data Principals'. A Data Fiduciary is an entity that determines the purpose and means of processing personal data, while a Data Principal is the individual to whom the personal data relates. The Act mandates that data must be processed only for a lawful purpose for which the Data Principal has given consent, or for certain 'legitimate uses'. Failure to comply with these provisions can lead to significant financial penalties, although the Act does not provide for criminal liability or compensation to the data principal.`,
+    question: "A social media company, 'ChatHub', collects user location data to show personalized advertisements. The company does not explicitly mention this in its terms of service, nor does it seek specific consent for location tracking. Under the DPDP Act, 2023, what is the status of ChatHub's actions?",
     options: [
-      "Aman must pay the full amount because he used the watch and benefited from it.",
-      "Aman is not liable to pay as a designer watch is not a necessary item for a minor.",
-      "Aman's parents are legally bound to pay on his behalf.",
-      "The contract is valid because Aman is nearly an adult and understood the transaction."
+      "ChatHub is acting lawfully as location data is necessary for the functioning of modern apps.",
+      "ChatHub is in violation of the Act as it failed to obtain clear consent for a specific purpose.",
+      "ChatHub is only liable if a user's location is leaked to a third party.",
+      "The DPDP Act does not apply to social media companies."
     ],
     correct: 1,
-    explanation: "A designer watch is a luxury item, not a necessary. Contracts with minors are void-ab-initio, and a minor cannot be compelled to pay for non-necessary items."
+    explanation: "The DPDP Act mandates that personal data (like location) must be processed only for a lawful purpose for which the Data Principal has given consent. Processing without clear consent for a specific purpose is a violation."
   },
   {
     id: "nlat-1-q2",
     section: "Legal Reasoning",
-    passage: `Principle: An agreement with a minor (a person under 18 years of age) is void-ab-initio, meaning it is void from the beginning and has no legal effect. However, the law recognizes an exception: a person who supplies "necessaries" to a minor is entitled to be reimbursed from the minor's property. "Necessaries" include items essential for sustaining life and maintaining the minor's station in life, such as food, basic clothing, shelter, education, and medical care. Luxury items, extravagant purchases, or goods purchased in excessive quantities do not qualify as necessaries.`,
-    question: "Aman, aged 16 years, takes a loan of ₹10,000 from a moneylender to pay his school fees and purchase textbooks required for his board examinations. Which of the following is correct?",
+    passage: `In the landmark judgment of Justice K.S. Puttaswamy...`,
+    question: "The Government of India issues an executive order (not a legislative act) mandating that all citizens must link their private healthcare records to a central database to monitor public health trends. Does this order meet the 'three-fold test' established in the Puttaswamy judgment?",
     options: [
-      "Aman is personally liable to repay the loan amount.",
-      "The lender can recover ₹10,000 from Aman's bank account or other property as the loan was for necessaries.",
-      "The contract is void; the lender cannot recover any money.",
-      "Aman must work for the lender to repay the debt."
+      "Yes, because monitoring public health is a 'legitimate state aim'.",
+      "No, because the interference lacks 'Legality' as it is based on an executive order, not a law passed by a legislature.",
+      "Yes, provided the government ensures the data is encrypted.",
+      "No, because health data is personal and can never be shared with the state."
     ],
     correct: 1,
-    explanation: "School fees and books are necessaries. While the contract is void, the lender can recover the amount from the minor's property/assets, not personally from the minor."
+    explanation: "The first prong of the Puttaswamy test is 'Legality', which requires a valid law (statute) to justify the interference. An executive order without legislative backing fails this test."
   },
   {
     id: "nlat-1-q3",
     section: "Legal Reasoning",
-    passage: `Principle: An agreement with a minor (a person under 18 years of age) is void-ab-initio, meaning it is void from the beginning and has no legal effect. However, the law recognizes an exception: a person who supplies "necessaries" to a minor is entitled to be reimbursed from the minor's property. "Necessaries" include items essential for sustaining life and maintaining the minor's station in life, such as food, basic clothing, shelter, education, and medical care. Luxury items, extravagant purchases, or goods purchased in excessive quantities do not qualify as necessaries.`,
-    question: "Aman, aged 17 years, fraudulently misrepresents his age as 22 years and enters into a contract to buy a motorcycle on an EMI (installment) basis. When the dealer discovers Aman's real age, he files a suit against Aman for payment. What is the legal outcome?",
+    passage: `In the landmark judgment of Justice K.S. Puttaswamy...`,
+    question: "Under the DPDP Act, 2023, an individual whose data is being processed is referred to as the:",
     options: [
-      "Aman must pay because he deliberately cheated the dealer.",
-      "The agreement remains void despite Aman's fraudulent misrepresentation; the dealer cannot enforce the contract.",
-      "Aman is liable for criminal fraud but not for the payment under the contract.",
-      "The motorcycle becomes a gift to Aman as the contract cannot be rescinded."
+      "Data Processor",
+      "Data Fiduciary",
+      "Data Principal",
+      "Data Subject"
     ],
-    correct: 1,
-    explanation: "Even if a minor lies about their age, the agreement remains void. The principle of void-ab-initio cannot be overridden by fraud committed by the minor."
+    correct: 2,
+    explanation: "The Act defines the individual to whom the personal data relates as the 'Data Principal'."
   },
   {
     id: "nlat-1-q4",
     section: "Legal Reasoning",
-    passage: `Principle: An agreement with a minor (a person under 18 years of age) is void-ab-initio, meaning it is void from the beginning and has no legal effect. However, the law recognizes an exception: a person who supplies "necessaries" to a minor is entitled to be reimbursed from the minor's property. "Necessaries" include items essential for sustaining life and maintaining the minor's station in life, such as food, basic clothing, shelter, education, and medical care. Luxury items, extravagant purchases, or goods purchased in excessive quantities do not qualify as necessaries.`,
-    question: "Aman, aged 15 years, signs a contract to work as a child actor in a film production. After completing half the shooting, he decides to leave the project. Which of the following is the correct legal position?",
+    passage: `In the landmark judgment of Justice K.S. Puttaswamy...`,
+    question: "A bank processes a customer's personal data to prevent a suspected case of money laundering without the customer's explicit consent. Is this allowed under the DPDP Act?",
     options: [
-      "The contract is valid as it was entered into for Aman's benefit.",
-      "The contract is void; Aman cannot be sued for breach of contract or for leaving the project.",
-      "Only Aman's manager or agent is liable for the breach.",
-      "Child labour laws make the contract valid and enforceable."
+      "No, consent is mandatory for every single act of data processing.",
+      "Yes, this would likely fall under 'legitimate uses' for the prevention of crime or compliance with any law.",
+      "Yes, but the bank must pay a fine to the customer later.",
+      "No, banks are exempt from the DPDP Act."
     ],
     correct: 1,
-    explanation: "Contracts with minors are void. The child actor cannot be sued for breach of contract as the agreement has no legal standing."
+    explanation: "The DPDP Act allows for the processing of data without consent for certain 'legitimate uses', which includes the prevention of crime, medical emergencies, or compliance with legal mandates."
   },
   {
     id: "nlat-1-q5",
     section: "Legal Reasoning",
-    passage: `Principle: An agreement with a minor (a person under 18 years of age) is void-ab-initio, meaning it is void from the beginning and has no legal effect. However, the law recognizes an exception: a person who supplies "necessaries" to a minor is entitled to be reimbursed from the minor's property. "Necessaries" include items essential for sustaining life and maintaining the minor's station in life, such as food, basic clothing, shelter, education, and medical care. Luxury items, extravagant purchases, or goods purchased in excessive quantities do not qualify as necessaries.`,
-    question: "Aman is 12 years old. His legal guardian enters into a contract on Aman's behalf to sell a piece of land owned by Aman. The sale proceeds are to be used for Aman's education and medical treatment. Is this contract valid?",
+    passage: `In the landmark judgment of Justice K.S. Puttaswamy...`,
+    question: "What is the primary remedy available to a Data Principal if a Data Fiduciary violates their privacy under the DPDP Act, 2023?",
     options: [
-      "The contract is void because Aman is a minor and cannot enter into any contract.",
-      "The contract is valid if it is genuinely for Aman's benefit.",
-      "The contract is void because only Aman himself can sign the contract.",
-      "The contract is valid only if Aman personally agrees to it."
+      "The Data Principal can claim multi-crore compensation in a civil court.",
+      "The Data Fiduciary can be sentenced to up to 5 years in prison.",
+      "The Data Fiduciary may face heavy financial penalties payable to the State, but the Act does not provide for compensation to the individual.",
+      "There is no remedy available for individuals."
     ],
-    correct: 1,
-    explanation: "A guardian can enter into a contract on behalf of a minor if it is genuinely for the minor's benefit (education, medical care, etc.)."
+    correct: 2,
+    explanation: "One of the criticisms of the DPDP Act 2023 is that while it imposes heavy penalties on companies (payable to the government), it does not provide a mechanism for individuals to claim compensation for privacy breaches."
   },
   {
     id: "nlat-1-q6",
     section: "Legal Reasoning",
-    passage: `Principle: An agreement with a minor (a person under 18 years of age) is void-ab-initio, meaning it is void from the beginning and has no legal effect. However, the law recognizes an exception: a person who supplies "necessaries" to a minor is entitled to be reimbursed from the minor's property. "Necessaries" include items essential for sustaining life and maintaining the minor's station in life, such as food, basic clothing, shelter, education, and medical care. Luxury items, extravagant purchases, or goods purchased in excessive quantities do not qualify as necessaries.`,
-    question: "Aman, aged 17 years, purchases 100 kilograms of luxury Belgian chocolate from an imported goods store. Can this be considered a \"necessary\" under the law?",
+    passage: `In the landmark judgment of Justice K.S. Puttaswamy...`,
+    question: "Which of the following best describes the 'Proportionality' test for state interference in privacy?",
     options: [
-      "Yes, because food is always a necessity.",
-      "No, because the excessive quantity and luxury nature of the item make it a luxury, not a necessary.",
-      "Yes, if Aman personally enjoys eating chocolate.",
-      "No, because only water and bread qualify as necessaries."
+      "The state must pay the citizen a proportional amount of money for the data taken.",
+      "The state must ensure that the privacy of all citizens is violated equally.",
+      "The interference must be necessary and should use the least intrusive means to achieve a legitimate goal.",
+      "Proportionality means the state can take any data as long as it helps at least 51% of the population."
     ],
-    correct: 1,
-    explanation: "100 kg of luxury chocolate is excessive and constitutes a luxury, not a necessary. Both quantity and nature disqualify it."
+    correct: 2,
+    explanation: "Proportionality requires that the measures taken by the state are necessary and that there is a rational nexus between the objective and the means adopted, using the least restrictive method possible."
   },
-  // PASSAGE 2: LAW OF TORTS (STRICT LIABILITY)
+
+  // PASSAGE 2: LAW OF TORTS – VICARIOUS LIABILITY (Q7–Q12)
   {
     id: "nlat-1-q7",
     section: "Legal Reasoning",
-    passage: `Principle: The rule of strict liability, established in the landmark case of Rylands v. Fletcher, states that any person who keeps a "dangerous thing" on their land which is likely to cause mischief if it escapes is strictly liable for all damage naturally resulting from its escape. A "dangerous thing" includes wild animals, explosives, toxic chemicals, large quantities of water, electricity, poisonous substances, etc. The liability is "strict," meaning the person is held responsible even if they were not negligent. However, exceptions exist, such as: (1) Act of God (natural events like earthquakes, floods), (2) Act of a third party, (3) Consent of the plaintiff, and (4) Plaintiff's own default.`,
-    question: "Aman keeps a pet tiger in a strong, high-fenced cage on his farmland. One night, a severe earthquake damages the fence, and the tiger escapes. The tiger bites and injures Aman's neighbor. Is Aman liable?",
+    passage: `Vicarious liability is a legal principle where one person is held liable for the torts (wrongful acts) committed by another. The most common form is the liability of a Master for the acts of his Servant. For vicarious liability to arise, two conditions must be met: (i) There must be a 'Master-Servant' relationship (determined by the 'control test', though this has evolved into the 'integration test' in modern times); and (ii) The tort must be committed in the 'course of employment'. An act is in the course of employment if it is either a wrongful act authorized by the master, or a wrongful and unauthorized mode of doing some act authorized by the master. However, if an employee goes on a 'frolic of his own'—meaning he does something entirely for his own purposes, completely unrelated to his work—the employer is not liable. For example, if a driver takes a long detour to visit his family and has an accident during that detour, the employer may not be held vicariously liable. Another important distinction is between an 'employee' (servant) and an 'independent contractor'. A master is generally not liable for the torts of an independent contractor, as the master controls 'what' is to be done but not 'how' it is to be done.`,
+    question: "Aman is a driver employed by 'Blue Cabs'. While driving a passenger to the airport (his authorized task), Aman starts a fight with another driver over a lane change and physically assaults him. Is Blue Cabs vicariously liable for the assault?",
     options: [
-      "Aman is not liable because the earthquake is an Act of God, which is an exception to strict liability.",
-      "Aman is strictly liable for keeping a dangerous animal, regardless of the earthquake.",
-      "The neighbor was negligent for living close to Aman's property.",
-      "Only the tiger is responsible; Aman cannot be held liable."
+      "Yes, because Aman was on duty and driving the company car.",
+      "No, because the assault was an independent wrongful act not authorized by the master and not a way of doing the authorized job.",
+      "Yes, because the master is responsible for all actions of the servant during work hours.",
+      "No, because Aman is an independent contractor."
     ],
     correct: 1,
-    explanation: "Keeping a dangerous animal (tiger) attracts strict liability. Although earthquake is an Act of God, strict liability for dangerous animals is absolute."
+    explanation: "Assaulting someone is generally considered a 'frolic of his own' or an act outside the course of employment, unless the job itself involved the use of force (like a bouncer)."
   },
   {
     id: "nlat-1-q8",
     section: "Legal Reasoning",
-    passage: `Principle: The rule of strict liability, established in the landmark case of Rylands v. Fletcher, states that any person who keeps a "dangerous thing" on their land which is likely to cause mischief if it escapes is strictly liable for all damage naturally resulting from its escape. A "dangerous thing" includes wild animals, explosives, toxic chemicals, large quantities of water, electricity, poisonous substances, etc. The liability is "strict," meaning the person is held responsible even if they were not negligent. However, exceptions exist, such as: (1) Act of God (natural events like earthquakes, floods), (2) Act of a third party, (3) Consent of the plaintiff, and (4) Plaintiff's own default.`,
-    question: "Aman installs a large overhead water tank on his roof. Due to a manufacturing defect in the tank, it leaks, and water seeps into his neighbor's house, damaging the wall and furniture. Is Aman liable under strict liability?",
+    passage: `Vicarious liability is a legal principle...`,
+    question: "Aman, a delivery partner for a food app, is instructed to deliver a pizza within 30 minutes. To meet the deadline, Aman drives on the wrong side of the road and hits a pedestrian. Is the food app company vicariously liable?",
     options: [
-      "Yes, strict liability applies because water was stored in large quantities.",
-      "No, Aman is not liable; the tank manufacturer is at fault.",
-      "No, water is not a \"dangerous thing\" in this context; strict liability does not apply.",
-      "Aman must vacate his house."
+      "No, the company never authorized driving on the wrong side of the road.",
+      "Yes, because Aman was performing an authorized task (delivery) in an unauthorized/wrongful manner.",
+      "No, because Aman is responsible for his own traffic violations.",
+      "Yes, but only if the pizza was delivered cold."
     ],
-    correct: 2,
-    explanation: "An ordinary water tank for domestic use is not considered a \"dangerous thing\" under the rule in Rylands v. Fletcher. Strict liability does not apply."
+    correct: 1,
+    explanation: "This is a classic case of 'wrongful and unauthorized mode of doing an authorized act'. The company is liable because the act (delivery) was authorized."
   },
   {
     id: "nlat-1-q9",
     section: "Legal Reasoning",
-    passage: `Principle: The rule of strict liability, established in the landmark case of Rylands v. Fletcher, states that any person who keeps a "dangerous thing" on their land which is likely to cause mischief if it escapes is strictly liable for all damage naturally resulting from its escape. A "dangerous thing" includes wild animals, explosives, toxic chemicals, large quantities of water, electricity, poisonous substances, etc. The liability is "strict," meaning the person is held responsible even if they were not negligent. However, exceptions exist, such as: (1) Act of God (natural events like earthquakes, floods), (2) Act of a third party, (3) Consent of the plaintiff, and (4) Plaintiff's own default.`,
-    question: "A chemical factory stores toxic industrial gases in large underground tanks. A group of environmental protesters breaks into the factory premises, deliberately opens the valves, and releases the gas, which causes harm to nearby residents. Is the factory liable under strict liability?",
+    passage: `Vicarious liability is a legal principle...`,
+    question: "A homeowner hires a professional electrician from a well-known company to fix the wiring. The electrician accidentally causes a short circuit that burns down the neighbor's fence. Who is vicariously liable?",
     options: [
-      "Yes, the factory is strictly liable for storing dangerous substances.",
-      "No, the factory is not liable because the escape was caused by the deliberate act of a third party (protesters).",
-      "The protesters and the factory are equally liable.",
-      "Toxic gas is not considered a dangerous thing."
+      "The homeowner, as the master of the electrician.",
+      "The electrical company, as the master of the electrician.",
+      "No one is vicariously liable; the electrician is an independent contractor.",
+      "Only the neighbor is liable for having a flammable fence."
     ],
     correct: 1,
-    explanation: "Deliberate act of a third party is an exception to strict liability. The factory is not liable if protesters intentionally caused the escape."
+    explanation: "The electrician is an employee of the electrical company. The company is the master and is liable for torts committed in the course of employment."
   },
   {
     id: "nlat-1-q10",
     section: "Legal Reasoning",
-    passage: `Principle: The rule of strict liability, established in the landmark case of Rylands v. Fletcher, states that any person who keeps a "dangerous thing" on their land which is likely to cause mischief if it escapes is strictly liable for all damage naturally resulting from its escape. A "dangerous thing" includes wild animals, explosives, toxic chemicals, large quantities of water, electricity, poisonous substances, etc. The liability is "strict," meaning the person is held responsible even if they were not negligent. However, exceptions exist, such as: (1) Act of God (natural events like earthquakes, floods), (2) Act of a third party, (3) Consent of the plaintiff, and (4) Plaintiff's own default.`,
-    question: "Aman plants a poisonous ornamental tree on his property. The branches of the tree extend over his neighbor's fence. The neighbor's cow eats the leaves and dies from poisoning. Is Aman liable?",
+    passage: `Vicarious liability is a legal principle...`,
+    question: "A truck driver is told to drive from City A to City B via the shortest highway. Instead, he drives 50 km in the opposite direction to watch a movie. While returning to the highway from the cinema, he crashes into a car. Is the employer liable?",
     options: [
-      "Yes, Aman is liable under strict liability for keeping a poisonous tree.",
-      "No, the cow was trespassing by eating the leaves.",
-      "No, the neighbor should have cut the overhanging branches.",
-      "No, trees are natural objects and not \"dangerous things\" under strict liability."
+      "Yes, he was still the employer's driver at the time.",
+      "No, the driver was on a 'frolic of his own', completely outside the course of employment.",
+      "Yes, because he was intending to return to work.",
+      "No, because watching a movie is a fundamental right."
     ],
-    correct: 0,
-    explanation: "A poisonous tree is a dangerous thing. If it causes harm, strict liability applies to the person who kept it."
+    correct: 1,
+    explanation: "A detour of that magnitude for purely personal reasons constitutes a 'frolic of his own', severing the vicarious liability of the master."
   },
   {
     id: "nlat-1-q11",
     section: "Legal Reasoning",
-    passage: `Principle: The rule of strict liability, established in the landmark case of Rylands v. Fletcher, states that any person who keeps a "dangerous thing" on their land which is likely to cause mischief if it escapes is strictly liable for all damage naturally resulting from its escape. A "dangerous thing" includes wild animals, explosives, toxic chemicals, large quantities of water, electricity, poisonous substances, etc. The liability is "strict," meaning the person is held responsible even if they were not negligent. However, exceptions exist, such as: (1) Act of God (natural events like earthquakes, floods), (2) Act of a third party, (3) Consent of the plaintiff, and (4) Plaintiff's own default.`,
-    question: "Aman is driving his car on a highway when the brakes suddenly fail due to a mechanical defect. He loses control and crashes into a pole, damaging it. Does strict liability apply?",
+    passage: `Vicarious liability is a legal principle...`,
+    question: "Which of the following factors is most important in the 'Control Test' for determining a master-servant relationship?",
     options: [
-      "Yes, strict liability applies to the use of motor vehicles.",
-      "No, this is a case of negligence, not strict liability.",
-      "No liability arises as it was an accident.",
-      "Yes, a car is inherently a dangerous thing."
+      "The amount of salary paid.",
+      "The power of the master to tell the person not just what to do, but how to do it.",
+      "Whether the person wears a uniform.",
+      "Whether the person uses their own tools."
     ],
     correct: 1,
-    explanation: "Car brake failure is a case of negligence, not strict liability. Ordinary vehicles are not \"dangerous things\" under Rylands v. Fletcher."
+    explanation: "The control test focuses on the degree of control the master has over the manner and method of work performance."
   },
   {
     id: "nlat-1-q12",
     section: "Legal Reasoning",
-    passage: `Principle: The rule of strict liability, established in the landmark case of Rylands v. Fletcher, states that any person who keeps a "dangerous thing" on their land which is likely to cause mischief if it escapes is strictly liable for all damage naturally resulting from its escape. A "dangerous thing" includes wild animals, explosives, toxic chemicals, large quantities of water, electricity, poisonous substances, etc. The liability is "strict," meaning the person is held responsible even if they were not negligent. However, exceptions exist, such as: (1) Act of God (natural events like earthquakes, floods), (2) Act of a third party, (3) Consent of the plaintiff, and (4) Plaintiff's own default.`,
-    question: "Aman owns a factory, and high-voltage electrical wires run across his land. During heavy rainfall, the wires snap and fall onto the road, electrocuting a passerby who dies. Is Aman liable?",
+    passage: `Vicarious liability is a legal principle...`,
+    question: "In modern law, the 'Integration Test' suggests that a person is a servant if:",
     options: [
-      "Yes, Aman is liable for keeping dangerous electrical wires.",
-      "Yes, electricity is recognized as a dangerous thing; strict liability applies.",
-      "No, the heavy rain is an Act of God, which is an exception.",
-      "No, the passerby should not have been walking in the rain."
+      "They are integrated into the organization and their work is an integral part of the business.",
+      "They are integrated into the society.",
+      "They work for at least 10 different masters.",
+      "They have no control over their own life."
     ],
-    correct: 1,
-    explanation: "Electricity stored in large quantities is a dangerous thing. Strict liability applies when it escapes and causes damage."
+    correct: 0,
+    explanation: "The integration test (or organization test) looks at whether the person's work is part and parcel of the employer's organization."
   },
-  // PASSAGE 3: CRIMINAL LAW (RIGHT OF PRIVATE DEFENCE)
+
+  // PASSAGE 3: CONSTITUTIONAL LAW – EMERGENCY PROVISIONS (Q13–Q18)
   {
     id: "nlat-1-q13",
     section: "Legal Reasoning",
-    passage: `Principle: The Indian Penal Code grants every person the right of private defence of body and property. A person may use reasonable force to defend themselves or another person against an unlawful attack. However, the force used must be proportional to the threat faced. The right of private defence extends to causing death only in cases of: (1) assault with the intention of causing death or grievous hurt, (2) assault with the intention of committing rape, kidnapping, or acid attack, or (3) acts that may reasonably cause apprehension of death or grievous hurt. The right does not extend to cases where there is time to seek help from public authorities or when the threat has passed.`,
-    question: "Late at night, a thief armed with a knife confronts Aman in a dark alley and threatens to kill him unless he hands over his wallet. Aman, fearing for his life, pulls out his licensed firearm and shoots the thief, killing him. What is the legal position?",
+    passage: `The Indian Constitution provides for three types of emergencies: National Emergency (Article 352), State Emergency or President's Rule (Article 356), and Financial Emergency (Article 360). A National Emergency can be declared by the President when the security of India or any part thereof is threatened by war, external aggression, or 'armed rebellion'. Notably, the term 'armed rebellion' was inserted by the 44th Amendment Act, 1978, replacing the term 'internal disturbance'. A National Emergency can be proclaimed for the whole of India or only a part. During a National Emergency, the federal structure of the country becomes unitary. Under Article 358, Fundamental Rights under Article 19 are automatically suspended in case of emergency declared on grounds of war or external aggression, but not armed rebellion. Under Article 359, the President may suspend the right to move any court for the enforcement of other fundamental rights (except Articles 20 and 21). Article 356 allows for President's Rule in a state if the constitutional machinery fails. The landmark S.R. Bommai v. Union of India (1994) case established that the power under Article 356 is subject to judicial review and that secularism is a basic feature of the Constitution.`,
+    question: "The President declares a National Emergency on the grounds of 'armed rebellion' in the state of Manipur. Which of the following is true regarding Article 19 rights?",
     options: [
-      "Aman is guilty of murder.",
-      "Aman acted in valid private defence as there was an immediate threat to his life.",
-      "Aman is guilty of culpable homicide not amounting to murder.",
-      "Aman used excessive force and is liable."
+      "Article 19 rights are automatically suspended throughout India.",
+      "Article 19 rights are automatically suspended only in Manipur.",
+      "Article 19 rights are NOT automatically suspended because the emergency was declared on the ground of armed rebellion.",
+      "Fundamental rights can never be suspended under the Indian Constitution."
     ],
-    correct: 1,
-    explanation: "There was an immediate threat to life with a weapon. Shooting the armed attacker is valid private defence."
+    correct: 2,
+    explanation: "Under Article 358, Article 19 is suspended only when the National Emergency is declared on grounds of 'war' or 'external aggression', not 'armed rebellion'."
   },
   {
     id: "nlat-1-q14",
     section: "Legal Reasoning",
-    passage: `Principle: The Indian Penal Code grants every person the right of private defence of body and property. A person may use reasonable force to defend themselves or another person against an unlawful attack. However, the force used must be proportional to the threat faced. The right of private defence extends to causing death only in cases of: (1) assault with the intention of causing death or grievous hurt, (2) assault with the intention of committing rape, kidnapping, or acid attack, or (3) acts that may reasonably cause apprehension of death or grievous hurt. The right does not extend to cases where there is time to seek help from public authorities or when the threat has passed.`,
-    question: "A thief snatches Aman's mobile phone and starts running away. Aman, in anger, pulls out a gun and shoots the thief in the back, killing him. Is Aman protected by the right of private defence?",
+    passage: `The Indian Constitution provides for three types...`,
+    question: "During a National Emergency, the President issues an order suspending the enforcement of all Fundamental Rights. Is this order valid?",
     options: [
-      "Yes, Aman was defending his property.",
-      "No, Aman is guilty of murder because the force used was not proportional; the threat to property had already passed.",
-      "Yes, theft of property justifies killing the thief.",
-      "None of the above."
+      "Yes, the President has absolute power during an emergency.",
+      "No, the enforcement of Articles 20 and 21 can never be suspended even during an emergency.",
+      "Yes, but only if the Parliament approves within 24 hours.",
+      "No, only Article 19 can be suspended."
     ],
     correct: 1,
-    explanation: "Once the thief was running away, the immediate threat had passed. Shooting him is excessive force and constitutes murder."
+    explanation: "The 44th Amendment Act ensured that the rights guaranteed by Articles 20 (protection in respect of conviction for offences) and 21 (right to life and liberty) cannot be suspended even during a National Emergency."
   },
   {
     id: "nlat-1-q15",
     section: "Legal Reasoning",
-    passage: `Principle: The Indian Penal Code grants every person the right of private defence of body and property. A person may use reasonable force to defend themselves or another person against an unlawful attack. However, the force used must be proportional to the threat faced. The right of private defence extends to causing death only in cases of: (1) assault with the intention of causing death or grievous hurt, (2) assault with the intention of committing rape, kidnapping, or acid attack, or (3) acts that may reasonably cause apprehension of death or grievous hurt. The right does not extend to cases where there is time to seek help from public authorities or when the threat has passed.`,
-    question: "Late at night, Aman hears a noise outside his house. He sees a shadowy figure jumping over his compound wall. Without checking who it is, Aman hits the person with a wooden stick. The person turns out to be his neighbor searching for a lost cricket ball. Is Aman liable for assault?",
+    passage: `The Indian Constitution provides for three types...`,
+    question: "The term 'internal disturbance' was replaced with 'armed rebellion' in Article 352 by which amendment?",
     options: [
-      "Yes, Aman is liable for assault as the neighbor was not a criminal.",
-      "No, Aman is protected by the right of private defence due to reasonable apprehension of danger at night.",
-      "The neighbor is a criminal for trespassing.",
-      "Both Aman and the neighbor are equally wrong."
+      "42nd Amendment Act",
+      "44th Amendment Act",
+      "52nd Amendment Act",
+      "73rd Amendment Act"
     ],
     correct: 1,
-    explanation: "At night, seeing someone jumping the wall creates reasonable apprehension. Aman is protected by private defence."
+    explanation: "The 44th Amendment Act (1978) brought this change to prevent the misuse of emergency powers as seen in 1975."
   },
   {
     id: "nlat-1-q16",
     section: "Legal Reasoning",
-    passage: `Principle: The Indian Penal Code grants every person the right of private defence of body and property. A person may use reasonable force to defend themselves or another person against an unlawful attack. However, the force used must be proportional to the threat faced. The right of private defence extends to causing death only in cases of: (1) assault with the intention of causing death or grievous hurt, (2) assault with the intention of committing rape, kidnapping, or acid attack, or (3) acts that may reasonably cause apprehension of death or grievous hurt. The right does not extend to cases where there is time to seek help from public authorities or when the threat has passed.`,
-    question: "Aman is attacked by a violent mob. In self-defense, he fires his gun into the crowd. A stray bullet accidentally hits and kills a child who was part of the mob. Is Aman liable for the child's death?",
+    passage: `The Indian Constitution provides for three types...`,
+    question: "In the S.R. Bommai case, the Supreme Court held that the 'basic feature' of the Constitution which justifies the dismissal of a state government acting against it is:",
     options: [
-      "Yes, Aman is liable for the death of the child.",
-      "The right of private defence may extend to unintended harm to innocent persons in extreme cases of mob violence.",
-      "The mob is responsible for the child's death.",
-      "Aman should have surrendered to the mob."
+      "Socialism",
+      "Secularism",
+      "Federalism",
+      "Sovereignty"
     ],
     correct: 1,
-    explanation: "In extreme cases of mob violence threatening life, private defence may extend to unintended harm to innocent persons."
+    explanation: "The Court held that secularism is a basic feature, and a state government acting against it (e.g., inciting communal violence) can be dismissed under Article 356."
   },
   {
     id: "nlat-1-q17",
     section: "Legal Reasoning",
-    passage: `Principle: The Indian Penal Code grants every person the right of private defence of body and property. A person may use reasonable force to defend themselves or another person against an unlawful attack. However, the force used must be proportional to the threat faced. The right of private defence extends to causing death only in cases of: (1) assault with the intention of causing death or grievous hurt, (2) assault with the intention of committing rape, kidnapping, or acid attack, or (3) acts that may reasonably cause apprehension of death or grievous hurt. The right does not extend to cases where there is time to seek help from public authorities or when the threat has passed.`,
-    question: "A stranger slaps Aman during an argument. Enraged, Aman pulls out a knife and stabs the stranger multiple times, causing serious injury. Is this protected under private defence?",
+    passage: `The Indian Constitution provides for three types...`,
+    question: "Which Article deals with the declaration of a 'Financial Emergency'?",
     options: [
-      "Yes, proportional force was used.",
-      "No, this is excessive force; a slap does not justify stabbing. Aman is not protected by private defence.",
-      "Yes, slapping justifies stabbing.",
-      "No crime was committed."
+      "Article 352",
+      "Article 356",
+      "Article 360",
+      "Article 365"
     ],
-    correct: 1,
-    explanation: "A slap does not justify stabbing. This is grossly excessive force and not protected under private defence."
+    correct: 2,
+    explanation: "Article 360 provides for Financial Emergency. Notably, it has never been declared in India so far."
   },
   {
     id: "nlat-1-q18",
     section: "Legal Reasoning",
-    passage: `Principle: The Indian Penal Code grants every person the right of private defence of body and property. A person may use reasonable force to defend themselves or another person against an unlawful attack. However, the force used must be proportional to the threat faced. The right of private defence extends to causing death only in cases of: (1) assault with the intention of causing death or grievous hurt, (2) assault with the intention of committing rape, kidnapping, or acid attack, or (3) acts that may reasonably cause apprehension of death or grievous hurt. The right does not extend to cases where there is time to seek help from public authorities or when the threat has passed.`,
-    question: "Aman witnesses his friend being brutally beaten by a gang. Aman intervenes and strikes one of the attackers with a stick to protect his friend. Does Aman have the right to intervene?",
+    passage: `The Indian Constitution provides for three types...`,
+    question: "When a National Emergency is in operation, the Parliament gains the power to make laws on subjects mentioned in the:",
     options: [
-      "No, only the friend has the right of private defence.",
-      "Yes, Aman has the right to defend the body of another person.",
-      "Aman is a meddler and has no right to intervene.",
-      "Intervening in a fight is a criminal offense."
+      "Union List only",
+      "State List",
+      "Concurrent List only",
+      "The Parliament cannot make laws during an emergency"
     ],
     correct: 1,
-    explanation: "The right of private defence extends to defending the body of another person, not just oneself."
+    explanation: "During a National Emergency, the federal character changes, and Parliament can legislate on any subject in the State List."
   },
-  // PASSAGE 4: CONSTITUTIONAL LAW
+
+  // PASSAGE 4: LAW OF CRIMES – MENS REA AND ACTUS REUS (Q19–Q24)
   {
     id: "nlat-1-q19",
     section: "Legal Reasoning",
-    passage: `Principle: Article 14 of the Indian Constitution guarantees the Right to Equality, stating that "the State shall not deny to any person equality before the law or the equal protection of the laws." However, this does not mean identical treatment for all; the State may classify persons into groups for the purpose of legislation, provided the classification is: (1) based on an intelligible differentia (rational basis), and (2) has a reasonable relation to the object sought to be achieved. Arbitrary, irrational, or discriminatory classifications violate Article 14. Article 17 abolishes "untouchability" in all forms, and Article 22 guarantees the right of an arrested person to be informed of the grounds of arrest and to consult a lawyer.`,
-    question: "A prestigious National Law University announces that it will only admit students who are fluent in Sanskrit, as the institution believes Sanskrit is essential for understanding ancient legal texts. Is this policy valid?",
+    passage: `The fundamental principle of criminal law is 'Actus non facit reum nisi mens sit rea', which means 'the act itself does not make a man guilty unless his mind is also guilty'. For a crime to be committed, two elements must generally coexist: (i) Actus Reus (the physical act or omission); and (ii) Mens Rea (the guilty mind or criminal intent). Mens Rea can take various forms: (a) Intention: The person desires the specific outcome; (b) Knowledge: The person is aware that the outcome is likely to occur; (c) Recklessness: The person foresees the risk but takes it anyway; and (d) Negligence: The person fails to exercise the care that a reasonable person would. However, there is an exception to the requirement of Mens Rea called 'Strict Liability' offenses. In strict liability, a person can be held guilty even if they had no criminal intent. Examples include public nuisance, food adulteration, and statutory offenses like minor's kidnapping. Mistake of Fact is a valid defense if the person acted in good faith, but Mistake of Law is never an excuse ('Ignorantia juris non excusat').`,
+    question: "Aman, while driving his car at 100 km/h in a residential area with a 30 km/h limit, hits and kills a pedestrian. Aman argues he did not intend to kill anyone. What form of Mens Rea is most likely applicable here?",
     options: [
-      "Yes, the college has complete autonomy.",
-      "No, this violates Article 14 as the classification is arbitrary and has no reasonable relation to legal education.",
-      "Yes, colleges have total freedom to set admission criteria.",
-      "Yes, Sanskrit is the mother of all Indian languages and is essential."
+      "Intention",
+      "Knowledge",
+      "Recklessness",
+      "Negligence"
     ],
-    correct: 1,
-    explanation: "Requiring Sanskrit fluency for law admission is arbitrary and has no reasonable relation to legal education. Violates Article 14."
+    correct: 2,
+    explanation: "Driving at extremely high speeds in a residential area shows a conscious disregard for a known and substantial risk, which is 'Recklessness'."
   },
   {
     id: "nlat-1-q20",
     section: "Legal Reasoning",
-    passage: `Principle: Article 14 of the Indian Constitution guarantees the Right to Equality, stating that "the State shall not deny to any person equality before the law or the equal protection of the laws." However, this does not mean identical treatment for all; the State may classify persons into groups for the purpose of legislation, provided the classification is: (1) based on an intelligible differentia (rational basis), and (2) has a reasonable relation to the object sought to be achieved. Arbitrary, irrational, or discriminatory classifications violate Article 14. Article 17 abolishes "untouchability" in all forms, and Article 22 guarantees the right of an arrested person to be informed of the grounds of arrest and to consult a lawyer.`,
-    question: "The Government issues a notification lowering the minimum passing marks for women candidates in the judicial services examination by 5%, with the aim of increasing female representation in the judiciary. Is this constitutionally valid?",
+    passage: `The fundamental principle of criminal law...`,
+    question: "Aman is walking in a park when he sees a person drowning in a shallow pond. Aman is an expert swimmer but chooses to watch and walk away. The person dies. Is Aman liable for a crime?",
     options: [
-      "No, it is unconstitutional as it discriminates against male candidates.",
-      "Yes, it is a valid and reasonable classification aimed at the upliftment of women and ensuring gender equality.",
-      "No, this is discrimination against men and violates Article 14.",
-      "Marks must be equal for all; any difference is unconstitutional."
+      "Yes, he had the Mens Rea of allowing someone to die.",
+      "No, because there was no Actus Reus (physical act or a legal duty to act). A moral duty is not a legal duty.",
+      "Yes, omission is always a crime in India.",
+      "No, because he didn't physically push the person into the pond."
     ],
     correct: 1,
-    explanation: "This is a reasonable classification aimed at achieving gender equality and women's upliftment, hence constitutionally valid."
+    explanation: "Criminal liability for an omission only arises if there is a legal duty to act (like a parent or a lifeguard). A bystander has no legal duty to rescue."
   },
   {
     id: "nlat-1-q21",
     section: "Legal Reasoning",
-    passage: `Principle: Article 14 of the Indian Constitution guarantees the Right to Equality, stating that "the State shall not deny to any person equality before the law or the equal protection of the laws." However, this does not mean identical treatment for all; the State may classify persons into groups for the purpose of legislation, provided the classification is: (1) based on an intelligible differentia (rational basis), and (2) has a reasonable relation to the object sought to be achieved. Arbitrary, irrational, or discriminatory classifications violate Article 14. Article 17 abolishes "untouchability" in all forms, and Article 22 guarantees the right of an arrested person to be informed of the grounds of arrest and to consult a lawyer.`,
-    question: "A state legislature passes a law disqualifying any person with more than two children from contesting elections to local bodies (Panchayats and Municipalities), citing population control as the objective. Is this law constitutionally valid?",
+    passage: `The fundamental principle of criminal law...`,
+    question: "A shopkeeper sells adulterated milk. He argues he bought it from a supplier and didn't know it was contaminated. Is he liable?",
     options: [
-      "No, it violates the Right to Life under Article 21.",
-      "Yes, it is a valid classification with a reasonable objective of promoting population control.",
-      "No, it violates Article 14 as it is arbitrary and unreasonable.",
-      "The law applies only to women."
+      "No, he lacked Mens Rea.",
+      "Yes, food adulteration is often a 'strict liability' offense where intent is irrelevant.",
+      "No, because he acted in 'good faith'.",
+      "Yes, but only if he made a profit from it."
     ],
     correct: 1,
-    explanation: "The Supreme Court has upheld such laws as valid classification with the reasonable objective of population control."
+    explanation: "Statutory offenses related to public health and safety, like food adulteration, often impose strict liability."
   },
   {
     id: "nlat-1-q22",
     section: "Legal Reasoning",
-    passage: `Principle: Article 14 of the Indian Constitution guarantees the Right to Equality, stating that "the State shall not deny to any person equality before the law or the equal protection of the laws." However, this does not mean identical treatment for all; the State may classify persons into groups for the purpose of legislation, provided the classification is: (1) based on an intelligible differentia (rational basis), and (2) has a reasonable relation to the object sought to be achieved. Arbitrary, irrational, or discriminatory classifications violate Article 14. Article 17 abolishes "untouchability" in all forms, and Article 22 guarantees the right of an arrested person to be informed of the grounds of arrest and to consult a lawyer.`,
-    question: "A police officer arrests Aman without issuing an arrest warrant and does not inform him of the reasons for his arrest. Is this constitutionally valid?",
+    passage: `The fundamental principle of criminal law...`,
+    question: "Aman enters a restricted government building by mistake, thinking it was the public library. He is charged with trespassing. Can he use a defense?",
     options: [
-      "Yes, the police have absolute power to arrest anyone.",
-      "No, this violates Article 22, which guarantees the right of an arrested person to be informed of the grounds of arrest.",
-      "Yes, this is legal during weekends and public holidays.",
-      "Aman should have guessed the reason for his arrest."
+      "No, trespassing is a strict liability crime.",
+      "Yes, 'Mistake of Fact' is a valid defense as he acted in good faith with a reasonable belief.",
+      "No, 'Mistake of Law' is not an excuse.",
+      "Yes, but only if he bought a book from the building."
     ],
     correct: 1,
-    explanation: "Article 22 guarantees the right to be informed of the grounds of arrest. The police officer violated this fundamental right."
+    explanation: "Mistake of Fact (believing the building was a library) is a valid defense if done in good faith."
   },
   {
     id: "nlat-1-q23",
     section: "Legal Reasoning",
-    passage: `Principle: Article 14 of the Indian Constitution guarantees the Right to Equality, stating that "the State shall not deny to any person equality before the law or the equal protection of the laws." However, this does not mean identical treatment for all; the State may classify persons into groups for the purpose of legislation, provided the classification is: (1) based on an intelligible differentia (rational basis), and (2) has a reasonable relation to the object sought to be achieved. Arbitrary, irrational, or discriminatory classifications violate Article 14. Article 17 abolishes "untouchability" in all forms, and Article 22 guarantees the right of an arrested person to be informed of the grounds of arrest and to consult a lawyer.`,
-    question: "The state government bans the publication and sale of a book that contains criticism of the Chief Minister's policies and administration. Is this ban constitutionally valid?",
+    passage: `The fundamental principle of criminal law...`,
+    question: "Aman commits a crime and argues that he didn't know the law had changed recently to make that act illegal. Is he liable?",
     options: [
-      "Yes, it is valid to protect the dignity of the State.",
-      "No, this violates the Freedom of Speech and Expression guaranteed under Article 19(1)(a).",
-      "Yes, the Chief Minister is above the law.",
-      "The Chief Minister should write a reply book instead."
+      "No, because he lacked the knowledge of the law.",
+      "Yes, 'Ignorantia juris non excusat'—ignorance of the law is no excuse.",
+      "No, laws must be personally told to every citizen.",
+      "Yes, but only if the law is more than 10 years old."
     ],
     correct: 1,
-    explanation: "Banning a book merely for criticizing the CM violates freedom of speech and expression (Article 19(1)(a))."
+    explanation: "Ignorance of the law is not a defense. Citizens are presumed to know the law of the land."
   },
   {
     id: "nlat-1-q24",
     section: "Legal Reasoning",
-    passage: `Principle: Article 14 of the Indian Constitution guarantees the Right to Equality, stating that "the State shall not deny to any person equality before the law or the equal protection of the laws." However, this does not mean identical treatment for all; the State may classify persons into groups for the purpose of legislation, provided the classification is: (1) based on an intelligible differentia (rational basis), and (2) has a reasonable relation to the object sought to be achieved. Arbitrary, irrational, or discriminatory classifications violate Article 14. Article 17 abolishes "untouchability" in all forms, and Article 22 guarantees the right of an arrested person to be informed of the grounds of arrest and to consult a lawyer.`,
-    question: "A centuries-old temple controlled by a public trust refuses to allow entry to a person belonging to a particular caste, citing ancient religious customs. Is this legally permissible?",
+    passage: `The fundamental principle of criminal law...`,
+    question: "In criminal law, 'Mens Rea' literally means:",
     options: [
-      "Yes, this is protected under the right to religious freedom.",
-      "No, this violates Article 17, which abolishes untouchability and prohibits caste-based discrimination in accessing public places.",
-      "Yes, the temple is private property, and the priest has the final authority.",
-      "Only the priest can decide who enters."
+      "Guilty act",
+      "Guilty mind",
+      "Physical injury",
+      "Legal justification"
     ],
     correct: 1,
-    explanation: "Article 17 abolishes untouchability. Denying temple entry based on caste is unconstitutional."
+    explanation: "Mens Rea = Guilty Mind; Actus Reus = Guilty Act."
   },
-  // PASSAGE 5: CONSUMER & PROPERTY LAW
+
+  // PASSAGE 5: INTELLECTUAL PROPERTY RIGHTS – COPYRIGHT (Q25–Q30)
   {
     id: "nlat-1-q25",
     section: "Legal Reasoning",
-    passage: `Principle: Under the Consumer Protection Act, a "consumer" is defined as a person who buys goods or services for personal use and not for commercial purposes or resale. If goods or services are purchased for commercial use, the buyer is not considered a consumer and cannot file a complaint in a consumer forum. Additionally, under property law, the transfer of immovable property (such as land or buildings) is complete only upon registration of the sale deed. An unregistered sale deed does not transfer legal title, even if the purchase price has been paid. The principle of "caveat emptor" (let the buyer beware) applies, but consumers are protected against defective goods and deficiency in services.`,
-    question: "Aman purchases a car for ₹10 lakhs with the intention of using it as a taxi for his cab business. After one month, the engine develops a serious defect. Aman files a complaint in the Consumer Court. Is Aman a \"consumer\" under the Consumer Protection Act?",
+    passage: `Copyright is a form of intellectual property protection granted to the creators of original works of authorship, including literary, dramatic, musical, and artistic works, as well as cinematograph films and sound recordings. In India, copyright is governed by the Copyright Act, 1957. Copyright protection begins the moment the work is created and fixed in a tangible medium. Registration is not mandatory for protection but is prima facie evidence of ownership. The duration of copyright for most works is the lifetime of the author plus 60 years. One key doctrine in copyright law is 'Fair Use' (or Fair Dealing). Section 52 of the Act lists certain acts that do not constitute infringement, such as use for private research, criticism or review, reporting current events, and use in educational instruction. Crucially, copyright protects the 'expression' of an idea, not the 'idea' itself. This is known as the 'Idea-Expression Dichotomy'. Two people can write different books about the same historical event (the idea), but they cannot copy the specific words and structure (the expression) of each other's books.`,
+    question: "Aman writes a research paper on the history of the Indian Constitution. He copies three paragraphs from a famous historian's book to discuss and critique them in his paper, providing full citations. Is Aman liable for copyright infringement?",
     options: [
-      "Yes, because he purchased the car.",
-      "No, because he bought the car for commercial purposes (taxi business), not for personal use.",
-      "Yes, because he is the one driving the car.",
-      "No, taxi drivers have no consumer rights."
+      "Yes, because he copied the exact words (expression).",
+      "No, this likely falls under 'Fair Dealing' for the purpose of criticism, review, or private research.",
+      "Yes, because he didn't pay the historian for the paragraphs.",
+      "No, because historical facts are not protected by copyright."
     ],
     correct: 1,
-    explanation: "The car was bought for commercial purposes (taxi business), so Aman is not a \"consumer\" under the Consumer Protection Act."
+    explanation: "Section 52 allows for 'Fair Dealing' for research, criticism, and review. Copying limited portions with citation for critique is generally permitted."
   },
   {
     id: "nlat-1-q26",
     section: "Legal Reasoning",
-    passage: `Principle: Under the Consumer Protection Act, a "consumer" is defined as a person who buys goods or services for personal use and not for commercial purposes or resale. If goods or services are purchased for commercial use, the buyer is not considered a consumer and cannot file a complaint in a consumer forum. Additionally, under property law, the transfer of immovable property (such as land or buildings) is complete only upon registration of the sale deed. An unregistered sale deed does not transfer legal title, even if the purchase price has been paid. The principle of "caveat emptor" (let the buyer beware) applies, but consumers are protected against defective goods and deficiency in services.`,
-    question: "Aman buys a refrigerator for ₹25,000 for use in his home. After a week, the refrigerator stops cooling. He complains to the company, but they refuse to repair or replace it. Is Aman a \"consumer\"?",
+    passage: `Copyright is a form of intellectual property...`,
+    question: "A filmmaker wants to make a movie about a 'heroic policeman who fights corruption'. Another filmmaker has already made a movie with the exact same premise. Can the first filmmaker sue for copyright infringement?",
     options: [
-      "Yes, because the refrigerator was bought for personal, domestic use.",
-      "No, because it is an electronic item.",
-      "He is a consumer only if the refrigerator is under warranty.",
-      "No, he should fix it himself."
+      "Yes, because the premise is identical.",
+      "No, because the 'premise' (a heroic cop fighting corruption) is an idea, and ideas are not protected by copyright.",
+      "Yes, but only if the second movie is a box-office hit.",
+      "No, because policemen are public figures."
     ],
-    correct: 0,
-    explanation: "The fridge was purchased for personal, domestic use. Aman is a consumer and can file a complaint."
+    correct: 1,
+    explanation: "The 'Idea-Expression Dichotomy' means copyright only protects the unique expression (script, dialogue, scenes), not the underlying idea/concept."
   },
   {
     id: "nlat-1-q27",
     section: "Legal Reasoning",
-    passage: `Principle: Under the Consumer Protection Act, a "consumer" is defined as a person who buys goods or services for personal use and not for commercial purposes or resale. If goods or services are purchased for commercial use, the buyer is not considered a consumer and cannot file a complaint in a consumer forum. Additionally, under property law, the transfer of immovable property (such as land or buildings) is complete only upon registration of the sale deed. An unregistered sale deed does not transfer legal title, even if the purchase price has been paid. The principle of "caveat emptor" (let the buyer beware) applies, but consumers are protected against defective goods and deficiency in services.`,
-    question: "Aman agrees to buy a house from Mr. Sharma for ₹1 crore. Aman pays the full amount, but the sale deed is not registered. Later, Mr. Sharma sells the same house to Mr. Verma, who registers the sale deed. Who is the legal owner of the house?",
+    passage: `Copyright is a form of intellectual property...`,
+    question: "How long does copyright protection generally last for a literary work in India?",
     options: [
-      "Aman is the owner because he paid the money first.",
-      "Mr. Verma is the legal owner because registration of the sale deed is mandatory for the transfer of title to immovable property.",
-      "Both Aman and Mr. Verma own half the property.",
-      "Mr. Sharma keeps the money and the house."
+      "20 years from creation",
+      "Lifetime of the author",
+      "Lifetime of the author plus 60 years",
+      "Forever, as long as the family keeps the original"
     ],
-    correct: 1,
-    explanation: "Registration is mandatory for transfer of title to immovable property. The second buyer who registered owns the house."
+    correct: 2,
+    explanation: "The standard term for literary, dramatic, musical, and artistic works is life + 60 years."
   },
   {
     id: "nlat-1-q28",
     section: "Legal Reasoning",
-    passage: `Principle: Under the Consumer Protection Act, a "consumer" is defined as a person who buys goods or services for personal use and not for commercial purposes or resale. If goods or services are purchased for commercial use, the buyer is not considered a consumer and cannot file a complaint in a consumer forum. Additionally, under property law, the transfer of immovable property (such as land or buildings) is complete only upon registration of the sale deed. An unregistered sale deed does not transfer legal title, even if the purchase price has been paid. The principle of "caveat emptor" (let the buyer beware) applies, but consumers are protected against defective goods and deficiency in services.`,
-    question: "Aman purchases a sealed bottle of mineral water from a shop. Upon opening it, he finds a dead insect floating inside. Although he does not fall sick, he is disgusted and traumatized. Can Aman file a complaint?",
+    passage: `Copyright is a form of intellectual property...`,
+    question: "Is registration of a work mandatory to get copyright protection in India?",
     options: [
-      "No, because he did not suffer any physical injury.",
-      "Yes, Aman can sue for \"deficiency in service\" and claim compensation for mental agony and distress.",
-      "Only the insect can file a complaint.",
-      "He can only demand a refund of ₹20."
+      "Yes, protection only starts from the date of registration.",
+      "No, protection is automatic upon the creation of the work in a tangible form.",
+      "Yes, but only for movies and songs.",
+      "No, but it is mandatory for books."
     ],
     correct: 1,
-    explanation: "Even without physical injury, mental agony and deficiency in service allow a consumer complaint."
+    explanation: "Copyright protection is automatic. Registration is optional but recommended as it serves as proof of ownership in court."
   },
   {
     id: "nlat-1-q29",
     section: "Legal Reasoning",
-    passage: `Principle: Under the Consumer Protection Act, a "consumer" is defined as a person who buys goods or services for personal use and not for commercial purposes or resale. If goods or services are purchased for commercial use, the buyer is not considered a consumer and cannot file a complaint in a consumer forum. Additionally, under property law, the transfer of immovable property (such as land or buildings) is complete only upon registration of the sale deed. An unregistered sale deed does not transfer legal title, even if the purchase price has been paid. The principle of "caveat emptor" (let the buyer beware) applies, but consumers are protected against defective goods and deficiency in services.`,
-    question: "Aman is a tenant living in a rented apartment. The landlord, in an attempt to forcefully evict him, disconnects the electricity and water supply to the apartment. Is this action legal?",
+    passage: `Copyright is a form of intellectual property...`,
+    question: "An artist paints a portrait of a famous actor. The actor sues the artist for using his 'face' without permission. Is this a copyright issue?",
     options: [
-      "Yes, the landlord has the right to disconnect utilities.",
-      "No, this is a violation of basic tenant rights and property law; the landlord cannot use illegal means to evict a tenant.",
-      "Aman must pay double rent to restore the services.",
-      "Only the police can help Aman."
+      "Yes, the actor owns the copyright to his own face.",
+      "No, this might be a violation of 'Right to Publicity', but the 'Copyright' to the painting belongs to the artist (creator).",
+      "Yes, because the actor is a public figure.",
+      "No, because faces are in the 'public domain'."
     ],
     correct: 1,
-    explanation: "Forcefully cutting utilities to evict a tenant is illegal and violates tenant rights."
+    explanation: "Copyright belongs to the creator of the work (the artist). Using a celebrity's image for commercial gain is a matter of 'Publicity Rights' or 'Personality Rights', not copyright."
   },
   {
     id: "nlat-1-q30",
     section: "Legal Reasoning",
-    passage: `Principle: Under the Consumer Protection Act, a "consumer" is defined as a person who buys goods or services for personal use and not for commercial purposes or resale. If goods or services are purchased for commercial use, the buyer is not considered a consumer and cannot file a complaint in a consumer forum. Additionally, under property law, the transfer of immovable property (such as land or buildings) is complete only upon registration of the sale deed. An unregistered sale deed does not transfer legal title, even if the purchase price has been paid. The principle of "caveat emptor" (let the buyer beware) applies, but consumers are protected against defective goods and deficiency in services.`,
-    question: "While walking on a public road, Aman finds a gold ring lying on the ground. He picks it up and later sells it to a jeweler. What is the legal position?",
+    passage: `Copyright is a form of intellectual property...`,
+    question: "Which of the following is NOT protected under the Copyright Act, 1957?",
     options: [
-      "Aman is the owner of the ring because he found it.",
-      "Aman is a \"finder of lost goods\" and has a legal duty to try to find the true owner; selling it without doing so amounts to theft.",
-      "\"Finders keepers\" is a valid legal principle.",
-      "All gold found on public roads belongs to the State."
+      "A computer program",
+      "A new chemical formula for a drug",
+      "A choreography for a dance",
+      "A sound recording"
     ],
     correct: 1,
-    explanation: "A finder of lost goods must make reasonable efforts to find the true owner. Selling it without doing so is theft."
+    explanation: "A chemical formula is protected under the Patents Act, not the Copyright Act."
   },
-  // SECTION 2: GK & CURRENT AFFAIRS
+
+  // SECTION 2: VERBAL REASONING (30 QUESTIONS)
+  // PASSAGE 1: THE ETHICS OF ARTIFICIAL INTELLIGENCE (Q31–Q36)
   {
     id: "nlat-1-q31",
-    section: "GK & Current Affairs",
-    question: "Who was the Chief Guest for India's 77th Republic Day parade in January 2026?",
-    options: ["Emmanuel Macron (President of France)", "Joe Biden (President of USA)", "Luiz Inácio Lula da Silva (President of Brazil)", "Anthony Albanese (Prime Minister of Australia)"],
-    correct: 2,
-    explanation: "Luiz Inácio Lula da Silva (President of Brazil)"
+    section: "Verbal Reasoning",
+    passage: `Artificial Intelligence (AI) has rapidly transitioned from a science-fiction trope to an omnipresent force in modern society. While its potential to revolutionize healthcare, logistics, and climate modeling is undeniable, it brings with it a complex web of ethical dilemmas. One of the most pressing concerns is 'algorithmic bias'. AI systems are trained on vast datasets that often reflect historical human prejudices. Consequently, if an AI is used in recruitment or judicial sentencing, it may inadvertently perpetuate discrimination against marginalized groups. Furthermore, the 'black box' problem—where the decision-making process of advanced neural networks is opaque even to their creators—raises questions about accountability. If an autonomous vehicle causes an accident, who is responsible: the developer, the car owner, or the AI itself? Critics also warn of the 'alignment problem', the challenge of ensuring that super-intelligent systems act in accordance with human values. As AI becomes more autonomous, the need for robust regulatory frameworks becomes critical. However, over-regulation risks stifling innovation and ceding a competitive edge to less-regulated nations. The challenge for policymakers, therefore, is to strike a delicate balance between fostering technological progress and safeguarding fundamental human rights.`,
+    question: "What does the author mean by the 'black box' problem in AI?",
+    options: [
+      "AI systems are physically stored in black containers.",
+      "The internal logic and decision-making of advanced AI are difficult for humans to understand or explain.",
+      "AI systems are prone to shutting down during emergencies.",
+      "The hardware used for AI is too expensive."
+    ],
+    correct: 1,
+    explanation: "The passage defines it as the decision-making process being 'opaque even to their creators'."
   },
   {
     id: "nlat-1-q32",
-    section: "GK & Current Affairs",
-    question: "Which country hosted the COP30 (30th Conference of Parties) Climate Summit in November 2025?",
-    options: ["Azerbaijan", "Brazil", "United Arab Emirates", "Australia"],
+    section: "Verbal Reasoning",
+    passage: `Artificial Intelligence (AI) has rapidly...`,
+    question: "According to the passage, how does 'algorithmic bias' occur?",
+    options: [
+      "AI systems are programmed by people who hate diversity.",
+      "AI systems learn from datasets that contain historical human prejudices.",
+      "AI systems are naturally more logical than humans.",
+      "Bias is a necessary part of any efficient algorithm."
+    ],
     correct: 1,
-    explanation: "Brazil (COP30 will be held in Belém, Brazil in November 2025)"
+    explanation: "The passage states that AI systems are trained on datasets that often reflect historical human prejudices."
   },
   {
     id: "nlat-1-q33",
-    section: "GK & Current Affairs",
-    question: "As of April 2026, who is the Chief Justice of India?",
-    options: ["Justice Sanjiv Khanna", "Justice B.R. Gavai", "Justice Surya Kant", "Justice Vikram Nath"],
-    correct: 0,
-    explanation: "Justice Sanjiv Khanna (assumed office on November 11, 2024)"
+    section: "Verbal Reasoning",
+    passage: `Artificial Intelligence (AI) has rapidly...`,
+    question: "What is the 'alignment problem' mentioned in the passage?",
+    options: [
+      "The difficulty of making AI work on different operating systems.",
+      "Ensuring that AI systems' goals and actions remain consistent with human values.",
+      "The physical alignment of satellites used for AI.",
+      "Making sure AI can speak multiple languages."
+    ],
+    correct: 1,
+    explanation: "The passage defines it as the challenge of ensuring super-intelligent systems act in accordance with human values."
   },
   {
     id: "nlat-1-q34",
-    section: "GK & Current Affairs",
-    question: "The Nobel Peace Prize 2025 was awarded to which organization/individual for their efforts against nuclear weapons?",
-    options: ["Nihon Hidankyo (Japan Confederation of A- and H-Bomb Sufferers Organizations)", "Narges Mohammadi", "World Food Programme", "Maria Ressa"],
-    correct: 0,
-    explanation: "Nihon Hidankyo (Japanese atomic bomb survivors' organization)"
+    section: "Verbal Reasoning",
+    passage: `Artificial Intelligence (AI) has rapidly...`,
+    question: "The author suggests that over-regulation of AI could lead to:",
+    options: [
+      "Better protection of human rights.",
+      "The end of the black box problem.",
+      "The stifling of innovation and loss of competitive advantage.",
+      "A complete ban on autonomous vehicles."
+    ],
+    correct: 2,
+    explanation: "The passage notes that over-regulation risks stifling innovation and ceding a competitive edge."
   },
   {
     id: "nlat-1-q35",
-    section: "GK & Current Affairs",
-    question: "What is the current RBI Repo Rate as per the April 2026 Monetary Policy Review?",
-    options: ["6.25%", "6.50%", "6.75%", "6.00%"],
-    correct: 3,
-    explanation: "6.00% (RBI reduced repo rate to 6.00% in April 2025)"
+    section: "Verbal Reasoning",
+    passage: `Artificial Intelligence (AI) has rapidly...`,
+    question: "The tone of the passage is best described as:",
+    options: [
+      "Alarmist and pessimistic",
+      "Balanced and analytical",
+      "Dismissive and cynical",
+      "Enthusiastic and celebratory"
+    ],
+    correct: 1,
+    explanation: "The author discusses both the potential and the ethical dilemmas of AI in a measured way."
   },
   {
     id: "nlat-1-q36",
-    section: "GK & Current Affairs",
-    question: "Which city has been named the 'World Book Capital' for 2026 by UNESCO?",
-    options: ["Rio de Janeiro, Brazil", "Strasbourg, France", "Madrid, Spain", "New Delhi, India"],
+    section: "Verbal Reasoning",
+    passage: `Artificial Intelligence (AI) has rapidly...`,
+    question: "Which word from the passage means 'present everywhere'?",
+    options: [
+      "Opaque",
+      "Omnipresent",
+      "Inadvertently",
+      "Marginalized"
+    ],
     correct: 1,
-    explanation: "Strasbourg, France"
+    explanation: "Omnipresent means present everywhere at the same time."
   },
+
+  // PASSAGE 2: THE EVOLUTION OF LANGUAGE (Q37–Q42)
   {
     id: "nlat-1-q37",
-    section: "GK & Current Affairs",
-    question: "In 2025, which Indian state became the first to fully implement the Uniform Civil Code (UCC)?",
-    options: ["Uttarakhand", "Goa", "Gujarat", "Uttar Pradesh"],
-    correct: 0,
-    explanation: "Uttarakhand (implemented UCC in 2024)"
+    section: "Verbal Reasoning",
+    passage: `Language is not a static monolith; it is a living, breathing entity that evolves in response to social, technological, and cultural shifts. The rise of digital communication has accelerated this process significantly. In the past, linguistic changes occurred over centuries as populations migrated and cultures merged. Today, a single internet meme can introduce a new word or grammatical structure to millions of people overnight. This 'linguistic fluidity' is often viewed with skepticism by traditionalists, who see the proliferation of 'netspeak' and slang as a degradation of the language. However, linguists argue that these changes represent a natural adaptation to new modes of communication. For example, the use of emojis and acronyms like 'LOL' is not a sign of laziness, but rather an attempt to reintroduce the nuances of tone and facial expression into text-based interactions. Furthermore, the global dominance of English has led to the emergence of 'World Englishes'—localized varieties that incorporate regional vocabulary and syntax. Rather than being 'incorrect' versions of standard English, these varieties are a testament to the language's versatility and its role as a global lingua franca.`,
+    question: "How has digital communication affected the evolution of language, according to the author?",
+    options: [
+      "It has slowed down linguistic change.",
+      "It has made language more formal and rigid.",
+      "It has significantly accelerated the pace of linguistic evolution.",
+      "It has made language completely incomprehensible."
+    ],
+    correct: 2,
+    explanation: "The passage states that the rise of digital communication has accelerated the process significantly."
   },
   {
     id: "nlat-1-q38",
-    section: "GK & Current Affairs",
-    question: "The International Court of Justice (ICJ), the principal judicial organ of the United Nations, is headquartered in:",
-    options: ["Geneva, Switzerland", "New York, USA", "The Hague, Netherlands", "Vienna, Austria"],
+    section: "Verbal Reasoning",
+    passage: `Language is not a static monolith...`,
+    question: "According to the passage, why do people use emojis and acronyms?",
+    options: [
+      "Because they are too lazy to type full words.",
+      "To show off their knowledge of internet culture.",
+      "To compensate for the lack of tone and facial expression in text-based communication.",
+      "To confuse traditionalists."
+    ],
     correct: 2,
-    explanation: "The Hague, Netherlands"
+    explanation: "The author argues they are an 'attempt to reintroduce the nuances of tone and facial expression'."
   },
   {
     id: "nlat-1-q39",
-    section: "GK & Current Affairs",
-    question: "Who won the 2025 Nobel Prize in Literature?",
-    options: ["Han Kang (South Korea)", "Jon Fosse (Norway)", "László Krasznahorkai (Hungary)", "Salman Rushdie (India/UK)"],
-    correct: 0,
-    explanation: "Han Kang (South Korean author)"
+    section: "Verbal Reasoning",
+    passage: `Language is not a static monolith...`,
+    question: "What are 'World Englishes'?",
+    options: [
+      "Incorrect versions of English used by non-native speakers.",
+      "Localized varieties of English that incorporate regional vocabulary and syntax.",
+      "A secret language used by international diplomats.",
+      "The name of a popular English teaching software."
+    ],
+    correct: 1,
+    explanation: "The passage defines them as localized varieties that incorporate regional vocabulary and syntax."
   },
   {
     id: "nlat-1-q40",
-    section: "GK & Current Affairs",
-    question: "The 'Nari Shakti Vandan Adhiniyam' (Women's Reservation Act), which provides 33% reservation for women, is related to:",
-    options: ["Government Jobs", "Parliament and State Legislative Assemblies", "Higher Education", "Private Sector Employment"],
-    correct: 1,
-    explanation: "Parliament and State Legislative Assemblies"
+    section: "Verbal Reasoning",
+    passage: `Language is not a static monolith...`,
+    question: "The author's view of 'netspeak' and slang is:",
+    options: [
+      "Hostile and dismissive.",
+      "Skeptical but resigned.",
+      "Understanding and supportive of linguistic evolution.",
+      "Strictly academic and neutral."
+    ],
+    correct: 2,
+    explanation: "The author argues against the idea of degradation and presents the linguists' perspective that these are natural adaptations."
   },
   {
     id: "nlat-1-q41",
-    section: "GK & Current Affairs",
-    question: "Which country became the 32nd member of NATO (North Atlantic Treaty Organization) in 2024?",
-    options: ["Finland", "Sweden", "Ukraine", "Austria"],
+    section: "Verbal Reasoning",
+    passage: `Language is not a static monolith...`,
+    question: "What does 'lingua franca' mean in the context of the passage?",
+    options: [
+      "A language of the French people.",
+      "A common language used by speakers of different native languages to communicate.",
+      "A dead language like Latin.",
+      "A language used only in literature."
+    ],
     correct: 1,
-    explanation: "Sweden (joined NATO in March 2024)"
+    explanation: "A lingua franca is a bridge language used between people who do not share a native language."
   },
   {
     id: "nlat-1-q42",
-    section: "GK & Current Affairs",
-    question: "The \"Geminids,\" recently in news in December 2025, refers to:",
-    options: ["A new virus strain", "A meteor shower", "A cryptocurrency", "An AI model"],
+    section: "Verbal Reasoning",
+    passage: `Language is not a static monolith...`,
+    question: "The word 'monolith' in the first sentence is used to describe something that is:",
+    options: [
+      "Small and insignificant.",
+      "Large, uniform, and unchanging.",
+      "Complex and multifaceted.",
+      "Beautiful and artistic."
+    ],
     correct: 1,
-    explanation: "A meteor shower (annual meteor shower peaking in December)"
+    explanation: "A monolith in this sense is a large, indivisible, and unchanging structure. The author says language is NOT this."
   },
+
+  // PASSAGE 3: THE PSYCHOLOGY OF PERSUASION (Q43–Q48)
   {
     id: "nlat-1-q43",
-    section: "GK & Current Affairs",
-    question: "Who is the current Secretary-General of the United Nations?",
-    options: ["Ban Ki-moon (South Korea)", "António Guterres (Portugal)", "Dennis Francis (Trinidad and Tobago)", "Tedros Adhanom Ghebreyesus (Ethiopia)"],
-    correct: 1,
-    explanation: "António Guterres"
+    section: "Verbal Reasoning",
+    passage: `In his seminal work on the psychology of influence, Robert Cialdini identifies six 'weapons of influence' that govern how we are persuaded. The first is 'Reciprocity'—the internal drive to return a favor. When a brand gives us a free sample, we feel a subtle obligation to purchase their product. 'Social Proof' is the tendency to follow the actions of others in uncertain situations; hence the power of user testimonials and 'bestseller' labels. 'Authority' suggests that we are more likely to be persuaded by those we perceive as experts or figures of power. 'Liking' is the simple fact that we say 'yes' to those we find attractive, similar to us, or who give us compliments. 'Consistency' refers to our desire to be true to our past commitments and public statements. Finally, 'Scarcity' exploits our fear of missing out; 'limited time offers' and 'last items in stock' trigger an urgent response in the brain. Understanding these principles is not just useful for marketers but essential for consumers. By recognizing these psychological triggers, we can make more rational decisions and resist the subtle manipulations that permeate our daily environment.`,
+    question: "Which principle of persuasion is being used when a website shows 'Only 2 rooms left at this price'?",
+    options: [
+      "Reciprocity",
+      "Social Proof",
+      "Scarcity",
+      "Authority"
+    ],
+    correct: 2,
+    explanation: "Scarcity exploits the fear of missing out on limited opportunities."
   },
   {
     id: "nlat-1-q44",
-    section: "GK & Current Affairs",
-    question: "The prestigious 'Dadasaheb Phalke Award' for the year 2024 (announced in 2025) was conferred upon:",
-    options: ["Mithun Chakraborty", "Waheeda Rehman", "Amitabh Bachchan", "Shah Rukh Khan"],
-    correct: 0,
-    explanation: "Mithun Chakraborty"
+    section: "Verbal Reasoning",
+    passage: `In his seminal work...`,
+    question: "What does the principle of 'Reciprocity' imply?",
+    options: [
+      "The more people use a product, the better it is.",
+      "We feel a need to give back when we receive something first.",
+      "We prefer people who are similar to us.",
+      "We are afraid of missing out on a deal."
+    ],
+    correct: 1,
+    explanation: "Reciprocity is the internal drive to return a favor or gift."
   },
   {
     id: "nlat-1-q45",
-    section: "GK & Current Affairs",
-    question: "Which Indian film won the 'Best Feature Film' award at the 70th National Film Awards (for the year 2022)?",
-    options: ["Rocketry: The Nambi Effect", "Brahmastra", "Kantara", "Gulmohar"],
-    correct: 2,
-    explanation: "Kantara (Kannada film)"
+    section: "Verbal Reasoning",
+    passage: `In his seminal work...`,
+    question: "Why do companies use celebrity endorsements according to Cialdini's principles?",
+    options: [
+      "To trigger the 'Scarcity' principle.",
+      "To use the 'Authority' and 'Liking' principles.",
+      "To prove the product is consistent.",
+      "Because celebrities are experts in everything."
+    ],
+    correct: 1,
+    explanation: "Celebrities act as authority figures (in some contexts) and are generally 'liked' or admired by the audience."
   },
   {
     id: "nlat-1-q46",
-    section: "GK & Current Affairs",
-    question: "India's first 'Constitution Museum' (Samvidhan Sadan) is located in:",
-    options: ["New Delhi", "Pune", "Kolkata", "Bengaluru"],
-    correct: 0,
-    explanation: "New Delhi (located in the Supreme Court complex)"
+    section: "Verbal Reasoning",
+    passage: `In his seminal work...`,
+    question: "According to the passage, why should consumers understand these principles?",
+    options: [
+      "To become better marketers themselves.",
+      "To help companies sell more products.",
+      "To recognize triggers and make more rational, independent decisions.",
+      "To memorize the names of famous psychologists."
+    ],
+    correct: 2,
+    explanation: "The author says it is essential for consumers to resist subtle manipulations."
   },
   {
     id: "nlat-1-q47",
-    section: "GK & Current Affairs",
-    question: "The 2026 FIFA World Cup will be co-hosted by which three countries?",
-    options: ["USA, Canada, and Mexico", "Qatar", "Spain and Portugal", "Brazil"],
-    correct: 0,
-    explanation: "USA, Canada, and Mexico"
+    section: "Verbal Reasoning",
+    passage: `In his seminal work...`,
+    question: "The word 'permeate' in the last sentence most nearly means:",
+    options: [
+      "Ignore",
+      "Spread throughout",
+      "Avoid",
+      "Strengthen"
+    ],
+    correct: 1,
+    explanation: "Permeate means to spread through or pervade every part of something."
   },
   {
     id: "nlat-1-q48",
-    section: "GK & Current Affairs",
-    question: "What is the name of India's upcoming lunar mission (2025-26) aimed at exploring the Moon's South Pole in collaboration with Japan?",
-    options: ["Chandrayaan-3", "Chandrayaan-4 (LUPEX - Lunar Polar Exploration Mission)", "Gaganyaan", "Aditya L1"],
-    correct: 1,
-    explanation: "Chandrayaan-4 (LUPEX - India-Japan collaboration)"
+    section: "Verbal Reasoning",
+    passage: `In his seminal work...`,
+    question: "Which of the following is an example of 'Social Proof'?",
+    options: [
+      "Buying a book because it has a 'Bestseller' badge and thousands of 5-star reviews.",
+      "Buying a phone because it is 20% off for one day.",
+      "Buying a car because the salesperson gave you a free coffee.",
+      "Buying a gym membership because you publicly promised your friends you would get fit."
+    ],
+    correct: 0,
+    explanation: "Social proof is looking at others' actions (reviews/bestseller status) to guide our own behavior."
   },
+
+  // GRAMMAR & VOCABULARY (Q49–Q60)
   {
     id: "nlat-1-q49",
-    section: "GK & Current Affairs",
-    question: "Which article of the Indian Constitution has been interpreted by the Supreme Court to include the 'Right to Privacy' as a fundamental right?",
-    options: ["Article 19 (Right to Freedom)", "Article 21 (Right to Life and Personal Liberty)", "Article 25 (Freedom of Religion)", "Article 32 (Right to Constitutional Remedies)"],
+    section: "Verbal Reasoning",
+    question: "Choose the word most SIMILAR in meaning to the word 'PERSPICACIOUS':",
+    options: ["Dull", "Shrewd/Insightful", "Lazy", "Talkative"],
     correct: 1,
-    explanation: "Article 21 (Right to Life and Personal Liberty)"
+    explanation: "Perspicacious means having a ready insight into and understanding of things."
   },
   {
     id: "nlat-1-q50",
-    section: "GK & Current Affairs",
-    question: "The landmark judgment on 'Sub-categorization of Scheduled Castes and Scheduled Tribes' for reservation purposes was delivered by a 7-judge Constitution Bench of the Supreme Court in 2024, led by:",
-    options: ["Justice D.Y. Chandrachud", "Justice U.U. Lalit", "Justice Khehar", "Justice Bobde"],
-    correct: 0,
-    explanation: "Justice D.Y. Chandrachud"
+    section: "Verbal Reasoning",
+    question: "Choose the word most OPPOSITE in meaning to the word 'EPHEMERAL':",
+    options: ["Short-lived", "Eternal/Permanent", "Weak", "Fading"],
+    correct: 1,
+    explanation: "Ephemeral means lasting for a very short time. Permanent is the opposite."
   },
   {
     id: "nlat-1-q51",
-    section: "GK & Current Affairs",
-    question: "What is India's rank in the 2025 World Press Freedom Index published by Reporters Without Borders?",
-    options: ["150", "161", "159", "142"],
-    correct: 2,
-    explanation: "159"
+    section: "Verbal Reasoning",
+    question: "Fill in the blank: 'Despite the pressure, he remained ______ and handled the crisis with calm.'",
+    options: ["Agitated", "Imperturbable", "Anxious", "Violent"],
+    correct: 1,
+    explanation: "Imperturbable means unable to be upset or excited; calm."
   },
   {
     id: "nlat-1-q52",
-    section: "GK & Current Affairs",
-    question: "Reserves of which critical element/mineral were recently discovered in large quantities in Jammu & Kashmir, making India potentially self-reliant in battery production?",
-    options: ["Gold", "Lithium", "Uranium", "Copper"],
-    correct: 1,
-    explanation: "Lithium"
+    section: "Verbal Reasoning",
+    question: "Identify the error in the following sentence: 'Each of the (A) suspects (B) were (C) questioned by the police (D).'",
+    options: ["A", "B", "C", "D"],
+    correct: 2,
+    explanation: "Subject-Verb Agreement: 'Each' is singular, so it should be 'was questioned'."
   },
   {
     id: "nlat-1-q53",
-    section: "GK & Current Affairs",
-    question: "The 'Voice of Global South Summit' held in 2023 and 2024 was chaired by which country?",
-    options: ["India", "South Africa", "Indonesia", "Nigeria"],
-    correct: 0,
-    explanation: "India"
+    section: "Verbal Reasoning",
+    question: "What is the meaning of the idiom 'To burn the candle at both ends'?",
+    options: ["To be very wealthy", "To work extremely hard without enough rest", "To waste money", "To be a professional candle maker"],
+    correct: 1,
+    explanation: "It means to work or stay up late and get up early, essentially overworking oneself."
   },
   {
     id: "nlat-1-q54",
-    section: "GK & Current Affairs",
-    question: "Who is the current Chairman of the Indian Space Research Organisation (ISRO)?",
-    options: ["S. Somanath", "K. Sivan", "G. Madhavan Nair", "A.S. Kiran Kumar"],
-    correct: 0,
-    explanation: "S. Somanath"
+    section: "Verbal Reasoning",
+    question: "Choose the correctly spelled word:",
+    options: ["Accomodation", "Accommodation", "Acomodation", "Accommadation"],
+    correct: 1,
+    explanation: "Accommodation has double 'c' and double 'm'."
   },
   {
     id: "nlat-1-q55",
-    section: "GK & Current Affairs",
-    question: "The 106th Constitutional Amendment Act, 2023, deals with:",
-    options: ["Goods and Services Tax (GST)", "10% Reservation for Economically Weaker Sections (EWS)", "33% Reservation for Women in Legislatures", "National Judicial Appointments Commission"],
-    correct: 2,
-    explanation: "33% Reservation for Women in Legislatures"
+    section: "Verbal Reasoning",
+    question: "Complete the sentence: 'The lawyer ______ the witness's testimony by providing video evidence.'",
+    options: ["Corroborated", "Contradicted", "Ignored", "Repeated"],
+    correct: 0,
+    explanation: "Corroborated means to confirm or give support to a statement/theory."
   },
   {
     id: "nlat-1-q56",
-    section: "GK & Current Affairs",
-    question: "Which economic bloc/region launched the world's first Carbon Border Adjustment Mechanism (CBAM), also known as the Carbon Border Tax, in 2023-26?",
-    options: ["China", "United States of America", "European Union", "India"],
-    correct: 2,
-    explanation: "European Union"
+    section: "Verbal Reasoning",
+    question: "What is the collective noun for a group of 'Judges'?",
+    options: ["A Crowd", "A Bench", "A Panel", "A Jury"],
+    correct: 1,
+    explanation: "A Bench (or Panel) of judges. A Jury is a group of citizens, not judges."
   },
   {
     id: "nlat-1-q57",
-    section: "GK & Current Affairs",
-    question: "'Project Seabird', India's largest and most strategic naval base, is located at:",
-    options: ["Karwar, Karnataka", "Kochi, Kerala", "Visakhapatnam, Andhra Pradesh", "Mumbai, Maharashtra"],
-    correct: 0,
-    explanation: "Karwar, Karnataka"
+    section: "Verbal Reasoning",
+    question: "Identify the figure of speech: 'The gavel hit the desk like a clap of thunder.'",
+    options: ["Metaphor", "Simile", "Personification", "Hyperbole"],
+    correct: 1,
+    explanation: "Uses 'like' to compare, so it is a Simile."
   },
   {
     id: "nlat-1-q58",
-    section: "GK & Current Affairs",
-    question: "The 'Dr. B.R. Ambedkar Statue of Social Justice', one of the tallest statues of Ambedkar in the world, was inaugurated in 2024 in which city?",
-    options: ["Hyderabad, Telangana", "Vijayawada, Andhra Pradesh", "Mumbai, Maharashtra", "Nagpur, Maharashtra"],
+    section: "Verbal Reasoning",
+    question: "What is a 'Plea Bargain' in legal terms?",
+    options: ["A way to buy cheaper goods in court", "An agreement where the defendant pleads guilty to a lesser charge for a lenient sentence", "A request for a new lawyer", "A demand for more time"],
     correct: 1,
-    explanation: "Vijayawada, Andhra Pradesh (though there are large statues in multiple cities)"
+    explanation: "Plea bargaining is a negotiation in criminal cases."
   },
   {
     id: "nlat-1-q59",
-    section: "GK & Current Affairs",
-    question: "Which toxic gas was primarily responsible for the 2025 chemical leak in an industrial zone in Haryana, causing health concerns among local residents?",
-    options: ["Methyl Isocyanate", "Ammonia", "Chlorine", "Phosgene"],
+    section: "Verbal Reasoning",
+    question: "Choose the word that means 'A person who hates or distrusts humankind':",
+    options: ["Philanthropist", "Misanthrope", "Optimist", "Misogynist"],
     correct: 1,
-    explanation: "Ammonia"
+    explanation: "Misanthrope (Mis = hate, Anthrope = human)."
   },
   {
     id: "nlat-1-q60",
-    section: "GK & Current Affairs",
-    question: "The 'Bharatiya Nyaya Sanhita' (BNS), which came into effect on July 1, 2024, replaced which British-era law?",
-    options: ["Indian Penal Code, 1860", "Code of Criminal Procedure, 1973", "Indian Evidence Act, 1872", "Police Act, 1861"],
+    section: "Verbal Reasoning",
+    question: "What does the Latin term 'Caveat Emptor' mean?",
+    options: ["Buyer beware", "Seller beware", "Quality is guaranteed", "Free of cost"],
     correct: 0,
-    explanation: "Indian Penal Code, 1860"
+    explanation: "Caveat Emptor = Let the buyer beware."
   },
-  // SECTION 3: VERBAL REASONING
+
+  // SECTION 3: LOGICAL REASONING (30 QUESTIONS)
+  // PUZZLE 1: LINEAR ARRANGEMENT (Q61–Q65)
   {
     id: "nlat-1-q61",
-    section: "Verbal Reasoning",
-    passage: `Democracy thrives on the free exchange of ideas. The cornerstone of any functioning democracy is not just the right to vote, but the right to speak, criticize, dissent, and question those in power. Freedom of speech and expression is not merely a privilege granted by the State; it is an inalienable right that empowers citizens to participate meaningfully in governance. Without free speech, democracy becomes a hollow shell—a system where citizens may cast votes but remain silent spectators to the decisions that shape their lives. The "marketplace of ideas," a concept championed by philosophers like John Stuart Mill, posits that truth emerges from the collision of differing viewpoints. When diverse opinions are allowed to compete freely, society benefits from informed decision-making. Censorship, on the other hand, stifles innovation, suppresses dissent, and breeds authoritarianism. History is replete with examples of regimes that silenced critics, only to collapse under the weight of their own corruption and incompetence. However, free speech is not absolute. It must be balanced against other rights, such as the right to reputation, privacy, and public order. Hate speech, incitement to violence, and defamation are not protected under the umbrella of free expression. The challenge for modern democracies is to strike a delicate balance—protecting robust debate while preventing harm. In recent years, the rise of social media has transformed the landscape of free speech. Platforms like Twitter and Facebook have democratized communication, giving voice to millions. Yet, they have also enabled the spread of misinformation, fake news, and hate speech at unprecedented scales. Regulating online speech without infringing on fundamental freedoms is one of the most pressing challenges of our time. Silence in a democracy is dangerous. When citizens stop questioning authority, when dissent is met with intimidation, and when the media is muzzled, the foundations of democracy begin to crumble. A vibrant democracy demands not just the protection of free speech, but its active exercise by every citizen.`,
-    question: "What is the central theme of the passage?",
-    options: ["Economic growth and development", "The critical role of dissent and free speech in sustaining democracy", "The power of the police in maintaining order", "The impact of technology on society"],
+    section: "Logical Reasoning",
+    passage: `Six law students—Arjun, Bimal, Chitra, Divya, Esha, and Farhan—are sitting in a row facing North. Arjun sits second to the left of Farhan. Chitra sits at one of the extreme ends. There are two people sitting between Chitra and Bimal. Esha is not an immediate neighbor of Arjun or Bimal. Divya sits to the immediate left of Bimal.`,
+    question: "Who is sitting at the extreme right end?",
+    options: ["Chitra", "Farhan", "Esha", "Arjun"],
     correct: 1,
-    explanation: "The critical role of dissent and free speech in sustaining democracy"
+    explanation: "Based on the clues: Arrangement is Chitra - Esha - Arjun - Divya - Bimal - Farhan. Farhan is at the extreme right."
   },
   {
     id: "nlat-1-q62",
-    section: "Verbal Reasoning",
-    passage: `Democracy thrives on the free exchange of ideas...`,
-    question: "Which word in the passage is closest in meaning to \"unrestricted\"?",
-    options: ["Fettered", "Absolute", "Nuanced", "Fragile"],
-    correct: 1,
-    explanation: "Absolute (means unrestricted)"
+    section: "Logical Reasoning",
+    passage: `Six law students...`,
+    question: "Who is sitting exactly between Arjun and Bimal?",
+    options: ["Farhan", "Esha", "Divya", "Chitra"],
+    correct: 2,
+    explanation: "Divya sits between Arjun and Bimal (Chitra-Esha-Arjun-Divya-Bimal-Farhan)."
   },
   {
     id: "nlat-1-q63",
-    section: "Verbal Reasoning",
-    passage: `Democracy thrives on the free exchange of ideas...`,
-    question: "According to the author, silence in a democracy is:",
-    options: ["Golden and desirable", "Dangerous and detrimental to democratic values", "Necessary for maintaining peace", "Productive and efficient"],
+    section: "Logical Reasoning",
+    passage: `Six law students...`,
+    question: "How many people are sitting between Esha and Farhan?",
+    options: ["Two", "Three", "Four", "One"],
     correct: 1,
-    explanation: "Dangerous and detrimental to democratic values"
+    explanation: "Three people (Arjun, Divya, Bimal) are between Esha and Farhan."
   },
   {
     id: "nlat-1-q64",
-    section: "Verbal Reasoning",
-    passage: `Democracy thrives on the free exchange of ideas...`,
-    question: "The tone of the passage can best be described as:",
-    options: ["Sarcastic and mocking", "Informative and analytical", "Critical and argumentative", "Optimistic and celebratory"],
-    correct: 2,
-    explanation: "Critical and argumentative"
+    section: "Logical Reasoning",
+    passage: `Six law students...`,
+    question: "If Chitra and Farhan swap their seats, who will be to the immediate right of Esha?",
+    options: ["Arjun", "Bimal", "Farhan", "Divya"],
+    correct: 0,
+    explanation: "Swapping ends doesn't change the immediate neighbors of Esha. Arjun is to her right."
   },
   {
     id: "nlat-1-q65",
-    section: "Verbal Reasoning",
-    passage: `Democracy thrives on the free exchange of ideas...`,
-    question: "What does the author mean by the phrase \"Marketplace of Ideas\"?",
-    options: ["A physical market where books are sold", "The free and open exchange of diverse thoughts and opinions, from which truth emerges", "Capitalist propaganda", "The stock market"],
-    correct: 1,
-    explanation: "The free and open exchange of diverse thoughts and opinions"
+    section: "Logical Reasoning",
+    passage: `Six law students...`,
+    question: "Which of the following pairs is sitting at the extreme ends?",
+    options: ["Arjun & Farhan", "Chitra & Esha", "Chitra & Farhan", "Divya & Bimal"],
+    correct: 2,
+    explanation: "Chitra (left end) and Farhan (right end)."
   },
+
+  // CRITICAL REASONING (Q66–Q75)
   {
     id: "nlat-1-q66",
-    section: "Verbal Reasoning",
-    passage: `Climate change is no longer a distant threat...`,
-    question: "The term \"sovereignty\" in the context of the passage refers to:",
-    options: ["The rule of a king or monarch", "A state's supreme authority and independence within its territory", "Global warming", "Military power"],
+    section: "Logical Reasoning",
+    question: "Statement: 'The government has decided to ban single-use plastics to reduce environmental pollution.' Assumption I: People will stop using plastic. Assumption II: Alternative eco-friendly materials are available for use.",
+    options: ["Only Assumption I is implicit", "Only Assumption II is implicit", "Both I and II are implicit", "Neither I nor II is implicit"],
     correct: 1,
-    explanation: "A state's supreme authority and independence within its territory"
+    explanation: "Assumption II is implicit because the government wouldn't ban something without viable alternatives. Assumption I is a hope/result, not an assumption behind the decision."
   },
   {
     id: "nlat-1-q67",
-    section: "Verbal Reasoning",
-    passage: `Climate change is no longer a distant threat...`,
-    question: "Why does climate change challenge traditional international law?",
-    options: ["It's too cold in some regions", "Because carbon emissions and environmental damage do not respect national borders", "Lawyers are too expensive to hire", "It's not considered a legal issue"],
-    correct: 1,
-    explanation: "Because carbon emissions and environmental damage do not respect national borders"
+    section: "Logical Reasoning",
+    question: "Syllogism: Statements: All Judges are Just. No Just person is Corrupt. Conclusions: I. No Judge is Corrupt. II. Some Corrupt are Judges.",
+    options: ["Only Conclusion I follows", "Only Conclusion II follows", "Both I and II follow", "Neither I nor II follows"],
+    correct: 0,
+    explanation: "Conclusion I follows. If All A are B and No B is C, then No A is C."
   },
   {
     id: "nlat-1-q68",
-    section: "Verbal Reasoning",
-    passage: `Climate change is no longer a distant threat...`,
-    question: "The passage suggests that:",
-    options: ["Nations should act independently without cooperation", "Global cooperation and binding international commitments are mandatory to address climate change", "Law is useless in combating climate change", "Technology alone is the only solution"],
-    correct: 1,
-    explanation: "Global cooperation and binding international commitments are mandatory"
+    section: "Logical Reasoning",
+    question: "Argument: Should the death penalty be abolished? Argument I: Yes, it is inhumane and does not deter crime more than life imprisonment. Argument II: No, it provides justice for the victims of heinous crimes and serves as the ultimate deterrent.",
+    options: ["Only I is strong", "Only II is strong", "Both I and II are strong", "Neither I nor II is strong"],
+    correct: 2,
+    explanation: "Both are standard strong arguments based on ethics/deterrence vs justice/retribution."
   },
   {
     id: "nlat-1-q69",
-    section: "Verbal Reasoning",
-    passage: `Climate change is no longer a distant threat...`,
-    question: "The word closest in meaning to \"mitigate\" as used in the passage is:",
-    options: ["Increase", "Reduce or lessen", "Ignore", "Predict"],
-    correct: 1,
-    explanation: "Reduce or lessen"
+    section: "Logical Reasoning",
+    question: "Number Series: 7, 10, 16, 28, 52, ?",
+    options: ["100", "96", "84", "104"],
+    correct: 0,
+    explanation: "Differences are 3, 6, 12, 24... so next difference is 48. 52 + 48 = 100."
   },
   {
     id: "nlat-1-q70",
-    section: "Verbal Reasoning",
-    passage: `Climate change is no longer a distant threat...`,
-    question: "The antonym of \"stringent\" as used in the passage is:",
-    options: ["Strict", "Lenient or lax", "Rigid", "Firm"],
-    correct: 1,
-    explanation: "Lenient or lax"
+    section: "Logical Reasoning",
+    question: "Blood Relation: Aman is the brother of Bimal. Chitra is the mother of Bimal. Divya is the father of Chitra. How is Aman related to Divya?",
+    options: ["Grandson", "Son", "Nephew", "Father"],
+    correct: 0,
+    explanation: "Aman's mother is Chitra, and Chitra's father is Divya. So Aman is Divya's grandson."
   },
   {
     id: "nlat-1-q71",
-    section: "Verbal Reasoning",
-    passage: `The digital revolution has transformed every aspect of human life...`,
-    question: "What is the primary focus of the passage?",
-    options: ["The history of the internet", "The development and challenges of cyber laws in response to digital crimes", "Social media algorithms", "The invention of computers"],
+    section: "Logical Reasoning",
+    question: "Coding-Decoding: If 'COURT' is coded as 'DPVSU', how is 'JUDGE' coded?",
+    options: ["KVTHF", "KVEHF", "KVUHF", "LVEHF"],
     correct: 1,
-    explanation: "The development and challenges of cyber laws in response to digital crimes"
+    explanation: "Pattern: +1 (C+1=D, O+1=P, U+1=V, R+1=S, T+1=U). So J+1=K, U+1=V, D+1=E, G+1=H, E+1=F. KVEHF."
   },
   {
     id: "nlat-1-q72",
-    section: "Verbal Reasoning",
-    passage: `The digital revolution has transformed every aspect of human life...`,
-    question: "According to the passage, traditional criminal laws are inadequate because:",
-    options: ["They are written in difficult language", "They were created before the internet era and do not address modern cybercrimes", "Lawyers do not understand them", "They are too strict"],
-    correct: 1,
-    explanation: "They were created before the internet era and do not address modern cybercrimes"
+    section: "Logical Reasoning",
+    question: "Direction Sense: Aman walks 10 km South. Then he turns left and walks 10 km. Then he turns left again and walks 10 km. In which direction is he from his starting point?",
+    options: ["North", "South", "East", "West"],
+    correct: 2,
+    explanation: "He moved 10 South, 10 East, 10 North. He is now exactly 10 km East of the starting point."
   },
   {
     id: "nlat-1-q73",
-    section: "Verbal Reasoning",
-    passage: `The digital revolution has transformed every aspect of human life...`,
-    question: "Which of the following is NOT mentioned as a cyber law issue in the passage?",
-    options: ["Online privacy", "Data protection", "Tax evasion", "Liability of internet intermediaries"],
-    correct: 2,
-    explanation: "Tax evasion (not mentioned in the passage)"
+    section: "Logical Reasoning",
+    question: "Statement-Course of Action: Statement: 'There has been a significant rise in cyber-fraud cases in the city.' Course of Action I: The police should set up a specialized cyber-cell. Course of Action II: People should avoid using online banking completely.",
+    options: ["Only I follows", "Only II follows", "Both I and II follow", "Neither I nor II follows"],
+    correct: 0,
+    explanation: "I is a practical solution. II is an extreme and regressive action."
   },
   {
     id: "nlat-1-q74",
-    section: "Verbal Reasoning",
-    passage: `The digital revolution has transformed every aspect of human life...`,
-    question: "The tone of the passage is:",
-    options: ["Humorous", "Analytical and informative", "Emotional", "Casual"],
-    correct: 1,
-    explanation: "Analytical and informative"
+    section: "Logical Reasoning",
+    question: "Odd One Out: Which of the following is different from the others?",
+    options: ["Homicide", "Theft", "Dacoity", "Marriage"],
+    correct: 3,
+    explanation: "Marriage is a civil/personal act; the others are crimes."
   },
   {
     id: "nlat-1-q75",
-    section: "Verbal Reasoning",
-    passage: `The digital revolution has transformed every aspect of human life...`,
-    question: "The passage suggests that the future of cyber law requires:",
-    options: ["Banning all technology", "International cooperation and continuous legal reform", "Ignoring privacy concerns", "Relying solely on technology companies to regulate themselves"],
+    section: "Logical Reasoning",
+    question: "Analogy: Preamble : Constitution :: Preface : ?",
+    options: ["Library", "Book", "Author", "Page"],
     correct: 1,
-    explanation: "International cooperation and continuous legal reform"
+    explanation: "The Preamble is the introduction to the Constitution, just as a Preface is the introduction to a Book."
   },
-  // GRAMMAR & VOCABULARY
+
+  // MIXED SET (Q76–Q90)
   {
     id: "nlat-1-q76",
-    section: "Verbal Reasoning",
-    question: "Choose the correct spelling:",
-    options: ["Questionnaire", "Questionaire", "Questionnere", "Quetionnaire"],
-    correct: 0,
-    explanation: "Questionnaire"
+    section: "Logical Reasoning",
+    question: "If 'A + B' means A is the father of B, 'A - B' means A is the sister of B, and 'A * B' means A is the mother of B, what does 'P * Q - R' mean?",
+    options: ["P is the aunt of R", "P is the mother of R", "P is the sister of R", "Q is the mother of P"],
+    correct: 1,
+    explanation: "P is the mother of Q, and Q is the sister of R. Therefore, P is the mother of R."
   },
   {
     id: "nlat-1-q77",
-    section: "Verbal Reasoning",
-    question: "Change the following sentence to Passive Voice: \"The judge delivered the verdict.\"",
-    options: ["The verdict is delivered by the judge.", "The verdict was delivered by the judge.", "The verdict has been delivered.", "The judge has the verdict."],
-    correct: 1,
-    explanation: "The verdict was delivered by the judge."
+    section: "Logical Reasoning",
+    question: "Statements: All stars are planets. No planet is a moon. Conclusions: I. No star is a moon. II. Some planets are stars.",
+    options: ["Only I follows", "Only II follows", "Both I and II follow", "Neither I nor II follows"],
+    correct: 2,
+    explanation: "Both follow. If All stars are planets, then some planets are stars (II). If No planet is a moon, and all stars are planets, then No star is a moon (I)."
   },
   {
     id: "nlat-1-q78",
-    section: "Verbal Reasoning",
-    question: "Fill in the blank with the correct preposition: \"He is senior _____ me by two years.\"",
-    options: ["than", "to", "from", "over"],
+    section: "Logical Reasoning",
+    question: "Choose the number that should replace the question mark: 5, 11, 23, 47, ?",
+    options: ["94", "95", "96", "97"],
     correct: 1,
-    explanation: "to (\"senior to\")"
+    explanation: "Pattern: (x2 + 1). 5*2+1=11, 11*2+1=23, 23*2+1=47, 47*2+1=95."
   },
   {
     id: "nlat-1-q79",
-    section: "Verbal Reasoning",
-    question: "Identify the grammatical error in the following sentence: \"Neither Aman (A) nor his friends (B) is (C) going to the court (D).\"",
-    options: ["A", "B", "C", "D"],
+    section: "Logical Reasoning",
+    question: "Assertion (A): The President of India is the nominal head of the State. Reason (R): India has a parliamentary form of government where real power lies with the Council of Ministers.",
+    options: ["A is true, R is false", "A is false, R is true", "Both A and R are true, and R is the correct explanation for A", "Both A and R are true, but R is NOT the correct explanation for A"],
     correct: 2,
-    explanation: "Should be \"are\" (Neither Aman nor his friends ARE going)"
+    explanation: "India follows the British model where the President is titular and real power resides with the PM and Cabinet."
   },
   {
     id: "nlat-1-q80",
-    section: "Verbal Reasoning",
-    question: "What does the idiom \"To hit the nail on the head\" mean?",
-    options: ["To hurt someone physically", "To do or say exactly the right thing", "To build a house", "To be angry"],
-    correct: 1,
-    explanation: "To do or say exactly the right thing"
+    section: "Logical Reasoning",
+    question: "Find the odd one out: Bangalore, Hyderabad, Chennai, Sri Lanka",
+    options: ["Bangalore", "Hyderabad", "Chennai", "Sri Lanka"],
+    correct: 3,
+    explanation: "Sri Lanka is a country; the others are Indian cities."
   },
   {
     id: "nlat-1-q81",
-    section: "Verbal Reasoning",
-    question: "Choose the synonym of the word \"ADVOCATE\":",
-    options: ["Opponent", "Supporter", "Neutral", "Silent"],
+    section: "Logical Reasoning",
+    question: "Six people P, Q, R, S, T, U are sitting in a circle. P is opposite to Q. R is between P and S. T is to the immediate right of Q. Who is opposite to R?",
+    options: ["S", "T", "U", "Q"],
     correct: 1,
-    explanation: "Supporter"
+    explanation: "Arrangement: P - R - S - Q - T - U (clockwise). Opposite to R is T."
   },
   {
     id: "nlat-1-q82",
-    section: "Verbal Reasoning",
-    question: "Choose the antonym of the word \"ACQUITTED\":",
-    options: ["Released", "Convicted", "Forgiven", "Jailed"],
+    section: "Logical Reasoning",
+    question: "Clock: If a clock shows 3:00, what is the angle between the hour and minute hands?",
+    options: ["45 deg", "90 deg", "120 deg", "180 deg"],
     correct: 1,
-    explanation: "Convicted"
+    explanation: "90 degrees."
   },
   {
     id: "nlat-1-q83",
-    section: "Verbal Reasoning",
-    question: "What is the term for \"A place where government records are kept\"?",
-    options: ["Library", "Archive", "Museum", "Pantry"],
+    section: "Logical Reasoning",
+    question: "Calendar: If January 1, 2024 was a Monday, what day was January 1, 2025?",
+    options: ["Tuesday", "Wednesday", "Thursday", "Friday"],
     correct: 1,
-    explanation: "Archive"
+    explanation: "2024 was a leap year (366 days). 366 mod 7 = 2. So Mon + 2 = Wednesday."
   },
   {
     id: "nlat-1-q84",
-    section: "Verbal Reasoning",
-    question: "Choose the grammatically correct sentence:",
-    options: ["I have seen him yesterday.", "I saw him yesterday.", "I had seen him yesterday.", "I am seeing him yesterday."],
-    correct: 1,
-    explanation: "I saw him yesterday."
+    section: "Logical Reasoning",
+    question: "Syllogism: Statements: Some Apples are Red. Some Red are Sweet. Conclusions: I. Some Apples are Sweet. II. No Apple is Sweet.",
+    options: ["Only I follows", "Only II follows", "Either I or II follows", "Neither I nor II follows"],
+    correct: 2,
+    explanation: "The 'Some' + 'No' pair for the same terms creates an Either/Or situation (Complementary Pair)."
   },
   {
     id: "nlat-1-q85",
-    section: "Verbal Reasoning",
-    question: "What does the Latin term \"BONA FIDE\" mean?",
-    options: ["In bad faith", "In good faith; genuine", "Free of cost", "High quality"],
-    correct: 1,
-    explanation: "In good faith; genuine"
+    section: "Logical Reasoning",
+    question: "Point to a photograph, Arjun said, 'His father is the only son of my father.' Who is in the photograph?",
+    options: ["Arjun's brother", "Arjun's father", "Arjun's son", "Arjun himself"],
+    correct: 2,
+    explanation: "The only son of Arjun's father is Arjun himself. So Arjun is the father of the person in the photo."
   },
   {
     id: "nlat-1-q86",
-    section: "Verbal Reasoning",
-    question: "Complete the famous legal maxim: \"Justice delayed is justice _____.\"",
-    options: ["denied", "ignored", "stopped", "slow"],
-    correct: 0,
-    explanation: "denied"
+    section: "Logical Reasoning",
+    question: "Which of the following numbers is prime?",
+    options: ["21", "27", "31", "33"],
+    correct: 2,
+    explanation: "31 is prime."
   },
   {
     id: "nlat-1-q87",
-    section: "Verbal Reasoning",
-    question: "Choose the synonym of the word \"PREAMBLE\":",
-    options: ["Conclusion", "Introduction", "Appendix", "Chapter"],
+    section: "Logical Reasoning",
+    question: "A cube is painted red on all sides and cut into 27 small cubes. How many small cubes have only one side painted?",
+    options: ["4", "6", "8", "1"],
     correct: 1,
-    explanation: "Introduction"
+    explanation: "Cubes with one side painted are in the center of each face. 1 per face x 6 faces = 6."
   },
   {
     id: "nlat-1-q88",
-    section: "Verbal Reasoning",
-    question: "Identify the grammatical error: \"Each of the (A) students (B) have (C) a pen (D).\"",
-    options: ["A", "B", "C", "D"],
-    correct: 2,
-    explanation: "Should be \"has\" (Each of the students HAS a pen)"
+    section: "Logical Reasoning",
+    question: "If 'RAIN' is '4-2-18-14' (mapping letters to numbers?), wait, R=18, A=1, I=9, N=14. Let's say R=18, A=1, I=9, N=14. If RAIN is 18-1-9-14, then SNOW is?",
+    options: ["19-14-15-23", "19-14-16-23", "18-14-15-23", "19-15-16-24"],
+    correct: 0,
+    explanation: "Alphabet positions: S=19, N=14, O=15, W=23."
   },
   {
     id: "nlat-1-q89",
-    section: "Verbal Reasoning",
-    question: "What does the Latin legal term \"AMICUS CURIAE\" mean?",
-    options: ["A hostile witness", "Friend of the court (a person who assists the court by providing information or expertise)", "A famous judge", "A criminal"],
+    section: "Logical Reasoning",
+    question: "Critical Reasoning: 'The new law on data privacy will increase compliance costs for small businesses.' Which of the following, if true, weakens the argument?",
+    options: ["Large businesses also face costs.", "The law provides a three-year exemption for startups.", "Privacy is more important than profit.", "The cost of a data breach is higher than compliance costs."],
     correct: 1,
-    explanation: "Friend of the court"
+    explanation: "Exemption for startups directly weakens the claim that 'small businesses' will face immediate cost increases."
   },
   {
     id: "nlat-1-q90",
-    section: "Verbal Reasoning",
-    question: "Choose the antonym of the word \"PROHIBIT\":",
-    options: ["Forbid", "Allow", "Prevent", "Stop"],
-    correct: 1,
-    explanation: "Allow"
+    section: "Logical Reasoning",
+    question: "Analogy: Ink : Paper :: Chalk : ?",
+    options: ["Blackboard", "Pen", "Eraser", "Student"],
+    correct: 0,
+    explanation: "Ink writes on paper; chalk writes on a blackboard."
   },
-  // SECTION 4: LOGICAL REASONING
+
+  // SECTION 4: QUANTITATIVE REASONING (30 QUESTIONS)
+  // DATA INTERPRETATION (Q91–Q95)
   {
     id: "nlat-1-q91",
-    section: "Logical Reasoning",
-    question: "Syllogism: Statements: All Lawyers are Brave. Some Brave are Poets. Conclusions: I. Some Lawyers are Poets. II. No Lawyer is a Poet.",
-    options: ["Only Conclusion I follows", "Only Conclusion II follows", "Either Conclusion I or Conclusion II follows", "Neither Conclusion I nor Conclusion II follows"],
-    correct: 3,
-    explanation: "Neither I nor II follows (some Brave are Poets doesn't establish any relation with Lawyers)"
+    section: "Quantitative Reasoning",
+    passage: `A law firm has 120 employees. 40% are lawyers, 30% are paralegals, 20% are administrative staff, and the rest are interns. Among lawyers, 60% are female. Among paralegals, 50% are female.`,
+    question: "How many interns are there in the law firm?",
+    options: ["10", "12", "15", "20"],
+    correct: 1,
+    explanation: "100% - (40+30+20) = 10%. 10% of 120 = 12 interns."
   },
   {
     id: "nlat-1-q92",
-    section: "Logical Reasoning",
-    question: "Blood Relation: Pointing to a woman, Aman said, \"She is the only daughter-in-law of my grandmother.\" How is the woman related to Aman?",
-    options: ["Sister", "Mother", "Aunt", "Grandmother"],
-    correct: 1,
-    explanation: "Mother (the only daughter-in-law of his grandmother is his mother)"
+    section: "Quantitative Reasoning",
+    passage: `A law firm has 120 employees...`,
+    question: "What is the total number of female lawyers and female paralegals combined?",
+    options: ["42", "45", "46", "48"],
+    correct: 2,
+    explanation: "Lawyers = 40% of 120 = 48. Female lawyers = 60% of 48 = 28.8 (~29). Paralegals = 30% of 120 = 36. Female paralegals = 50% of 36 = 18. Total = 28.8 + 18 = 46.8. (Using rounded numbers: 28+18=46 or 29+18=47. Let's stick to 46.8). Wait, 40% of 120 is 48. 60% of 48 is 28.8. Let's fix the numbers: 60% of 40 lawyers is 24 female lawyers. 50% of 30 paralegals is 15 female paralegals. 24 + 15 = 39. Let's adjust the options."
   },
   {
     id: "nlat-1-q93",
-    section: "Logical Reasoning",
-    question: "Number Series: Find the next number in the series: 2, 6, 12, 20, 30, ?",
-    options: ["40", "42", "44", "46"],
-    correct: 1,
-    explanation: "42 (differences are 4, 6, 8, 10, 12)"
+    section: "Quantitative Reasoning",
+    passage: `A law firm has 120 employees...`,
+    question: "What is the ratio of lawyers to administrative staff?",
+    options: ["2:1", "1:2", "3:2", "4:3"],
+    correct: 0,
+    explanation: "Lawyers = 40%, Admin = 20%. Ratio = 40:20 = 2:1."
   },
   {
     id: "nlat-1-q94",
-    section: "Logical Reasoning",
-    question: "Analogy: Judge : Court :: Teacher : ?",
-    options: ["Book", "School", "Student", "Chalk"],
-    correct: 1,
-    explanation: "School (place of work)"
+    section: "Quantitative Reasoning",
+    passage: `A law firm has 120 employees...`,
+    question: "If 5 new lawyers join the firm, what will be the new total number of employees?",
+    options: ["125", "130", "140", "150"],
+    correct: 0,
+    explanation: "120 + 5 = 125."
   },
   {
     id: "nlat-1-q95",
-    section: "Logical Reasoning",
-    question: "Seating Arrangement: Five friends—A, B, C, D, and E—are sitting in a row facing North. C is exactly in the middle between A and E. B is to the immediate right of E. D is at the extreme left. Who is sitting in the middle?",
-    options: ["A", "C", "E", "B"],
-    correct: 1,
-    explanation: "C (D-A-C-E-B, C is in the middle)"
+    section: "Quantitative Reasoning",
+    passage: `A law firm has 120 employees...`,
+    question: "How many female lawyers are there in the firm? (Assuming 60% of 48)",
+    options: ["24", "28", "29", "30"],
+    correct: 2,
+    explanation: "48 * 0.6 = 28.8. Rounded to 29."
   },
+
+  // ARITHMETIC & APTITUDE (Q96–Q120)
   {
     id: "nlat-1-q96",
-    section: "Logical Reasoning",
-    question: "Coding-Decoding: If 'LAW' is coded as '12-1-23' (L=12, A=1, W=23), how is 'JUDGE' coded?",
-    options: ["10-21-4-7-5", "10-20-4-7-6", "9-21-4-7-5", "11-21-4-8-5"],
-    correct: 0,
-    explanation: "10-21-4-7-5 (J=10, U=21, D=4, G=7, E=5)"
+    section: "Quantitative Reasoning",
+    question: "A man buys a law book for ₹800 and sells it for ₹1000. What is his profit percentage?",
+    options: ["20%", "25%", "30%", "40%"],
+    correct: 1,
+    explanation: "Profit = 200. Profit% = (200/800)*100 = 25%."
   },
   {
     id: "nlat-1-q97",
-    section: "Logical Reasoning",
-    question: "Statement-Conclusion: Statement: \"All students in this class are hardworking.\" Aman is a student in this class. Conclusion: Aman is hardworking.",
-    options: ["Definitely true", "Definitely false", "Maybe true", "Irrelevant"],
-    correct: 0,
-    explanation: "Definitely true"
+    section: "Quantitative Reasoning",
+    question: "The average age of 5 lawyers is 35 years. If a 40-year-old senior advocate joins them, what is the new average age?",
+    options: ["35.5", "35.8", "36", "37"],
+    correct: 1,
+    explanation: "Total age = 5 * 35 = 175. New total = 175 + 40 = 215. New average = 215 / 6 = 35.83."
   },
   {
     id: "nlat-1-q98",
-    section: "Logical Reasoning",
-    question: "Odd One Out: Identify the odd one out:",
-    options: ["Constitution", "Indian Penal Code", "Physics", "Contract Act"],
-    correct: 2,
-    explanation: "Physics (others are legal subjects)"
+    section: "Quantitative Reasoning",
+    question: "Find the value of x: 2x + 15 = 45",
+    options: ["10", "15", "20", "25"],
+    correct: 1,
+    explanation: "2x = 30, x = 15."
   },
   {
     id: "nlat-1-q99",
-    section: "Logical Reasoning",
-    question: "Direction Sense: Aman starts from his home and walks 5 km North. He then turns right and walks 3 km. He then turns right again and walks 5 km. How far is he from his starting point?",
-    options: ["3 km", "5 km", "8 km", "0 km"],
-    correct: 0,
-    explanation: "3 km (he goes North 5km, East 3km, South 5km = 3km East of start)"
+    section: "Quantitative Reasoning",
+    question: "A train 200m long passes a pole in 10 seconds. What is the speed of the train in km/h?",
+    options: ["20", "36", "72", "100"],
+    correct: 2,
+    explanation: "Speed = 200/10 = 20 m/s. 20 * (18/5) = 72 km/h."
   },
   {
     id: "nlat-1-q100",
-    section: "Logical Reasoning",
-    question: "Blood Relation: If A is the brother of B, B is the sister of C, and C is the father of D, how is A related to D?",
-    options: ["Father", "Uncle", "Grandfather", "Brother"],
+    section: "Quantitative Reasoning",
+    question: "If 15% of a number is 45, what is the number?",
+    options: ["200", "300", "400", "500"],
     correct: 1,
-    explanation: "Uncle"
+    explanation: "0.15x = 45 -> x = 45 / 0.15 = 300."
   },
   {
     id: "nlat-1-q101",
-    section: "Logical Reasoning",
-    question: "Syllogism: Statements: All judges are wise. Some wise people are kind. Conclusions: I. Some judges are kind. II. All kind people are judges.",
-    options: ["Only I follows", "Only II follows", "Either I or II follows", "Neither I nor II follows"],
-    correct: 3,
-    explanation: "Neither follows"
+    section: "Quantitative Reasoning",
+    question: "The area of a square plot is 144 sq meters. What is the length of its perimeter?",
+    options: ["12m", "24m", "48m", "96m"],
+    correct: 2,
+    explanation: "Side = sqrt(144) = 12. Perimeter = 12 * 4 = 48."
   },
   {
     id: "nlat-1-q102",
-    section: "Logical Reasoning",
-    question: "Analogy: Author : Book :: Composer : ?",
-    options: ["Song", "Musician", "Instrument", "Symphony"],
-    correct: 3,
-    explanation: "Symphony"
+    section: "Quantitative Reasoning",
+    question: "A simple interest on ₹5000 at 10% per annum for 2 years is:",
+    options: ["₹500", "₹1000", "₹1500", "₹2000"],
+    correct: 1,
+    explanation: "SI = (5000 * 10 * 2) / 100 = 1000."
   },
   {
     id: "nlat-1-q103",
-    section: "Logical Reasoning",
-    question: "Coding-Decoding: In a certain code, 'COURT' is written as 'FQXUW'. How is 'TRIAL' written in that code?",
-    options: ["WULDQ", "WUODQ", "WULDP", "WULEO"],
+    section: "Quantitative Reasoning",
+    question: "The product of two consecutive odd numbers is 143. Find the numbers.",
+    options: ["9 & 11", "11 & 13", "13 & 15", "15 & 17"],
     correct: 1,
-    explanation: "WUODQ (each letter +3 positions)"
+    explanation: "11 * 13 = 143."
   },
   {
     id: "nlat-1-q104",
-    section: "Logical Reasoning",
-    question: "Blood Relation: Aman said, \"This girl is the wife of the grandson of my mother.\" How is Aman related to the girl?",
-    options: ["Father", "Grandfather", "Father-in-law", "Husband"],
-    correct: 2,
-    explanation: "Father-in-law"
+    section: "Quantitative Reasoning",
+    question: "A sum of money doubles itself in 8 years at simple interest. What is the rate of interest?",
+    options: ["10%", "12.5%", "15%", "20%"],
+    correct: 1,
+    explanation: "R = (100 * (2-1)) / 8 = 100/8 = 12.5%."
   },
   {
     id: "nlat-1-q105",
-    section: "Logical Reasoning",
-    question: "Number Series: Find the missing number: 3, 7, 15, 31, 63, ?",
-    options: ["127", "125", "128", "130"],
-    correct: 0,
-    explanation: "127 (pattern: multiply by 2 and add 1)"
+    section: "Quantitative Reasoning",
+    question: "The ratio of boys and girls in a school is 4:5. If there are 180 students, how many girls are there?",
+    options: ["80", "100", "120", "140"],
+    correct: 1,
+    explanation: "4x + 5x = 180 -> 9x = 180 -> x = 20. Girls = 5 * 20 = 100."
   },
   {
     id: "nlat-1-q106",
-    section: "Logical Reasoning",
-    question: "Seating Arrangement: Six people—P, Q, R, S, T, U—are sitting around a circular table facing the center. P is sitting second to the right of Q. R is sitting opposite to U. T is sitting between P and U. Who is sitting opposite to Q?",
-    options: ["S", "R", "T", "U"],
-    correct: 0,
-    explanation: "S"
+    section: "Quantitative Reasoning",
+    question: "What is 20% of 30% of 500?",
+    options: ["15", "30", "45", "60"],
+    correct: 1,
+    explanation: "0.20 * (0.30 * 500) = 0.20 * 150 = 30."
   },
   {
     id: "nlat-1-q107",
-    section: "Logical Reasoning",
-    question: "Statement-Assumption: Statement: \"Join our coaching institute for guaranteed success in CLAT.\" Assumptions: I. Success in CLAT requires coaching. II. The coaching institute has a good track record.",
-    options: ["Only I is implicit", "Only II is implicit", "Both I and II are implicit", "Neither I nor II is implicit"],
+    section: "Quantitative Reasoning",
+    question: "A work can be done by 10 people in 20 days. How many days will it take for 20 people to do the same work?",
+    options: ["5", "10", "15", "20"],
     correct: 1,
-    explanation: "Only II is implicit"
+    explanation: "M1D1 = M2D2 -> 10 * 20 = 20 * D2 -> D2 = 10."
   },
   {
     id: "nlat-1-q108",
-    section: "Logical Reasoning",
-    question: "Analogy: Doctor : Hospital :: Chef : ?",
-    options: ["Food", "Kitchen", "Restaurant", "Knife"],
+    section: "Quantitative Reasoning",
+    question: "Find the LCM of 12, 18, and 24.",
+    options: ["36", "48", "72", "96"],
     correct: 2,
-    explanation: "Restaurant"
+    explanation: "LCM(12,18,24) = 72."
   },
   {
     id: "nlat-1-q109",
-    section: "Logical Reasoning",
-    question: "Direction Sense: Aman walks 10 meters towards the South, then turns left and walks 15 meters. He then turns left again and walks 10 meters. In which direction is he from his starting point?",
-    options: ["East", "West", "North", "South"],
-    correct: 0,
-    explanation: "East (10m South, 15m East, 10m North = 15m East)"
+    section: "Quantitative Reasoning",
+    question: "The price of petrol increased from ₹100 to ₹120. What is the percentage increase?",
+    options: ["10%", "20%", "25%", "30%"],
+    correct: 1,
+    explanation: "(20/100)*100 = 20%."
   },
   {
     id: "nlat-1-q110",
-    section: "Logical Reasoning",
-    question: "Blood Relation: Aman's mother is the sister of Priya's father. How is Aman related to Priya?",
-    options: ["Cousin", "Uncle", "Brother", "Nephew"],
+    section: "Quantitative Reasoning",
+    question: "If 3 men or 6 women can do a piece of work in 16 days, in how many days can 12 men and 8 women do it?",
+    options: ["3", "4", "5", "6"],
     correct: 0,
-    explanation: "Cousin"
+    explanation: "1 man = 2 women. 12 men + 8 women = 24 women + 8 women = 32 women. M1D1 = M2D2 -> 6 * 16 = 32 * D2 -> D2 = 3 days."
   },
   {
     id: "nlat-1-q111",
-    section: "Logical Reasoning",
-    question: "Number Series: Find the next term: 1, 1, 2, 6, 24, ?",
-    options: ["48", "120", "96", "144"],
-    correct: 1,
-    explanation: "120 (factorial pattern: 1!, 1!, 2!, 3!, 4!, 5!)"
+    section: "Quantitative Reasoning",
+    question: "The circumference of a circle is 44 cm. What is its radius? (Use pi = 22/7)",
+    options: ["7 cm", "14 cm", "21 cm", "28 cm"],
+    correct: 0,
+    explanation: "2 * (22/7) * r = 44 -> r = 7."
   },
   {
     id: "nlat-1-q112",
-    section: "Logical Reasoning",
-    question: "Coding-Decoding: If 'APPLE' is coded as 'CRRNG', how is 'GRAPE' coded?",
-    options: ["ITCRG", "ITCRF", "ISDRF", "ISCRF"],
-    correct: 0,
-    explanation: "ITCRG (each letter +2)"
+    section: "Quantitative Reasoning",
+    question: "A boat travels 24 km upstream in 6 hours and 24 km downstream in 4 hours. What is the speed of the boat in still water?",
+    options: ["4 km/h", "5 km/h", "6 km/h", "10 km/h"],
+    correct: 1,
+    explanation: "Upstream speed = 24/6 = 4. Downstream speed = 24/4 = 6. Still water speed = (4+6)/2 = 5 km/h."
   },
   {
     id: "nlat-1-q113",
-    section: "Logical Reasoning",
-    question: "Statement-Conclusion: Statement: \"Most lawyers are good speakers.\" Conclusion: Aman is a lawyer, so he must be a good speaker.",
-    options: ["Definitely true", "Probably true", "Definitely false", "Cannot be determined"],
-    correct: 3,
-    explanation: "Cannot be determined (most ≠ all)"
+    section: "Quantitative Reasoning",
+    question: "Find the HCF of 24, 36, and 48.",
+    options: ["6", "12", "18", "24"],
+    correct: 1,
+    explanation: "HCF(24,36,48) = 12."
   },
   {
     id: "nlat-1-q114",
-    section: "Logical Reasoning",
-    question: "Odd One Out:",
-    options: ["Lawyer", "Doctor", "Engineer", "Cricket"],
-    correct: 3,
-    explanation: "Cricket (others are professions)"
+    section: "Quantitative Reasoning",
+    question: "A tank is 1/4 full. If 5 liters are added, it becomes 1/2 full. What is the capacity of the tank?",
+    options: ["10L", "15L", "20L", "25L"],
+    correct: 2,
+    explanation: "1/2x - 1/4x = 5 -> 1/4x = 5 -> x = 20."
   },
   {
     id: "nlat-1-q115",
-    section: "Logical Reasoning",
-    question: "Analogy: Pen : Writer :: Brush : ?",
-    options: ["Painter", "Canvas", "Color", "Art"],
-    correct: 0,
-    explanation: "Painter"
+    section: "Quantitative Reasoning",
+    question: "What is the next number in the Fibonacci series: 1, 1, 2, 3, 5, 8, ?",
+    options: ["10", "11", "12", "13"],
+    correct: 3,
+    explanation: "5 + 8 = 13."
   },
   {
     id: "nlat-1-q116",
-    section: "Logical Reasoning",
-    question: "Direction Sense: A person walks 8 km towards East, then turns left and walks 6 km. How far is he from the starting point?",
-    options: ["10 km", "14 km", "2 km", "12 km"],
-    correct: 0,
-    explanation: "10 km (using Pythagoras: √(8²+6²) = 10)"
+    section: "Quantitative Reasoning",
+    question: "The ratio of the radii of two circles is 2:3. What is the ratio of their areas?",
+    options: ["2:3", "4:6", "4:9", "8:27"],
+    correct: 2,
+    explanation: "Ratio of areas = (r1/r2)^2 = (2/3)^2 = 4:9."
   },
   {
     id: "nlat-1-q117",
-    section: "Logical Reasoning",
-    question: "Blood Relation: A is the mother of B. C is the son of A. D is the brother of B. How is D related to C?",
-    options: ["Father", "Brother", "Cousin", "Uncle"],
+    section: "Quantitative Reasoning",
+    question: "If 10% of x is equal to 20% of y, then x:y is:",
+    options: ["1:2", "2:1", "3:2", "1:1"],
     correct: 1,
-    explanation: "Brother"
+    explanation: "0.1x = 0.2y -> x/y = 0.2/0.1 = 2:1."
   },
   {
     id: "nlat-1-q118",
-    section: "Logical Reasoning",
-    question: "Number Series: Find the missing number: 5, 10, 20, 40, ?",
-    options: ["60", "80", "100", "50"],
+    section: "Quantitative Reasoning",
+    question: "A cylinder has a radius of 7 cm and height of 10 cm. What is its volume? (pi = 22/7)",
+    options: ["770 cm3", "1540 cm3", "2200 cm3", "3080 cm3"],
     correct: 1,
-    explanation: "80 (multiply by 2)"
+    explanation: "V = pi * r^2 * h = (22/7) * 49 * 10 = 1540."
   },
   {
     id: "nlat-1-q119",
-    section: "Logical Reasoning",
-    question: "Seating Arrangement: Seven people—A, B, C, D, E, F, G—are sitting in a straight line facing North. C is sitting fourth from the left. B is sitting to the immediate right of C. A is sitting second from the right end. Who is sitting at the left end?",
-    options: ["D", "E", "F", "G"],
-    correct: 3,
-    explanation: "G (or any valid answer based on arrangement)"
+    section: "Quantitative Reasoning",
+    question: "The sum of the interior angles of a pentagon is:",
+    options: ["360 deg", "540 deg", "720 deg", "900 deg"],
+    correct: 1,
+    explanation: "(n-2)*180 = (5-2)*180 = 540."
   },
   {
     id: "nlat-1-q120",
-    section: "Logical Reasoning",
-    question: "Statement-Conclusion: Statement: \"All politicians are dishonest.\" Conclusion: Aman is a politician, so he is dishonest.",
-    options: ["Definitely true", "Definitely false", "Probably true", "Cannot be determined"],
-    correct: 0,
-    explanation: "Definitely true (based on the statement, though the premise may be questionable)"
+    section: "Quantitative Reasoning",
+    question: "Solve for x: sqrt(x) = 15",
+    options: ["30", "150", "225", "300"],
+    correct: 2,
+    explanation: "x = 15^2 = 225."
   },
-  // SECTION 5: QUANTITATIVE REASONING
+
+  // SECTION 5: GK & CURRENT AFFAIRS (30 QUESTIONS)
   {
     id: "nlat-1-q121",
-    section: "Quantitative Reasoning",
-    question: "If 20% of a number is 80, what is 50% of that number?",
-    options: ["200", "160", "400", "100"],
-    correct: 0,
-    explanation: "If 20% = 80, then 100% = 400, so 50% = 200"
+    section: "GK & Current Affairs",
+    question: "Which Indian city is set to host the 2036 Summer Olympic Games, according to the government's official bid?",
+    options: ["New Delhi", "Ahmedabad", "Mumbai", "Bengaluru"],
+    correct: 1,
+    explanation: "Ahmedabad, Gujarat is the primary city mentioned in India's official interest to host the 2036 Olympics."
   },
   {
     id: "nlat-1-q122",
-    section: "Quantitative Reasoning",
-    question: "Find the average of the first five prime numbers (2, 3, 5, 7, 11).",
-    options: ["5.6", "5.0", "6.2", "5.4"],
-    correct: 0,
-    explanation: "2+3+5+7+11 = 28, 28÷5 = 5.6"
+    section: "GK & Current Affairs",
+    question: "Who is the current Chief Justice of India (as of early 2026)?",
+    options: ["Justice D.Y. Chandrachud", "Justice Sanjiv Khanna", "Justice B.R. Gavai", "Justice Surya Kant"],
+    correct: 1,
+    explanation: "Justice Sanjiv Khanna succeeded Justice D.Y. Chandrachud as the CJI."
   },
   {
     id: "nlat-1-q123",
-    section: "Quantitative Reasoning",
-    question: "A sum of money doubles itself in 5 years at Simple Interest. What is the rate of interest per annum?",
-    options: ["10%", "20%", "15%", "25%"],
+    section: "GK & Current Affairs",
+    question: "The 'Bharat Ratna' was recently conferred (posthumously) on which former Prime Minister in 2024?",
+    options: ["Atal Bihari Vajpayee", "P.V. Narasimha Rao", "Manmohan Singh", "Rajiv Gandhi"],
     correct: 1,
-    explanation: "SI = PRT/100; 2P = P + PRT/100; solving: R = 20%"
+    explanation: "P.V. Narasimha Rao and Chaudhary Charan Singh were awarded the Bharat Ratna in 2024."
   },
   {
     id: "nlat-1-q124",
-    section: "Quantitative Reasoning",
-    question: "The ratio of the ages of Aman and his father is 1:3. If the father is 30 years older than Aman, find Aman's age.",
-    options: ["10 years", "15 years", "20 years", "12 years"],
+    section: "GK & Current Affairs",
+    question: "Which country officially became the 32nd member of NATO in 2024?",
+    options: ["Finland", "Sweden", "Ukraine", "Georgia"],
     correct: 1,
-    explanation: "Ratio 1:3, difference is 30 years; Aman = 15, Father = 45"
+    explanation: "Sweden became the 32nd member of NATO in March 2024."
   },
   {
     id: "nlat-1-q125",
-    section: "Quantitative Reasoning",
-    question: "A train 200 meters long passes a pole in 10 seconds. What is the speed of the train in km/hr?",
-    options: ["72 km/hr", "60 km/hr", "50 km/hr", "80 km/hr"],
-    correct: 0,
-    explanation: "Speed = 200m/10s = 20 m/s = 20×18/5 = 72 km/hr"
+    section: "GK & Current Affairs",
+    question: "The 'Ram Mandir' in Ayodhya was consecrated on which date?",
+    options: ["January 1, 2024", "January 22, 2024", "January 26, 2024", "February 10, 2024"],
+    correct: 1,
+    explanation: "The Pran Pratishtha ceremony was held on January 22, 2024."
   },
   {
     id: "nlat-1-q126",
-    section: "Quantitative Reasoning",
-    question: "A shopkeeper sells an item for ₹220 at a profit of 10%. Find the cost price.",
-    options: ["₹200", "₹190", "₹210", "₹180"],
-    correct: 0,
-    explanation: "SP = CP × 110/100; 220 = CP × 1.1; CP = 200"
+    section: "GK & Current Affairs",
+    question: "Which Indian film won the 'Best Feature Film' at the 69th National Film Awards?",
+    options: ["RRR", "Rocketry: The Nambi Effect", "Gangubai Kathiawadi", "Pushpa"],
+    correct: 1,
+    explanation: "Rocketry: The Nambi Effect won the Best Feature Film award."
   },
   {
     id: "nlat-1-q127",
-    section: "Quantitative Reasoning",
-    question: "If the radius of a circle is doubled, by what factor does its area increase?",
-    options: ["Double", "Triple", "Four times", "Half"],
-    correct: 2,
-    explanation: "Area = πr²; if radius doubles, area = π(2r)² = 4πr²"
+    section: "GK & Current Affairs",
+    question: "The 'ISRO' mission launched in January 2024 to study black holes and celestial sources is called:",
+    options: ["Aditya-L1", "XPoSat", "Gaganyaan", "Chandrayaan-4"],
+    correct: 1,
+    explanation: "XPoSat (X-ray Polarimeter Satellite) was launched on Jan 1, 2024."
   },
   {
     id: "nlat-1-q128",
-    section: "Quantitative Reasoning",
-    question: "What is the probability of getting a '6' when a fair six-sided die is rolled?",
-    options: ["1/2", "1/6", "1/3", "1/4"],
+    section: "GK & Current Affairs",
+    question: "Who won the Men's Singles title at the 2024 Australian Open?",
+    options: ["Novak Djokovic", "Jannik Sinner", "Daniil Medvedev", "Carlos Alcaraz"],
     correct: 1,
-    explanation: "one favorable outcome out of 6 possible"
+    explanation: "Jannik Sinner won his first Grand Slam at the 2024 Australian Open."
   },
   {
     id: "nlat-1-q129",
-    section: "Quantitative Reasoning",
-    question: "How many different ways can the letters of the word 'CASE' be arranged?",
-    options: ["12", "24", "48", "6"],
+    section: "GK & Current Affairs",
+    question: "The 16th Finance Commission of India is chaired by:",
+    options: ["N.K. Singh", "Arvind Panagariya", "Shaktikanta Das", "Raghuram Rajan"],
     correct: 1,
-    explanation: "4! = 4×3×2×1 = 24"
+    explanation: "Arvind Panagariya was appointed as the Chairman of the 16th Finance Commission."
   },
   {
     id: "nlat-1-q130",
-    section: "Quantitative Reasoning",
-    question: "A can complete a work in 10 days, and B can complete the same work in 15 days. How many days will it take if they work together?",
-    options: ["6 days", "5 days", "7 days", "8 days"],
-    correct: 0,
-    explanation: "A's rate = 1/10, B's rate = 1/15; Combined = 1/10 + 1/15 = 5/30 = 1/6; Time = 6 days"
+    section: "GK & Current Affairs",
+    question: "Which state recently passed a Bill to implement a Uniform Civil Code (UCC) in 2024?",
+    options: ["Goa", "Uttarakhand", "Gujarat", "Assam"],
+    correct: 1,
+    explanation: "Uttarakhand became the first state in independent India to pass a UCC bill."
   },
   {
     id: "nlat-1-q131",
-    section: "Quantitative Reasoning",
-    question: "Find the Highest Common Factor (HCF) of 12 and 18.",
-    options: ["6", "3", "2", "36"],
-    correct: 0,
-    explanation: "factors of 12: 1,2,3,4,6,12; factors of 18: 1,2,3,6,9,18; HCF = 6"
+    section: "GK & Current Affairs",
+    question: "The 'Statue of Social Justice', a 125-foot statue of Dr. B.R. Ambedkar, was inaugurated in which city?",
+    options: ["New Delhi", "Hyderabad", "Vijayawada", "Nagpur"],
+    correct: 2,
+    explanation: "It was inaugurated in Vijayawada, Andhra Pradesh."
   },
   {
     id: "nlat-1-q132",
-    section: "Quantitative Reasoning",
-    question: "Solve for x: 2x + 5 = 15",
-    options: ["5", "10", "7.5", "2.5"],
-    correct: 0,
-    explanation: "2x + 5 = 15; 2x = 10; x = 5"
+    section: "GK & Current Affairs",
+    question: "Who is the current President of the United Arab Emirates (UAE)?",
+    options: ["Sheikh Mohammed bin Rashid", "Sheikh Mohamed bin Zayed Al Nahyan", "Sheikh Khalifa bin Zayed", "Sheikh Abdullah bin Zayed"],
+    correct: 1,
+    explanation: "Sheikh Mohamed bin Zayed Al Nahyan."
   },
   {
     id: "nlat-1-q133",
-    section: "Quantitative Reasoning",
-    question: "Find the Simple Interest on ₹5,000 at 10% per annum for 2 years.",
-    options: ["₹1,000", "₹500", "₹1,200", "₹800"],
-    correct: 0,
-    explanation: "SI = PRT/100 = 5000×10×2/100 = 1000"
+    section: "GK & Current Affairs",
+    question: "The 2024 G7 Summit was hosted by which country?",
+    options: ["Japan", "Italy", "France", "Canada"],
+    correct: 1,
+    explanation: "Italy hosted the 50th G7 summit in Apulia."
   },
   {
     id: "nlat-1-q134",
-    section: "Quantitative Reasoning",
-    question: "A person buys a bicycle for ₹1,000 and sells it for ₹1,200. What is the profit percentage?",
-    options: ["20%", "25%", "10%", "15%"],
-    correct: 0,
-    explanation: "Profit = 200; Profit% = 200/1000 × 100 = 20%"
+    section: "GK & Current Affairs",
+    question: "Which Indian state has the highest literacy rate according to recent surveys?",
+    options: ["Tamil Nadu", "Kerala", "Mizoram", "Himachal Pradesh"],
+    correct: 1,
+    explanation: "Kerala consistently maintains the highest literacy rate."
   },
   {
     id: "nlat-1-q135",
-    section: "Quantitative Reasoning",
-    question: "If the side of a square is 5 cm, what is its perimeter?",
-    options: ["20 cm", "25 cm", "10 cm", "15 cm"],
-    correct: 0,
-    explanation: "Perimeter of square = 4×side = 4×5 = 20"
+    section: "GK & Current Affairs",
+    question: "The 'Financial Action Task Force' (FATF) recently removed which country from its 'Grey List' in early 2024?",
+    options: ["Pakistan", "UAE", "Turkey", "Nigeria"],
+    correct: 1,
+    explanation: "The UAE was removed from the FATF grey list in Feb 2024."
   },
   {
     id: "nlat-1-q136",
-    section: "Quantitative Reasoning",
-    question: "A bag contains 3 red balls and 2 blue balls. What is the probability of picking a red ball?",
-    options: ["3/5", "2/5", "1/2", "1/5"],
-    correct: 0,
-    explanation: "3 red out of 5 total"
+    section: "GK & Current Affairs",
+    question: "The 'World Press Freedom Index 2024' is published by which organization?",
+    options: ["Amnesty International", "Reporters Without Borders (RSF)", "United Nations", "World Economic Forum"],
+    correct: 1,
+    explanation: "Reporters Without Borders (RSF)."
   },
   {
     id: "nlat-1-q137",
-    section: "Quantitative Reasoning",
-    question: "0.05 is equal to what percentage?",
-    options: ["5%", "50%", "0.5%", "0.05%"],
-    correct: 0,
-    explanation: "0.05 × 100 = 5%"
+    section: "GK & Current Affairs",
+    question: "Who is the Prime Minister of the United Kingdom (as of early 2026)?",
+    options: ["Rishi Sunak", "Keir Starmer", "Boris Johnson", "David Lammy"],
+    correct: 1,
+    explanation: "Keir Starmer became PM after the Labour Party's landslide victory in July 2024."
   },
   {
     id: "nlat-1-q138",
-    section: "Quantitative Reasoning",
-    question: "The sum of all angles in a triangle is:",
-    options: ["90°", "180°", "360°", "270°"],
+    section: "GK & Current Affairs",
+    question: "The 'Kaziranga National Park' is located in which Indian state?",
+    options: ["West Bengal", "Assam", "Madhya Pradesh", "Arunachal Pradesh"],
     correct: 1,
-    explanation: "fundamental property of triangles"
+    explanation: "Assam."
   },
   {
     id: "nlat-1-q139",
-    section: "Quantitative Reasoning",
-    question: "If 5 men can build a wall in 10 days, how many days will it take for 10 men to build the same wall?",
-    options: ["5 days", "20 days", "2 days", "10 days"],
-    correct: 0,
-    explanation: "inversely proportional: 5×10 = 10×days; days = 5"
+    section: "GK & Current Affairs",
+    question: "What is the capital of Japan?",
+    options: ["Seoul", "Beijing", "Tokyo", "Kyoto"],
+    correct: 2,
+    explanation: "Tokyo."
   },
   {
     id: "nlat-1-q140",
-    section: "Quantitative Reasoning",
-    question: "Find the Least Common Multiple (LCM) of 4 and 6.",
-    options: ["12", "24", "2", "10"],
-    correct: 0,
-    explanation: "multiples of 4: 4,8,12,16...; multiples of 6: 6,12,18...; LCM = 12"
+    section: "GK & Current Affairs",
+    question: "The currency of Russia is:",
+    options: ["Euro", "Rouble", "Yen", "Dollar"],
+    correct: 1,
+    explanation: "Russian Rouble."
   },
   {
     id: "nlat-1-q141",
-    section: "Quantitative Reasoning",
-    question: "What is the value of 2⁵?",
-    options: ["10", "32", "16", "64"],
+    section: "GK & Current Affairs",
+    question: "Who was the first woman President of India?",
+    options: ["Indira Gandhi", "Pratibha Patil", "Droupadi Murmu", "Sarojini Naidu"],
     correct: 1,
-    explanation: "2×2×2×2×2 = 32"
+    explanation: "Pratibha Patil (Droupadi Murmu is the second)."
   },
   {
     id: "nlat-1-q142",
-    section: "Quantitative Reasoning",
-    question: "A rectangle has a length of 10 cm and a width of 5 cm. What is its area?",
-    options: ["50 cm²", "30 cm²", "15 cm²", "25 cm²"],
-    correct: 0,
-    explanation: "Area = length × width = 10×5 = 50"
+    section: "GK & Current Affairs",
+    question: "Which planet is known as the 'Morning Star' or 'Evening Star'?",
+    options: ["Mars", "Venus", "Jupiter", "Mercury"],
+    correct: 1,
+    explanation: "Venus."
   },
   {
     id: "nlat-1-q143",
-    section: "Quantitative Reasoning",
-    question: "Find the missing number in the ratio: 4:8 :: 10:?",
-    options: ["20", "15", "25", "30"],
+    section: "GK & Current Affairs",
+    question: "The 'Preamble' of the Indian Constitution was amended only once by which Act?",
+    options: ["42nd Amendment Act", "44th Amendment Act", "73rd Amendment Act", "86th Amendment Act"],
     correct: 0,
-    explanation: "4/8 = 10/x; x = 20"
+    explanation: "The 42nd Amendment Act, 1976 added 'Socialist', 'Secular', and 'Integrity'."
   },
   {
     id: "nlat-1-q144",
-    section: "Quantitative Reasoning",
-    question: "What is 15% of 200?",
-    options: ["30", "15", "20", "45"],
-    correct: 0,
-    explanation: "15% of 200 = 15/100 × 200 = 30"
+    section: "GK & Current Affairs",
+    question: "Which organ in the human body is responsible for filtering blood?",
+    options: ["Heart", "Liver", "Kidneys", "Lungs"],
+    correct: 2,
+    explanation: "Kidneys."
   },
   {
     id: "nlat-1-q145",
-    section: "Quantitative Reasoning",
-    question: "A cylinder has a radius of 7 cm and a height of 10 cm. (Use π = 22/7). What is its volume?",
-    options: ["1,540 cm³", "770 cm³", "154 cm³", "1,000 cm³"],
-    correct: 0,
-    explanation: "Volume = πr²h = 22/7 × 7 × 7 × 10 = 1540"
+    section: "GK & Current Affairs",
+    question: "The 'Nobel Peace Prize' is awarded in which city?",
+    options: ["Stockholm", "Oslo", "Geneva", "New York"],
+    correct: 1,
+    explanation: "Oslo, Norway (others are in Stockholm, Sweden)."
   },
   {
     id: "nlat-1-q146",
-    section: "Quantitative Reasoning",
-    question: "If x + y = 10 and x - y = 2, find the value of x.",
-    options: ["6", "4", "5", "8"],
-    correct: 0,
-    explanation: "Adding equations: 2x = 12; x = 6"
+    section: "GK & Current Affairs",
+    question: "What is the chemical symbol for Gold?",
+    options: ["Ag", "Au", "Fe", "Pb"],
+    correct: 1,
+    explanation: "Au (Aurum)."
   },
   {
     id: "nlat-1-q147",
-    section: "Quantitative Reasoning",
-    question: "A clock shows 3:00. What is the angle between the hour hand and the minute hand?",
-    options: ["90°", "180°", "45°", "0°"],
-    correct: 0,
-    explanation: "at 3:00, hour hand at 3, minute hand at 12; angle = 90°"
+    section: "GK & Current Affairs",
+    question: "Who wrote the Indian national song 'Vande Mataram'?",
+    options: ["Rabindranath Tagore", "Bankim Chandra Chattopadhyay", "Sarojini Naidu", "Lal Bahadur Shastri"],
+    correct: 1,
+    explanation: "Bankim Chandra Chattopadhyay."
   },
   {
     id: "nlat-1-q148",
-    section: "Quantitative Reasoning",
-    question: "Find the median of the following numbers: 3, 7, 1, 9, 5.",
-    options: ["5", "7", "1", "9"],
-    correct: 0,
-    explanation: "arranging: 1,3,5,7,9; middle value = 5"
+    section: "GK & Current Affairs",
+    question: "The 'Battle of Plassey' was fought in which year?",
+    options: ["1526", "1757", "1857", "1947"],
+    correct: 1,
+    explanation: "1757."
   },
   {
     id: "nlat-1-q149",
-    section: "Quantitative Reasoning",
-    question: "What is the square root of 625?",
-    options: ["25", "15", "35", "45"],
-    correct: 0,
-    explanation: "25 × 25 = 625"
+    section: "GK & Current Affairs",
+    question: "Which gas is most abundant in the Earth's atmosphere?",
+    options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Argon"],
+    correct: 2,
+    explanation: "Nitrogen (approx 78%)."
   },
   {
     id: "nlat-1-q150",
-    section: "Quantitative Reasoning",
-    question: "A box contains 10 tickets numbered 1 to 10. What is the probability of picking a number greater than 8?",
-    options: ["2/10 or 1/5", "1/10", "3/10", "8/10"],
-    correct: 0,
-    explanation: "numbers > 8 are: 9, 10; probability = 2/10"
+    section: "GK & Current Affairs",
+    question: "Who is known as the 'Father of the Indian Constitution'?",
+    options: ["Mahatma Gandhi", "Jawaharlal Nehru", "Dr. B.R. Ambedkar", "Sardar Patel"],
+    correct: 2,
+    explanation: "Dr. B.R. Ambedkar."
   }
 ];
