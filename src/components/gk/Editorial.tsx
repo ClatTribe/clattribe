@@ -210,6 +210,23 @@ export default function Editorial() {
       })
       .catch((e) => console.error("Editorial fetch failed:", e));
   }, []);
+
+  React.useEffect(() => {
+    if (!selectedEditorial) return;
+    const _startMs = Date.now();
+    return () => {
+      const _elapsed = (Date.now() - _startMs) / 60000;
+      if (_elapsed >= 0.3 && _elapsed <= 25) {
+        const _wc = selectedEditorial.content ? selectedEditorial.content.split(/\s+/).filter(Boolean).length : 200;
+        const _wpm = Math.round(_wc / _elapsed);
+        if (_wpm >= 80 && _wpm <= 700) {
+          const _ls = typeof window !== "undefined" ? window.localStorage : { getItem: () => null, setItem: () => null };
+          const _prev = parseInt(_ls.getItem("gk_readingSpeed") || "0", 10);
+          _ls.setItem("gk_readingSpeed", String(_prev > 0 ? Math.round((_prev + _wpm) / 2) : _wpm));
+        }
+      }
+    };
+  }, [selectedEditorial]);
   const filteredEditorials = React.useMemo(() => {
     return allEditorials.filter((e) =>
       e.date.includes(`${selectedDate}, ${new Date().getFullYear()}`),
