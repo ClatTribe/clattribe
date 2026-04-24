@@ -274,7 +274,21 @@ export default function GKDashboard() {
       </section>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {accuracy === "--" && readingSpeed === "--" && quizzesTaken === 0 ? (
+        <div className="bg-white dark:bg-white/5 border border-gray-100 dark:border-white/5 rounded-3xl md:rounded-[2rem] p-8 md:p-10 flex flex-col items-center justify-center text-center gap-5">
+          <div className="w-16 h-16 bg-emerald-50 dark:bg-emerald-500/10 rounded-full flex items-center justify-center">
+            <TrendingUp size={28} className="text-emerald-600" />
+          </div>
+          <div className="space-y-1.5">
+            <p className="text-base font-semibold text-gray-800 dark:text-white">Your stats will appear here</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400">Complete your first editorial to see your accuracy, reading speed, and more.</p>
+          </div>
+          <a href="/gk/editorial" className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-6 py-2.5 rounded-full transition-colors">
+            Read today’s editorial →
+          </a>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {stats.map((stat, idx) => (
           <motion.div
             key={stat.label}
@@ -298,7 +312,8 @@ export default function GKDashboard() {
             </div>
           </motion.div>
         ))}
-      </div>
+        </div>
+      )}
 
       {/* Streak */}
       <section className="bg-white dark:bg-white/5 border border-gray-100 dark:border-white/5 rounded-3xl md:rounded-[2rem] p-6 md:p-10 relative overflow-hidden">
