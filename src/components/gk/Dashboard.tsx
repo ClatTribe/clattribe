@@ -97,6 +97,7 @@ export default function GKDashboard() {
   const [toast, setToast] = React.useState<string | null>(null);
   const [userName, setUserName] = React.useState("Student");
   const [quizzesTaken, setQuizzesTaken] = React.useState(0);
+  const [isFirstVisit, setIsFirstVisit] = React.useState(false);
   const [accuracy, setAccuracy] = React.useState("--");
   const [readingSpeed, setReadingSpeed] = React.useState("--");
   const [streak, setStreak] = React.useState(1);
@@ -121,6 +122,9 @@ export default function GKDashboard() {
       10,
     );
     setQuizzesTaken(q);
+
+    const _ls = typeof window !== "undefined" ? window.localStorage : { getItem: () => null, setItem: () => null };
+    if (!_ls.getItem("gk_dashboardVisited")) { setIsFirstVisit(true); _ls.setItem("gk_dashboardVisited", "1"); }
 
     const acc = (
       typeof window !== "undefined"
@@ -274,7 +278,7 @@ export default function GKDashboard() {
       </section>
 
       {/* Stats */}
-      {accuracy === "--" && readingSpeed === "--" && quizzesTaken === 0 ? (
+      {isFirstVisit ? (
         <div className="bg-white dark:bg-white/5 border border-gray-100 dark:border-white/5 rounded-3xl md:rounded-[2rem] p-8 md:p-10 flex flex-col items-center justify-center text-center gap-5">
           <div className="w-16 h-16 bg-emerald-50 dark:bg-emerald-500/10 rounded-full flex items-center justify-center">
             <TrendingUp size={28} className="text-emerald-600" />
