@@ -140,6 +140,12 @@ export default function GKPYQTest({ onComplete, onBack }: Props) {
       0,
     );
     onComplete(score, questions.length);
+    const _ls2 = typeof window !== "undefined" ? window.localStorage : { getItem: () => null, setItem: () => null };
+    const _qt = parseInt(_ls2.getItem("gk_quizzesTaken") || "0", 10);
+    _ls2.setItem("gk_quizzesTaken", String(_qt + 1));
+    const _pct = Math.round((score / questions.length) * 100);
+    const _pa = parseInt(_ls2.getItem("gk_accuracy") || "0", 10);
+    _ls2.setItem("gk_accuracy", String(_pa > 0 ? Math.round((_pa + _pct) / 2) : _pct));
     setStep("result");
   }
 
