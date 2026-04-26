@@ -16,29 +16,52 @@ export const GK_CATEGORIES = [
   'Awards & Honors',
 ];
 
-export const GK_DAILY_TARGETS = [
-  {
-    id: '1',
-    title: "Read Today's Hindu Editorial Analysis",
-    description: 'Focus on the legal implications of the recent Supreme Court ruling.',
-    type: 'Reading',
-    is_completed: false,
-  },
-  {
-    id: '2',
-    title: 'Take 10-Question Daily Quiz',
-    description: 'Test your knowledge on the G20 Summit highlights.',
-    type: 'Quiz',
-    is_completed: false,
-  },
-  {
-    id: '3',
-    title: 'Review Bookmarked Passages',
-    description: 'Quickly go through your saved legal current affairs.',
-    type: 'Reading',
-    is_completed: true,
-  },
-];
+// Program start date — same anchor used by the weekly quiz system (Jan 5, 2026 = Week 1)
+const _PROGRAM_START = new Date(2026, 0, 5);
+
+function _getCurrentWeekNumber(): number {
+  const msPerWeek = 7 * 24 * 60 * 60 * 1000;
+  const elapsed = Date.now() - _PROGRAM_START.getTime();
+  return Math.max(1, Math.floor(elapsed / msPerWeek) + 1);
+}
+
+function _formatToday(): string {
+  return new Date().toLocaleDateString('en-IN', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+}
+
+/** Returns daily targets with descriptions derived from today's date — no stale text. */
+export function getDailyTargets() {
+  const weekNum = _getCurrentWeekNumber();
+  const today = _formatToday();
+  return [
+    {
+      id: '1',
+      title: "Read Today's Hindu Editorial",
+      description: `${today} — pick out the legal and polity angles that CLAT could passage-test.`,
+      type: 'Reading',
+      is_completed: false,
+    },
+    {
+      id: '2',
+      title: `Attempt Week ${weekNum} Quiz`,
+      description: `This week's current affairs quiz is live — 20 questions, 20 minutes.`,
+      type: 'Quiz',
+      is_completed: false,
+    },
+    {
+      id: '3',
+      title: 'Review Bookmarked Passages',
+      description: 'Go through your saved passages and re-check the explanations you missed.',
+      type: 'Reading',
+      is_completed: false,
+    },
+  ];
+}
 
 export const GK_LEADERBOARD_DATA = [
   { id: '1', name: 'Rahul Sharma', score: 2850, rank: 1, avatar: 'RS' },
