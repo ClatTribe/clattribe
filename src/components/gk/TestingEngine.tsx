@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Zap,
@@ -22,7 +23,6 @@ import GKPassageTest from './PassageTest';
 import GKSectionalTest from './GKSectionalTest';
 import GKWeeklyTest from './GKWeeklyTest';
 import GKPYQTest from './GKPYQTest';
-import GKFullMockTest from './GKFullMockTest';
 
 type TestType = 'weekly' | 'pyq' | 'mock' | 'sectional' | 'passage' | 'custom' | null;
 
@@ -410,6 +410,7 @@ interface TestingEngineProps {
 }
 
 export default function TestingEngine({ hasMockAccess = false, onUnlockMocks }: TestingEngineProps) {
+  const router = useRouter();
   const [activeCategory, setActiveCategory] = React.useState<TestType>(null);
   const [testResult, setTestResult] = React.useState<TestResult | null>(null);
   const [history, setHistory] = React.useState<TestResult[]>(() => {
@@ -537,16 +538,6 @@ export default function TestingEngine({ hasMockAccess = false, onUnlockMocks }: 
         </button>
         <GKSectionalTest onComplete={handleTestComplete} />
       </div>
-    );
-  }
-
-  if (activeCategory === 'mock') {
-    return (
-      <GKFullMockTest
-        hasMockAccess={hasMockAccess}
-        onUnlockMocks={onUnlockMocks}
-        onBack={() => setActiveCategory(null)}
-      />
     );
   }
 
@@ -707,7 +698,7 @@ export default function TestingEngine({ hasMockAccess = false, onUnlockMocks }: 
                 key={cat.id}
                 whileHover={{ y: -8, scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={() => setActiveCategory(cat.id)}
+                onClick={() => isMock ? router.push('/gk/testing/exams') : setActiveCategory(cat.id)}
                 className="group relative bg-white dark:bg-white/5 p-8 rounded-[2.5rem] border border-gray-100 dark:border-white/10 text-left transition-all duration-300 overflow-hidden hover:shadow-2xl hover:shadow-[#F59E0B]/10"
               >
                 {/* Background Accent */}
