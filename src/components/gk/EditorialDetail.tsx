@@ -1,0 +1,365 @@
+"use client";
+import React from "react";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import {
+  ChevronRight,
+  BookMarked,
+  FileText,
+  Zap,
+  ArrowRight,
+} from "lucide-react";
+
+export interface MCQ {
+  question: string;
+  options: string[];
+  correctAnswer: number;
+  explanation: string;
+}
+
+export interface EditorialCard {
+  id: string;
+  source: "The Hindu" | "The Indian Express";
+  title: string;
+  date: string;
+  isoDate: string;
+  slug: string;
+  readTime: string;
+  summary: string;
+  content: string;
+  tags: string[];
+  mcqs: MCQ[];
+}
+
+function cleanEditorialContent(raw: string): string[] {
+  if (!raw) return [];
+  const footerMarkers = [
+    "\nPublished\n",
+    "\nRead Comments",
+    "\nCopy link",
+    "\nPrint\n",
+    "\nShare\n",
+  ];
+  let text = raw;
+  for (const marker of footerMarkers) {
+    const idx = text.indexOf(marker);
+    if (idx > 200) {
+      text = text.substring(0, idx);
+      break;
+    }
+  }
+  text = text.replace(/\n([,;])/g, "$1");
+  const lines = text
+    .split("\n")
+    .map((l) => l.trim())
+    .filter((l) => l.length > 0);
+  const paragraphs: string[] = [];
+  let current = "";
+  for (const line of lines) {
+    if (!current) {
+      current = line;
+      continue;
+    }
+    if (/^[a-z,;(]/.test(line)) {
+      current += " " + line;
+    } else {
+      paragraphs.push(current);
+      current = line;
+    }
+  }
+  if (current) paragraphs.push(current);
+  return paragraphs.filter((p) => p.length > 10);
+}
+
+export default function EditorialDetail({
+  editorial: item,
+}: {
+  editorial: EditorialCard;
+}) {
+  const searchParams = useSearchParams();
+  const autoOpenQuiz = searchParams?.get("quiz") === "1";
+
+  const [showQuiz, setShowQuiz] = React.useState(autoOpenQuiz);
+  const [currentQuestion, setCurrentQuestion] = React.useState(0);
+  const [selectedOption, setSelectedOption] = React.useState<number | null>(null);
+  const [showExplanation, setShowExplanation] = React.useState(false);
+  const [score, setScore] = React.useState(0);
+  const [quizFinished, setQuizFinished] = React.useState(false);
+  const [bookmarked, setBookmarked] = React.useState(false);
+
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      const list = JSON.parse(
+        window.localStorage.getItem("gk_editorial_bookmarks") || "[]",
+      );
+      setBookmarked(Array.isArray(list) && list.includes(item.id));
+    } catch {}
+  }, [item.id]);
+
+  // Reading-speed tracking — stores rolling avg in localStorage for the dashboard widget
+  React.useEffect(() => {
+    const startMs = Date.now();
+    return () => {
+      const elapsed = (Date.now() - startMs) / 60000;
+      if (elapsed >= 0.3 && elapsed <= 25) {
+        const wc = item.content
+          ? item.content.split(/\s+/).filter(Boolean).length
+          : 200;
+        const wpm = Math.round(wc / elapsed);
+        if (wpm >= 80 && wpm <= 700 && typeof window !== "undefined") {
+          const prev = parseInt(
+            window.localStorage.getItem("gk_readingSpeed") || "0",
+            10,
+          );
+          window.localStorage.setItem(
+            "gk_readingSpeed",
+            String(prev > 0 ? Math.round((prev + wpm) / 2) : wpm),
+          );
+        }
+      }
+    };
+  }, [item]);
+
+  const toggleBookmark = () => {
+    if (typeof window === "undefined") return;
+    try {
+      const list: string[] = JSON.parse(
+        window.localStorage.getItem("gk_editorial_bookmarks") || "[]",
+      );
+      const next = list.includes(item.id)
+        ? list.filter((x) => x !== item.id)
+        : [...list, item.id];
+      window.localStorage.setItem(
+        "gk_editorial_bookmarks",
+        JSON.stringify(next),
+      );
+      setBookmarked(next.includes(item.id));
+    } catch {}
+  };
+
+  const handleOptionSelect = (idx: number) => {
+    if (selectedOption !== null) return;
+    setSelectedOption(idx);
+    if (idx === item.mcqs[currentQuestion].correctAnswer) setScore((s) => s + 1);
+    setShowExplanation(true);
+  };
+
+  const nextQuestion = () => {
+    if (currentQuestion + 1 < item.mcqs.length) {
+      setCurrentQuestion((c) => c + 1);
+      setSelectedOption(null);
+      setShowExplanation(false);
+    } else setQuizFinished(true);
+  };
+
+  const paragraphs = cleanEditorialContent(item.content);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="max-w-4xl mx-auto space-y-8"
+    >
+      <Link
+        href="/gk/editorial"
+        className="flex items-center gap-2 text-gray-500 hover:text-[#F59E0B] transition-colors font-bold uppercase text-[10px] tracking-widest"
+      >
+        <ChevronRight size={16} className="rotate-180" /> Back to Editorials
+      </Link>
+
+      <div className="bg-white dark:bg-white/5 p-6 md:p-10 rounded-3xl md:rounded-[3rem] border border-gray-100 dark:border-white/10 space-y-8">
+        <div className="space-y-4">
+          <div className="flex items-center gap-3">
+            <span
+              className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${
+                item.source === "The Hindu"
+                  ? "bg-[#F59E0B]/10 text-[#F59E0B]"
+                  : "bg-blue-500/10 text-blue-500"
+              }`}
+            >
+              {item.source}
+            </span>
+            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+              {item.date}
+            </span>
+          </div>
+          <div className="flex items-start justify-between gap-4">
+            <h1 className="text-3xl font-black text-[#060818] dark:text-white leading-tight flex-1">
+              {item.title}
+            </h1>
+            <button
+              onClick={toggleBookmark}
+              className={`p-2 rounded-xl transition-all shrink-0 ${
+                bookmarked
+                  ? "text-amber-500 bg-amber-50 dark:bg-amber-500/10"
+                  : "text-gray-400 hover:text-amber-500 bg-gray-50 dark:bg-white/5"
+              }`}
+              title="Bookmark article"
+            >
+              <BookMarked size={20} />
+            </button>
+          </div>
+          <div className="flex gap-2">
+            {item.tags.map((tag) => (
+              <span
+                key={tag}
+                className="px-3 py-1 rounded-full bg-gray-50 dark:bg-white/5 text-[10px] font-black text-gray-400 uppercase tracking-widest"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="prose dark:prose-invert max-w-none space-y-5">
+          {paragraphs.map((para, idx) => (
+            <p
+              key={idx}
+              className="text-base md:text-lg text-gray-600 dark:text-gray-300 leading-relaxed font-medium"
+            >
+              {para}
+            </p>
+          ))}
+        </div>
+
+        <div className="bg-amber-50 dark:bg-[#F59E0B]/10 border border-amber-200 dark:border-[#F59E0B]/20 rounded-2xl p-6">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-6 h-6 bg-[#F59E0B] rounded-lg flex items-center justify-center shrink-0">
+              <Zap size={12} className="text-[#060818]" />
+            </div>
+            <span className="text-xs font-black uppercase tracking-widest text-[#F59E0B]">
+              Key GK Takeaways for CLAT
+            </span>
+          </div>
+          <ul className="space-y-3">
+            {paragraphs.slice(0, 4).map((para, i) => (
+              <li
+                key={i}
+                className="flex items-start gap-3 text-sm text-gray-700 dark:text-gray-300 font-medium leading-relaxed"
+              >
+                <span className="w-5 h-5 bg-[#F59E0B]/20 text-[#F59E0B] rounded-full flex items-center justify-center shrink-0 text-[10px] font-black mt-0.5">
+                  {i + 1}
+                </span>
+                <span>
+                  {para.length > 200 ? para.substring(0, 200) + "…" : para}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="pt-8 border-t border-gray-100 dark:border-white/5 flex flex-col sm:flex-row justify-between items-center gap-6">
+          <div className="flex items-center gap-4">
+            <button className="flex items-center gap-2 text-[#060818] dark:text-white font-bold hover:text-[#F59E0B] transition-colors">
+              <FileText size={20} /> Download PDF
+            </button>
+          </div>
+          {item.mcqs.length > 0 && (
+            <button
+              onClick={() => setShowQuiz(true)}
+              className="w-full sm:w-auto bg-[#F59E0B] text-[#060818] px-8 py-4 rounded-2xl font-black text-sm shadow-xl shadow-[#F59E0B]/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+            >
+              <Zap size={18} fill="currentColor" /> Take Passage Quiz
+            </button>
+          )}
+        </div>
+      </div>
+
+      {showQuiz && item.mcqs.length > 0 && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="fixed inset-0 z-[100] bg-[#060818]/90 backdrop-blur-sm flex items-center justify-center p-6"
+        >
+          <div className="bg-white dark:bg-[#060818] w-full max-w-2xl rounded-[3rem] p-10 shadow-2xl border border-white/10 relative overflow-hidden">
+            <button
+              onClick={() => setShowQuiz(false)}
+              className="absolute top-8 right-8 text-gray-400 hover:text-white transition-colors"
+            >
+              <Zap size={24} className="rotate-45" />
+            </button>
+
+            {!quizFinished ? (
+              <div className="space-y-8">
+                <div className="space-y-2">
+                  <p className="text-[10px] font-black text-[#F59E0B] uppercase tracking-widest">
+                    Question {currentQuestion + 1} of {item.mcqs.length}
+                  </p>
+                  <h3 className="text-xl font-black text-[#060818] dark:text-white">
+                    {item.mcqs[currentQuestion].question}
+                  </h3>
+                </div>
+                <div className="grid gap-4">
+                  {item.mcqs[currentQuestion].options.map((option, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => handleOptionSelect(idx)}
+                      disabled={selectedOption !== null}
+                      className={`w-full p-6 rounded-2xl text-left font-bold transition-all border-2 ${
+                        selectedOption === idx
+                          ? idx === item.mcqs[currentQuestion].correctAnswer
+                            ? "bg-green-500 border-green-500 text-white"
+                            : "bg-red-500 border-red-500 text-white"
+                          : selectedOption !== null &&
+                              idx === item.mcqs[currentQuestion].correctAnswer
+                            ? "bg-green-500/20 border-green-500 text-green-500"
+                            : "bg-gray-50 dark:bg-white/5 border-transparent text-gray-600 dark:text-gray-300 hover:border-[#F59E0B]/50"
+                      }`}
+                    >
+                      {option}
+                    </button>
+                  ))}
+                </div>
+                {showExplanation && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-6 bg-[#F59E0B]/10 rounded-2xl border border-[#F59E0B]/20"
+                  >
+                    <p className="text-sm font-bold text-[#F59E0B] mb-2 uppercase tracking-widest">
+                      Explanation
+                    </p>
+                    <p className="text-sm text-gray-600 dark:text-gray-300 font-medium">
+                      {item.mcqs[currentQuestion].explanation}
+                    </p>
+                    <button
+                      onClick={nextQuestion}
+                      className="mt-6 w-full bg-[#F59E0B] text-[#060818] py-4 rounded-xl font-black text-sm flex items-center justify-center gap-2"
+                    >
+                      {currentQuestion + 1 < item.mcqs.length
+                        ? "Next Question"
+                        : "Finish Quiz"}{" "}
+                      <ArrowRight size={18} />
+                    </button>
+                  </motion.div>
+                )}
+              </div>
+            ) : (
+              <div className="text-center space-y-8 py-10">
+                <div className="w-24 h-24 bg-[#F59E0B]/10 rounded-full flex items-center justify-center mx-auto">
+                  <Zap size={48} className="text-[#F59E0B]" fill="currentColor" />
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-3xl font-black text-[#060818] dark:text-white">
+                    Quiz Completed!
+                  </h3>
+                  <p className="text-gray-500 font-bold">
+                    You scored {score} out of {item.mcqs.length}
+                  </p>
+                </div>
+                <button
+                  onClick={() => setShowQuiz(false)}
+                  className="bg-[#F59E0B] text-[#060818] px-10 py-4 rounded-2xl font-black text-sm shadow-xl shadow-[#F59E0B]/20"
+                >
+                  Back to Editorial
+                </button>
+              </div>
+            )}
+          </div>
+        </motion.div>
+      )}
+    </motion.div>
+  );
+}
