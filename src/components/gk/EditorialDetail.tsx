@@ -30,6 +30,8 @@ export interface EditorialCard {
   content: string;
   tags: string[];
   mcqs: MCQ[];
+  /** Curated 4-point exam-ready takeaways. Empty/missing → box hidden. */
+  takeaways: string[];
 }
 
 function cleanEditorialContent(raw: string): string[] {
@@ -155,6 +157,8 @@ export default function EditorialDetail({
   };
 
   const paragraphs = cleanEditorialContent(item.content);
+  const hasTakeaways =
+    Array.isArray(item.takeaways) && item.takeaways.length > 0;
 
   return (
     <motion.div
@@ -224,31 +228,33 @@ export default function EditorialDetail({
           ))}
         </div>
 
-        <div className="bg-amber-50 dark:bg-[#F59E0B]/10 border border-amber-200 dark:border-[#F59E0B]/20 rounded-2xl p-6">
-          <div className="flex items-center gap-2 mb-4">
-            <div className="w-6 h-6 bg-[#F59E0B] rounded-lg flex items-center justify-center shrink-0">
-              <Zap size={12} className="text-[#060818]" />
+        {/* Takeaways box: only rendered when curated takeaways exist in the DB.
+            No more chopped-off article paragraphs masquerading as analysis. */}
+        {hasTakeaways && (
+          <div className="bg-amber-50 dark:bg-[#F59E0B]/10 border border-amber-200 dark:border-[#F59E0B]/20 rounded-2xl p-6">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-6 h-6 bg-[#F59E0B] rounded-lg flex items-center justify-center shrink-0">
+                <Zap size={12} className="text-[#060818]" />
+              </div>
+              <span className="text-xs font-black uppercase tracking-widest text-[#F59E0B]">
+                Key GK Takeaways for CLAT
+              </span>
             </div>
-            <span className="text-xs font-black uppercase tracking-widest text-[#F59E0B]">
-              Key GK Takeaways for CLAT
-            </span>
+            <ul className="space-y-3">
+              {item.takeaways.map((t, i) => (
+                <li
+                  key={i}
+                  className="flex items-start gap-3 text-sm text-gray-700 dark:text-gray-300 font-medium leading-relaxed"
+                >
+                  <span className="w-5 h-5 bg-[#F59E0B]/20 text-[#F59E0B] rounded-full flex items-center justify-center shrink-0 text-[10px] font-black mt-0.5">
+                    {i + 1}
+                  </span>
+                  <span>{t}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-          <ul className="space-y-3">
-            {paragraphs.slice(0, 4).map((para, i) => (
-              <li
-                key={i}
-                className="flex items-start gap-3 text-sm text-gray-700 dark:text-gray-300 font-medium leading-relaxed"
-              >
-                <span className="w-5 h-5 bg-[#F59E0B]/20 text-[#F59E0B] rounded-full flex items-center justify-center shrink-0 text-[10px] font-black mt-0.5">
-                  {i + 1}
-                </span>
-                <span>
-                  {para.length > 200 ? para.substring(0, 200) + "…" : para}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        )}
 
         <div className="pt-8 border-t border-gray-100 dark:border-white/5 flex flex-col sm:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-4">
