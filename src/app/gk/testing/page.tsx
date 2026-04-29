@@ -1,4 +1,5 @@
 import GKTestingEngine from "@/components/gk/TestingEngine";
+import MocksUnlockBanner from "@/components/gk/MocksUnlockBanner";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,5 +9,11 @@ export const metadata: Metadata = {
 };
 
 export default function TestingEnginePage() {
-  return <GKTestingEngine />;
+  return (
+    <div className="space-y-8">
+      {/* Banner: hidden once user has lifetime mocks access. */}
+      <MocksUnlockBanner />
+      <GKTestingEngine />
+    </div>
+  );
 }
