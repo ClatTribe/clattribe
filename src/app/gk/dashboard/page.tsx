@@ -1,4 +1,5 @@
 import GKDashboard from "@/components/gk/Dashboard";
+import PortalPaywall from "@/components/gk/PortalPaywall";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,5 +9,11 @@ export const metadata: Metadata = {
 };
 
 export default function DashboardPage() {
-  return <GKDashboard />;
+  return (
+    <div className="space-y-8">
+      {/* Paywall: only shown when trial has expired and user hasn't paid. Auto-hidden otherwise. */}
+      <PortalPaywall />
+      <GKDashboard />
+    </div>
+  );
 }
