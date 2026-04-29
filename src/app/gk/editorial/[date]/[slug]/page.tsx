@@ -75,6 +75,11 @@ async function fetchEditorialByDateSlug(
       correctAnswer: Math.max(0, optionKeys.indexOf(m.correct ?? "A")),
       explanation: m.explanation ?? "",
     }));
+    const takeaways: string[] = Array.isArray(match.takeaways)
+      ? match.takeaways
+          .map((t: unknown) => (typeof t === "string" ? t.trim() : ""))
+          .filter((t: string) => t.length > 0)
+      : [];
     return {
       id: match.id,
       source: (match.source === "Indian Express"
@@ -92,6 +97,7 @@ async function fetchEditorialByDateSlug(
       content: match.content || "",
       tags: [],
       mcqs,
+      takeaways,
     };
   } catch {
     return null;
