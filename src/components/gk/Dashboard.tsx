@@ -19,6 +19,8 @@ export default function GKDashboard() {
   const [toast, setToast] = React.useState<string | null>(null);
   const [userName, setUserName] = React.useState<string>('Student');
   const [readingSpeed, setReadingSpeed] = React.useState<string>('—');
+  const [streak, setStreak] = React.useState<string>('0');
+  const [editorialsRead, setEditorialsRead] = React.useState<string>('—');
 
   React.useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -28,6 +30,34 @@ export default function GKDashboard() {
       const wpm = window.localStorage.getItem('gk_readingSpeed');
       if (wpm && !isNaN(parseInt(wpm, 10)) && parseInt(wpm, 10) > 0) {
         setReadingSpeed(`${wpm} wpm`);
+      }
+
+      // Editorials Read + Day Streak from gk_read_editorials
+      const list: { id: string; isoDate: string; readAt: string }[] = JSON.parse(
+        window.localStorage.getItem('gk_read_editorials') || '[]',
+      );
+      if (Array.isArray(list)) {
+        setEditorialsRead(list.length > 0 ? String(list.length) : '—');
+        const days = new Set<string>();
+        for (const r of list) {
+          if (r && r.readAt) {
+            const d = new Date(r.readAt);
+            if (!isNaN(d.getTime())) {
+              days.add(`${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`);
+            }
+          }
+        }
+        let s = 0;
+        const today = new Date();
+        const cursor = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+        if (!days.has(`${cursor.getFullYear()}-${cursor.getMonth()}-${cursor.getDate()}`)) {
+          cursor.setDate(cursor.getDate() - 1);
+        }
+        while (days.has(`${cursor.getFullYear()}-${cursor.getMonth()}-${cursor.getDate()}`)) {
+          s += 1;
+          cursor.setDate(cursor.getDate() - 1);
+        }
+        setStreak(s > 0 ? String(s) : '0');
       }
     } catch {}
   }, []);
@@ -42,8 +72,8 @@ export default function GKDashboard() {
   const stats = [
     { label: 'Accuracy Rate', value: '—', icon: TrendingUp, color: 'text-emerald-600', bg: 'bg-emerald-50' },
     { label: 'Reading Speed', value: readingSpeed, icon: Zap, color: 'text-amber-500', bg: 'bg-amber-50' },
-    { label: 'Quizzes Taken', value: '—', icon: CheckCircle2, color: 'text-blue-600', bg: 'bg-blue-50' },
-    { label: 'Editorials Read', value: '—', icon: Sparkles, color: 'text-orange-600', bg: 'bg-orange-50' },
+    { label: 'Day Streak', value: streak, icon: CheckCircle2, color: 'text-blue-600', bg: 'bg-blue-50' },
+    { label: 'Editorials Read', value: editorialsRead, icon: Sparkles, color: 'text-orange-600', bg: 'bg-orange-50' },
   ];
 
   return (
