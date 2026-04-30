@@ -14,6 +14,7 @@ export default function TestPageLayout({
     timeSpent: number;
     answers: (number | null)[];
     questions: MockQuestion[];
+    timePerQuestion?: number[];
   }) => void) => React.ReactNode;
   categoryName: string;
 }) {
@@ -26,6 +27,7 @@ export default function TestPageLayout({
     timeSpent: number;
     answers: (number | null)[];
     questions: MockQuestion[];
+    timePerQuestion?: number[];
   }) => {
     // Group by actual sections
     const sections: Record<string, { correct: number; total: number }> = {};
@@ -103,7 +105,7 @@ export default function TestPageLayout({
       );
     }
 
-    const newResult: TestResult = {
+    const newResult: TestResult & { timePerQuestion?: number[] } = {
       ...results,
       id: Math.random().toString(36).substr(2, 9),
       category: categoryName,
@@ -114,6 +116,7 @@ export default function TestPageLayout({
       }),
       topicBreakdown: fullBreakdown,
       suggestions,
+      timePerQuestion: results.timePerQuestion,
     };
 
     setTestResult(newResult);
