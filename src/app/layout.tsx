@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/react";
+import ContactButton from "./components/ContactButton";
 
 import { Montserrat, Lato } from "next/font/google";
 
@@ -133,6 +134,7 @@ export default function RootLayout({
         </noscript>
 
         <main className="flex-1">{children}</main>
+        <ContactButton />
         <Analytics />
       </body>
     </html>
