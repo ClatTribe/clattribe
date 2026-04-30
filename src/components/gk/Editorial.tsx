@@ -3,6 +3,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { RAZORPAY_LINKS } from "@/lib/access";
 import {
   Lock,
   ChevronRight,
@@ -209,18 +210,45 @@ export default function Editorial() {
                 key={`${item.month}-${item.date}`}
                 whileHover={{ y: -4 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => !item.locked && setSelectedDate(item.date)}
-                className={`flex-shrink-0 w-24 h-32 rounded-3xl flex flex-col items-center justify-center gap-1 transition-all relative border-2 ${
+                onClick={() => {
+                  if (item.locked) {
+                    if (typeof window !== "undefined") {
+                      window.open(
+                        RAZORPAY_LINKS.portalMonthly,
+                        "_blank",
+                        "noopener,noreferrer",
+                      );
+                    }
+                  } else {
+                    setSelectedDate(item.date);
+                  }
+                }}
+                className={`group/day flex-shrink-0 w-24 h-32 rounded-3xl flex flex-col items-center justify-center gap-1 transition-all relative border-2 ${
                   selectedDate === item.date
                     ? "bg-[#F59E0B] border-[#F59E0B] text-[#060818] shadow-lg shadow-[#F59E0B]/20"
                     : "bg-white dark:bg-[#060818] border-gray-100 dark:border-white/10 text-gray-400 dark:text-gray-500 hover:border-[#F59E0B]/50"
-                } ${item.locked ? "opacity-60 cursor-not-allowed" : "cursor-pointer"}`}
+                } ${item.locked ? "opacity-70 hover:opacity-100 hover:border-[#F59E0B] cursor-pointer" : "cursor-pointer"}`}
+                title={item.locked ? "Unlock with ₹99/month" : ""}
+                aria-label={item.locked ? `Unlock ${item.month} ${item.date} with ₹99/month` : `Read editorial from ${item.month} ${item.date}`}
               >
                 {item.locked && (
                   <div className="absolute top-3 right-3">
                     <span className="bg-[#F59E0B]/20 text-[#F59E0B] text-[8px] font-black px-1.5 py-0.5 rounded uppercase">
                       PRO
                     </span>
+                  </div>
+                )}
+                {item.locked && (
+                  <div className="pointer-events-none absolute inset-0 rounded-3xl flex items-center justify-center bg-[#060818]/85 dark:bg-black/80 text-white opacity-0 group-hover/day:opacity-100 group-active/day:opacity-100 group-focus/day:opacity-100 transition-opacity p-2">
+                    <div className="flex flex-col items-center gap-1 text-center">
+                      <Lock size={14} className="text-[#F59E0B]" />
+                      <span className="text-[10px] font-black uppercase tracking-widest text-[#F59E0B]">
+                        Unlock
+                      </span>
+                      <span className="text-[11px] font-black leading-tight">
+                        ₹99 / month
+                      </span>
+                    </div>
                   </div>
                 )}
                 <span
