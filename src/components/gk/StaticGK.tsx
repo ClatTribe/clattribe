@@ -89,6 +89,16 @@ export default function StaticGK() {
     return counts;
   }, [items]);
 
+  // Sync search query with the ?q= URL param so cross-links from Monthly Summary land correctly.
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const q = params.get('q');
+      if (q) setSearchQuery(q);
+    } catch {}
+  }, []);
+
   const filtered = React.useMemo(() => {
     return items.filter((item) => {
       if (item.category !== activeTab) return false;
