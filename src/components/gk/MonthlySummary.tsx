@@ -21,6 +21,7 @@ import {
   Target,
   Sparkles,
 } from "lucide-react";
+import Link from "next/link";
 import { gkSupabase } from "@/lib/gk-supabase";
 
 // ---------- Types ----------
@@ -443,12 +444,14 @@ function EventCard({ event }: { event: SummaryEvent }) {
             <Sparkles size={10} /> Connect to
           </span>
           {event.connect_to.map((c, i) => (
-            <span
+            <Link
               key={i}
-              className="px-2.5 py-1 rounded-full bg-gray-100 dark:bg-white/5 text-[11px] font-bold text-gray-600 dark:text-gray-300"
+              href={`/gk/static-gk?q=${encodeURIComponent(c)}`}
+              className="px-2.5 py-1 rounded-full bg-gray-100 dark:bg-white/5 text-[11px] font-bold text-gray-600 dark:text-gray-300 hover:bg-[#F59E0B]/15 hover:text-[#F59E0B] dark:hover:bg-[#F59E0B]/20 dark:hover:text-[#F59E0B] hover:underline transition-colors"
+              title={`Open Static GK: ${c}`}
             >
               {c}
-            </span>
+            </Link>
           ))}
         </div>
       )}
