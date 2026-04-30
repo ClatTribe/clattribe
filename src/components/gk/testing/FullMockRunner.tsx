@@ -66,6 +66,8 @@ export default function FullMockRunner({
   );
   const [marked, setMarked] = React.useState<Set<number>>(new Set());
   const [visited, setVisited] = React.useState<Set<number>>(new Set([0]));
+  const [timePerQuestion, setTimePerQuestion] = React.useState<number[]>(() => Array(questions.length).fill(0));
+  const qStartRef = React.useRef<number>(Date.now());
   const [startTime, setStartTime] = React.useState<number | null>(null);
   const [timeLeft, setTimeLeft] = React.useState(TOTAL_SECONDS);
   const [showSubmitConfirm, setShowSubmitConfirm] = React.useState(false);
@@ -112,6 +114,15 @@ export default function FullMockRunner({
 
   const goToQuestion = (idx: number) => {
     if (idx < 0 || idx >= questions.length) return;
+    const elapsed = Date.now() - qStartRef.current;
+    if (elapsed > 0 && elapsed < 1000 * 60 * 60) {
+      setTimePerQuestion((prev) => {
+        const next = [...prev];
+        next[current] = (next[current] || 0) + elapsed;
+        return next;
+      });
+    }
+    qStartRef.current = Date.now();
     setCurrent(idx);
     setVisited((prev) => {
       if (prev.has(idx)) return prev;
@@ -153,6 +164,11 @@ export default function FullMockRunner({
 
   const doFinish = () => {
     if (finishedRef.current === false) finishedRef.current = true;
+    const finalElapsed = Date.now() - qStartRef.current;
+    const finalTpq = [...timePerQuestion];
+    if (finalElapsed > 0 && finalElapsed < 1000 * 60 * 60) {
+      finalTpq[current] = (finalTpq[current] || 0) + finalElapsed;
+    }
     const score = answers.reduce<number>(
       (acc, ans, i) => (ans === questions[i].correct ? acc + 1 : acc),
       0,
@@ -166,6 +182,7 @@ export default function FullMockRunner({
       timeSpent,
       answers,
       questions,
+      timePerQuestion: finalTpq.map((ms) => Math.round(ms / 1000)),
     });
   };
 
