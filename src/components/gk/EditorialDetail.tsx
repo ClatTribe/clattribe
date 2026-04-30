@@ -9,6 +9,11 @@ import {
   FileText,
   Zap,
   ArrowRight,
+  Type,
+  Highlighter,
+  Check,
+  X as XIcon,
+  ExternalLink,
 } from "lucide-react";
 
 export interface MCQ {
@@ -90,6 +95,26 @@ export default function EditorialDetail({
   const [quizFinished, setQuizFinished] = React.useState(false);
   const [bookmarked, setBookmarked] = React.useState(false);
 
+  // Reading tools state
+  const [readingProgress, setReadingProgress] = React.useState(0);
+  const [fontSize, setFontSize] = React.useState<"sm" | "base" | "lg" | "xl">("base");
+  const [isRead, setIsRead] = React.useState(false);
+  const [highlights, setHighlights] = React.useState<string[]>([]);
+  const [selection, setSelection] = React.useState<{
+    text: string;
+    x: number;
+    y: number;
+  } | null>(null);
+  const [glossary, setGlossary] = React.useState<{
+    term: string;
+    summary: string;
+    url?: string;
+    loading: boolean;
+    x: number;
+    y: number;
+  } | null>(null);
+  const proseRef = React.useRef<HTMLDivElement | null>(null);
+
   React.useEffect(() => {
     if (typeof window === "undefined") return;
     try {
@@ -141,6 +166,181 @@ export default function EditorialDetail({
     } catch {}
   };
 
+  // Persist font size + read state across sessions
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      const f = window.localStorage.getItem("gk_font_size");
+      if (f === "sm" || f === "base" || f === "lg" || f === "xl") setFontSize(f);
+      const list: { id: string }[] = JSON.parse(
+        window.localStorage.getItem("gk_read_editorials") || "[]",
+      );
+      setIsRead(Array.isArray(list) && list.some((r) => r && r.id === item.id));
+      const h: string[] = JSON.parse(
+        window.localStorage.getItem(`gk_highlights_${item.id}`) || "[]",
+      );
+      if (Array.isArray(h)) setHighlights(h);
+    } catch {}
+  }, [item.id]);
+
+  // Track reading progress (top of viewport bar)
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    const onScroll = () => {
+      const h = document.documentElement;
+      const total = h.scrollHeight - h.clientHeight || 1;
+      const pct = Math.min(100, Math.max(0, (window.scrollY / total) * 100));
+      setReadingProgress(pct);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
+  // Track text selection inside the prose container
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    const onUp = () => {
+      const sel = window.getSelection();
+      if (!sel || sel.isCollapsed) return setSelection(null);
+      const text = sel.toString().trim();
+      if (text.length < 2 || text.length > 280) return setSelection(null);
+      const root = proseRef.current;
+      if (!root) return;
+      const anchor = sel.anchorNode;
+      const node =
+        anchor &&
+        (anchor.nodeType === 1 ? (anchor as Element) : (anchor.parentElement as Element));
+      if (!node || !root.contains(node)) return setSelection(null);
+      const range = sel.getRangeAt(0);
+      const rect = range.getBoundingClientRect();
+      setSelection({
+        text,
+        x: rect.left + rect.width / 2 + window.scrollX,
+        y: rect.top + window.scrollY - 8,
+      });
+    };
+    document.addEventListener("mouseup", onUp);
+    document.addEventListener("touchend", onUp);
+    return () => {
+      document.removeEventListener("mouseup", onUp);
+      document.removeEventListener("touchend", onUp);
+    };
+  }, []);
+
+  const changeFontSize = (delta: 1 | -1) => {
+    const order: ("sm" | "base" | "lg" | "xl")[] = ["sm", "base", "lg", "xl"];
+    const i = order.indexOf(fontSize);
+    const next = order[Math.min(order.length - 1, Math.max(0, i + delta))];
+    setFontSize(next);
+    if (typeof window !== "undefined") {
+      try {
+        window.localStorage.setItem("gk_font_size", next);
+      } catch {}
+    }
+  };
+
+  const proseSizeClass =
+    fontSize === "sm"
+      ? "text-sm md:text-base"
+      : fontSize === "base"
+        ? "text-base md:text-lg"
+        : fontSize === "lg"
+          ? "text-lg md:text-xl"
+          : "text-xl md:text-2xl";
+
+  const saveHighlight = (text: string) => {
+    if (typeof window === "undefined") return;
+    const trimmed = text.trim();
+    if (!trimmed) return;
+    try {
+      const key = `gk_highlights_${item.id}`;
+      const existing: string[] = JSON.parse(
+        window.localStorage.getItem(key) || "[]",
+      );
+      if (existing.includes(trimmed)) {
+        setSelection(null);
+        return;
+      }
+      const nextList = [...existing, trimmed];
+      window.localStorage.setItem(key, JSON.stringify(nextList));
+      setHighlights(nextList);
+      const globalKey = "gk_saved_highlights";
+      const all: {
+        id: string;
+        editorialId: string;
+        title: string;
+        text: string;
+        savedAt: string;
+      }[] = JSON.parse(window.localStorage.getItem(globalKey) || "[]");
+      all.push({
+        id: `${item.id}_${Date.now()}`,
+        editorialId: item.id,
+        title: item.title,
+        text: trimmed,
+        savedAt: new Date().toISOString(),
+      });
+      window.localStorage.setItem(globalKey, JSON.stringify(all.slice(-200)));
+    } catch {}
+    setSelection(null);
+    try {
+      window.getSelection()?.removeAllRanges();
+    } catch {}
+  };
+
+  const lookupTerm = async (term: string, x: number, y: number) => {
+    setSelection(null);
+    setGlossary({ term, summary: "", loading: true, x, y });
+    try {
+      const slug = encodeURIComponent(term.replace(/\s+/g, " ").trim());
+      const res = await fetch(
+        `https://en.wikipedia.org/api/rest_v1/page/summary/${slug}?redirect=true`,
+      );
+      if (!res.ok) throw new Error("not found");
+      const data = await res.json();
+      const summary =
+        (data.extract && String(data.extract).split(". ").slice(0, 2).join(". ")) ||
+        "No summary available.";
+      const url =
+        (data.content_urls &&
+          data.content_urls.desktop &&
+          data.content_urls.desktop.page) ||
+        undefined;
+      setGlossary({ term, summary, url, loading: false, x, y });
+    } catch {
+      setGlossary({
+        term,
+        summary: "No quick definition found. Tap to search the web.",
+        url: `https://www.google.com/search?q=${encodeURIComponent(term)}`,
+        loading: false,
+        x,
+        y,
+      });
+    }
+  };
+
+  const markAsRead = () => {
+    if (typeof window === "undefined") return;
+    try {
+      const key = "gk_read_editorials";
+      const list: { id: string; isoDate: string; readAt: string }[] = JSON.parse(
+        window.localStorage.getItem(key) || "[]",
+      );
+      const filtered = list.filter((r) => r && r.id !== item.id);
+      filtered.push({
+        id: item.id,
+        isoDate: item.isoDate,
+        readAt: new Date().toISOString(),
+      });
+      window.localStorage.setItem(key, JSON.stringify(filtered));
+      setIsRead(true);
+    } catch {}
+  };
+
   const handleOptionSelect = (idx: number) => {
     if (selectedOption !== null) return;
     setSelectedOption(idx);
@@ -166,6 +366,96 @@ export default function EditorialDetail({
       animate={{ opacity: 1, y: 0 }}
       className="max-w-4xl mx-auto space-y-8"
     >
+      {/* Reading progress bar — fixed at top of viewport */}
+      <div className="fixed top-0 left-0 right-0 z-[60] h-1 bg-gray-100 dark:bg-white/5 pointer-events-none">
+        <div
+          className="h-full bg-[#F59E0B] transition-[width] duration-150 ease-out"
+          style={{ width: `${readingProgress}%` }}
+        />
+      </div>
+
+      {/* Floating action menu when text is selected inside the prose */}
+      {selection && (
+        <div
+          style={{
+            position: "absolute",
+            top: selection.y,
+            left: selection.x,
+            transform: "translate(-50%, -100%)",
+            zIndex: 70,
+          }}
+          onMouseDown={(e) => e.preventDefault()}
+          className="flex items-center gap-1 bg-[#060818] text-white rounded-2xl shadow-2xl border border-white/10 p-1.5"
+        >
+          <button
+            onClick={() => saveHighlight(selection.text)}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-[#F59E0B] hover:text-[#060818] text-xs font-black uppercase tracking-widest transition-colors"
+          >
+            <Highlighter size={12} /> Save
+          </button>
+          <button
+            onClick={() => lookupTerm(selection.text, selection.x, selection.y)}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-[#F59E0B] hover:text-[#060818] text-xs font-black uppercase tracking-widest transition-colors"
+          >
+            <FileText size={12} /> Define
+          </button>
+          <button
+            onClick={() => setSelection(null)}
+            className="w-7 h-7 rounded-xl text-gray-400 hover:text-white flex items-center justify-center"
+            aria-label="Dismiss"
+          >
+            <XIcon size={14} />
+          </button>
+        </div>
+      )}
+
+      {/* Glossary popover (Wikipedia summary) */}
+      {glossary && (
+        <div
+          style={{
+            position: "absolute",
+            top: glossary.y,
+            left: glossary.x,
+            transform: "translate(-50%, -100%)",
+            zIndex: 70,
+            maxWidth: "min(360px, calc(100vw - 32px))",
+          }}
+          className="bg-white dark:bg-[#060818] border border-gray-100 dark:border-white/10 rounded-2xl shadow-2xl p-4"
+        >
+          <div className="flex items-start justify-between gap-2 mb-1">
+            <p className="text-[10px] font-black text-[#F59E0B] uppercase tracking-widest">
+              {glossary.term}
+            </p>
+            <button
+              onClick={() => setGlossary(null)}
+              className="text-gray-400 hover:text-[#060818] dark:hover:text-white"
+              aria-label="Close"
+            >
+              <XIcon size={14} />
+            </button>
+          </div>
+          {glossary.loading ? (
+            <p className="text-xs text-gray-500 italic">Looking it up…</p>
+          ) : (
+            <>
+              <p className="text-sm text-gray-700 dark:text-gray-200 leading-relaxed font-medium">
+                {glossary.summary}
+              </p>
+              {glossary.url && (
+                <a
+                  href={glossary.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-flex items-center gap-1 text-[10px] font-black text-[#F59E0B] uppercase tracking-widest hover:underline"
+                >
+                  Read more <ExternalLink size={11} />
+                </a>
+              )}
+            </>
+          )}
+        </div>
+      )}
+
       <Link
         href="/gk/editorial"
         className="flex items-center gap-2 text-gray-500 hover:text-[#F59E0B] transition-colors font-bold uppercase text-[10px] tracking-widest"
@@ -217,11 +507,14 @@ export default function EditorialDetail({
           </div>
         </div>
 
-        <div className="prose dark:prose-invert max-w-none space-y-5">
+        <div
+          ref={proseRef}
+          className={`prose dark:prose-invert max-w-none space-y-5 ${proseSizeClass}`}
+        >
           {paragraphs.map((para, idx) => (
             <p
               key={idx}
-              className="text-base md:text-lg text-gray-600 dark:text-gray-300 leading-relaxed font-medium"
+              className="text-gray-600 dark:text-gray-300 leading-relaxed font-medium"
             >
               {para}
             </p>
@@ -257,11 +550,53 @@ export default function EditorialDetail({
         )}
 
         <div className="pt-8 border-t border-gray-100 dark:border-white/5 flex flex-col sm:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4 flex-wrap">
+            {/* Font size toggle */}
+            <div className="flex items-center gap-1 bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-xl p-1">
+              <button
+                onClick={() => changeFontSize(-1)}
+                disabled={fontSize === "sm"}
+                className="w-8 h-8 rounded-lg flex items-center justify-center text-gray-500 hover:text-[#F59E0B] hover:bg-white dark:hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed text-base font-black"
+                title="Smaller text"
+              >
+                A-
+              </button>
+              <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest px-1">
+                <Type size={12} className="inline" />
+              </span>
+              <button
+                onClick={() => changeFontSize(1)}
+                disabled={fontSize === "xl"}
+                className="w-8 h-8 rounded-lg flex items-center justify-center text-gray-500 hover:text-[#F59E0B] hover:bg-white dark:hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed text-base font-black"
+                title="Larger text"
+              >
+                A+
+              </button>
+            </div>
             <button className="flex items-center gap-2 text-[#060818] dark:text-white font-bold hover:text-[#F59E0B] transition-colors">
               <FileText size={20} /> Download PDF
             </button>
           </div>
+          {/* Mark as Read — drives streak completion on the dashboard */}
+          <button
+            onClick={markAsRead}
+            disabled={isRead}
+            className={`w-full sm:w-auto px-6 py-3 rounded-2xl font-black text-sm transition-all flex items-center justify-center gap-2 border-2 ${
+              isRead
+                ? "bg-emerald-500/10 border-emerald-500 text-emerald-600 dark:text-emerald-400 cursor-default"
+                : "bg-white dark:bg-white/5 border-[#F59E0B] text-[#F59E0B] hover:bg-[#F59E0B] hover:text-[#060818] active:scale-[0.98]"
+            }`}
+          >
+            {isRead ? (
+              <>
+                <Check size={18} /> Marked as Read
+              </>
+            ) : (
+              <>
+                <BookMarked size={18} /> Mark as Read
+              </>
+            )}
+          </button>
           {item.mcqs.length > 0 && (
             <button
               onClick={() => setShowQuiz(true)}
