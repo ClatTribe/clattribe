@@ -109,7 +109,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
             ></div>
 
             <img
-              src="https://res.cloudinary.com/daetdadtt/image/upload/v1765009390/IMG_5613_1_knzs0v.jpg"
+              src="https://ik.imagekit.io/CLAT/ClatTribe/WhatsApp%20Image%202026-05-01%20at%2012.24.34.jpeg"
               alt=" Star Teacher"
               className="w-full h-full object-cover rounded-2xl shadow-2xl transition-all duration-700"
             />
