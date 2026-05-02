@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 import {
   Play,
   Pause,
@@ -23,6 +24,7 @@ interface NewsRow {
   source: string;
   title: string;
   url: string;
+  slug: string | null;
   excerpt: string | null;
   audio_summary: string | null;
   category: string | null;
@@ -73,7 +75,7 @@ export default function Vault() {
         const cutoffIso = cutoff.toISOString().slice(0, 10);
         const { data, error } = await gkSupabase
           .from("gk_news_articles")
-          .select("id, date, source, title, url, excerpt, audio_summary, category")
+          .select("id, date, source, title, url, slug, excerpt, audio_summary, category")
           .gte("date", cutoffIso)
           .order("date", { ascending: false })
           .order("created_at", { ascending: false })
@@ -389,10 +391,8 @@ function NewsCard({
         </button>
       </div>
 
-      <a
-        href={item.url}
-        target="_blank"
-        rel="noopener noreferrer"
+      <Link
+        href={item.slug ? `/gk/news/${item.date}/${item.slug}` : item.url}
         className="block group"
       >
         <h4
@@ -411,7 +411,7 @@ function NewsCard({
             {blurb}
           </p>
         )}
-      </a>
+      </Link>
 
       <div className="flex items-center gap-2 mt-4 flex-wrap">
         {item.audio_summary ? (
@@ -463,14 +463,12 @@ function NewsCard({
             <Calendar size={10} /> Audio briefing pending
           </span>
         )}
-        <a
-          href={item.url}
-          target="_blank"
-          rel="noopener noreferrer"
+        <Link
+          href={item.slug ? `/gk/news/${item.date}/${item.slug}` : item.url}
           className="ml-auto flex items-center gap-1 px-3 py-2 text-xs font-black text-gray-500 dark:text-gray-300 hover:text-[#F59E0B] uppercase tracking-widest"
         >
-          Read at {item.source} <ArrowUpRight size={12} />
-        </a>
+          Read full <ArrowUpRight size={12} />
+        </Link>
       </div>
     </motion.div>
   );
