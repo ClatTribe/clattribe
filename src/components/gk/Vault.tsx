@@ -207,9 +207,6 @@ export default function Vault() {
 
       {/* Hero */}
       <section className="text-center py-10 sm:py-16 bg-white dark:bg-white/5 rounded-[2rem] sm:rounded-[3rem] border border-gray-100 dark:border-white/5 relative overflow-hidden">
-        <div className="absolute top-6 right-6 hidden sm:flex items-center gap-1 text-[10px] font-black text-[#F59E0B] uppercase tracking-widest">
-          <Sparkles size={12} /> Powered by Gemini
-        </div>
         <div className="max-w-2xl mx-auto px-4 sm:px-6">
           <h2 className="text-3xl sm:text-5xl font-black text-[#060818] dark:text-white mb-4 sm:mb-6 leading-tight">
             Legal news for the CLAT student.{" "}
