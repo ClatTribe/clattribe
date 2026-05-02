@@ -2,7 +2,6 @@
 
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
 import {
   Play,
   Pause,
@@ -11,39 +10,43 @@ import {
   Bookmark,
   Volume2,
   Sparkles,
-  ArrowRight,
+  ArrowUpRight,
   Loader2,
   Calendar,
+  ExternalLink,
 } from "lucide-react";
 import { gkSupabase } from "@/lib/gk-supabase";
 
-interface EditorialRow {
+interface NewsRow {
   id: string;
   date: string;
-  source: "The Hindu" | "Indian Express" | string;
+  source: string;
   title: string;
   url: string;
+  excerpt: string | null;
   audio_summary: string | null;
-  takeaways: string[] | null;
+  category: string | null;
 }
 
 /**
- * GK Vault — daily CLAT/law-related news with on-device audio playback.
+ * GK Vault â daily CLAT-related legal NEWS articles (not editorials).
+ *
+ * Sources: LiveLaw, Bar & Bench, SCC Online â pure legal-news outlets.
+ * Editorials live on /gk/editorial. Vault is the news ticker.
  *
  * Audio architecture:
- *  - Gemini (server-side, in the daily pipeline) writes a 60-90 word audio-friendly
- *    summary into gk_editorials.audio_summary for every editorial.
+ *  - Gemini (server-side, in the daily news pipeline) writes a 60-90 word
+ *    audio-friendly summary into gk_news_articles.audio_summary.
  *  - The browser's native SpeechSynthesis API reads it aloud on demand.
- *  - No audio files, no storage, no per-play API cost. The summary is what costs.
  */
 export default function Vault() {
-  const [items, setItems] = React.useState<EditorialRow[]>([]);
+  const [items, setItems] = React.useState<NewsRow[]>([]);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
   const [bookmarks, setBookmarks] = React.useState<string[]>([]);
   const [toast, setToast] = React.useState<string | null>(null);
 
-  // Audio state — only one editorial plays at a time
+  // Audio state â only one article plays at a time
   const [playingId, setPlayingId] = React.useState<string | null>(null);
   const [paused, setPaused] = React.useState(false);
   const [ttsSupported, setTtsSupported] = React.useState(true);
@@ -65,16 +68,16 @@ export default function Vault() {
       setLoading(true);
       setError(null);
       try {
-        // Last 14 days of editorials, newest first.
         const cutoff = new Date();
         cutoff.setDate(cutoff.getDate() - 14);
         const cutoffIso = cutoff.toISOString().slice(0, 10);
         const { data, error } = await gkSupabase
-          .from("gk_editorials")
-          .select("id, date, source, title, url, audio_summary, takeaways")
+          .from("gk_news_articles")
+          .select("id, date, source, title, url, excerpt, audio_summary, category")
           .gte("date", cutoffIso)
           .order("date", { ascending: false })
-          .limit(40);
+          .order("created_at", { ascending: false })
+          .limit(50);
         if (error) throw error;
         if (!cancelled) setItems(data || []);
       } catch (e) {
@@ -87,7 +90,7 @@ export default function Vault() {
       }
     })();
 
-    // Stop any TTS when the page unmounts so audio doesn't bleed into other pages.
+    // Stop TTS on unmount so audio doesn't bleed into other pages.
     return () => {
       cancelled = true;
       if (typeof window !== "undefined" && window.speechSynthesis) {
@@ -117,8 +120,8 @@ export default function Vault() {
     });
   };
 
-  /** Play audio summary via the Web Speech API. Cancels any in-flight playback first. */
-  const speak = (item: EditorialRow) => {
+  /** Play audio summary via Web Speech API. Cancels any in-flight playback. */
+  const speak = (item: NewsRow) => {
     if (typeof window === "undefined" || !window.speechSynthesis) {
       showToast("Audio playback isn't supported in this browser.");
       return;
@@ -130,7 +133,6 @@ export default function Vault() {
 
     const synth = window.speechSynthesis;
 
-    // If we're already playing this item, treat as pause/resume toggle.
     if (playingId === item.id) {
       if (paused) {
         synth.resume();
@@ -150,7 +152,6 @@ export default function Vault() {
     u.pitch = 1;
     u.volume = 1;
 
-    // Pick a clear English voice if available; prefer Indian or UK English.
     try {
       const voices = synth.getVoices();
       const preferred =
@@ -184,34 +185,6 @@ export default function Vault() {
     setPaused(false);
   };
 
-  const inferCategory = (item: EditorialRow): string => {
-    const t = (item.title + " " + (item.audio_summary || "")).toLowerCase();
-    if (
-      /supreme court|judgment|article \d+|constitution|bench|tribunal|legal|law|act\b/.test(
-        t,
-      )
-    )
-      return "Legal";
-    if (
-      /parliament|election|minister|cabinet|amendment|bill|policy|government|cm|pm/.test(
-        t,
-      )
-    )
-      return "Polity";
-    if (
-      /opec|nato|un|gulf|russia|ukraine|israel|gaza|china|trade pact|treaty|summit/.test(
-        t,
-      )
-    )
-      return "International Relations";
-    if (/inflation|gdp|rbi|fed|rate|economy|budget|fiscal|tariff|market/.test(t))
-      return "Economy";
-    if (/climate|wildfire|species|forest|emission|environment|biodiversity/.test(t))
-      return "Environment";
-    if (/court|justice|judge|case|petition/.test(t)) return "Legal";
-    return "Current Affairs";
-  };
-
   const todayItems = items.filter((i) => i.date === items[0]?.date);
   const olderItems = items.filter((i) => i.date !== items[0]?.date);
 
@@ -237,12 +210,13 @@ export default function Vault() {
         </div>
         <div className="max-w-2xl mx-auto px-4 sm:px-6">
           <h2 className="text-3xl sm:text-5xl font-black text-[#060818] dark:text-white mb-4 sm:mb-6 leading-tight">
-            Daily law &amp; CLAT news.{" "}
+            Legal news for the CLAT student.{" "}
             <span className="text-[#F59E0B]">Read or listen.</span>
           </h2>
           <p className="text-base sm:text-xl text-gray-500 dark:text-gray-400 mb-8 sm:mb-10 max-w-md mx-auto">
-            Curated current affairs from The Hindu and Indian Express, with a
-            60-second audio summary on every story.
+            Supreme Court rulings, new statutes, courtroom news from LiveLaw,
+            Bar &amp; Bench and SCC Online â with a 60-second audio briefing on
+            every story.
           </p>
           <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
             <button
@@ -259,12 +233,12 @@ export default function Vault() {
               />{" "}
               Listen to today's top story
             </button>
-            <Link
+            <a
               href="/gk/editorial"
               className="bg-white dark:bg-white/10 text-[#060818] dark:text-white border-2 border-gray-100 dark:border-white/10 px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl font-bold hover:border-[#F59E0B] transition-all text-sm sm:text-base flex-1 sm:flex-none flex items-center justify-center gap-2"
             >
-              <BookOpen size={18} /> Browse all editorials
-            </Link>
+              <BookOpen size={18} /> Editorials &amp; analysis
+            </a>
           </div>
         </div>
       </section>
@@ -283,7 +257,7 @@ export default function Vault() {
         <div className="flex items-center justify-center py-16 text-gray-400">
           <Loader2 size={20} className="animate-spin mr-2" />
           <span className="font-bold uppercase text-xs tracking-widest">
-            Loading today's news…
+            Loading today's newsâ¦
           </span>
         </div>
       ) : error ? (
@@ -292,7 +266,8 @@ export default function Vault() {
         </div>
       ) : items.length === 0 ? (
         <div className="bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-2xl p-8 text-center text-gray-500">
-          No editorials available yet. Tomorrow's batch lands at 7&nbsp;AM.
+          No legal news has been ingested yet. The daily pipeline runs at
+          7&nbsp;AM IST.
         </div>
       ) : (
         <>
@@ -312,7 +287,6 @@ export default function Vault() {
                   key={item.id}
                   item={item}
                   idx={idx}
-                  category={inferCategory(item)}
                   bookmarked={bookmarks.includes(item.id)}
                   onBookmark={() => toggleBookmark(item.id)}
                   onPlay={() => speak(item)}
@@ -328,24 +302,15 @@ export default function Vault() {
           {/* Older */}
           {olderItems.length > 0 && (
             <section className="space-y-5 sm:space-y-8">
-              <div className="flex items-baseline justify-between">
-                <h3 className="text-xl sm:text-2xl font-black dark:text-white">
-                  Earlier this week
-                </h3>
-                <Link
-                  href="/gk/editorial"
-                  className="text-[11px] font-black text-[#F59E0B] uppercase tracking-widest hover:underline flex items-center gap-1"
-                >
-                  Open archive <ArrowRight size={12} />
-                </Link>
-              </div>
+              <h3 className="text-xl sm:text-2xl font-black dark:text-white">
+                Earlier this week
+              </h3>
               <div className="space-y-3 sm:space-y-4">
-                {olderItems.slice(0, 12).map((item, idx) => (
+                {olderItems.slice(0, 20).map((item, idx) => (
                   <NewsCard
                     key={item.id}
                     item={item}
                     idx={idx}
-                    category={inferCategory(item)}
                     bookmarked={bookmarks.includes(item.id)}
                     onBookmark={() => toggleBookmark(item.id)}
                     onPlay={() => speak(item)}
@@ -365,12 +330,11 @@ export default function Vault() {
   );
 }
 
-/* ─────────────────────────── Card ─────────────────────────── */
+/* âââââââââââââââââââââââââââ Card âââââââââââââââââââââââââââ */
 
 function NewsCard({
   item,
   idx,
-  category,
   bookmarked,
   onBookmark,
   onPlay,
@@ -380,9 +344,8 @@ function NewsCard({
   ttsSupported,
   compact,
 }: {
-  item: EditorialRow;
+  item: NewsRow;
   idx: number;
-  category: string;
   bookmarked: boolean;
   onBookmark: () => void;
   onPlay: () => void;
@@ -392,13 +355,7 @@ function NewsCard({
   ttsSupported: boolean;
   compact?: boolean;
 }) {
-  const slug = (item.title || "")
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, "")
-    .trim()
-    .replace(/\s+/g, "-")
-    .slice(0, 80);
-  const detailHref = `/gk/editorial/${item.date}/${slug}`;
+  const blurb = item.audio_summary || item.excerpt || "";
 
   return (
     <motion.div
@@ -411,9 +368,11 @@ function NewsCard({
     >
       <div className="flex justify-between items-start mb-3 gap-3">
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="text-[10px] font-black px-3 py-1 rounded-full bg-gray-50 dark:bg-white/10 text-gray-500 uppercase tracking-widest">
-            {category}
-          </span>
+          {item.category && (
+            <span className="text-[10px] font-black px-3 py-1 rounded-full bg-gray-50 dark:bg-white/10 text-gray-500 uppercase tracking-widest">
+              {item.category}
+            </span>
+          )}
           <span className="text-[10px] font-black px-2 py-1 rounded-full bg-[#F59E0B]/10 text-[#F59E0B] uppercase tracking-widest">
             {item.source}
           </span>
@@ -430,20 +389,29 @@ function NewsCard({
         </button>
       </div>
 
-      <Link href={detailHref} className="block group">
+      <a
+        href={item.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block group"
+      >
         <h4
           className={`${
             compact ? "text-sm sm:text-base" : "text-base sm:text-xl"
-          } font-bold mb-2 text-[#060818] dark:text-white group-hover:text-[#F59E0B] transition-colors leading-snug`}
+          } font-bold mb-2 text-[#060818] dark:text-white group-hover:text-[#F59E0B] transition-colors leading-snug flex items-start gap-2`}
         >
-          {item.title}
+          <span className="flex-1">{item.title}</span>
+          <ExternalLink
+            size={14}
+            className="opacity-0 group-hover:opacity-100 transition-opacity mt-1 flex-shrink-0"
+          />
         </h4>
-        {item.audio_summary && (
+        {blurb && (
           <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400 leading-relaxed line-clamp-3">
-            {item.audio_summary}
+            {blurb}
           </p>
         )}
-      </Link>
+      </a>
 
       <div className="flex items-center gap-2 mt-4 flex-wrap">
         {item.audio_summary ? (
@@ -459,7 +427,11 @@ function NewsCard({
                     : "bg-[#060818] text-white hover:bg-gray-800"
               } disabled:opacity-40 disabled:cursor-not-allowed`}
               aria-label={
-                isPlaying ? "Pause audio" : isPaused ? "Resume audio" : "Play audio summary"
+                isPlaying
+                  ? "Pause audio"
+                  : isPaused
+                    ? "Resume audio"
+                    : "Play audio summary"
               }
             >
               {isPlaying ? (
@@ -488,15 +460,17 @@ function NewsCard({
           </>
         ) : (
           <span className="text-[10px] font-black text-gray-300 uppercase tracking-widest flex items-center gap-1">
-            <Calendar size={10} /> Audio summary processing
+            <Calendar size={10} /> Audio briefing pending
           </span>
         )}
-        <Link
-          href={detailHref}
+        <a
+          href={item.url}
+          target="_blank"
+          rel="noopener noreferrer"
           className="ml-auto flex items-center gap-1 px-3 py-2 text-xs font-black text-gray-500 dark:text-gray-300 hover:text-[#F59E0B] uppercase tracking-widest"
         >
-          Read full <ArrowRight size={12} />
-        </Link>
+          Read at {item.source} <ArrowUpRight size={12} />
+        </a>
       </div>
     </motion.div>
   );
