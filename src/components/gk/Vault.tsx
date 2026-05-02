@@ -29,9 +29,9 @@ interface NewsRow {
 }
 
 /**
- * GK Vault â daily CLAT-related legal NEWS articles (not editorials).
+ * GK Vault - daily CLAT-related legal NEWS articles (not editorials).
  *
- * Sources: LiveLaw, Bar & Bench, SCC Online â pure legal-news outlets.
+ * Sources: LiveLaw, Bar & Bench, SCC Online - pure legal-news outlets.
  * Editorials live on /gk/editorial. Vault is the news ticker.
  *
  * Audio architecture:
@@ -46,7 +46,7 @@ export default function Vault() {
   const [bookmarks, setBookmarks] = React.useState<string[]>([]);
   const [toast, setToast] = React.useState<string | null>(null);
 
-  // Audio state â only one article plays at a time
+  // Audio state - only one article plays at a time
   const [playingId, setPlayingId] = React.useState<string | null>(null);
   const [paused, setPaused] = React.useState(false);
   const [ttsSupported, setTtsSupported] = React.useState(true);
@@ -215,7 +215,7 @@ export default function Vault() {
           </h2>
           <p className="text-base sm:text-xl text-gray-500 dark:text-gray-400 mb-8 sm:mb-10 max-w-md mx-auto">
             Supreme Court rulings, new statutes, courtroom news from LiveLaw,
-            Bar &amp; Bench and SCC Online â with a 60-second audio briefing on
+            Bar &amp; Bench and SCC Online - with a 60-second audio briefing on
             every story.
           </p>
           <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
