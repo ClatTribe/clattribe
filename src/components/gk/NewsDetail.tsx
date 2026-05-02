@@ -104,8 +104,9 @@ export default function NewsDetail({ article }: { article: NewsArticle }) {
     setPaused(false);
 
     const u = new SpeechSynthesisUtterance(article.audio_summary);
-    u.rate = 1.05;
-    u.pitch = 1;
+    // Slower, more explanatory cadence - like a teacher walking the student through it
+    u.rate = 0.92;
+    u.pitch = 1.05;
     u.volume = 1;
     try {
       const voices = synth.getVoices();
