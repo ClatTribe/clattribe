@@ -40,6 +40,28 @@ async function fetchEditorials(): Promise<
   }
 }
 
+async function fetchNewsArticles(): Promise<
+  Array<{ id: string; date: string; slug: string | null; title: string }>
+> {
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/gk_news_articles?select=id,date,slug,title&slug=not.is.null&order=date.desc&limit=500`,
+      {
+        headers: {
+          apikey: SUPABASE_KEY,
+          Authorization: `Bearer ${SUPABASE_KEY}`,
+        },
+        next: { revalidate: 3600 },
+      },
+    );
+    if (!res.ok) return [];
+    const rows = await res.json();
+    return Array.isArray(rows) ? rows : [];
+  } catch {
+    return [];
+  }
+}
+
 async function fetchMonthlySummaryMonths(): Promise<string[]> {
   try {
     const res = await fetch(
@@ -68,11 +90,13 @@ async function fetchMonthlySummaryMonths(): Promise<string[]> {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://www.clattribe.com";
 
-  const [blogs, editorials, monthlySummaryMonths] = await Promise.all([
-    getAllBlogs(),
-    fetchEditorials(),
-    fetchMonthlySummaryMonths(),
-  ]);
+  const [blogs, editorials, newsArticles, monthlySummaryMonths] =
+    await Promise.all([
+      getAllBlogs(),
+      fetchEditorials(),
+      fetchNewsArticles(),
+      fetchMonthlySummaryMonths(),
+    ]);
 
   const blogUrls: MetadataRoute.Sitemap = blogs.map((post) => ({
     url: `${baseUrl}/blogs/${post.slug}`,
@@ -86,6 +110,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .map((e) => ({
       url: `${baseUrl}/gk/editorial/${e.date}/${slugify(e.title)}`,
       lastModified: new Date(e.date),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    }));
+
+  const newsUrls: MetadataRoute.Sitemap = newsArticles
+    .filter((a) => a.slug && a.date && a.date !== "1970-01-01")
+    .map((a) => ({
+      url: `${baseUrl}/gk/news/${a.date}/${a.slug}`,
+      lastModified: new Date(a.date),
       changeFrequency: "monthly" as const,
       priority: 0.7,
     }));
@@ -159,6 +192,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     ...gkRoutes,
     ...editorialUrls,
+    ...newsUrls,
     ...monthlySummaryUrls,
     ...blogUrls,
   ];
