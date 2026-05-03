@@ -67,8 +67,34 @@ function formatDate(iso: string): string {
 export default async function EditorialPage() {
   const editorials = await fetchRecentEditorials();
 
+  const itemListJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "The Hindu Editorial for CLAT 2027",
+    description:
+      "Daily editorials from The Hindu and The Indian Express, hand-picked for CLAT, AILET, and NLAT aspirants.",
+    url: "https://www.clattribe.com/gk/editorial",
+    numberOfItems: editorials.length,
+    itemListElement: editorials
+      .map((e, i) => {
+        const slug = slugify(e.title);
+        if (!slug) return null;
+        return {
+          "@type": "ListItem",
+          position: i + 1,
+          url: `https://www.clattribe.com/gk/editorial/${e.date}/${slug}`,
+          name: e.title,
+        };
+      })
+      .filter(Boolean),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+      />
       {/* Server-rendered SEO shell - real H1, real intro, real anchor list for crawlers */}
       <section className="mb-8 space-y-4">
         <h1 className="text-3xl lg:text-4xl font-black tracking-tight text-[#060818] dark:text-white">
