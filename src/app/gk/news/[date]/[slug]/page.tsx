@@ -1,6 +1,9 @@
 import NewsDetail, { NewsArticle } from "@/components/gk/NewsDetail";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Link from "next/link";
+import { getAllBlogs } from "../../../../lib/blogs";
+import { findTopRelated } from "../../../../lib/related";
 
 const SUPABASE_URL = "https://fjswchcothephgtzqbgq.supabase.co";
 const SUPABASE_KEY =
@@ -89,6 +92,14 @@ export default async function NewsDetailPage({ params }: Props) {
   const article = await fetchNewsByDateSlug(date, slug);
   if (!article) notFound();
 
+  const allBlogs = await getAllBlogs();
+  const relatedBlogs = findTopRelated(
+    article.title,
+    allBlogs,
+    (b) => `${b.title} ${(b.tags || []).join(" ")}`,
+    4,
+  );
+
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "NewsArticle",
@@ -119,6 +130,33 @@ export default async function NewsDetailPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
       <NewsDetail article={article} />
+      {relatedBlogs.length > 0 && (
+        <section className="max-w-3xl mx-auto mt-10 px-6 lg:px-0">
+          <h2 className="text-xs font-black uppercase tracking-widest text-[#F59E0B] mb-4">
+            Related from CLAT Tribe Blogs
+          </h2>
+          <ul className="space-y-3">
+            {relatedBlogs.map((b) => (
+              <li
+                key={b.slug}
+                className="border-b border-gray-100 dark:border-white/10 pb-3"
+              >
+                <Link
+                  href={`/blogs/${b.slug}`}
+                  className="block text-base font-bold text-[#060818] dark:text-white hover:text-[#F59E0B] leading-snug"
+                >
+                  {b.title}
+                </Link>
+                {b.excerpt && (
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">
+                    {b.excerpt}
+                  </p>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
     </>
   );
 }
