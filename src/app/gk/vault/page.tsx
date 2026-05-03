@@ -58,8 +58,28 @@ function formatDate(iso: string): string {
 export default async function VaultPage() {
   const articles = (await fetchRecentNews()).filter((a) => a.slug);
 
+  const itemListJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "CLAT Current Affairs Vault",
+    description:
+      "Daily curated legal and current-affairs news for CLAT, AILET, and NLAT aspirants.",
+    url: "https://www.clattribe.com/gk/vault",
+    numberOfItems: articles.length,
+    itemListElement: articles.map((a, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      url: `https://www.clattribe.com/gk/news/${a.date}/${a.slug}`,
+      name: a.title,
+    })),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+      />
       {/* Server-rendered SEO shell - real H1, real intro, real anchor list for crawlers */}
       <section className="mb-8 space-y-4">
         <h1 className="text-3xl lg:text-4xl font-black tracking-tight text-[#060818] dark:text-white">
