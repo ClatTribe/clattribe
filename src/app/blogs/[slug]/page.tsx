@@ -1,14 +1,84 @@
 import { getBlogBySlug, getAllBlogSlugs, getAllBlogs } from '../../lib/blogs';
+import { findTopRelated } from '../../lib/related';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
-import { Metadata } from 'next'; 
+import Link from 'next/link';
+import { Metadata } from 'next';
 import Navbar from '@/app/components/navbar';
 import BlogSidebar from '../BlogSidebar';
+
+const SUPABASE_URL = "https://fjswchcothephgtzqbgq.supabase.co";
+const SUPABASE_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9." +
+  "eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZqc3djaGNvdGhlcGhndHpxYmdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU3NTk2ODQsImV4cCI6MjA3MTMzNTY4NH0." +
+  "AqKfl8rwkH4_Y0sVdcQLWu6HF1nrxhro-jMyEdUggV4";
 
 interface BlogPageProps {
   params: Promise<{
     slug: string;
   }>;
+}
+
+interface GKItem {
+  id: string;
+  date: string;
+  slug: string;
+  title: string;
+  type: 'news' | 'editorial';
+}
+
+function gkSlugify(s: string): string {
+  return (s || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+async function fetchRecentGK(): Promise<GKItem[]> {
+  try {
+    const headers = {
+      apikey: SUPABASE_KEY,
+      Authorization: `Bearer ${SUPABASE_KEY}`,
+    };
+    const opts = { headers, next: { revalidate: 1800 } };
+    const [newsRes, edRes] = await Promise.all([
+      fetch(
+        `${SUPABASE_URL}/rest/v1/gk_news_articles?select=id,date,slug,title&slug=not.is.null&order=date.desc&limit=80`,
+        opts,
+      ),
+      fetch(
+        `${SUPABASE_URL}/rest/v1/gk_editorials?select=id,date,title&order=date.desc&limit=80`,
+        opts,
+      ),
+    ]);
+    const news = newsRes.ok ? await newsRes.json() : [];
+    const eds = edRes.ok ? await edRes.json() : [];
+    const newsItems: GKItem[] = (Array.isArray(news) ? news : [])
+      .filter((n: { slug?: string }) => Boolean(n.slug))
+      .map((n: { id: string; date: string; slug: string; title: string }) => ({
+        id: n.id,
+        date: n.date,
+        slug: n.slug,
+        title: n.title,
+        type: 'news' as const,
+      }));
+    const edItems: GKItem[] = (Array.isArray(eds) ? eds : [])
+      .map((e: { id: string; date: string; title: string }) => ({
+        id: e.id,
+        date: e.date,
+        slug: gkSlugify(e.title),
+        title: e.title,
+        type: 'editorial' as const,
+      }))
+      .filter((e: GKItem) => Boolean(e.slug));
+    return [...newsItems, ...edItems];
+  } catch {
+    return [];
+  }
 }
 
 export async function generateStaticParams() {
@@ -22,7 +92,7 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
   const { slug } = await params;
   try {
     const blog = await getBlogBySlug(slug);
-    
+
     return {
       title: `${blog.title} | CLAT Tribe`,
       description: blog.excerpt || `Read ${blog.title}`,
@@ -36,10 +106,10 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
         siteName: 'CLAT Tribe',
         type: 'article',
         publishedTime: blog.date,
-        modifiedTime: blog.lastModified ?? blog.date, 
+        modifiedTime: blog.lastModified ?? blog.date,
         images: [
           {
-            url: blog.coverImage ?? "/default-og.jpg", 
+            url: blog.coverImage ?? "/default-og.jpg",
             width: 1200,
             height: 630,
           },
@@ -49,7 +119,7 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
         card: 'summary_large_image',
         title: blog.title,
         description: blog.excerpt,
-        images: [blog.coverImage ?? "/default-og.jpg"], 
+        images: [blog.coverImage ?? "/default-og.jpg"],
       },
     };
   } catch {
@@ -60,7 +130,7 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
 export default async function BlogPage({ params }: BlogPageProps) {
   const { slug } = await params;
   let blog;
-  
+
   try {
     blog = await getBlogBySlug(slug);
   } catch (error) {
@@ -73,19 +143,23 @@ export default async function BlogPage({ params }: BlogPageProps) {
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .filter(b => b.slug !== slug);
 
+  // Cross-silo internal linking: pull recent GK content and score by title overlap with this blog
+  const gkItems = await fetchRecentGK();
+  const relatedGK = findTopRelated(blog.title, gkItems, (i) => i.title, 4);
+
   return (
     <div className="min-h-screen w-full" style={{ backgroundColor: '#050818' }}>
       <Navbar/>
-      
+
       {/* Main Container: Added padding/max-width logic from Set 1 to accommodate Sidebar */}
       <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12 pt-18 sm:pt-20 md:pt-24">
-        
+
         {/* Cover Image Section */}
         {blog.coverImage && (
           <div className="flex justify-center mb-8 sm:mb-12">
-            <div 
+            <div
               className="relative w-full rounded-xl overflow-hidden shadow-2xl max-w-4xl"
-              style={{ 
+              style={{
                 border: '1px solid rgba(245, 158, 11, 0.15)',
                 aspectRatio: '16/9'
               }}
@@ -106,21 +180,21 @@ export default async function BlogPage({ params }: BlogPageProps) {
 
         {/* Layout Wrapper: Flex container for Article + Sidebar */}
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 max-w-6xl mx-auto">
-          
+
           <article className="flex-1 min-w-0">
             {/* Header Section */}
             <header className="mb-6 sm:mb-8">
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
                 {blog.title}
               </h1>
-              
+
               <div className="flex items-center gap-3 sm:gap-4 text-slate-400 mb-4 text-sm md:text-base flex-wrap">
                 <time className="font-medium">
                   Published: {new Date(blog.date).toLocaleDateString('en-US', {
                     year: 'numeric', month: 'long', day: 'numeric',
                   })}
                 </time>
-                
+
                 {blog.lastModified && (
                   <>
                     <span className="text-slate-600">•</span>
@@ -139,7 +213,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
                   </>
                 )}
               </div>
-              
+
               {blog.tags && blog.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2">
                   {blog.tags.map((tag: string) => (
@@ -163,7 +237,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
             {blog.audioUrl && (
               <div className="mb-8 p-4 rounded-lg border border-[rgba(245,158,11,0.15)] bg-[#0F172B]">
                 <h2 className="text-white font-semibold mb-3 flex items-center gap-2">
-                  🎧 Listen to this article
+                  Listen to this article
                 </h2>
                 <audio controls className="w-full">
                   <source src={blog.audioUrl} type="audio/mpeg" />
@@ -206,7 +280,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
           {/* Sidebar Area (Integrated from Code Set 1) */}
           <aside className="lg:w-80 xl:w-96 flex-shrink-0">
             <div className="lg:sticky lg:top-8">
-              <BlogSidebar 
+              <BlogSidebar
                 latestBlogs={latestBlogs}
                 currentSlug={slug}
                 currentTitle={blog.title}
@@ -215,6 +289,36 @@ export default async function BlogPage({ params }: BlogPageProps) {
           </aside>
 
         </div>
+
+        {/* Cross-silo internal linking: related Daily GK content */}
+        {relatedGK.length > 0 && (
+          <section className="max-w-6xl mx-auto mt-12 pt-8 border-t border-white/10">
+            <h2 className="text-xs font-black uppercase tracking-widest text-[#F59E0B] mb-4">
+              Related Daily GK
+            </h2>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {relatedGK.map((g) => (
+                <li key={g.id}>
+                  <Link
+                    href={
+                      g.type === 'news'
+                        ? `/gk/news/${g.date}/${g.slug}`
+                        : `/gk/editorial/${g.date}/${g.slug}`
+                    }
+                    className="block p-4 rounded-xl border border-white/10 bg-white/5 hover:border-[#F59E0B] hover:shadow-lg transition"
+                  >
+                    <span className="text-[10px] font-black uppercase tracking-widest text-[#F59E0B]">
+                      {g.type === 'news' ? 'Current Affairs' : 'Editorial'}
+                    </span>
+                    <p className="text-base font-bold text-white mt-1 leading-snug">
+                      {g.title}
+                    </p>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
       </div>
     </div>
   );
