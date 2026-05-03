@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "The Hindu Editorial for CLAT 2027 — Daily GK Capsule",
   description:
     "Read the latest CLAT-focused editorials and passages for Legal & GK preparation.",
+  alternates: { canonical: "/gk/editorial" },
 };
 
 export default function EditorialPage() {
