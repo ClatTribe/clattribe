@@ -3,7 +3,7 @@ import PortalPaywall from "@/components/gk/PortalPaywall";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Dashboard",
+  title: "My CLAT GK Dashboard — Streaks, Targets & Daily Reads",
   description:
     "Track your daily targets, reading speed, and CLAT prep progress on CLAT Tribe — India's #1 GK platform for CLAT.",
   alternates: { canonical: "/gk/dashboard" },
