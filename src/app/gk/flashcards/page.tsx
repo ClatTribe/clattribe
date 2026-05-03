@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Flashcards - GK & Legal Portal | CLAT Tribe",
   description:
     "Memorize critical GK facts and Legal concepts using intelligent spaced repetition flashcards.",
+  alternates: { canonical: "/gk/flashcards" },
 };
 
 export default function FlashcardsPage() {
