@@ -103,8 +103,43 @@ const SECTIONS = [
 export default async function GKHubPage() {
   const { news, editorials } = await fetchRecent();
 
+  const orgJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "NewsMediaOrganization",
+    name: "CLAT Tribe",
+    alternateName: "CLAT Tribe GK Portal",
+    url: "https://www.clattribe.com/gk",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://www.clattribe.com/clattribe.png",
+      width: 512,
+      height: 512,
+    },
+    description:
+      "India's #1 GK platform for CLAT 2027. Daily editorials, current-affairs news, smart flashcards, full mocks, and monthly summaries.",
+    sameAs: ["https://www.clattribe.com"],
+    knowsAbout: [
+      "CLAT",
+      "AILET",
+      "NLAT",
+      "MHCET Law",
+      "Legal Reasoning",
+      "Constitutional Law",
+      "Current Affairs",
+      "Indian Polity",
+    ],
+    audience: {
+      "@type": "EducationalAudience",
+      educationalRole: "law-entrance-aspirant",
+    },
+  };
+
   return (
     <div className="space-y-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+      />
       <header className="space-y-4">
         <h1 className="text-3xl lg:text-5xl font-black tracking-tight text-[#060818] dark:text-white">
           Daily GK for CLAT 2027
