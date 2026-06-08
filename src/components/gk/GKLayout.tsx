@@ -28,7 +28,7 @@ interface GKLayoutProps {
 interface SearchResult {
   id: string;
   title: string;
-  type: "editorial" | "vault" | "flashcard" | "pyq";
+  type: "editorial" | "vault" | "flashcard" | "pyq" | "static-gk";
   tab: string;
 }
 
@@ -167,6 +167,22 @@ export default function GKLayout({
           const pyqRows: any[] = await pyqResp.json();
           pyqRows.forEach((r) =>
             results.push({ id: r.id, title: r.question, type: "pyq", tab: "testing" })
+          );
+        }
+
+        const staticResp = await fetch(
+          `${SUPABASE_URL}/rest/v1/static_gk_items?or=(title.ilike.*${encodeURIComponent(searchQuery)}*,content.ilike.*${encodeURIComponent(searchQuery)}*)&select=id,title&limit=5`,
+          {
+            headers: {
+              apikey: SUPABASE_KEY,
+              Authorization: `Bearer ${SUPABASE_KEY}`,
+            },
+          }
+        );
+        if (staticResp.ok) {
+          const staticRows: any[] = await staticResp.json();
+          staticRows.forEach((r) =>
+            results.push({ id: r.id, title: r.title, type: "static-gk", tab: "static-gk" })
           );
         }
 
